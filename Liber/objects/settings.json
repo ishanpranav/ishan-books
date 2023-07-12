@@ -1,0 +1,142 @@
+﻿{
+  "groups": {
+    "FileCustomMenuGroup": [
+      {
+        "command": {
+          "$type": "new-company"
+        },
+        "shortcutKeys": "control, shift, n"
+      },
+      {
+        "command": {
+          "$type": "open-company"
+        },
+        "shortcutKeys": "control, o",
+        "hasSeparator": true
+      },
+      {
+        "command": {
+          "$type": "import"
+        },
+        "hasSeparator": true
+      },
+      {
+        "command": {
+          "$type": "save-company"
+        },
+        "shortcutKeys": "control, s"
+      },
+      {
+        "command": {
+          "$type": "save-company-as"
+        },
+        "hasSeparator": true
+      },
+      {
+        "command": {
+          "$type": "edit-company"
+        },
+        "hasSeparator": true
+      },
+      {
+        "command": {
+          "$type": "open-recent-company"
+        },
+        "hasSeparator": true
+      },
+      {
+        "command": {
+          "$type": "close"
+        }
+      }
+    ],
+    "EditCustomMenuGroup": [
+      {
+        "command": {
+          "$type": "new-account"
+        },
+        "hasSeparator": true
+      },
+      {
+        "command": {
+          "$type": "settings"
+        }
+      }
+    ],
+    "ViewCustomMenuGroup": [
+      {
+        "command": {
+          "$type": "accounts"
+        },
+        "shortcutKeys": "control, shift, a"
+      },
+      {
+        "command": {
+          "$type": "journal"
+        },
+        "hasSeparator": true
+      },
+      {
+        "command": {
+          "$type": "errors"
+        }
+      }
+    ],
+    "HelpCustomMenuGroup": [
+      {
+        "command": {
+          "$type": "url",
+          "name": "HelpCommand",
+          "destination": "https://github.com/ishanpranav/liberty"
+        },
+        "shortcutKeys": "control, f1",
+        "hasSeparator": true
+      },
+      {
+        "command": {
+          "$type": "url",
+          "name": "AboutCommand",
+          "destination": "https://github.com/ishanpranav/liberty"
+        }
+      }
+    ]
+  },
+  "shortcuts": [
+    {
+      "command": {
+        "$type": "new-company"
+      }
+    },
+    {
+      "command": {
+        "$type": "open-company"
+      }
+    },
+    {
+      "command": {
+        "$type": "save-company"
+      },
+      "hasSeparator": true
+    },
+    {
+      "command": {
+        "$type": "url",
+        "name": "HelpCommand",
+        "destination": "https://github.com/ishanpranav/liberty"
+      }
+    }
+  ],
+  "recentItems": [],
+  "maxRecentItems": 10,
+  "readers": {
+    ".accounts": {
+      "$type": "csv-accounts"
+    },
+    ".journal": {
+      "$type": "csv-journal"
+    },
+    ".json": {
+      "$type": "json-company"
+    }
+  }
+}
