@@ -120,22 +120,4 @@
   <data name="CancelCaption" xml:space="preserve">
     <value>Guardar cambios</value>
   </data>
-  <data name="Default" xml:space="preserve">
-    <value>(Predeterminado)</value>
-  </data>
-  <data name="AccountUniqueNameException" xml:space="preserve">
-    <value>El nombre de la cuenta debe ser único.</value>
-  </data>
-  <data name="AccountUniqueNumberException" xml:space="preserve">
-    <value>El número de cuenta debe ser único.</value>
-  </data>
-  <data name="AccountNameArgumentException" xml:space="preserve">
-    <value>El nombre de la cuenta no puede estar vacío.</value>
-  </data>
-  <data name="LineAccountArgumentException" xml:space="preserve">
-    <value>Cada línea de la entrada del diario general debe tiene una cuenta válida.</value>
-  </data>
-  <data name="JournalLinesArgumentException" xml:space="preserve">
-    <value>La entrada del diario general no se equilibra. Asegúrese de que el número total de débitos sea igual al número total de créditos.</value>
-  </data>
 </root>

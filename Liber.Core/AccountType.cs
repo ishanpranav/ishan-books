@@ -1,76 +1,89 @@
-﻿using System;
+﻿using CsvHelper.Configuration.Attributes;
+using System;
+using System.Resources;
 
 namespace Liber;
 
-/// <summary>
-/// 
-/// </summary>
-public enum AccountType
+public enum AccountType : short
 {
-    /// <summary>
-    /// 
-    /// </summary>
+    [Name("STOCK", "MUTUAL", "TRADING")]
     None = 0,
 
-    /// <summary>
-    /// 
-    /// </summary>
-    Asset = 1,
+    [Name("A/RECEIVABLE")]
+    AccountReceivable = 12,
 
-    /// <summary>
-    /// 
-    /// </summary>
-    Liability = -2,
+    [Name("A/PAYABLE")]
+    AccountPayable = -22,
 
-    /// <summary>
-    /// 
-    /// </summary>
-    Equity = -3,
+    [Name("CASH")]
+    Cash = 1101,
 
-    /// <summary>
-    /// 
-    /// </summary>
-    Income = -4,
+    [Name("BANK")]
+    Bank = 1102,
 
-    /// <summary>
-    /// 
-    /// </summary>
-    Expense = 5
+    [Name("CREDIT")]
+    CreditCard = -21,
+
+    [Name("EQUITY")]
+    Equity = -3101,
+
+    [Name("EXPENSE")]
+    Expense = 6,
+
+    [Name("INCOME")]
+    Income = -4000,
+
+    [Name("LIABILITY")]
+    OtherCurrentLiability = -2300,
+
+    [Name("ASSET")]
+    OtherCurrentAsset = 13,
+
+    [Name("EXPENSE")]
+    Cost = 50,
+
+    [Name("ASSET")]
+    OtherAsset = 18,
+
+    [Name("ASSET")]
+    FixedAsset = 16,
+
+    [Name("LIABILITY")]
+    LongTermLiability = -26,
+
+    [Name("INCOME")]
+    OtherIncome = -49,
+
+    [Name("EXPENSE")]
+    OtherExpense = 69,
+
+    [Name("EQUITY")]
+    OtherComprehensiveIncome = -39
 }
 
-/// <summary>
-/// 
-/// </summary>
 public static class AccountTypeExtensions
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="value"></param>
-    /// <param name="debit"></param>
-    /// <returns></returns>
+    private static readonly ResourceManager s_resourceManager = new ResourceManager(typeof(AccountTypeExtensions));
+
     public static decimal ToBalance(this AccountType value, decimal debit)
     {
         return value.Sign() * debit;
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="value"></param>
-    /// <returns></returns>
     public static int Sign(this AccountType value)
     {
         return Math.Sign((int)value);
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="value"></param>
-    /// <returns></returns>
     public static bool IsDebit(this AccountType value)
     {
         return value >= 0;
+    }
+
+    public static string ToLocalizedString(this AccountType value)
+    {
+        string key = value.ToString();
+
+        return s_resourceManager.GetString(key) ?? key;
     }
 }

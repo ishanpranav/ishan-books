@@ -117,34 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AccountCompanionException" xml:space="preserve">
-    <value>All parent accounts (companion and contra accounts) must be locked.</value>
-  </data>
-  <data name="AccountNameArgumentException" xml:space="preserve">
-    <value>The account name cannot be empty.</value>
-  </data>
-  <data name="AccountNumberException" xml:space="preserve">
-    <value>The account number must be unique.</value>
-  </data>
   <data name="CancelCaption" xml:space="preserve">
     <value>Save Changes</value>
   </data>
-  <data name="Default" xml:space="preserve">
-    <value>(Default)</value>
-  </data>
   <data name="ExceptionCaption" xml:space="preserve">
     <value>Error</value>
-  </data>
-  <data name="FilterPrefix" xml:space="preserve">
-    <value>All Files (*.*)|*.*|All Supported Files</value>
-  </data>
-  <data name="InvalidAccountException" xml:space="preserve">
-    <value>Each line of the the journal entry must reference a valid account.</value>
-  </data>
-  <data name="JournalLinesArgumentException" xml:space="preserve">
-    <value>The journal entry does not balance. Please ensure that the total number of debits is equal to the total number of credits.</value>
-  </data>
-  <data name="JournalNumberException" xml:space="preserve">
-    <value>The journal entry number must be unique.</value>
   </data>
 </root>

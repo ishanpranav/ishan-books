@@ -9,11 +9,15 @@ internal sealed class EditAccountForm : AccountForm
         Account account = company.Accounts[key];
 
         Key = key;
-        Number = account.Number;
-        AccountName = account.Name;
+        numberNumericUpDown.Value = account.Number;
+        nameTextBox.Text = account.Name;
+        placeholderCheckBox.Checked = account.Placeholder;
+        hiddenCheckBox.Checked = account.Hidden;
+        descriptionTextBox.Text = account.Description;
+        notesTextBox.Text = account.Notes;
         Type = account.Type;
-        Placeholder = account.Placeholder;
         ParentKey = account.ParentKey;
+        Color = account.Color;
     }
 
     public Guid Key { get; }
@@ -22,11 +26,7 @@ internal sealed class EditAccountForm : AccountForm
     {
         Account account = Company.Accounts[Key];
 
-        account.Number = Number;
-        account.Name = AccountName;
-        account.Type = Type;
-        account.Placeholder = Placeholder;
-
+        ApplyChanges(account);
         Company.UpdateAccount(Key, ParentKey);
     }
 

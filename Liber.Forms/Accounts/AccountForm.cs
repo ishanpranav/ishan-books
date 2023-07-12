@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Liber.Forms.Accounts;
 
 internal abstract partial class AccountForm : Form
 {
+    private Color _color;
+
     protected AccountForm(Company company)
     {
         InitializeComponent();
@@ -27,31 +30,7 @@ internal abstract partial class AccountForm : Form
 
     public Company Company { get; }
 
-    public decimal Number
-    {
-        get
-        {
-            return numberNumericUpDown.Value;
-        }
-        set
-        {
-            numberNumericUpDown.Value = value;
-        }
-    }
-
-    public string? AccountName
-    {
-        get
-        {
-            return nameTextBox.Text;
-        }
-        set
-        {
-            nameTextBox.Text = value;
-        }
-    }
-
-    public AccountType Type
+    protected AccountType Type
     {
         get
         {
@@ -63,19 +42,7 @@ internal abstract partial class AccountForm : Form
         }
     }
 
-    public bool Placeholder
-    {
-        get
-        {
-            return lockedCheckBox.Checked;
-        }
-        set
-        {
-            lockedCheckBox.Checked = value;
-        }
-    }
-
-    public Guid ParentKey
+    protected Guid ParentKey
     {
         get
         {
@@ -99,12 +66,37 @@ internal abstract partial class AccountForm : Form
         }
     }
 
+    protected Color Color
+    {
+        get
+        {
+            return _color;
+        }
+        set
+        {
+            _color = value;
+            colorButton.BackColor = value;
+        }
+    }
+
     protected virtual bool IsValid(Guid parentKey)
     {
         return true;
     }
 
     protected abstract void CommitChanges();
+
+    protected void ApplyChanges(Account account)
+    {
+        account.Number = numberNumericUpDown.Value;
+        account.Name = nameTextBox.Text;
+        account.Type = Type;
+        account.Placeholder = placeholderCheckBox.Checked;
+        account.Hidden = hiddenCheckBox.Checked;
+        account.Description = descriptionTextBox.Text;
+        account.Notes = notesTextBox.Text;
+        account.Color = Color;
+    }
 
     private void InitializeParent(Guid key, Account value)
     {
@@ -144,33 +136,22 @@ internal abstract partial class AccountForm : Form
 
     private void OnAcceptButtonClick(object sender, EventArgs e)
     {
-        _errorProvider.SetError(numberNumericUpDown, null);
-        _errorProvider.SetError(nameTextBox, null);
-
-        try
-        {
-            CommitChanges();
-        }
-        catch (ArgumentException argumentException)
-        {
-            _errorProvider.SetError(nameTextBox, argumentException.Message);
-
-            return;
-        }
-        catch (InvalidOperationException invalidOperationException)
-        {
-            _errorProvider.SetError(numberNumericUpDown, invalidOperationException.Message);
-
-            return;
-        }
-
         DialogResult = DialogResult.OK;
 
+        CommitChanges();
         Close();
     }
 
     private void OnCancelButtonClick(object sender, EventArgs e)
     {
         Close();
+    }
+
+    private void OnColorButtonClick(object sender, EventArgs e)
+    {
+        if (_colorDialog.ShowDialog() == DialogResult.OK)
+        {
+            Color = _colorDialog.Color;
+        }
     }
 }

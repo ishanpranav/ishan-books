@@ -23,11 +23,6 @@ internal static class FormattedStrings
         return new Uri(GetString("HelpUrl"));
     }
 
-    public static string ToLocalizedString(this Enum value)
-    {
-        return GetString(value.GetType().Name + value);
-    }
-
     public static string GetCancelText(this Company company)
     {
         return string.Format(GetString("CancelText"), company.Name ?? GetString("DefaultCompanyName"));

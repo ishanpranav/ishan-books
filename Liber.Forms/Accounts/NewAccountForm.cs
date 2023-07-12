@@ -4,17 +4,14 @@ internal sealed class NewAccountForm : AccountForm
 {
     public NewAccountForm(Company company) : base(company)
     {
-        Number = company.NextAccountNumber;
+        numberNumericUpDown.Value = company.NextAccountNumber;
     }
 
     protected override void CommitChanges()
     {
-        Company.AddAccount(new Account()
-        {
-            Name = AccountName,
-            Number = Number,
-            Type = Type,
-            Placeholder = Placeholder
-        }, ParentKey);
+        Account account = new Account();
+
+        ApplyChanges(account);
+        Company.AddAccount(account, ParentKey);
     }
 }

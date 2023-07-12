@@ -1,8 +1,10 @@
 using Liber.Forms.Accounts;
 using Liber.Forms.Companies;
 using Liber.Forms.Properties;
+using Liber.GnuCash;
 using MessagePack;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
@@ -27,6 +29,12 @@ internal sealed partial class MainForm : Form
         .WithSecurity(MessagePackSecurity.UntrustedData);
     private readonly Company _company = new Company();
     private string? _path;
+
+    static MainForm()
+    {
+        s_jsonOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase, allowIntegerValues: true));
+        s_jsonOptions.Converters.Add(new TypeConverterJsonConverterAdapter());
+    }
 
     public MainForm(string[] args)
     {
@@ -118,6 +126,7 @@ internal sealed partial class MainForm : Form
             return;
         }
 
+        CloseChildren();
         NewCompanyForm form = new NewCompanyForm();
 
         form.FormClosed += (_, _) =>
@@ -125,7 +134,6 @@ internal sealed partial class MainForm : Form
             if (form.DialogResult == DialogResult.OK)
             {
                 form.Company.CopyTo(_company);
-                CloseChildren();
             }
         };
 
@@ -162,7 +170,7 @@ internal sealed partial class MainForm : Form
 
     private Task SaveAsAsync()
     {
-        if (!TryGetSavePath(out string? path))
+        if (!TryGetSavePath(filterIndex: 1, out string? path))
         {
             return Task.CompletedTask;
         }
@@ -170,8 +178,9 @@ internal sealed partial class MainForm : Form
         return ExportAsync(path);
     }
 
-    private bool TryGetSavePath([MaybeNullWhen(false)] out string result)
+    private bool TryGetSavePath(int filterIndex, [MaybeNullWhen(false)] out string result)
     {
+        _saveFileDialog.FilterIndex = filterIndex;
         _saveFileDialog.FileName = _company.Name;
 
         if (_saveFileDialog.ShowDialog() != DialogResult.OK)
@@ -188,12 +197,7 @@ internal sealed partial class MainForm : Form
 
     private async void OnOpenToolStripMenuItemClick(object sender, EventArgs e)
     {
-        if (await TryCancelAsync())
-        {
-            return;
-        }
-
-        if (!TryGetOpenPath(filterIndex: 2, out string? path))
+        if (await TryCancelAsync() || !TryGetOpenPath(filterIndex: 2, out string? path))
         {
             return;
         }
@@ -216,12 +220,12 @@ internal sealed partial class MainForm : Form
 
         return true;
     }
-    
+
     private async Task ImportCompanyAsync(string path)
     {
         await using FileStream input = File.OpenRead(path);
 
-        (await MessagePackSerializer.DeserializeAsync<Company>(input,s_messagePackOptions)).CopyTo(_company);
+        (await MessagePackSerializer.DeserializeAsync<Company>(input, s_messagePackOptions)).CopyTo(_company);
     }
 
     private async Task ImportJsonCompanyAsync(string path)
@@ -252,7 +256,7 @@ internal sealed partial class MainForm : Form
                         await ImportJsonCompanyAsync(path);
                         break;
 
-                    default:
+                    case ".liber":
                         await ImportCompanyAsync(path);
                         break;
                 }
@@ -283,7 +287,7 @@ internal sealed partial class MainForm : Form
 
     private void OnAboutToolStripMenuItemClick(object sender, EventArgs e)
     {
-        _factory.Register(Guid.NewGuid(), new UrlForm(FormattedStrings.GetHelpUrl()));
+        _factory.AutoRegister(() => new UrlForm(FormattedStrings.GetHelpUrl()));
     }
 
     private async Task ExportCompanyAsync(string path)
@@ -318,7 +322,7 @@ internal sealed partial class MainForm : Form
                         await ExportJsonCompanyAsync(path);
                         break;
 
-                    default:
+                    case ".liber":
                         await ExportCompanyAsync(path);
                         break;
                 }
@@ -370,5 +374,36 @@ internal sealed partial class MainForm : Form
     private void OnNewAccountToolStripMenuItemClick(object sender, EventArgs e)
     {
         _factory.AutoRegister(() => new NewAccountForm(_company));
+    }
+
+    private async void OnImportAccountsToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        if (!TryGetOpenPath(filterIndex: 5, out string? path))
+        {
+            return;
+        }
+
+        await using FileStream input = File.OpenRead(path);
+
+        IReadOnlyCollection<Account> accounts = await GnuCashSerializer.DeserializeAccountsAsync(input);
+
+        _factory.Register(Guid.NewGuid(), new ImportAccountsForm(_company, accounts));
+    }
+
+    private void OnSettingsToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        _factory.AutoRegister(() => new SettingsForm());
+    }
+
+    private async void OnExportAccountsToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        if (!TryGetSavePath(filterIndex: 3, out string? path))
+        {
+            return;
+        }
+
+        await using FileStream output = File.Create(path);
+
+        await GnuCashSerializer.SerializeAccountsAsync(output, _company.Accounts.Values);
     }
 }

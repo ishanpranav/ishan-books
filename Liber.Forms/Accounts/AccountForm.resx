@@ -63,10 +63,14 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="cancelButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 145</value>
+    <value>297, 343</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="cancelButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
   </data>
   <data name="cancelButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>86, 31</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="cancelButton.TabIndex" type="System.Int32, mscorlib">
@@ -85,16 +89,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cancelButton.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>17</value>
   </data>
   <data name="acceptButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
   <data name="acceptButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>178, 145</value>
+    <value>205, 343</value>
+  </data>
+  <data name="acceptButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
   </data>
   <data name="acceptButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>86, 31</value>
   </data>
   <data name="acceptButton.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -112,16 +119,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;acceptButton.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>16</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 38</value>
+    <value>12, 50</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>39, 15</value>
+    <value>49, 20</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -139,7 +146,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>15</value>
   </data>
   <data name="nameTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -157,10 +164,238 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>7, 15</value>
+    <value>8, 20</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>348, 186</value>
+    <value>395, 387</value>
+  </data>
+  <data name="colorButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="colorButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>105, 267</value>
+  </data>
+  <data name="colorButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>278, 29</value>
+  </data>
+  <data name="colorButton.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="colorButton.Text" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="&gt;&gt;colorButton.Name" xml:space="preserve">
+    <value>colorButton</value>
+  </data>
+  <data name="&gt;&gt;colorButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;colorButton.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;colorButton.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="label7.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 271</value>
+  </data>
+  <data name="label7.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 20</value>
+  </data>
+  <data name="label7.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="label7.Text" xml:space="preserve">
+    <value>&amp;Color</value>
+  </data>
+  <data name="&gt;&gt;label7.Name" xml:space="preserve">
+    <value>label7</value>
+  </data>
+  <data name="&gt;&gt;label7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label7.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="hiddenCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="hiddenCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="hiddenCheckBox.HelpString" xml:space="preserve">
+    <value>Specifies whether the account is a placeholder for parent, companion, or contra accounts. Transactions cannot be posted to placeholder accounts.</value>
+  </data>
+  <data name="hiddenCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="hiddenCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>182, 303</value>
+  </data>
+  <data name="hiddenCheckBox.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="hiddenCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 24</value>
+  </data>
+  <data name="hiddenCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="hiddenCheckBox.Text" xml:space="preserve">
+    <value>&amp;Hidden</value>
+  </data>
+  <data name="&gt;&gt;hiddenCheckBox.Name" xml:space="preserve">
+    <value>hiddenCheckBox</value>
+  </data>
+  <data name="&gt;&gt;hiddenCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;hiddenCheckBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;hiddenCheckBox.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="notesTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="notesTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>105, 192</value>
+  </data>
+  <data name="notesTextBox.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="notesTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>278, 69</value>
+  </data>
+  <data name="notesTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;notesTextBox.Name" xml:space="preserve">
+    <value>notesTextBox</value>
+  </data>
+  <data name="&gt;&gt;notesTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;notesTextBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;notesTextBox.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="label6.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 194</value>
+  </data>
+  <data name="label6.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 20</value>
+  </data>
+  <data name="label6.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="label6.Text" xml:space="preserve">
+    <value>N&amp;otes</value>
+  </data>
+  <data name="&gt;&gt;label6.Name" xml:space="preserve">
+    <value>label6</value>
+  </data>
+  <data name="&gt;&gt;label6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label6.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="descriptionTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="descriptionTextBox.HelpString" xml:space="preserve">
+    <value>Specifies the name of the account.</value>
+  </data>
+  <data name="descriptionTextBox.IconAlignment" type="System.Windows.Forms.ErrorIconAlignment, System.Windows.Forms">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="descriptionTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>105, 158</value>
+  </data>
+  <data name="descriptionTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="descriptionTextBox.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="descriptionTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>278, 27</value>
+  </data>
+  <data name="descriptionTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;descriptionTextBox.Name" xml:space="preserve">
+    <value>descriptionTextBox</value>
+  </data>
+  <data name="&gt;&gt;descriptionTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;descriptionTextBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;descriptionTextBox.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="label5.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 160</value>
+  </data>
+  <data name="label5.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 20</value>
+  </data>
+  <data name="label5.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="label5.Text" xml:space="preserve">
+    <value>&amp;Description</value>
+  </data>
+  <data name="&gt;&gt;label5.Name" xml:space="preserve">
+    <value>label5</value>
+  </data>
+  <data name="&gt;&gt;label5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="parentComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -169,17 +404,13 @@
     <value>Specifies the parent or companion account.</value>
   </data>
   <data name="parentComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>74, 92</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="parentComboBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
+    <value>105, 123</value>
   </data>
   <data name="parentComboBox.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="parentComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>260, 23</value>
+    <value>278, 28</value>
   </data>
   <data name="parentComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -194,7 +425,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;parentComboBox.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>7</value>
   </data>
   <data name="label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -203,13 +434,13 @@
     <value>NoControl</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 95</value>
+    <value>12, 126</value>
   </data>
   <data name="label4.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 15</value>
+    <value>50, 20</value>
   </data>
   <data name="label4.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -227,46 +458,43 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="lockedCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Right</value>
-  </data>
-  <data name="lockedCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lockedCheckBox.HelpString" xml:space="preserve">
-    <value>Specifies whether the account is a placeholder for parent, companion, or contra accounts. Transactions cannot be posted to placeholder accounts.</value>
-  </data>
-  <data name="lockedCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>246, 119</value>
-  </data>
-  <data name="lockedCheckBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
-  </data>
-  <data name="lockedCheckBox.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lockedCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 19</value>
-  </data>
-  <data name="lockedCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="lockedCheckBox.Text" xml:space="preserve">
+  <data name="placeholderCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="placeholderCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="placeholderCheckBox.HelpString" xml:space="preserve">
+    <value>Specifies whether the account is a placeholder for parent, companion, or contra accounts. Transactions cannot be posted to placeholder accounts.</value>
+  </data>
+  <data name="placeholderCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>274, 303</value>
+  </data>
+  <data name="placeholderCheckBox.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="placeholderCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>109, 24</value>
+  </data>
+  <data name="placeholderCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="placeholderCheckBox.Text" xml:space="preserve">
     <value>&amp;Placeholder</value>
   </data>
-  <data name="&gt;&gt;lockedCheckBox.Name" xml:space="preserve">
-    <value>lockedCheckBox</value>
+  <data name="&gt;&gt;placeholderCheckBox.Name" xml:space="preserve">
+    <value>placeholderCheckBox</value>
   </data>
-  <data name="&gt;&gt;lockedCheckBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;placeholderCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lockedCheckBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;placeholderCheckBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;lockedCheckBox.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;placeholderCheckBox.ZOrder" xml:space="preserve">
+    <value>9</value>
   </data>
   <data name="typeComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -278,13 +506,16 @@
     <value>MiddleLeft</value>
   </data>
   <data name="typeComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>74, 64</value>
+    <value>105, 85</value>
+  </data>
+  <data name="typeComboBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
   </data>
   <data name="typeComboBox.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="typeComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>260, 23</value>
+    <value>278, 28</value>
   </data>
   <data name="typeComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -299,7 +530,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;typeComboBox.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>10</value>
   </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -308,13 +539,13 @@
     <value>NoControl</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 67</value>
+    <value>12, 88</value>
   </data>
   <data name="label3.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>31, 15</value>
+    <value>40, 20</value>
   </data>
   <data name="label3.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -332,7 +563,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>11</value>
   </data>
   <data name="label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -344,13 +575,13 @@
     <value>NoControl</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>158, 9</value>
+    <value>178, 12</value>
   </data>
   <data name="label2.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 15</value>
+    <value>63, 20</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -368,7 +599,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>12</value>
   </data>
   <data name="numberNumericUpDown.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -380,13 +611,16 @@
     <value>MiddleLeft</value>
   </data>
   <data name="numberNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>231, 7</value>
+    <value>261, 9</value>
+  </data>
+  <data name="numberNumericUpDown.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
   </data>
   <data name="numberNumericUpDown.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="numberNumericUpDown.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 23</value>
+    <value>118, 27</value>
   </data>
   <data name="numberNumericUpDown.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -404,13 +638,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;numberNumericUpDown.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>13</value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>364, 220</value>
+    <value>413, 278</value>
   </data>
   <data name="$this.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -427,6 +661,12 @@
   <data name="&gt;&gt;_helpProvider.Type" xml:space="preserve">
     <value>System.Windows.Forms.HelpProvider, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;_colorDialog.Name" xml:space="preserve">
+    <value>_colorDialog</value>
+  </data>
+  <data name="&gt;&gt;_colorDialog.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColorDialog, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>AccountForm</value>
   </data>
@@ -437,13 +677,16 @@
     <value>MiddleLeft</value>
   </data>
   <data name="nameTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>74, 35</value>
+    <value>105, 47</value>
+  </data>
+  <data name="nameTextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
   </data>
   <data name="nameTextBox.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="nameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>260, 23</value>
+    <value>278, 27</value>
   </data>
   <data name="nameTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -458,6 +701,9 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;nameTextBox.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>14</value>
   </data>
+  <metadata name="_colorDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>296, 17</value>
+  </metadata>
 </root>

@@ -61,33 +61,6 @@ namespace Liber.Forms.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All parent accounts (companion and contra accounts) must be locked..
-        /// </summary>
-        internal static string AccountCompanionException {
-            get {
-                return ResourceManager.GetString("AccountCompanionException", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The account name cannot be empty..
-        /// </summary>
-        internal static string AccountNameArgumentException {
-            get {
-                return ResourceManager.GetString("AccountNameArgumentException", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The account number must be unique..
-        /// </summary>
-        internal static string AccountNumberException {
-            get {
-                return ResourceManager.GetString("AccountNumberException", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Save Changes.
         /// </summary>
         internal static string CancelCaption {
@@ -97,56 +70,11 @@ namespace Liber.Forms.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to (Default).
-        /// </summary>
-        internal static string Default {
-            get {
-                return ResourceManager.GetString("Default", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         internal static string ExceptionCaption {
             get {
                 return ResourceManager.GetString("ExceptionCaption", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to All Files (*.*)|*.*|All Supported Files.
-        /// </summary>
-        internal static string FilterPrefix {
-            get {
-                return ResourceManager.GetString("FilterPrefix", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Each line of the the journal entry must reference a valid account..
-        /// </summary>
-        internal static string InvalidAccountException {
-            get {
-                return ResourceManager.GetString("InvalidAccountException", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The journal entry does not balance. Please ensure that the total number of debits is equal to the total number of credits..
-        /// </summary>
-        internal static string JournalLinesArgumentException {
-            get {
-                return ResourceManager.GetString("JournalLinesArgumentException", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The journal entry number must be unique..
-        /// </summary>
-        internal static string JournalNumberException {
-            get {
-                return ResourceManager.GetString("JournalNumberException", resourceCulture);
             }
         }
     }

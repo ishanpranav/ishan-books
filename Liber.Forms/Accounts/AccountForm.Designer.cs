@@ -37,12 +37,20 @@
             _errorProvider = new System.Windows.Forms.ErrorProvider(components);
             numberNumericUpDown = new System.Windows.Forms.NumericUpDown();
             typeComboBox = new System.Windows.Forms.ComboBox();
+            descriptionTextBox = new System.Windows.Forms.TextBox();
             _helpProvider = new System.Windows.Forms.HelpProvider();
             label2 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
-            lockedCheckBox = new System.Windows.Forms.CheckBox();
+            placeholderCheckBox = new System.Windows.Forms.CheckBox();
             parentComboBox = new System.Windows.Forms.ComboBox();
+            label5 = new System.Windows.Forms.Label();
+            label6 = new System.Windows.Forms.Label();
+            hiddenCheckBox = new System.Windows.Forms.CheckBox();
+            label7 = new System.Windows.Forms.Label();
+            notesTextBox = new System.Windows.Forms.TextBox();
+            _colorDialog = new System.Windows.Forms.ColorDialog();
+            colorButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)_errorProvider).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numberNumericUpDown).BeginInit();
             SuspendLayout();
@@ -101,6 +109,14 @@
             _helpProvider.SetShowHelp(typeComboBox, (bool)resources.GetObject("typeComboBox.ShowHelp"));
             typeComboBox.Format += OnTypeComboBoxFormat;
             // 
+            // descriptionTextBox
+            // 
+            resources.ApplyResources(descriptionTextBox, "descriptionTextBox");
+            _helpProvider.SetHelpString(descriptionTextBox, resources.GetString("descriptionTextBox.HelpString"));
+            _errorProvider.SetIconAlignment(descriptionTextBox, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("descriptionTextBox.IconAlignment"));
+            descriptionTextBox.Name = "descriptionTextBox";
+            _helpProvider.SetShowHelp(descriptionTextBox, (bool)resources.GetObject("descriptionTextBox.ShowHelp"));
+            // 
             // label2
             // 
             resources.ApplyResources(label2, "label2");
@@ -119,13 +135,13 @@
             label4.Name = "label4";
             _helpProvider.SetShowHelp(label4, (bool)resources.GetObject("label4.ShowHelp"));
             // 
-            // lockedCheckBox
+            // placeholderCheckBox
             // 
-            resources.ApplyResources(lockedCheckBox, "lockedCheckBox");
-            _helpProvider.SetHelpString(lockedCheckBox, resources.GetString("lockedCheckBox.HelpString"));
-            lockedCheckBox.Name = "lockedCheckBox";
-            _helpProvider.SetShowHelp(lockedCheckBox, (bool)resources.GetObject("lockedCheckBox.ShowHelp"));
-            lockedCheckBox.UseVisualStyleBackColor = true;
+            resources.ApplyResources(placeholderCheckBox, "placeholderCheckBox");
+            _helpProvider.SetHelpString(placeholderCheckBox, resources.GetString("placeholderCheckBox.HelpString"));
+            placeholderCheckBox.Name = "placeholderCheckBox";
+            _helpProvider.SetShowHelp(placeholderCheckBox, (bool)resources.GetObject("placeholderCheckBox.ShowHelp"));
+            placeholderCheckBox.UseVisualStyleBackColor = true;
             // 
             // parentComboBox
             // 
@@ -136,15 +152,66 @@
             parentComboBox.Name = "parentComboBox";
             _helpProvider.SetShowHelp(parentComboBox, (bool)resources.GetObject("parentComboBox.ShowHelp"));
             // 
+            // label5
+            // 
+            resources.ApplyResources(label5, "label5");
+            label5.Name = "label5";
+            _helpProvider.SetShowHelp(label5, (bool)resources.GetObject("label5.ShowHelp"));
+            // 
+            // label6
+            // 
+            resources.ApplyResources(label6, "label6");
+            label6.Name = "label6";
+            _helpProvider.SetShowHelp(label6, (bool)resources.GetObject("label6.ShowHelp"));
+            // 
+            // hiddenCheckBox
+            // 
+            resources.ApplyResources(hiddenCheckBox, "hiddenCheckBox");
+            _helpProvider.SetHelpString(hiddenCheckBox, resources.GetString("hiddenCheckBox.HelpString"));
+            hiddenCheckBox.Name = "hiddenCheckBox";
+            _helpProvider.SetShowHelp(hiddenCheckBox, (bool)resources.GetObject("hiddenCheckBox.ShowHelp"));
+            hiddenCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // label7
+            // 
+            resources.ApplyResources(label7, "label7");
+            label7.Name = "label7";
+            _helpProvider.SetShowHelp(label7, (bool)resources.GetObject("label7.ShowHelp"));
+            // 
+            // notesTextBox
+            // 
+            resources.ApplyResources(notesTextBox, "notesTextBox");
+            notesTextBox.Name = "notesTextBox";
+            // 
+            // _colorDialog
+            // 
+            _colorDialog.AnyColor = true;
+            _colorDialog.FullOpen = true;
+            _colorDialog.SolidColorOnly = true;
+            // 
+            // colorButton
+            // 
+            resources.ApplyResources(colorButton, "colorButton");
+            colorButton.Name = "colorButton";
+            colorButton.UseVisualStyleBackColor = true;
+            colorButton.Click += OnColorButtonClick;
+            // 
             // AccountForm
             // 
             AcceptButton = acceptButton;
             resources.ApplyResources(this, "$this");
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             CancelButton = cancelButton;
+            Controls.Add(colorButton);
+            Controls.Add(label7);
+            Controls.Add(hiddenCheckBox);
+            Controls.Add(notesTextBox);
+            Controls.Add(label6);
+            Controls.Add(descriptionTextBox);
+            Controls.Add(label5);
             Controls.Add(parentComboBox);
             Controls.Add(label4);
-            Controls.Add(lockedCheckBox);
+            Controls.Add(placeholderCheckBox);
             Controls.Add(typeComboBox);
             Controls.Add(label3);
             Controls.Add(label2);
@@ -167,15 +234,23 @@
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button acceptButton;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox nameTextBox;
         private System.Windows.Forms.HelpProvider _helpProvider;
         private System.Windows.Forms.ErrorProvider _errorProvider;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.NumericUpDown numberNumericUpDown;
-        private System.Windows.Forms.ComboBox typeComboBox;
         private System.Windows.Forms.ComboBox parentComboBox;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.CheckBox lockedCheckBox;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        protected System.Windows.Forms.TextBox nameTextBox;
+        protected System.Windows.Forms.NumericUpDown numberNumericUpDown;
+        protected System.Windows.Forms.CheckBox placeholderCheckBox;
+        protected System.Windows.Forms.TextBox notesTextBox;
+        protected System.Windows.Forms.TextBox descriptionTextBox;
+        protected System.Windows.Forms.CheckBox hiddenCheckBox;
+        private System.Windows.Forms.ComboBox typeComboBox;
+        private System.Windows.Forms.Button colorButton;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ColorDialog _colorDialog;
     }
 }

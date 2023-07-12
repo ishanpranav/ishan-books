@@ -33,9 +33,13 @@ partial class MainForm
         fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        importAccountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
         saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        exportAccountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
         printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         printPreviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,10 +49,6 @@ partial class MainForm
         recentPathsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         recentPathsToolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
         exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-        viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-        accountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-        otherWindowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-        newAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         editToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
         undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         redoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,6 +58,12 @@ partial class MainForm
         pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
         selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+        settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        accountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        otherWindowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        newAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         customizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -88,13 +94,14 @@ partial class MainForm
         // 
         // menuStrip1
         // 
-        menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { fileToolStripMenuItem, viewToolStripMenuItem, editToolStripMenuItem1, toolsToolStripMenuItem, helpToolStripMenuItem });
+        menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+        menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { fileToolStripMenuItem, editToolStripMenuItem1, viewToolStripMenuItem, toolsToolStripMenuItem, helpToolStripMenuItem });
         resources.ApplyResources(menuStrip1, "menuStrip1");
         menuStrip1.Name = "menuStrip1";
         // 
         // fileToolStripMenuItem
         // 
-        fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripMenuItem, openToolStripMenuItem, toolStripSeparator, saveToolStripMenuItem, saveAsToolStripMenuItem, toolStripSeparator1, printToolStripMenuItem, printPreviewToolStripMenuItem, toolStripSeparator2, editToolStripMenuItem, toolStripSeparator8, recentPathsToolStripMenuItem, recentPathsToolStripSeparator, exitToolStripMenuItem });
+        fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripMenuItem, openToolStripMenuItem, importToolStripMenuItem, toolStripSeparator, saveToolStripMenuItem, saveAsToolStripMenuItem, exportToolStripMenuItem, toolStripSeparator1, printToolStripMenuItem, printPreviewToolStripMenuItem, toolStripSeparator2, editToolStripMenuItem, toolStripSeparator8, recentPathsToolStripMenuItem, recentPathsToolStripSeparator, exitToolStripMenuItem });
         fileToolStripMenuItem.Name = "fileToolStripMenuItem";
         resources.ApplyResources(fileToolStripMenuItem, "fileToolStripMenuItem");
         // 
@@ -109,6 +116,18 @@ partial class MainForm
         resources.ApplyResources(openToolStripMenuItem, "openToolStripMenuItem");
         openToolStripMenuItem.Name = "openToolStripMenuItem";
         openToolStripMenuItem.Click += OnOpenToolStripMenuItemClick;
+        // 
+        // importToolStripMenuItem
+        // 
+        importToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { importAccountsToolStripMenuItem });
+        importToolStripMenuItem.Name = "importToolStripMenuItem";
+        resources.ApplyResources(importToolStripMenuItem, "importToolStripMenuItem");
+        // 
+        // importAccountsToolStripMenuItem
+        // 
+        importAccountsToolStripMenuItem.Name = "importAccountsToolStripMenuItem";
+        resources.ApplyResources(importAccountsToolStripMenuItem, "importAccountsToolStripMenuItem");
+        importAccountsToolStripMenuItem.Click += OnImportAccountsToolStripMenuItemClick;
         // 
         // toolStripSeparator
         // 
@@ -126,6 +145,18 @@ partial class MainForm
         saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
         resources.ApplyResources(saveAsToolStripMenuItem, "saveAsToolStripMenuItem");
         saveAsToolStripMenuItem.Click += OnSaveAsToolStripMenuItemClick;
+        // 
+        // exportToolStripMenuItem
+        // 
+        exportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { exportAccountsToolStripMenuItem });
+        exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+        resources.ApplyResources(exportToolStripMenuItem, "exportToolStripMenuItem");
+        // 
+        // exportAccountsToolStripMenuItem
+        // 
+        exportAccountsToolStripMenuItem.Name = "exportAccountsToolStripMenuItem";
+        resources.ApplyResources(exportAccountsToolStripMenuItem, "exportAccountsToolStripMenuItem");
+        exportAccountsToolStripMenuItem.Click += OnExportAccountsToolStripMenuItemClick;
         // 
         // toolStripSeparator1
         // 
@@ -174,33 +205,9 @@ partial class MainForm
         resources.ApplyResources(exitToolStripMenuItem, "exitToolStripMenuItem");
         exitToolStripMenuItem.Click += OnExitToolStripMenuItemClick;
         // 
-        // viewToolStripMenuItem
-        // 
-        viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { accountsToolStripMenuItem, otherWindowsToolStripMenuItem });
-        viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-        resources.ApplyResources(viewToolStripMenuItem, "viewToolStripMenuItem");
-        // 
-        // accountsToolStripMenuItem
-        // 
-        accountsToolStripMenuItem.Name = "accountsToolStripMenuItem";
-        resources.ApplyResources(accountsToolStripMenuItem, "accountsToolStripMenuItem");
-        accountsToolStripMenuItem.Click += OnAccountsToolStripMenuItemClick;
-        // 
-        // otherWindowsToolStripMenuItem
-        // 
-        otherWindowsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { newAccountToolStripMenuItem });
-        otherWindowsToolStripMenuItem.Name = "otherWindowsToolStripMenuItem";
-        resources.ApplyResources(otherWindowsToolStripMenuItem, "otherWindowsToolStripMenuItem");
-        // 
-        // newAccountToolStripMenuItem
-        // 
-        newAccountToolStripMenuItem.Name = "newAccountToolStripMenuItem";
-        resources.ApplyResources(newAccountToolStripMenuItem, "newAccountToolStripMenuItem");
-        newAccountToolStripMenuItem.Click += OnNewAccountToolStripMenuItemClick;
-        // 
         // editToolStripMenuItem1
         // 
-        editToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { undoToolStripMenuItem, redoToolStripMenuItem, toolStripSeparator3, cutToolStripMenuItem, copyToolStripMenuItem, pasteToolStripMenuItem, toolStripSeparator4, selectAllToolStripMenuItem });
+        editToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { undoToolStripMenuItem, redoToolStripMenuItem, toolStripSeparator3, cutToolStripMenuItem, copyToolStripMenuItem, pasteToolStripMenuItem, toolStripSeparator4, selectAllToolStripMenuItem, toolStripSeparator9, settingsToolStripMenuItem });
         editToolStripMenuItem1.Name = "editToolStripMenuItem1";
         resources.ApplyResources(editToolStripMenuItem1, "editToolStripMenuItem1");
         // 
@@ -243,6 +250,41 @@ partial class MainForm
         // 
         selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
         resources.ApplyResources(selectAllToolStripMenuItem, "selectAllToolStripMenuItem");
+        // 
+        // toolStripSeparator9
+        // 
+        toolStripSeparator9.Name = "toolStripSeparator9";
+        resources.ApplyResources(toolStripSeparator9, "toolStripSeparator9");
+        // 
+        // settingsToolStripMenuItem
+        // 
+        settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+        resources.ApplyResources(settingsToolStripMenuItem, "settingsToolStripMenuItem");
+        settingsToolStripMenuItem.Click += OnSettingsToolStripMenuItemClick;
+        // 
+        // viewToolStripMenuItem
+        // 
+        viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { accountsToolStripMenuItem, otherWindowsToolStripMenuItem });
+        viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+        resources.ApplyResources(viewToolStripMenuItem, "viewToolStripMenuItem");
+        // 
+        // accountsToolStripMenuItem
+        // 
+        accountsToolStripMenuItem.Name = "accountsToolStripMenuItem";
+        resources.ApplyResources(accountsToolStripMenuItem, "accountsToolStripMenuItem");
+        accountsToolStripMenuItem.Click += OnAccountsToolStripMenuItemClick;
+        // 
+        // otherWindowsToolStripMenuItem
+        // 
+        otherWindowsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { newAccountToolStripMenuItem });
+        otherWindowsToolStripMenuItem.Name = "otherWindowsToolStripMenuItem";
+        resources.ApplyResources(otherWindowsToolStripMenuItem, "otherWindowsToolStripMenuItem");
+        // 
+        // newAccountToolStripMenuItem
+        // 
+        newAccountToolStripMenuItem.Name = "newAccountToolStripMenuItem";
+        resources.ApplyResources(newAccountToolStripMenuItem, "newAccountToolStripMenuItem");
+        newAccountToolStripMenuItem.Click += OnNewAccountToolStripMenuItemClick;
         // 
         // toolsToolStripMenuItem
         // 
@@ -294,6 +336,7 @@ partial class MainForm
         // 
         // toolStrip1
         // 
+        toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
         toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripButton, openToolStripButton, saveToolStripButton, printToolStripButton, toolStripSeparator6, cutToolStripButton, copyToolStripButton, pasteToolStripButton, toolStripSeparator7, helpToolStripButton });
         resources.ApplyResources(toolStrip1, "toolStrip1");
         toolStrip1.Name = "toolStrip1";
@@ -457,4 +500,10 @@ partial class MainForm
     private System.Windows.Forms.ToolStripMenuItem accountsToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem otherWindowsToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem newAccountToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem importAccountsToolStripMenuItem;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+    private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem exportAccountsToolStripMenuItem;
 }

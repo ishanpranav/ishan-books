@@ -34,5 +34,17 @@ namespace Liber.Forms.Properties {
                 this["RecentPaths"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Culture {
+            get {
+                return ((string)(this["Culture"]));
+            }
+            set {
+                this["Culture"] = value;
+            }
+        }
     }
 }
