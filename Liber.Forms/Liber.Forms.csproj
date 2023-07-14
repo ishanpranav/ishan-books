@@ -60,6 +60,9 @@
 	  <Compile Update="Controls\ListViewEx.cs">
 	    <SubType>Component</SubType>
 	  </Compile>
+	  <Compile Update="TransactionForm.cs">
+	    <SubType>Form</SubType>
+	  </Compile>
 	  <Compile Update="Properties\Resources.Designer.cs">
 	    <DependentUpon>Resources.resx</DependentUpon>
 	    <DesignTime>True</DesignTime>

@@ -17,6 +17,7 @@ namespace Liber;
 public class Account : IXmlSerializable
 {
     internal readonly HashSet<Account> children = new HashSet<Account>();
+    internal readonly HashSet<Line> lines = new HashSet<Line>();
 
     public Account() { }
 
@@ -67,6 +68,7 @@ public class Account : IXmlSerializable
     [Key(5)]
     [LocalizedDisplayName(nameof(Description))]
     [Name("Description")]
+    [NullValues("")]
     [Optional]
     public string? Description { get; set; }
 
@@ -74,6 +76,7 @@ public class Account : IXmlSerializable
     [Key(6)]
     [LocalizedDisplayName(nameof(Notes))]
     [Name("Notes")]
+    [NullValues("")]
     [Optional]
     public string? Notes { get; set; }
 
@@ -103,7 +106,7 @@ public class Account : IXmlSerializable
         {
             decimal result = 0;
 
-            foreach (Line line in Lines)
+            foreach (Line line in lines)
             {
                 result += line.Balance;
             }
@@ -120,14 +123,12 @@ public class Account : IXmlSerializable
     {
         get
         {
-            decimal result = 0;
-
-            foreach (Line line in Lines)
+            if (Balance < 0)
             {
-                result += line.Debit;
+                return 0;
             }
 
-            return result;
+            return Balance;
         }
     }
 
@@ -139,14 +140,12 @@ public class Account : IXmlSerializable
     {
         get
         {
-            decimal result = 0;
-
-            foreach (Line line in Lines)
+            if (Balance > 0)
             {
-                result += line.Credit;
+                return 0;
             }
 
-            return result;
+            return -Balance;
         }
     }
 
@@ -164,7 +163,13 @@ public class Account : IXmlSerializable
     [Browsable(false)]
     [IgnoreMember]
     [JsonIgnore]
-    public IReadOnlyCollection<Line> Lines { get; } = new HashSet<Line>();
+    public IReadOnlyCollection<Line> Lines
+    {
+        get
+        {
+            return lines;
+        }
+    }
 
     public override string ToString()
     {

@@ -4,7 +4,7 @@ namespace Liber;
 
 public class Line
 {
-    public Guid Account { get; set; }
+    public Guid AccountKey { get; set; }
     public decimal Balance { get; set; }
 
     public decimal Debit
@@ -32,4 +32,6 @@ public class Line
             return -Balance;
         }
     }
+
+    public string? Description { get; set; }
 }

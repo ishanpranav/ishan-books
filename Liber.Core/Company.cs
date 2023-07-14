@@ -1,6 +1,8 @@
 ﻿using MessagePack;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
 using System.Text.Json.Serialization;
 using System.Xml;
 using System.Xml.Schema;
@@ -13,17 +15,29 @@ namespace Liber;
 public sealed class Company : IXmlSerializable
 {
     private readonly Dictionary<Guid, Account> _accounts;
+    private readonly Dictionary<Guid, Transaction> _transactions;
+    private readonly SortedSet<Transaction> _sortedTransactions;
 
     public Company()
     {
         _accounts = new Dictionary<Guid, Account>();
+        _transactions = new Dictionary<Guid, Transaction>();
+        _sortedTransactions = new SortedSet<Transaction>(TransactionComparer.Default);
     }
 
     [JsonConstructor]
     [SerializationConstructor]
-    public Company(IReadOnlyDictionary<Guid, Account> accounts, decimal nextAccountNumber)
+    public Company(
+        IReadOnlyDictionary<Guid, Account> accounts,
+        IReadOnlyDictionary<Guid, Transaction> transactions,
+        decimal nextAccountNumber,
+        decimal nextTransactionNumber)
     {
         _accounts = new Dictionary<Guid, Account>(accounts);
+        _transactions = new Dictionary<Guid, Transaction>(transactions);
+        _sortedTransactions = new SortedSet<Transaction>(transactions.Values, TransactionComparer.Default);
+        NextAccountNumber = nextAccountNumber;
+        NextTransactionNumber = nextTransactionNumber;
 
         foreach (Account account in accounts.Values)
         {
@@ -33,10 +47,25 @@ public sealed class Company : IXmlSerializable
             }
         }
 
-        NextAccountNumber = nextAccountNumber;
+        foreach (Transaction transaction in transactions.Values)
+        {
+            foreach (Line line in transaction.Lines)
+            {
+                accounts[line.AccountKey].lines.Add(line);
+            }
+        }
     }
 
     [Key(0)]
+    public string? Name { get; set; }
+
+    [Key(1)]
+    public decimal NextAccountNumber { get; private set; } = 1;
+
+    [Key(2)]
+    public decimal NextTransactionNumber { get; private set; } = 1;
+
+    [Key(3)]
     public IReadOnlyDictionary<Guid, Account> Accounts
     {
         get
@@ -45,11 +74,23 @@ public sealed class Company : IXmlSerializable
         }
     }
 
-    [Key(1)]
-    public decimal NextAccountNumber { get; private set; } = 1;
+    [Key(4)]
+    public IReadOnlyDictionary<Guid, Transaction> Transactions
+    {
+        get
+        {
+            return _transactions;
+        }
+    }
 
-    [Key(2)]
-    public string? Name { get; set; }
+    [JsonIgnore]
+    public Transaction? LastTransaction
+    {
+        get
+        {
+            return _sortedTransactions.Max;
+        }
+    }
 
     public event EventHandler<KeyEventArgs>? AccountAdded;
     public event EventHandler<KeyEventArgs>? AccountUpdated;
@@ -100,6 +141,7 @@ public sealed class Company : IXmlSerializable
         }
 
         NextAccountNumber = Math.Max(value.Number, NextAccountNumber);
+
         AccountUpdated?.Invoke(sender: this, new KeyEventArgs(key));
     }
 
@@ -111,16 +153,84 @@ public sealed class Company : IXmlSerializable
         AccountRemoved?.Invoke(sender: this, new KeyEventArgs(key));
     }
 
+    public Transaction? GetTransactionBefore(Guid key)
+    {
+        Transaction value = _transactions[key];
+
+        if (TransactionComparer.Default.Compare(_sortedTransactions.Max, value) >= 0)
+        {
+            return null;
+        }
+
+        return _sortedTransactions
+            .GetViewBetween(_sortedTransactions.Min, value)
+            .FirstOrDefault();
+    }
+
+    public Transaction? GetTransactionAfter(Guid key)
+    {
+        Transaction value = _transactions[key];
+
+        if (TransactionComparer.Default.Compare(_sortedTransactions.Max, value) <= 0)
+        {
+            return null;
+        }
+
+        return _sortedTransactions
+            .GetViewBetween(value, _sortedTransactions.Max)
+            .Take(2)
+            .LastOrDefault();
+    }
+
+    public Guid AddTransaction(Transaction value)
+    {
+        Guid key = Guid.NewGuid();
+
+        foreach (Line line in value.Lines)
+        {
+            _accounts[line.AccountKey].lines.Add(line);
+        }
+
+        _transactions.Add(key, value);
+        _sortedTransactions.Add(value);
+
+        NextTransactionNumber = Math.Max(value.Number, NextTransactionNumber) + 1;
+
+        return key;
+    }
+
+    public void RemoveTransaction(Guid key)
+    {
+        Transaction value = _transactions[key];
+
+        foreach (Line line in value.Lines)
+        {
+            _accounts[line.AccountKey].lines.Remove(line);
+        }
+
+        _transactions.Remove(key);
+        _sortedTransactions.Remove(value);
+    }
+
     public void CopyTo(Company other)
     {
         other.Name = Name;
         other.NextAccountNumber = NextAccountNumber;
+        other.NextTransactionNumber = NextTransactionNumber;
 
         other._accounts.Clear();
+        other._transactions.Clear();
+        other._sortedTransactions.Clear();
 
         foreach (KeyValuePair<Guid, Account> account in _accounts)
         {
             other._accounts[account.Key] = account.Value;
+        }
+
+        foreach (KeyValuePair<Guid, Transaction> transaction in _transactions)
+        {
+            other._transactions[transaction.Key] = transaction.Value;
+            other._sortedTransactions.Add(transaction.Value);
         }
     }
 

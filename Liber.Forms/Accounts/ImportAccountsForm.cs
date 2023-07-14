@@ -36,7 +36,7 @@ internal sealed partial class ImportAccountsForm : Form
 
         _dataGridView.DataSource = _accounts;
 
-        _dataGridView.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+        _dataGridView.AutoResizeColumns();
     }
 
     private void OnAcceptButtonClick(object sender, EventArgs e)

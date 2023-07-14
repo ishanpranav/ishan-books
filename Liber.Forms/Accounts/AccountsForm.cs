@@ -129,9 +129,9 @@ internal sealed partial class AccountsForm : Form
         _company.RemoveAccount(key);
     }
 
-    private void OnJournalToolStripMenuItemClick(object sender, EventArgs e)
+    private void OnTransactionToolStripMenuItemClick(object sender, EventArgs e)
     {
-
+        _factory.AutoRegister(() => new TransactionForm(_company));
     }
 
     private void OnListViewAfterLabelEdit(object sender, LabelEditEventArgs e)

@@ -50,6 +50,8 @@ partial class MainForm
         settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         accountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        transactionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
         reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
         otherWindowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -185,7 +187,7 @@ partial class MainForm
         // 
         // viewToolStripMenuItem
         // 
-        viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { accountsToolStripMenuItem, reportsToolStripMenuItem, toolStripSeparator10, otherWindowsToolStripMenuItem });
+        viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { accountsToolStripMenuItem, transactionToolStripMenuItem, toolStripSeparator2, reportsToolStripMenuItem, toolStripSeparator10, otherWindowsToolStripMenuItem });
         viewToolStripMenuItem.Name = "viewToolStripMenuItem";
         resources.ApplyResources(viewToolStripMenuItem, "viewToolStripMenuItem");
         // 
@@ -194,6 +196,17 @@ partial class MainForm
         accountsToolStripMenuItem.Name = "accountsToolStripMenuItem";
         resources.ApplyResources(accountsToolStripMenuItem, "accountsToolStripMenuItem");
         accountsToolStripMenuItem.Click += OnAccountsToolStripMenuItemClick;
+        // 
+        // transactionToolStripMenuItem
+        // 
+        transactionToolStripMenuItem.Name = "transactionToolStripMenuItem";
+        resources.ApplyResources(transactionToolStripMenuItem, "transactionToolStripMenuItem");
+        transactionToolStripMenuItem.Click += OnTransactionToolStripMenuItemClick;
+        // 
+        // toolStripSeparator2
+        // 
+        toolStripSeparator2.Name = "toolStripSeparator2";
+        resources.ApplyResources(toolStripSeparator2, "toolStripSeparator2");
         // 
         // reportsToolStripMenuItem
         // 
@@ -376,4 +389,6 @@ partial class MainForm
     private System.Windows.Forms.ToolStripMenuItem exportAccountsToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
+    private System.Windows.Forms.ToolStripMenuItem transactionToolStripMenuItem;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 }

@@ -414,4 +414,9 @@ internal sealed partial class MainForm : Form
     {
         _factory.AutoRegister(() => new ReportsForm(_company));
     }
+
+    private void OnTransactionToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        _factory.AutoRegister(() => new TransactionForm(_company));
+    }
 }

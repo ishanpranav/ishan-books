@@ -18,6 +18,7 @@ internal abstract partial class AccountForm : Form
 
         Company = company;
         Company.AccountAdded += OnCompanyAccountAdded;
+        Company.AccountUpdated += OnCompanyAccountUpdated;
         Company.AccountRemoved += OnCompanyAccountRemoved;
         DialogResult = DialogResult.Cancel;
         typeComboBox.DataSource = Enum.GetValues<AccountType>();
@@ -171,5 +172,19 @@ internal abstract partial class AccountForm : Form
         {
             Color = _colorDialog.Color;
         }
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            Company.AccountAdded -= OnCompanyAccountAdded;
+            Company.AccountUpdated -= OnCompanyAccountUpdated;
+            Company.AccountRemoved -= OnCompanyAccountRemoved;
+
+            components?.Dispose();
+        }
+
+        base.Dispose(disposing);
     }
 }
