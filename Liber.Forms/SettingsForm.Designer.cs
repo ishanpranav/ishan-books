@@ -87,6 +87,7 @@
             Controls.Add(cancelButton);
             MaximizeBox = false;
             Name = "SettingsForm";
+            ShowIcon = false;
             groupBox1.ResumeLayout(false);
             ResumeLayout(false);
         }

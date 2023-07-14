@@ -2,11 +2,15 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
 
 namespace Liber;
 
 [MessagePackObject]
-public sealed class Company
+[XmlRoot("company")]
+public sealed class Company : IXmlSerializable
 {
     private readonly Dictionary<Guid, Account> _accounts;
 
@@ -117,6 +121,26 @@ public sealed class Company
         foreach (KeyValuePair<Guid, Account> account in _accounts)
         {
             other._accounts[account.Key] = account.Value;
+        }
+    }
+
+    public XmlSchema? GetSchema()
+    {
+        return null;
+    }
+
+    void IXmlSerializable.ReadXml(XmlReader reader)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void WriteXml(XmlWriter writer)
+    {
+        writer.WriteElementString("name", Name);
+
+        foreach (Account account in Accounts.Values)
+        {
+            XmlSerializers.Account.Serialize(writer, account);
         }
     }
 }

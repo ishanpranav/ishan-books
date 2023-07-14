@@ -67,6 +67,7 @@
             Controls.Add(cancelButton);
             Controls.Add(_dataGridView);
             Name = "ImportAccountsForm";
+            ShowIcon = false;
             ((System.ComponentModel.ISupportInitialize)_dataGridView).EndInit();
             ResumeLayout(false);
         }

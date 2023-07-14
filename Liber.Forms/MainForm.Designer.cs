@@ -62,11 +62,10 @@ partial class MainForm
         settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         accountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
         otherWindowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         newAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-        toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-        customizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-        optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         contentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         indexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -95,7 +94,7 @@ partial class MainForm
         // menuStrip1
         // 
         menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-        menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { fileToolStripMenuItem, editToolStripMenuItem1, viewToolStripMenuItem, toolsToolStripMenuItem, helpToolStripMenuItem });
+        menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { fileToolStripMenuItem, editToolStripMenuItem1, viewToolStripMenuItem, helpToolStripMenuItem });
         resources.ApplyResources(menuStrip1, "menuStrip1");
         menuStrip1.Name = "menuStrip1";
         // 
@@ -264,7 +263,7 @@ partial class MainForm
         // 
         // viewToolStripMenuItem
         // 
-        viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { accountsToolStripMenuItem, otherWindowsToolStripMenuItem });
+        viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { accountsToolStripMenuItem, reportsToolStripMenuItem, toolStripSeparator10, otherWindowsToolStripMenuItem });
         viewToolStripMenuItem.Name = "viewToolStripMenuItem";
         resources.ApplyResources(viewToolStripMenuItem, "viewToolStripMenuItem");
         // 
@@ -273,6 +272,17 @@ partial class MainForm
         accountsToolStripMenuItem.Name = "accountsToolStripMenuItem";
         resources.ApplyResources(accountsToolStripMenuItem, "accountsToolStripMenuItem");
         accountsToolStripMenuItem.Click += OnAccountsToolStripMenuItemClick;
+        // 
+        // reportsToolStripMenuItem
+        // 
+        reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
+        resources.ApplyResources(reportsToolStripMenuItem, "reportsToolStripMenuItem");
+        reportsToolStripMenuItem.Click += OnReportsToolStripMenuItemClick;
+        // 
+        // toolStripSeparator10
+        // 
+        toolStripSeparator10.Name = "toolStripSeparator10";
+        resources.ApplyResources(toolStripSeparator10, "toolStripSeparator10");
         // 
         // otherWindowsToolStripMenuItem
         // 
@@ -285,22 +295,6 @@ partial class MainForm
         newAccountToolStripMenuItem.Name = "newAccountToolStripMenuItem";
         resources.ApplyResources(newAccountToolStripMenuItem, "newAccountToolStripMenuItem");
         newAccountToolStripMenuItem.Click += OnNewAccountToolStripMenuItemClick;
-        // 
-        // toolsToolStripMenuItem
-        // 
-        toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { customizeToolStripMenuItem, optionsToolStripMenuItem });
-        toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-        resources.ApplyResources(toolsToolStripMenuItem, "toolsToolStripMenuItem");
-        // 
-        // customizeToolStripMenuItem
-        // 
-        customizeToolStripMenuItem.Name = "customizeToolStripMenuItem";
-        resources.ApplyResources(customizeToolStripMenuItem, "customizeToolStripMenuItem");
-        // 
-        // optionsToolStripMenuItem
-        // 
-        optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-        resources.ApplyResources(optionsToolStripMenuItem, "optionsToolStripMenuItem");
         // 
         // helpToolStripMenuItem
         // 
@@ -468,9 +462,6 @@ partial class MainForm
     private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
     private System.Windows.Forms.ToolStripMenuItem selectAllToolStripMenuItem;
-    private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
-    private System.Windows.Forms.ToolStripMenuItem customizeToolStripMenuItem;
-    private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem contentsToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem indexToolStripMenuItem;
@@ -506,4 +497,6 @@ partial class MainForm
     private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem exportAccountsToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
 }

@@ -51,7 +51,7 @@
             ClientSize = new System.Drawing.Size(546, 325);
             Controls.Add(_webView);
             Name = "BrowserForm";
-            Load += OnBrowserFormLoad;
+            Load += OnLoad;
             ((System.ComponentModel.ISupportInitialize)_webView).EndInit();
             ResumeLayout(false);
         }

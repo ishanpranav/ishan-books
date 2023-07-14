@@ -4,12 +4,17 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
 
 namespace Liber;
 
 [MessagePackObject]
-public class Account
+[XmlRoot("account")]
+public class Account : IXmlSerializable
 {
     internal readonly HashSet<Account> children = new HashSet<Account>();
 
@@ -32,6 +37,7 @@ public class Account
     [LocalizedDisplayName(nameof(Number))]
     public decimal Number { get; set; }
 
+    [DataMember]
     [Index(2)]
     [Key(1)]
     [LocalizedDisplayName(nameof(Name))]
@@ -81,7 +87,7 @@ public class Account
     [Ignore]
     [IgnoreMember]
     [JsonIgnore]
-    public decimal Balance
+    public decimal Debit
     {
         get
         {
@@ -92,7 +98,7 @@ public class Account
                 result += line.Debit;
             }
 
-            return Type.ToBalance(result);
+            return result;
         }
     }
 
@@ -115,5 +121,21 @@ public class Account
     public override string ToString()
     {
         return $"{Number} - {Name}";
+    }
+
+    public XmlSchema? GetSchema()
+    {
+        return null;
+    }
+
+    void IXmlSerializable.ReadXml(XmlReader reader)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void WriteXml(XmlWriter writer)
+    {
+        writer.WriteElementString("name", ToString());
+        writer.WriteElementString("debit", XmlConvert.ToString(Debit));
     }
 }

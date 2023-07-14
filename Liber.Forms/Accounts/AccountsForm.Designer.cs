@@ -213,6 +213,7 @@ namespace Liber.Forms.Accounts
             Controls.Add(_listView);
             Controls.Add(_statusStrip1);
             Name = "AccountsForm";
+            ShowIcon = false;
             WindowState = FormWindowState.Maximized;
             _contextMenuStrip.ResumeLayout(false);
             _statusStrip1.ResumeLayout(false);

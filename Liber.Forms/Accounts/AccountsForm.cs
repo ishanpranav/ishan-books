@@ -45,12 +45,12 @@ internal sealed partial class AccountsForm : Form
     private static void AddSubItems(ListViewItem item, Account value)
     {
         item.Text = value.Name;
-        
+
         item.SubItems.AddRange(new string[]
         {
             value.Number.ToString(),
             value.Type.ToLocalizedString(),
-            value.Balance.ToString("c")
+            value.Debit.ToString("c")
         });
 
         if (value.Placeholder)

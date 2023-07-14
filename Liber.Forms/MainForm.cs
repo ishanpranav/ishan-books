@@ -1,7 +1,6 @@
 using Liber.Forms.Accounts;
 using Liber.Forms.Companies;
 using Liber.Forms.Properties;
-using Liber.GnuCash;
 using MessagePack;
 using System;
 using System.Collections.Generic;
@@ -409,5 +408,10 @@ internal sealed partial class MainForm : Form
 
             await GnuCashSerializer.SerializeAccountsAsync(output, _company.Accounts);
         });
+    }
+
+    private void OnReportsToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        _factory.AutoRegister(() => new ReportsForm(_company));
     }
 }

@@ -78,6 +78,7 @@ partial class CompanyForm
         MaximizeBox = false;
         Name = "CompanyForm";
         _helpProvider.SetShowHelp(this, (bool)resources.GetObject("$this.ShowHelp"));
+        ShowIcon = false;
         Load += OnLoad;
         ResumeLayout(false);
         PerformLayout();
