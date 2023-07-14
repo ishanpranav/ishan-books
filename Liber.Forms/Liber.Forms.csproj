@@ -10,6 +10,13 @@
 
 	<ItemGroup>
 	  <None Remove="Properties\Resources.en.restext" />
+	  <None Remove="transforms\trial-balance.xslt" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="transforms\trial-balance.xslt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -79,9 +86,6 @@
 	  <None Update="Properties\Settings.settings">
 	    <Generator>SettingsSingleFileGenerator</Generator>
 	    <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-	  </None>
-	  <None Update="styles\trial-balance.xslt">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
 	</ItemGroup>
 

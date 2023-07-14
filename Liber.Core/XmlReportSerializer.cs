@@ -7,6 +7,7 @@ namespace Liber;
 
 public static class XmlReportSerializer
 {
+    private static readonly XmlReaderSettings s_xslSettings = new XmlReaderSettings();
     private static readonly XmlWriterSettings s_xmlSettings = new XmlWriterSettings()
     {
         Async = true
@@ -17,6 +18,24 @@ public static class XmlReportSerializer
         Indent = true,
         NewLineOnAttributes = true
     };
+
+    public static XslStylesheet DeserializeStylesheet(string path)
+    {
+        using XmlReader xslReader = XmlReader.Create(path, s_xslSettings);
+
+        return (XslStylesheet)XmlSerializers.Stylesheet.Deserialize(xslReader)!;
+    }
+
+    public static XslCompiledTransform DeserializeTransform(string path)
+    {
+        XslCompiledTransform result = new XslCompiledTransform();
+
+        using XmlReader xslReader = XmlReader.Create(path, s_xslSettings);
+
+        result.Load(xslReader);
+
+        return result;
+    }
 
     public static string Serialize(XslCompiledTransform transform, Company company)
     {

@@ -87,6 +87,25 @@ public class Account : IXmlSerializable
     [Ignore]
     [IgnoreMember]
     [JsonIgnore]
+    public decimal Balance
+    {
+        get
+        {
+            decimal result = 0;
+
+            foreach (Line line in Lines)
+            {
+                result += line.Balance;
+            }
+
+            return result;
+        }
+    }
+
+    [Browsable(false)]
+    [Ignore]
+    [IgnoreMember]
+    [JsonIgnore]
     public decimal Debit
     {
         get
@@ -96,6 +115,25 @@ public class Account : IXmlSerializable
             foreach (Line line in Lines)
             {
                 result += line.Debit;
+            }
+
+            return result;
+        }
+    }
+
+    [Browsable(false)]
+    [Ignore]
+    [IgnoreMember]
+    [JsonIgnore]
+    public decimal Credit
+    {
+        get
+        {
+            decimal result = 0;
+
+            foreach (Line line in Lines)
+            {
+                result += line.Credit;
             }
 
             return result;
@@ -137,5 +175,6 @@ public class Account : IXmlSerializable
     {
         writer.WriteElementString("name", ToString());
         writer.WriteElementString("debit", XmlConvert.ToString(Debit));
+        writer.WriteElementString("credit", XmlConvert.ToString(Credit));
     }
 }

@@ -4,8 +4,19 @@ namespace Liber;
 
 internal static class XmlSerializers
 {
+    private static XmlSerializer? s_stylesheet;
     private static XmlSerializer? s_report;
     private static XmlSerializer? s_account;
+
+    public static XmlSerializer Stylesheet
+    {
+        get
+        {
+            s_stylesheet ??= new XmlSerializer(typeof(XslStylesheet));
+
+            return s_stylesheet;
+        }
+    }
 
     public static XmlSerializer Report
     {

@@ -50,7 +50,7 @@ internal sealed partial class AccountsForm : Form
         {
             value.Number.ToString(),
             value.Type.ToLocalizedString(),
-            value.Debit.ToString("c")
+            value.Type.ToBalance(value.Balance).ToString("c")
         });
 
         if (value.Placeholder)

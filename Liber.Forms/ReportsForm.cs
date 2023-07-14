@@ -9,7 +9,7 @@ namespace Liber.Forms;
 
 internal sealed partial class ReportsForm : Form
 {
-    private static readonly Dictionary<string, XslCompiledTransform> s_styles = new Dictionary<string, XslCompiledTransform>();
+    private static readonly Dictionary<string, XslCompiledTransform> s_transforms = new Dictionary<string, XslCompiledTransform>();
 
     private readonly Company _company;
 
@@ -26,7 +26,7 @@ internal sealed partial class ReportsForm : Form
 
         _webView.CoreWebView2.DocumentTitleChanged += (_, _) => Text = _webView.CoreWebView2.DocumentTitle;
 
-        string[] files = Directory.GetFiles("styles", "*.xslt");
+        string[] files = Directory.GetFiles("transforms", "*.xslt");
 
         if (files.Length == 0)
         {
@@ -37,7 +37,8 @@ internal sealed partial class ReportsForm : Form
 
         foreach (string file in files)
         {
-            ListViewItem item = _listView.Items.Add(Path.GetFileNameWithoutExtension(file));
+            IReadOnlyDictionary<string, string> variables = XmlReportSerializer.DeserializeStylesheet(file).ToDictionary();
+            ListViewItem item = _listView.Items.Add(variables["title"]);
 
             item.ImageIndex = 0;
             item.Tag = file;
@@ -48,16 +49,13 @@ internal sealed partial class ReportsForm : Form
     {
         string file = (string)_listView.SelectedItems[0].Tag;
 
-        if (!s_styles.TryGetValue(file, out XslCompiledTransform? style))
+        if (!s_transforms.TryGetValue(file, out XslCompiledTransform? transform))
         {
-            style = new XslCompiledTransform();
-
-            style.Load(file);
-
-            s_styles[file] = style;
+            transform = XmlReportSerializer.DeserializeTransform(file);
+            s_transforms[file] = transform;
         }
 
-        string xhtml = XmlReportSerializer.Serialize(style, _company);
+        string xhtml = XmlReportSerializer.Serialize(transform, _company);
 
         _webView.NavigateToString(xhtml);
     }
