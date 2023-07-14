@@ -23,7 +23,6 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Liber.Core\Liber.Core.csproj" />
-	  <ProjectReference Include="..\Liber.GnuCash\Liber.GnuCash.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -1,7 +1,7 @@
 ﻿using CsvHelper.Configuration.Attributes;
 using System;
 
-namespace Liber.GnuCash;
+namespace Liber;
 
 [NewLine("\n")]
 public class GnuCashAccount
