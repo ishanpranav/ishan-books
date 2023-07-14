@@ -57,7 +57,7 @@
 				</tbody>
 				<tfoot>
 					<tr>
-						<td></td>
+						<th>Total</th>
 						<td class="total right">
 							<xsl:value-of select="format-number(sum(company/account/debit), ' #,##0.00 ;(#,##0.00)')"/>
 						</td>

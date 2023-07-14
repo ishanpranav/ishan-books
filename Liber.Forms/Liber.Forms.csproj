@@ -10,10 +10,14 @@
 
 	<ItemGroup>
 	  <None Remove="Properties\Resources.en.restext" />
+	  <None Remove="transforms\financial-statement.xslt" />
 	  <None Remove="transforms\trial-balance.xslt" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Content Include="transforms\financial-statement.xslt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
 	  <Content Include="transforms\trial-balance.xslt">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>

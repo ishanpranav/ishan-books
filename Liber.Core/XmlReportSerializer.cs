@@ -1,13 +1,18 @@
 ﻿using System;
 using System.IO;
 using System.Xml;
+using System.Xml.Resolvers;
 using System.Xml.Xsl;
 
 namespace Liber;
 
 public static class XmlReportSerializer
 {
-    private static readonly XmlReaderSettings s_xslSettings = new XmlReaderSettings();
+    private static readonly XmlReaderSettings s_xslSettings = new XmlReaderSettings()
+    {
+        XmlResolver = s_resolver
+    };
+    private static readonly XmlKnownResolver s_resolver = new XmlKnownResolver(s_xslSettings);
     private static readonly XmlWriterSettings s_xmlSettings = new XmlWriterSettings()
     {
         Async = true
@@ -31,8 +36,8 @@ public static class XmlReportSerializer
         XslCompiledTransform result = new XslCompiledTransform();
 
         using XmlReader xslReader = XmlReader.Create(path, s_xslSettings);
-
-        result.Load(xslReader);
+        
+        result.Load(xslReader, settings: null, s_resolver);
 
         return result;
     }

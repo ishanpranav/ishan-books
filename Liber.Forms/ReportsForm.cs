@@ -38,7 +38,13 @@ internal sealed partial class ReportsForm : Form
         foreach (string file in files)
         {
             IReadOnlyDictionary<string, string> variables = XmlReportSerializer.DeserializeStylesheet(file).ToDictionary();
-            ListViewItem item = _listView.Items.Add(variables["title"]);
+
+            if (!variables.TryGetValue("title", out string? title))
+            {
+                continue;
+            }
+
+            ListViewItem item = _listView.Items.Add(title);
 
             item.ImageIndex = 0;
             item.Tag = file;

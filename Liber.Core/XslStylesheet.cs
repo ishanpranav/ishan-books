@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 
 namespace Liber;
 
-[XmlRoot("stylesheet")]
+[XmlRoot("stylesheet", Namespace = "http://www.w3.org/1999/XSL/Transform")]
 public class XslStylesheet
 {
     [XmlElement("variable")]
