@@ -22,7 +22,7 @@ internal sealed partial class SettingsForm : Form
 
         DialogResult = DialogResult.Cancel;
         cultureComboBox.DataSource = s_availableCultures;
-        cultureComboBox.SelectedItem = CultureInfo.CurrentCulture;
+        cultureComboBox.SelectedItem = CultureInfo.CurrentUICulture;
     }
 
     private static IEnumerable<CultureInfo> GetAvailableCultures()
@@ -67,7 +67,6 @@ internal sealed partial class SettingsForm : Form
         }
 
         Settings.Default.Culture = culture.Name;
-        CultureInfo.CurrentCulture = culture;
         CultureInfo.CurrentUICulture = culture;
         DialogResult = DialogResult.OK;
 

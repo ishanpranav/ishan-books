@@ -45,7 +45,7 @@ internal sealed partial class AccountsForm : Form
     private static void AddSubItems(ListViewItem item, Account value)
     {
         item.Text = value.Name;
-
+        
         item.SubItems.AddRange(new string[]
         {
             value.Number.ToString(),

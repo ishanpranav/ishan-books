@@ -1,4 +1,5 @@
-﻿<root>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
@@ -396,5 +397,23 @@
   </data>
   <data name="helpToolStripButton.Text" xml:space="preserve">
     <value>Ayudar</value>
+  </data>
+  <data name="_openFileDialog.Filter" xml:space="preserve">
+    <value>Todos los archivos (*.*)|*.*|Todos los archivos compatibles (*.shbk; *.json)|*.shbk;*.json|Archivo de empresa de SharpBooks (*.shbk)|*.shbk|Notación de objetos JavaScript (JSON) (*.json)|*.json|Archivo delimitado por comas (*.csv)|*.csv</value>
+  </data>
+  <data name="_saveFileDialog.Filter" xml:space="preserve">
+    <value>Archivo de empresa de SharpBooks (*.shbk)|*.shbk|Notación de objetos JavaScript (*.json)|*.json|Delimitado por comas (*.csv)|*.csv</value>
+  </data>
+  <data name="exportAccountsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Plan de cuentas (*.csv)</value>
+  </data>
+  <data name="exportToolStripMenuItem.Text" xml:space="preserve">
+    <value>Exportar</value>
+  </data>
+  <data name="importAccountsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Plan de cuentas (*.csv)</value>
+  </data>
+  <data name="newAccountToolStripMenuItem.Text" xml:space="preserve">
+    <value>Nueva cuenta</value>
   </data>
 </root>

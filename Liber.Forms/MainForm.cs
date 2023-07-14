@@ -33,6 +33,7 @@ internal sealed partial class MainForm : Form
     static MainForm()
     {
         s_jsonOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase, allowIntegerValues: true));
+        s_jsonOptions.Converters.Add(new JsonColorConverter());
         s_jsonOptions.Converters.Add(new TypeConverterJsonConverterAdapter());
     }
 
@@ -252,7 +253,7 @@ internal sealed partial class MainForm : Form
                     await ImportJsonCompanyAsync(path);
                     break;
 
-                case ".liber":
+                case ".shbk":
                     await ImportCompanyAsync(path);
                     break;
             }
@@ -327,7 +328,7 @@ internal sealed partial class MainForm : Form
                     await ExportJsonCompanyAsync(path);
                     break;
 
-                case ".liber":
+                case ".shbk":
                     await ExportCompanyAsync(path);
                     break;
             }

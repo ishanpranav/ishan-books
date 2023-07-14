@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,22 +117,58 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Color" xml:space="preserve">
-    <value>Color</value>
+  <data name="AccountPayable" xml:space="preserve">
+    <value>Cuenta por pagar</value>
   </data>
-  <data name="Description" xml:space="preserve">
-    <value>Description</value>
+  <data name="AccountReceivable" xml:space="preserve">
+    <value>Cuenta por cobrar</value>
   </data>
-  <data name="Name" xml:space="preserve">
-    <value>Name</value>
+  <data name="Asset" xml:space="preserve">
+    <value>Activo</value>
   </data>
-  <data name="Notes" xml:space="preserve">
-    <value>Notes</value>
+  <data name="Equity" xml:space="preserve">
+    <value>Patrimonio</value>
   </data>
-  <data name="Number" xml:space="preserve">
-    <value>Number</value>
+  <data name="Cash" xml:space="preserve">
+    <value>Efectivo</value>
   </data>
-  <data name="Placeholder" xml:space="preserve">
-    <value>Placeholder</value>
+  <data name="Cost" xml:space="preserve">
+    <value>Costo de ventas</value>
+  </data>
+  <data name="CreditCard" xml:space="preserve">
+    <value>Tarjeta de crédito</value>
+  </data>
+  <data name="Expense" xml:space="preserve">
+    <value>Gasto</value>
+  </data>
+  <data name="FixedAsset" xml:space="preserve">
+    <value>Activo fijo</value>
+  </data>
+  <data name="Income" xml:space="preserve">
+    <value>Ingreso</value>
+  </data>
+  <data name="LongTermLiability" xml:space="preserve">
+    <value>Pasivo a largo plazo</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>(Sin categoría)</value>
+  </data>
+  <data name="OtherAsset" xml:space="preserve">
+    <value>Otro activo</value>
+  </data>
+  <data name="OtherIncome" xml:space="preserve">
+    <value>Otro ingreso</value>
+  </data>
+  <data name="OtherExpense" xml:space="preserve">
+    <value>Otro gasto</value>
+  </data>
+  <data name="OtherComprehensiveIncome" xml:space="preserve">
+    <value>Otro resultado integral</value>
+  </data>
+  <data name="OtherCurrentAsset" xml:space="preserve">
+    <value>Otro activo circulante</value>
+  </data>
+  <data name="OtherCurrentLiability" xml:space="preserve">
+    <value>Otro pasivo circulante</value>
   </data>
 </root>

@@ -52,36 +52,28 @@ public class Account
     [Name("Placeholder")]
     public bool Placeholder { get; set; }
 
-    [BooleanFalseValues("F")]
-    [BooleanTrueValues("T")]
-    [Index(9)]
-    [Key(5)]
-    [LocalizedDisplayName(nameof(Hidden))]
-    [Name("Hidden")]
-    public bool Hidden { get; set; }
-
     [Index(4)]
-    [Key(6)]
+    [Key(5)]
     [LocalizedDisplayName(nameof(Description))]
     [Name("Description")]
     public string? Description { get; set; }
 
     [Index(6)]
-    [Key(7)]
+    [Key(6)]
     [LocalizedDisplayName(nameof(Notes))]
     [Name("Notes")]
     public string? Notes { get; set; }
 
     [Index(5)]
     [Browsable(false)]
-    [Key(8)]
+    [Key(7)]
     [Name("Account Color")]
     [CsvHelper.Configuration.Attributes.TypeConverter(typeof(CsvHelper.TypeConversion.ColorConverter))]
     public Color Color { get; set; }
 
     [Index(10)]
     [Browsable(false)]
-    [Key(9)]
+    [Key(8)]
     [Name("Tax Info")]
     public TaxType TaxType { get; set; }
 

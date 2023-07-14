@@ -125,5 +125,6 @@
   </data>
   <data name="HelpUrl" xml:space="preserve">
     <value>https://github.com/ishanpranav/sharp-books</value>
+    <comment>@Invariant</comment>
   </data>
 </root>

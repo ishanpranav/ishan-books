@@ -6,7 +6,7 @@ using System.Windows.Forms;
 namespace Liber.Forms.Accounts;
 
 internal sealed partial class ImportAccountsForm : Form
-{ 
+{
     private readonly Company _company;
     private readonly BindingList<Account> _accounts = new BindingList<Account>();
 

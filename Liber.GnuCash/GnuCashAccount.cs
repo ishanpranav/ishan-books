@@ -24,6 +24,12 @@ public class GnuCashAccount
     [Name("Namespace")]
     public string Namespace { get; set; } = "CURRENCY";
 
+    [BooleanFalseValues("F")]
+    [BooleanTrueValues("T")]
+    [Index(9)]
+    [Name("Hidden")]
+    public bool Hidden { get; set; }
+
     [Index(3)]
     [Name("Account Code")]
     public string Code

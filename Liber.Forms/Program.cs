@@ -16,7 +16,6 @@ internal static class Program
         {
             CultureInfo culture = new CultureInfo(Settings.Default.Culture);
 
-            CultureInfo.CurrentCulture = culture;
             CultureInfo.CurrentUICulture = culture;
         }
 

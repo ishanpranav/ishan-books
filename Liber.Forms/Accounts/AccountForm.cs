@@ -105,7 +105,6 @@ internal abstract partial class AccountForm : Form
         account.Name = nameTextBox.Text;
         account.Type = Type;
         account.Placeholder = placeholderCheckBox.Checked;
-        account.Hidden = hiddenCheckBox.Checked;
         account.Description = descriptionTextBox.Text;
         account.Notes = notesTextBox.Text;
         account.Color = Color;

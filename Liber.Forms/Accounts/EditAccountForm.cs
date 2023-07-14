@@ -12,7 +12,6 @@ internal sealed class EditAccountForm : AccountForm
         numberNumericUpDown.Value = account.Number;
         nameTextBox.Text = account.Name;
         placeholderCheckBox.Checked = account.Placeholder;
-        hiddenCheckBox.Checked = account.Hidden;
         descriptionTextBox.Text = account.Description;
         notesTextBox.Text = account.Notes;
         Type = account.Type;

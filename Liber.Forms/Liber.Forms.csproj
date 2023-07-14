@@ -9,8 +9,15 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="Properties\Resources.en.restext" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Properties\Resources.en.restext" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <PackageReference Include="MessagePack" Version="2.5.124" />
-	  <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.0-preview.5.23280.1" />
 	  <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1905-prerelease" />
 	</ItemGroup>
 
