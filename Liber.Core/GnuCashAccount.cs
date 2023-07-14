@@ -6,48 +6,32 @@ namespace Liber;
 [NewLine("\n")]
 public class GnuCashAccount
 {
-    public GnuCashAccount(Account account, [Optional] string path)
+    public GnuCashAccount(Account account)
     {
         Account = account;
-        Path = path;
     }
 
+    public Account Account { get; }
+
     [Index(1)]
-    [Name("Account Full Name")]
-    public string Path { get; }
+    [Name("Full Account Name")]
+    [Optional]
+    public string? Path { get; set; }
 
     [Index(7)]
     [Name("Symbol")]
+    [Optional]
     public string Symbol { get; set; } = "USD";
 
     [Index(8)]
     [Name("Namespace")]
+    [Optional]
     public string Namespace { get; set; } = "CURRENCY";
 
     [BooleanFalseValues("F")]
     [BooleanTrueValues("T")]
     [Index(9)]
     [Name("Hidden")]
+    [Optional]
     public bool Hidden { get; set; }
-
-    [Index(3)]
-    [Name("Account Code")]
-    public string Code
-    {
-        get
-        {
-            return Account.Number.ToString();
-        }
-        set
-        {
-            if (!decimal.TryParse(Code, out decimal number))
-            {
-                return;
-            }
-
-            Account.Number = number;
-        }
-    }
-
-    public Account Account { get; set; }
 }

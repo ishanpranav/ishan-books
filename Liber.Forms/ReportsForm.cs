@@ -13,6 +13,8 @@ internal sealed partial class ReportsForm : Form
 
     private readonly Company _company;
 
+    private string? _xhtml;
+
     public ReportsForm(Company company)
     {
         InitializeComponent();
@@ -25,6 +27,11 @@ internal sealed partial class ReportsForm : Form
         await _webView.EnsureCoreWebView2Async();
 
         _webView.CoreWebView2.DocumentTitleChanged += (_, _) => Text = _webView.CoreWebView2.DocumentTitle;
+        _webView.CoreWebView2.ContextMenuRequested += (_, e) =>
+        {
+            e.MenuItems.Clear();
+            _contextMenu.Show(_webView, e.Location);
+        };
 
         string[] files = Directory.GetFiles("transforms", "*.xslt");
 
@@ -61,8 +68,45 @@ internal sealed partial class ReportsForm : Form
             s_transforms[file] = transform;
         }
 
-        string xhtml = XmlReportSerializer.Serialize(transform, _company);
+        _xhtml = XmlReportSerializer.Serialize(transform, _company);
 
-        _webView.NavigateToString(xhtml);
+        _webView.NavigateToString(_xhtml);
+
+        saveAsToolStripButton.Enabled = true;
+        saveAsToolStripMenuItem.Enabled = true;
+        printPreviewToolStripButton.Enabled = true;
+        printPreviewToolStripMenuItem.Enabled = true;
+        printToolStripButton.Enabled = true;
+        printToolStripMenuItem.Enabled = true;
+    }
+
+    private void OnPrintPreviewToolStripButtonClick(object sender, EventArgs e)
+    {
+        _webView.CoreWebView2.ShowPrintUI();
+    }
+
+    private void OnHelpToolStripButtonClick(object sender, EventArgs e)
+    {
+
+    }
+
+    private async void OnSaveAsToolStripButtonClick(object sender, EventArgs e)
+    {
+        if (_saveFileDialog.ShowDialog() != DialogResult.OK)
+        {
+            return;
+        }
+
+        switch (Path.GetExtension(_saveFileDialog.FileName).ToUpperInvariant())
+        {
+            case ".PDF":
+                await _webView.CoreWebView2.PrintToPdfAsync(_saveFileDialog.FileName);
+                break;
+
+            case ".HTM":
+            case ".HTML":
+                await File.WriteAllTextAsync(_saveFileDialog.FileName, _xhtml);
+                break;
+        }
     }
 }

@@ -33,5 +33,6 @@ internal sealed partial class UrlForm : Form
 
             Icon = Icon.FromHandle(bitmap.GetHicon());
         };
+        _webView.CoreWebView2.ContextMenuRequested += (_, e) => e.MenuItems.Clear();
     }
 }

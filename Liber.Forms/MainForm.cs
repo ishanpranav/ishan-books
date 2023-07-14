@@ -246,13 +246,13 @@ internal sealed partial class MainForm : Form
     {
         await AbortRetryIgnoreAsync(async () =>
         {
-            switch (Path.GetExtension(path).ToLower())
+            switch (Path.GetExtension(path).ToUpperInvariant())
             {
-                case ".json":
+                case ".JSON":
                     await ImportJsonCompanyAsync(path);
                     break;
 
-                case ".shbk":
+                case ".SHBK":
                     await ImportCompanyAsync(path);
                     break;
             }
@@ -297,21 +297,21 @@ internal sealed partial class MainForm : Form
         _path = path;
     }
 
-    private static async Task AbortRetryIgnoreAsync(Func<Task> action)
+    private async Task AbortRetryIgnoreAsync(Func<Task> action)
     {
         DialogResult result;
 
         do
         {
-            try
+            //try
             {
                 await action();
 
                 result = DialogResult.OK;
             }
-            catch (Exception exception)
+            //catch (Exception exception)
             {
-                result = MessageBox.Show(exception.Message, Resources.ExceptionCaption, MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error);
+                //result = MessageBox.Show(exception.Message, Resources.ExceptionCaption, MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error);
             }
         }
         while (result == DialogResult.Retry);
@@ -321,13 +321,13 @@ internal sealed partial class MainForm : Form
     {
         await AbortRetryIgnoreAsync(async () =>
         {
-            switch (Path.GetExtension(path).ToLower())
+            switch (Path.GetExtension(path).ToUpperInvariant())
             {
-                case ".json":
+                case ".JSON":
                     await ExportJsonCompanyAsync(path);
                     break;
 
-                case ".shbk":
+                case ".SHBK":
                     await ExportCompanyAsync(path);
                     break;
             }

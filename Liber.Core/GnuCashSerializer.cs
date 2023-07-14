@@ -22,10 +22,7 @@ public static class GnuCashSerializer
     private static async Task<IReadOnlyCollection<T>> DeserializeAsync<T>(Stream input)
     {
         using StreamReader streamReader = new StreamReader(input);
-        using CsvReader csvReader = new CsvReader(streamReader, new CsvConfiguration(CultureInfo.InvariantCulture)
-        {
-            BadDataFound = null
-        });
+        using CsvReader csvReader = new CsvReader(streamReader, new CsvConfiguration(CultureInfo.InvariantCulture));
 
         List<T> results = new List<T>();
 
@@ -59,7 +56,10 @@ public static class GnuCashSerializer
                     .Insert(0, current.Name);
             }
 
-            gnuCashAccounts.Add(new GnuCashAccount(account, pathBuilder.ToString()));
+            gnuCashAccounts.Add(new GnuCashAccount(account)
+            {
+                Path = pathBuilder.ToString()
+            });
         }
 
         await SerializeAsync(output, gnuCashAccounts);
@@ -72,7 +72,10 @@ public static class GnuCashSerializer
 
         foreach (GnuCashAccount account in gnuCashAccounts)
         {
-            results.Add(account.Account);
+            if (!account.Hidden)
+            {
+                results.Add(account.Account);
+            }
         }
 
         return results;

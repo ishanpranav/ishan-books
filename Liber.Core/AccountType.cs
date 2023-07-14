@@ -6,7 +6,7 @@ namespace Liber;
 
 public enum AccountType : short
 {
-    [Name("STOCK", "MUTUAL", "TRADING")]
+    [Name("", "STOCK", "MUTUAL", "TRADING")]
     None = 0,
 
     [Name("A/RECEIVABLE")]

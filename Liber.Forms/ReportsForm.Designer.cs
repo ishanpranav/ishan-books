@@ -30,79 +30,69 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReportsForm));
-            saveToolStripButton = new System.Windows.Forms.ToolStripButton();
+            saveAsToolStripButton = new System.Windows.Forms.ToolStripButton();
             printToolStripButton = new System.Windows.Forms.ToolStripButton();
             toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            cutToolStripButton = new System.Windows.Forms.ToolStripButton();
-            copyToolStripButton = new System.Windows.Forms.ToolStripButton();
-            pasteToolStripButton = new System.Windows.Forms.ToolStripButton();
-            toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             helpToolStripButton = new System.Windows.Forms.ToolStripButton();
             toolStrip1 = new System.Windows.Forms.ToolStrip();
+            printPreviewToolStripButton = new System.Windows.Forms.ToolStripButton();
             splitContainer1 = new System.Windows.Forms.SplitContainer();
             _listView = new System.Windows.Forms.ListViewEx();
             _imageList = new System.Windows.Forms.ImageList(components);
             _webView = new Microsoft.Web.WebView2.WinForms.WebView2();
+            _saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            _contextMenu = new System.Windows.Forms.ContextMenuStrip(components);
+            saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            printPreviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)_webView).BeginInit();
+            _contextMenu.SuspendLayout();
             SuspendLayout();
             // 
-            // saveToolStripButton
+            // saveAsToolStripButton
             // 
-            saveToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(saveToolStripButton, "saveToolStripButton");
-            saveToolStripButton.Name = "saveToolStripButton";
+            saveAsToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(saveAsToolStripButton, "saveAsToolStripButton");
+            saveAsToolStripButton.Name = "saveAsToolStripButton";
+            saveAsToolStripButton.Click += OnSaveAsToolStripButtonClick;
             // 
             // printToolStripButton
             // 
             printToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(printToolStripButton, "printToolStripButton");
             printToolStripButton.Name = "printToolStripButton";
+            printToolStripButton.Click += OnPrintPreviewToolStripButtonClick;
             // 
             // toolStripSeparator
             // 
             toolStripSeparator.Name = "toolStripSeparator";
             resources.ApplyResources(toolStripSeparator, "toolStripSeparator");
             // 
-            // cutToolStripButton
-            // 
-            cutToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(cutToolStripButton, "cutToolStripButton");
-            cutToolStripButton.Name = "cutToolStripButton";
-            // 
-            // copyToolStripButton
-            // 
-            copyToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(copyToolStripButton, "copyToolStripButton");
-            copyToolStripButton.Name = "copyToolStripButton";
-            // 
-            // pasteToolStripButton
-            // 
-            pasteToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(pasteToolStripButton, "pasteToolStripButton");
-            pasteToolStripButton.Name = "pasteToolStripButton";
-            // 
-            // toolStripSeparator1
-            // 
-            toolStripSeparator1.Name = "toolStripSeparator1";
-            resources.ApplyResources(toolStripSeparator1, "toolStripSeparator1");
-            // 
             // helpToolStripButton
             // 
             helpToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(helpToolStripButton, "helpToolStripButton");
             helpToolStripButton.Name = "helpToolStripButton";
+            helpToolStripButton.Click += OnHelpToolStripButtonClick;
             // 
             // toolStrip1
             // 
-            toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { saveToolStripButton, printToolStripButton, toolStripSeparator, cutToolStripButton, copyToolStripButton, pasteToolStripButton, toolStripSeparator1, helpToolStripButton });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { saveAsToolStripButton, printPreviewToolStripButton, printToolStripButton, toolStripSeparator, helpToolStripButton });
             resources.ApplyResources(toolStrip1, "toolStrip1");
             toolStrip1.Name = "toolStrip1";
+            // 
+            // printPreviewToolStripButton
+            // 
+            printPreviewToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(printPreviewToolStripButton, "printPreviewToolStripButton");
+            printPreviewToolStripButton.Name = "printPreviewToolStripButton";
+            printPreviewToolStripButton.Click += OnPrintPreviewToolStripButtonClick;
             // 
             // splitContainer1
             // 
@@ -144,6 +134,38 @@
             _webView.Name = "_webView";
             _webView.ZoomFactor = 1D;
             // 
+            // _saveFileDialog
+            // 
+            resources.ApplyResources(_saveFileDialog, "_saveFileDialog");
+            // 
+            // _contextMenu
+            // 
+            _contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { saveAsToolStripMenuItem, toolStripSeparator1, printToolStripMenuItem, printPreviewToolStripMenuItem });
+            _contextMenu.Name = "contextMenuStrip1";
+            resources.ApplyResources(_contextMenu, "_contextMenu");
+            // 
+            // saveAsToolStripMenuItem
+            // 
+            resources.ApplyResources(saveAsToolStripMenuItem, "saveAsToolStripMenuItem");
+            saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+            saveAsToolStripMenuItem.Click += OnSaveAsToolStripButtonClick;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            resources.ApplyResources(toolStripSeparator1, "toolStripSeparator1");
+            // 
+            // printToolStripMenuItem
+            // 
+            resources.ApplyResources(printToolStripMenuItem, "printToolStripMenuItem");
+            printToolStripMenuItem.Name = "printToolStripMenuItem";
+            printToolStripMenuItem.Click += OnPrintPreviewToolStripButtonClick;
+            // 
+            // printPreviewToolStripMenuItem
+            // 
+            resources.ApplyResources(printPreviewToolStripMenuItem, "printPreviewToolStripMenuItem");
+            printPreviewToolStripMenuItem.Name = "printPreviewToolStripMenuItem";
+            // 
             // ReportsForm
             // 
             resources.ApplyResources(this, "$this");
@@ -160,24 +182,28 @@
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)_webView).EndInit();
+            _contextMenu.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private System.Windows.Forms.ToolStripButton saveToolStripButton;
+        private System.Windows.Forms.ToolStripButton saveAsToolStripButton;
         private System.Windows.Forms.ToolStripButton printToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
-        private System.Windows.Forms.ToolStripButton cutToolStripButton;
-        private System.Windows.Forms.ToolStripButton copyToolStripButton;
-        private System.Windows.Forms.ToolStripButton pasteToolStripButton;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton helpToolStripButton;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ListViewEx _listView;
         private Microsoft.Web.WebView2.WinForms.WebView2 _webView;
         private System.Windows.Forms.ImageList _imageList;
+        private System.Windows.Forms.SaveFileDialog _saveFileDialog;
+        private System.Windows.Forms.ContextMenuStrip _contextMenu;
+        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem printToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem printPreviewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton printPreviewToolStripButton;
     }
 }

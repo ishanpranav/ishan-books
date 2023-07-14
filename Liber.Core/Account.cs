@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 using System.Xml;
 using System.Xml.Schema;
@@ -32,22 +31,26 @@ public class Account : IXmlSerializable
     [Key(0)]
     public Guid ParentKey { get; internal set; }
 
-    [Ignore]
+    [Default(0)]
+    [Index(3)]
     [Key(2)]
     [LocalizedDisplayName(nameof(Number))]
+    [Name("Account Code")]
+    [Optional]
     public decimal Number { get; set; }
 
-    [DataMember]
     [Index(2)]
     [Key(1)]
     [LocalizedDisplayName(nameof(Name))]
     [Name("Account Name")]
+    [Optional]
     public string Name { get; set; } = string.Empty;
 
     [Index(0)]
     [Key(3)]
     [LocalizedDisplayName(nameof(Type))]
     [Name("Type")]
+    [Optional]
     public AccountType Type { get; set; }
 
     [BooleanFalseValues("F")]
@@ -56,24 +59,28 @@ public class Account : IXmlSerializable
     [Key(4)]
     [LocalizedDisplayName(nameof(Placeholder))]
     [Name("Placeholder")]
+    [Optional]
     public bool Placeholder { get; set; }
 
     [Index(4)]
     [Key(5)]
     [LocalizedDisplayName(nameof(Description))]
     [Name("Description")]
+    [Optional]
     public string? Description { get; set; }
 
     [Index(6)]
     [Key(6)]
     [LocalizedDisplayName(nameof(Notes))]
     [Name("Notes")]
+    [Optional]
     public string? Notes { get; set; }
 
     [Index(5)]
     [Browsable(false)]
     [Key(7)]
     [Name("Account Color")]
+    [Optional]
     [CsvHelper.Configuration.Attributes.TypeConverter(typeof(CsvHelper.TypeConversion.ColorConverter))]
     public Color Color { get; set; }
 
@@ -81,6 +88,7 @@ public class Account : IXmlSerializable
     [Browsable(false)]
     [Key(8)]
     [Name("Tax Info")]
+    [Optional]
     public TaxType TaxType { get; set; }
 
     [Browsable(false)]

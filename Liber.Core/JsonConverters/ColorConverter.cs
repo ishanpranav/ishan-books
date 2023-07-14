@@ -10,7 +10,7 @@ public class ColorConverter : DefaultTypeConverter
     {
         if (string.IsNullOrWhiteSpace(text))
         {
-            return null;
+            return Color.Empty;
         }
 
         string[] segments = text

@@ -6,7 +6,10 @@ namespace Liber;
 public enum TaxType
 {
     [Name("F")]
-    None = 0
+    None = 0,
+
+    [Name("T")]
+    Other = 1
 }
 
 public static class TaxTypeExtensions
