@@ -9,7 +9,7 @@
 
 	<ItemGroup>
 	  <PackageReference Include="CsvHelper" Version="30.0.1" />
-	  <PackageReference Include="MessagePack.Annotations" Version="2.5.124" />
+	  <PackageReference Include="MessagePack" Version="2.5.124" />
 	</ItemGroup>
 
 	<ItemGroup>

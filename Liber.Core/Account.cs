@@ -1,5 +1,6 @@
 ﻿using CsvHelper.Configuration.Attributes;
 using MessagePack;
+using MessagePack.Formatters;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -79,6 +80,7 @@ public class Account : IXmlSerializable
     [Index(5)]
     [Browsable(false)]
     [Key(7)]
+    [MessagePackFormatter(typeof(MessagePackColorFormatter))]
     [Name("Account Color")]
     [Optional]
     [CsvHelper.Configuration.Attributes.TypeConverter(typeof(CsvHelper.TypeConversion.ColorConverter))]
