@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Security.Principal;
 using System.Windows.Forms;
 
 namespace Liber.Forms.Accounts;
 
 internal sealed partial class ImportAccountsForm : Form
-{
-    private Company _company;
+{ 
+    private readonly Company _company;
     private readonly BindingList<Account> _accounts = new BindingList<Account>();
 
     public ImportAccountsForm(Company company)

@@ -244,35 +244,24 @@ internal sealed partial class MainForm : Form
 
     private async Task ImportAsync(string path)
     {
-        DialogResult result;
-
-        do
+        await AbortRetryIgnoreAsync(async () =>
         {
-            try
+            switch (Path.GetExtension(path).ToLower())
             {
-                switch (Path.GetExtension(path).ToLower())
-                {
-                    case ".json":
-                        await ImportJsonCompanyAsync(path);
-                        break;
+                case ".json":
+                    await ImportJsonCompanyAsync(path);
+                    break;
 
-                    case ".liber":
-                        await ImportCompanyAsync(path);
-                        break;
-                }
-
-                CloseChildren();
-                _recentPathManager.Add(path);
-
-                _path = path;
-                result = DialogResult.OK;
+                case ".liber":
+                    await ImportCompanyAsync(path);
+                    break;
             }
-            catch (Exception exception)
-            {
-                result = MessageBox.Show(exception.Message, Resources.ExceptionCaption, MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error);
-            }
-        }
-        while (result == DialogResult.Retry);
+
+            CloseChildren();
+            _recentPathManager.Add(path);
+
+            _path = path;
+        });
     }
 
     private async void OnSaveAsToolStripMenuItemClick(object sender, EventArgs e)
@@ -308,7 +297,7 @@ internal sealed partial class MainForm : Form
         _path = path;
     }
 
-    private async Task ExportAsync(string path)
+    private static async Task AbortRetryIgnoreAsync(Func<Task> action)
     {
         DialogResult result;
 
@@ -316,18 +305,7 @@ internal sealed partial class MainForm : Form
         {
             try
             {
-                switch (Path.GetExtension(path).ToLower())
-                {
-                    case ".json":
-                        await ExportJsonCompanyAsync(path);
-                        break;
-
-                    case ".liber":
-                        await ExportCompanyAsync(path);
-                        break;
-                }
-
-                _recentPathManager.Add(path);
+                await action();
 
                 result = DialogResult.OK;
             }
@@ -337,6 +315,25 @@ internal sealed partial class MainForm : Form
             }
         }
         while (result == DialogResult.Retry);
+    }
+
+    private async Task ExportAsync(string path)
+    {
+        await AbortRetryIgnoreAsync(async () =>
+        {
+            switch (Path.GetExtension(path).ToLower())
+            {
+                case ".json":
+                    await ExportJsonCompanyAsync(path);
+                    break;
+
+                case ".liber":
+                    await ExportCompanyAsync(path);
+                    break;
+            }
+
+            _recentPathManager.Add(path);
+        });
     }
 
     private Task SaveAsync()
@@ -383,11 +380,14 @@ internal sealed partial class MainForm : Form
             return;
         }
 
-        await using FileStream input = File.OpenRead(path);
+        await AbortRetryIgnoreAsync(async () =>
+        {
+            await using FileStream input = File.OpenRead(path);
 
-        IReadOnlyCollection<Account> accounts = await GnuCashSerializer.DeserializeAccountsAsync(input);
+            IReadOnlyCollection<Account> accounts = await GnuCashSerializer.DeserializeAccountsAsync(input);
 
-        _factory.Register(Guid.NewGuid(), new ImportAccountsForm(_company, accounts));
+            _factory.Register(Guid.NewGuid(), new ImportAccountsForm(_company, accounts));
+        });
     }
 
     private void OnSettingsToolStripMenuItemClick(object sender, EventArgs e)
@@ -402,8 +402,11 @@ internal sealed partial class MainForm : Form
             return;
         }
 
-        await using FileStream output = File.Create(path);
+        await AbortRetryIgnoreAsync(async () =>
+        {
+            await using FileStream output = File.Create(path);
 
-        await GnuCashSerializer.SerializeAccountsAsync(output, _company.Accounts.Values);
+            await GnuCashSerializer.SerializeAccountsAsync(output, _company.Accounts);
+        });
     }
 }

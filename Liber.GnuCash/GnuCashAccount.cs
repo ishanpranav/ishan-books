@@ -1,36 +1,47 @@
 ﻿using CsvHelper.Configuration.Attributes;
+using System;
 
 namespace Liber.GnuCash;
 
+[NewLine("\n")]
 public class GnuCashAccount
 {
-    private readonly Account _account;
-
-    public GnuCashAccount(Account account)
+    public GnuCashAccount(Account account, [Optional] string path)
     {
-        _account = account;
-    }
-
-    [Index(0)]
-    [Name("Type")]
-    public AccountType Type
-    {
-        get
-        {
-            return _account.Type;
-        }
-        set
-        {
-            _account.Type = value;
-        }
+        Account = account;
+        Path = path;
     }
 
     [Index(1)]
-    [Name("Full Account Name")]
-    public string Path { get; set; }
+    [Name("Account Full Name")]
+    public string Path { get; }
 
-    public Account ToAccount()
+    [Index(7)]
+    [Name("Symbol")]
+    public string Symbol { get; set; } = "USD";
+
+    [Index(8)]
+    [Name("Namespace")]
+    public string Namespace { get; set; } = "CURRENCY";
+
+    [Index(3)]
+    [Name("Account Code")]
+    public string Code
     {
-        return _account;
+        get
+        {
+            return Account.Number.ToString();
+        }
+        set
+        {
+            if (!decimal.TryParse(Code, out decimal number))
+            {
+                return;
+            }
+
+            Account.Number = number;
+        }
     }
+
+    public Account Account { get; set; }
 }

@@ -23,47 +23,70 @@ public class Account
     }
 
     [Browsable(false)]
+    [Ignore]
     [Key(0)]
     public Guid ParentKey { get; internal set; }
 
-    [Key(1)]
-    [LocalizedDisplayName(nameof(Name))]
-    public string? Name { get; set; }
-
-    [Browsable(false)]
-    [IgnoreMember]
-    [JsonIgnore]
-    public string? Path { get; set; }
-
+    [Ignore]
     [Key(2)]
     [LocalizedDisplayName(nameof(Number))]
     public decimal Number { get; set; }
 
+    [Index(2)]
+    [Key(1)]
+    [LocalizedDisplayName(nameof(Name))]
+    [Name("Account Name")]
+    public string Name { get; set; } = string.Empty;
+
+    [Index(0)]
     [Key(3)]
     [LocalizedDisplayName(nameof(Type))]
+    [Name("Type")]
     public AccountType Type { get; set; }
 
+    [BooleanFalseValues("F")]
+    [BooleanTrueValues("T")]
+    [Index(11)]
     [Key(4)]
     [LocalizedDisplayName(nameof(Placeholder))]
+    [Name("Placeholder")]
     public bool Placeholder { get; set; }
 
+    [BooleanFalseValues("F")]
+    [BooleanTrueValues("T")]
+    [Index(9)]
     [Key(5)]
     [LocalizedDisplayName(nameof(Hidden))]
+    [Name("Hidden")]
     public bool Hidden { get; set; }
 
+    [Index(4)]
     [Key(6)]
     [LocalizedDisplayName(nameof(Description))]
+    [Name("Description")]
     public string? Description { get; set; }
 
+    [Index(6)]
     [Key(7)]
     [LocalizedDisplayName(nameof(Notes))]
-    public string Notes { get; set; }
+    [Name("Notes")]
+    public string? Notes { get; set; }
 
+    [Index(5)]
+    [Browsable(false)]
     [Key(8)]
-    [LocalizedDisplayName(nameof(Color))]
+    [Name("Account Color")]
+    [CsvHelper.Configuration.Attributes.TypeConverter(typeof(CsvHelper.TypeConversion.ColorConverter))]
     public Color Color { get; set; }
 
+    [Index(10)]
     [Browsable(false)]
+    [Key(9)]
+    [Name("Tax Info")]
+    public TaxType TaxType { get; set; }
+
+    [Browsable(false)]
+    [Ignore]
     [IgnoreMember]
     [JsonIgnore]
     public decimal Balance

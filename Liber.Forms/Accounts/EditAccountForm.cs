@@ -18,6 +18,7 @@ internal sealed class EditAccountForm : AccountForm
         Type = account.Type;
         ParentKey = account.ParentKey;
         Color = account.Color;
+        TaxType = account.TaxType;
     }
 
     public Guid Key { get; }

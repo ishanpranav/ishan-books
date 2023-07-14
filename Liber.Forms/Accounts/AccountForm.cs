@@ -21,6 +21,7 @@ internal abstract partial class AccountForm : Form
         Company.AccountRemoved += OnCompanyAccountRemoved;
         DialogResult = DialogResult.Cancel;
         typeComboBox.DataSource = Enum.GetValues<AccountType>();
+        taxTypeComboBox.DataSource = Enum.GetValues<TaxType>();
 
         foreach (KeyValuePair<Guid, Account> account in Company.Accounts)
         {
@@ -39,6 +40,18 @@ internal abstract partial class AccountForm : Form
         set
         {
             typeComboBox.SelectedItem = value;
+        }
+    }
+
+    protected TaxType TaxType
+    {
+        get
+        {
+            return (TaxType)taxTypeComboBox.SelectedItem;
+        }
+        set
+        {
+            taxTypeComboBox.SelectedItem = value;
         }
     }
 
@@ -96,6 +109,7 @@ internal abstract partial class AccountForm : Form
         account.Description = descriptionTextBox.Text;
         account.Notes = notesTextBox.Text;
         account.Color = Color;
+        account.TaxType = TaxType;
     }
 
     private void InitializeParent(Guid key, Account value)
@@ -132,6 +146,11 @@ internal abstract partial class AccountForm : Form
     private void OnTypeComboBoxFormat(object sender, ListControlConvertEventArgs e)
     {
         e.Value = ((AccountType)e.ListItem!).ToLocalizedString();
+    }
+
+    private void OnTaxTypeComboBoxFormat(object sender, ListControlConvertEventArgs e)
+    {
+        e.Value = ((TaxType)e.ListItem!).ToLocalizedString();
     }
 
     private void OnAcceptButtonClick(object sender, EventArgs e)

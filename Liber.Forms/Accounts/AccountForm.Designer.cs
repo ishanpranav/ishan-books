@@ -48,6 +48,8 @@
             label6 = new System.Windows.Forms.Label();
             hiddenCheckBox = new System.Windows.Forms.CheckBox();
             label7 = new System.Windows.Forms.Label();
+            taxTypeComboBox = new System.Windows.Forms.ComboBox();
+            label8 = new System.Windows.Forms.Label();
             notesTextBox = new System.Windows.Forms.TextBox();
             _colorDialog = new System.Windows.Forms.ColorDialog();
             colorButton = new System.Windows.Forms.Button();
@@ -178,6 +180,22 @@
             label7.Name = "label7";
             _helpProvider.SetShowHelp(label7, (bool)resources.GetObject("label7.ShowHelp"));
             // 
+            // taxTypeComboBox
+            // 
+            resources.ApplyResources(taxTypeComboBox, "taxTypeComboBox");
+            taxTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            taxTypeComboBox.FormattingEnabled = true;
+            _helpProvider.SetHelpString(taxTypeComboBox, resources.GetString("taxTypeComboBox.HelpString"));
+            taxTypeComboBox.Name = "taxTypeComboBox";
+            _helpProvider.SetShowHelp(taxTypeComboBox, (bool)resources.GetObject("taxTypeComboBox.ShowHelp"));
+            taxTypeComboBox.Format += OnTaxTypeComboBoxFormat;
+            // 
+            // label8
+            // 
+            resources.ApplyResources(label8, "label8");
+            label8.Name = "label8";
+            _helpProvider.SetShowHelp(label8, (bool)resources.GetObject("label8.ShowHelp"));
+            // 
             // notesTextBox
             // 
             resources.ApplyResources(notesTextBox, "notesTextBox");
@@ -202,6 +220,8 @@
             resources.ApplyResources(this, "$this");
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             CancelButton = cancelButton;
+            Controls.Add(taxTypeComboBox);
+            Controls.Add(label8);
             Controls.Add(colorButton);
             Controls.Add(label7);
             Controls.Add(hiddenCheckBox);
@@ -252,5 +272,7 @@
         private System.Windows.Forms.Button colorButton;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ColorDialog _colorDialog;
+        private System.Windows.Forms.ComboBox taxTypeComboBox;
+        private System.Windows.Forms.Label label8;
     }
 }
