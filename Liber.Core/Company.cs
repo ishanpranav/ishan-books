@@ -53,15 +53,6 @@ public sealed class Company : IXmlSerializable
     }
 
     [Key(0)]
-    public string? Name { get; set; }
-
-    [Key(1)]
-    public decimal NextAccountNumber { get; private set; } = 1;
-
-    [Key(2)]
-    public decimal NextTransactionNumber { get; private set; } = 1;
-
-    [Key(3)]
     public IReadOnlyDictionary<Guid, Account> Accounts
     {
         get
@@ -70,7 +61,7 @@ public sealed class Company : IXmlSerializable
         }
     }
 
-    [Key(4)]
+    [Key(1)]
     public IReadOnlyCollection<Transaction> Transactions
     {
         get
@@ -78,6 +69,15 @@ public sealed class Company : IXmlSerializable
             return _transactions;
         }
     }
+
+    [Key(2)]
+    public decimal NextAccountNumber { get; private set; } = 1;
+
+    [Key(3)]
+    public decimal NextTransactionNumber { get; private set; } = 1;
+
+    [Key(4)]
+    public string? Name { get; set; }
 
     [IgnoreMember]
     [JsonIgnore]
@@ -161,7 +161,9 @@ public sealed class Company : IXmlSerializable
 
         return _transactions
             .GetViewBetween(_transactions.Min, value)
-            .FirstOrDefault();
+            .Reverse()
+            .Take(2)
+            .Last();
     }
 
     public Transaction? GetTransactionAfter(Transaction value)
@@ -174,7 +176,7 @@ public sealed class Company : IXmlSerializable
         return _transactions
             .GetViewBetween(value, LastTransaction)
             .Take(2)
-            .LastOrDefault();
+            .Last();
     }
 
     public void AddTransaction(Transaction value)

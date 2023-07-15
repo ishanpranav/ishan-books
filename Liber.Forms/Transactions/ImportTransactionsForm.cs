@@ -1,22 +1,65 @@
 ﻿using Liber.Forms.Accounts;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 
 namespace Liber.Forms.Transactions;
 
 internal sealed class ImportTransactionsForm : ImportForm
 {
-    private readonly List<Transaction> _transactions = new List<Transaction>();
-    private readonly BindingList<Line> _lines = new BindingList<Line>();
+    private readonly Dictionary<Guid, Transaction> _transactions = new Dictionary<Guid, Transaction>();
 
-    public ImportTransactionsForm(Company company) : base(company)
+    public ImportTransactionsForm(Company company, FormFactory factory, IReadOnlyCollection<GnuCashLine> lines) : base(company, factory)
     {
-        _dataGridView.DataSource = _lines;
+        Dictionary<string, Guid> accounts = new Dictionary<string, Guid>(company.Accounts.Count);
+
+        foreach (KeyValuePair<Guid, Account> account in company.Accounts)
+        {
+            accounts.Add(account.Value.Name, account.Key);
+        }
+
+        foreach (GnuCashLine line in lines)
+        {
+            if (!_transactions.TryGetValue(line.TransactionId, out Transaction? transaction))
+            {
+                transaction = new Transaction()
+                {
+                    Id = line.TransactionId,
+                    Number = line.TransactionNumber,
+                    Posted = line.TransactionPosted,
+                    Description = line.TransactionDescription,
+                    Memo = line.TransactionMemo
+                };
+                _transactions[line.TransactionId] = transaction;
+            }
+
+            line.Value.AccountKey = accounts[line.AccountName];
+
+            transaction.Lines.Add(line.Value);
+        }
+
+        foreach (Transaction transaction in _transactions.Values)
+        {
+            if (!string.IsNullOrWhiteSpace(transaction.Description))
+            {
+                _listView.Items.Add(transaction.Description);
+
+                continue;
+            }
+
+            if (!string.IsNullOrWhiteSpace(transaction.Memo))
+            {
+                _listView.Items.Add(transaction.Memo);
+
+                continue;
+            }
+
+            _listView.Items.Add(transaction.Posted.ToLongDateString());
+        }
     }
 
     protected override void CommitChanges()
     {
-        foreach (Transaction transaction in _transactions)
+        foreach (Transaction transaction in _transactions.Values)
         {
             Company.AddTransaction(transaction);
         }

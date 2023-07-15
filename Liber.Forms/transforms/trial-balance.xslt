@@ -25,15 +25,17 @@
 					</tr>
 					<tr>
 						<th colspan="3" class="bar">
-							<xsl:value-of select="end"/>
+							<xsl:call-template name="date-long">
+								<xsl:with-param name="value" select="end"/>
+							</xsl:call-template>
 						</th>
 					</tr>
-				</thead>
-				<tbody>
 					<tr>
 						<th></th>
 						<th colspan="2" class="heading">
-							<xsl:value-of select="end"/>
+							<xsl:call-template name="date-year">
+								<xsl:with-param name="value" select="end"/>
+							</xsl:call-template>
 						</th>
 					</tr>
 					<tr>
@@ -41,28 +43,38 @@
 						<th class="heading">Debit</th>
 						<th class="heading">Credit</th>
 					</tr>
+				</thead>
+				<tbody>
 					<xsl:for-each select="//account">
 						<tr>
 							<td class="left">
 								<xsl:value-of select="name"/>
 							</td>
 							<td class="right">
-								<xsl:value-of select="format-number(debit, ' #,##0.00 ;(#,##0.00)')"/>
+								<xsl:call-template name="number">
+									<xsl:with-param name="value" select="debit"/>
+								</xsl:call-template>
 							</td>
 							<td class="right">
-								<xsl:value-of select="format-number(credit, ' #,##0.00 ;(#,##0.00)')"/>
+								<xsl:call-template name="number">
+									<xsl:with-param name="value" select="credit"/>
+								</xsl:call-template>
 							</td>
 						</tr>
 					</xsl:for-each>
 				</tbody>
 				<tfoot>
 					<tr>
-						<td></td>
+						<th class="left">Total</th>
 						<td class="total right">
-							<xsl:value-of select="format-number(sum(company/account/debit), ' #,##0.00 ;(#,##0.00)')"/>
+							<xsl:call-template name="number">
+								<xsl:with-param name="value" select="sum(//debit)"/>
+							</xsl:call-template>
 						</td>
 						<td class="total right">
-							<xsl:value-of select="format-number(sum(company/account/credit), ' #,##0.00 ;(#,##0.00)')"/>
+							<xsl:call-template name="number">
+								<xsl:with-param name="value" select="sum(//credit)"/>
+							</xsl:call-template>
 						</td>
 					</tr>
 				</tfoot>

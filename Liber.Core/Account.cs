@@ -28,7 +28,6 @@ public class Account : IXmlSerializable
         ParentKey = parentKey;
     }
 
-    [Browsable(false)]
     [Ignore]
     [Key(0)]
     public Guid ParentKey { get; internal set; }
@@ -36,21 +35,18 @@ public class Account : IXmlSerializable
     [Default(0)]
     [Index(3)]
     [Key(2)]
-    [LocalizedDisplayName(nameof(Number))]
     [Name("Account Code")]
     [Optional]
     public decimal Number { get; set; }
 
     [Index(2)]
     [Key(1)]
-    [LocalizedDisplayName(nameof(Name))]
     [Name("Account Name")]
     [Optional]
     public string Name { get; set; } = string.Empty;
 
     [Index(0)]
     [Key(3)]
-    [LocalizedDisplayName(nameof(Type))]
     [Name("Type")]
     [Optional]
     public AccountType Type { get; set; }
@@ -59,14 +55,12 @@ public class Account : IXmlSerializable
     [BooleanTrueValues("T")]
     [Index(11)]
     [Key(4)]
-    [LocalizedDisplayName(nameof(Placeholder))]
     [Name("Placeholder")]
     [Optional]
     public bool Placeholder { get; set; }
 
     [Index(4)]
     [Key(5)]
-    [LocalizedDisplayName(nameof(Description))]
     [Name("Description")]
     [NullValues("")]
     [Optional]
@@ -74,7 +68,6 @@ public class Account : IXmlSerializable
 
     [Index(6)]
     [Key(6)]
-    [LocalizedDisplayName(nameof(Notes))]
     [Name("Notes")]
     [NullValues("")]
     [Optional]
@@ -90,13 +83,11 @@ public class Account : IXmlSerializable
     public Color Color { get; set; }
 
     [Index(10)]
-    [Browsable(false)]
     [Key(8)]
     [Name("Tax Info")]
     [Optional]
     public TaxType TaxType { get; set; }
 
-    [Browsable(false)]
     [Ignore]
     [IgnoreMember]
     [JsonIgnore]
@@ -115,7 +106,6 @@ public class Account : IXmlSerializable
         }
     }
 
-    [Browsable(false)]
     [Ignore]
     [IgnoreMember]
     [JsonIgnore]
@@ -132,7 +122,6 @@ public class Account : IXmlSerializable
         }
     }
 
-    [Browsable(false)]
     [Ignore]
     [IgnoreMember]
     [JsonIgnore]
@@ -149,7 +138,6 @@ public class Account : IXmlSerializable
         }
     }
 
-    [Browsable(false)]
     [IgnoreMember]
     [JsonIgnore]
     public IReadOnlyCollection<Account> Children
@@ -160,7 +148,6 @@ public class Account : IXmlSerializable
         }
     }
 
-    [Browsable(false)]
     [IgnoreMember]
     [JsonIgnore]
     public IReadOnlyCollection<Line> Lines
@@ -188,7 +175,7 @@ public class Account : IXmlSerializable
 
     public void WriteXml(XmlWriter writer)
     {
-        writer.WriteElementString("name", ToString());
+        writer.WriteElementString("name", Name);
         writer.WriteElementString("debit", XmlConvert.ToString(Debit));
         writer.WriteElementString("credit", XmlConvert.ToString(Credit));
     }

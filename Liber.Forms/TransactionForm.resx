@@ -59,10 +59,14 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="postedDateTimePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>56, 31</value>
+    <value>64, 41</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="postedDateTimePicker.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
   </data>
   <data name="postedDateTimePicker.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 23</value>
+    <value>117, 27</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="postedDateTimePicker.TabIndex" type="System.Int32, mscorlib">
@@ -84,10 +88,10 @@
     <value>True</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 34</value>
+    <value>14, 45</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>31, 15</value>
+    <value>41, 20</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -111,10 +115,10 @@
     <value>True</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>179, 34</value>
+    <value>205, 45</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 15</value>
+    <value>63, 20</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -135,10 +139,13 @@
     <value>8</value>
   </data>
   <data name="numberNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>236, 31</value>
+    <value>270, 41</value>
+  </data>
+  <data name="numberNumericUpDown.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
   </data>
   <data name="numberNumericUpDown.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 23</value>
+    <value>118, 27</value>
   </data>
   <data name="numberNumericUpDown.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -161,7 +168,7 @@
   <data name="newToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABiSURBVDhP7czBCoAwCIBhn80nifnq1cVDddHjQtogtjbb
+        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAABiSURBVDhP7czBCoAwCIBhn80nifnq1cVDddHjQtogtjbb
         NRJ+BuI+yCMi0UtVp3Rejx0gYjMiiszcRjKwb0eV7UOgPuIBy7z2EQ+w947Yffp6jQeUDQFlP/B94G2P
         wGgAACcYuZjJw4fhNwAAAABJRU5ErkJggg==
 </value>
@@ -170,7 +177,7 @@
     <value>Magenta</value>
   </data>
   <data name="newToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>29, 24</value>
   </data>
   <data name="newToolStripButton.Text" xml:space="preserve">
     <value>&amp;New</value>
@@ -178,7 +185,7 @@
   <data name="saveToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABzSURBVDhPY/j69WvDt2/f/pODQXoZQIyYCfv+MwTPIQmD
+        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAABzSURBVDhPY/j69WvDt2/f/pODQXoZQIyYCfv+MwTPIQmD
         9ID0gg3ApoAYjGHAh/cficLD2QBS8SA1AJufkTGyWtoagM5HFwdhmAEfkPMCukJkzcjiIAw24MuXLwbI
         hqArRNaMLA7CYANAAGYISIA0/O0/AID67ECmnhNDAAAAAElFTkSuQmCC
 </value>
@@ -187,18 +194,18 @@
     <value>Magenta</value>
   </data>
   <data name="saveToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>29, 24</value>
   </data>
   <data name="saveToolStripButton.Text" xml:space="preserve">
     <value>&amp;Save</value>
   </data>
   <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+    <value>6, 27</value>
   </data>
   <data name="copyToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAB4SURBVDhPtc9RCoAgDMbxzuZJAo9pN/KhetkejQWD/HLq
+        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAB4SURBVDhPtc9RCoAgDMbxzuZJAo9pN/KhetkejQWD/HLq
         oAZ/ItIfbZEhomLFzOt9qDdyMITwKsZYcs5jRIFjP6tS2uYQC0DEXKkF6BrPzL+xAHw3V5oF5NlEPICk
         iNxzAZgLwP4BsNZFTb5XAOYCcD4DRnWBuahc6R2LWkqXAfkAAAAASUVORK5CYII=
 </value>
@@ -207,7 +214,7 @@
     <value>Magenta</value>
   </data>
   <data name="copyToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>29, 24</value>
   </data>
   <data name="copyToolStripButton.Text" xml:space="preserve">
     <value>&amp;Duplicate</value>
@@ -216,7 +223,7 @@
     <value>0, 0</value>
   </data>
   <data name="toolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>567, 25</value>
+    <value>648, 27</value>
   </data>
   <data name="toolStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -238,10 +245,13 @@
     <value>Bottom, Right</value>
   </data>
   <data name="cancelButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>480, 309</value>
+    <value>549, 412</value>
+  </data>
+  <data name="cancelButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
   </data>
   <data name="cancelButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>86, 31</value>
   </data>
   <data name="cancelButton.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -265,10 +275,13 @@
     <value>Bottom, Right</value>
   </data>
   <data name="applyButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>372, 309</value>
+    <value>425, 412</value>
+  </data>
+  <data name="applyButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
   </data>
   <data name="applyButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 23</value>
+    <value>117, 31</value>
   </data>
   <data name="applyButton.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -292,10 +305,13 @@
     <value>Bottom, Right</value>
   </data>
   <data name="acceptButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>264, 309</value>
+    <value>302, 412</value>
+  </data>
+  <data name="acceptButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
   </data>
   <data name="acceptButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 23</value>
+    <value>117, 31</value>
   </data>
   <data name="acceptButton.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -367,13 +383,16 @@
     <value>125</value>
   </data>
   <data name="_dataGridView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 60</value>
+    <value>14, 80</value>
+  </data>
+  <data name="_dataGridView.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
   </data>
   <data name="_dataGridView.RowHeadersWidth" type="System.Int32, mscorlib">
     <value>51</value>
   </data>
   <data name="_dataGridView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>543, 243</value>
+    <value>621, 324</value>
   </data>
   <data name="_dataGridView.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -394,10 +413,13 @@
     <value>Top, Right</value>
   </data>
   <data name="previousButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>399, 31</value>
+    <value>456, 37</value>
+  </data>
+  <data name="previousButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
   </data>
   <data name="previousButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>86, 31</value>
   </data>
   <data name="previousButton.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -421,10 +443,13 @@
     <value>Top, Right</value>
   </data>
   <data name="nextButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>480, 31</value>
+    <value>549, 37</value>
+  </data>
+  <data name="nextButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
   </data>
   <data name="nextButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>86, 31</value>
   </data>
   <data name="nextButton.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -448,13 +473,16 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>7, 15</value>
+    <value>8, 20</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>567, 344</value>
+    <value>648, 459</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>358, 232</value>
+    <value>407, 294</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>General Journal</value>

@@ -76,7 +76,7 @@ internal abstract partial class AccountForm : Form
                 return;
             }
 
-            parentComboBox.SelectedItem = new AccountView(value, Company.Accounts[value]);
+            parentComboBox.SelectedItem = value;
         }
     }
 

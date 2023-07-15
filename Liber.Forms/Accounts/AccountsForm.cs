@@ -157,9 +157,4 @@ internal sealed partial class AccountsForm : Form
 
         base.Dispose(disposing);
     }
-
-    private void OnImportToolStripMenuItemClick(object sender, EventArgs e)
-    {
-        _factory.AutoRegister(() => new ImportAccountsForm(_company));
-    }
 }

@@ -6,18 +6,13 @@ namespace Liber;
 [NewLine("\n")]
 public class GnuCashAccount
 {
-    public GnuCashAccount(Account value)
-    {
-        Value = value;
-    }
-
     [Ignore]
     public Guid Key { get; set; }
 
     [Index(1)]
     [Name("Full Account Name")]
     [Optional]
-    public string? Path { get; set; }
+    public string Path { get; set; } = string.Empty;
 
     [Index(7)]
     [Name("Symbol")]
@@ -36,5 +31,5 @@ public class GnuCashAccount
     [Optional]
     public bool Hidden { get; set; }
 
-    public Account Value { get; set; }
+    public Account Value { get; set; } = new Account();
 }

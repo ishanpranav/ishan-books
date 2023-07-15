@@ -56,28 +56,13 @@ public static class GnuCashSerializer
                     .Insert(0, current.Name);
             }
 
-            gnuCashAccounts.Add(new GnuCashAccount(account)
+            gnuCashAccounts.Add(new GnuCashAccount()
             {
+                Value = account,
                 Path = pathBuilder.ToString()
             });
         }
 
         await SerializeAsync(output, gnuCashAccounts);
-    }
-
-    public static async Task<IReadOnlyCollection<Account>> DeserializeAccountsAsync(Stream input)
-    {
-        IReadOnlyCollection<GnuCashAccount> gnuCashAccounts = await DeserializeAsync<GnuCashAccount>(input);
-        List<Account> results = new List<Account>();
-
-        foreach (GnuCashAccount account in gnuCashAccounts)
-        {
-            if (!account.Hidden)
-            {
-                results.Add(account.Value);
-            }
-        }
-
-        return results;
     }
 }

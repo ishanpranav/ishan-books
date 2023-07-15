@@ -59,13 +59,13 @@
             // numberNumericUpDown
             // 
             resources.ApplyResources(numberNumericUpDown, "numberNumericUpDown");
-            numberNumericUpDown.Maximum = new decimal(new int[] { 9999999, 0, 0, 0 });
-            numberNumericUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            numberNumericUpDown.Maximum = new decimal(new int[] { int.MaxValue, 0, 0, 0 });
             numberNumericUpDown.Name = "numberNumericUpDown";
             numberNumericUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // toolStrip1
             // 
+            toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripButton, saveToolStripButton, toolStripSeparator3, copyToolStripButton });
             resources.ApplyResources(toolStrip1, "toolStrip1");
             toolStrip1.Name = "toolStrip1";

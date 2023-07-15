@@ -39,8 +39,6 @@ namespace Liber.Forms.Accounts
             editToolStripMenuItem = new ToolStripMenuItem();
             renameToolStripMenuItem = new ToolStripMenuItem();
             removeToolStripMenuItem = new ToolStripMenuItem();
-            toolStripSeparator1 = new ToolStripSeparator();
-            importToolStripMenuItem = new ToolStripMenuItem();
             toolStripDropDownButton2 = new ToolStripDropDownButton();
             transactionlToolStripMenuItem = new ToolStripMenuItem();
             reconcileToolStripMenuItem = new ToolStripMenuItem();
@@ -144,7 +142,7 @@ namespace Liber.Forms.Accounts
             // toolStripDropDownButton1
             // 
             toolStripDropDownButton1.DisplayStyle = ToolStripItemDisplayStyle.Text;
-            toolStripDropDownButton1.DropDownItems.AddRange(new ToolStripItem[] { newToolStripMenuItem, editToolStripMenuItem, renameToolStripMenuItem, removeToolStripMenuItem, toolStripSeparator1, importToolStripMenuItem });
+            toolStripDropDownButton1.DropDownItems.AddRange(new ToolStripItem[] { newToolStripMenuItem, editToolStripMenuItem, renameToolStripMenuItem, removeToolStripMenuItem });
             resources.ApplyResources(toolStripDropDownButton1, "toolStripDropDownButton1");
             toolStripDropDownButton1.Name = "toolStripDropDownButton1";
             // 
@@ -171,17 +169,6 @@ namespace Liber.Forms.Accounts
             removeToolStripMenuItem.Name = "removeToolStripMenuItem";
             resources.ApplyResources(removeToolStripMenuItem, "removeToolStripMenuItem");
             removeToolStripMenuItem.Click += OnRemoveToolStripMenuItem;
-            // 
-            // toolStripSeparator1
-            // 
-            toolStripSeparator1.Name = "toolStripSeparator1";
-            resources.ApplyResources(toolStripSeparator1, "toolStripSeparator1");
-            // 
-            // importToolStripMenuItem
-            // 
-            importToolStripMenuItem.Name = "importToolStripMenuItem";
-            resources.ApplyResources(importToolStripMenuItem, "importToolStripMenuItem");
-            importToolStripMenuItem.Click += OnImportToolStripMenuItemClick;
             // 
             // toolStripDropDownButton2
             // 
@@ -248,7 +235,5 @@ namespace Liber.Forms.Accounts
         private ToolStripMenuItem makeGeneralJournalEntriesToolStripMenuItem1;
         private ToolStripMenuItem reconcileToolStripMenuItem1;
         private ToolStripMenuItem useRegisterToolStripMenuItem1;
-        private ToolStripSeparator toolStripSeparator1;
-        private ToolStripMenuItem importToolStripMenuItem;
     }
 }

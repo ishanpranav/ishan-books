@@ -1,6 +1,7 @@
 using Liber.Forms.Accounts;
 using Liber.Forms.Companies;
 using Liber.Forms.Properties;
+using Liber.Forms.Transactions;
 using MessagePack;
 using System;
 using System.Collections.Generic;
@@ -311,8 +312,7 @@ internal sealed partial class MainForm : Form
             }
             catch (Exception exception)
             {
-                throw;
-                result = MessageBox.Show(exception.Message, Resources.ExceptionCaption, MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error);
+                throw;        result = MessageBox.Show(exception.Message, Resources.ExceptionCaption, MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error);
             }
         }
         while (result == DialogResult.Retry);
@@ -387,7 +387,24 @@ internal sealed partial class MainForm : Form
 
             IReadOnlyCollection<GnuCashAccount> accounts = await GnuCashSerializer.DeserializeAsync<GnuCashAccount>(input);
 
-            _factory.Register(Guid.NewGuid(), new ImportAccountsForm(_company, accounts));
+            _factory.Register(Guid.NewGuid(), new ImportAccountsForm(_company, _factory, accounts));
+        });
+    }
+
+    private async void OnImportTransactionsToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        if (!TryGetOpenPath(filterIndex: 5, out string? path))
+        {
+            return;
+        }
+
+        await AbortRetryIgnoreAsync(async () =>
+        {
+            await using FileStream input = File.OpenRead(path);
+
+            IReadOnlyCollection<GnuCashLine> lines = await GnuCashSerializer.DeserializeAsync<GnuCashLine>(input);
+
+            _factory.Register(Guid.NewGuid(), new ImportTransactionsForm(_company, _factory, lines));
         });
     }
 
@@ -419,10 +436,5 @@ internal sealed partial class MainForm : Form
     private void OnTransactionToolStripMenuItemClick(object sender, EventArgs e)
     {
         _factory.AutoRegister(() => new TransactionForm(_company));
-    }
-
-    private void OnAccountToolStripMenuItemClick(object sender, EventArgs e)
-    {
-        _factory.AutoRegister(() => new ImportAccountsForm(_company));
     }
 }

@@ -29,19 +29,10 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ImportForm));
-            _dataGridView = new System.Windows.Forms.DataGridView();
             cancelButton = new System.Windows.Forms.Button();
             acceptButton = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)_dataGridView).BeginInit();
+            _listView = new System.Windows.Forms.ListViewEx();
             SuspendLayout();
-            // 
-            // _dataGridView
-            // 
-            _dataGridView.AllowUserToOrderColumns = true;
-            resources.ApplyResources(_dataGridView, "_dataGridView");
-            _dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            _dataGridView.Name = "_dataGridView";
-            _dataGridView.RowTemplate.Height = 29;
             // 
             // cancelButton
             // 
@@ -57,24 +48,33 @@
             acceptButton.UseVisualStyleBackColor = true;
             acceptButton.Click += OnAcceptButtonClick;
             // 
+            // _listView
+            // 
+            _listView.AllowColumnReorder = true;
+            resources.ApplyResources(_listView, "_listView");
+            _listView.Name = "_listView";
+            _listView.SortColumn = 0;
+            _listView.SortOrder = System.Windows.Forms.SortOrder.None;
+            _listView.UseCompatibleStateImageBehavior = false;
+            _listView.View = System.Windows.Forms.View.List;
+            // 
             // ImportForm
             // 
             AcceptButton = acceptButton;
             resources.ApplyResources(this, "$this");
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             CancelButton = cancelButton;
+            Controls.Add(_listView);
             Controls.Add(acceptButton);
             Controls.Add(cancelButton);
-            Controls.Add(_dataGridView);
             Name = "ImportForm";
             ShowIcon = false;
-            ((System.ComponentModel.ISupportInitialize)_dataGridView).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button acceptButton;
-        protected System.Windows.Forms.DataGridView _dataGridView;
+        protected System.Windows.Forms.ListViewEx _listView;
     }
 }

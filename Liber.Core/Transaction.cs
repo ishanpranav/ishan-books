@@ -1,11 +1,11 @@
-﻿using CsvHelper.Configuration.Attributes;
-using MessagePack;
+﻿using MessagePack;
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace Liber;
 
+[MessagePackObject]
 public class Transaction :
     IComparable,
     IComparable<Transaction>, 
@@ -23,29 +23,22 @@ public class Transaction :
         Lines = lines;
     }
 
-    [Index(1)]
     [Key(0)]
-    [Name("Transaction ID")]
+    public ICollection<Line> Lines { get; }
+
+    [Key(1)]
     public Guid Id { get; set; }
 
-    [Index(2)]
-    [Key(1)]
-    [Name("Number")]
+    [Key(2)]
     public decimal Number { get; set; }
 
-    [Index(0)]
-    [Key(2)]
-    [Name("Date")]
+    [Key(3)]
     public DateTime Posted { get; set; }
 
-    [Index(3)]
-    [Key(3)]
-    [Name("Description")]
+    [Key(4)]
     public string? Description { get; set; }
 
-    [Index(4)]
-    [Key(4)]
-    [Name("Notes")]
+    [Key(5)]
     public string? Memo { get; set; }
 
     [IgnoreMember]
@@ -63,9 +56,6 @@ public class Transaction :
             return result;
         }
     }
-
-    [Key(5)]
-    public ICollection<Line> Lines { get; }
 
     public override bool Equals(object? obj)
     {
@@ -138,9 +128,9 @@ public class Transaction :
 
     public static bool operator ==(Transaction? left, Transaction? right)
     {
-        if (ReferenceEquals(left, null))
+        if (left is null)
         {
-            return ReferenceEquals(right, null);
+            return right is null;
         }
 
         return left.Equals(right);
@@ -153,21 +143,21 @@ public class Transaction :
 
     public static bool operator <(Transaction? left, Transaction? right)
     {
-        return ReferenceEquals(left, null) ? !ReferenceEquals(right, null) : left.CompareTo(right) < 0;
+        return left is null ? right is not null : left.CompareTo(right) < 0;
     }
 
     public static bool operator <=(Transaction? left, Transaction? right)
     {
-        return ReferenceEquals(left, null) || left.CompareTo(right) <= 0;
+        return left is null || left.CompareTo(right) <= 0;
     }
 
     public static bool operator >(Transaction? left, Transaction? right)
     {
-        return !ReferenceEquals(left, null) && left.CompareTo(right) > 0;
+        return left is not null && left.CompareTo(right) > 0;
     }
 
     public static bool operator >=(Transaction? left, Transaction? right)
     {
-        return ReferenceEquals(left, null) ? ReferenceEquals(right, null) : left.CompareTo(right) >= 0;
+        return left is null ? right is null : left.CompareTo(right) >= 0;
     }
 }

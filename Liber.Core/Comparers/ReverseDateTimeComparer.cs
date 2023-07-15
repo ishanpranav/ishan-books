@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace Liber.Forms;
+namespace System.Collections.Specialized;
 
-internal sealed class ReverseDateTimeComparer : Comparer<DateTime>
+public class ReverseDateTimeComparer : Comparer<DateTime>
 {
     private static ReverseDateTimeComparer? s_instance;
 

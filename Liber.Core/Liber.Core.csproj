@@ -16,9 +16,6 @@
 	  <EmbeddedResource Update="AccountTypeExtensions.resx">
 	    <Generator></Generator>
 	  </EmbeddedResource>
-	  <EmbeddedResource Update="Attributes\LocalizedDisplayNameAttribute.resx">
-	    <Generator></Generator>
-	  </EmbeddedResource>
 	</ItemGroup>
 
 </Project>
