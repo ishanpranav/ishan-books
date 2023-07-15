@@ -1,6 +1,6 @@
 ﻿namespace Liber.Forms.Accounts
 {
-    partial class ImportAccountsForm
+    partial class ImportForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ImportAccountsForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ImportForm));
             _dataGridView = new System.Windows.Forms.DataGridView();
             cancelButton = new System.Windows.Forms.Button();
             acceptButton = new System.Windows.Forms.Button();
@@ -57,7 +57,7 @@
             acceptButton.UseVisualStyleBackColor = true;
             acceptButton.Click += OnAcceptButtonClick;
             // 
-            // ImportAccountsForm
+            // ImportForm
             // 
             AcceptButton = acceptButton;
             resources.ApplyResources(this, "$this");
@@ -66,16 +66,15 @@
             Controls.Add(acceptButton);
             Controls.Add(cancelButton);
             Controls.Add(_dataGridView);
-            Name = "ImportAccountsForm";
+            Name = "ImportForm";
             ShowIcon = false;
             ((System.ComponentModel.ISupportInitialize)_dataGridView).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView _dataGridView;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button acceptButton;
+        protected System.Windows.Forms.DataGridView _dataGridView;
     }
 }

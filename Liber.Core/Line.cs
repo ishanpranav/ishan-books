@@ -1,12 +1,19 @@
-﻿using System;
+﻿using MessagePack;
+using System;
+using System.Text.Json.Serialization;
 
 namespace Liber;
 
 public class Line
 {
+    [Key(0)]
     public Guid AccountKey { get; set; }
+
+    [Key(1)]
     public decimal Balance { get; set; }
 
+    [IgnoreMember]
+    [JsonIgnore]
     public decimal Debit
     {
         get
@@ -20,6 +27,8 @@ public class Line
         }
     }
 
+    [IgnoreMember]
+    [JsonIgnore]
     public decimal Credit
     {
         get
@@ -33,5 +42,6 @@ public class Line
         }
     }
 
+    [Key(2)]
     public string? Description { get; set; }
 }

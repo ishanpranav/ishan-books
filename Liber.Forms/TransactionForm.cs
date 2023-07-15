@@ -1,6 +1,7 @@
 ﻿using Liber.Forms.Accounts;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -10,7 +11,7 @@ internal sealed partial class TransactionForm : Form
 {
     private readonly Company _company;
 
-    private Guid _key;
+    private Transaction? _current;
 
     public TransactionForm(Company company)
     {
@@ -41,9 +42,10 @@ internal sealed partial class TransactionForm : Form
         accountColumn.Items.Add(new AccountView(key, value));
     }
 
-    private void InitializeTransaction(Guid key, Transaction transaction)
+    [MemberNotNull(nameof(_current))]
+    private void InitializeTransaction(Transaction transaction)
     {
-        _key = key;
+        _current = transaction;
         numberNumericUpDown.Value = transaction.Number;
         postedDateTimePicker.Value = transaction.Posted;
 
@@ -80,14 +82,15 @@ internal sealed partial class TransactionForm : Form
         return (decimal)cellValue;
     }
 
-    private bool Save(out Transaction transaction)
+    [MemberNotNullWhen(true, nameof(_current))]
+    private bool Save()
     {
-        if (_key != Guid.Empty && _company.Transactions.ContainsKey(_key))
+        if (_current != null)
         {
-            _company.RemoveTransaction(_key);
+            _company.RemoveTransaction(_current);
         }
 
-        transaction = new Transaction()
+        Transaction transaction = new Transaction()
         {
             Number = numberNumericUpDown.Value,
             Posted = postedDateTimePicker.Value,
@@ -128,7 +131,8 @@ internal sealed partial class TransactionForm : Form
             return false;
         }
 
-        InitializeTransaction(_company.AddTransaction(transaction), transaction);
+        _company.AddTransaction(transaction);
+        InitializeTransaction(transaction);
 
         return true;
     }
@@ -144,7 +148,7 @@ internal sealed partial class TransactionForm : Form
     {
         Clear();
 
-        _key = Guid.Empty;
+        _current = null;
         numberNumericUpDown.Value = _company.NextTransactionNumber;
     }
 
@@ -174,24 +178,24 @@ internal sealed partial class TransactionForm : Form
 
     private void OnSaveToolStripButtonClick(object sender, EventArgs e)
     {
-        Save(out _);
+        Save();
     }
 
     private void OnCopyToolStripButtonClick(object sender, EventArgs e)
     {
-        if (!Save(out Transaction transaction))
+        if (!Save())
         {
             return;
         }
 
         Transaction clone = new Transaction()
         {
-            Posted = transaction.Posted,
-            Description = transaction.Description,
-            Number = transaction.Number + 1
+            Posted = _current.Posted,
+            Description = _current.Description,
+            Number = _current.Number + 1
         };
 
-        foreach (Line line in transaction.Lines)
+        foreach (Line line in _current.Lines)
         {
             clone.Lines.Add(new Line()
             {
@@ -201,12 +205,13 @@ internal sealed partial class TransactionForm : Form
             });
         }
 
-        InitializeTransaction(_company.AddTransaction(clone), clone);
+        _company.AddTransaction(clone);
+        InitializeTransaction(clone);
     }
 
     private void OnAcceptButtonClick(object sender, EventArgs e)
     {
-        if (!Save(out _))
+        if (!Save())
         {
             return;
         }
@@ -218,7 +223,7 @@ internal sealed partial class TransactionForm : Form
 
     private void OnApplyButtonClick(object sender, EventArgs e)
     {
-        if (Save(out _))
+        if (Save())
         {
             CreateNew();
         }
@@ -227,6 +232,46 @@ internal sealed partial class TransactionForm : Form
     private void OnCancelButtonClick(object sender, EventArgs e)
     {
         Clear();
+    }
+
+    private void OnNextButtonClick(object sender, EventArgs e)
+    {
+        if (_current == null)
+        {
+            CreateNew();
+
+            return;
+        }
+
+        Transaction? next = _company.GetTransactionAfter(_current);
+
+        if (next == null)
+        {
+            CreateNew();
+
+            return;
+        }
+
+        InitializeTransaction(next);
+    }
+
+    private void OnPreviousButtonClick(object sender, EventArgs e)
+    {
+        Transaction? previous;
+
+        if (_current == null)
+        {
+            previous = _company.LastTransaction;
+        }
+        else
+        {
+            previous = _company.GetTransactionBefore(_current);
+        }
+
+        if (previous != null)
+        {
+            InitializeTransaction(previous);
+        }
     }
 
     protected override void Dispose(bool disposing)
@@ -241,41 +286,5 @@ internal sealed partial class TransactionForm : Form
         }
 
         base.Dispose(disposing);
-    }
-
-    private void OnNextButtonClick(object sender, EventArgs e)
-    {
-        if (_key == Guid.Empty)
-        {
-            CreateNew();
-
-            return;
-        }
-
-        Transaction? next = _company.GetTransactionAfter(_key);
-
-        if (next != null)
-        {
-            InitializeTransaction(next.Key, next);
-        }
-    }
-
-    private void OnPreviousButtonClick(object sender, EventArgs e)
-    {
-        Transaction? previous;
-
-        if (_key == Guid.Empty)
-        {
-            previous = _company.LastTransaction;
-        }
-        else
-        {
-            previous = _company.GetTransactionBefore(_key);
-        }
-
-        if (previous != null)
-        {
-            InitializeTransaction(previous);
-        }
     }
 }

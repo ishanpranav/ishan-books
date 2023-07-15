@@ -72,6 +72,7 @@ partial class MainForm
         _saveFileDialog = new System.Windows.Forms.SaveFileDialog();
         _recentPathManager = new RecentPathManager();
         _factory = new FormFactory();
+        accountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         menuStrip1.SuspendLayout();
         toolStrip1.SuspendLayout();
         SuspendLayout();
@@ -221,7 +222,7 @@ partial class MainForm
         // 
         // otherWindowsToolStripMenuItem
         // 
-        otherWindowsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { newAccountToolStripMenuItem });
+        otherWindowsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { newAccountToolStripMenuItem, accountToolStripMenuItem });
         otherWindowsToolStripMenuItem.Name = "otherWindowsToolStripMenuItem";
         resources.ApplyResources(otherWindowsToolStripMenuItem, "otherWindowsToolStripMenuItem");
         // 
@@ -323,6 +324,12 @@ partial class MainForm
         // 
         _factory.Parent = this;
         // 
+        // accountToolStripMenuItem
+        // 
+        accountToolStripMenuItem.Name = "accountToolStripMenuItem";
+        resources.ApplyResources(accountToolStripMenuItem, "accountToolStripMenuItem");
+        accountToolStripMenuItem.Click += OnAccountToolStripMenuItemClick;
+        // 
         // MainForm
         // 
         AllowDrop = true;
@@ -391,4 +398,5 @@ partial class MainForm
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
     private System.Windows.Forms.ToolStripMenuItem transactionToolStripMenuItem;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+    private System.Windows.Forms.ToolStripMenuItem accountToolStripMenuItem;
 }

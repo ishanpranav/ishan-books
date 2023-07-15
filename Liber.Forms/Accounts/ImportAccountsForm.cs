@@ -1,23 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Windows.Forms;
 
 namespace Liber.Forms.Accounts;
 
-internal sealed partial class ImportAccountsForm : Form
+internal sealed class ImportAccountsForm : ImportForm
 {
-    private readonly Company _company;
     private readonly BindingList<Account> _accounts = new BindingList<Account>();
 
-    public ImportAccountsForm(Company company)
+    public ImportAccountsForm(Company company) : base(company)
     {
-        InitializeComponent();
-
-        _company = company;
+        _dataGridView.DataSource = _accounts;
     }
 
-    public ImportAccountsForm(Company company, IReadOnlyCollection<Account> accounts) : this(company)
+    public ImportAccountsForm(Company company, IReadOnlyCollection<Account> accounts) : base(company)
     {
         foreach (Account account in accounts)
         {
@@ -39,18 +35,11 @@ internal sealed partial class ImportAccountsForm : Form
         _dataGridView.AutoResizeColumns();
     }
 
-    private void OnAcceptButtonClick(object sender, EventArgs e)
+    protected override void CommitChanges()
     {
         foreach (Account account in _accounts)
         {
-            _company.AddAccount(account, Guid.Empty);
+            Company.AddAccount(account, Guid.Empty);
         }
-
-        Close();
-    }
-
-    private void OnCancelButtonClick(object sender, EventArgs e)
-    {
-        Close();
     }
 }

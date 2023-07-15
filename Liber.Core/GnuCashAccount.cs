@@ -4,7 +4,7 @@ using System;
 namespace Liber;
 
 [NewLine("\n")]
-public class GnuCashAccount
+internal sealed class GnuCashAccount
 {
     public GnuCashAccount(Account account)
     {

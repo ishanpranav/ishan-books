@@ -303,15 +303,16 @@ internal sealed partial class MainForm : Form
 
         do
         {
-            //try
+            try
             {
                 await action();
 
                 result = DialogResult.OK;
             }
-            //catch (Exception exception)
+            catch (Exception exception)
             {
-                //result = MessageBox.Show(exception.Message, Resources.ExceptionCaption, MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error);
+                throw;
+                result = MessageBox.Show(exception.Message, Resources.ExceptionCaption, MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error);
             }
         }
         while (result == DialogResult.Retry);
@@ -418,5 +419,10 @@ internal sealed partial class MainForm : Form
     private void OnTransactionToolStripMenuItemClick(object sender, EventArgs e)
     {
         _factory.AutoRegister(() => new TransactionForm(_company));
+    }
+
+    private void OnAccountToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        _factory.AutoRegister(() => new ImportAccountsForm(_company));
     }
 }
