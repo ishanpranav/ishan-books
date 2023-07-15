@@ -19,7 +19,7 @@ public static class GnuCashSerializer
         await csvWriter.WriteRecordsAsync(items);
     }
 
-    private static async Task<IReadOnlyCollection<T>> DeserializeAsync<T>(Stream input)
+    public static async Task<IReadOnlyCollection<T>> DeserializeAsync<T>(Stream input)
     {
         using StreamReader streamReader = new StreamReader(input);
         using CsvReader csvReader = new CsvReader(streamReader, new CsvConfiguration(CultureInfo.InvariantCulture));
@@ -74,7 +74,7 @@ public static class GnuCashSerializer
         {
             if (!account.Hidden)
             {
-                results.Add(account.Account);
+                results.Add(account.Value);
             }
         }
 

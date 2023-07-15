@@ -385,7 +385,7 @@ internal sealed partial class MainForm : Form
         {
             await using FileStream input = File.OpenRead(path);
 
-            IReadOnlyCollection<Account> accounts = await GnuCashSerializer.DeserializeAccountsAsync(input);
+            IReadOnlyCollection<GnuCashAccount> accounts = await GnuCashSerializer.DeserializeAsync<GnuCashAccount>(input);
 
             _factory.Register(Guid.NewGuid(), new ImportAccountsForm(_company, accounts));
         });

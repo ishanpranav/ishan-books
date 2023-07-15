@@ -4,14 +4,12 @@ using System;
 namespace Liber;
 
 [NewLine("\n")]
-internal sealed class GnuCashAccount
+public class GnuCashAccount
 {
-    public GnuCashAccount(Account account)
+    public GnuCashAccount(Account value)
     {
-        Account = account;
+        Value = value;
     }
-
-    public Account Account { get; }
 
     [Index(1)]
     [Name("Full Account Name")]
@@ -34,4 +32,6 @@ internal sealed class GnuCashAccount
     [Name("Hidden")]
     [Optional]
     public bool Hidden { get; set; }
+
+    public Account Value { get; set; }
 }

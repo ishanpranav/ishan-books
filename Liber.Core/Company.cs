@@ -117,14 +117,16 @@ public sealed class Company : IXmlSerializable
         }
     }
 
-    public void AddAccount(Account value, Guid parentKey)
+    public Guid AddAccount(Account value, Guid parentKey)
     {
-        Guid key = Guid.NewGuid();
+        Guid result = Guid.NewGuid();
 
         AddChild(value, parentKey);
         NextAccountNumber = Math.Max(value.Number, NextAccountNumber) + 1;
-        _accounts.Add(key, value);
-        AccountAdded?.Invoke(sender: this, new KeyEventArgs(key));
+        _accounts.Add(result, value);
+        AccountAdded?.Invoke(sender: this, new KeyEventArgs(result));
+
+        return result;
     }
 
     public void UpdateAccount(Guid key, Guid parentKey)
