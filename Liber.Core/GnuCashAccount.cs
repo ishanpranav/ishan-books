@@ -11,6 +11,9 @@ public class GnuCashAccount
         Value = value;
     }
 
+    [Ignore]
+    public Guid Key { get; set; }
+
     [Index(1)]
     [Name("Full Account Name")]
     [Optional]
