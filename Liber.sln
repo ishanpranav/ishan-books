@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Liber", "Liber\Liber.csproj", "{BE4F78D1-DF4F-4AA7-B7EB-9567B438D98B}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Liber.Forms", "Liber.Forms\Liber.Forms.csproj", "{52D832F0-CDF0-4B43-B55E-4339A30805F6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Liber.Core", "Liber.Core\Liber.Core.csproj", "{F637DEE3-CDCA-4CAD-A753-F470D0954AA7}"
@@ -20,10 +18,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BE4F78D1-DF4F-4AA7-B7EB-9567B438D98B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BE4F78D1-DF4F-4AA7-B7EB-9567B438D98B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BE4F78D1-DF4F-4AA7-B7EB-9567B438D98B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BE4F78D1-DF4F-4AA7-B7EB-9567B438D98B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{52D832F0-CDF0-4B43-B55E-4339A30805F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{52D832F0-CDF0-4B43-B55E-4339A30805F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52D832F0-CDF0-4B43-B55E-4339A30805F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
