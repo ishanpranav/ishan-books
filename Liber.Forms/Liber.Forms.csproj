@@ -10,16 +10,21 @@
 
 	<ItemGroup>
 	  <None Remove="Properties\Resources.en.restext" />
-	  <None Remove="transforms\financial-statement.xslt" />
-	  <None Remove="transforms\trial-balance.xslt" />
+	  <None Remove="styles\financial-statement.css" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Content Include="transforms\financial-statement.xslt">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  <Content Include="styles\financial-statement.css">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
-	  <Content Include="transforms\trial-balance.xslt">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  <Content Include="styles\financial-statement.xslt">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="styles\general-journal.xslt">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="styles\trial-balance.xslt">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
 	</ItemGroup>
 

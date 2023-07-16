@@ -191,7 +191,7 @@ internal sealed partial class TransactionForm : Form
         Transaction clone = new Transaction()
         {
             Posted = _current.Posted,
-            Description = _current.Description,
+            Name = _current.Name,
             Number = _current.Number + 1
         };
 

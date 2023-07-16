@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Liber.Forms;
+namespace Liber.Forms.Components;
 
 internal sealed class RecentPathManager : Component
 {

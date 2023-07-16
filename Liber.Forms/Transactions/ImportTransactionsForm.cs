@@ -1,4 +1,5 @@
 ﻿using Liber.Forms.Accounts;
+using Liber.Forms.Components;
 using System;
 using System.Collections.Generic;
 
@@ -25,8 +26,8 @@ internal sealed class ImportTransactionsForm : ImportForm
                 {
                     Id = line.TransactionId,
                     Number = line.TransactionNumber,
+                    Name = line.TransactionName,
                     Posted = line.TransactionPosted,
-                    Description = line.TransactionDescription,
                     Memo = line.TransactionMemo
                 };
                 _transactions[line.TransactionId] = transaction;
@@ -39,9 +40,9 @@ internal sealed class ImportTransactionsForm : ImportForm
 
         foreach (Transaction transaction in _transactions.Values)
         {
-            if (!string.IsNullOrWhiteSpace(transaction.Description))
+            if (!string.IsNullOrWhiteSpace(transaction.Name))
             {
-                _listView.Items.Add(transaction.Description);
+                _listView.Items.Add(transaction.Name);
 
                 continue;
             }

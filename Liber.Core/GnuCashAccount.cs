@@ -10,7 +10,7 @@ public class GnuCashAccount
     public Guid Key { get; set; }
 
     [Index(1)]
-    [Name("Full Account Name")]
+    [Name("Account Full Name", "Full Account Name")]
     [Optional]
     public string Path { get; set; } = string.Empty;
 

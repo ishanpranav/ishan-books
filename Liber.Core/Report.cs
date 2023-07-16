@@ -9,9 +9,31 @@ public class Report
     [XmlElement("company")]
     public Company? Company { get; set; }
 
-    [XmlElement("start")]
-    public DateTime Start { get; set; }
+    [XmlElement("started")]
+    public DateTime Started { get; set; }
 
-    [XmlElement("end")]
-    public DateTime End { get; set; }
+    [XmlElement("posted")]
+    public DateTime Posted { get; set; }
+
+    public Transaction MinTransaction
+    {
+        get
+        {
+            return new Transaction()
+            {
+                Posted = Started
+            };
+        }
+    }
+
+    public Transaction MaxTransaction
+    {
+        get
+        {
+            return new Transaction()
+            {
+                Posted = Posted
+            };
+        }
+    }
 }

@@ -183,11 +183,12 @@ public sealed class Company : IXmlSerializable
     {
         foreach (Line line in value.Lines)
         {
+            line.Transaction = value;
             _accounts[line.AccountKey].lines.Add(line);
         }
 
         _transactions.Add(value);
-        
+
         NextTransactionNumber = Math.Max(value.Number, NextTransactionNumber) + 1;
     }
 
@@ -235,9 +236,25 @@ public sealed class Company : IXmlSerializable
     {
         writer.WriteElementString("name", Name);
 
-        foreach (Account account in Accounts.Values)
+        foreach (Account account in _accounts.Values)
         {
             XmlSerializers.Account.Serialize(writer, account);
+        }
+
+        IEnumerable<Transaction> transactions;
+
+        if (writer is XmlReportWriter reportWriter)
+        {
+            transactions = _transactions.GetViewBetween(reportWriter.Report.MinTransaction, reportWriter.Report.MaxTransaction);
+        }
+        else
+        {
+            transactions = _transactions;
+        }
+
+        foreach (Transaction transaction in transactions)
+        {
+            XmlSerializers.Transaction.Serialize(writer, transaction);
         }
     }
 }

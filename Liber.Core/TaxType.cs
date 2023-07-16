@@ -14,7 +14,7 @@ public enum TaxType
 
 public static class TaxTypeExtensions
 {
-    private static readonly ResourceManager s_resourceManager = new ResourceManager(typeof(AccountTypeExtensions));
+    private static readonly ResourceManager s_resourceManager = new ResourceManager(typeof(TaxTypeExtensions));
 
     public static string ToLocalizedString(this TaxType value)
     {

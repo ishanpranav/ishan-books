@@ -1,12 +1,10 @@
-﻿using System.IO;
+﻿namespace System.Xml.Resolvers;
 
-namespace System.Xml.Resolvers;
-
-internal sealed class XmlKnownResolver : XmlResolver
+internal sealed class XmlReportResolver : XmlResolver
 {
     private readonly XmlReaderSettings _settings;
 
-    public XmlKnownResolver(XmlReaderSettings settings)
+    public XmlReportResolver(XmlReaderSettings settings)
     {
         _settings = settings;
     }

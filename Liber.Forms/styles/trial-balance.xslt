@@ -25,8 +25,9 @@
 					</tr>
 					<tr>
 						<th colspan="3" class="bar">
+							<xsl:text>As of </xsl:text>
 							<xsl:call-template name="date-long">
-								<xsl:with-param name="value" select="end"/>
+								<xsl:with-param name="value" select="posted"/>
 							</xsl:call-template>
 						</th>
 					</tr>
@@ -34,7 +35,7 @@
 						<th></th>
 						<th colspan="2" class="heading">
 							<xsl:call-template name="date-year">
-								<xsl:with-param name="value" select="end"/>
+								<xsl:with-param name="value" select="posted"/>
 							</xsl:call-template>
 						</th>
 					</tr>
@@ -45,7 +46,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<xsl:for-each select="//account">
+					<xsl:for-each select="company/account">
 						<tr>
 							<td class="left">
 								<xsl:value-of select="name"/>
@@ -68,12 +69,12 @@
 						<th class="left">Total</th>
 						<td class="total right">
 							<xsl:call-template name="number">
-								<xsl:with-param name="value" select="sum(//debit)"/>
+								<xsl:with-param name="value" select="sum(company/account/debit)"/>
 							</xsl:call-template>
 						</td>
 						<td class="total right">
 							<xsl:call-template name="number">
-								<xsl:with-param name="value" select="sum(//credit)"/>
+								<xsl:with-param name="value" select="sum(company/account/credit)"/>
 							</xsl:call-template>
 						</td>
 					</tr>

@@ -7,6 +7,8 @@ internal static class XmlSerializers
     private static XmlSerializer? s_stylesheet;
     private static XmlSerializer? s_report;
     private static XmlSerializer? s_account;
+    private static XmlSerializer? s_transaction;
+    private static XmlSerializer? s_line;
 
     public static XmlSerializer Stylesheet
     {
@@ -35,6 +37,26 @@ internal static class XmlSerializers
             s_account ??= new XmlSerializer(typeof(Account));
 
             return s_account;
+        }
+    }
+
+    public static XmlSerializer Transaction
+    {
+        get
+        {
+            s_transaction ??= new XmlSerializer(typeof(Transaction));
+
+            return s_transaction;
+        }
+    }
+
+    public static XmlSerializer Line
+    {
+        get
+        {
+            s_line ??= new XmlSerializer(typeof(Line));
+
+            return s_line;
         }
     }
 }

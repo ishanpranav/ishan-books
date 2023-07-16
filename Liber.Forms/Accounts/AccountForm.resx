@@ -627,34 +627,37 @@
   <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="notesTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="memoTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="notesTextBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="memoTextBox.HelpString" xml:space="preserve">
+    <value>Provides additional notes associated with the account.</value>
+  </data>
+  <data name="memoTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>106, 220</value>
   </data>
-  <data name="notesTextBox.Multiline" type="System.Boolean, mscorlib">
+  <data name="memoTextBox.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="notesTextBox.ShowHelp" type="System.Boolean, mscorlib">
+  <data name="memoTextBox.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="notesTextBox.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="memoTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>277, 69</value>
   </data>
-  <data name="notesTextBox.TabIndex" type="System.Int32, mscorlib">
+  <data name="memoTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
-  <data name="&gt;&gt;notesTextBox.Name" xml:space="preserve">
-    <value>notesTextBox</value>
+  <data name="&gt;&gt;memoTextBox.Name" xml:space="preserve">
+    <value>memoTextBox</value>
   </data>
-  <data name="&gt;&gt;notesTextBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;memoTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;notesTextBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;memoTextBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;notesTextBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;memoTextBox.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="colorButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace Liber.Forms;
+namespace Liber.Forms.Components;
 
 internal sealed class FormFactory : Component
 {

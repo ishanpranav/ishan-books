@@ -25,7 +25,7 @@ public class GnuCashLine
     [Name("Description")]
     [NullValues("")]
     [Optional]
-    public string? TransactionDescription { get; set; }
+    public string? TransactionName { get; set; }
 
     [Index(4)]
     [Name("Notes")]

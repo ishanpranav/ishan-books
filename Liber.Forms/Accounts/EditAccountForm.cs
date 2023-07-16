@@ -13,7 +13,7 @@ internal sealed class EditAccountForm : AccountForm
         nameTextBox.Text = account.Name;
         placeholderCheckBox.Checked = account.Placeholder;
         descriptionTextBox.Text = account.Description;
-        notesTextBox.Text = account.Notes;
+        memoTextBox.Text = account.Memo;
         Type = account.Type;
         ParentKey = account.ParentKey;
         Color = account.Color;

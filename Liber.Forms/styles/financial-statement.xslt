@@ -27,8 +27,18 @@
 			<xsl:when test="$month = '12'">December</xsl:when>
 		</xsl:choose>
 		<xsl:text> </xsl:text>
-		<xsl:value-of select="format-number((substring($value, 9, 2)), '#')"/>
+		<xsl:value-of select="format-number(substring($value, 9, 2), '#')"/>
 		<xsl:text>, </xsl:text>
+		<xsl:call-template name="date-year">
+			<xsl:with-param name="value" select="$value"/>
+		</xsl:call-template>
+	</xsl:template>
+	<xsl:template name="date-simple">
+		<xsl:param name="value"/>
+		<xsl:value-of select="substring($value, 6, 2)"/>
+		<xsl:text>/</xsl:text>
+		<xsl:value-of select="substring($value, 9, 2)"/>
+		<xsl:text>/</xsl:text>
 		<xsl:call-template name="date-year">
 			<xsl:with-param name="value" select="$value"/>
 		</xsl:call-template>
@@ -51,45 +61,7 @@
 				<title>
 					<xsl:value-of select="$title"/>
 				</title>
-				<style type="text/css">
-					table {
-					font-family: Arial;
-					font-size: 11pt;
-					margin: 0.75in auto 0.75in auto;
-					}
-
-					th {
-					font-weight: bold;
-					}
-
-					.bar {
-					border-bottom: 3px solid;
-					padding-bottom: 1px;
-					}
-
-					.title {
-					font-size: 14pt;
-					}
-
-					.heading {
-					border-bottom: 1px solid;
-					font-weight: bold;
-					}
-
-					.total {
-					border-top: 1px solid;
-					border-bottom: 3px double;
-					font-weight: bold;
-					}
-
-					.left {
-					text-align: left;
-					}
-
-					.right {
-					text-align: right;
-					}
-				</style>
+				<link rel="stylesheet" type="text/css" href="https://sharp-books.example/styles/financial-statement.css"/>
 			</head>
 			<body>
 				<table>

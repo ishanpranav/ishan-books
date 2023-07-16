@@ -12,14 +12,9 @@ public static class XmlReportSerializer
     {
         XmlResolver = s_resolver
     };
-    private static readonly XmlKnownResolver s_resolver = new XmlKnownResolver(s_xslSettings);
-    private static readonly XmlWriterSettings s_xmlSettings = new XmlWriterSettings()
-    {
-        Async = true
-    };
+    private static readonly XmlReportResolver s_resolver = new XmlReportResolver(s_xslSettings);
     private static readonly XmlWriterSettings s_xhtmlSettings = new XmlWriterSettings()
     {
-        Async = true,
         Indent = true,
         NewLineOnAttributes = true
     };
@@ -45,14 +40,13 @@ public static class XmlReportSerializer
     public static string Serialize(XslCompiledTransform transform, Company company)
     {
         using MemoryStream memoryStream = new MemoryStream();
-        using XmlWriter xmlWriter = XmlWriter.Create(memoryStream, s_xmlSettings);
-
-        XmlSerializers.Report.Serialize(xmlWriter, new Report()
+        using XmlReportWriter xmlWriter = new XmlReportWriter(memoryStream, new Report()
         {
             Company = company,
-            Start = new DateTime(DateTime.Today.Year, 1, 1),
-            End = DateTime.Today
+            Started = new DateTime(DateTime.Today.Year, 1, 1),
+            Posted = DateTime.Today
         });
+
         memoryStream.Seek(offset: 0, SeekOrigin.Begin);
 
         using XmlReader xmlReader = XmlReader.Create(memoryStream);

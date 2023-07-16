@@ -71,7 +71,7 @@ public class Account : IXmlSerializable
     [Name("Notes")]
     [NullValues("")]
     [Optional]
-    public string? Notes { get; set; }
+    public string? Memo { get; set; }
 
     [Index(5)]
     [Browsable(false)]
@@ -106,38 +106,6 @@ public class Account : IXmlSerializable
         }
     }
 
-    [Ignore]
-    [IgnoreMember]
-    [JsonIgnore]
-    public decimal Debit
-    {
-        get
-        {
-            if (Balance < 0)
-            {
-                return 0;
-            }
-
-            return Balance;
-        }
-    }
-
-    [Ignore]
-    [IgnoreMember]
-    [JsonIgnore]
-    public decimal Credit
-    {
-        get
-        {
-            if (Balance > 0)
-            {
-                return 0;
-            }
-
-            return -Balance;
-        }
-    }
-
     [IgnoreMember]
     [JsonIgnore]
     public IReadOnlyCollection<Account> Children
@@ -158,6 +126,21 @@ public class Account : IXmlSerializable
         }
     }
 
+    public decimal GetBalance(DateTime posted)
+    {
+        decimal result = 0;
+
+        foreach (Line line in lines)
+        {
+            if (line.Transaction!.Posted <= posted)
+            {
+                result += line.Balance;
+            }
+        }
+
+        return result;
+    }
+
     public override string ToString()
     {
         return $"{Number} - {Name}";
@@ -176,7 +159,20 @@ public class Account : IXmlSerializable
     public void WriteXml(XmlWriter writer)
     {
         writer.WriteElementString("name", Name);
-        writer.WriteElementString("debit", XmlConvert.ToString(Debit));
-        writer.WriteElementString("credit", XmlConvert.ToString(Credit));
+
+        decimal debit;
+        decimal credit;
+
+        if (writer is XmlReportWriter reportWriter)
+        {
+            Accounting.DebitCredit(GetBalance(reportWriter.Report.Posted), out debit, out credit);
+        }
+        else
+        {
+            Accounting.DebitCredit(Balance, out debit, out credit);
+        }
+
+        writer.WriteElementString("debit", XmlConvert.ToString(debit));
+        writer.WriteElementString("credit", XmlConvert.ToString(credit));
     }
 }

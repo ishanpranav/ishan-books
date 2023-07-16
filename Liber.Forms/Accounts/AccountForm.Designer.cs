@@ -33,7 +33,7 @@
             label7 = new System.Windows.Forms.Label();
             taxTypeComboBox = new System.Windows.Forms.ComboBox();
             label8 = new System.Windows.Forms.Label();
-            notesTextBox = new System.Windows.Forms.TextBox();
+            memoTextBox = new System.Windows.Forms.TextBox();
             colorButton = new System.Windows.Forms.Button();
             _helpProvider = new System.Windows.Forms.HelpProvider();
             _colorDialog = new System.Windows.Forms.ColorDialog();
@@ -166,11 +166,12 @@
             label8.Name = "label8";
             _helpProvider.SetShowHelp(label8, (bool)resources.GetObject("label8.ShowHelp"));
             // 
-            // notesTextBox
+            // memoTextBox
             // 
-            resources.ApplyResources(notesTextBox, "notesTextBox");
-            notesTextBox.Name = "notesTextBox";
-            _helpProvider.SetShowHelp(notesTextBox, (bool)resources.GetObject("notesTextBox.ShowHelp"));
+            resources.ApplyResources(memoTextBox, "memoTextBox");
+            _helpProvider.SetHelpString(memoTextBox, resources.GetString("memoTextBox.HelpString"));
+            memoTextBox.Name = "memoTextBox";
+            _helpProvider.SetShowHelp(memoTextBox, (bool)resources.GetObject("memoTextBox.ShowHelp"));
             // 
             // colorButton
             // 
@@ -196,7 +197,7 @@
             Controls.Add(label8);
             Controls.Add(colorButton);
             Controls.Add(label7);
-            Controls.Add(notesTextBox);
+            Controls.Add(memoTextBox);
             Controls.Add(label6);
             Controls.Add(descriptionTextBox);
             Controls.Add(label5);
@@ -235,7 +236,7 @@
         protected System.Windows.Forms.TextBox nameTextBox;
         protected System.Windows.Forms.NumericUpDown numberNumericUpDown;
         protected System.Windows.Forms.CheckBox placeholderCheckBox;
-        protected System.Windows.Forms.TextBox notesTextBox;
+        protected System.Windows.Forms.TextBox memoTextBox;
         protected System.Windows.Forms.TextBox descriptionTextBox;
         private System.Windows.Forms.ComboBox typeComboBox;
         private System.Windows.Forms.Button colorButton;

@@ -1,19 +1,25 @@
 ﻿using MessagePack;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json.Serialization;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
 
 namespace Liber;
 
 [MessagePackObject]
+[XmlRoot("transaction")]
 public class Transaction :
     IComparable,
-    IComparable<Transaction>, 
-    IEquatable<Transaction>
+    IComparable<Transaction>,
+    IEquatable<Transaction>,
+    IXmlSerializable
 {
     public Transaction()
     {
-        Lines = new HashSet<Line>();
+        Lines = new List<Line>();
     }
 
     [JsonConstructor]
@@ -21,6 +27,11 @@ public class Transaction :
     public Transaction(ICollection<Line> lines)
     {
         Lines = lines;
+
+        foreach (Line line in lines)
+        {
+            line.Transaction = this;
+        }
     }
 
     [Key(0)]
@@ -30,13 +41,13 @@ public class Transaction :
     public Guid Id { get; set; }
 
     [Key(2)]
-    public decimal Number { get; set; }
-
-    [Key(3)]
     public DateTime Posted { get; set; }
 
+    [Key(3)]
+    public decimal Number { get; set; }
+
     [Key(4)]
-    public string? Description { get; set; }
+    public string? Name { get; set; }
 
     [Key(5)]
     public string? Memo { get; set; }
@@ -55,36 +66,6 @@ public class Transaction :
 
             return result;
         }
-    }
-
-    public override bool Equals(object? obj)
-    {
-        if (obj == null)
-        {
-            return false;
-        }
-
-        if (ReferenceEquals(obj, this))
-        {
-            return true;
-        }
-
-        return obj is Transaction other && Equals(other);
-    }
-
-    public bool Equals(Transaction? other)
-    {
-        if (other is null)
-        {
-            return false;
-        }
-
-        return Id == other.Id;
-    }
-
-    public override int GetHashCode()
-    {
-        return Id.GetHashCode();
     }
 
     int IComparable.CompareTo(object? obj)
@@ -124,6 +105,76 @@ public class Transaction :
         }
 
         return Id.CompareTo(other.Id);
+    }
+
+    public override bool Equals(object? obj)
+    {
+        if (obj == null)
+        {
+            return false;
+        }
+
+        if (ReferenceEquals(obj, this))
+        {
+            return true;
+        }
+
+        return obj is Transaction other && Equals(other);
+    }
+
+    public bool Equals(Transaction? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return Id == other.Id;
+    }
+
+    public override int GetHashCode()
+    {
+        return Id.GetHashCode();
+    }
+
+    public XmlSchema? GetSchema()
+    {
+        return null;
+    }
+
+    void IXmlSerializable.ReadXml(XmlReader reader)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void WriteXml(XmlWriter writer)
+    {
+        writer.WriteElementString("posted", XmlConvert.ToString(Posted, XmlDateTimeSerializationMode.Utc));
+
+        if (Number == 0)
+        {
+            writer.WriteElementString("number", value: null);
+        }
+        else
+        {
+            writer.WriteElementString("number", XmlConvert.ToString(Number));
+        }
+
+        writer.WriteElementString("name", Name);
+
+        IOrderedEnumerable<Line> lines = Lines
+            .OrderBy(x => x.Debit > 0 ? -1 : 1)
+            .ThenByDescending(x => Math.Abs(x.Balance));
+
+        if (writer is XmlReportWriter reportWriter)
+        {
+            lines = lines.ThenBy(x => reportWriter.Report.Company!.Accounts[x.AccountKey].Number);
+        }
+
+        foreach (Line line in lines)
+        {
+            XmlSerializers.Line.Serialize(writer, line);
+        }
     }
 
     public static bool operator ==(Transaction? left, Transaction? right)

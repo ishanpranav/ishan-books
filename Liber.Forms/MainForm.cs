@@ -298,7 +298,7 @@ internal sealed partial class MainForm : Form
         _path = path;
     }
 
-    private async Task AbortRetryIgnoreAsync(Func<Task> action)
+    private static async Task AbortRetryIgnoreAsync(Func<Task> action)
     {
         DialogResult result;
 
@@ -312,7 +312,7 @@ internal sealed partial class MainForm : Form
             }
             catch (Exception exception)
             {
-                throw;        result = MessageBox.Show(exception.Message, Resources.ExceptionCaption, MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error);
+                result = MessageBox.Show(exception.Message, Resources.ExceptionCaption, MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error);
             }
         }
         while (result == DialogResult.Retry);

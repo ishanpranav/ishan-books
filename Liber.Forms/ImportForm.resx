@@ -63,7 +63,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="cancelButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>274, 317</value>
+    <value>514, 351</value>
   </data>
   <data name="cancelButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>94, 29</value>
@@ -91,7 +91,7 @@
     <value>Bottom, Right</value>
   </data>
   <data name="acceptButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>174, 317</value>
+    <value>414, 351</value>
   </data>
   <data name="acceptButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>94, 29</value>
@@ -121,7 +121,7 @@
     <value>12, 12</value>
   </data>
   <data name="_listView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>356, 299</value>
+    <value>596, 333</value>
   </data>
   <data name="_listView.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -145,7 +145,7 @@
     <value>8, 20</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>380, 359</value>
+    <value>620, 393</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ImportForm</value>

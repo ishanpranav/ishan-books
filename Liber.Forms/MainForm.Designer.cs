@@ -1,4 +1,6 @@
-﻿namespace Liber.Forms;
+﻿using Liber.Forms.Components;
+
+namespace Liber.Forms;
 
 partial class MainForm
 {

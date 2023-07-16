@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.Web.WebView2.Core;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 using System.Xml.Xsl;
 
@@ -9,7 +11,7 @@ namespace Liber.Forms;
 
 internal sealed partial class ReportsForm : Form
 {
-    private static readonly Dictionary<string, XslCompiledTransform> s_transforms = new Dictionary<string, XslCompiledTransform>();
+    private static readonly Dictionary<string, XslCompiledTransform> s_styles = new Dictionary<string, XslCompiledTransform>();
 
     private readonly Company _company;
 
@@ -32,8 +34,10 @@ internal sealed partial class ReportsForm : Form
             e.MenuItems.Clear();
             _contextMenu.Show(_webView, e.Location);
         };
+        
+        _webView.CoreWebView2.SetVirtualHostNameToFolderMapping("sharp-books.example", Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)!, CoreWebView2HostResourceAccessKind.DenyCors);
 
-        string[] files = Directory.GetFiles("transforms", "*.xslt");
+        string[] files = Directory.GetFiles("styles", "*.xslt");
 
         if (files.Length == 0)
         {
@@ -62,13 +66,13 @@ internal sealed partial class ReportsForm : Form
     {
         string file = (string)_listView.SelectedItems[0].Tag;
 
-        if (!s_transforms.TryGetValue(file, out XslCompiledTransform? transform))
+        if (!s_styles.TryGetValue(file, out XslCompiledTransform? style))
         {
-            transform = XmlReportSerializer.DeserializeTransform(file);
-            s_transforms[file] = transform;
+            style = XmlReportSerializer.DeserializeTransform(file);
+            s_styles[file] = style;
         }
 
-        _xhtml = XmlReportSerializer.Serialize(transform, _company);
+        _xhtml = XmlReportSerializer.Serialize(style, _company);
 
         _webView.NavigateToString(_xhtml);
 
