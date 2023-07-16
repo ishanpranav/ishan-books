@@ -73,12 +73,12 @@
                                 </td>
                                 <xsl:choose>
                                     <xsl:when test="credit = 0">
-                                        <td>
+                                        <td class="left">
                                             <xsl:value-of select="account"/>
                                         </td>
                                     </xsl:when>
                                     <xsl:otherwise>
-                                        <td class="indent">
+                                        <td class="left in-2">
                                             <xsl:value-of select="account"/>
                                         </td>
                                     </xsl:otherwise>

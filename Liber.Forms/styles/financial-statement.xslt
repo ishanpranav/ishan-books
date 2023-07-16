@@ -46,10 +46,9 @@
     <xsl:template name="number">
         <xsl:param name="value"/>
         <xsl:choose>
-            <xsl:when test="$value = 0">-</xsl:when>
-            <xsl:otherwise>
+            <xsl:when test="$value != 0">
                 <xsl:value-of select="format-number($value, ' #,##0.00 ;(#,##0.00)')"/>
-            </xsl:otherwise>
+            </xsl:when>
         </xsl:choose>
     </xsl:template>
     <xsl:template name="financial-statement">
@@ -69,5 +68,45 @@
                 </table>
             </body>
         </html>
+    </xsl:template>
+    <xsl:template match="company">
+        <xsl:param name="type"/>
+        <xsl:param name="balance"/>
+        <xsl:param name="description"/>
+        <xsl:param name="total"/>
+        <xsl:param name="indent"/>
+        <xsl:param name="sign"/>
+        <xsl:choose>
+            <xsl:when test="$balance != 0">
+                <tr>
+                    <th class="in-{$indent} left">
+                        <xsl:value-of select="$description"/>
+                    </th>
+                    <th></th>
+                </tr>
+                <xsl:for-each select="//account[type = $type]">
+                    <tr>
+                        <td class="in-{$indent + 2} left">
+                            <xsl:value-of select="name"/>
+                        </td>
+                        <td class="right">
+                            <xsl:call-template name="number">
+                                <xsl:with-param name="value" select="$sign * (debit - credit)"/>
+                            </xsl:call-template>
+                        </td>
+                    </tr>
+                </xsl:for-each>
+            </xsl:when>
+        </xsl:choose>
+        <tr>
+            <th class="in-{$indent} left">
+                <xsl:value-of select="$total"/>
+            </th>
+            <td class="subtotal right">
+                <xsl:call-template name="number">
+                    <xsl:with-param name="value" select="$sign * $balance"/>
+                </xsl:call-template>
+            </td>
+        </tr>
     </xsl:template>
 </xsl:stylesheet>

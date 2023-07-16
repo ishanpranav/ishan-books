@@ -147,6 +147,9 @@
   <data name="Income" xml:space="preserve">
     <value>Income</value>
   </data>
+  <data name="IncomeTaxExpense" xml:space="preserve">
+    <value>Income Tax Expense</value>
+  </data>
   <data name="LongTermLiability" xml:space="preserve">
     <value>Long-Term Liability</value>
   </data>

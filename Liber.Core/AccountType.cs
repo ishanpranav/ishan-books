@@ -58,7 +58,10 @@ public enum AccountType : short
     OtherExpense = 69,
 
     [Name("EQUITY")]
-    OtherComprehensiveIncome = -39
+    OtherComprehensiveIncome = -39,
+
+    [Name("EXPENSE")]
+    IncomeTaxExpense = 7
 }
 
 public static class AccountTypeExtensions

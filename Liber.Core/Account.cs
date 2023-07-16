@@ -159,6 +159,7 @@ public class Account : IXmlSerializable
     public void WriteXml(XmlWriter writer)
     {
         writer.WriteElementString("name", Name);
+        writer.WriteElementString("type", Type.ToString());
 
         decimal debit;
         decimal credit;

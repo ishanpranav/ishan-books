@@ -11,6 +11,7 @@
 	<ItemGroup>
 	  <None Remove="Properties\Resources.en.restext" />
 	  <None Remove="styles\financial-statement.css" />
+	  <None Remove="styles\income-statement.xslt" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -21,6 +22,9 @@
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="styles\general-journal.xslt">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="styles\income-statement.xslt">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="styles\trial-balance.xslt">

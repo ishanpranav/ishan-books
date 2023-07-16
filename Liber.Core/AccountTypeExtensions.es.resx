@@ -171,4 +171,7 @@
   <data name="OtherCurrentLiability" xml:space="preserve">
     <value>Otro pasivo circulante</value>
   </data>
+  <data name="IncomeTaxExpense" xml:space="preserve">
+    <value>Impuesto sobre la renta</value>
+  </data>
 </root>

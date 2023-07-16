@@ -40,6 +40,11 @@
             _listView = new System.Windows.Forms.ListViewEx();
             _imageList = new System.Windows.Forms.ImageList(components);
             _webView = new Microsoft.Web.WebView2.WinForms.WebView2();
+            panel1 = new System.Windows.Forms.Panel();
+            label2 = new System.Windows.Forms.Label();
+            postedDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            label1 = new System.Windows.Forms.Label();
+            startedDateTimePicker = new System.Windows.Forms.DateTimePicker();
             _saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             _contextMenu = new System.Windows.Forms.ContextMenuStrip(components);
             saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,6 +57,7 @@
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)_webView).BeginInit();
+            panel1.SuspendLayout();
             _contextMenu.SuspendLayout();
             SuspendLayout();
             // 
@@ -83,6 +89,7 @@
             // 
             // toolStrip1
             // 
+            toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { saveAsToolStripButton, printPreviewToolStripButton, printToolStripButton, toolStripSeparator, helpToolStripButton });
             resources.ApplyResources(toolStrip1, "toolStrip1");
             toolStrip1.Name = "toolStrip1";
@@ -106,6 +113,7 @@
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.Controls.Add(_webView);
+            splitContainer1.Panel2.Controls.Add(panel1);
             // 
             // _listView
             // 
@@ -134,12 +142,46 @@
             _webView.Name = "_webView";
             _webView.ZoomFactor = 1D;
             // 
+            // panel1
+            // 
+            panel1.Controls.Add(label2);
+            panel1.Controls.Add(postedDateTimePicker);
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(startedDateTimePicker);
+            resources.ApplyResources(panel1, "panel1");
+            panel1.Name = "panel1";
+            // 
+            // label2
+            // 
+            resources.ApplyResources(label2, "label2");
+            label2.Name = "label2";
+            // 
+            // postedDateTimePicker
+            // 
+            resources.ApplyResources(postedDateTimePicker, "postedDateTimePicker");
+            postedDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            postedDateTimePicker.Name = "postedDateTimePicker";
+            postedDateTimePicker.ValueChanged += OnPostedDateTimePickerValueChanged;
+            // 
+            // label1
+            // 
+            resources.ApplyResources(label1, "label1");
+            label1.Name = "label1";
+            // 
+            // startedDateTimePicker
+            // 
+            resources.ApplyResources(startedDateTimePicker, "startedDateTimePicker");
+            startedDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            startedDateTimePicker.Name = "startedDateTimePicker";
+            startedDateTimePicker.ValueChanged += OnStartedDateTimePickerValueChanged;
+            // 
             // _saveFileDialog
             // 
             resources.ApplyResources(_saveFileDialog, "_saveFileDialog");
             // 
             // _contextMenu
             // 
+            _contextMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             _contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { saveAsToolStripMenuItem, toolStripSeparator1, printToolStripMenuItem, printPreviewToolStripMenuItem });
             _contextMenu.Name = "contextMenuStrip1";
             resources.ApplyResources(_contextMenu, "_contextMenu");
@@ -182,6 +224,8 @@
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)_webView).EndInit();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             _contextMenu.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
@@ -205,5 +249,10 @@
         private System.Windows.Forms.ToolStripMenuItem printPreviewToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton printPreviewToolStripButton;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DateTimePicker postedDateTimePicker;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DateTimePicker startedDateTimePicker;
     }
 }

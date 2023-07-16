@@ -37,15 +37,10 @@ public static class XmlReportSerializer
         return result;
     }
 
-    public static string Serialize(XslCompiledTransform transform, Company company)
+    public static string Serialize(XslCompiledTransform transform, Report report)
     {
         using MemoryStream memoryStream = new MemoryStream();
-        using XmlReportWriter xmlWriter = new XmlReportWriter(memoryStream, new Report()
-        {
-            Company = company,
-            Started = new DateTime(DateTime.Today.Year, 1, 1),
-            Posted = DateTime.Today
-        });
+        using XmlReportWriter xmlWriter = new XmlReportWriter(memoryStream, report);
 
         memoryStream.Seek(offset: 0, SeekOrigin.Begin);
 

@@ -33,8 +33,6 @@ th {
 
 .subtotal {
     border-top: 1px solid;
-    margin-top: 10px;
-    margin-bottom: 10px;
 }
 
 .left {
@@ -45,6 +43,22 @@ th {
     text-align: right;
 }
 
-.indent {
+.in-1 {
+    padding-left: 2ch;
+}
+
+.in-2 {
     padding-left: 4ch;
+}
+
+.in-3 {
+    padding-left: 6ch;
+}
+
+.in-4 {
+    padding-left: 8ch;
+}
+
+.in-5 {
+    padding-left: 10ch;
 }

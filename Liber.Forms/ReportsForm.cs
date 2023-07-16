@@ -16,6 +16,7 @@ internal sealed partial class ReportsForm : Form
     private readonly Company _company;
 
     private string? _xhtml;
+    private string? _file;
 
     public ReportsForm(Company company)
     {
@@ -34,7 +35,7 @@ internal sealed partial class ReportsForm : Form
             e.MenuItems.Clear();
             _contextMenu.Show(_webView, e.Location);
         };
-        
+
         _webView.CoreWebView2.SetVirtualHostNameToFolderMapping("sharp-books.example", Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)!, CoreWebView2HostResourceAccessKind.DenyCors);
 
         string[] files = Directory.GetFiles("styles", "*.xslt");
@@ -60,28 +61,47 @@ internal sealed partial class ReportsForm : Form
             item.ImageIndex = 0;
             item.Tag = file;
         }
+
+        startedDateTimePicker.Value = new DateTime(DateTime.Today.Year, 1, 1);
+        postedDateTimePicker.Value = DateTime.Today;
+    }
+
+    private void InitializeReport()
+    {
+        if (_file == null)
+        {
+            return;
+        }
+
+        if (!s_styles.TryGetValue(_file, out XslCompiledTransform? style))
+        {
+            style = XmlReportSerializer.DeserializeTransform(_file);
+            s_styles[_file] = style;
+        }
+
+        _xhtml = XmlReportSerializer.Serialize(style, new Report()
+        {
+            Company = _company,
+            Started = startedDateTimePicker.Value,
+            Posted = postedDateTimePicker.Value
+        });
+
+        _webView.NavigateToString(_xhtml);
     }
 
     private void OnListViewItemActivate(object sender, EventArgs e)
     {
-        string file = (string)_listView.SelectedItems[0].Tag;
-
-        if (!s_styles.TryGetValue(file, out XslCompiledTransform? style))
-        {
-            style = XmlReportSerializer.DeserializeTransform(file);
-            s_styles[file] = style;
-        }
-
-        _xhtml = XmlReportSerializer.Serialize(style, _company);
-
-        _webView.NavigateToString(_xhtml);
-
+        _file = (string)_listView.SelectedItems[0].Tag;
         saveAsToolStripButton.Enabled = true;
         saveAsToolStripMenuItem.Enabled = true;
         printPreviewToolStripButton.Enabled = true;
         printPreviewToolStripMenuItem.Enabled = true;
         printToolStripButton.Enabled = true;
         printToolStripMenuItem.Enabled = true;
+        startedDateTimePicker.Enabled = true;
+        postedDateTimePicker.Enabled = true;
+
+        InitializeReport();
     }
 
     private void OnPrintPreviewToolStripButtonClick(object sender, EventArgs e)
@@ -112,5 +132,19 @@ internal sealed partial class ReportsForm : Form
                 await File.WriteAllTextAsync(_saveFileDialog.FileName, _xhtml);
                 break;
         }
+    }
+
+    private void OnStartedDateTimePickerValueChanged(object sender, EventArgs e)
+    {
+        postedDateTimePicker.MinDate = startedDateTimePicker.Value;
+
+        InitializeReport();
+    }
+
+    private void OnPostedDateTimePickerValueChanged(object sender, EventArgs e)
+    {
+        startedDateTimePicker.MaxDate = postedDateTimePicker.Value;
+
+        InitializeReport();
     }
 }
