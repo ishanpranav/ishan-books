@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Liber.Forms.Accounts;
@@ -21,7 +22,9 @@ internal abstract partial class AccountForm : Form
         Company.AccountUpdated += OnCompanyAccountUpdated;
         Company.AccountRemoved += OnCompanyAccountRemoved;
         DialogResult = DialogResult.Cancel;
-        typeComboBox.DataSource = Enum.GetValues<AccountType>();
+        typeComboBox.DataSource = Enum
+            .GetValues<AccountType>()
+            .OrderBy(x => Math.Abs((short)x));
         taxTypeComboBox.DataSource = Enum.GetValues<TaxType>();
 
         foreach (KeyValuePair<Guid, Account> account in Company.Accounts)

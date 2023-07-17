@@ -24,7 +24,7 @@
                         </th>
                     </tr>
                     <tr>
-                        <th colspan="6" class="bar">
+                        <th colspan="2" class="bar">
                             <xsl:call-template name="date-long">
                                 <xsl:with-param name="value" select="started"/>
                             </xsl:call-template>
@@ -87,10 +87,16 @@
                         <xsl:with-param name="sign">1</xsl:with-param>
                     </xsl:apply-templates>
                     <tr>
-                        <th class="in-1 left">Net ordinary income</th>
+                        <xsl:variable name="netOrdinaryIncome" select="-$income - $cost - $expense"/>
+                        <th class="in-1 left">
+                            <xsl:choose>
+                                <xsl:when test="$netOrdinaryIncome &lt; 0">Net ordinary loss</xsl:when>
+                                <xsl:otherwise>Net ordinary income</xsl:otherwise>
+                            </xsl:choose>
+                        </th>
                         <td class="subtotal right">
                             <xsl:call-template name="number">
-                                <xsl:with-param name="value" select="-$income - $cost - $expense"/>
+                                <xsl:with-param name="value" select="$netOrdinaryIncome"/>
                             </xsl:call-template>
                         </td>
                     </tr>
@@ -121,10 +127,16 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th class="left">Net income</th>
+                        <xsl:variable name="netIncome" select="-$income + -$otherIncome - $cost - $expense - $otherExpense - $incomeTaxExpense"/>
+                        <th class="left">
+                            <xsl:choose>
+                                <xsl:when test="$netIncome &lt; 0">Net loss</xsl:when>
+                                <xsl:otherwise>Net income</xsl:otherwise>
+                            </xsl:choose>
+                        </th>
                         <td class="total right">
                             <xsl:call-template name="number">
-                                <xsl:with-param name="value" select="-$income + -$otherIncome - $cost - $expense - $otherExpense - $incomeTaxExpense"/>
+                                <xsl:with-param name="value" select="$netIncome"/>
                             </xsl:call-template>
                         </td>
                     </tr>

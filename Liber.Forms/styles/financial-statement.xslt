@@ -74,6 +74,7 @@
         <xsl:param name="balance"/>
         <xsl:param name="description"/>
         <xsl:param name="total"/>
+        <xsl:param name="negative" select="$total"/>
         <xsl:param name="indent"/>
         <xsl:param name="sign"/>
         <xsl:choose>
@@ -100,7 +101,14 @@
         </xsl:choose>
         <tr>
             <th class="in-{$indent} left">
-                <xsl:value-of select="$total"/>
+                <xsl:choose>
+                    <xsl:when test="$sign * $balance &lt; 0">
+                        <xsl:value-of select="$negative"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="$total"/>
+                    </xsl:otherwise>
+                </xsl:choose>
             </th>
             <td class="subtotal right">
                 <xsl:call-template name="number">

@@ -183,8 +183,10 @@ public sealed class Company : IXmlSerializable
     {
         foreach (Line line in value.Lines)
         {
+            Account account = _accounts[line.AccountKey];
+
             line.Transaction = value;
-            _accounts[line.AccountKey].lines.Add(line);
+            account.lines.Add(line);
         }
 
         _transactions.Add(value);
@@ -196,6 +198,7 @@ public sealed class Company : IXmlSerializable
     {
         foreach (Line line in value.Lines)
         {
+            line.Transaction = null;
             _accounts[line.AccountKey].lines.Remove(line);
         }
 

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Text.Json.Serialization;
 using System.Xml;
 using System.Xml.Schema;
@@ -106,6 +107,26 @@ public class Account : IXmlSerializable
         }
     }
 
+    public bool Temporary
+    {
+        get
+        {
+            switch (Type)
+            {
+                case AccountType.Expense:
+                case AccountType.Income:
+                case AccountType.Cost:
+                case AccountType.OtherIncome:
+                case AccountType.OtherExpense:
+                case AccountType.IncomeTaxExpense:
+                    return true;
+
+                default:
+                    return false;
+            }
+        }
+    }
+
     [IgnoreMember]
     [JsonIgnore]
     public IReadOnlyCollection<Account> Children
@@ -141,6 +162,23 @@ public class Account : IXmlSerializable
         return result;
     }
 
+    public decimal GetBalance(DateTime started, DateTime posted)
+    {
+        decimal result = 0;
+
+        foreach (Line line in lines)
+        {
+            Transaction transaction = line.Transaction!;
+
+            if (transaction.Posted >= started && transaction.Posted <= posted)
+            {
+                result += line.Balance;
+            }
+        }
+
+        return result;
+    }
+
     public override string ToString()
     {
         return $"{Number} - {Name}";
@@ -166,7 +204,18 @@ public class Account : IXmlSerializable
 
         if (writer is XmlReportWriter reportWriter)
         {
-            Accounting.DebitCredit(GetBalance(reportWriter.Report.Posted), out debit, out credit);
+            decimal balance;
+
+            if (Temporary)
+            {
+                balance = GetBalance(reportWriter.Report.Started, reportWriter.Report.Posted);
+            }
+            else
+            {
+                balance = GetBalance(reportWriter.Report.Posted);
+            }
+
+            Accounting.DebitCredit(balance, out debit, out credit);
         }
         else
         {
