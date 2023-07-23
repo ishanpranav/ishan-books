@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CancelText" xml:space="preserve">
-    <value>¿Deseas guardar los cambios en {0}?</value>
+    <value>¿Desea Usted guardar los cambios en {0}?</value>
   </data>
   <data name="DefaultCompanyName" xml:space="preserve">
     <value>Compañía sin título</value>

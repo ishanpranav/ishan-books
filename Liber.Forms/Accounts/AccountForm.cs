@@ -27,6 +27,7 @@ internal abstract partial class AccountForm : Form
             .OrderBy(x => Math.Abs((short)x))
             .ToList();
         taxTypeComboBox.DataSource = Enum.GetValues<TaxType>();
+        numberNumericUpDown.Maximum = decimal.MaxValue;
 
         foreach (KeyValuePair<Guid, Account> account in Company.Accounts)
         {

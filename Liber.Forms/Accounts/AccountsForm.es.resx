@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
@@ -57,34 +58,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="nameColumn.Text" xml:space="preserve">
-    <value>Nombre</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>7, 15</value>
   </data>
-  <data name="numberColumn.Text" xml:space="preserve">
-    <value>Número</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>800, 450</value>
   </data>
-  <data name="typeColumn.Text" xml:space="preserve">
-    <value>Tipo</value>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Plan de cuentas</value>
   </data>
   <data name="balanceColumn.Text" xml:space="preserve">
     <value>Saldo</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="_contextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 164</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="_listView.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
-  </data>
-  <data name="_listView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>800, 428</value>
-  </data>
-  <data name="newAccountToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
-  </data>
-  <data name="newAccountToolStripMenuItem.Text" xml:space="preserve">
-    <value>Nueva</value>
   </data>
   <data name="editAccountToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 22</value>
@@ -92,20 +78,17 @@
   <data name="editAccountToolStripMenuItem.Text" xml:space="preserve">
     <value>Editar cuenta</value>
   </data>
-  <data name="renameAccountToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
+  <data name="editToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>191, 22</value>
   </data>
-  <data name="renameAccountToolStripMenuItem.Text" xml:space="preserve">
-    <value>Reno&amp;mbrar cuenta</value>
+  <data name="editToolStripMenuItem.Text" xml:space="preserve">
+    <value>Editar cuenta</value>
   </data>
-  <data name="removeAccountToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>172, 22</value>
+  <data name="importToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>191, 22</value>
   </data>
-  <data name="removeAccountToolStripMenuItem.Text" xml:space="preserve">
-    <value>Eliminar cuenta</value>
-  </data>
-  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 6</value>
+  <data name="journalToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>144, 22</value>
   </data>
   <data name="makeGeneralJournalEntriesToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 22</value>
@@ -113,26 +96,59 @@
   <data name="makeGeneralJournalEntriesToolStripMenuItem1.Text" xml:space="preserve">
     <value>Diaro general</value>
   </data>
+  <data name="nameColumn.Text" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="newAccountToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 22</value>
+  </data>
+  <data name="newAccountToolStripMenuItem.Text" xml:space="preserve">
+    <value>Nueva</value>
+  </data>
+  <data name="newToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>191, 22</value>
+  </data>
+  <data name="newToolStripMenuItem.Text" xml:space="preserve">
+    <value>Nueva cuenta</value>
+  </data>
+  <data name="numberColumn.Text" xml:space="preserve">
+    <value>Número</value>
+  </data>
+  <data name="reconcileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>144, 22</value>
+  </data>
+  <data name="reconcileToolStripMenuItem.Text" xml:space="preserve">
+    <value>Reconci&amp;liar</value>
+  </data>
   <data name="reconcileToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 22</value>
   </data>
   <data name="reconcileToolStripMenuItem1.Text" xml:space="preserve">
     <value>Reconciliar</value>
   </data>
-  <data name="useRegisterToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="removeAccountToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 22</value>
   </data>
-  <data name="useRegisterToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Usar registro</value>
+  <data name="removeAccountToolStripMenuItem.Text" xml:space="preserve">
+    <value>Eliminar cuenta</value>
   </data>
-  <data name="_statusStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 428</value>
+  <data name="removeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>191, 22</value>
   </data>
-  <data name="_statusStrip1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 0, 12, 0</value>
+  <data name="removeToolStripMenuItem.Text" xml:space="preserve">
+    <value>Eliminar cuenta</value>
   </data>
-  <data name="_statusStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>800, 22</value>
+  <data name="renameAccountToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 22</value>
+  </data>
+  <data name="renameAccountToolStripMenuItem.Text" xml:space="preserve">
+    <value>Reno&amp;mbrar cuenta</value>
+  </data>
+  <data name="renameToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>191, 22</value>
+  </data>
+  <data name="renameToolStripMenuItem.Text" xml:space="preserve">
+    <value>Reno&amp;mbrar cuenta</value>
   </data>
   <data name="toolStripDropDownButton1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -151,39 +167,6 @@
   <data name="toolStripDropDownButton1.Text" xml:space="preserve">
     <value>Cuent&amp;a</value>
   </data>
-  <data name="newToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 22</value>
-  </data>
-  <data name="newToolStripMenuItem.Text" xml:space="preserve">
-    <value>Nueva cuenta</value>
-  </data>
-  <data name="editToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 22</value>
-  </data>
-  <data name="editToolStripMenuItem.Text" xml:space="preserve">
-    <value>Editar cuenta</value>
-  </data>
-  <data name="renameToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 22</value>
-  </data>
-  <data name="renameToolStripMenuItem.Text" xml:space="preserve">
-    <value>Reno&amp;mbrar cuenta</value>
-  </data>
-  <data name="removeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 22</value>
-  </data>
-  <data name="removeToolStripMenuItem.Text" xml:space="preserve">
-    <value>Eliminar cuenta</value>
-  </data>
-  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 6</value>
-  </data>
-  <data name="importToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 22</value>
-  </data>
-  <data name="importToolStripMenuItem.Text" xml:space="preserve">
-    <value>Importar cuentas</value>
-  </data>
   <data name="toolStripDropDownButton2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -201,31 +184,46 @@
   <data name="toolStripDropDownButton2.Text" xml:space="preserve">
     <value>Ac&amp;tividades</value>
   </data>
-  <data name="journalToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 22</value>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 6</value>
   </data>
-  <data name="journalToolStripMenuItem.Text" xml:space="preserve">
-    <value>Diaro general</value>
+  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>169, 6</value>
   </data>
-  <data name="reconcileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 22</value>
+  <data name="transactionlToolStripMenuItem.Text" xml:space="preserve">
+    <value>Diario general</value>
   </data>
-  <data name="reconcileToolStripMenuItem.Text" xml:space="preserve">
-    <value>Reconci&amp;liar</value>
+  <data name="typeColumn.Text" xml:space="preserve">
+    <value>Tipo</value>
   </data>
   <data name="useRegisterToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>144, 22</value>
   </data>
   <data name="useRegisterToolStripMenuItem.Text" xml:space="preserve">
+    <value>Usar &amp;registro</value>
+  </data>
+  <data name="useRegisterToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 22</value>
+  </data>
+  <data name="useRegisterToolStripMenuItem1.Text" xml:space="preserve">
     <value>Usar registro</value>
   </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>7, 15</value>
+  <data name="_contextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>173, 164</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>800, 450</value>
+  <data name="_listView.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Plan de cuentas</value>
+  <data name="_listView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>800, 428</value>
+  </data>
+  <data name="_statusStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 428</value>
+  </data>
+  <data name="_statusStrip1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 0, 12, 0</value>
+  </data>
+  <data name="_statusStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>800, 22</value>
   </data>
 </root>

@@ -23,6 +23,7 @@ internal sealed partial class TransactionForm : Form
         DialogResult = DialogResult.Cancel;
         accountColumn.ValueMember = nameof(AccountView.Key);
         accountColumn.DisplayMember = nameof(AccountView.DisplayName);
+        numberNumericUpDown.Maximum = decimal.MaxValue;
 
         foreach (KeyValuePair<Guid, Account> account in _company.Accounts)
         {
@@ -46,6 +47,11 @@ internal sealed partial class TransactionForm : Form
         nameComboBox.DataSource = array;
         debitColumn.ValueType = typeof(decimal);
         creditColumn.ValueType = typeof(decimal);
+
+        if (!_company.Color.IsEmpty)
+        {
+            _dataGridView.AlternatingRowsDefaultCellStyle.BackColor = _company.Color;
+        }
 
         _dataGridView.AutoResizeColumns();
         CreateNew();

@@ -24,7 +24,7 @@ namespace Liber.Forms.Accounts
             numberColumn = new ColumnHeader();
             typeColumn = new ColumnHeader();
             balanceColumn = new ColumnHeader();
-            _contextMenuStrip = new ContextMenuStrip(components);
+            _contextMenu = new ContextMenuStrip(components);
             newAccountToolStripMenuItem = new ToolStripMenuItem();
             editAccountToolStripMenuItem = new ToolStripMenuItem();
             renameAccountToolStripMenuItem = new ToolStripMenuItem();
@@ -33,7 +33,7 @@ namespace Liber.Forms.Accounts
             makeGeneralJournalEntriesToolStripMenuItem1 = new ToolStripMenuItem();
             reconcileToolStripMenuItem1 = new ToolStripMenuItem();
             useRegisterToolStripMenuItem1 = new ToolStripMenuItem();
-            _statusStrip1 = new StatusStrip();
+            _statusStrip = new StatusStrip();
             toolStripDropDownButton1 = new ToolStripDropDownButton();
             newToolStripMenuItem = new ToolStripMenuItem();
             editToolStripMenuItem = new ToolStripMenuItem();
@@ -43,15 +43,15 @@ namespace Liber.Forms.Accounts
             transactionlToolStripMenuItem = new ToolStripMenuItem();
             reconcileToolStripMenuItem = new ToolStripMenuItem();
             useRegisterToolStripMenuItem = new ToolStripMenuItem();
-            _contextMenuStrip.SuspendLayout();
-            _statusStrip1.SuspendLayout();
+            _contextMenu.SuspendLayout();
+            _statusStrip.SuspendLayout();
             SuspendLayout();
             // 
             // _listView
             // 
             _listView.AllowColumnReorder = true;
             _listView.Columns.AddRange(new ColumnHeader[] { nameColumn, numberColumn, typeColumn, balanceColumn });
-            _listView.ContextMenuStrip = _contextMenuStrip;
+            _listView.ContextMenuStrip = _contextMenu;
             resources.ApplyResources(_listView, "_listView");
             _listView.FullRowSelect = true;
             _listView.LabelEdit = true;
@@ -80,12 +80,12 @@ namespace Liber.Forms.Accounts
             // 
             resources.ApplyResources(balanceColumn, "balanceColumn");
             // 
-            // _contextMenuStrip
+            // _contextMenu
             // 
-            _contextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            _contextMenuStrip.Items.AddRange(new ToolStripItem[] { newAccountToolStripMenuItem, editAccountToolStripMenuItem, renameAccountToolStripMenuItem, removeAccountToolStripMenuItem, toolStripSeparator2, makeGeneralJournalEntriesToolStripMenuItem1, reconcileToolStripMenuItem1, useRegisterToolStripMenuItem1 });
-            _contextMenuStrip.Name = "contextMenuStrip1";
-            resources.ApplyResources(_contextMenuStrip, "_contextMenuStrip");
+            _contextMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
+            _contextMenu.Items.AddRange(new ToolStripItem[] { newAccountToolStripMenuItem, editAccountToolStripMenuItem, renameAccountToolStripMenuItem, removeAccountToolStripMenuItem, toolStripSeparator2, makeGeneralJournalEntriesToolStripMenuItem1, reconcileToolStripMenuItem1, useRegisterToolStripMenuItem1 });
+            _contextMenu.Name = "contextMenuStrip1";
+            resources.ApplyResources(_contextMenu, "_contextMenu");
             // 
             // newAccountToolStripMenuItem
             // 
@@ -132,12 +132,12 @@ namespace Liber.Forms.Accounts
             useRegisterToolStripMenuItem1.Name = "useRegisterToolStripMenuItem1";
             resources.ApplyResources(useRegisterToolStripMenuItem1, "useRegisterToolStripMenuItem1");
             // 
-            // _statusStrip1
+            // _statusStrip
             // 
-            _statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            _statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripDropDownButton1, toolStripDropDownButton2 });
-            resources.ApplyResources(_statusStrip1, "_statusStrip1");
-            _statusStrip1.Name = "_statusStrip1";
+            _statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            _statusStrip.Items.AddRange(new ToolStripItem[] { toolStripDropDownButton1, toolStripDropDownButton2 });
+            resources.ApplyResources(_statusStrip, "_statusStrip");
+            _statusStrip.Name = "_statusStrip";
             // 
             // toolStripDropDownButton1
             // 
@@ -198,13 +198,13 @@ namespace Liber.Forms.Accounts
             resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(_listView);
-            Controls.Add(_statusStrip1);
+            Controls.Add(_statusStrip);
             Name = "AccountsForm";
             ShowIcon = false;
             WindowState = FormWindowState.Maximized;
-            _contextMenuStrip.ResumeLayout(false);
-            _statusStrip1.ResumeLayout(false);
-            _statusStrip1.PerformLayout();
+            _contextMenu.ResumeLayout(false);
+            _statusStrip.ResumeLayout(false);
+            _statusStrip.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -212,9 +212,9 @@ namespace Liber.Forms.Accounts
         #endregion
 
         private ListViewEx _listView;
-        private System.Windows.Forms.StatusStrip _statusStrip1;
+        private System.Windows.Forms.StatusStrip _statusStrip;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
-        private System.Windows.Forms.ContextMenuStrip _contextMenuStrip;
+        private System.Windows.Forms.ContextMenuStrip _contextMenu;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ColumnHeader numberColumn;
         private System.Windows.Forms.ColumnHeader nameColumn;

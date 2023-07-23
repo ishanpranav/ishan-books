@@ -31,7 +31,7 @@ partial class MainForm
     private void InitializeComponent()
     {
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-        menuStrip1 = new System.Windows.Forms.MenuStrip();
+        _menuStrip = new System.Windows.Forms.MenuStrip();
         fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -65,7 +65,7 @@ partial class MainForm
         searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
         aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-        toolStrip1 = new System.Windows.Forms.ToolStrip();
+        _toolStrip = new System.Windows.Forms.ToolStrip();
         newToolStripButton = new System.Windows.Forms.ToolStripButton();
         openToolStripButton = new System.Windows.Forms.ToolStripButton();
         saveToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -75,15 +75,16 @@ partial class MainForm
         _saveFileDialog = new System.Windows.Forms.SaveFileDialog();
         _recentPathManager = new RecentPathManager();
         _factory = new FormFactory();
-        menuStrip1.SuspendLayout();
-        toolStrip1.SuspendLayout();
+        _menuStrip.SuspendLayout();
+        _toolStrip.SuspendLayout();
         SuspendLayout();
         // 
-        // menuStrip1
+        // _menuStrip
         // 
-        menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { fileToolStripMenuItem, editToolStripMenuItem1, viewToolStripMenuItem, helpToolStripMenuItem });
-        resources.ApplyResources(menuStrip1, "menuStrip1");
-        menuStrip1.Name = "menuStrip1";
+        _menuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+        _menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { fileToolStripMenuItem, editToolStripMenuItem1, viewToolStripMenuItem, helpToolStripMenuItem });
+        resources.ApplyResources(_menuStrip, "_menuStrip");
+        _menuStrip.Name = "_menuStrip";
         // 
         // fileToolStripMenuItem
         // 
@@ -272,11 +273,12 @@ partial class MainForm
         resources.ApplyResources(aboutToolStripMenuItem, "aboutToolStripMenuItem");
         aboutToolStripMenuItem.Click += OnAboutToolStripMenuItemClick;
         // 
-        // toolStrip1
+        // _toolStrip
         // 
-        toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripButton, openToolStripButton, saveToolStripButton, toolStripSeparator6, helpToolStripButton });
-        resources.ApplyResources(toolStrip1, "toolStrip1");
-        toolStrip1.Name = "toolStrip1";
+        _toolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+        _toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripButton, openToolStripButton, saveToolStripButton, toolStripSeparator6, helpToolStripButton });
+        resources.ApplyResources(_toolStrip, "_toolStrip");
+        _toolStrip.Name = "_toolStrip";
         // 
         // newToolStripButton
         // 
@@ -337,27 +339,27 @@ partial class MainForm
         AllowDrop = true;
         resources.ApplyResources(this, "$this");
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        Controls.Add(toolStrip1);
-        Controls.Add(menuStrip1);
+        Controls.Add(_toolStrip);
+        Controls.Add(_menuStrip);
         IsMdiContainer = true;
-        MainMenuStrip = menuStrip1;
+        MainMenuStrip = _menuStrip;
         Name = "MainForm";
         WindowState = System.Windows.Forms.FormWindowState.Maximized;
         FormClosing += OnFormClosing;
         Load += OnLoad;
         DragDrop += OnDragDrop;
         DragOver += OnDragOver;
-        menuStrip1.ResumeLayout(false);
-        menuStrip1.PerformLayout();
-        toolStrip1.ResumeLayout(false);
-        toolStrip1.PerformLayout();
+        _menuStrip.ResumeLayout(false);
+        _menuStrip.PerformLayout();
+        _toolStrip.ResumeLayout(false);
+        _toolStrip.PerformLayout();
         ResumeLayout(false);
         PerformLayout();
     }
 
     #endregion
 
-    private System.Windows.Forms.MenuStrip menuStrip1;
+    private System.Windows.Forms.MenuStrip _menuStrip;
     private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
@@ -374,7 +376,7 @@ partial class MainForm
     private System.Windows.Forms.ToolStripMenuItem searchToolStripMenuItem;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
     private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-    private System.Windows.Forms.ToolStrip toolStrip1;
+    private System.Windows.Forms.ToolStrip _toolStrip;
     private System.Windows.Forms.ToolStripButton newToolStripButton;
     private System.Windows.Forms.ToolStripButton openToolStripButton;
     private System.Windows.Forms.ToolStripButton saveToolStripButton;

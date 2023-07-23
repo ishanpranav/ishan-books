@@ -1,6 +1,8 @@
 ﻿using MessagePack;
+using MessagePack.Formatters;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text.Json.Serialization;
 using System.Xml;
@@ -81,6 +83,10 @@ public sealed class Company : IXmlSerializable
 
     [Key(5)]
     public CompanyType Type { get; set; }
+
+    [Key(6)]
+    [MessagePackFormatter(typeof(MessagePackColorFormatter))]
+    public Color Color { get; set; }
 
     [IgnoreMember]
     [JsonIgnore]

@@ -117,10 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CancelCaption" xml:space="preserve">
-    <value>Guardar cambios</value>
-  </data>
-  <data name="WarningText" xml:space="preserve">
-    <value>Usted está a punto de cerrar el archivo de la empresa sin guardar los cambios.</value>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Importar el plan de cuentas</value>
   </data>
 </root>

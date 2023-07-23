@@ -34,7 +34,7 @@
             printToolStripButton = new System.Windows.Forms.ToolStripButton();
             toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             helpToolStripButton = new System.Windows.Forms.ToolStripButton();
-            toolStrip1 = new System.Windows.Forms.ToolStrip();
+            _toolStrip = new System.Windows.Forms.ToolStrip();
             printPreviewToolStripButton = new System.Windows.Forms.ToolStripButton();
             splitContainer1 = new System.Windows.Forms.SplitContainer();
             _listView = new System.Windows.Forms.ListViewEx();
@@ -51,7 +51,8 @@
             toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             printPreviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            toolStrip1.SuspendLayout();
+            _helpProvider = new System.Windows.Forms.HelpProvider();
+            _toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -87,12 +88,12 @@
             helpToolStripButton.Name = "helpToolStripButton";
             helpToolStripButton.Click += OnHelpToolStripButtonClick;
             // 
-            // toolStrip1
+            // _toolStrip
             // 
-            toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { saveAsToolStripButton, printPreviewToolStripButton, printToolStripButton, toolStripSeparator, helpToolStripButton });
-            resources.ApplyResources(toolStrip1, "toolStrip1");
-            toolStrip1.Name = "toolStrip1";
+            _toolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            _toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { saveAsToolStripButton, printPreviewToolStripButton, printToolStripButton, toolStripSeparator, helpToolStripButton });
+            resources.ApplyResources(_toolStrip, "_toolStrip");
+            _toolStrip.Name = "_toolStrip";
             // 
             // printPreviewToolStripButton
             // 
@@ -160,7 +161,9 @@
             // 
             resources.ApplyResources(postedDateTimePicker, "postedDateTimePicker");
             postedDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            _helpProvider.SetHelpString(postedDateTimePicker, resources.GetString("postedDateTimePicker.HelpString"));
             postedDateTimePicker.Name = "postedDateTimePicker";
+            _helpProvider.SetShowHelp(postedDateTimePicker, (bool)resources.GetObject("postedDateTimePicker.ShowHelp"));
             postedDateTimePicker.ValueChanged += OnPostedDateTimePickerValueChanged;
             // 
             // label1
@@ -172,7 +175,9 @@
             // 
             resources.ApplyResources(startedDateTimePicker, "startedDateTimePicker");
             startedDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            _helpProvider.SetHelpString(startedDateTimePicker, resources.GetString("startedDateTimePicker.HelpString"));
             startedDateTimePicker.Name = "startedDateTimePicker";
+            _helpProvider.SetShowHelp(startedDateTimePicker, (bool)resources.GetObject("startedDateTimePicker.ShowHelp"));
             startedDateTimePicker.ValueChanged += OnStartedDateTimePickerValueChanged;
             // 
             // _saveFileDialog
@@ -213,12 +218,12 @@
             resources.ApplyResources(this, "$this");
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             Controls.Add(splitContainer1);
-            Controls.Add(toolStrip1);
+            Controls.Add(_toolStrip);
             Name = "ReportsForm";
             ShowIcon = false;
             Load += OnLoad;
-            toolStrip1.ResumeLayout(false);
-            toolStrip1.PerformLayout();
+            _toolStrip.ResumeLayout(false);
+            _toolStrip.PerformLayout();
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
@@ -237,7 +242,7 @@
         private System.Windows.Forms.ToolStripButton printToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
         private System.Windows.Forms.ToolStripButton helpToolStripButton;
-        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStrip _toolStrip;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ListViewEx _listView;
         private Microsoft.Web.WebView2.WinForms.WebView2 _webView;
@@ -254,5 +259,6 @@
         private System.Windows.Forms.DateTimePicker postedDateTimePicker;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker startedDateTimePicker;
+        private System.Windows.Forms.HelpProvider _helpProvider;
     }
 }

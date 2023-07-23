@@ -117,10 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CancelCaption" xml:space="preserve">
-    <value>Guardar cambios</value>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Centro de reportes contables</value>
   </data>
-  <data name="WarningText" xml:space="preserve">
-    <value>Usted está a punto de cerrar el archivo de la empresa sin guardar los cambios.</value>
+  <data name="helpToolStripButton.Text" xml:space="preserve">
+    <value>Ayuda</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Desde</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Hasta</value>
+  </data>
+  <data name="postedDateTimePicker.HelpString" xml:space="preserve">
+    <value>Especifica la fecha de finalización.</value>
+  </data>
+  <data name="saveAsToolStripButton.Text" xml:space="preserve">
+    <value>Guardar como</value>
+  </data>
+  <data name="saveAsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Guardar como</value>
+  </data>
+  <data name="startedDateTimePicker.HelpString" xml:space="preserve">
+    <value>Especifica la fecha de inicio.</value>
+  </data>
+  <data name="_saveFileDialog.Filter" xml:space="preserve">
+    <value>Documento PDF (*.pdf)|*.pdf|Documento HTML (*.htm; *.html)|*.htm;*.html</value>
   </data>
 </root>

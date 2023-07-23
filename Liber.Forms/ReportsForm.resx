@@ -1,4 +1,5 @@
-﻿<root>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
@@ -100,9 +101,6 @@
   <data name="printToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>29, 24</value>
   </data>
-  <data name="printToolStripButton.Text" xml:space="preserve">
-    <value>&amp;Print</value>
-  </data>
   <data name="toolStripSeparator.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 27</value>
   </data>
@@ -130,7 +128,7 @@
   <data name="helpToolStripButton.Text" xml:space="preserve">
     <value>He&amp;lp</value>
   </data>
-  <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="_toolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
   <data name="printPreviewToolStripButton.Enabled" type="System.Boolean, mscorlib">
@@ -152,31 +150,25 @@
   <data name="printPreviewToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>29, 24</value>
   </data>
-  <data name="printPreviewToolStripButton.Text" xml:space="preserve">
-    <value>toolStripButton1</value>
-  </data>
-  <data name="toolStrip1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_toolStrip.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="toolStrip1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_toolStrip.Size" type="System.Drawing.Size, System.Drawing">
     <value>655, 27</value>
   </data>
-  <data name="toolStrip1.TabIndex" type="System.Int32, mscorlib">
+  <data name="_toolStrip.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="toolStrip1.Text" xml:space="preserve">
-    <value>toolStrip1</value>
+  <data name="&gt;&gt;_toolStrip.Name" xml:space="preserve">
+    <value>_toolStrip</value>
   </data>
-  <data name="&gt;&gt;toolStrip1.Name" xml:space="preserve">
-    <value>toolStrip1</value>
-  </data>
-  <data name="&gt;&gt;toolStrip1.Type" xml:space="preserve">
+  <data name="&gt;&gt;_toolStrip.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStrip1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_toolStrip.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;toolStrip1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_toolStrip.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
@@ -285,8 +277,17 @@
   <data name="postedDateTimePicker.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <metadata name="_helpProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>537, 17</value>
+  </metadata>
+  <data name="postedDateTimePicker.HelpString" xml:space="preserve">
+    <value>Specifies the ending date for the report.</value>
+  </data>
   <data name="postedDateTimePicker.Location" type="System.Drawing.Point, System.Drawing">
     <value>223, 7</value>
+  </data>
+  <data name="postedDateTimePicker.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="postedDateTimePicker.Size" type="System.Drawing.Size, System.Drawing">
     <value>117, 27</value>
@@ -336,8 +337,14 @@
   <data name="startedDateTimePicker.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="startedDateTimePicker.HelpString" xml:space="preserve">
+    <value>Specifies the beginning date for the report.</value>
+  </data>
   <data name="startedDateTimePicker.Location" type="System.Drawing.Point, System.Drawing">
     <value>52, 7</value>
+  </data>
+  <data name="startedDateTimePicker.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="startedDateTimePicker.Size" type="System.Drawing.Size, System.Drawing">
     <value>117, 27</value>
@@ -473,9 +480,6 @@
   <data name="printToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>223, 26</value>
   </data>
-  <data name="printToolStripMenuItem.Text" xml:space="preserve">
-    <value>Print</value>
-  </data>
   <data name="printPreviewToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -494,9 +498,6 @@
   </data>
   <data name="printPreviewToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>223, 26</value>
-  </data>
-  <data name="printPreviewToolStripMenuItem.Text" xml:space="preserve">
-    <value>Print Preview</value>
   </data>
   <data name="_contextMenu.Size" type="System.Drawing.Size, System.Drawing">
     <value>224, 88</value>
@@ -584,6 +585,12 @@
   </data>
   <data name="&gt;&gt;printPreviewToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_helpProvider.Name" xml:space="preserve">
+    <value>_helpProvider</value>
+  </data>
+  <data name="&gt;&gt;_helpProvider.Type" xml:space="preserve">
+    <value>System.Windows.Forms.HelpProvider, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ReportsForm</value>

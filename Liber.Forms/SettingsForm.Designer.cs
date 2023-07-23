@@ -41,14 +41,18 @@
             // acceptButton
             // 
             resources.ApplyResources(acceptButton, "acceptButton");
+            _helpProvider.SetHelpString(acceptButton, resources.GetString("acceptButton.HelpString"));
             acceptButton.Name = "acceptButton";
+            _helpProvider.SetShowHelp(acceptButton, (bool)resources.GetObject("acceptButton.ShowHelp"));
             acceptButton.UseVisualStyleBackColor = true;
             acceptButton.Click += OnAcceptButtonClick;
             // 
             // cancelButton
             // 
             resources.ApplyResources(cancelButton, "cancelButton");
+            _helpProvider.SetHelpString(cancelButton, resources.GetString("cancelButton.HelpString"));
             cancelButton.Name = "cancelButton";
+            _helpProvider.SetShowHelp(cancelButton, (bool)resources.GetObject("cancelButton.ShowHelp"));
             cancelButton.UseVisualStyleBackColor = true;
             cancelButton.Click += OnCancelButtonClick;
             // 

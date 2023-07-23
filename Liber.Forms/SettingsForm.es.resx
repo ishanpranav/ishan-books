@@ -58,21 +58,27 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="cancelButton.Text" xml:space="preserve">
-    <value>&amp;Cancelar</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 15</value>
-  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Preferencias</value>
+  </data>
+  <data name="acceptButton.HelpString" xml:space="preserve">
+    <value>Acepta los cambios en las preferencias.</value>
+  </data>
+  <data name="cancelButton.HelpString" xml:space="preserve">
+    <value>Deshacer los cambios.</value>
+  </data>
+  <data name="cancelButton.Text" xml:space="preserve">
+    <value>&amp;Cancelar</value>
   </data>
   <data name="cultureComboBox.HelpString" xml:space="preserve">
     <value>Especifica las configuraciones de idioma, región y cultura preferidas.</value>
   </data>
   <data name="groupBox1.Text" xml:space="preserve">
     <value>Idioma y cultura</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 15</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>La aplicación debe reiniciarse para que los cambios de idioma y región surtan efecto.</value>

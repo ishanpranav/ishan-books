@@ -16,6 +16,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TransactionForm));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             postedDateTimePicker = new System.Windows.Forms.DateTimePicker();
             label1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
@@ -39,6 +40,7 @@
             label4 = new System.Windows.Forms.Label();
             nameComboBox = new System.Windows.Forms.ComboBox();
             memoTextBox = new System.Windows.Forms.TextBox();
+            _helpProvider = new System.Windows.Forms.HelpProvider();
             ((System.ComponentModel.ISupportInitialize)numberNumericUpDown).BeginInit();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)_dataGridView).BeginInit();
@@ -47,31 +49,38 @@
             // postedDateTimePicker
             // 
             postedDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            _helpProvider.SetHelpString(postedDateTimePicker, resources.GetString("postedDateTimePicker.HelpString"));
             resources.ApplyResources(postedDateTimePicker, "postedDateTimePicker");
             postedDateTimePicker.Name = "postedDateTimePicker";
+            _helpProvider.SetShowHelp(postedDateTimePicker, (bool)resources.GetObject("postedDateTimePicker.ShowHelp"));
             // 
             // label1
             // 
             resources.ApplyResources(label1, "label1");
             label1.Name = "label1";
+            _helpProvider.SetShowHelp(label1, (bool)resources.GetObject("label1.ShowHelp"));
             // 
             // label2
             // 
             resources.ApplyResources(label2, "label2");
             label2.Name = "label2";
+            _helpProvider.SetShowHelp(label2, (bool)resources.GetObject("label2.ShowHelp"));
             // 
             // numberNumericUpDown
             // 
+            _helpProvider.SetHelpString(numberNumericUpDown, resources.GetString("numberNumericUpDown.HelpString"));
             resources.ApplyResources(numberNumericUpDown, "numberNumericUpDown");
-            numberNumericUpDown.Maximum = new decimal(new int[] { int.MaxValue, 0, 0, 0 });
             numberNumericUpDown.Name = "numberNumericUpDown";
+            _helpProvider.SetShowHelp(numberNumericUpDown, (bool)resources.GetObject("numberNumericUpDown.ShowHelp"));
             numberNumericUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // toolStrip1
             // 
+            toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripButton, saveToolStripButton, toolStripSeparator3, copyToolStripButton });
             resources.ApplyResources(toolStrip1, "toolStrip1");
             toolStrip1.Name = "toolStrip1";
+            _helpProvider.SetShowHelp(toolStrip1, (bool)resources.GetObject("toolStrip1.ShowHelp"));
             // 
             // newToolStripButton
             // 
@@ -103,6 +112,7 @@
             // 
             resources.ApplyResources(cancelButton, "cancelButton");
             cancelButton.Name = "cancelButton";
+            _helpProvider.SetShowHelp(cancelButton, (bool)resources.GetObject("cancelButton.ShowHelp"));
             cancelButton.UseVisualStyleBackColor = true;
             cancelButton.Click += OnCancelButtonClick;
             // 
@@ -110,6 +120,7 @@
             // 
             resources.ApplyResources(applyButton, "applyButton");
             applyButton.Name = "applyButton";
+            _helpProvider.SetShowHelp(applyButton, (bool)resources.GetObject("applyButton.ShowHelp"));
             applyButton.UseVisualStyleBackColor = true;
             applyButton.Click += OnApplyButtonClick;
             // 
@@ -117,17 +128,21 @@
             // 
             resources.ApplyResources(acceptButton, "acceptButton");
             acceptButton.Name = "acceptButton";
+            _helpProvider.SetShowHelp(acceptButton, (bool)resources.GetObject("acceptButton.ShowHelp"));
             acceptButton.UseVisualStyleBackColor = true;
             acceptButton.Click += OnAcceptButtonClick;
             // 
             // _dataGridView
             // 
             _dataGridView.AllowUserToOrderColumns = true;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Info;
+            _dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             resources.ApplyResources(_dataGridView, "_dataGridView");
             _dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             _dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { accountColumn, debitColumn, creditColumn, descriptionColumn });
             _dataGridView.Name = "_dataGridView";
             _dataGridView.RowTemplate.Height = 25;
+            _helpProvider.SetShowHelp(_dataGridView, (bool)resources.GetObject("_dataGridView.ShowHelp"));
             // 
             // accountColumn
             // 
@@ -153,6 +168,7 @@
             // 
             resources.ApplyResources(previousButton, "previousButton");
             previousButton.Name = "previousButton";
+            _helpProvider.SetShowHelp(previousButton, (bool)resources.GetObject("previousButton.ShowHelp"));
             previousButton.UseVisualStyleBackColor = true;
             previousButton.Click += OnPreviousButtonClick;
             // 
@@ -160,6 +176,7 @@
             // 
             resources.ApplyResources(nextButton, "nextButton");
             nextButton.Name = "nextButton";
+            _helpProvider.SetShowHelp(nextButton, (bool)resources.GetObject("nextButton.ShowHelp"));
             nextButton.UseVisualStyleBackColor = true;
             nextButton.Click += OnNextButtonClick;
             // 
@@ -167,22 +184,28 @@
             // 
             resources.ApplyResources(label3, "label3");
             label3.Name = "label3";
+            _helpProvider.SetShowHelp(label3, (bool)resources.GetObject("label3.ShowHelp"));
             // 
             // label4
             // 
             resources.ApplyResources(label4, "label4");
             label4.Name = "label4";
+            _helpProvider.SetShowHelp(label4, (bool)resources.GetObject("label4.ShowHelp"));
             // 
             // nameComboBox
             // 
             nameComboBox.FormattingEnabled = true;
+            _helpProvider.SetHelpString(nameComboBox, resources.GetString("nameComboBox.HelpString"));
             resources.ApplyResources(nameComboBox, "nameComboBox");
             nameComboBox.Name = "nameComboBox";
+            _helpProvider.SetShowHelp(nameComboBox, (bool)resources.GetObject("nameComboBox.ShowHelp"));
             // 
             // memoTextBox
             // 
             resources.ApplyResources(memoTextBox, "memoTextBox");
+            _helpProvider.SetHelpString(memoTextBox, resources.GetString("memoTextBox.HelpString"));
             memoTextBox.Name = "memoTextBox";
+            _helpProvider.SetShowHelp(memoTextBox, (bool)resources.GetObject("memoTextBox.ShowHelp"));
             // 
             // TransactionForm
             // 
@@ -206,6 +229,7 @@
             Controls.Add(label1);
             Controls.Add(postedDateTimePicker);
             Name = "TransactionForm";
+            _helpProvider.SetShowHelp(this, (bool)resources.GetObject("$this.ShowHelp"));
             ((System.ComponentModel.ISupportInitialize)numberNumericUpDown).EndInit();
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
@@ -239,5 +263,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox nameComboBox;
         private System.Windows.Forms.TextBox memoTextBox;
+        private System.Windows.Forms.HelpProvider _helpProvider;
     }
 }
