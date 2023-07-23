@@ -60,7 +60,6 @@
                         <xsl:with-param name="description">Other comprehensive income</xsl:with-param>
                         <xsl:with-param name="total">Total other comprehensive income</xsl:with-param>
                         <xsl:with-param name="negative">Total other comprehensive loss</xsl:with-param>
-                        <xsl:with-param name="indent">1</xsl:with-param>
                         <xsl:with-param name="sign">-1</xsl:with-param>
                     </xsl:apply-templates>
                 </tbody>
@@ -69,7 +68,7 @@
                         <th class="left">Comprehensive income</th>
                         <td class="total right">
                             <xsl:call-template name="number">
-                                <xsl:with-param name="value" select="-$netIncome + -$otherComprehensiveIncome"/>
+                                <xsl:with-param name="value" select="-$netIncome -$otherComprehensiveIncome"/>
                             </xsl:call-template>
                         </td>
                     </tr>
