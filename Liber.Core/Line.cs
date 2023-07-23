@@ -64,21 +64,6 @@ public class Line : IXmlSerializable
     [JsonIgnore]
     public Transaction? Transaction { get; internal set; }
 
-    public int CompareTo(object? obj)
-    {
-        if (obj == null)
-        {
-            return 1;
-        }
-
-        if (obj is not Line line)
-        {
-            throw new ArgumentException(message: null, nameof(obj));
-        }
-
-        return CompareTo(line);
-    }
-
     public XmlSchema? GetSchema()
     {
         return null;
