@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using Liber.Forms.Components;
+using Liber.Forms.Transactions;
 
 namespace Liber.Forms.Accounts;
 
@@ -132,7 +133,26 @@ internal sealed partial class AccountsForm : Form
 
     private void OnTransactionToolStripMenuItemClick(object sender, EventArgs e)
     {
-        _factory.AutoRegister(() => new TransactionForm(_company));
+        Guid formKey = typeof(TransactionForm).GUID;
+
+        if (!_listView.TryGetSelection(out Guid accountKey) || _factory.TryKill(formKey))
+        {
+            return;
+        }
+
+        TransactionForm form = new TransactionForm(_company);
+        Transaction transaction = new Transaction()
+        {
+            Posted = DateTime.Today,
+            Number = _company.NextTransactionNumber
+        };
+
+        transaction.Lines.Add(new Line()
+        {
+            AccountKey = accountKey
+        });
+        form.InitializeTransaction(transaction);
+        _factory.Register(formKey, form);
     }
 
     private void OnListViewAfterLabelEdit(object sender, LabelEditEventArgs e)

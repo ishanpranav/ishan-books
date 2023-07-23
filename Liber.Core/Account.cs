@@ -107,6 +107,8 @@ public class Account : IXmlSerializable
         }
     }
 
+    [IgnoreMember]
+    [JsonIgnore]
     public bool Temporary
     {
         get

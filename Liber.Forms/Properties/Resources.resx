@@ -123,4 +123,7 @@
   <data name="ExceptionCaption" xml:space="preserve">
     <value>Error</value>
   </data>
+  <data name="WarningText" xml:space="preserve">
+    <value>You are about to close the company file without saving your changes.</value>
+  </data>
 </root>

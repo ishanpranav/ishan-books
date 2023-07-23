@@ -2,10 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Windows.Forms;
 
-namespace Liber.Forms;
+namespace Liber.Forms.Transactions;
 
 internal sealed partial class TransactionForm : Form
 {
@@ -30,6 +29,21 @@ internal sealed partial class TransactionForm : Form
             InitializeAccount(account.Key, account.Value);
         }
 
+        SortedSet<string> names = new SortedSet<string>();
+
+        foreach (Transaction transaction in _company.Transactions)
+        {
+            if (!string.IsNullOrWhiteSpace(transaction.Name))
+            {
+                names.Add(transaction.Name);
+            }
+        }
+
+        string[] array = new string[names.Count];
+
+        names.CopyTo(array);
+
+        nameComboBox.DataSource = array;
         debitColumn.ValueType = typeof(decimal);
         creditColumn.ValueType = typeof(decimal);
 
@@ -43,11 +57,13 @@ internal sealed partial class TransactionForm : Form
     }
 
     [MemberNotNull(nameof(_current))]
-    private void InitializeTransaction(Transaction transaction)
+    public void InitializeTransaction(Transaction transaction)
     {
         _current = transaction;
         numberNumericUpDown.Value = transaction.Number;
         postedDateTimePicker.Value = transaction.Posted;
+        nameComboBox.Text = transaction.Name;
+        memoTextBox.Text = transaction.Memo;
 
         _dataGridView.Rows.Clear();
 
@@ -94,6 +110,8 @@ internal sealed partial class TransactionForm : Form
         {
             Number = numberNumericUpDown.Value,
             Posted = postedDateTimePicker.Value,
+            Name = nameComboBox.Text,
+            Memo = memoTextBox.Text
         };
 
         foreach (DataGridViewRow row in _dataGridView.Rows)
@@ -140,7 +158,9 @@ internal sealed partial class TransactionForm : Form
     private void Clear()
     {
         postedDateTimePicker.Value = DateTime.Today;
+        nameComboBox.Text = string.Empty;
 
+        memoTextBox.Clear();
         _dataGridView.Rows.Clear();
     }
 
@@ -191,8 +211,9 @@ internal sealed partial class TransactionForm : Form
         Transaction clone = new Transaction()
         {
             Posted = _current.Posted,
+            Number = _current.Number + 1,
             Name = _current.Name,
-            Number = _current.Number + 1
+            Memo = _current.Memo
         };
 
         foreach (Line line in _current.Lines)

@@ -77,5 +77,14 @@ namespace Liber.Forms.Properties {
                 return ResourceManager.GetString("ExceptionCaption", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are about to close the company file without saving your changes..
+        /// </summary>
+        internal static string WarningText {
+            get {
+                return ResourceManager.GetString("WarningText", resourceCulture);
+            }
+        }
     }
 }

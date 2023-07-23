@@ -37,6 +37,7 @@ partial class MainForm
         openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         importAccountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        importTransactionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
         saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -74,14 +75,12 @@ partial class MainForm
         _saveFileDialog = new System.Windows.Forms.SaveFileDialog();
         _recentPathManager = new RecentPathManager();
         _factory = new FormFactory();
-        importTransactionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         menuStrip1.SuspendLayout();
         toolStrip1.SuspendLayout();
         SuspendLayout();
         // 
         // menuStrip1
         // 
-        menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
         menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { fileToolStripMenuItem, editToolStripMenuItem1, viewToolStripMenuItem, helpToolStripMenuItem });
         resources.ApplyResources(menuStrip1, "menuStrip1");
         menuStrip1.Name = "menuStrip1";
@@ -115,6 +114,12 @@ partial class MainForm
         importAccountsToolStripMenuItem.Name = "importAccountsToolStripMenuItem";
         resources.ApplyResources(importAccountsToolStripMenuItem, "importAccountsToolStripMenuItem");
         importAccountsToolStripMenuItem.Click += OnImportAccountsToolStripMenuItemClick;
+        // 
+        // importTransactionsToolStripMenuItem
+        // 
+        importTransactionsToolStripMenuItem.Name = "importTransactionsToolStripMenuItem";
+        resources.ApplyResources(importTransactionsToolStripMenuItem, "importTransactionsToolStripMenuItem");
+        importTransactionsToolStripMenuItem.Click += OnImportTransactionsToolStripMenuItemClick;
         // 
         // toolStripSeparator
         // 
@@ -269,7 +274,6 @@ partial class MainForm
         // 
         // toolStrip1
         // 
-        toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
         toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripButton, openToolStripButton, saveToolStripButton, toolStripSeparator6, helpToolStripButton });
         resources.ApplyResources(toolStrip1, "toolStrip1");
         toolStrip1.Name = "toolStrip1";
@@ -327,12 +331,6 @@ partial class MainForm
         // _factory
         // 
         _factory.Parent = this;
-        // 
-        // importTransactionsToolStripMenuItem
-        // 
-        importTransactionsToolStripMenuItem.Name = "importTransactionsToolStripMenuItem";
-        resources.ApplyResources(importTransactionsToolStripMenuItem, "importTransactionsToolStripMenuItem");
-        importTransactionsToolStripMenuItem.Click += OnImportTransactionsToolStripMenuItemClick;
         // 
         // MainForm
         // 

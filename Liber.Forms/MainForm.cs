@@ -57,12 +57,13 @@ internal sealed partial class MainForm : Form
         }
     }
 
-    private async void OnFormClosing(object sender, FormClosingEventArgs e)
+    private void OnFormClosing(object sender, FormClosingEventArgs e)
     {
-        if (await TryCancelAsync())
-        {
-            e.Cancel = true;
-        }
+        e.Cancel = MessageBox.Show(
+            Resources.WarningText,
+            Resources.CancelCaption,
+            MessageBoxButtons.OKCancel,
+            MessageBoxIcon.Warning) == DialogResult.Cancel;
     }
 
     private void OnDragOver(object sender, DragEventArgs e)
@@ -147,6 +148,27 @@ internal sealed partial class MainForm : Form
         {
             child.Close();
         }
+    }
+
+    private async Task CancelAsync()
+    {
+        switch (MessageBox.Show(
+            _company.GetCancelText(),
+            Resources.CancelCaption,
+            MessageBoxButtons.YesNoCancel,
+            MessageBoxIcon.Warning))
+        {
+            case DialogResult.No:
+                Close();
+                return;
+
+            case DialogResult.Cancel:
+                return;
+        }
+
+        await SaveAsync();
+
+        Close();
     }
 
     private async Task<bool> TryCancelAsync()

@@ -1,4 +1,4 @@
-﻿namespace Liber.Forms
+﻿namespace Liber.Forms.Transactions
 {
     partial class TransactionForm
     {
@@ -35,6 +35,10 @@
             descriptionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             previousButton = new System.Windows.Forms.Button();
             nextButton = new System.Windows.Forms.Button();
+            label3 = new System.Windows.Forms.Label();
+            label4 = new System.Windows.Forms.Label();
+            nameComboBox = new System.Windows.Forms.ComboBox();
+            memoTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)numberNumericUpDown).BeginInit();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)_dataGridView).BeginInit();
@@ -65,7 +69,6 @@
             // 
             // toolStrip1
             // 
-            toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripButton, saveToolStripButton, toolStripSeparator3, copyToolStripButton });
             resources.ApplyResources(toolStrip1, "toolStrip1");
             toolStrip1.Name = "toolStrip1";
@@ -160,12 +163,37 @@
             nextButton.UseVisualStyleBackColor = true;
             nextButton.Click += OnNextButtonClick;
             // 
+            // label3
+            // 
+            resources.ApplyResources(label3, "label3");
+            label3.Name = "label3";
+            // 
+            // label4
+            // 
+            resources.ApplyResources(label4, "label4");
+            label4.Name = "label4";
+            // 
+            // nameComboBox
+            // 
+            nameComboBox.FormattingEnabled = true;
+            resources.ApplyResources(nameComboBox, "nameComboBox");
+            nameComboBox.Name = "nameComboBox";
+            // 
+            // memoTextBox
+            // 
+            resources.ApplyResources(memoTextBox, "memoTextBox");
+            memoTextBox.Name = "memoTextBox";
+            // 
             // TransactionForm
             // 
             AcceptButton = acceptButton;
             resources.ApplyResources(this, "$this");
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             CancelButton = cancelButton;
+            Controls.Add(memoTextBox);
+            Controls.Add(nameComboBox);
+            Controls.Add(label4);
+            Controls.Add(label3);
             Controls.Add(nextButton);
             Controls.Add(previousButton);
             Controls.Add(_dataGridView);
@@ -207,5 +235,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn descriptionColumn;
         private System.Windows.Forms.Button previousButton;
         private System.Windows.Forms.Button nextButton;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox nameComboBox;
+        private System.Windows.Forms.TextBox memoTextBox;
     }
 }
