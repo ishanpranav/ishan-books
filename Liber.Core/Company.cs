@@ -79,6 +79,9 @@ public sealed class Company : IXmlSerializable
     [Key(4)]
     public string? Name { get; set; }
 
+    [Key(5)]
+    public CompanyType Type { get; set; }
+
     [IgnoreMember]
     [JsonIgnore]
     public Transaction? LastTransaction
@@ -238,6 +241,7 @@ public sealed class Company : IXmlSerializable
     public void WriteXml(XmlWriter writer)
     {
         writer.WriteElementString("name", Name);
+        writer.WriteElementString("type", Type.ToString());
 
         foreach (Account account in _accounts.Values)
         {

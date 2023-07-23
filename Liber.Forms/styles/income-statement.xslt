@@ -68,7 +68,6 @@
                         <xsl:with-param name="description">Costs of revenue</xsl:with-param>
                         <xsl:with-param name="total">Total cost of revenue</xsl:with-param>
                         <xsl:with-param name="indent">3</xsl:with-param>
-                        <xsl:with-param name="sign">1</xsl:with-param>
                     </xsl:apply-templates>
                     <tr>
                         <th class="in-2 left">Gross profit</th>
@@ -84,7 +83,6 @@
                         <xsl:with-param name="description">Expenses</xsl:with-param>
                         <xsl:with-param name="total">Total expense</xsl:with-param>
                         <xsl:with-param name="indent">3</xsl:with-param>
-                        <xsl:with-param name="sign">1</xsl:with-param>
                     </xsl:apply-templates>
                     <tr>
                         <xsl:variable name="netOrdinaryIncome" select="-$income - $cost - $expense"/>
@@ -114,7 +112,6 @@
                         <xsl:with-param name="description">Other expenses</xsl:with-param>
                         <xsl:with-param name="total">Total other expense</xsl:with-param>
                         <xsl:with-param name="indent">2</xsl:with-param>
-                        <xsl:with-param name="sign">1</xsl:with-param>
                     </xsl:apply-templates>
                     <xsl:apply-templates select="company">
                         <xsl:with-param name="type">IncomeTaxExpense</xsl:with-param>
@@ -122,12 +119,11 @@
                         <xsl:with-param name="description">Income tax expense</xsl:with-param>
                         <xsl:with-param name="total">Total income tax expense</xsl:with-param>
                         <xsl:with-param name="indent">2</xsl:with-param>
-                        <xsl:with-param name="sign">1</xsl:with-param>
                     </xsl:apply-templates>
                 </tbody>
                 <tfoot>
                     <tr>
-                        <xsl:variable name="netIncome" select="-$income + -$otherIncome - $cost - $expense - $otherExpense - $incomeTaxExpense"/>
+                        <xsl:variable name="netIncome" select="-$income - $otherIncome - $cost - $expense - $otherExpense - $incomeTaxExpense"/>
                         <th class="left">
                             <xsl:choose>
                                 <xsl:when test="$netIncome &lt; 0">Net loss</xsl:when>

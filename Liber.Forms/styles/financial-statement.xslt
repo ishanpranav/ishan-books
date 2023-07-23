@@ -2,8 +2,8 @@
 <xsl:stylesheet
     version="1.0"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-  xmlns:msxsl="urn:schemas-microsoft-com:xslt"
-  exclude-result-prefixes="msxsl">
+    xmlns:msxsl="urn:schemas-microsoft-com:xslt"
+    exclude-result-prefixes="msxsl">
     <xsl:output method="html" indent="yes"/>
     <xsl:template name="date-year">
         <xsl:param name="value"/>
@@ -76,7 +76,7 @@
         <xsl:param name="total"/>
         <xsl:param name="negative" select="$total"/>
         <xsl:param name="indent"/>
-        <xsl:param name="sign"/>
+        <xsl:param name="sign" select="1"/>
         <xsl:choose>
             <xsl:when test="$balance != 0">
                 <tr>
@@ -116,5 +116,16 @@
                 </xsl:call-template>
             </td>
         </tr>
+    </xsl:template>
+    <xsl:template name="equity">
+        <xsl:param name="type"/>
+        <xsl:param name="value" select="0"/>
+        <xsl:choose>
+            <xsl:when test="type = 'Individual' and value &gt;= 0">Owner's equity</xsl:when>
+            <xsl:when test="type = 'Parternship' and value &gt;= 0">Partners' equity</xsl:when>
+            <xsl:when test="type = 'Corporation' and value &gt;= 0">Shareholders' equity</xsl:when>
+            <xsl:when test="value &lt; 0">Deficit</xsl:when>
+            <xsl:otherwise>Equity</xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 </xsl:stylesheet>

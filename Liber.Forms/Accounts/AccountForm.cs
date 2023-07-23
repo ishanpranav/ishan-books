@@ -24,7 +24,8 @@ internal abstract partial class AccountForm : Form
         DialogResult = DialogResult.Cancel;
         typeComboBox.DataSource = Enum
             .GetValues<AccountType>()
-            .OrderBy(x => Math.Abs((short)x));
+            .OrderBy(x => Math.Abs((short)x))
+            .ToList();
         taxTypeComboBox.DataSource = Enum.GetValues<TaxType>();
 
         foreach (KeyValuePair<Guid, Account> account in Company.Accounts)
