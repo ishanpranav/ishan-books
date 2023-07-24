@@ -67,3 +67,4 @@
 #*.RTF   diff=astextplain
 
 *.generated.cs linguist-generated
+*.sql linguist-detectable
