@@ -126,8 +126,8 @@
   <data name="Asset" xml:space="preserve">
     <value>Asset</value>
   </data>
-  <data name="Cash" xml:space="preserve">
-    <value>Cash</value>
+  <data name="Bank" xml:space="preserve">
+    <value>Bank</value>
   </data>
   <data name="Cost" xml:space="preserve">
     <value>Cost of Goods Sold</value>

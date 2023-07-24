@@ -147,6 +147,9 @@
   <data name="exportAccountsToolStripMenuItem.Text" xml:space="preserve">
     <value>Plan de cuentas (*.csv)</value>
   </data>
+  <data name="exportCompanyToolStripMenuItem.Text" xml:space="preserve">
+    <value>Empresa (*.xml)</value>
+  </data>
   <data name="exportToolStripMenuItem.Text" xml:space="preserve">
     <value>Exportar</value>
   </data>

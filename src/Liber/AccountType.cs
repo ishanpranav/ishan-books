@@ -10,7 +10,7 @@ namespace Liber;
 
 public enum AccountType : short
 {
-    [Name("", "A/RECEIVABLE", "A/PAYABLE", "STOCK", "MUTUAL", "TRADING")]
+    [Name("", "STOCK", "MUTUAL", "TRADING")]
     None = 0,
 
     [Name("BANK", "CASH")]
@@ -28,11 +28,11 @@ public enum AccountType : short
     [Name("INCOME")]
     Income = -4000,
 
-    [Name("LIABILITY")]
-    OtherCurrentLiability = -2300,
-
-    [Name("ASSET")]
+    [Name("ASSET", "A/RECEIVABLE")]
     OtherCurrentAsset = 1300,
+
+    [Name("LIABILITY", "A/PAYABLE")]
+    OtherCurrentLiability = -2300,
 
     [Name("EXPENSE")]
     Cost = 5000,

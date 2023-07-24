@@ -10,10 +10,12 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 using Liber.Forms.Accounts;
 using Liber.Forms.Companies;
 using Liber.Forms.Properties;
 using Liber.Forms.Transactions;
+using Liber.Sqlite;
 using MessagePack;
 
 namespace Liber.Forms;
@@ -155,27 +157,6 @@ internal sealed partial class MainForm : Form
         }
     }
 
-    private async Task CancelAsync()
-    {
-        switch (MessageBox.Show(
-            _company.GetCancelText(),
-            Resources.CancelCaption,
-            MessageBoxButtons.YesNoCancel,
-            MessageBoxIcon.Warning))
-        {
-            case DialogResult.No:
-                Close();
-                return;
-
-            case DialogResult.Cancel:
-                return;
-        }
-
-        await SaveAsync();
-
-        Close();
-    }
-
     private async Task<bool> TryCancelAsync()
     {
         switch (MessageBox.Show(
@@ -198,7 +179,7 @@ internal sealed partial class MainForm : Form
 
     private Task SaveAsAsync()
     {
-        if (!TryGetSavePath(filterIndex: 1, out string? path))
+        if (!TryGetSavePath(FilterIndex.MessagePack, out string? path))
         {
             return Task.CompletedTask;
         }
@@ -206,9 +187,9 @@ internal sealed partial class MainForm : Form
         return ExportAsync(path);
     }
 
-    private bool TryGetSavePath(int filterIndex, [MaybeNullWhen(false)] out string result)
+    private bool TryGetSavePath(FilterIndex filterIndex, [MaybeNullWhen(false)] out string result)
     {
-        _saveFileDialog.FilterIndex = filterIndex;
+        _saveFileDialog.FilterIndex = (int)filterIndex + (int)FilterIndex.Offset;
         _saveFileDialog.FileName = _company.Name;
 
         if (_saveFileDialog.ShowDialog() != DialogResult.OK)
@@ -225,7 +206,7 @@ internal sealed partial class MainForm : Form
 
     private async void OnOpenToolStripMenuItemClick(object sender, EventArgs e)
     {
-        if (await TryCancelAsync() || !TryGetOpenPath(filterIndex: 2, out string? path))
+        if (await TryCancelAsync() || !TryGetOpenPath(FilterIndex.AllSupportedFiles, out string? path))
         {
             return;
         }
@@ -233,9 +214,9 @@ internal sealed partial class MainForm : Form
         await ImportAsync(path);
     }
 
-    public bool TryGetOpenPath(int filterIndex, [MaybeNullWhen(false)] out string result)
+    public bool TryGetOpenPath(FilterIndex filterIndex, [MaybeNullWhen(false)] out string result)
     {
-        _openFileDialog.FilterIndex = filterIndex;
+        _openFileDialog.FilterIndex = (int)filterIndex;
 
         if (_openFileDialog.ShowDialog() != DialogResult.OK)
         {
@@ -270,12 +251,26 @@ internal sealed partial class MainForm : Form
         company.CopyTo(_company);
     }
 
+    private async Task ImportSqliteCompanyAsync(string path)
+    {
+        (await SqliteSerializer.DeserializeAsync(path)).CopyTo(_company);
+    }
+
     private async Task ImportAsync(string path)
     {
         await AbortRetryIgnoreAsync(async () =>
         {
             switch (Path.GetExtension(path).ToUpperInvariant())
             {
+                case ".SQLITE":
+                case ".SQLITE3":
+                case ".DB":
+                case ".DB3":
+                case ".S3DB":
+                case ".SL3":
+                    await ImportSqliteCompanyAsync(path);
+                    break;
+
                 case ".JSON":
                     await ImportJsonCompanyAsync(path);
                     break;
@@ -325,6 +320,13 @@ internal sealed partial class MainForm : Form
         _path = path;
     }
 
+    private async Task ExportSqliteCompanyAsync(string path)
+    {
+        await SqliteSerializer.SerializeAsync(path, _company);
+
+        _path = path;
+    }
+
     private static async Task AbortRetryIgnoreAsync(Func<Task> action)
     {
         DialogResult result;
@@ -351,6 +353,15 @@ internal sealed partial class MainForm : Form
         {
             switch (Path.GetExtension(path).ToUpperInvariant())
             {
+                case ".SQLITE":
+                case ".SQLITE3":
+                case ".DB":
+                case ".DB3":
+                case ".S3DB":
+                case ".SL3":
+                    await ExportSqliteCompanyAsync(path);
+                    break;
+
                 case ".JSON":
                     await ExportJsonCompanyAsync(path);
                     break;
@@ -403,7 +414,7 @@ internal sealed partial class MainForm : Form
 
     private async void OnImportAccountsToolStripMenuItemClick(object sender, EventArgs e)
     {
-        if (!TryGetOpenPath(filterIndex: 5, out string? path))
+        if (!TryGetOpenPath(FilterIndex.Csv, out string? path))
         {
             return;
         }
@@ -420,7 +431,7 @@ internal sealed partial class MainForm : Form
 
     private async void OnImportTransactionsToolStripMenuItemClick(object sender, EventArgs e)
     {
-        if (!TryGetOpenPath(filterIndex: 5, out string? path))
+        if (!TryGetOpenPath(FilterIndex.Csv, out string? path))
         {
             return;
         }
@@ -442,7 +453,7 @@ internal sealed partial class MainForm : Form
 
     private async void OnExportAccountsToolStripMenuItemClick(object sender, EventArgs e)
     {
-        if (!TryGetSavePath(filterIndex: 3, out string? path))
+        if (!TryGetSavePath(FilterIndex.Csv, out string? path))
         {
             return;
         }
@@ -457,7 +468,7 @@ internal sealed partial class MainForm : Form
 
     private async void OnExportTransactionsToolStripMenuItemClick(object sender, EventArgs e)
     {
-        if (!TryGetSavePath(filterIndex: 3, out string? path))
+        if (!TryGetSavePath(FilterIndex.Csv, out string? path))
         {
             return;
         }
@@ -467,6 +478,23 @@ internal sealed partial class MainForm : Form
             await using FileStream output = File.Create(path);
 
             await GnuCashSerializer.SerializeTransactionsAsync(output, _company);
+        });
+    }
+
+    private async void OnExportCompanyToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        if (!TryGetSavePath(FilterIndex.Xml, out string? path))
+        {
+            return;
+        }
+
+        await AbortRetryIgnoreAsync(() =>
+        {
+            using XmlWriter writer = XmlWriter.Create(path);
+
+            XmlSerializers.Company.Serialize(writer, _company);
+
+            return Task.CompletedTask;
         });
     }
 

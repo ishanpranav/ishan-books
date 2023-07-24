@@ -30,6 +30,7 @@ partial class MainForm
     /// </summary>
     private void InitializeComponent()
     {
+        components = new System.ComponentModel.Container();
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
         _menuStrip = new System.Windows.Forms.MenuStrip();
         fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,6 +43,8 @@ partial class MainForm
         saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        exportCompanyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
         exportAccountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         exportTransactionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -74,8 +77,8 @@ partial class MainForm
         helpToolStripButton = new System.Windows.Forms.ToolStripButton();
         _openFileDialog = new System.Windows.Forms.OpenFileDialog();
         _saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-        _recentPathManager = new RecentPathManager();
-        _factory = new FormFactory();
+        _recentPathManager = new RecentPathManager(components);
+        _factory = new FormFactory(components);
         _menuStrip.SuspendLayout();
         _toolStrip.SuspendLayout();
         SuspendLayout();
@@ -142,9 +145,20 @@ partial class MainForm
         // 
         // exportToolStripMenuItem
         // 
-        exportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { exportAccountsToolStripMenuItem, exportTransactionsToolStripMenuItem });
+        exportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { exportCompanyToolStripMenuItem, toolStripSeparator3, exportAccountsToolStripMenuItem, exportTransactionsToolStripMenuItem });
         exportToolStripMenuItem.Name = "exportToolStripMenuItem";
         resources.ApplyResources(exportToolStripMenuItem, "exportToolStripMenuItem");
+        // 
+        // exportCompanyToolStripMenuItem
+        // 
+        exportCompanyToolStripMenuItem.Name = "exportCompanyToolStripMenuItem";
+        resources.ApplyResources(exportCompanyToolStripMenuItem, "exportCompanyToolStripMenuItem");
+        exportCompanyToolStripMenuItem.Click += OnExportCompanyToolStripMenuItemClick;
+        // 
+        // toolStripSeparator3
+        // 
+        toolStripSeparator3.Name = "toolStripSeparator3";
+        resources.ApplyResources(toolStripSeparator3, "toolStripSeparator3");
         // 
         // exportAccountsToolStripMenuItem
         // 
@@ -411,4 +425,6 @@ partial class MainForm
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     private System.Windows.Forms.ToolStripMenuItem importTransactionsToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem exportTransactionsToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem exportCompanyToolStripMenuItem;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
 }

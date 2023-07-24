@@ -154,6 +154,15 @@
   <data name="saveAsToolStripMenuItem.Text" xml:space="preserve">
     <value>Save &amp;As</value>
   </data>
+  <data name="exportCompanyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>252, 26</value>
+  </data>
+  <data name="exportCompanyToolStripMenuItem.Text" xml:space="preserve">
+    <value>Company (*.xml)</value>
+  </data>
+  <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>249, 6</value>
+  </data>
   <data name="exportAccountsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>252, 26</value>
   </data>
@@ -442,13 +451,13 @@
     <value>276, 17</value>
   </metadata>
   <data name="_openFileDialog.Filter" xml:space="preserve">
-    <value>All Files (*.*)|*.*|All Supported Files (*.shbk; *.json)|*.shbk;*.json|SharpBooks Company File (*.shbk)|*.shbk|JavaScript Object Notation (*.json)|*.json|Comma-delimited (*.csv)|*.csv</value>
+    <value>All Files (*.*)|*.*|All Supported Files (*.shbk;*.json;*.sqlite;*.sqlite3;*.db;*.db3;*.s3db;*.sl3)|*.shbk;*.json;*.sqlite;*.sqlite3;*.db;*.db3;*.s3db;*.sl3|SharpBooks Company File (*.shbk)|*.shbk|JavaScript Object Notation (*.json)|*.json|SQLite3 Database File (*.sqlite;*.sqlite3;*.db;*.db3;*.s3db;*.sl3)|*.sqlite;*.sqlite3;*.db;*.db3;*.s3db;*.sl3|Comma-delimited (*.csv)|*.csv|XML Document (*.xml)|*.xml</value>
   </data>
   <metadata name="_saveFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>441, 17</value>
   </metadata>
   <data name="_saveFileDialog.Filter" xml:space="preserve">
-    <value>SharpBooks Company File (*.shbk)|*.shbk|JavaScript Object Notation (*.json)|*.json|Comma-delimited (*.csv)|*.csv</value>
+    <value>SharpBooks Company File (*.shbk)|*.shbk|JavaScript Object Notation (*.json)|*.json|SQLite3 Database File (*.sqlite;*.sqlite3;*.db;*.db3;*.s3db;*.sl3)|*.sqlite;*.sqlite3;*.db;*.db3;*.s3db;*.sl3|Comma-delimited (*.csv)|*.csv|XML Document (*.xml)|*.xml</value>
   </data>
   <metadata name="_recentPathManager.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>601, 17</value>
@@ -531,6 +540,18 @@
   </data>
   <data name="&gt;&gt;exportToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;exportCompanyToolStripMenuItem.Name" xml:space="preserve">
+    <value>exportCompanyToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;exportCompanyToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator3.Name" xml:space="preserve">
+    <value>toolStripSeparator3</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;exportAccountsToolStripMenuItem.Name" xml:space="preserve">
     <value>exportAccountsToolStripMenuItem</value>

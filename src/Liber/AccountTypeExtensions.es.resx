@@ -129,8 +129,8 @@
   <data name="Equity" xml:space="preserve">
     <value>Patrimonio</value>
   </data>
-  <data name="Cash" xml:space="preserve">
-    <value>Efectivo</value>
+  <data name="Bank" xml:space="preserve">
+    <value>Banco</value>
   </data>
   <data name="Cost" xml:space="preserve">
     <value>Costo de ventas</value>
