@@ -34,6 +34,8 @@ partial class CompanyForm
         cancelButton = new System.Windows.Forms.Button();
         acceptButton = new System.Windows.Forms.Button();
         _helpProvider = new System.Windows.Forms.HelpProvider();
+        _colorButton = new System.Windows.Forms.ColorButton();
+        label2 = new System.Windows.Forms.Label();
         SuspendLayout();
         // 
         // label1
@@ -67,12 +69,25 @@ partial class CompanyForm
         acceptButton.UseVisualStyleBackColor = true;
         acceptButton.Click += OnAcceptButtonClick;
         // 
+        // _colorButton
+        // 
+        resources.ApplyResources(_colorButton, "_colorButton");
+        _colorButton.Name = "_colorButton";
+        _colorButton.UseVisualStyleBackColor = true;
+        // 
+        // label2
+        // 
+        resources.ApplyResources(label2, "label2");
+        label2.Name = "label2";
+        // 
         // CompanyForm
         // 
         AcceptButton = acceptButton;
         resources.ApplyResources(this, "$this");
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         CancelButton = cancelButton;
+        Controls.Add(label2);
+        Controls.Add(_colorButton);
         Controls.Add(acceptButton);
         Controls.Add(cancelButton);
         Controls.Add(nameTextBox);
@@ -81,7 +96,6 @@ partial class CompanyForm
         Name = "CompanyForm";
         _helpProvider.SetShowHelp(this, (bool)resources.GetObject("$this.ShowHelp"));
         ShowIcon = false;
-        Load += OnLoad;
         ResumeLayout(false);
         PerformLayout();
     }
@@ -93,4 +107,6 @@ partial class CompanyForm
     private System.Windows.Forms.Button acceptButton;
     private System.Windows.Forms.Button cancelButton;
     private System.Windows.Forms.HelpProvider _helpProvider;
+    private System.Windows.Forms.ColorButton _colorButton;
+    private System.Windows.Forms.Label label2;
 }

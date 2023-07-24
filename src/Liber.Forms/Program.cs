@@ -18,9 +18,7 @@ internal static class Program
 
         if (!string.IsNullOrWhiteSpace(Settings.Default.Culture))
         {
-            CultureInfo culture = new CultureInfo(Settings.Default.Culture);
-
-            CultureInfo.CurrentUICulture = culture;
+            CultureInfo.CurrentUICulture = new CultureInfo(Settings.Default.Culture);
         }
 
         Application.Run(new MainForm(args));

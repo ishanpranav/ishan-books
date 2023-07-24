@@ -186,7 +186,7 @@ public class Account : IXmlSerializable
 
     public override string ToString()
     {
-        return $"{Number} - {Name}";
+        return Name;
     }
 
     public XmlSchema? GetSchema()

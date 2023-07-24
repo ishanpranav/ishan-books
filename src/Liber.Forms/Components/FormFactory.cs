@@ -15,6 +15,13 @@ internal sealed class FormFactory : Component
 
     public Form? Parent { get; set; }
 
+    public FormFactory() { }
+
+    public FormFactory(IContainer container)
+    {
+        container.Add(this);
+    }
+
     public void Register(Guid key, Form value)
     {
         _forms.Add(key, value);

@@ -223,6 +223,7 @@ public sealed class Company : IXmlSerializable
         other.Name = Name;
         other.NextAccountNumber = NextAccountNumber;
         other.NextTransactionNumber = NextTransactionNumber;
+        other.Color = Color;
 
         other._accounts.Clear();
         other._transactions.Clear();

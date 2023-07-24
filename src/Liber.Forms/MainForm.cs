@@ -8,7 +8,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Liber.Forms.Accounts;
@@ -21,25 +20,12 @@ namespace Liber.Forms;
 
 internal sealed partial class MainForm : Form
 {
-    private static readonly JsonSerializerOptions s_jsonOptions = new JsonSerializerOptions()
-    {
-        AllowTrailingCommas = true,
-        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
-        PropertyNameCaseInsensitive = true,
-        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-        WriteIndented = true
-    };
     private static readonly MessagePackSerializerOptions s_messagePackOptions = MessagePackSerializerOptions.Standard
         .WithSecurity(MessagePackSecurity.UntrustedData);
-    private readonly Company _company = new Company();
-    private string? _path;
 
-    static MainForm()
-    {
-        s_jsonOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase, allowIntegerValues: true));
-        s_jsonOptions.Converters.Add(new JsonColorConverter());
-        s_jsonOptions.Converters.Add(new TypeConverterJsonConverterAdapter());
-    }
+    private readonly Company _company = new Company();
+
+    private string? _path;
 
     public MainForm(string[] args)
     {
@@ -108,10 +94,25 @@ internal sealed partial class MainForm : Form
 
         foreach (string path in _recentPathManager.Paths)
         {
+            if (!File.Exists(path))
+            {
+                continue;
+            }
+
             ToolStripItem item = recentPathsToolStripMenuItem.DropDownItems.Add($"{i} - {path}");
 
             item.Click += async (_, _) => await ImportAsync(path);
             i++;
+
+            string? directoryName = Path.GetDirectoryName(path);
+
+            if (directoryName != null)
+            {
+                FileDialogCustomPlace customPlace = new FileDialogCustomPlace(directoryName);
+
+                _openFileDialog.CustomPlaces.Add(customPlace);
+                _saveFileDialog.CustomPlaces.Add(customPlace);
+            }
         }
 
         recentPathsToolStripMenuItem.Visible = true;
@@ -259,7 +260,7 @@ internal sealed partial class MainForm : Form
     {
         await using FileStream input = File.OpenRead(path);
 
-        Company? company = await JsonSerializer.DeserializeAsync<Company>(input, s_jsonOptions);
+        Company? company = await JsonSerializer.DeserializeAsync<Company>(input, FormattedStrings.JsonOptions);
 
         if (company == null)
         {
@@ -319,7 +320,7 @@ internal sealed partial class MainForm : Form
     {
         await using FileStream output = File.Create(path);
 
-        await JsonSerializer.SerializeAsync(output, _company, s_jsonOptions);
+        await JsonSerializer.SerializeAsync(output, _company, FormattedStrings.JsonOptions);
 
         _path = path;
     }
@@ -450,7 +451,22 @@ internal sealed partial class MainForm : Form
         {
             await using FileStream output = File.Create(path);
 
-            await GnuCashSerializer.SerializeAccountsAsync(output, _company.Accounts);
+            await GnuCashSerializer.SerializeAccountsAsync(output, _company);
+        });
+    }
+
+    private async void OnExportTransactionsToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        if (!TryGetSavePath(filterIndex: 3, out string? path))
+        {
+            return;
+        }
+
+        await AbortRetryIgnoreAsync(async () =>
+        {
+            await using FileStream output = File.Create(path);
+
+            await GnuCashSerializer.SerializeTransactionsAsync(output, _company);
         });
     }
 

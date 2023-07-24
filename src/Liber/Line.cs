@@ -21,7 +21,7 @@ public class Line : IXmlSerializable
     [Key(0)]
     public Guid AccountKey { get; set; }
 
-    [Index(11)]
+    [Index(14)]
     [Key(1)]
     [Name("Value Num.")]
     [NumberStyles(NumberStyles.Currency)]
@@ -64,9 +64,10 @@ public class Line : IXmlSerializable
     [Optional]
     public string? Description { get; set; }
 
+    [Ignore]
     [IgnoreMember]
     [JsonIgnore]
-    public Transaction? Transaction { get; internal set; }
+    public Transaction? Transaction { get; internal set; } 
 
     public XmlSchema? GetSchema()
     {

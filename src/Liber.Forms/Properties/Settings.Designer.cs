@@ -46,5 +46,17 @@ namespace Liber.Forms.Properties {
                 this["Culture"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("null")]
+        public string CustomColors {
+            get {
+                return ((string)(this["CustomColors"]));
+            }
+            set {
+                this["CustomColors"] = value;
+            }
+        }
     }
 }

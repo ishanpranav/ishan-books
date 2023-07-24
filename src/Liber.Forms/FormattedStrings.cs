@@ -5,12 +5,29 @@
 using System;
 using System.Resources;
 using System.Runtime.CompilerServices;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Liber;
 
 internal static class FormattedStrings
 {
+    public static readonly JsonSerializerOptions JsonOptions = new JsonSerializerOptions()
+    {
+        AllowTrailingCommas = true,
+        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
+        PropertyNameCaseInsensitive = true,
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        WriteIndented = true
+    };
     private static readonly ResourceManager s_resourceManager = new ResourceManager(typeof(FormattedStrings));
+
+    static FormattedStrings()
+    {
+        JsonOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase, allowIntegerValues: true));
+        JsonOptions.Converters.Add(new JsonColorConverter());
+        JsonOptions.Converters.Add(new TypeConverterJsonConverterAdapter());
+    }
 
     public static string GetString([CallerMemberName] string? key = null)
     {

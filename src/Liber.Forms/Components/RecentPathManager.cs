@@ -8,36 +8,34 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using Liber.Forms.Properties;
 
 namespace Liber.Forms.Components;
 
 internal sealed class RecentPathManager : Component
 {
-    private readonly JsonSerializerOptions s_options = new JsonSerializerOptions()
-    {
-        AllowTrailingCommas = true,
-        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
-        PropertyNameCaseInsensitive = true,
-        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-        WriteIndented = true
-    };
-    private readonly Dictionary<string, DateTime> s_dates = new Dictionary<string, DateTime>();
+    private readonly Dictionary<string, DateTime> _dates = new Dictionary<string, DateTime>();
 
-    private SortedDictionary<DateTime, string>? s_paths;
+    private SortedDictionary<DateTime, string>? _paths;
+
+    public RecentPathManager() { }
+
+    public RecentPathManager(IContainer container)
+    {
+        container.Add(this);
+    }
 
     [Browsable(false)]
     public bool Empty
     {
         get
         {
-            if (s_paths == null)
+            if (_paths == null)
             {
                 Load();
             }
 
-            return s_paths == null || s_paths.Count == 0;
+            return _paths == null || _paths.Count == 0;
         }
     }
 
@@ -46,17 +44,17 @@ internal sealed class RecentPathManager : Component
     {
         get
         {
-            if (s_paths == null)
+            if (_paths == null)
             {
                 Load();
 
-                if (s_paths == null)
+                if (_paths == null)
                 {
                     return Enumerable.Empty<string>();
                 }
             }
 
-            return s_paths.Values;
+            return _paths.Values;
         }
     }
 
@@ -66,23 +64,23 @@ internal sealed class RecentPathManager : Component
     {
         DateTime modified = DateTime.Now;
 
-        if (s_paths == null)
+        if (_paths == null)
         {
             Load();
 
-            if (s_paths == null)
+            if (_paths == null)
             {
-                s_paths = new SortedDictionary<DateTime, string>(ReverseDateTimeComparer.Default);
+                _paths = new SortedDictionary<DateTime, string>(ReverseDateTimeComparer.Default);
             }
         }
 
-        if (s_dates.TryGetValue(path, out DateTime lastModified))
+        if (_dates.TryGetValue(path, out DateTime lastModified))
         {
-            s_paths.Remove(lastModified);
+            _paths.Remove(lastModified);
         }
 
-        s_paths.Add(modified, path);
-        s_dates[path] = modified;
+        _paths.Add(modified, path);
+        _dates[path] = modified;
 
         Save();
         Updated?.Invoke(sender: this, EventArgs.Empty);
@@ -90,27 +88,27 @@ internal sealed class RecentPathManager : Component
 
     private void Save()
     {
-        Settings.Default.RecentPaths = JsonSerializer.Serialize(s_paths, s_options);
+        Settings.Default.RecentPaths = JsonSerializer.Serialize(_paths, FormattedStrings.JsonOptions);
 
         Settings.Default.Save();
     }
 
     private void Load()
     {
-        Dictionary<DateTime, string>? paths = JsonSerializer.Deserialize<Dictionary<DateTime, string>>(Settings.Default.RecentPaths, s_options);
+        Dictionary<DateTime, string>? paths = JsonSerializer.Deserialize<Dictionary<DateTime, string>>(Settings.Default.RecentPaths, FormattedStrings.JsonOptions);
 
         if (paths == null)
         {
             return;
         }
 
-        s_paths = new SortedDictionary<DateTime, string>(paths, ReverseDateTimeComparer.Default);
+        _paths = new SortedDictionary<DateTime, string>(paths, ReverseDateTimeComparer.Default);
 
-        s_dates.Clear();
+        _dates.Clear();
 
         foreach (KeyValuePair<DateTime, string> path in paths)
         {
-            s_dates.Add(path.Value, path.Key);
+            _dates.Add(path.Value, path.Key);
         }
     }
 }

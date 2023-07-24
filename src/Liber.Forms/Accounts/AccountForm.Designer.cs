@@ -34,9 +34,8 @@
             taxTypeComboBox = new System.Windows.Forms.ComboBox();
             label8 = new System.Windows.Forms.Label();
             memoTextBox = new System.Windows.Forms.TextBox();
-            colorButton = new System.Windows.Forms.Button();
+            _colorButton = new System.Windows.Forms.ColorButton();
             _helpProvider = new System.Windows.Forms.HelpProvider();
-            _colorDialog = new System.Windows.Forms.ColorDialog();
             ((System.ComponentModel.ISupportInitialize)numberNumericUpDown).BeginInit();
             SuspendLayout();
             // 
@@ -218,26 +217,20 @@
             memoTextBox.Name = "memoTextBox";
             _helpProvider.SetShowHelp(memoTextBox, (bool)resources.GetObject("memoTextBox.ShowHelp"));
             // 
-            // colorButton
+            // _colorButton
             // 
-            resources.ApplyResources(colorButton, "colorButton");
-            _helpProvider.SetHelpKeyword(colorButton, resources.GetString("colorButton.HelpKeyword"));
-            _helpProvider.SetHelpNavigator(colorButton, (System.Windows.Forms.HelpNavigator)resources.GetObject("colorButton.HelpNavigator"));
-            _helpProvider.SetHelpString(colorButton, resources.GetString("colorButton.HelpString"));
-            colorButton.Name = "colorButton";
-            _helpProvider.SetShowHelp(colorButton, (bool)resources.GetObject("colorButton.ShowHelp"));
-            colorButton.UseVisualStyleBackColor = true;
-            colorButton.Click += OnColorButtonClick;
+            resources.ApplyResources(_colorButton, "_colorButton");
+            _colorButton.BackColor = System.Drawing.Color.Empty;
+            _helpProvider.SetHelpKeyword(_colorButton, resources.GetString("_colorButton.HelpKeyword"));
+            _helpProvider.SetHelpNavigator(_colorButton, (System.Windows.Forms.HelpNavigator)resources.GetObject("_colorButton.HelpNavigator"));
+            _helpProvider.SetHelpString(_colorButton, resources.GetString("_colorButton.HelpString"));
+            _colorButton.Name = "_colorButton";
+            _helpProvider.SetShowHelp(_colorButton, (bool)resources.GetObject("_colorButton.ShowHelp"));
+            _colorButton.UseVisualStyleBackColor = true;
             // 
             // _helpProvider
             // 
             resources.ApplyResources(_helpProvider, "_helpProvider");
-            // 
-            // _colorDialog
-            // 
-            _colorDialog.AnyColor = true;
-            _colorDialog.FullOpen = true;
-            _colorDialog.SolidColorOnly = true;
             // 
             // AccountForm
             // 
@@ -247,7 +240,7 @@
             CancelButton = cancelButton;
             Controls.Add(taxTypeComboBox);
             Controls.Add(label8);
-            Controls.Add(colorButton);
+            Controls.Add(_colorButton);
             Controls.Add(label7);
             Controls.Add(memoTextBox);
             Controls.Add(label6);
@@ -294,9 +287,8 @@
         protected System.Windows.Forms.TextBox memoTextBox;
         protected System.Windows.Forms.TextBox descriptionTextBox;
         private System.Windows.Forms.ComboBox typeComboBox;
-        private System.Windows.Forms.Button colorButton;
+        protected System.Windows.Forms.ColorButton _colorButton;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ColorDialog _colorDialog;
         private System.Windows.Forms.ComboBox taxTypeComboBox;
         private System.Windows.Forms.Label label8;
     }

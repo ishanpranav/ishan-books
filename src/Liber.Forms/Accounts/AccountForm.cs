@@ -5,7 +5,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -13,8 +12,6 @@ namespace Liber.Forms.Accounts;
 
 internal abstract partial class AccountForm : Form
 {
-    private Color _color;
-
     protected AccountForm(Company company)
     {
         InitializeComponent();
@@ -89,19 +86,6 @@ internal abstract partial class AccountForm : Form
         }
     }
 
-    protected Color Color
-    {
-        get
-        {
-            return _color;
-        }
-        set
-        {
-            _color = value;
-            colorButton.BackColor = value;
-        }
-    }
-
     protected virtual bool IsValid(Guid parentKey)
     {
         return true;
@@ -117,7 +101,7 @@ internal abstract partial class AccountForm : Form
         account.Placeholder = placeholderCheckBox.Checked;
         account.Description = descriptionTextBox.Text;
         account.Memo = memoTextBox.Text;
-        account.Color = Color;
+        account.Color = _colorButton.BackColor;
         account.TaxType = TaxType;
     }
 
@@ -173,14 +157,6 @@ internal abstract partial class AccountForm : Form
     private void OnCancelButtonClick(object sender, EventArgs e)
     {
         Close();
-    }
-
-    private void OnColorButtonClick(object sender, EventArgs e)
-    {
-        if (_colorDialog.ShowDialog() == DialogResult.OK)
-        {
-            Color = _colorDialog.Color;
-        }
     }
 
     protected override void Dispose(bool disposing)

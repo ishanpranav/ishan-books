@@ -3,6 +3,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Windows.Forms;
 
 namespace Liber.Forms.Accounts;
 
@@ -18,9 +19,9 @@ internal sealed class EditAccountForm : AccountForm
         placeholderCheckBox.Checked = account.Placeholder;
         descriptionTextBox.Text = account.Description;
         memoTextBox.Text = account.Memo;
+        _colorButton.BackColor = account.Color;
         Type = account.Type;
         ParentKey = account.ParentKey;
-        Color = account.Color;
         TaxType = account.TaxType;
     }
 

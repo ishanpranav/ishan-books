@@ -150,6 +150,9 @@
   <data name="exportToolStripMenuItem.Text" xml:space="preserve">
     <value>Exportar</value>
   </data>
+  <data name="exportTransactionsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Diario general (*.csv)</value>
+  </data>
   <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>73, 24</value>
   </data>

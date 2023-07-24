@@ -38,35 +38,65 @@ public static class GnuCashSerializer
         return results;
     }
 
-    public static async Task SerializeAccountsAsync(Stream output, IReadOnlyDictionary<Guid, Account> accounts)
+    private static string GetPath(Company company, Account account)
     {
-        List<GnuCashAccount> gnuCashAccounts = new List<GnuCashAccount>();
         StringBuilder pathBuilder = new StringBuilder();
 
-        foreach (Account account in accounts.Values)
+        pathBuilder.Append(account.Name);
+
+        Account current = account;
+
+        while (current.ParentKey != Guid.Empty)
         {
+            current = company.Accounts[current.ParentKey];
+
             pathBuilder
-                .Clear()
-                .Append(account.Name);
+                .Insert(0, ':')
+                .Insert(0, current.Name);
+        }
 
-            Account current = account;
+        return pathBuilder.ToString();
+    }
 
-            while (current.ParentKey != Guid.Empty)
-            {
-                current = accounts[current.ParentKey];
+    public static async Task SerializeAccountsAsync(Stream output, Company company)
+    {
+        List<GnuCashAccount> gnuCashAccounts = new List<GnuCashAccount>();
 
-                pathBuilder
-                    .Insert(0, ':')
-                    .Insert(0, current.Name);
-            }
-
+        foreach (Account account in company.Accounts.Values)
+        {
             gnuCashAccounts.Add(new GnuCashAccount()
             {
                 Value = account,
-                Path = pathBuilder.ToString()
+                Path = GetPath(company, account)
             });
         }
 
         await SerializeAsync(output, gnuCashAccounts);
+    }
+
+    public static async Task SerializeTransactionsAsync(Stream output, Company company)
+    {
+        List<GnuCashLine> lines = new List<GnuCashLine>();
+
+        foreach (Transaction transaction in company.Transactions)
+        {
+            foreach (Line line in transaction.Lines)
+            {
+                Account account = company.Accounts[line.AccountKey];
+                string balanceWithSymbol = line.Balance.ToString("c2");
+
+                lines.Add(new GnuCashLine()
+                {
+                    Value = line,
+                    AccountName = account.Name,
+                    AccountPath = GetPath(company, account),
+                    Amount = line.Balance,
+                    AmountWithSymbol = balanceWithSymbol,
+                    ValueWithSymbol = balanceWithSymbol
+                });
+            }
+        }
+
+        await SerializeAsync(output, lines);
     }
 }

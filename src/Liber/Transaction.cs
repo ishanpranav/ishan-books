@@ -9,6 +9,7 @@ using System.Text.Json.Serialization;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
+using CsvHelper.Configuration.Attributes;
 using MessagePack;
 
 namespace Liber;
@@ -41,21 +42,39 @@ public class Transaction :
     [Key(0)]
     public ICollection<Line> Lines { get; }
 
+    [Index(1)]
     [Key(1)]
+    [Name("Transaction ID")]
     public Guid Id { get; set; }
 
+    [Format("M/d/yyyy")]
+    [Index(0)]
     [Key(2)]
+    [Name("Date")]
     public DateTime Posted { get; set; }
 
+    [Default(0)]
+    [Index(2)]
     [Key(3)]
+    [Name("Number")]
+    [Optional]
     public decimal Number { get; set; }
 
+    [Index(3)]
     [Key(4)]
+    [Name("Description")]
+    [NullValues("")]
+    [Optional]
     public string? Name { get; set; }
 
+    [Index(4)]
     [Key(5)]
+    [Name("Notes")]
+    [NullValues("")]
+    [Optional]
     public string? Memo { get; set; }
 
+    [Ignore]
     [IgnoreMember]
     public decimal Balance
     {

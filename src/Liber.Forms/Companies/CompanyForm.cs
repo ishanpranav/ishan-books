@@ -20,6 +20,8 @@ internal abstract partial class CompanyForm : Form
 
         Company = company;
         DialogResult = DialogResult.Cancel;
+        nameTextBox.Text = company.Name;
+        _colorButton.BackColor = company.Color;
     }
 
     public Company Company { get; }
@@ -36,19 +38,10 @@ internal abstract partial class CompanyForm : Form
         }
     }
 
-    private void OnLoad(object sender, EventArgs e)
-    {
-        nameTextBox.DataBindings.Add(
-            propertyName: nameof(nameTextBox.Text),
-            dataSource: Company,
-            dataMember: nameof(Company.Name),
-            formattingEnabled: true,
-            DataSourceUpdateMode.Never);
-    }
-
     private void OnAcceptButtonClick(object sender, EventArgs e)
     {
         Company.Name = nameTextBox.Text;
+        Company.Color = _colorButton.BackColor;
         DialogResult = DialogResult.OK;
 
         Close();

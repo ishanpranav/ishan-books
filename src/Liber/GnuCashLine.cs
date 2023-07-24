@@ -3,6 +3,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Globalization;
 using CsvHelper.Configuration.Attributes;
 
 namespace Liber;
@@ -60,6 +61,16 @@ public class GnuCashLine
     [Index(10)]
     [Name("Account Name")]
     public string AccountName { get; set; } = string.Empty;
+
+    [Index(11)]
+    public string? AmountWithSymbol { get; set; }
+
+    [Index(12)]
+    [NumberStyles(NumberStyles.Currency)]
+    public decimal Amount { get; set; }
+
+    [Index(13)]
+    public string? ValueWithSymbol { get; set; }
 
     public Line Value { get; set; } = new Line();
 }

@@ -84,19 +84,19 @@
   <data name="cancelButton.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
     <value>AssociateIndex</value>
   </data>
-  <data name="cancelButton.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="_colorButton.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="colorButton.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="_colorButton.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="colorButton.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+  <data name="_colorButton.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
     <value>AssociateIndex</value>
   </data>
-  <data name="colorButton.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="_colorButton.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="colorButton.HelpString" xml:space="preserve">
+  <data name="_colorButton.HelpString" xml:space="preserve">
     <value>Specifies the colour displayed on the account register.</value>
   </data>
   <data name="descriptionTextBox.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">

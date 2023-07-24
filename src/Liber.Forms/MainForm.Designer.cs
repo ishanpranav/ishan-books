@@ -43,6 +43,7 @@ partial class MainForm
         saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         exportAccountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        exportTransactionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
         editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
@@ -141,7 +142,7 @@ partial class MainForm
         // 
         // exportToolStripMenuItem
         // 
-        exportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { exportAccountsToolStripMenuItem });
+        exportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { exportAccountsToolStripMenuItem, exportTransactionsToolStripMenuItem });
         exportToolStripMenuItem.Name = "exportToolStripMenuItem";
         resources.ApplyResources(exportToolStripMenuItem, "exportToolStripMenuItem");
         // 
@@ -150,6 +151,12 @@ partial class MainForm
         exportAccountsToolStripMenuItem.Name = "exportAccountsToolStripMenuItem";
         resources.ApplyResources(exportAccountsToolStripMenuItem, "exportAccountsToolStripMenuItem");
         exportAccountsToolStripMenuItem.Click += OnExportAccountsToolStripMenuItemClick;
+        // 
+        // exportTransactionsToolStripMenuItem
+        // 
+        exportTransactionsToolStripMenuItem.Name = "exportTransactionsToolStripMenuItem";
+        resources.ApplyResources(exportTransactionsToolStripMenuItem, "exportTransactionsToolStripMenuItem");
+        exportTransactionsToolStripMenuItem.Click += OnExportTransactionsToolStripMenuItemClick;
         // 
         // toolStripSeparator1
         // 
@@ -403,4 +410,5 @@ partial class MainForm
     private System.Windows.Forms.ToolStripMenuItem transactionToolStripMenuItem;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     private System.Windows.Forms.ToolStripMenuItem importTransactionsToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem exportTransactionsToolStripMenuItem;
 }
