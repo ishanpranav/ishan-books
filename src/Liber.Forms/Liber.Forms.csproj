@@ -1,0 +1,118 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net7.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWindowsForms>true</UseWindowsForms>
+		<NeutralLanguage>en-US</NeutralLanguage>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="Properties\Resources.en.restext" />
+	  <None Remove="Properties\Resources.es-ES.restext" />
+	  <None Remove="styles\balance-sheet.xslt" />
+	  <None Remove="styles\comprehensive-income-statement.xslt" />
+	  <None Remove="styles\financial-statement.css" />
+	  <None Remove="styles\financial-statement.xslt" />
+	  <None Remove="styles\income-statement.xslt" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="styles\balance-sheet.xslt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="styles\financial-statement.css">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="styles\financial-statement.xslt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="styles\general-journal.xslt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="styles\comprehensive-income-statement.xslt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="styles\income-statement.xslt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="styles\trial-balance.xslt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Properties\Resources.en.restext" />
+	  <EmbeddedResource Include="Properties\Resources.es-ES.restext" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1905-prerelease" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Liber\Liber.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Accounts\AccountForm.cs">
+	    <SubType>Form</SubType>
+	  </Compile>
+	  <Compile Update="Accounts\AccountsForm.cs">
+	    <SubType>Form</SubType>
+	  </Compile>
+	  <Compile Update="Accounts\EditAccountForm.cs">
+	    <SubType>Form</SubType>
+	  </Compile>
+	  <Compile Update="Accounts\NewAccountForm.cs">
+	    <SubType>Form</SubType>
+	  </Compile>
+	  <Compile Update="Companies\CompanyForm.cs">
+	    <SubType>Form</SubType>
+	  </Compile>
+	  <Compile Update="Companies\EditCompanyForm.cs">
+	    <SubType>Form</SubType>
+	  </Compile>
+	  <Compile Update="Companies\NewCompanyForm.cs">
+	    <SubType>Form</SubType>
+	  </Compile>
+	  <Compile Update="Controls\ListViewEx.cs">
+	    <SubType>Component</SubType>
+	  </Compile>
+	  <Compile Update="Transactions\TransactionForm.cs">
+	    <SubType>Form</SubType>
+	  </Compile>
+	  <Compile Update="Properties\Resources.Designer.cs">
+	    <DependentUpon>Resources.resx</DependentUpon>
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	  </Compile>
+	  <Compile Update="Properties\Settings.Designer.cs">
+	    <DesignTimeSharedInput>True</DesignTimeSharedInput>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Settings.settings</DependentUpon>
+	  </Compile>
+	  <Compile Update="SettingsForm.cs">
+	    <SubType>Form</SubType>
+	  </Compile>
+	  <Compile Update="UrlForm.cs">
+	    <SubType>Form</SubType>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="Properties\Resources.resx">
+	    <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+	    <Generator>ResXFileCodeGenerator</Generator>
+	  </EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="Properties\Settings.settings">
+	    <Generator>SettingsSingleFileGenerator</Generator>
+	    <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+	  </None>
+	</ItemGroup>
+
+</Project>

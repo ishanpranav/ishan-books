@@ -1,0 +1,66 @@
+{
+  "licenses": {
+    "csvhelper": {
+      "title": "Dual licensing under MS-PL and Apache 2.0",
+      "url": "https://raw.githubusercontent.com/JoshClose/CsvHelper/master/LICENSE.txt"
+    }
+  },
+  "dependencies": [
+    {
+      "title": ".NET Runtime",
+      "formats": [ "c#", "c++", "c" ],
+      "source": "https://github.com/dotnet/runtime",
+      "author": ".NET Foundation and Contributors",
+      "copyright": ".NET Foundation and Contributors",
+      "license": "mit_dotnet",
+      "notices": "https://github.com/dotnet/runtime/blob/main/THIRD-PARTY-NOTICES.TXT",
+      "index": ".NET Foundation, et al."
+    },
+    {
+      "title": "MessagePack for C#",
+      "formats": [ "c#" ],
+      "source": "https://github.com/neuecc/MessagePack-CSharp",
+      "author": "Yoshifumi Kawai",
+      "copyright": "2017 Yoshifumi Kawai and contributors",
+      "license": "mit_kawai",
+      "notices": "https://github.com/neuecc/MessagePack-CSharp/blob/master/LICENSE",
+      "index": "Kawai, Yoshifumi"
+    },
+    {
+      "title": "lz4net",
+      "formats": [ "c#" ],
+      "source": "https://github.com/MiloszKrajewski/lz4net",
+      "author": "Milosz Krajewski",
+      "copyright": "2013-2017, Milosz Krajewski",
+      "license": "bsd-2-clause_krajewski",
+      "index": "Krajewski, Milosz"
+    },
+    {
+      "title": "CsvHelper",
+      "formats": [ "c#", "css" ],
+      "source": "https://github.com/JoshClose/CsvHelper",
+      "author": "Josh Close",
+      "license": "csvhelper",
+      "index": "Close, Josh"
+    },
+    {
+      "title": "Microsoft Edge WebView2",
+      "formats": [ "c++" ],
+      "source": "https://developer.microsoft.com/en-us/microsoft-edge/webview2",
+      "author": "Microsoft Corporation",
+      "license": "bsd-3-clause_microsoft",
+      "index": "Microsoft"
+    }
+  ],
+  "tools": [
+    {
+      "title": "VisualStudio.gitignore",
+      "formats": [ "ignore list" ],
+      "source": "https://github.com/github/gitignore",
+      "author": "GitHub, Inc.",
+      "resource": "https://github.com/github/gitignore/blob/main/VisualStudio.gitignore",
+      "license": "cc0-1.0",
+      "index": "GitHub, Inc., et al."
+    }
+  ]
+}
