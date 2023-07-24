@@ -18,7 +18,7 @@ CodeDomProvider provider = new CSharpCodeProvider();
 #>
 namespace Liber.Sqlite;
 
-public static class Queries
+internal static class Queries
 {<# foreach (string path in Directory.GetFiles(Path.Combine(Path.GetDirectoryName(this.Host.TemplateFile), "queries"), "*.sql"))
     {
     
@@ -31,12 +31,14 @@ public static class Queries
     {
         if (!line.Trim().StartsWith("--"))
         {
-            builder.Append(line);
+            builder.Append(line.Trim());
         }
     }
 
-    line = Regex.Replace(builder.ToString(), @"\s+", " ");
+    reader.Close();
 
+    line = Regex.Replace(builder.ToString(), @"\s+", " ");
+    
     provider.GenerateCodeFromExpression(new CodePrimitiveExpression(line), writer, null);
 
     #>

@@ -27,14 +27,14 @@ public class Account : IXmlSerializable
 
     [JsonConstructor]
     [SerializationConstructor]
-    public Account(Guid parentKey)
+    public Account(Guid parentId)
     {
-        ParentKey = parentKey;
+        ParentId = parentId;
     }
 
     [Ignore]
     [Key(0)]
-    public Guid ParentKey { get; internal set; }
+    public Guid ParentId { get; internal set; }
 
     [Default(0)]
     [Index(3)]

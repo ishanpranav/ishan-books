@@ -1,4 +1,4 @@
-﻿// KeyEventArgs.cs
+﻿// GuidEventArgs.cs
 // Copyright (c) 2023 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
@@ -6,12 +6,12 @@ using System;
 
 namespace Liber;
 
-public class KeyEventArgs : EventArgs
+public class GuidEventArgs : EventArgs
 {
-    public KeyEventArgs(Guid key)
+    public GuidEventArgs(Guid id)
     {
-        Key = key;
+        Id = id;
     }
 
-    public Guid Key { get; }
+    public Guid Id { get; }
 }

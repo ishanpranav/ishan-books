@@ -13,8 +13,7 @@ INSERT INTO "main"."Account" (
     "Memo",
     "Color",
     "TaxType"
-)
-VALUES (
+) VALUES (
     @id,
     @parentId,
     @number,

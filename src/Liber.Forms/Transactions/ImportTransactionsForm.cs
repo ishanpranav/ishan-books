@@ -37,7 +37,7 @@ internal sealed class ImportTransactionsForm : ImportForm
                 _transactions[line.TransactionId] = transaction;
             }
 
-            line.Value.AccountKey = accounts[line.AccountName];
+            line.Value.AccountId = accounts[line.AccountName];
 
             transaction.Lines.Add(line.Value);
         }

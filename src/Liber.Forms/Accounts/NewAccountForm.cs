@@ -16,6 +16,6 @@ internal sealed class NewAccountForm : AccountForm
         Account account = new Account();
 
         ApplyChanges(account);
-        Company.AddAccount(account, ParentKey);
+        Company.AddAccount(account, ParentId);
     }
 }

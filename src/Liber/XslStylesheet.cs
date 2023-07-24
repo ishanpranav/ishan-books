@@ -15,7 +15,7 @@ public class XslStylesheet
 
     public IReadOnlyDictionary<string, string> ToDictionary()
     {
-        Dictionary<string, string> results = new Dictionary<string, string>();
+        Dictionary<string, string> results = new Dictionary<string, string>(Variables.Count);
 
         foreach (XslVariable variable in Variables)
         {

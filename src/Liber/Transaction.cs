@@ -191,7 +191,7 @@ public class Transaction :
 
         if (writer is XmlReportWriter reportWriter)
         {
-            lines = lines.ThenBy(x => reportWriter.Report.Company!.Accounts[x.AccountKey].Number);
+            lines = lines.ThenBy(x => reportWriter.Report.Company!.Accounts[x.AccountId].Number);
         }
 
         foreach (Line line in lines)

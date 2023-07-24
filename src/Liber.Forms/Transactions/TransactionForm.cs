@@ -25,7 +25,7 @@ internal sealed partial class TransactionForm : Form
         _company.AccountUpdated += OnCompanyAccountUpdated;
         _company.AccountRemoved += OnCompanyAccountRemoved;
         DialogResult = DialogResult.Cancel;
-        accountColumn.ValueMember = nameof(AccountView.Key);
+        accountColumn.ValueMember = nameof(AccountView.Id);
         accountColumn.DisplayMember = nameof(AccountView.DisplayName);
         numberNumericUpDown.Maximum = decimal.MaxValue;
 
@@ -92,7 +92,7 @@ internal sealed partial class TransactionForm : Form
                 credit = line.Credit;
             }
 
-            _dataGridView.Rows.Add(line.AccountKey, debit, credit, line.Description);
+            _dataGridView.Rows.Add(line.AccountId, debit, credit, line.Description);
         }
 
         _dataGridView.AutoResizeColumns();
@@ -140,13 +140,13 @@ internal sealed partial class TransactionForm : Form
                 return false;
             }
 
-            Guid accountKey = (Guid)row.Cells[accountColumn.Index].Value;
+            Guid accountId = (Guid)row.Cells[accountColumn.Index].Value;
             decimal debit = ToDecimal(row.Cells[debitColumn.Index].Value);
             decimal credit = ToDecimal(row.Cells[creditColumn.Index].Value);
 
             transaction.Lines.Add(new Line()
             {
-                AccountKey = accountKey,
+                AccountId = accountId,
                 Balance = debit - credit,
                 Description = (string?)row.Cells[descriptionColumn.Index].Value
             });
@@ -182,19 +182,19 @@ internal sealed partial class TransactionForm : Form
         numberNumericUpDown.Value = _company.NextTransactionNumber;
     }
 
-    private void OnCompanyAccountAdded(object? sender, KeyEventArgs e)
+    private void OnCompanyAccountAdded(object? sender, GuidEventArgs e)
     {
-        InitializeAccount(e.Key, _company.Accounts[e.Key]);
+        InitializeAccount(e.Id, _company.Accounts[e.Id]);
     }
 
-    private void OnCompanyAccountUpdated(object? sender, KeyEventArgs e)
+    private void OnCompanyAccountUpdated(object? sender, GuidEventArgs e)
     {
         _dataGridView.Refresh();
     }
 
-    private void OnCompanyAccountRemoved(object? sender, KeyEventArgs e)
+    private void OnCompanyAccountRemoved(object? sender, GuidEventArgs e)
     {
-        accountColumn.Items.Remove(e.Key);
+        accountColumn.Items.Remove(e.Id);
     }
 
     private void OnNumberNumericUpDownValueChanged(object sender, EventArgs e)
@@ -230,7 +230,7 @@ internal sealed partial class TransactionForm : Form
         {
             clone.Lines.Add(new Line()
             {
-                AccountKey = line.AccountKey,
+                AccountId = line.AccountId,
                 Balance = line.Balance,
                 Description = line.Description
             });

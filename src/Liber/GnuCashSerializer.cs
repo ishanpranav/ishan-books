@@ -46,9 +46,9 @@ public static class GnuCashSerializer
 
         Account current = account;
 
-        while (current.ParentKey != Guid.Empty)
+        while (current.ParentId != Guid.Empty)
         {
-            current = company.Accounts[current.ParentKey];
+            current = company.Accounts[current.ParentId];
 
             pathBuilder
                 .Insert(0, ':')
@@ -60,7 +60,7 @@ public static class GnuCashSerializer
 
     public static async Task SerializeAccountsAsync(Stream output, Company company)
     {
-        List<GnuCashAccount> gnuCashAccounts = new List<GnuCashAccount>();
+        List<GnuCashAccount> gnuCashAccounts = new List<GnuCashAccount>(company.Accounts.Count);
 
         foreach (Account account in company.Accounts.Values)
         {
@@ -82,7 +82,7 @@ public static class GnuCashSerializer
         {
             foreach (Line line in transaction.Lines)
             {
-                Account account = company.Accounts[line.AccountKey];
+                Account account = company.Accounts[line.AccountId];
                 string balanceWithSymbol = line.Balance.ToString("c2");
 
                 lines.Add(new GnuCashLine()

@@ -4,7 +4,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Common;
+using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
@@ -13,6 +15,66 @@ namespace Liber.Sqlite;
 
 public static class SqliteSerializer
 {
+    private static async Task<string?> GetStringAsync(DbDataReader reader, int ordinal)
+    {
+        if (await reader.IsDBNullAsync(ordinal))
+        {
+            return null;
+        }
+
+        return reader.GetString(ordinal);
+    }
+
+    private static async Task<Color> GetColorAsync(DbDataReader reader, int ordinal)
+    {
+        if (await reader.IsDBNullAsync(ordinal))
+        {
+            return Color.Empty;
+        }
+
+        return Color.FromArgb(reader.GetInt32(ordinal));
+    }
+
+    private static object ValueOf(string? value)
+    {
+        if (value == null)
+        {
+            return DBNull.Value;
+        }
+
+        return value;
+    }
+
+    private static object ValueOf(Color value)
+    {
+        if (value.IsEmpty)
+        {
+            return DBNull.Value;
+        }
+
+        return value.ToArgb();
+    }
+
+    private static object ValueOf(decimal value)
+    {
+        if (value == 0)
+        {
+            return DBNull.Value;
+        }
+
+        return value;
+    }
+
+    private static object ValueOf(Guid value)
+    {
+        if (value == Guid.Empty)
+        {
+            return DBNull.Value;
+        }
+
+        return value;
+    }
+
     private static SqliteConnection CreateConnection(string path)
     {
         return new SqliteConnection(new SqliteConnectionStringBuilder()
@@ -21,10 +83,8 @@ public static class SqliteSerializer
         }.ConnectionString);
     }
 
-    public static async Task SerializeAsync(string path, Company company)
+    public static async Task SerializeAsync(string path, Company value)
     {
-        File.Delete(path);
-
         await using SqliteConnection connection = CreateConnection(path);
 
         await connection.OpenAsync();
@@ -33,38 +93,162 @@ public static class SqliteSerializer
         {
             command.CommandText = Queries.Create;
 
+            command.Parameters.AddWithValue("@name", ValueOf(value.Name));
+            command.Parameters.AddWithValue("@nextAccountNumber", value.NextAccountNumber);
+            command.Parameters.AddWithValue("@nextTransactionNumber", value.NextTransactionNumber);
+            command.Parameters.AddWithValue("@type", value.Type);
+            command.Parameters.AddWithValue("@color", ValueOf(value.Color));
+
             await command.ExecuteNonQueryAsync();
         }
 
-        await using (DbTransaction transaction = await connection.BeginTransactionAsync())
+        await using (DbTransaction dbTransaction = await connection.BeginTransactionAsync())
         {
-            foreach (KeyValuePair<Guid, Account> account in company.Accounts)
+            foreach (KeyValuePair<Guid, Account> account in value.Accounts)
             {
                 await using (SqliteCommand command = connection.CreateCommand())
                 {
                     command.CommandText = Queries.InsertAccount;
 
                     command.Parameters.AddWithValue("@id", account.Key);
-                    command.Parameters.AddWithValue("@parentId", account.Value.ParentKey);
-                    command.Parameters.AddWithValue("@number", account.Value.Number);
+                    command.Parameters.AddWithValue("@parentId", ValueOf(account.Value.ParentId));
+                    command.Parameters.AddWithValue("@number", ValueOf(account.Value.Number));
                     command.Parameters.AddWithValue("@name", account.Value.Name);
                     command.Parameters.AddWithValue("@type", account.Value.Type);
                     command.Parameters.AddWithValue("@placeholder", account.Value.Placeholder);
-                    command.Parameters.AddWithValue("@description", (object?)account.Value.Description ?? DBNull.Value);
-                    command.Parameters.AddWithValue("@memo", (object?)account.Value.Memo ?? DBNull.Value);
-                    command.Parameters.AddWithValue("@color", account.Value.Color.ToArgb());
+                    command.Parameters.AddWithValue("@description", ValueOf(account.Value.Description));
+                    command.Parameters.AddWithValue("@memo", ValueOf(account.Value.Memo));
+                    command.Parameters.AddWithValue("@color", ValueOf(account.Value.Color));
                     command.Parameters.AddWithValue("@taxType", account.Value.TaxType);
 
                     await command.ExecuteNonQueryAsync();
                 }
             }
 
-            await transaction.CommitAsync();
+            foreach (Transaction transaction in value.Transactions)
+            {
+                await using (SqliteCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = Queries.InsertTransaction;
+
+                    command.Parameters.AddWithValue("@id", transaction.Id);
+                    command.Parameters.AddWithValue("@posted", transaction.Posted);
+                    command.Parameters.AddWithValue("@number", ValueOf(transaction.Number));
+                    command.Parameters.AddWithValue("@name", ValueOf(transaction.Name));
+                    command.Parameters.AddWithValue("@memo", ValueOf(transaction.Memo));
+
+                    await command.ExecuteNonQueryAsync();
+                }
+
+                foreach (Line line in transaction.Lines)
+                {
+                    await using (SqliteCommand command = connection.CreateCommand())
+                    {
+                        command.CommandText = Queries.InsertLine;
+
+                        command.Parameters.AddWithValue("@accountId", line.AccountId);
+                        command.Parameters.AddWithValue("@balance", line.Balance);
+                        command.Parameters.AddWithValue("@description", ValueOf(line.Description));
+                        command.Parameters.AddWithValue("@transactionId", transaction.Id);
+
+                        await command.ExecuteNonQueryAsync();
+                    }
+                }
+            }
+
+            await dbTransaction.CommitAsync();
         }
     }
 
-    public static Task<Company> DeserializeAsync(string path)
+    public static async Task<Company> DeserializeAsync(string path)
     {
-        return Task.FromResult(new Company());
+        await using SqliteConnection connection = CreateConnection(path);
+
+        await connection.OpenAsync();
+
+        Dictionary<Guid, Account> accounts = new Dictionary<Guid, Account>();
+        Dictionary<Guid, Transaction> transactions = new Dictionary<Guid, Transaction>();
+
+        await using (SqliteCommand command = connection.CreateCommand())
+        {
+            command.CommandText = Queries.SelectAccounts;
+
+            await using (SqliteDataReader reader = await command.ExecuteReaderAsync())
+            {
+                while (await reader.ReadAsync())
+                {
+                    accounts.Add(reader.GetGuid(0), new Account(reader.GetGuid(1))
+                    {
+                        Number = reader.GetDecimal(2),
+                        Name = reader.GetString(3),
+                        Type = await reader.GetFieldValueAsync<AccountType>(4),
+                        Placeholder = reader.GetBoolean(5),
+                        Description = await GetStringAsync(reader, 6),
+                        Memo = await GetStringAsync(reader, 7),
+                        Color = await GetColorAsync(reader, 8),
+                        TaxType = TaxType.None
+                    });
+                }
+            }
+        }
+
+        await using (SqliteCommand command = connection.CreateCommand())
+        {
+            command.CommandText = Queries.SelectTransactions;
+
+            await using (SqliteDataReader reader = await command.ExecuteReaderAsync())
+            {
+                while (await reader.ReadAsync())
+                {
+                    Guid id = reader.GetGuid(0);
+
+                    transactions.Add(id, new Transaction()
+                    {
+                        Id = id,
+                        Posted = reader.GetDateTime(1),
+                        Number = reader.GetDecimal(2),
+                        Name = await GetStringAsync(reader, 3),
+                        Memo = await GetStringAsync(reader, 4)
+                    });
+                }
+            }
+        }
+
+        await using (SqliteCommand command = connection.CreateCommand())
+        {
+            command.CommandText = Queries.SelectLines;
+
+            await using (SqliteDataReader reader = await command.ExecuteReaderAsync())
+            {
+                while (await reader.ReadAsync())
+                {
+                    Guid id = reader.GetGuid(0);
+
+                    transactions[id].Lines.Add(new Line()
+                    {
+                        AccountId = reader.GetGuid(1),
+                        Balance = reader.GetDecimal(2),
+                        Description = await GetStringAsync(reader, 3)
+                    });
+                }
+            }
+        }
+
+        await using (SqliteCommand command = connection.CreateCommand())
+        {
+            command.CommandText = Queries.SelectCompany;
+
+            await using (SqliteDataReader reader = await command.ExecuteReaderAsync(CommandBehavior.SingleRow))
+            {
+                await reader.ReadAsync();
+
+                return new Company(accounts, transactions.Values, reader.GetDecimal(1), reader.GetDecimal(2))
+                {
+                    Name = await GetStringAsync(reader, 0),
+                    Type = await reader.GetFieldValueAsync<CompanyType>(3),
+                    Color = await GetColorAsync(reader, 4)
+                };
+            }
+        }
     }
 }

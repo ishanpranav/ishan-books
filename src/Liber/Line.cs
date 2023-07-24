@@ -19,7 +19,7 @@ public class Line : IXmlSerializable
 {
     [Ignore]
     [Key(0)]
-    public Guid AccountKey { get; set; }
+    public Guid AccountId { get; set; }
 
     [Index(14)]
     [Key(1)]
@@ -85,11 +85,11 @@ public class Line : IXmlSerializable
 
         if (writer is XmlReportWriter reportWriter)
         {
-            account = reportWriter.Report.Company!.Accounts[AccountKey].Name;
+            account = reportWriter.Report.Company!.Accounts[AccountId].Name;
         }
         else
         {
-            account = AccountKey.ToString();
+            account = AccountId.ToString();
         }
 
         Accounting.DebitCredit(Balance, out decimal debit, out decimal credit);

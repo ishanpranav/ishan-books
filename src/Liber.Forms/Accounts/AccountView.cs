@@ -10,11 +10,11 @@ internal sealed class AccountView : IEquatable<Guid>
 {
     public AccountView(Guid id, Account value)
     {
-        Key = id;
+        Id = id;
         Value = value;
     }
 
-    public Guid Key { get; }
+    public Guid Id { get; }
     public Account Value { get; }
 
     public string DisplayName
@@ -27,7 +27,7 @@ internal sealed class AccountView : IEquatable<Guid>
 
     public bool Equals(Guid other)
     {
-        return Key.Equals(other);
+        return Id.Equals(other);
     }
 
     public override bool Equals(object? obj)
@@ -47,7 +47,7 @@ internal sealed class AccountView : IEquatable<Guid>
 
     public override int GetHashCode()
     {
-        return Key.GetHashCode();
+        return Id.GetHashCode();
     }
 
     public override string ToString()

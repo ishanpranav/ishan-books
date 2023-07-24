@@ -43,9 +43,9 @@ public sealed class Company : IXmlSerializable
 
         foreach (Account account in accounts.Values)
         {
-            if (account.ParentKey != Guid.Empty)
+            if (account.ParentId != Guid.Empty)
             {
-                accounts[account.ParentKey].children.Add(account);
+                accounts[account.ParentId].children.Add(account);
             }
         }
 
@@ -53,7 +53,8 @@ public sealed class Company : IXmlSerializable
         {
             foreach (Line line in transaction.Lines)
             {
-                accounts[line.AccountKey].lines.Add(line);
+                accounts[line.AccountId].lines.Add(line);
+                line.Transaction = transaction;
             }
         }
     }
@@ -102,17 +103,17 @@ public sealed class Company : IXmlSerializable
         }
     }
 
-    public event EventHandler<KeyEventArgs>? AccountAdded;
-    public event EventHandler<KeyEventArgs>? AccountUpdated;
-    public event EventHandler<KeyEventArgs>? AccountRemoved;
+    public event EventHandler<GuidEventArgs>? AccountAdded;
+    public event EventHandler<GuidEventArgs>? AccountUpdated;
+    public event EventHandler<GuidEventArgs>? AccountRemoved;
 
-    private void AddChild(Account value, Guid parentKey)
+    private void AddChild(Account value, Guid parentId)
     {
-        value.ParentKey = parentKey;
+        value.ParentId = parentId;
 
-        if (parentKey != Guid.Empty)
+        if (parentId != Guid.Empty)
         {
-            Account parent = _accounts[parentKey];
+            Account parent = _accounts[parentId];
 
             parent.children.Add(value);
         }
@@ -120,49 +121,49 @@ public sealed class Company : IXmlSerializable
 
     private void RemoveChild(Account value)
     {
-        if (value.ParentKey != Guid.Empty)
+        if (value.ParentId != Guid.Empty)
         {
-            Account parent = _accounts[value.ParentKey];
+            Account parent = _accounts[value.ParentId];
 
             parent.children.Remove(value);
 
-            value.ParentKey = Guid.Empty;
+            value.ParentId = Guid.Empty;
         }
     }
 
-    public Guid AddAccount(Account value, Guid parentKey)
+    public Guid AddAccount(Account value, Guid parentId)
     {
         Guid result = Guid.NewGuid();
 
-        AddChild(value, parentKey);
+        AddChild(value, parentId);
         NextAccountNumber = Math.Max(value.Number, NextAccountNumber) + 1;
         _accounts.Add(result, value);
-        AccountAdded?.Invoke(sender: this, new KeyEventArgs(result));
+        AccountAdded?.Invoke(sender: this, new GuidEventArgs(result));
 
         return result;
     }
 
-    public void UpdateAccount(Guid key, Guid parentKey)
+    public void UpdateAccount(Guid id, Guid parentId)
     {
-        Account value = _accounts[key];
+        Account value = _accounts[id];
 
-        if (parentKey != value.ParentKey)
+        if (parentId != value.ParentId)
         {
             RemoveChild(value);
-            AddChild(value, parentKey);
+            AddChild(value, parentId);
         }
 
         NextAccountNumber = Math.Max(value.Number, NextAccountNumber);
 
-        AccountUpdated?.Invoke(sender: this, new KeyEventArgs(key));
+        AccountUpdated?.Invoke(sender: this, new GuidEventArgs(id));
     }
 
-    public void RemoveAccount(Guid key)
+    public void RemoveAccount(Guid id)
     {
-        RemoveChild(_accounts[key]);
-        _accounts.Remove(key);
+        RemoveChild(_accounts[id]);
+        _accounts.Remove(id);
 
-        AccountRemoved?.Invoke(sender: this, new KeyEventArgs(key));
+        AccountRemoved?.Invoke(sender: this, new GuidEventArgs(id));
     }
 
     public Transaction? GetTransactionBefore(Transaction value)
@@ -196,7 +197,7 @@ public sealed class Company : IXmlSerializable
     {
         foreach (Line line in value.Lines)
         {
-            Account account = _accounts[line.AccountKey];
+            Account account = _accounts[line.AccountId];
 
             line.Transaction = value;
             account.lines.Add(line);
@@ -212,7 +213,7 @@ public sealed class Company : IXmlSerializable
         foreach (Line line in value.Lines)
         {
             line.Transaction = null;
-            _accounts[line.AccountKey].lines.Remove(line);
+            _accounts[line.AccountId].lines.Remove(line);
         }
 
         _transactions.Remove(value);

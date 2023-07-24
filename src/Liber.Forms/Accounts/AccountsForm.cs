@@ -36,16 +36,16 @@ internal sealed partial class AccountsForm : Form
         _listView.AutoResizeColumns();
     }
 
-    private void InitializeAccount(Guid key, Account value)
+    private void InitializeAccount(Guid id, Account value)
     {
         ListViewItem item = _listView.Items.Add(new ListViewItem()
         {
-            Tag = key,
+            Tag = id,
             Selected = true
         });
 
         AddSubItems(item, value);
-        _items.Add(key, item);
+        _items.Add(id, item);
     }
 
     private static void AddSubItems(ListViewItem item, Account value)
@@ -69,23 +69,23 @@ internal sealed partial class AccountsForm : Form
         }
     }
 
-    private void OnCompanyAccountAdded(object? sender, KeyEventArgs e)
+    private void OnCompanyAccountAdded(object? sender, GuidEventArgs e)
     {
-        InitializeAccount(e.Key, _company.Accounts[e.Key]);
+        InitializeAccount(e.Id, _company.Accounts[e.Id]);
         _listView.AutoResizeColumns();
     }
 
-    private void OnCompanyAccountUpdated(object? sender, KeyEventArgs e)
+    private void OnCompanyAccountUpdated(object? sender, GuidEventArgs e)
     {
-        ListViewItem item = _items[e.Key];
+        ListViewItem item = _items[e.Id];
 
         item.SubItems.Clear();
-        AddSubItems(item, _company.Accounts[e.Key]);
+        AddSubItems(item, _company.Accounts[e.Id]);
     }
 
-    private void OnCompanyAccountRemoved(object? sender, KeyEventArgs e)
+    private void OnCompanyAccountRemoved(object? sender, GuidEventArgs e)
     {
-        ListViewItem item = _items[e.Key];
+        ListViewItem item = _items[e.Id];
 
         _listView.Items.Remove(item);
         _listView.AutoResizeColumns();
@@ -120,26 +120,26 @@ internal sealed partial class AccountsForm : Form
 
     private void OnRemoveToolStripMenuItem(object sender, EventArgs e)
     {
-        if (!_listView.TryGetSelection(out Guid key))
+        if (!_listView.TryGetSelection(out Guid id))
         {
             return;
         }
 
-        Account value = _company.Accounts[key];
+        Account value = _company.Accounts[id];
 
         if (value.Children.Count > 0 || value.Lines.Count > 0)
         {
             return;
         }
 
-        _company.RemoveAccount(key);
+        _company.RemoveAccount(id);
     }
 
     private void OnTransactionToolStripMenuItemClick(object sender, EventArgs e)
     {
-        Guid formKey = typeof(TransactionForm).GUID;
+        Guid key = typeof(TransactionForm).GUID;
 
-        if (!_listView.TryGetSelection(out Guid accountKey) || _factory.TryKill(formKey))
+        if (!_listView.TryGetSelection(out Guid id) || _factory.TryKill(key))
         {
             return;
         }
@@ -153,20 +153,20 @@ internal sealed partial class AccountsForm : Form
 
         transaction.Lines.Add(new Line()
         {
-            AccountKey = accountKey
+            AccountId = id
         });
         form.InitializeTransaction(transaction);
-        _factory.Register(formKey, form);
+        _factory.Register(key, form);
     }
 
     private void OnListViewAfterLabelEdit(object sender, LabelEditEventArgs e)
     {
-        Guid key = (Guid)_listView.Items[e.Item].Tag;
-        Account value = _company.Accounts[key];
+        Guid id = (Guid)_listView.Items[e.Item].Tag;
+        Account value = _company.Accounts[id];
 
         value.Name = e.Label!;
 
-        _company.UpdateAccount(key, value.ParentKey);
+        _company.UpdateAccount(id, value.ParentId);
     }
 
     protected override void Dispose(bool disposing)

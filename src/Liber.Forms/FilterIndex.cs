@@ -4,7 +4,7 @@
 
 namespace Liber.Forms;
 
-public enum FilterIndex
+internal enum FilterIndex
 {
     None = 0,
     Offset = -2,

@@ -62,7 +62,7 @@ internal abstract partial class AccountForm : Form
         }
     }
 
-    protected Guid ParentKey
+    protected Guid ParentId
     {
         get
         {
@@ -71,7 +71,7 @@ internal abstract partial class AccountForm : Form
                 return Guid.Empty;
             }
 
-            return ((AccountView)parentComboBox.SelectedItem).Key;
+            return ((AccountView)parentComboBox.SelectedItem).Id;
         }
         set
         {
@@ -86,7 +86,7 @@ internal abstract partial class AccountForm : Form
         }
     }
 
-    protected virtual bool IsValid(Guid parentKey)
+    protected virtual bool IsValid(Guid parentId)
     {
         return true;
     }
@@ -105,34 +105,34 @@ internal abstract partial class AccountForm : Form
         account.TaxType = TaxType;
     }
 
-    private void InitializeParent(Guid key, Account value)
+    private void InitializeParent(Guid id, Account value)
     {
-        AccountView accountView = new AccountView(key, value);
+        AccountView accountView = new AccountView(id, value);
 
         parentComboBox.Items.Add(accountView);
     }
 
-    private void OnCompanyAccountAdded(object? sender, KeyEventArgs e)
+    private void OnCompanyAccountAdded(object? sender, GuidEventArgs e)
     {
-        if (IsValid(e.Key))
+        if (IsValid(e.Id))
         {
-            InitializeParent(e.Key, Company.Accounts[e.Key]);
+            InitializeParent(e.Id, Company.Accounts[e.Id]);
         }
     }
 
-    private void OnCompanyAccountUpdated(object? sender, KeyEventArgs e)
+    private void OnCompanyAccountUpdated(object? sender, GuidEventArgs e)
     {
-        if (IsValid(e.Key))
+        if (IsValid(e.Id))
         {
             parentComboBox.Refresh();
         }
     }
 
-    private void OnCompanyAccountRemoved(object? sender, KeyEventArgs e)
+    private void OnCompanyAccountRemoved(object? sender, GuidEventArgs e)
     {
-        if (IsValid(e.Key))
+        if (IsValid(e.Id))
         {
-            parentComboBox.Items.Remove(e.Key);
+            parentComboBox.Items.Remove(e.Id);
         }
     }
 

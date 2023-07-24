@@ -25,11 +25,11 @@ internal sealed class ImportAccountsForm : ImportForm
         }
     }
 
-    private Guid GetParentKey(Guid key, string value)
+    private Guid GetParentId(Guid id, string value)
     {
         foreach (KeyValuePair<Guid, Account> account in Company.Accounts)
         {
-            if (account.Key == key)
+            if (account.Key == id)
             {
                 continue;
             }
@@ -49,7 +49,7 @@ internal sealed class ImportAccountsForm : ImportForm
 
         foreach (GnuCashAccount account in _accounts)
         {
-            account.Key = Company.AddAccount(account.Value, Guid.Empty);
+            account.Id = Company.AddAccount(account.Value, Guid.Empty);
         }
 
         foreach (GnuCashAccount account in _accounts)
@@ -61,14 +61,14 @@ internal sealed class ImportAccountsForm : ImportForm
                 continue;
             }
 
-            Guid parentKey = GetParentKey(account.Key, segments[segments.Length - 2]);
+            Guid parentId = GetParentId(account.Id, segments[segments.Length - 2]);
 
-            if (parentKey == Guid.Empty)
+            if (parentId == Guid.Empty)
             {
                 continue;
             }
 
-            Company.UpdateAccount(account.Key, parentKey);
+            Company.UpdateAccount(account.Id, parentId);
         }
 
         Factory.Register(typeof(AccountsForm).GUID, new AccountsForm(Company, Factory));
