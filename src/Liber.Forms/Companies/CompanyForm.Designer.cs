@@ -34,6 +34,8 @@ partial class CompanyForm
         cancelButton = new System.Windows.Forms.Button();
         acceptButton = new System.Windows.Forms.Button();
         _helpProvider = new System.Windows.Forms.HelpProvider();
+        passwordTextBox = new System.Windows.Forms.TextBox();
+        label3 = new System.Windows.Forms.Label();
         _colorButton = new System.Windows.Forms.ColorButton();
         label2 = new System.Windows.Forms.Label();
         SuspendLayout();
@@ -69,6 +71,20 @@ partial class CompanyForm
         acceptButton.UseVisualStyleBackColor = true;
         acceptButton.Click += OnAcceptButtonClick;
         // 
+        // passwordTextBox
+        // 
+        resources.ApplyResources(passwordTextBox, "passwordTextBox");
+        _helpProvider.SetHelpString(passwordTextBox, resources.GetString("passwordTextBox.HelpString"));
+        passwordTextBox.Name = "passwordTextBox";
+        _helpProvider.SetShowHelp(passwordTextBox, (bool)resources.GetObject("passwordTextBox.ShowHelp"));
+        passwordTextBox.UseSystemPasswordChar = true;
+        // 
+        // label3
+        // 
+        resources.ApplyResources(label3, "label3");
+        label3.Name = "label3";
+        _helpProvider.SetShowHelp(label3, (bool)resources.GetObject("label3.ShowHelp"));
+        // 
         // _colorButton
         // 
         resources.ApplyResources(_colorButton, "_colorButton");
@@ -86,6 +102,8 @@ partial class CompanyForm
         resources.ApplyResources(this, "$this");
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         CancelButton = cancelButton;
+        Controls.Add(passwordTextBox);
+        Controls.Add(label3);
         Controls.Add(label2);
         Controls.Add(_colorButton);
         Controls.Add(acceptButton);
@@ -109,4 +127,6 @@ partial class CompanyForm
     private System.Windows.Forms.HelpProvider _helpProvider;
     private System.Windows.Forms.ColorButton _colorButton;
     private System.Windows.Forms.Label label2;
+    protected System.Windows.Forms.TextBox passwordTextBox;
+    private System.Windows.Forms.Label label3;
 }

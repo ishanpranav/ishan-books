@@ -6,5 +6,9 @@ namespace Liber.Forms.Companies;
 
 internal sealed class EditCompanyForm : CompanyForm
 {
-    public EditCompanyForm(Company company) : base(company) { }
+    public EditCompanyForm(Company company) : base(company)
+    {
+        passwordTextBox.Text = company.Password;
+        passwordTextBox.Enabled = false;
+    }
 }

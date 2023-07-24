@@ -135,7 +135,10 @@ internal sealed partial class MainForm : Form
             return;
         }
 
+        _path = null;
+
         CloseChildren();
+
         NewCompanyForm form = new NewCompanyForm();
 
         form.FormClosed += (_, _) =>
@@ -253,7 +256,12 @@ internal sealed partial class MainForm : Form
 
     private async Task ImportSqliteCompanyAsync(string path)
     {
-        (await SqliteSerializer.DeserializeAsync(path)).CopyTo(_company);
+        using PasswordForm form = new PasswordForm();
+
+        if (form.ShowDialog() == DialogResult.OK)
+        {
+            (await SqliteSerializer.DeserializeAsync(path, form.Password)).CopyTo(_company);
+        }
     }
 
     private async Task ImportAsync(string path)

@@ -95,6 +95,10 @@ public sealed class Company : IXmlSerializable
 
     [IgnoreMember]
     [JsonIgnore]
+    public string? Password { get; set; }
+
+    [IgnoreMember]
+    [JsonIgnore]
     public Transaction? LastTransaction
     {
         get
@@ -225,6 +229,7 @@ public sealed class Company : IXmlSerializable
         other.NextAccountNumber = NextAccountNumber;
         other.NextTransactionNumber = NextTransactionNumber;
         other.Color = Color;
+        other.Password = Password;
 
         other._accounts.Clear();
         other._transactions.Clear();

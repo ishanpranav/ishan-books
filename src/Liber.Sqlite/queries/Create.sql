@@ -1,6 +1,7 @@
 ﻿-- Create.sql
 -- Copyright (c) 2023 Ishan Pranav. All rights reserved.
 -- Licensed under the MIT License.
+
 PRAGMA foreign_keys = OFF;
 
 DROP TABLE IF EXISTS "Company";

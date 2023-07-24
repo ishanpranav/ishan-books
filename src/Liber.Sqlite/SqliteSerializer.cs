@@ -7,14 +7,19 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Drawing;
-using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
+using SQLitePCL;
 
 namespace Liber.Sqlite;
 
 public static class SqliteSerializer
 {
+    static SqliteSerializer()
+    {
+        Batteries.Init();
+    }
+
     private static async Task<string?> GetStringAsync(DbDataReader reader, int ordinal)
     {
         if (await reader.IsDBNullAsync(ordinal))
@@ -75,17 +80,24 @@ public static class SqliteSerializer
         return value;
     }
 
-    private static SqliteConnection CreateConnection(string path)
+    private static SqliteConnection CreateConnection(string path, string? password)
     {
-        return new SqliteConnection(new SqliteConnectionStringBuilder()
+        SqliteConnectionStringBuilder connectionStringBuilder = new SqliteConnectionStringBuilder()
         {
             DataSource = path
-        }.ConnectionString);
+        };
+
+        if (password != null)
+        {
+            connectionStringBuilder.Password = password;
+        }
+
+        return new SqliteConnection(connectionStringBuilder.ConnectionString);
     }
 
     public static async Task SerializeAsync(string path, Company value)
     {
-        await using SqliteConnection connection = CreateConnection(path);
+        await using SqliteConnection connection = CreateConnection(path, value.Password);
 
         await connection.OpenAsync();
 
@@ -160,9 +172,9 @@ public static class SqliteSerializer
         }
     }
 
-    public static async Task<Company> DeserializeAsync(string path)
+    public static async Task<Company> DeserializeAsync(string path, string password)
     {
-        await using SqliteConnection connection = CreateConnection(path);
+        await using SqliteConnection connection = CreateConnection(path, password);
 
         await connection.OpenAsync();
 
@@ -246,7 +258,8 @@ public static class SqliteSerializer
                 {
                     Name = await GetStringAsync(reader, 0),
                     Type = await reader.GetFieldValueAsync<CompanyType>(3),
-                    Color = await GetColorAsync(reader, 4)
+                    Color = await GetColorAsync(reader, 4),
+                    Password = password
                 };
             }
         }

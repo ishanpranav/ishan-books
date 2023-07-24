@@ -1,7 +1,7 @@
 {
   "licenses": {
     "csvhelper": {
-      "title": "Dual licensing under MS-PL and Apache 2.0",
+      "title": "MS-PL and Apache 2.0",
       "url": "https://raw.githubusercontent.com/JoshClose/CsvHelper/master/LICENSE.txt"
     }
   },
@@ -48,8 +48,32 @@
       "formats": [ "c++" ],
       "source": "https://developer.microsoft.com/en-us/microsoft-edge/webview2",
       "author": "Microsoft Corporation",
-      "license": "bsd-3-clause_microsoft",
+      "license": "bsd-3-clause-microsoft",
       "index": "Microsoft"
+    },
+    {
+      "title": "SQLitePCL.raw",
+      "formats": [ "c#" ],
+      "source": "https://github.com/ericsink/SQLitePCL.raw",
+      "author": "Erik Sink",
+      "license": "apache-2.0_sink",
+      "notices": "https://raw.githubusercontent.com/ericsink/SQLitePCL.raw/master/NOTICE.TXT",
+      "index": "Sink, Eric"
+    },
+    {
+      "title": "SQLCipher",
+      "formats": [ "c", "tcl" ],
+      "source": "https://github.com/sqlcipher/sqlcipher",
+      "author": "Zetetic, LLC",
+      "license": "bsd-3-clause-zetetic",
+      "index": "Zetetic"
+    },
+    {
+      "title": "SQLite",
+      "formats": [ "c" ],
+      "source": "https://sqlite.org",
+      "author": "SQLite Contributors",
+      "index": "SQLite"
     }
   ],
   "tools": [

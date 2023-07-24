@@ -22,6 +22,7 @@ internal abstract partial class CompanyForm : Form
         DialogResult = DialogResult.Cancel;
         nameTextBox.Text = company.Name;
         _colorButton.BackColor = company.Color;
+        passwordTextBox.Text = company.Password;
     }
 
     public Company Company { get; }
@@ -42,6 +43,7 @@ internal abstract partial class CompanyForm : Form
     {
         Company.Name = nameTextBox.Text;
         Company.Color = _colorButton.BackColor;
+        Company.Password = passwordTextBox.Text;
         DialogResult = DialogResult.OK;
 
         Close();
