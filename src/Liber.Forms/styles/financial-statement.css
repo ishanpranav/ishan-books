@@ -1,4 +1,10 @@
-﻿table {
+﻿/*
+financial-statement.css
+Copyright (c) 2023 Ishan Pranav. All rights reserved.
+Licensed under the MIT License.
+*/
+
+table {
     font-family: Arial;
     font-size: 11pt;
     margin-left: auto;

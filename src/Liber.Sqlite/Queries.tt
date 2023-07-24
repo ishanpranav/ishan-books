@@ -4,6 +4,8 @@
 <#@ import namespace="System.IO" #>
 <#@ import namespace="System.CodeDom" #>
 <#@ import namespace="System.CodeDom.Compiler" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Text.RegularExpressions" #>
 <#@ import namespace="Microsoft.CSharp" #>
 <#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
 <#@ output extension=".generated.cs" #>
@@ -21,8 +23,21 @@ public static class Queries
     {
     
     StringWriter writer = new StringWriter();
+    StringBuilder builder = new StringBuilder();
+    StreamReader reader = File.OpenText(path);
+    string? line;
 
-    provider.GenerateCodeFromExpression(new CodePrimitiveExpression(File.ReadAllText(path)), writer, null);
+    while ((line = reader.ReadLine()) != null)
+    {
+        if (!line.Trim().StartsWith("--"))
+        {
+            builder.Append(line);
+        }
+    }
+
+    line = Regex.Replace(builder.ToString(), @"\s+", " ");
+
+    provider.GenerateCodeFromExpression(new CodePrimitiveExpression(line), writer, null);
 
     #>
 

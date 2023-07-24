@@ -20,7 +20,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Liber.Forms", "src\Liber.Fo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Liber", "src\Liber\Liber.csproj", "{D923A044-0AAF-46C3-BA1A-4A5D8287B17A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Liber.Sqlite", "Liber.Sqlite\Liber.Sqlite.csproj", "{0B69FCBE-AF45-4E8D-B163-CC57347DD94A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Liber.Sqlite", "src\Liber.Sqlite\Liber.Sqlite.csproj", "{864739FE-0A2A-4634-8CE3-FE3C0B3B6DCD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,10 +36,10 @@ Global
 		{D923A044-0AAF-46C3-BA1A-4A5D8287B17A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D923A044-0AAF-46C3-BA1A-4A5D8287B17A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D923A044-0AAF-46C3-BA1A-4A5D8287B17A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0B69FCBE-AF45-4E8D-B163-CC57347DD94A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0B69FCBE-AF45-4E8D-B163-CC57347DD94A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0B69FCBE-AF45-4E8D-B163-CC57347DD94A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0B69FCBE-AF45-4E8D-B163-CC57347DD94A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{864739FE-0A2A-4634-8CE3-FE3C0B3B6DCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{864739FE-0A2A-4634-8CE3-FE3C0B3B6DCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{864739FE-0A2A-4634-8CE3-FE3C0B3B6DCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{864739FE-0A2A-4634-8CE3-FE3C0B3B6DCD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

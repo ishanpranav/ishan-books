@@ -1,3 +1,9 @@
+<!--
+README.md
+Copyright (c) 2023 Ishan Pranav. All rights reserved.
+Licensed under the MIT License.
+-->
+
 # SharpBooks
 This is a cross-platform library and application for double-entry bookkeeping.
 The project includes a standalone class library and a Windows GUI application.

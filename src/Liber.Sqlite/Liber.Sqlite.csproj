@@ -6,19 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="Queries.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Queries.tt</DependentUpon>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.Data.Sqlite" Version="7.0.9" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Liber\Liber.csproj" />
+    <ProjectReference Include="..\Liber\Liber.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,4 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+income-statement.xslt
+Copyright (c) 2023 Ishan Pranav. All rights reserved.
+Licensed under the MIT License.
+-->
 <xsl:stylesheet
     version="1.0"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
