@@ -48,4 +48,14 @@ internal static class FormattedStrings
     {
         return string.Format(GetString("CancelText"), company.Name ?? GetString("DefaultCompanyName"));
     }
+
+    public static string GetNotSupportedText(string extension)
+    {
+        if (extension.Length == 0)
+        {
+            return GetString("NotSupportedText_0");
+        }
+
+        return string.Format(GetString("NotSupportedText_1"), extension.Substring(1).ToUpper());
+    }
 }

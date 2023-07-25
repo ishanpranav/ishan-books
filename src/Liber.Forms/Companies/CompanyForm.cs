@@ -28,18 +28,6 @@ internal abstract partial class CompanyForm : Form
 
     public Company Company { get; }
 
-    protected bool ShowCancelButton
-    {
-        get
-        {
-            return cancelButton.Enabled;
-        }
-        set
-        {
-            cancelButton.Enabled = value;
-        }
-    }
-
     private void OnAcceptButtonClick(object sender, EventArgs e)
     {
         Company.Name = nameTextBox.Text;

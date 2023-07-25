@@ -12,7 +12,7 @@ namespace Liber.Forms;
 
 internal static class ClickOnce
 {
-    public static bool NetworkDeployed
+    public static bool IsNetworkDeployed
     {
         get
         {

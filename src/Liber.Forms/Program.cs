@@ -25,7 +25,7 @@ internal static class Program
 
         IReadOnlyList<string> arguments;
 
-        if (ClickOnce.NetworkDeployed)
+        if (ClickOnce.IsNetworkDeployed)
         {
             arguments = ClickOnce.GetArguments();
         }

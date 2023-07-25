@@ -338,7 +338,6 @@ partial class MainForm
         // 
         _openFileDialog.DefaultExt = "liber";
         resources.ApplyResources(_openFileDialog, "_openFileDialog");
-        _openFileDialog.FilterIndex = 2;
         _openFileDialog.RestoreDirectory = true;
         // 
         // _saveFileDialog

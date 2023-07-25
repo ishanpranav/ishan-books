@@ -152,10 +152,10 @@ partial class CompanyForm
     private System.Windows.Forms.Label label1;
     private System.Windows.Forms.TextBox nameTextBox;
     private System.Windows.Forms.Button acceptButton;
-    private System.Windows.Forms.Button cancelButton;
     private System.Windows.Forms.HelpProvider _helpProvider;
     private System.Windows.Forms.ColorButton _colorButton;
     private System.Windows.Forms.Label label2;
     protected System.Windows.Forms.TextBox passwordTextBox;
     private System.Windows.Forms.Label label3;
+    protected System.Windows.Forms.Button cancelButton;
 }

@@ -11,4 +11,16 @@ internal sealed class EditCompanyForm : CompanyForm
         passwordTextBox.Text = company.Password;
         passwordTextBox.Enabled = false;
     }
+
+    public bool IsPasswordEnabled
+    {
+        get
+        {
+            return passwordTextBox.Enabled;
+        }
+        set
+        {
+            passwordTextBox.Enabled = value;
+        }
+    }
 }

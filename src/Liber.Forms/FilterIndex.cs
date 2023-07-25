@@ -10,9 +10,10 @@ internal enum FilterIndex
     Offset = -2,
     AllFiles = 1,
     AllSupportedFiles = 2,
-    MessagePack = 3,
-    Json = 4,
-    Sqlite = 5,
-    Csv = 6,
-    Xml = 7
+    Liber = 3,
+    MessagePack = 4,
+    Json = 5,
+    Sqlite = 6,
+    Csv = 7,
+    Xml = 8
 }

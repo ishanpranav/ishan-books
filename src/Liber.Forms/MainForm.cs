@@ -183,7 +183,7 @@ internal sealed partial class MainForm : Form
 
     private Task SaveAsAsync()
     {
-        if (!TryGetSavePath(FilterIndex.MessagePack, out string? path))
+        if (!TryGetSavePath(FilterIndex.Liber, out string? path))
         {
             return Task.CompletedTask;
         }
@@ -234,7 +234,7 @@ internal sealed partial class MainForm : Form
         return true;
     }
 
-    private async Task ImportCompanyAsync(string path)
+    private async Task ImportMessagePackCompanyAsync(string path)
     {
         await using FileStream input = File.OpenRead(path);
 
@@ -271,21 +271,17 @@ internal sealed partial class MainForm : Form
         {
             switch (Path.GetExtension(path).ToUpperInvariant())
             {
-                case ".SQLITE":
-                case ".SQLITE3":
-                case ".DB":
-                case ".DB3":
-                case ".S3DB":
-                case ".SL3":
-                    await ImportSqliteCompanyAsync(path);
-                    break;
-
                 case ".JSON":
                     await ImportJsonCompanyAsync(path);
                     break;
 
-                case ".SHBK":
-                    await ImportCompanyAsync(path);
+                case ".MPK":
+                case ".MSGPACK":
+                    await ImportMessagePackCompanyAsync(path);
+                    break;
+
+                default:
+                    await ImportSqliteCompanyAsync(path);
                     break;
             }
 
@@ -311,7 +307,7 @@ internal sealed partial class MainForm : Form
         _factory.AutoRegister(() => new UrlForm(FormattedStrings.GetHelpUrl()));
     }
 
-    private async Task ExportCompanyAsync(string path)
+    private async Task ExportMessagePackCompanyAsync(string path)
     {
         await using FileStream output = File.Create(path);
 
@@ -360,8 +356,11 @@ internal sealed partial class MainForm : Form
     {
         await AbortRetryIgnoreAsync(async () =>
         {
-            switch (Path.GetExtension(path).ToUpperInvariant())
+            string extension = Path.GetExtension(path);
+
+            switch (extension.ToUpperInvariant())
             {
+                case ".SHBK":
                 case ".SQLITE":
                 case ".SQLITE3":
                 case ".DB":
@@ -375,8 +374,13 @@ internal sealed partial class MainForm : Form
                     await ExportJsonCompanyAsync(path);
                     break;
 
-                case ".SHBK":
-                    await ExportCompanyAsync(path);
+                case ".MPK":
+                case ".MSGPACK":
+                    await ExportMessagePackCompanyAsync(path);
+                    break;
+
+                default:
+                    MessageBox.Show(Resources.ExceptionCaption, FormattedStrings.GetNotSupportedText(extension), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     break;
             }
 

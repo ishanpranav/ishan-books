@@ -89,6 +89,15 @@ namespace Liber.Forms.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} files are not supported..
+        /// </summary>
+        internal static string NotSupportedText {
+            get {
+                return ResourceManager.GetString("NotSupportedText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You are about to close the company file without saving your changes..
         /// </summary>
         internal static string WarningText {
