@@ -68,3 +68,7 @@
 
 *.generated.cs linguist-generated
 *.sql linguist-language=sql
+*.manifest binary
+*.application binary
+*.deploy binary
+docs/*.css linguist-detectable
