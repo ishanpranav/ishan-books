@@ -123,6 +123,10 @@
   <data name="ExceptionCaption" xml:space="preserve">
     <value>Error</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\favicon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="WarningText" xml:space="preserve">
     <value>You are about to close the company file without saving your changes.</value>
   </data>

@@ -20,6 +20,7 @@ internal sealed partial class AccountsForm : Form
     public AccountsForm(Company company, FormFactory factory)
     {
         InitializeComponent();
+        ClickOnce.Initialize(this);
 
         _company = company;
         _factory = factory;

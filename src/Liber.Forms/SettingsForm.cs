@@ -18,6 +18,7 @@ internal sealed partial class SettingsForm : Form
     public SettingsForm()
     {
         InitializeComponent();
+        ClickOnce.Initialize(this);
 
         if (s_availableCultures == null)
         {

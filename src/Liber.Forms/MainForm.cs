@@ -29,14 +29,15 @@ internal sealed partial class MainForm : Form
 
     private string? _path;
 
-    public MainForm(string[] args)
+    public MainForm()
     {
         InitializeComponent();
+        ClickOnce.Initialize(this);
+    }
 
-        if (args.Length > 0)
-        {
-            _recentPathManager.Add(args[0]);
-        }
+    public MainForm(string path) : this()
+    {
+        _recentPathManager.Add(path);
     }
 
     private async void OnLoad(object sender, EventArgs e)

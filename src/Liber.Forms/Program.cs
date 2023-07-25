@@ -3,7 +3,9 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Windows.Forms;
 using Liber.Forms.Properties;
 
@@ -21,6 +23,24 @@ internal static class Program
             CultureInfo.CurrentUICulture = new CultureInfo(Settings.Default.Culture);
         }
 
-        Application.Run(new MainForm(args));
+        IReadOnlyList<string> arguments;
+
+        if (ClickOnce.NetworkDeployed)
+        {
+            arguments = ClickOnce.GetArguments();
+        }
+        else
+        {
+            arguments = args;
+        }
+
+        if (arguments.Count > 0)
+        {
+            Application.Run(new MainForm(arguments[0]));
+        }
+        else
+        {
+            Application.Run(new MainForm());
+        }
     }
 }

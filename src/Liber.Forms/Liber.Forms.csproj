@@ -6,6 +6,7 @@
 		<Nullable>enable</Nullable>
 		<UseWindowsForms>true</UseWindowsForms>
 		<NeutralLanguage>en-US</NeutralLanguage>
+		<ApplicationIcon>favicon.ico</ApplicationIcon>
 	</PropertyGroup>
 
 	<ItemGroup>

@@ -29,14 +29,13 @@ Licensed under the MIT License.
                 <meta charset="utf-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
                 <meta name="author" content="Ishan Pranav"/>
-                <meta name="description" content="Download GNSS log parser"/>
+                <meta name="description" content="Download SharpBooks"/>
                 <title>
                     <xsl:value-of select="$CompanyName"/> - <xsl:value-of select="$ProductName"/>
                 </title>
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous"/>
-                <link href="index.css"
-                  rel="stylesheet"
-                  type="text/css"/>
+                <link href="index.css" rel="stylesheet" type="text/css"/>
+                <link href="favicon.ico" rel="icon" type="image/x-icon"/>
             </head>
             <body>
                 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">

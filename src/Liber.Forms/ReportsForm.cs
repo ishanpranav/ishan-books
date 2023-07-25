@@ -25,6 +25,7 @@ internal sealed partial class ReportsForm : Form
     public ReportsForm(Company company)
     {
         InitializeComponent();
+        ClickOnce.Initialize(this);
 
         _company = company;
     }

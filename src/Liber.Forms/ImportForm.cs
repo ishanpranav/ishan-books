@@ -14,6 +14,7 @@ internal abstract partial class ImportForm : Form
     protected ImportForm(Company company, FormFactory factory)
     {
         InitializeComponent();
+        ClickOnce.Initialize(this);
 
         new ComponentResourceManager(GetType()).ApplyResources(this, "$this");
 

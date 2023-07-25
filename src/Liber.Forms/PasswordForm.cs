@@ -16,6 +16,7 @@ internal sealed partial class PasswordForm : Form
     public PasswordForm()
     {
         InitializeComponent();
+        ClickOnce.Initialize(this);
 
         DialogResult = DialogResult.Cancel;
     }

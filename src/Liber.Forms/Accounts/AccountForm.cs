@@ -15,6 +15,7 @@ internal abstract partial class AccountForm : Form
     protected AccountForm(Company company)
     {
         InitializeComponent();
+        ClickOnce.Initialize(this);
 
         new ComponentResourceManager(GetType()).ApplyResources(this, "$this");
 

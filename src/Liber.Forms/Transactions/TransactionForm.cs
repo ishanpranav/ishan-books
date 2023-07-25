@@ -19,6 +19,7 @@ internal sealed partial class TransactionForm : Form
     public TransactionForm(Company company)
     {
         InitializeComponent();
+        ClickOnce.Initialize(this);
 
         _company = company;
         _company.AccountAdded += OnCompanyAccountAdded;
