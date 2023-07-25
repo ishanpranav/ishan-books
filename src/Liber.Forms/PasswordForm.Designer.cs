@@ -36,14 +36,14 @@ partial class PasswordForm
         acceptButton = new System.Windows.Forms.Button();
         passwordTextBox = new System.Windows.Forms.TextBox();
         label1 = new System.Windows.Forms.Label();
-        this.SuspendLayout();
+        SuspendLayout();
         // 
         // acceptButton
         // 
         resources.ApplyResources(acceptButton, "acceptButton");
         acceptButton.Name = "acceptButton";
         acceptButton.UseVisualStyleBackColor = true;
-        acceptButton.Click += this.OnAcceptButtonClick;
+        acceptButton.Click += OnAcceptButtonClick;
         // 
         // passwordTextBox
         // 
@@ -59,17 +59,17 @@ partial class PasswordForm
         // 
         // PasswordForm
         // 
-        this.AcceptButton = acceptButton;
+        AcceptButton = acceptButton;
         resources.ApplyResources(this, "$this");
-        this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        this.Controls.Add(label1);
-        this.Controls.Add(passwordTextBox);
-        this.Controls.Add(acceptButton);
-        this.MaximizeBox = false;
-        this.MinimizeBox = false;
-        this.Name = "PasswordForm";
-        this.ResumeLayout(false);
-        this.PerformLayout();
+        AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+        Controls.Add(label1);
+        Controls.Add(passwordTextBox);
+        Controls.Add(acceptButton);
+        MaximizeBox = false;
+        MinimizeBox = false;
+        Name = "PasswordForm";
+        ResumeLayout(false);
+        PerformLayout();
     }
 
     #endregion

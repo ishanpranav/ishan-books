@@ -8,6 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
+		docs\index.css = docs\index.css
 		LICENSE.txt = LICENSE.txt
 		tools\licenses.json = tools\licenses.json
 		tools\New-PublishPage.ps1 = tools\New-PublishPage.ps1
@@ -101,8 +102,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		RESX_ConfirmAddLanguageFile = True
-		RESX_SortFileContentOnSave = True
 		SolutionGuid = {9170A1F4-FAEF-448C-A8BC-A2D0D54864C8}
+		RESX_SortFileContentOnSave = True
+		RESX_ConfirmAddLanguageFile = True
 	EndGlobalSection
 EndGlobal

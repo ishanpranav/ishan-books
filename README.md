@@ -37,7 +37,13 @@ __Export-friendly formats__
 - [X] PDF Document (*.pdf)
 - [X] HTML Document (*.html)
 
-__Controls__
+__Localization__
+- [X] English
+- [X] English (United States)
+- [X] Spanish
+- [X] Spanish (Spain)
+
+__Additional features__
 - [X] Password protection
 ## License
 This repository is licensed with the [MIT](LICENSE.txt) license.

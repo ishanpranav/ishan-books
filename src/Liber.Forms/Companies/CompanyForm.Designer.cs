@@ -43,12 +43,17 @@ partial class CompanyForm
         // label1
         // 
         resources.ApplyResources(label1, "label1");
+        _helpProvider.SetHelpKeyword(label1, resources.GetString("label1.HelpKeyword"));
+        _helpProvider.SetHelpNavigator(label1, (System.Windows.Forms.HelpNavigator)resources.GetObject("label1.HelpNavigator"));
+        _helpProvider.SetHelpString(label1, resources.GetString("label1.HelpString"));
         label1.Name = "label1";
         _helpProvider.SetShowHelp(label1, (bool)resources.GetObject("label1.ShowHelp"));
         // 
         // nameTextBox
         // 
         resources.ApplyResources(nameTextBox, "nameTextBox");
+        _helpProvider.SetHelpKeyword(nameTextBox, resources.GetString("nameTextBox.HelpKeyword"));
+        _helpProvider.SetHelpNavigator(nameTextBox, (System.Windows.Forms.HelpNavigator)resources.GetObject("nameTextBox.HelpNavigator"));
         _helpProvider.SetHelpString(nameTextBox, resources.GetString("nameTextBox.HelpString"));
         nameTextBox.Name = "nameTextBox";
         _helpProvider.SetShowHelp(nameTextBox, (bool)resources.GetObject("nameTextBox.ShowHelp"));
@@ -56,6 +61,8 @@ partial class CompanyForm
         // cancelButton
         // 
         resources.ApplyResources(cancelButton, "cancelButton");
+        _helpProvider.SetHelpKeyword(cancelButton, resources.GetString("cancelButton.HelpKeyword"));
+        _helpProvider.SetHelpNavigator(cancelButton, (System.Windows.Forms.HelpNavigator)resources.GetObject("cancelButton.HelpNavigator"));
         _helpProvider.SetHelpString(cancelButton, resources.GetString("cancelButton.HelpString"));
         cancelButton.Name = "cancelButton";
         _helpProvider.SetShowHelp(cancelButton, (bool)resources.GetObject("cancelButton.ShowHelp"));
@@ -65,15 +72,23 @@ partial class CompanyForm
         // acceptButton
         // 
         resources.ApplyResources(acceptButton, "acceptButton");
+        _helpProvider.SetHelpKeyword(acceptButton, resources.GetString("acceptButton.HelpKeyword"));
+        _helpProvider.SetHelpNavigator(acceptButton, (System.Windows.Forms.HelpNavigator)resources.GetObject("acceptButton.HelpNavigator"));
         _helpProvider.SetHelpString(acceptButton, resources.GetString("acceptButton.HelpString"));
         acceptButton.Name = "acceptButton";
         _helpProvider.SetShowHelp(acceptButton, (bool)resources.GetObject("acceptButton.ShowHelp"));
         acceptButton.UseVisualStyleBackColor = true;
         acceptButton.Click += OnAcceptButtonClick;
         // 
+        // _helpProvider
+        // 
+        resources.ApplyResources(_helpProvider, "_helpProvider");
+        // 
         // passwordTextBox
         // 
         resources.ApplyResources(passwordTextBox, "passwordTextBox");
+        _helpProvider.SetHelpKeyword(passwordTextBox, resources.GetString("passwordTextBox.HelpKeyword"));
+        _helpProvider.SetHelpNavigator(passwordTextBox, (System.Windows.Forms.HelpNavigator)resources.GetObject("passwordTextBox.HelpNavigator"));
         _helpProvider.SetHelpString(passwordTextBox, resources.GetString("passwordTextBox.HelpString"));
         passwordTextBox.Name = "passwordTextBox";
         _helpProvider.SetShowHelp(passwordTextBox, (bool)resources.GetObject("passwordTextBox.ShowHelp"));
@@ -82,19 +97,30 @@ partial class CompanyForm
         // label3
         // 
         resources.ApplyResources(label3, "label3");
+        _helpProvider.SetHelpKeyword(label3, resources.GetString("label3.HelpKeyword"));
+        _helpProvider.SetHelpNavigator(label3, (System.Windows.Forms.HelpNavigator)resources.GetObject("label3.HelpNavigator"));
+        _helpProvider.SetHelpString(label3, resources.GetString("label3.HelpString"));
         label3.Name = "label3";
         _helpProvider.SetShowHelp(label3, (bool)resources.GetObject("label3.ShowHelp"));
         // 
         // _colorButton
         // 
         resources.ApplyResources(_colorButton, "_colorButton");
+        _helpProvider.SetHelpKeyword(_colorButton, resources.GetString("_colorButton.HelpKeyword"));
+        _helpProvider.SetHelpNavigator(_colorButton, (System.Windows.Forms.HelpNavigator)resources.GetObject("_colorButton.HelpNavigator"));
+        _helpProvider.SetHelpString(_colorButton, resources.GetString("_colorButton.HelpString"));
         _colorButton.Name = "_colorButton";
+        _helpProvider.SetShowHelp(_colorButton, (bool)resources.GetObject("_colorButton.ShowHelp"));
         _colorButton.UseVisualStyleBackColor = true;
         // 
         // label2
         // 
         resources.ApplyResources(label2, "label2");
+        _helpProvider.SetHelpKeyword(label2, resources.GetString("label2.HelpKeyword"));
+        _helpProvider.SetHelpNavigator(label2, (System.Windows.Forms.HelpNavigator)resources.GetObject("label2.HelpNavigator"));
+        _helpProvider.SetHelpString(label2, resources.GetString("label2.HelpString"));
         label2.Name = "label2";
+        _helpProvider.SetShowHelp(label2, (bool)resources.GetObject("label2.ShowHelp"));
         // 
         // CompanyForm
         // 
@@ -110,6 +136,9 @@ partial class CompanyForm
         Controls.Add(cancelButton);
         Controls.Add(nameTextBox);
         Controls.Add(label1);
+        _helpProvider.SetHelpKeyword(this, resources.GetString("$this.HelpKeyword"));
+        _helpProvider.SetHelpNavigator(this, (System.Windows.Forms.HelpNavigator)resources.GetObject("$this.HelpNavigator"));
+        _helpProvider.SetHelpString(this, resources.GetString("$this.HelpString"));
         MaximizeBox = false;
         Name = "CompanyForm";
         _helpProvider.SetShowHelp(this, (bool)resources.GetObject("$this.ShowHelp"));

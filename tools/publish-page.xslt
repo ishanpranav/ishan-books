@@ -33,71 +33,97 @@ Licensed under the MIT License.
                 <title>
                     <xsl:value-of select="$CompanyName"/> - <xsl:value-of select="$ProductName"/>
                 </title>
-                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-                      rel="stylesheet"
-                      type="text/css"
-                      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
-                      crossorigin="anonymous"/>
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous"/>
                 <link href="index.css"
-                      rel="stylesheet"
-                      type="text/css"/>
+                  rel="stylesheet"
+                  type="text/css"/>
             </head>
             <body>
-                <div class="container col-lg-8 mx-auto p-4 py-md-5">
+                <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                    <symbol id="arrow-right-circle" viewBox="0 0 16 16">
+                        <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                    </symbol>
+                </svg>
+                <div class="col-lg-8 mx-auto p-4 py-md-5">
                     <header class="d-flex align-items-center pb-3 mb-5 border-bottom">
-                        <span class="fs-4">
-                            <xsl:value-of select="$CompanyName"/>
-                        </span>
+                        <a href="/" class="d-flex align-items-center text-body-emphasis text-decoration-none">
+                            <span class="fs-4">
+                                <xsl:value-of select="$CompanyName"/>
+                            </span>
+                        </a>
                     </header>
+
                     <main>
-                        <h1>
+                        <h1 class="text-body-emphasis">
                             <xsl:value-of select="$ProductName"/>
                         </h1>
-                        <p class="fs-5 col-md-8">
-                            A cross-platform library and application for parsing NovAtel GNSS
-                            command output message logs.
-                        </p>
+                        <p class="fs-5 col-md-8">Double-entry accounting.</p>
+
                         <div class="mb-5">
                             <a href="{$InstallerHref}"
-                               class="btn btn-primary btn-lg px-4">
+                               class="btn btn-primary btn-lg px-4 mr-1">
                                 Download v<xsl:value-of select="$Version"/>
                             </a>
+                            <xsl:text> </xsl:text>
                             <a href="https://github.com/ishanpranav/novatel-gnss-log-parser"
                                target="_blank"
                                class="btn btn-light btn-lg px-4">
                                 View source
                             </a>
                         </div>
+
                         <hr class="col-3 col-md-2 mb-5"/>
+
                         <div class="row g-5">
                             <div class="col-md-6">
-                                <img src="images/Capture.png"
-                                     alt="A screenshot of the application."
-                                     class="img-fluid"/>
+                                <h2 class="text-body-emphasis">Features</h2>
+                                <p>Ready to beyond the starter template? Check out these open source projects that you can quickly duplicate to a new GitHub repository.</p>
+                                <ul class="list-unstyled ps-0">
+                                    <li>
+                                        <a class="icon-link mb-1" href="https://en.wikipedia.org/wiki/Chart_of_accounts">
+                                            <svg class="bi" width="16" height="16">
+                                                <use href="#arrow-right-circle"/>
+                                            </svg>
+                                            Chart of accounts
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="icon-link mb-1" href="https://en.wikipedia.org/wiki/General_journal">
+                                            <svg class="bi" width="16" height="16">
+                                                <use href="#arrow-right-circle"/>
+                                            </svg>
+                                            General journal
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
+
                             <div class="col-md-6">
-                                <h2>Prerequisites</h2>
+                                <h2 class="text-body-emphasis">Prerequisities</h2>
                                 <p>
                                     <xsl:value-of select="$BootstrapperSection/TR[1]/TD"/>
                                 </p>
-                                <ul class="icon-list">
+                                <ul class="list-unstyled ps-0">
                                     <xsl:for-each select="$BootstrapperSection/TR/TD/UL/LI">
                                         <li>
-                                            <xsl:value-of select="."/>
+                                            <a class="icon-link mb-1" href="#">
+                                                <svg class="bi" width="16" height="16">
+                                                    <use href="#arrow-right-circle"/>
+                                                </svg>
+                                                <xsl:value-of select="."/>
+                                            </a>
                                         </li>
                                     </xsl:for-each>
                                 </ul>
                                 <p>
                                     <xsl:copy-of select="$BootstrapperSection/TR[3]/TD"/>
                                 </p>
-                                <p>
-                                    <a href="{$InstallerHref}"
-                                       class="btn btn-light btn-md px-4">Download installer</a>
-                                </p>
+                                <a href="{$InstallerHref}"
+                                   class="btn btn-light btn-md px-4">Download installer</a>
                             </div>
                         </div>
                     </main>
-                    <footer class="pt-5 my-5 text-muted border-top">
+                    <footer class="pt-5 my-5 text-body-secondary border-top">
                         Created by <xsl:value-of select="$CompanyName"/> &#183; &#169; 2023
                     </footer>
                 </div>
