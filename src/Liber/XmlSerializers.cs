@@ -8,22 +8,11 @@ namespace Liber;
 
 public static class XmlSerializers
 {
-    private static XmlSerializer? s_stylesheet;
     private static XmlSerializer? s_report;
     private static XmlSerializer? s_account;
     private static XmlSerializer? s_transaction;
     private static XmlSerializer? s_line;
     private static XmlSerializer? s_company;
-
-    public static XmlSerializer Stylesheet
-    {
-        get
-        {
-            s_stylesheet ??= new XmlSerializer(typeof(XslStylesheet));
-
-            return s_stylesheet;
-        }
-    }
 
     public static XmlSerializer Report
     {

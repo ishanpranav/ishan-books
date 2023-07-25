@@ -120,7 +120,4 @@
   <data name="CancelText" xml:space="preserve">
     <value>¿Desea Usted guardar los cambios en {0}?</value>
   </data>
-  <data name="DefaultCompanyName" xml:space="preserve">
-    <value>Compañía sin título</value>
-  </data>
 </root>

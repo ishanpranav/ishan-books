@@ -3,9 +3,7 @@
 // Licensed under the MIT License.
 
 using System;
-using System.IO;
 using System.Windows.Forms;
-using Liber.Sqlite;
 
 namespace Liber.Forms;
 

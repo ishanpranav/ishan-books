@@ -9,10 +9,11 @@ Licensed under the MIT License.
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:msxsl="urn:schemas-microsoft-com:xslt"
     xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:liber="urn:liber"
     exclude-result-prefixes="msxsl">
-    <xsl:include href="financial-statement.xslt"/>
+    <xsl:include href="base/financial-statement.xslt"/>
     <xsl:output method="html" indent="yes"/>
-    <xsl:variable name="title">Trial Balance</xsl:variable>
+    <xsl:variable name="title" select="liber:gets('trial-balance')"/>
     <xsl:template match="/report">
         <xsl:call-template name="financial-statement">
             <xsl:with-param name="title" select="$title"/>
@@ -30,24 +31,23 @@ Licensed under the MIT License.
                     </tr>
                     <tr>
                         <th colspan="3" class="bar">
-                            <xsl:text>As of </xsl:text>
-                            <xsl:call-template name="date-long">
-                                <xsl:with-param name="value" select="posted"/>
-                            </xsl:call-template>
+                            <xsl:value-of select="liber:fdatel()"/>
                         </th>
                     </tr>
                     <tr>
                         <th></th>
                         <th colspan="2" class="heading">
-                            <xsl:call-template name="date-year">
-                                <xsl:with-param name="value" select="posted"/>
-                            </xsl:call-template>
+                            <xsl:value-of select="liber:ftspans()"/>
                         </th>
                     </tr>
                     <tr>
                         <th></th>
-                        <th class="heading">Debit</th>
-                        <th class="heading">Credit</th>
+                        <th class="heading">
+                            <xsl:value-of select="liber:gets('debit')"/>
+                        </th>
+                        <th class="heading">
+                            <xsl:value-of select="liber:gets('credit')"/>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -57,30 +57,24 @@ Licensed under the MIT License.
                                 <xsl:value-of select="name"/>
                             </td>
                             <td class="right">
-                                <xsl:call-template name="number">
-                                    <xsl:with-param name="value" select="debit"/>
-                                </xsl:call-template>
+                                <xsl:value-of select="liber:fm(debit)"/>
                             </td>
                             <td class="right">
-                                <xsl:call-template name="number">
-                                    <xsl:with-param name="value" select="credit"/>
-                                </xsl:call-template>
+                                <xsl:value-of select="liber:fm(credit)"/>
                             </td>
                         </tr>
                     </xsl:for-each>
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th class="left">Total</th>
+                        <th class="left">
+                            <xsl:value-of select="liber:gets('total')"/>
+                        </th>
                         <td class="total right">
-                            <xsl:call-template name="number">
-                                <xsl:with-param name="value" select="sum(company/account/debit)"/>
-                            </xsl:call-template>
+                            <xsl:value-of select="liber:fm(sum(company/account/debit))"/>
                         </td>
                         <td class="total right">
-                            <xsl:call-template name="number">
-                                <xsl:with-param name="value" select="sum(company/account/credit)"/>
-                            </xsl:call-template>
+                            <xsl:value-of select="liber:fm(sum(company/account/credit))"/>
                         </td>
                     </tr>
                 </tfoot>

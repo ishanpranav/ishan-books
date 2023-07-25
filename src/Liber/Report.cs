@@ -13,10 +13,10 @@ public class Report
     [XmlElement("company")]
     public Company? Company { get; set; }
 
-    [XmlElement("started")]
+    [XmlIgnore]
     public DateTime Started { get; set; }
 
-    [XmlElement("posted")]
+    [XmlIgnore]
     public DateTime Posted { get; set; }
 
     public Transaction MinTransaction

@@ -9,10 +9,11 @@ Licensed under the MIT License.
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:msxsl="urn:schemas-microsoft-com:xslt"
     xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:liber="urn:liber"
     exclude-result-prefixes="msxsl">
-    <xsl:include href="financial-statement.xslt"/>
+    <xsl:include href="base/financial-statement.xslt"/>
     <xsl:output method="html" indent="yes"/>
-    <xsl:variable name="title">Income Statement</xsl:variable>
+    <xsl:variable name="title" select="liber:gets('income-statement')"/>
     <xsl:template match="/report">
         <xsl:call-template name="financial-statement">
             <xsl:with-param name="title" select="$title"/>
@@ -30,21 +31,13 @@ Licensed under the MIT License.
                     </tr>
                     <tr>
                         <th colspan="2" class="bar">
-                            <xsl:call-template name="date-long">
-                                <xsl:with-param name="value" select="started"/>
-                            </xsl:call-template>
-                            <xsl:text> &#x2013; </xsl:text>
-                            <xsl:call-template name="date-long">
-                                <xsl:with-param name="value" select="posted"/>
-                            </xsl:call-template>
+                            <xsl:value-of select="liber:ftspanl()"/>
                         </th>
                     </tr>
                     <tr>
                         <th></th>
                         <th class="heading">
-                            <xsl:call-template name="date-year">
-                                <xsl:with-param name="value" select="posted"/>
-                            </xsl:call-template>
+                            <xsl:value-of select="liber:ftspans()"/>
                         </th>
                     </tr>
                 </thead>

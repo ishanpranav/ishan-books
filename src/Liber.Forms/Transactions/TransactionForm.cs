@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Windows.Forms;
 using Liber.Forms.Accounts;
+using Liber.Forms.Properties;
 
 namespace Liber.Forms.Transactions;
 
@@ -136,7 +137,7 @@ internal sealed partial class TransactionForm : Form
 
             if (row.Cells[accountColumn.Index].Value == null)
             {
-                row.ErrorText = "AccountInvalid";
+                row.ErrorText = Resources.InvalidAccountError;
 
                 return false;
             }
@@ -155,7 +156,7 @@ internal sealed partial class TransactionForm : Form
 
         if (transaction.Balance != 0)
         {
-            _dataGridView.Rows[_dataGridView.NewRowIndex].ErrorText = "Imbalance";
+            _dataGridView.Rows[_dataGridView.NewRowIndex].ErrorText = Resources.ImbalanceError;
 
             return false;
         }
@@ -304,6 +305,16 @@ internal sealed partial class TransactionForm : Form
         {
             InitializeTransaction(previous);
         }
+    }
+
+    private void OnPrintToolStripButtonClick(object sender, EventArgs e)
+    {
+
+    }
+
+    private void OnDataGridViewCellMousDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+    {
+
     }
 
     protected override void Dispose(bool disposing)

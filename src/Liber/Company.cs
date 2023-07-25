@@ -10,6 +10,7 @@ using System.Text.Json.Serialization;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
+using Liber.Properties;
 using MessagePack;
 using MessagePack.Formatters;
 
@@ -257,7 +258,7 @@ public sealed class Company : IXmlSerializable
 
     public void WriteXml(XmlWriter writer)
     {
-        writer.WriteElementString("name", Name);
+        writer.WriteElementString("name", Name ?? Resources.DefaultCompanyName);
         writer.WriteElementString("type", Type.ToString());
 
         foreach (Account account in _accounts.Values)

@@ -32,8 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReportsForm));
             saveAsToolStripButton = new System.Windows.Forms.ToolStripButton();
             printToolStripButton = new System.Windows.Forms.ToolStripButton();
-            toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            helpToolStripButton = new System.Windows.Forms.ToolStripButton();
             _toolStrip = new System.Windows.Forms.ToolStrip();
             printPreviewToolStripButton = new System.Windows.Forms.ToolStripButton();
             splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -76,22 +74,10 @@
             printToolStripButton.Name = "printToolStripButton";
             printToolStripButton.Click += OnPrintPreviewToolStripButtonClick;
             // 
-            // toolStripSeparator
-            // 
-            toolStripSeparator.Name = "toolStripSeparator";
-            resources.ApplyResources(toolStripSeparator, "toolStripSeparator");
-            // 
-            // helpToolStripButton
-            // 
-            helpToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(helpToolStripButton, "helpToolStripButton");
-            helpToolStripButton.Name = "helpToolStripButton";
-            helpToolStripButton.Click += OnHelpToolStripButtonClick;
-            // 
             // _toolStrip
             // 
             _toolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            _toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { saveAsToolStripButton, printPreviewToolStripButton, printToolStripButton, toolStripSeparator, helpToolStripButton });
+            _toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { saveAsToolStripButton, printPreviewToolStripButton, printToolStripButton });
             resources.ApplyResources(_toolStrip, "_toolStrip");
             _toolStrip.Name = "_toolStrip";
             // 
@@ -240,8 +226,6 @@
 
         private System.Windows.Forms.ToolStripButton saveAsToolStripButton;
         private System.Windows.Forms.ToolStripButton printToolStripButton;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
-        private System.Windows.Forms.ToolStripButton helpToolStripButton;
         private System.Windows.Forms.ToolStrip _toolStrip;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ListViewEx _listView;

@@ -61,38 +61,6 @@
     <value>17, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="_menuStrip.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="_menuStrip.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 3, 0, 3</value>
-  </data>
-  <data name="_menuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>513, 30</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="_menuStrip.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;_menuStrip.Name" xml:space="preserve">
-    <value>_menuStrip</value>
-  </data>
-  <data name="&gt;&gt;_menuStrip.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_menuStrip.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;_menuStrip.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 24</value>
-  </data>
-  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;File</value>
-  </data>
   <data name="newToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -138,12 +106,6 @@
   <data name="openToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Open</value>
   </data>
-  <data name="importToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>215, 26</value>
-  </data>
-  <data name="importToolStripMenuItem.Text" xml:space="preserve">
-    <value>I&amp;mport</value>
-  </data>
   <data name="importAccountsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>252, 26</value>
   </data>
@@ -155,6 +117,12 @@
   </data>
   <data name="importTransactionsToolStripMenuItem.Text" xml:space="preserve">
     <value>General Journal (*.csv)</value>
+  </data>
+  <data name="importToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>215, 26</value>
+  </data>
+  <data name="importToolStripMenuItem.Text" xml:space="preserve">
+    <value>I&amp;mport</value>
   </data>
   <data name="toolStripSeparator.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 6</value>
@@ -185,12 +153,6 @@
   <data name="saveAsToolStripMenuItem.Text" xml:space="preserve">
     <value>Save &amp;As</value>
   </data>
-  <data name="exportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>215, 26</value>
-  </data>
-  <data name="exportToolStripMenuItem.Text" xml:space="preserve">
-    <value>Export</value>
-  </data>
   <data name="exportCompanyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>252, 26</value>
   </data>
@@ -212,6 +174,12 @@
   <data name="exportTransactionsToolStripMenuItem.Text" xml:space="preserve">
     <value>General Journal (*.csv)</value>
   </data>
+  <data name="exportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>215, 26</value>
+  </data>
+  <data name="exportToolStripMenuItem.Text" xml:space="preserve">
+    <value>Export</value>
+  </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 6</value>
   </data>
@@ -230,6 +198,7 @@
   <data name="recentPathsToolStripMenuItem.Text" xml:space="preserve">
     <value>Recent Files</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="recentPathsToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -245,11 +214,11 @@
   <data name="exitToolStripMenuItem.Text" xml:space="preserve">
     <value>E&amp;xit</value>
   </data>
-  <data name="editToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 24</value>
+  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 24</value>
   </data>
-  <data name="editToolStripMenuItem1.Text" xml:space="preserve">
-    <value>&amp;Edit</value>
+  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;File</value>
   </data>
   <data name="settingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>168, 26</value>
@@ -257,11 +226,11 @@
   <data name="settingsToolStripMenuItem.Text" xml:space="preserve">
     <value>Pre&amp;ferences</value>
   </data>
-  <data name="viewToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 24</value>
+  <data name="editToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 24</value>
   </data>
-  <data name="viewToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;View</value>
+  <data name="editToolStripMenuItem1.Text" xml:space="preserve">
+    <value>&amp;Edit</value>
   </data>
   <data name="accountsToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+Shift+A</value>
@@ -290,23 +259,23 @@
   <data name="toolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
     <value>298, 6</value>
   </data>
-  <data name="otherWindowsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>301, 26</value>
-  </data>
-  <data name="otherWindowsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Other Windows</value>
-  </data>
   <data name="newAccountToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>180, 26</value>
   </data>
   <data name="newAccountToolStripMenuItem.Text" xml:space="preserve">
     <value>New Account</value>
   </data>
-  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="otherWindowsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>301, 26</value>
+  </data>
+  <data name="otherWindowsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Other Windows</value>
+  </data>
+  <data name="viewToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 24</value>
   </data>
-  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Help</value>
+  <data name="viewToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;View</value>
   </data>
   <data name="contentsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>215, 26</value>
@@ -335,30 +304,40 @@
   <data name="aboutToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;About SharpBooks</value>
   </data>
+  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 24</value>
+  </data>
+  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Help</value>
+  </data>
+  <data name="_menuStrip.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="_menuStrip.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>6, 3, 0, 3</value>
+  </data>
+  <data name="_menuStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>513, 30</value>
+  </data>
+  <data name="_menuStrip.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;_menuStrip.Name" xml:space="preserve">
+    <value>_menuStrip</value>
+  </data>
+  <data name="&gt;&gt;_menuStrip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_menuStrip.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;_menuStrip.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <metadata name="_toolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>152, 17</value>
   </metadata>
-  <data name="_toolStrip.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 30</value>
-  </data>
-  <data name="_toolStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>513, 27</value>
-  </data>
-  <data name="_toolStrip.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;_toolStrip.Name" xml:space="preserve">
-    <value>_toolStrip</value>
-  </data>
-  <data name="&gt;&gt;_toolStrip.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_toolStrip.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;_toolStrip.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="newToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -446,26 +425,44 @@
   <data name="helpToolStripButton.Text" xml:space="preserve">
     <value>He&amp;lp</value>
   </data>
+  <data name="_toolStrip.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 30</value>
+  </data>
+  <data name="_toolStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>513, 27</value>
+  </data>
+  <data name="_toolStrip.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;_toolStrip.Name" xml:space="preserve">
+    <value>_toolStrip</value>
+  </data>
+  <data name="&gt;&gt;_toolStrip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_toolStrip.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;_toolStrip.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <metadata name="_openFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>276, 17</value>
   </metadata>
   <data name="_openFileDialog.Filter" xml:space="preserve">
-    <value>SharpBooks Company File (*.shbk)|*.shbk|MessagePack (*.mpk;*.msgpack)|*.mpk;*.msgpack|JavaScript Object Notation (*.json)|*.json|SQLite3 Database File (*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3)|*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3|Comma-delimited (*.csv)|*.csv|XML Document (*.xml)|*.xml</value>
+    <value>All Files (*.*)|*.*|All Supported Files (*.shbk;*.mpk;*.msgpack;*.json;*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3)|*.shbk;*.json;*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3|SharpBooks Company File (*.shbk)|*.shbk|MessagePack (*.mpk;*.msgpack)|*.mpk;*.msgpack|JavaScript Object Notation (*.json)|*.json|SQLite3 Database File (*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3)|*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3|Comma-delimited (*.csv)|*.csv</value>
   </data>
   <metadata name="_saveFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>441, 17</value>
   </metadata>
   <data name="_saveFileDialog.Filter" xml:space="preserve">
-    <value>All Files (*.*)|*.*|All Supported Files (*.shbk;*.mpk;*.msgpack;*.json;*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3)|*.shbk;*.json;*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3|SharpBooks Company File (*.shbk)|*.shbk|MessagePack (*.mpk;*.msgpack)|*.mpk;*.msgpack|JavaScript Object Notation (*.json)|*.json|SQLite3 Database File (*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3)|*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3|Comma-delimited (*.csv)|*.csv</value>
+    <value>SharpBooks Company File (*.shbk)|*.shbk|MessagePack (*.mpk;*.msgpack)|*.mpk;*.msgpack|JavaScript Object Notation (*.json)|*.json|SQLite3 Database File (*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3)|*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3|Comma-delimited (*.csv)|*.csv|XML Document (*.xml)|*.xml</value>
   </data>
   <metadata name="_recentPathManager.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>601, 17</value>
   </metadata>
   <metadata name="_factory.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 60</value>
-  </metadata>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, System.Private.CoreLib, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
-    <value>es</value>
   </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

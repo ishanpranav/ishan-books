@@ -9,10 +9,11 @@ Licensed under the MIT License.
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:msxsl="urn:schemas-microsoft-com:xslt"
     xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:liber="urn:liber"
     exclude-result-prefixes="msxsl">
-    <xsl:include href="financial-statement.xslt"/>
+    <xsl:include href="base/financial-statement.xslt"/>
     <xsl:output method="html" indent="yes"/>
-    <xsl:variable name="title">Comprehensive Income Statement</xsl:variable>
+    <xsl:variable name="title" select="liber:gets('comprehensive-income-statement')"/>
     <xsl:template match="/report">
         <xsl:call-template name="financial-statement">
             <xsl:with-param name="title" select="$title"/>
@@ -30,21 +31,13 @@ Licensed under the MIT License.
                     </tr>
                     <tr>
                         <th colspan="2" class="bar">
-                            <xsl:call-template name="date-long">
-                                <xsl:with-param name="value" select="started"/>
-                            </xsl:call-template>
-                            <xsl:text> &#x2013; </xsl:text>
-                            <xsl:call-template name="date-long">
-                                <xsl:with-param name="value" select="posted"/>
-                            </xsl:call-template>
+                            <xsl:value-of select="liber:ftspanl()"/>
                         </th>
                     </tr>
                     <tr>
                         <th></th>
                         <th class="heading">
-                            <xsl:call-template name="date-year">
-                                <xsl:with-param name="value" select="posted"/>
-                            </xsl:call-template>
+                            <xsl:value-of select="liber:ftspans()"/>
                         </th>
                     </tr>
                 </thead>
@@ -52,19 +45,18 @@ Licensed under the MIT License.
                 <xsl:variable name="otherComprehensiveIncome" select="sum(company/account[type = 'OtherComprehensiveIncome']/debit) - sum(company/account[type = 'OtherComprehensiveIncome']/credit)"/>
                 <tbody>
                     <tr>
-                        <th class="in-1 left">Net income</th>
-                        <th>
-                            <xsl:call-template name="number">
-                                <xsl:with-param name="value" select="-$netIncome"/>
-                            </xsl:call-template>
+                        <th class="in-1 left">
+                            <xsl:value-of select="liber:pngets('net-income', -$netIncome)"/>
+                        </th>
+                        <th class="right">
+                            <xsl:value-of select="liber:fm(-$netIncome)"/>
                         </th>
                     </tr>
                     <xsl:apply-templates select="company">
                         <xsl:with-param name="type">OtherComprehensiveIncome</xsl:with-param>
                         <xsl:with-param name="balance" select="$otherComprehensiveIncome"/>
-                        <xsl:with-param name="description">Other comprehensive income</xsl:with-param>
-                        <xsl:with-param name="total">Total other comprehensive income</xsl:with-param>
-                        <xsl:with-param name="negative">Total other comprehensive loss</xsl:with-param>
+                        <xsl:with-param name="description" select="liber:gets('other-comprehensive-income')"/>
+                        <xsl:with-param name="total" select="liber:pngets('other-comprehensive-income', -$otherComprehensiveIncome)"/>
                         <xsl:with-param name="sign">-1</xsl:with-param>
                     </xsl:apply-templates>
                 </tbody>
@@ -72,9 +64,7 @@ Licensed under the MIT License.
                     <tr>
                         <th class="left">Comprehensive income</th>
                         <td class="total right">
-                            <xsl:call-template name="number">
-                                <xsl:with-param name="value" select="-$netIncome -$otherComprehensiveIncome"/>
-                            </xsl:call-template>
+                            <xsl:value-of select="liber:fm(-$netIncome - $otherComprehensiveIncome)"/>
                         </td>
                     </tr>
                 </tfoot>

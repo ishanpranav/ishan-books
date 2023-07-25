@@ -336,12 +336,14 @@ partial class MainForm
         // 
         // _openFileDialog
         // 
-        _openFileDialog.DefaultExt = "liber";
+        _openFileDialog.DefaultExt = "shbk";
         resources.ApplyResources(_openFileDialog, "_openFileDialog");
         _openFileDialog.RestoreDirectory = true;
+        _openFileDialog.Tag = "";
         // 
         // _saveFileDialog
         // 
+        _saveFileDialog.DefaultExt = "shbk";
         resources.ApplyResources(_saveFileDialog, "_saveFileDialog");
         _saveFileDialog.FilterIndex = 3;
         _saveFileDialog.RestoreDirectory = true;

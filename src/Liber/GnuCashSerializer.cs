@@ -60,15 +60,17 @@ public static class GnuCashSerializer
 
     public static async Task SerializeAccountsAsync(Stream output, Company company)
     {
-        List<GnuCashAccount> gnuCashAccounts = new List<GnuCashAccount>(company.Accounts.Count);
+        int i = 0;
+        GnuCashAccount[] gnuCashAccounts = new GnuCashAccount[company.Accounts.Count];
 
         foreach (Account account in company.Accounts.Values)
         {
-            gnuCashAccounts.Add(new GnuCashAccount()
+            gnuCashAccounts[i] = new GnuCashAccount()
             {
                 Value = account,
                 Path = GetPath(company, account)
-            });
+            };
+            i++;
         }
 
         await SerializeAsync(output, gnuCashAccounts);

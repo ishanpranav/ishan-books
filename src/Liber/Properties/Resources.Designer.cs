@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Liber.Forms.Properties {
+namespace Liber.Properties {
     using System;
     
     
@@ -22,7 +22,7 @@ namespace Liber.Forms.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,10 +36,10 @@ namespace Liber.Forms.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Liber.Forms.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Liber.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,7 +51,7 @@ namespace Liber.Forms.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,57 +61,11 @@ namespace Liber.Forms.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save Changes.
+        ///   Looks up a localized string similar to Untitled Company.
         /// </summary>
-        internal static string CancelCaption {
+        public static string DefaultCompanyName {
             get {
-                return ResourceManager.GetString("CancelCaption", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Error.
-        /// </summary>
-        internal static string ExceptionCaption {
-            get {
-                return ResourceManager.GetString("ExceptionCaption", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon Icon {
-            get {
-                object obj = ResourceManager.GetObject("Icon", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The transaction does not balance. Please ensure that total amount entered in the debit column is equal to the total amount entered in the credit column..
-        /// </summary>
-        internal static string ImbalanceError {
-            get {
-                return ResourceManager.GetString("ImbalanceError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please select a valid account..
-        /// </summary>
-        internal static string InvalidAccountError {
-            get {
-                return ResourceManager.GetString("InvalidAccountError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You are about to close the company file without saving your changes..
-        /// </summary>
-        internal static string WarningText {
-            get {
-                return ResourceManager.GetString("WarningText", resourceCulture);
+                return ResourceManager.GetString("DefaultCompanyName", resourceCulture);
             }
         }
     }

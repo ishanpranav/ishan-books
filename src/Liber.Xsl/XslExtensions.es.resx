@@ -117,11 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CancelText" xml:space="preserve">
-    <value>Do you want to save changes to {0}?</value>
+  <data name="account" xml:space="preserve">
+    <value>Cuenta</value>
   </data>
-  <data name="HelpUrl" xml:space="preserve">
-    <value>https://github.com/ishanpranav/sharp-books</value>
-    <comment>@Invariant</comment>
+  <data name="credit" xml:space="preserve">
+    <value />
+  </data>
+  <data name="date" xml:space="preserve">
+    <value>Fecha</value>
+  </data>
+  <data name="debit" xml:space="preserve">
+    <value />
+  </data>
+  <data name="description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="general-journal" xml:space="preserve">
+    <value>Diario General</value>
+  </data>
+  <data name="name" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="number" xml:space="preserve">
+    <value />
+  </data>
+  <data name="__ftspanl{0}{1}" xml:space="preserve">
+    <value />
+  </data>
+  <data name="__ftspans{0}{1}" xml:space="preserve">
+    <value />
   </data>
 </root>

@@ -26,6 +26,7 @@
             saveToolStripButton = new System.Windows.Forms.ToolStripButton();
             toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             copyToolStripButton = new System.Windows.Forms.ToolStripButton();
+            printToolStripButton = new System.Windows.Forms.ToolStripButton();
             cancelButton = new System.Windows.Forms.Button();
             applyButton = new System.Windows.Forms.Button();
             acceptButton = new System.Windows.Forms.Button();
@@ -77,7 +78,7 @@
             // toolStrip1
             // 
             toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripButton, saveToolStripButton, toolStripSeparator3, copyToolStripButton });
+            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripButton, saveToolStripButton, toolStripSeparator3, copyToolStripButton, printToolStripButton });
             resources.ApplyResources(toolStrip1, "toolStrip1");
             toolStrip1.Name = "toolStrip1";
             _helpProvider.SetShowHelp(toolStrip1, (bool)resources.GetObject("toolStrip1.ShowHelp"));
@@ -107,6 +108,13 @@
             resources.ApplyResources(copyToolStripButton, "copyToolStripButton");
             copyToolStripButton.Name = "copyToolStripButton";
             copyToolStripButton.Click += OnCopyToolStripButtonClick;
+            // 
+            // printToolStripButton
+            // 
+            printToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(printToolStripButton, "printToolStripButton");
+            printToolStripButton.Name = "printToolStripButton";
+            printToolStripButton.Click += OnPrintToolStripButtonClick;
             // 
             // cancelButton
             // 
@@ -140,9 +148,12 @@
             resources.ApplyResources(_dataGridView, "_dataGridView");
             _dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             _dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { accountColumn, debitColumn, creditColumn, descriptionColumn });
+            _dataGridView.MultiSelect = false;
             _dataGridView.Name = "_dataGridView";
             _dataGridView.RowTemplate.Height = 25;
+            _dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             _helpProvider.SetShowHelp(_dataGridView, (bool)resources.GetObject("_dataGridView.ShowHelp"));
+            _dataGridView.CellMouseDoubleClick += OnDataGridViewCellMousDoubleClick;
             // 
             // accountColumn
             // 
@@ -264,5 +275,6 @@
         private System.Windows.Forms.ComboBox nameComboBox;
         private System.Windows.Forms.TextBox memoTextBox;
         private System.Windows.Forms.HelpProvider _helpProvider;
+        private System.Windows.Forms.ToolStripButton printToolStripButton;
     }
 }

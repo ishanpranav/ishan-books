@@ -9,6 +9,7 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 using System.Xml.Xsl;
+using Liber.Forms.Properties;
 using Microsoft.Web.WebView2.Core;
 
 namespace Liber.Forms;
@@ -41,7 +42,7 @@ internal sealed partial class ReportsForm : Form
             _contextMenu.Show(_webView, e.Location);
         };
 
-        _webView.CoreWebView2.SetVirtualHostNameToFolderMapping("sharp-books.example", Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)!, CoreWebView2HostResourceAccessKind.DenyCors);
+        _webView.CoreWebView2.SetVirtualHostNameToFolderMapping("liber.example", Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)!, CoreWebView2HostResourceAccessKind.DenyCors);
 
         string[] files = Directory.GetFiles("styles", "*.xslt");
 
@@ -54,14 +55,8 @@ internal sealed partial class ReportsForm : Form
 
         foreach (string file in files)
         {
-            IReadOnlyDictionary<string, string> variables = XmlReportSerializer.DeserializeStylesheet(file).ToDictionary();
-
-            if (!variables.TryGetValue("title", out string? title))
-            {
-                continue;
-            }
-
-            ListViewItem item = _listView.Items.Add(title);
+            string key = Path.GetFileNameWithoutExtension(file);
+            ListViewItem item = _listView.Items.Add(XslExtensions.GetString(key));
 
             item.ImageIndex = 0;
             item.Tag = file;
@@ -84,12 +79,14 @@ internal sealed partial class ReportsForm : Form
             s_styles[_file] = style;
         }
 
-        _xhtml = XmlReportSerializer.Serialize(style, new Report()
+        Report report = new Report()
         {
             Company = _company,
             Started = startedDateTimePicker.Value,
             Posted = postedDateTimePicker.Value
-        });
+        };
+
+        _xhtml = XmlReportSerializer.Serialize(style, report, new XslExtensions(report));
 
         _webView.NavigateToString(_xhtml);
     }
@@ -114,11 +111,6 @@ internal sealed partial class ReportsForm : Form
         _webView.CoreWebView2.ShowPrintUI();
     }
 
-    private void OnHelpToolStripButtonClick(object sender, EventArgs e)
-    {
-
-    }
-
     private async void OnSaveAsToolStripButtonClick(object sender, EventArgs e)
     {
         if (_saveFileDialog.ShowDialog() != DialogResult.OK)
@@ -126,7 +118,9 @@ internal sealed partial class ReportsForm : Form
             return;
         }
 
-        switch (Path.GetExtension(_saveFileDialog.FileName).ToUpperInvariant())
+        string extension = Path.GetExtension(_saveFileDialog.FileName);
+
+        switch (extension.ToUpperInvariant())
         {
             case ".PDF":
                 await _webView.CoreWebView2.PrintToPdfAsync(_saveFileDialog.FileName);
@@ -135,6 +129,10 @@ internal sealed partial class ReportsForm : Form
             case ".HTM":
             case ".HTML":
                 await File.WriteAllTextAsync(_saveFileDialog.FileName, _xhtml);
+                break;
+
+            default:
+                MessageBox.Show(Resources.ExceptionCaption, FormattedStrings.GetNotSupportedText(extension), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 break;
         }
     }

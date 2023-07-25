@@ -127,8 +127,11 @@
   <data name="Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\favicon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="NotSupportedText" xml:space="preserve">
-    <value>{0} files are not supported.</value>
+  <data name="ImbalanceError" xml:space="preserve">
+    <value>The transaction does not balance. Please ensure that total amount entered in the debit column is equal to the total amount entered in the credit column.</value>
+  </data>
+  <data name="InvalidAccountError" xml:space="preserve">
+    <value>Please select a valid account.</value>
   </data>
   <data name="WarningText" xml:space="preserve">
     <value>You are about to close the company file without saving your changes.</value>

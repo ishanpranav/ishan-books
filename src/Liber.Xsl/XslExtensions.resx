@@ -117,11 +117,73 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CancelText" xml:space="preserve">
-    <value>Do you want to save changes to {0}?</value>
+  <data name="account" xml:space="preserve">
+    <value>Account</value>
   </data>
-  <data name="HelpUrl" xml:space="preserve">
-    <value>https://github.com/ishanpranav/sharp-books</value>
-    <comment>@Invariant</comment>
+  <data name="balance-sheet" xml:space="preserve">
+    <value>Balance Sheet</value>
+  </data>
+  <data name="cash-flow-statement" xml:space="preserve">
+    <value>Cash Flow Statement</value>
+  </data>
+  <data name="comprehensive-income-statement" xml:space="preserve">
+    <value>Comprehensive Income Statement</value>
+  </data>
+  <data name="credit" xml:space="preserve">
+    <value>Credit</value>
+  </data>
+  <data name="date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="debit" xml:space="preserve">
+    <value>Debit</value>
+  </data>
+  <data name="description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="general-journal" xml:space="preserve">
+    <value>General Journal</value>
+  </data>
+  <data name="income-statement" xml:space="preserve">
+    <value>Income Statement</value>
+  </data>
+  <data name="name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="number" xml:space="preserve">
+    <value>Number</value>
+  </data>
+  <data name="other-comprehensive-income" xml:space="preserve">
+    <value>Other comprehensive income</value>
+  </data>
+  <data name="total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="trial-balance" xml:space="preserve">
+    <value>Trial Balance</value>
+  </data>
+  <data name="_n_net-income" xml:space="preserve">
+    <value>Net loss</value>
+  </data>
+  <data name="_n_other-comprehensive-income" xml:space="preserve">
+    <value>Total other comprehensive loss</value>
+  </data>
+  <data name="_p_net-income" xml:space="preserve">
+    <value>Net income</value>
+  </data>
+  <data name="_p_other-comprehensive-income" xml:space="preserve">
+    <value>Total other comprehensive income</value>
+  </data>
+  <data name="__fdatel{0}" xml:space="preserve">
+    <value>As of {0:MMMM d, yyyy}</value>
+  </data>
+  <data name="__fdate{0}" xml:space="preserve">
+    <value>{0:MM/dd/yyyy}</value>
+  </data>
+  <data name="__ftspanl{0}{1}" xml:space="preserve">
+    <value>{0:MMMM d, yyyy} - {1:MMMM d, yyyy}</value>
+  </data>
+  <data name="__ftspans{0}{1}" xml:space="preserve">
+    <value>{0:MMM d} - {1:MMM d}</value>
   </data>
 </root>

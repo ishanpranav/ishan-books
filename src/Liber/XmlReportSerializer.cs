@@ -11,6 +11,10 @@ namespace Liber;
 
 public static class XmlReportSerializer
 {
+    private static readonly XsltSettings s_xsltSettings = new XsltSettings()
+    {
+        EnableDocumentFunction = true
+    };
     private static readonly XmlReaderSettings s_xslSettings = new XmlReaderSettings()
     {
         XmlResolver = s_resolver
@@ -22,36 +26,32 @@ public static class XmlReportSerializer
         NewLineOnAttributes = true
     };
 
-    public static XslStylesheet DeserializeStylesheet(string path)
-    {
-        using XmlReader xslReader = XmlReader.Create(path, s_xslSettings);
-
-        return (XslStylesheet)XmlSerializers.Stylesheet.Deserialize(xslReader)!;
-    }
-
     public static XslCompiledTransform DeserializeTransform(string path)
     {
         XslCompiledTransform result = new XslCompiledTransform();
 
         using XmlReader xslReader = XmlReader.Create(path, s_xslSettings);
 
-        result.Load(xslReader, settings: null, s_resolver);
+        result.Load(xslReader, s_xsltSettings, s_resolver);
 
         return result;
     }
 
-    public static string Serialize(XslCompiledTransform transform, Report report)
+    public static string Serialize(XslCompiledTransform transform, Report report, object extension)
     {
         using MemoryStream memoryStream = new MemoryStream();
-        using XmlReportWriter xmlWriter = new XmlReportWriter(memoryStream, report);
+        using XmlWriter xmlWriter = new XmlReportWriter(memoryStream, report);
 
         memoryStream.Seek(offset: 0, SeekOrigin.Begin);
 
-        using XmlReader xmlReader = XmlReader.Create(memoryStream);
+        using XmlReader xmlReader = XmlReader.Create(memoryStream, s_xslSettings);
         using StringWriter stringWriter = new StringWriter();
         using XmlWriter xhtmlWriter = XmlWriter.Create(stringWriter, s_xhtmlSettings);
 
-        transform.Transform(xmlReader, xhtmlWriter);
+        XsltArgumentList arguments = new XsltArgumentList();
+
+        arguments.AddExtensionObject("urn:liber", extension);
+        transform.Transform(xmlReader, arguments, xhtmlWriter, s_resolver);
 
         return stringWriter.ToString();
     }

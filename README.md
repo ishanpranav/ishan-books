@@ -24,9 +24,10 @@ __Reporting__
 - [ ] Equity statement
 
 __First-class data formats__
-- [X] JavaScript Object Notation (*.json)
-- [X] MessagePack (*.shbk)
-- [X] SQLite3 Database (*.db; *.sqlite)
+- [X] SharpBooks Company (*.shbk)
+- [X] JavaScript Object Notation (\*.json)
+- [X] MessagePack (\*.msgpack; \*.mpk)
+- [X] SQLite3 Database (\*.db; \*.sqlite)
 
 __Import-friendly formats__
 - [X] Comma-delimited (*.csv)
