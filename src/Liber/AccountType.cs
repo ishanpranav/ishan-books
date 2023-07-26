@@ -14,25 +14,25 @@ public enum AccountType : short
     None = 0,
 
     [Name("BANK", "CASH")]
-    Bank = 1100,
+    Bank = 11,
 
     [Name("CREDIT")]
-    CreditCard = -2100,
+    CreditCard = -21,
 
     [Name("EQUITY")]
-    Equity = -3000,
+    Equity = -30,
 
     [Name("EXPENSE")]
-    Expense = 6000,
+    Expense = 60,
 
     [Name("INCOME")]
-    Income = -4000,
+    Income = -40,
 
     [Name("ASSET", "A/RECEIVABLE")]
-    OtherCurrentAsset = 1300,
+    OtherCurrentAsset = 13,
 
     [Name("LIABILITY", "A/PAYABLE")]
-    OtherCurrentLiability = -2300,
+    OtherCurrentLiability = -23,
 
     [Name("EXPENSE")]
     Cost = 5000,
@@ -46,17 +46,14 @@ public enum AccountType : short
     [Name("LIABILITY")]
     LongTermLiability = -2600,
 
-    [Name("INCOME")]
-    OtherIncome = -4900,
-
-    [Name("EXPENSE")]
-    OtherExpense = 6900,
-
     [Name("EQUITY")]
     OtherComprehensiveIncome = -3900,
 
     [Name("EXPENSE")]
-    IncomeTaxExpense = 7000
+    IncomeTaxExpense = 7000,
+
+    [Name("EXPENSE")]
+    OtherIncomeExpense = 9000
 }
 
 public static class AccountTypeExtensions

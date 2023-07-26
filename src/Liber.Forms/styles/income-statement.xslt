@@ -44,94 +44,77 @@ Licensed under the MIT License.
                 <xsl:variable name="income" select="sum(company/account[type = 'Income']/debit) - sum(company/account[type = 'Income']/credit)"/>
                 <xsl:variable name="cost" select="sum(company/account[type = 'Cost']/debit) - sum(company/account[type = 'Cost']/credit)"/>
                 <xsl:variable name="expense" select="sum(company/account[type = 'Expense']/debit) - sum(company/account[type = 'Expense']/credit)"/>
-                <xsl:variable name="otherIncome" select="sum(company/account[type = 'OtherIncome']/debit) - sum(company/account[type = 'OtherIncome']/credit)"/>
-                <xsl:variable name="otherExpense" select="sum(company/account[type = 'OtherExpense']/debit) - sum(company/account[type = 'OtherExpense']/credit)"/>
+                <xsl:variable name="otherIncomeExpense" select="sum(company/account[type = 'OtherIncomeExpense']/debit) - sum(company/account[type = 'OtherIncomeExpense']/credit)"/>
                 <xsl:variable name="incomeTaxExpense" select="sum(company/account[type = 'IncomeTaxExpense']/debit) - sum(company/account[type = 'IncomeTaxExpense']/credit)"/>
                 <tbody>
                     <tr>
-                        <th class="in-1 left">Ordinary revenue and expenses</th>
+                        <th class="in-1 left">
+                            <xsl:value-of select="liber:gets('ordinary-income')"/>
+                        </th>
                         <th></th>
                     </tr>
                     <xsl:apply-templates select="company">
                         <xsl:with-param name="type">Income</xsl:with-param>
                         <xsl:with-param name="balance" select="$income"/>
-                        <xsl:with-param name="description">Revenues</xsl:with-param>
-                        <xsl:with-param name="total">Total revenue</xsl:with-param>
+                        <xsl:with-param name="description" select="liber:gets('revenues')"/>
+                        <xsl:with-param name="total" select="liber:gets('revenue')"/>
                         <xsl:with-param name="indent">3</xsl:with-param>
                         <xsl:with-param name="sign">-1</xsl:with-param>
                     </xsl:apply-templates>
                     <xsl:apply-templates select="company">
                         <xsl:with-param name="type">Cost</xsl:with-param>
                         <xsl:with-param name="balance" select="$cost"/>
-                        <xsl:with-param name="description">Costs of revenue</xsl:with-param>
-                        <xsl:with-param name="total">Total cost of revenue</xsl:with-param>
+                        <xsl:with-param name="description" select="liber:gets('costs-of-revenue')"/>
+                        <xsl:with-param name="total" select="liber:gets('cost-of-revenue')"/>
                         <xsl:with-param name="indent">3</xsl:with-param>
                     </xsl:apply-templates>
                     <tr>
-                        <th class="in-2 left">Gross profit</th>
+                        <th class="in-2 left">
+                            <xsl:value-of select="liber:pngets('gross-profit', -$income - $cost)"/>
+                        </th>
                         <td class="subtotal right">
-                            <xsl:call-template name="number">
-                                <xsl:with-param name="value" select="-$income - $cost"/>
-                            </xsl:call-template>
+                            <xsl:value-of select="liber:fm(-$income - $cost)"/>
                         </td>
                     </tr>
                     <xsl:apply-templates select="company">
                         <xsl:with-param name="type">Expense</xsl:with-param>
                         <xsl:with-param name="balance" select="$expense"/>
-                        <xsl:with-param name="description">Expenses</xsl:with-param>
-                        <xsl:with-param name="total">Total expense</xsl:with-param>
+                        <xsl:with-param name="description" select="liber:gets('expenses')"/>
+                        <xsl:with-param name="total" select="liber:gets('expense')"/>
                         <xsl:with-param name="indent">3</xsl:with-param>
                     </xsl:apply-templates>
                     <tr>
-                        <xsl:variable name="netOrdinaryIncome" select="-$income - $cost - $expense"/>
                         <th class="in-1 left">
-                            <xsl:choose>
-                                <xsl:when test="$netOrdinaryIncome &lt; 0">Net ordinary loss</xsl:when>
-                                <xsl:otherwise>Net ordinary income</xsl:otherwise>
-                            </xsl:choose>
+                            <xsl:value-of select="liber:pngets('ordinary-income', -$income - $cost - $expense)"/>
                         </th>
                         <td class="subtotal right">
-                            <xsl:call-template name="number">
-                                <xsl:with-param name="value" select="$netOrdinaryIncome"/>
-                            </xsl:call-template>
+                            <xsl:value-of select="liber:fm(-$income - $cost - $expense)"/>
                         </td>
                     </tr>
                     <xsl:apply-templates select="company">
-                        <xsl:with-param name="type">OtherIncome</xsl:with-param>
-                        <xsl:with-param name="balance" select="$otherIncome"/>
-                        <xsl:with-param name="description">Other income</xsl:with-param>
-                        <xsl:with-param name="total">Total other income</xsl:with-param>
+                        <xsl:with-param name="type">OtherIncomeExpense</xsl:with-param>
+                        <xsl:with-param name="balance" select="$otherIncomeExpense"/>
+                        <xsl:with-param name="description" select="liber:gets('other-income-expenses')"/>
+                        <xsl:with-param name="total" select="liber:gets('other-income-expense')"/>
                         <xsl:with-param name="indent">2</xsl:with-param>
                         <xsl:with-param name="sign">-1</xsl:with-param>
                     </xsl:apply-templates>
                     <xsl:apply-templates select="company">
-                        <xsl:with-param name="type">OtherExpense</xsl:with-param>
-                        <xsl:with-param name="balance" select="$otherExpense"/>
-                        <xsl:with-param name="description">Other expenses</xsl:with-param>
-                        <xsl:with-param name="total">Total other expense</xsl:with-param>
-                        <xsl:with-param name="indent">2</xsl:with-param>
-                    </xsl:apply-templates>
-                    <xsl:apply-templates select="company">
                         <xsl:with-param name="type">IncomeTaxExpense</xsl:with-param>
                         <xsl:with-param name="balance" select="$incomeTaxExpense"/>
-                        <xsl:with-param name="description">Income tax expense</xsl:with-param>
-                        <xsl:with-param name="total">Total income tax expense</xsl:with-param>
+                        <xsl:with-param name="description" select="liber:gets('income-tax-expenses')"/>
+                        <xsl:with-param name="total" select="liber:gets('income-tax-expense')"/>
                         <xsl:with-param name="indent">2</xsl:with-param>
                     </xsl:apply-templates>
                 </tbody>
                 <tfoot>
                     <tr>
-                        <xsl:variable name="netIncome" select="-$income - $otherIncome - $cost - $expense - $otherExpense - $incomeTaxExpense"/>
+                        <xsl:variable name="netIncome" select="-$income - $otherIncomeExpense - $cost - $expense - $incomeTaxExpense"/>
                         <th class="left">
-                            <xsl:choose>
-                                <xsl:when test="$netIncome &lt; 0">Net loss</xsl:when>
-                                <xsl:otherwise>Net income</xsl:otherwise>
-                            </xsl:choose>
+                            <xsl:value-of select="liber:pngets('net-income', $netIncome)"/>
                         </th>
                         <td class="total right">
-                            <xsl:call-template name="number">
-                                <xsl:with-param name="value" select="$netIncome"/>
-                            </xsl:call-template>
+                            <xsl:value-of select="liber:fm($netIncome)"/>
                         </td>
                     </tr>
                 </tfoot>

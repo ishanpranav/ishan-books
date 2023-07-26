@@ -121,8 +121,7 @@ public class Account : IXmlSerializable
                 case AccountType.Expense:
                 case AccountType.Income:
                 case AccountType.Cost:
-                case AccountType.OtherIncome:
-                case AccountType.OtherExpense:
+                case AccountType.OtherIncomeExpense:
                 case AccountType.IncomeTaxExpense:
                     return true;
 

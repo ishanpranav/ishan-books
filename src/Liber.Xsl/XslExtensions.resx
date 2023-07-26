@@ -129,6 +129,12 @@
   <data name="comprehensive-income-statement" xml:space="preserve">
     <value>Comprehensive Income Statement</value>
   </data>
+  <data name="cost-of-revenue" xml:space="preserve">
+    <value>Total cost of revenue</value>
+  </data>
+  <data name="costs-of-revenue" xml:space="preserve">
+    <value>Costs of revenue</value>
+  </data>
   <data name="credit" xml:space="preserve">
     <value>Credit</value>
   </data>
@@ -141,11 +147,23 @@
   <data name="description" xml:space="preserve">
     <value>Description</value>
   </data>
+  <data name="expense" xml:space="preserve">
+    <value>Total expense</value>
+  </data>
+  <data name="expenses" xml:space="preserve">
+    <value>Expenses</value>
+  </data>
   <data name="general-journal" xml:space="preserve">
     <value>General Journal</value>
   </data>
   <data name="income-statement" xml:space="preserve">
     <value>Income Statement</value>
+  </data>
+  <data name="income-tax-expense" xml:space="preserve">
+    <value>Total income tax expense</value>
+  </data>
+  <data name="income-tax-expenses" xml:space="preserve">
+    <value>Income tax expenses</value>
   </data>
   <data name="name" xml:space="preserve">
     <value>Name</value>
@@ -153,8 +171,23 @@
   <data name="number" xml:space="preserve">
     <value>Number</value>
   </data>
+  <data name="ordinary-income" xml:space="preserve">
+    <value>Ordinary revenue and expenses</value>
+  </data>
   <data name="other-comprehensive-income" xml:space="preserve">
     <value>Other comprehensive income</value>
+  </data>
+  <data name="other-income-expense" xml:space="preserve">
+    <value>Other income and expenses</value>
+  </data>
+  <data name="other-income-expenses" xml:space="preserve">
+    <value>Total other income and expenses</value>
+  </data>
+  <data name="revenue" xml:space="preserve">
+    <value>Total revenue</value>
+  </data>
+  <data name="revenues" xml:space="preserve">
+    <value>Revenues</value>
   </data>
   <data name="total" xml:space="preserve">
     <value>Total</value>
@@ -162,14 +195,26 @@
   <data name="trial-balance" xml:space="preserve">
     <value>Trial Balance</value>
   </data>
+  <data name="_n_gross-profit" xml:space="preserve">
+    <value>Gross loss</value>
+  </data>
   <data name="_n_net-income" xml:space="preserve">
     <value>Net loss</value>
+  </data>
+  <data name="_n_ordinary-income" xml:space="preserve">
+    <value>Net ordinary loss</value>
   </data>
   <data name="_n_other-comprehensive-income" xml:space="preserve">
     <value>Total other comprehensive loss</value>
   </data>
+  <data name="_p_gross-profit" xml:space="preserve">
+    <value>Gross profit</value>
+  </data>
   <data name="_p_net-income" xml:space="preserve">
     <value>Net income</value>
+  </data>
+  <data name="_p_ordinary-income" xml:space="preserve">
+    <value>Net ordinary income</value>
   </data>
   <data name="_p_other-comprehensive-income" xml:space="preserve">
     <value>Total other comprehensive income</value>

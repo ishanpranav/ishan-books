@@ -31,7 +31,7 @@
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="styles\income-statement.xslt">
-	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="styles\trial-balance.xslt">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
