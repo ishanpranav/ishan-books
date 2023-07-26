@@ -41,13 +41,29 @@ internal sealed partial class ReportsForm : Form
         InitializeReports(
             path: "styles",
             searchPattern: "*.xslt",
-            XslExtensions.GetString,
+            Report.GetString,
             x => new XslReportView(x));
+
+        string getString(string value)
+        {
+            return value;
+        }
+
+        IReportView createReportView(string path)
+        {
+            return new SkiaReportView(new DrawableCheck(path));
+        }
+
         InitializeReports(
             path: "checks",
             searchPattern: "*.chk",
-            x => x,
-            x => new SkiaReportView(new DrawableCheck(x)));
+            getString,
+            createReportView);
+        InitializeReports(
+            path: "checks",
+            searchPattern: "*.ini",
+            getString,
+            createReportView);
 
         startedDateTimePicker.Value = new DateTime(DateTime.Today.Year, 1, 1);
         postedDateTimePicker.Value = DateTime.Today;
@@ -79,7 +95,7 @@ internal sealed partial class ReportsForm : Form
             }
             catch
             {
-                continue;
+                throw; // continue;
             }
 
             string key = Path.GetFileNameWithoutExtension(file);
@@ -145,5 +161,23 @@ internal sealed partial class ReportsForm : Form
         startedDateTimePicker.MaxDate = postedDateTimePicker.Value;
 
         InitializeReport();
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            foreach (ListViewItem item in _listView.Items)
+            {
+                if (item.Tag is IDisposable disposable)
+                {
+                    disposable.Dispose();
+                }
+            }
+
+            components?.Dispose();
+        }
+
+        base.Dispose(disposing);
     }
 }

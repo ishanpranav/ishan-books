@@ -19,7 +19,7 @@ CodeDomProvider provider = new CSharpCodeProvider();
 namespace Liber.Sqlite;
 
 internal static class Queries
-{<# foreach (string path in Directory.GetFiles(Path.Combine(Path.GetDirectoryName(this.Host.TemplateFile), "queries"), "*.sql"))
+{<# foreach (string path in Directory.EnumerateFiles(Path.Combine(Path.GetDirectoryName(this.Host.TemplateFile), "queries"), "*.sql"))
     {
     
     StringWriter writer = new StringWriter();

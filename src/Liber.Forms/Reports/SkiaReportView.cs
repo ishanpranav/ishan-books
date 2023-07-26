@@ -2,6 +2,7 @@
 // Copyright (c) 2023 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.IO;
 using System.Threading.Tasks;
 using Liber.Skia;
@@ -10,21 +11,23 @@ using SkiaSharp;
 
 namespace Liber.Forms.Reports;
 
-internal sealed class SkiaReportView : IReportView
+internal sealed class SkiaReportView : IDisposable, IReportView
 {
-    private readonly SKDrawable _drawable;
+    private readonly DrawableReport _report;
 
-    public SkiaReportView(SKDrawable drawable)
+    public SkiaReportView(DrawableReport report)
     {
-        _drawable = drawable;
+        _report = report;
     }
 
     public void InitializeReport(CoreWebView2 coreWebView2, Report report)
     {
-        using FileStream output = File.Create("document.pdf");
+        using (FileStream output = File.Create("document.pdf"))
+        {
+            SkiaSerializer.SerializePdf(output, _report);
+        }
 
-        SkiaSerializer.SerializePdf(output, _drawable);
-        coreWebView2.Navigate("document.pdf");
+        coreWebView2.Navigate(Path.GetFullPath("document.pdf"));
     }
 
     public Task PrintAsync(string path)
@@ -36,15 +39,15 @@ internal sealed class SkiaReportView : IReportView
         switch (extension.ToUpperInvariant())
         {
             case ".PDF":
-                SkiaSerializer.SerializePdf(output, _drawable);
+                SkiaSerializer.SerializePdf(output, _report);
                 break;
 
             case ".XPS":
-                SkiaSerializer.SerializeXps(output, _drawable);
+                SkiaSerializer.SerializeXps(output, _report);
                 break;
 
             case ".PNG":
-                SkiaSerializer.SerializeImage(output, _drawable, SKEncodedImageFormat.Png);
+                SkiaSerializer.SerializeImage(output, _report, SKEncodedImageFormat.Png);
                 break;
 
             default:
@@ -53,5 +56,10 @@ internal sealed class SkiaReportView : IReportView
         }
 
         return Task.CompletedTask;
+    }
+
+    public void Dispose()
+    {
+        _report.Dispose();
     }
 }

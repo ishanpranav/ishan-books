@@ -10,6 +10,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="checks\1105.ini" />
+	  <None Remove="checks\quicken_3part.chk" />
 	  <None Remove="Properties\Resources.en.restext" />
 	  <None Remove="Properties\Resources.es-ES.restext" />
 	  <None Remove="styles\comprehensive-income-statement.xslt" />
@@ -18,6 +20,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Content Include="checks\quicken_3part.chk">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
 	  <Content Include="styles\financial-statement.css">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
@@ -39,6 +44,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Content Include="checks\1105.ini">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
 	  <EmbeddedResource Include="Properties\Resources.en.restext" />
 	  <EmbeddedResource Include="Properties\Resources.es-ES.restext" />
 	</ItemGroup>
@@ -50,7 +58,6 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\Liber.Skia\Liber.Skia.csproj" />
 	  <ProjectReference Include="..\Liber.Sqlite\Liber.Sqlite.csproj" />
-	  <ProjectReference Include="..\Liber.Xsl\Liber.Xsl.vcxproj" />
 	</ItemGroup>
 
 	<ItemGroup>

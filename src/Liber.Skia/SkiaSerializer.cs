@@ -2,45 +2,46 @@
 // Copyright (c) 2023 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
+using System.IO;
 using SkiaSharp;
 
 namespace Liber.Skia;
 
 public static class SkiaSerializer
 {
-    private static void Draw(SKCanvas canvas, SKDrawable drawable)
+    private static void Draw(SKCanvas canvas, DrawableReport report)
     {
-        drawable.Draw(canvas, x: 0, y: 0);
+        report.Draw(canvas, report.X, report.Y);
     }
 
-    private static void Serialize(SKDocument document, SKDrawable drawable)
+    private static void Serialize(SKDocument document, DrawableReport report)
     {
-        SKCanvas canvas = document.BeginPage(width: 256, height: 256);
+        using SKCanvas canvas = document.BeginPage(report.Width, report.Height);
 
-        Draw(canvas, drawable);
+        Draw(canvas, report);
         document.EndPage();
     }
 
-    public static void SerializePdf(Stream output, SKDrawable drawable)
+    public static void SerializePdf(Stream output, DrawableReport report)
     {
         using SKDocument document = SKDocument.CreatePdf(output);
 
-        Serialize(document, drawable);
+        Serialize(document, report);
     }
 
-    public static void SerializeXps(Stream output, SKDrawable drawable)
+    public static void SerializeXps(Stream output, DrawableReport report)
     {
         using SKDocument document = SKDocument.CreateXps(output);
 
-        Serialize(document, drawable);
+        Serialize(document, report);
     }
 
-    public static void SerializeImage(Stream output, SKDrawable drawable, SKEncodedImageFormat format)
+    public static void SerializeImage(Stream output, DrawableReport report, SKEncodedImageFormat format)
     {
-        SKBitmap bitmap = new SKBitmap();
-        SKCanvas canvas = new SKCanvas(bitmap);
-
-        Draw(canvas, drawable);
+        using SKBitmap bitmap = new SKBitmap();
+        using SKCanvas canvas = new SKCanvas(bitmap);
+        
+        Draw(canvas, report);
         bitmap.Encode(output, format, quality: 100);
     }
 }

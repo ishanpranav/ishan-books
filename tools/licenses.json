@@ -125,6 +125,15 @@
       "copyright": "2013-2022 Omar Khudeira (http://omar.io)",
       "license": "mit_khudeira",
       "index": "Khudeira, Omar"
+    },
+    {
+      "title": "ini-parser",
+      "formats": [ "c#" ],
+      "source": "https://github.com/rickyah/ini-parser",
+      "author": "Ricardo Amores Hernández",
+      "copyright": "2008 Ricardo Amores Hernández",
+      "license": "mit_hernandez",
+      "index": "Hernández, Ricardo Amores"
     }
   ],
   "references": [

@@ -32,7 +32,7 @@ internal sealed class XslReportView : IReportView
             s_styles[_path] = style;
         }
 
-        _xhtml = XmlReportSerializer.Serialize(style, report, new XslExtensions(report));
+        _xhtml = XmlReportSerializer.Serialize(style, report);
         _coreWebView2 = coreWebView2;
 
         coreWebView2.NavigateToString(_xhtml);

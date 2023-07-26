@@ -37,7 +37,7 @@ public static class XmlReportSerializer
         return result;
     }
 
-    public static string Serialize(XslCompiledTransform transform, Report report, object extension)
+    public static string Serialize(XslCompiledTransform transform, Report report)
     {
         using MemoryStream memoryStream = new MemoryStream();
         using XmlWriter xmlWriter = new XmlReportWriter(memoryStream, report);
@@ -50,7 +50,7 @@ public static class XmlReportSerializer
 
         XsltArgumentList arguments = new XsltArgumentList();
 
-        arguments.AddExtensionObject("urn:liber", extension);
+        arguments.AddExtensionObject("urn:liber", report);
         transform.Transform(xmlReader, arguments, xhtmlWriter, s_resolver);
 
         return stringWriter.ToString();
