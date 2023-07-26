@@ -7,12 +7,12 @@ using namespace System::Resources;
 
 String^ XslExtensions::fdate(DateTime value)
 {
-    return String::Format(GetString(L"__fdate{0}"), value);
+    return String::Format(gets(L"__fdate{0}"), value);
 }
 
 String^ XslExtensions::fdatel()
 {
-    return String::Format(GetString(L"__fdatel{0}"), _report->Posted);
+    return String::Format(gets(L"__fdatel{0}"), _report->Posted);
 }
 
 String^ XslExtensions::fm(Decimal value)
@@ -22,37 +22,37 @@ String^ XslExtensions::fm(Decimal value)
 
 String^ XslExtensions::ftspanl()
 {
-    return String::Format(GetString(L"__ftspanl{0}{1}"), _report->Started, _report->Posted);
+    return String::Format(gets(L"__ftspanl{0}{1}"), _report->Started, _report->Posted);
 }
 
 String^ XslExtensions::ftspans()
 {
-    return String::Format(GetString(L"__ftspans{0}{1}"), _report->Started, _report->Posted);
+    return String::Format(gets(L"__ftspans{0}{1}"), _report->Started, _report->Posted);
 }
 
 String^ XslExtensions::pngets(String^ key, Decimal value)
 {
     if (value < 0)
     {
-        return GetString(L"_n_" + key);
+        return gets(L"_n_" + key);
     }
 
-    return GetString(L"_p_" + key);
+    return gets(L"_p_" + key);
 }
 
 String^ XslExtensions::gets(String^ key)
 {
-    return GetString(key);
+    return GetString(key, _culture);
 }
 
-String^ XslExtensions::GetString(String^ key)
+String^ XslExtensions::GetString(String^ key, CultureInfo^ culture)
 {
     if (!s_resourceManager)
     {
         s_resourceManager = gcnew ResourceManager(XslExtensions::typeid);
     }
 
-    String^ result = s_resourceManager->GetString(key);
+    String^ result = s_resourceManager->GetString(key, culture);
 
     if (!result)
     {

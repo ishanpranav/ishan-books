@@ -3,21 +3,24 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Xml;
+using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace Liber;
 
 [XmlRoot("report")]
-public class Report
+public class Report : IXmlSerializable
 {
-    [XmlElement("company")]
-    public Company? Company { get; set; }
+    public Report(Company company, DateTime posted)
+    {
+        Company = company;
+        Posted = posted;
+    }
 
-    [XmlIgnore]
+    public Company Company { get; }
     public DateTime Started { get; set; }
-
-    [XmlIgnore]
-    public DateTime Posted { get; set; }
+    public DateTime Posted { get; }
 
     public Transaction MinTransaction
     {
@@ -39,5 +42,22 @@ public class Report
                 Posted = Posted
             };
         }
+    }
+
+    public XmlSchema? GetSchema()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void ReadXml(XmlReader reader)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void WriteXml(XmlWriter writer)
+    {
+        writer.WriteStartElement("company");
+        XmlSerializers.Company.Serialize(writer, Company);
+        writer.WriteEndElement();
     }
 }

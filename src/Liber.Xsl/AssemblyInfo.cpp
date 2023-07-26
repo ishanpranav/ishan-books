@@ -2,6 +2,7 @@
 
 using namespace System;
 using namespace System::Reflection;
+using namespace System::Resources;
 using namespace System::Runtime::CompilerServices;
 using namespace System::Runtime::InteropServices;
 using namespace System::Security::Permissions;
@@ -14,7 +15,6 @@ using namespace System::Security::Permissions;
 [assembly:AssemblyCopyrightAttribute(L"Copyright (c) 2023 Ishan Pranav")];
 [assembly:AssemblyTrademarkAttribute(L"")];
 [assembly:AssemblyCultureAttribute(L"")];
-
 [assembly:AssemblyVersionAttribute(L"1.0.*")];
-
 [assembly:ComVisible(false)];
+[assembly:NeutralResourcesLanguage(L"en-US")];

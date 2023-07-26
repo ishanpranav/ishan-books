@@ -168,10 +168,7 @@
   <data name="OtherCurrentLiability" xml:space="preserve">
     <value>Other Current Liability</value>
   </data>
-  <data name="OtherExpense" xml:space="preserve">
-    <value>Other Expense</value>
-  </data>
-  <data name="OtherIncome" xml:space="preserve">
-    <value>Other Income</value>
+  <data name="OtherIncomeExpense" xml:space="preserve">
+    <value>Other Income/Expense</value>
   </data>
 </root>

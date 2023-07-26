@@ -53,7 +53,7 @@ public enum AccountType : short
     IncomeTaxExpense = 7000,
 
     [Name("EXPENSE")]
-    OtherIncomeExpense = 9000
+    OtherIncomeExpense = -90
 }
 
 public static class AccountTypeExtensions

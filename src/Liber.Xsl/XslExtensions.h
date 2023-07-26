@@ -4,6 +4,7 @@
 #pragma once
 
 using namespace System;
+using namespace System::Globalization;
 using namespace System::Resources;
 
 namespace Liber
@@ -11,9 +12,10 @@ namespace Liber
     public ref class XslExtensions
     {
     public:
-        XslExtensions(Report^ report)
+        XslExtensions(Report^ report, CultureInfo^ culture)
         {
             _report = report;
+            _culture = culture;
         }
 
         String^ fdate(DateTime value);
@@ -24,10 +26,12 @@ namespace Liber
         String^ pngets(String^ key, Decimal value);
         String^ gets(String^ key);
 
-        static String^ GetString(String^ key);
+        static String^ GetString(String^ key, CultureInfo^ culture);
 
     private:
-        Report^ _report;
         static ResourceManager^ s_resourceManager;
+
+        Report^ _report;
+        CultureInfo^ _culture;
     };
 }

@@ -126,9 +126,6 @@
   <data name="Asset" xml:space="preserve">
     <value>Activo</value>
   </data>
-  <data name="Equity" xml:space="preserve">
-    <value>Patrimonio</value>
-  </data>
   <data name="Bank" xml:space="preserve">
     <value>Banco</value>
   </data>
@@ -137,6 +134,9 @@
   </data>
   <data name="CreditCard" xml:space="preserve">
     <value>Tarjeta de crédito</value>
+  </data>
+  <data name="Equity" xml:space="preserve">
+    <value>Patrimonio</value>
   </data>
   <data name="Expense" xml:space="preserve">
     <value>Gasto</value>
@@ -147,6 +147,9 @@
   <data name="Income" xml:space="preserve">
     <value>Ingreso</value>
   </data>
+  <data name="IncomeTaxExpense" xml:space="preserve">
+    <value>Impuesto sobre la renta</value>
+  </data>
   <data name="LongTermLiability" xml:space="preserve">
     <value>Pasivo a largo plazo</value>
   </data>
@@ -155,12 +158,6 @@
   </data>
   <data name="OtherAsset" xml:space="preserve">
     <value>Otro activo</value>
-  </data>
-  <data name="OtherIncome" xml:space="preserve">
-    <value>Otro ingreso</value>
-  </data>
-  <data name="OtherExpense" xml:space="preserve">
-    <value>Otro gasto</value>
   </data>
   <data name="OtherComprehensiveIncome" xml:space="preserve">
     <value>Otro resultado integral</value>
@@ -171,7 +168,10 @@
   <data name="OtherCurrentLiability" xml:space="preserve">
     <value>Otro pasivo circulante</value>
   </data>
-  <data name="IncomeTaxExpense" xml:space="preserve">
-    <value>Impuesto sobre la renta</value>
+  <data name="OtherExpense" xml:space="preserve">
+    <value>Otro gasto</value>
+  </data>
+  <data name="OtherIncome" xml:space="preserve">
+    <value>Otro ingreso</value>
   </data>
 </root>

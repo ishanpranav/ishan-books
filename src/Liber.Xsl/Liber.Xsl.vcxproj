@@ -139,7 +139,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="XslExtensions.es.resx" />
+    <EmbeddedResource Include="XslExtensions.es-ES.resx">
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Liber.XslExtensions.es-ES.resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="XslExtensions.es.resx">
+      <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Liber.XslExtensions.es.resources</LogicalName>
+    </EmbeddedResource>
     <EmbeddedResource Include="XslExtensions.resx">
       <LogicalName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Liber.XslExtensions.resources</LogicalName>
     </EmbeddedResource>

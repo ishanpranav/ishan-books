@@ -67,7 +67,7 @@ public class Line : IXmlSerializable
     [Ignore]
     [IgnoreMember]
     [JsonIgnore]
-    public Transaction? Transaction { get; internal set; } 
+    public Transaction? Transaction { get; internal set; }
 
     public XmlSchema? GetSchema()
     {

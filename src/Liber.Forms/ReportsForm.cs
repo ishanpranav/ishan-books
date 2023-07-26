@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
@@ -56,7 +57,7 @@ internal sealed partial class ReportsForm : Form
         foreach (string file in files)
         {
             string key = Path.GetFileNameWithoutExtension(file);
-            ListViewItem item = _listView.Items.Add(XslExtensions.GetString(key));
+            ListViewItem item = _listView.Items.Add(XslExtensions.GetString(key, CultureInfo.CurrentUICulture));
 
             item.ImageIndex = 0;
             item.Tag = file;
@@ -79,14 +80,12 @@ internal sealed partial class ReportsForm : Form
             s_styles[_file] = style;
         }
 
-        Report report = new Report()
+        Report report = new Report(_company, postedDateTimePicker.Value)
         {
-            Company = _company,
-            Started = startedDateTimePicker.Value,
-            Posted = postedDateTimePicker.Value
+            Started = startedDateTimePicker.Value
         };
 
-        _xhtml = XmlReportSerializer.Serialize(style, report, new XslExtensions(report));
+        _xhtml = XmlReportSerializer.Serialize(style, report, new XslExtensions(report, CultureInfo.CurrentUICulture));
 
         _webView.NavigateToString(_xhtml);
     }

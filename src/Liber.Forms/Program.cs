@@ -19,7 +19,10 @@ internal static class Program
 
         if (!string.IsNullOrWhiteSpace(Settings.Default.Culture))
         {
-            CultureInfo.CurrentUICulture = new CultureInfo(Settings.Default.Culture);
+            CultureInfo culture = new CultureInfo(Settings.Default.Culture);
+
+            CultureInfo.CurrentCulture = culture;
+            CultureInfo.CurrentUICulture = culture;
         }
 
         IReadOnlyList<string> arguments;
