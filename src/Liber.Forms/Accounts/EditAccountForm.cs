@@ -19,6 +19,7 @@ internal sealed class EditAccountForm : AccountForm
         descriptionTextBox.Text = account.Description;
         memoTextBox.Text = account.Memo;
         _colorButton.BackColor = account.Color;
+        _colorButton.ForeColor = Colors.GetForeColor(company.Color);
         Type = account.Type;
         ParentId = account.ParentId;
         TaxType = account.TaxType;

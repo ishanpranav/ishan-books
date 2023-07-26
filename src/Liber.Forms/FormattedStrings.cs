@@ -7,7 +7,7 @@ using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Liber.Properties;
+using System.Windows.Forms;
 
 namespace Liber;
 
@@ -47,16 +47,22 @@ internal static class FormattedStrings
 
     public static string GetCancelText(this Company company)
     {
-        return string.Format(GetString("CancelText"), company.Name ?? Resources.DefaultCompanyName);
+        return string.Format(GetString("CancelText"), company.Name ?? Properties.Resources.DefaultCompanyName);
     }
 
-    public static string GetNotSupportedText(string extension)
+    public static void ShowNotSupportedMessage(string extension)
     {
+        string text;
+
         if (extension.Length == 0)
         {
-            return GetString("NotSupportedText_0");
+            text = GetString("NotSupportedText_0");
+        }
+        else
+        {
+            text = string.Format(GetString("NotSupportedText_1"), extension.Substring(1).ToUpper());
         }
 
-        return string.Format(GetString("NotSupportedText_1"), extension.Substring(1).ToUpper());
+        MessageBox.Show(Forms.Properties.Resources.ExceptionCaption, text, MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
 }

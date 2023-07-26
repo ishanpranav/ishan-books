@@ -85,7 +85,7 @@ public static class GnuCashSerializer
             foreach (Line line in transaction.Lines)
             {
                 Account account = company.Accounts[line.AccountId];
-                string balanceWithSymbol = line.Balance.ToString("c2");
+                string balanceWithSymbol = line.Balance.ToString("c");
 
                 lines.Add(new GnuCashLine()
                 {

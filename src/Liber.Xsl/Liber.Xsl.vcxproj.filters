@@ -39,5 +39,8 @@
     <EmbeddedResource Include="XslExtensions.es.resx">
       <Filter>Resource Files</Filter>
     </EmbeddedResource>
+    <EmbeddedResource Include="XslExtensions.es-ES.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

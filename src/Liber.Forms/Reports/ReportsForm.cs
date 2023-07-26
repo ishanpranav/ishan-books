@@ -3,26 +3,20 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
-using System.Xml.Xsl;
-using Liber.Forms.Properties;
+using Liber.Skia;
 using Microsoft.Web.WebView2.Core;
 
-namespace Liber.Forms;
+namespace Liber.Forms.Reports;
 
 internal sealed partial class ReportsForm : Form
 {
-    private static readonly Dictionary<string, XslCompiledTransform> s_styles = new Dictionary<string, XslCompiledTransform>();
-
     private readonly Company _company;
 
-    private string? _xhtml;
-    private string? _file;
+    private IReportView? _view;
 
     public ReportsForm(Company company)
     {
@@ -44,55 +38,74 @@ internal sealed partial class ReportsForm : Form
         };
 
         _webView.CoreWebView2.SetVirtualHostNameToFolderMapping("liber.example", Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)!, CoreWebView2HostResourceAccessKind.DenyCors);
+        InitializeReports(
+            path: "styles",
+            searchPattern: "*.xslt",
+            XslExtensions.GetString,
+            x => new XslReportView(x));
+        InitializeReports(
+            path: "checks",
+            searchPattern: "*.chk",
+            x => x,
+            x => new SkiaReportView(new DrawableCheck(x)));
 
-        string[] files = Directory.GetFiles("styles", "*.xslt");
+        startedDateTimePicker.Value = new DateTime(DateTime.Today.Year, 1, 1);
+        postedDateTimePicker.Value = DateTime.Today;
+    }
+
+    private void InitializeReports(string path, string searchPattern, Func<string, string> stringAccessor, Func<string, IReportView> reportViewFactory)
+    {
+        string[] files = Directory.GetFiles(path, searchPattern);
 
         if (files.Length == 0)
         {
             return;
         }
 
-        _imageList.Images.Add(Icon.ExtractAssociatedIcon(files[0])!);
+        Icon? icon = Icon.ExtractAssociatedIcon(files[0]);
+
+        if (icon != null)
+        {
+            _imageList.Images.Add(icon);
+        }
 
         foreach (string file in files)
         {
+            IReportView reportView;
+
+            try
+            {
+                reportView = reportViewFactory(file);
+            }
+            catch
+            {
+                continue;
+            }
+
             string key = Path.GetFileNameWithoutExtension(file);
-            ListViewItem item = _listView.Items.Add(XslExtensions.GetString(key, CultureInfo.CurrentUICulture));
+            ListViewItem item = _listView.Items.Add(stringAccessor(key));
 
-            item.ImageIndex = 0;
-            item.Tag = file;
+            item.ImageIndex = _imageList.Images.Count - 1;
+            item.Tag = reportView;
         }
-
-        startedDateTimePicker.Value = new DateTime(DateTime.Today.Year, 1, 1);
-        postedDateTimePicker.Value = DateTime.Today;
     }
 
     private void InitializeReport()
     {
-        if (_file == null)
+        if (_view == null)
         {
             return;
         }
 
-        if (!s_styles.TryGetValue(_file, out XslCompiledTransform? style))
-        {
-            style = XmlReportSerializer.DeserializeTransform(_file);
-            s_styles[_file] = style;
-        }
-
-        Report report = new Report(_company, postedDateTimePicker.Value)
+        _view.InitializeReport(_webView.CoreWebView2, new Report(_company, postedDateTimePicker.Value)
         {
             Started = startedDateTimePicker.Value
-        };
-
-        _xhtml = XmlReportSerializer.Serialize(style, report, new XslExtensions(report, CultureInfo.CurrentUICulture));
-
-        _webView.NavigateToString(_xhtml);
+        });
     }
 
     private void OnListViewItemActivate(object sender, EventArgs e)
     {
-        _file = (string)_listView.SelectedItems[0].Tag;
+        _view = (IReportView)_listView.SelectedItems[0].Tag;
         saveAsToolStripButton.Enabled = true;
         saveAsToolStripMenuItem.Enabled = true;
         printPreviewToolStripButton.Enabled = true;
@@ -112,28 +125,12 @@ internal sealed partial class ReportsForm : Form
 
     private async void OnSaveAsToolStripButtonClick(object sender, EventArgs e)
     {
-        if (_saveFileDialog.ShowDialog() != DialogResult.OK)
+        if (_view == null || _saveFileDialog.ShowDialog() != DialogResult.OK)
         {
             return;
         }
 
-        string extension = Path.GetExtension(_saveFileDialog.FileName);
-
-        switch (extension.ToUpperInvariant())
-        {
-            case ".PDF":
-                await _webView.CoreWebView2.PrintToPdfAsync(_saveFileDialog.FileName);
-                break;
-
-            case ".HTM":
-            case ".HTML":
-                await File.WriteAllTextAsync(_saveFileDialog.FileName, _xhtml);
-                break;
-
-            default:
-                MessageBox.Show(Resources.ExceptionCaption, FormattedStrings.GetNotSupportedText(extension), MessageBoxButtons.OK, MessageBoxIcon.Error);
-                break;
-        }
+        await _view.PrintAsync(_saveFileDialog.FileName);
     }
 
     private void OnStartedDateTimePickerValueChanged(object sender, EventArgs e)

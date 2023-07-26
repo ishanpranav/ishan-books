@@ -26,6 +26,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Liber.Sqlite", "src\Liber.S
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Liber.Xsl", "src\Liber.Xsl\Liber.Xsl.vcxproj", "{A7E9F9EA-90A4-46D3-A142-AA8F0EE90731}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Liber.Skia", "src\Liber.Skia\Liber.Skia.csproj", "{6283574A-6A41-4194-86AA-4202C3C1D891}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -120,13 +122,33 @@ Global
 		{A7E9F9EA-90A4-46D3-A142-AA8F0EE90731}.Release|x64.Build.0 = Release|x64
 		{A7E9F9EA-90A4-46D3-A142-AA8F0EE90731}.Release|x86.ActiveCfg = Release|Win32
 		{A7E9F9EA-90A4-46D3-A142-AA8F0EE90731}.Release|x86.Build.0 = Release|Win32
+		{6283574A-6A41-4194-86AA-4202C3C1D891}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6283574A-6A41-4194-86AA-4202C3C1D891}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6283574A-6A41-4194-86AA-4202C3C1D891}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{6283574A-6A41-4194-86AA-4202C3C1D891}.Debug|ARM.Build.0 = Debug|Any CPU
+		{6283574A-6A41-4194-86AA-4202C3C1D891}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{6283574A-6A41-4194-86AA-4202C3C1D891}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{6283574A-6A41-4194-86AA-4202C3C1D891}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6283574A-6A41-4194-86AA-4202C3C1D891}.Debug|x64.Build.0 = Debug|Any CPU
+		{6283574A-6A41-4194-86AA-4202C3C1D891}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6283574A-6A41-4194-86AA-4202C3C1D891}.Debug|x86.Build.0 = Debug|Any CPU
+		{6283574A-6A41-4194-86AA-4202C3C1D891}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6283574A-6A41-4194-86AA-4202C3C1D891}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6283574A-6A41-4194-86AA-4202C3C1D891}.Release|ARM.ActiveCfg = Release|Any CPU
+		{6283574A-6A41-4194-86AA-4202C3C1D891}.Release|ARM.Build.0 = Release|Any CPU
+		{6283574A-6A41-4194-86AA-4202C3C1D891}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{6283574A-6A41-4194-86AA-4202C3C1D891}.Release|ARM64.Build.0 = Release|Any CPU
+		{6283574A-6A41-4194-86AA-4202C3C1D891}.Release|x64.ActiveCfg = Release|Any CPU
+		{6283574A-6A41-4194-86AA-4202C3C1D891}.Release|x64.Build.0 = Release|Any CPU
+		{6283574A-6A41-4194-86AA-4202C3C1D891}.Release|x86.ActiveCfg = Release|Any CPU
+		{6283574A-6A41-4194-86AA-4202C3C1D891}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		RESX_ConfirmAddLanguageFile = True
-		RESX_SortFileContentOnSave = True
 		SolutionGuid = {9170A1F4-FAEF-448C-A8BC-A2D0D54864C8}
+		RESX_SortFileContentOnSave = True
+		RESX_ConfirmAddLanguageFile = True
 	EndGlobalSection
 EndGlobal

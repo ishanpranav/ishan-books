@@ -17,7 +17,7 @@ String^ XslExtensions::fdatel()
 
 String^ XslExtensions::fm(Decimal value)
 {
-    return String::Format(L"{0:#,##0.00 ;(#,##0.00);-   }", value);
+    return DecimalExtensions::ToLocalizedString(value);
 }
 
 String^ XslExtensions::ftspanl()
@@ -42,17 +42,17 @@ String^ XslExtensions::pngets(String^ key, Decimal value)
 
 String^ XslExtensions::gets(String^ key)
 {
-    return GetString(key, _culture);
+    return GetString(key);
 }
 
-String^ XslExtensions::GetString(String^ key, CultureInfo^ culture)
+String^ XslExtensions::GetString(String^ key)
 {
     if (!s_resourceManager)
     {
         s_resourceManager = gcnew ResourceManager(XslExtensions::typeid);
     }
 
-    String^ result = s_resourceManager->GetString(key, culture);
+    String^ result = s_resourceManager->GetString(key);
 
     if (!result)
     {

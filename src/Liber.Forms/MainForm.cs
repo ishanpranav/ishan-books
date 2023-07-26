@@ -14,6 +14,7 @@ using System.Xml;
 using Liber.Forms.Accounts;
 using Liber.Forms.Companies;
 using Liber.Forms.Properties;
+using Liber.Forms.Reports;
 using Liber.Forms.Transactions;
 using Liber.Sqlite;
 using MessagePack;
@@ -380,7 +381,7 @@ internal sealed partial class MainForm : Form
                     break;
 
                 default:
-                    MessageBox.Show(Resources.ExceptionCaption, FormattedStrings.GetNotSupportedText(extension), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    FormattedStrings.ShowNotSupportedMessage(extension);
                     break;
             }
 

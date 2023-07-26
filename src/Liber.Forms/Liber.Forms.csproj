@@ -48,6 +48,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\Liber.Skia\Liber.Skia.csproj" />
 	  <ProjectReference Include="..\Liber.Sqlite\Liber.Sqlite.csproj" />
 	  <ProjectReference Include="..\Liber.Xsl\Liber.Xsl.vcxproj" />
 	</ItemGroup>

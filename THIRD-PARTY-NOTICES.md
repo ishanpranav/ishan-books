@@ -15,17 +15,10 @@ Dependencies
 This section contains notices for binary dependencies redistributed alongside
 the application.
 
-### .NET Runtime&emsp;<sub><sup>*c\#*&ensp;*c++*&ensp;*c*&ensp;</sup></sub>
-- Author: .NET Foundation and Contributors
-- Source: [dotnet/runtime](https://github.com/dotnet/runtime)
-- License: [MIT](#mit_dotnet)
-
-For more information about this software, please see its [third-party notices](https://github.com/dotnet/runtime/blob/main/THIRD-PARTY-NOTICES.TXT).
-
 ### CsvHelper&emsp;<sub><sup>*c\#*&ensp;*css*&ensp;</sup></sub>
 - Author: Josh Close
 - Source: [JoshClose/CsvHelper](https://github.com/JoshClose/CsvHelper)
-- License: [MS-PL and Apache 2.0](#csvhelper)
+- License: [Microsoft Public License and Apache license 2.0](#csvhelper)
 
 ### MessagePack for C\#&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
 - Author: Yoshifumi Kawai
@@ -34,15 +27,47 @@ For more information about this software, please see its [third-party notices](h
 
 For more information about this software, please see its [third-party notices](https://github.com/neuecc/MessagePack-CSharp/blob/master/LICENSE).
 
+### ByteSize&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
+- Author: Omar Khudeira
+- Source: [omar/ByteSize](https://github.com/omar/ByteSize)
+- License: [MIT](#mit_khudeira)
+
+### Inflector&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
+- Author: Scott Kirkland
+- Source: [srkirkland/Inflector](https://github.com/srkirkland/Inflector)
+- License: [MIT](#mit_kirkland)
+
 ### lz4net&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
 - Author: Milosz Krajewski
 - Source: [MiloszKrajewski/lz4net](https://github.com/MiloszKrajewski/lz4net)
 - License: [BSD 2-clause "Simplified" license](#bsd-2-clause_krajewski)
 
+### .NET Runtime&emsp;<sub><sup>*c\#*&ensp;*c++*&ensp;*c*&ensp;</sup></sub>
+- Author: .NET Foundation and contributors
+- Source: [dotnet/runtime](https://github.com/dotnet/runtime)
+- License: [MIT](#mit_dotnet)
+
+For more information about this software, please see its [third-party notices](https://github.com/dotnet/runtime/blob/main/THIRD-PARTY-NOTICES.TXT).
+
 ### Microsoft Edge WebView2&emsp;<sub><sup>*c++*&ensp;</sup></sub>
 - Author: Microsoft Corporation
 - Source: [https://developer.microsoft.com/en-us/microsoft-edge/webview2](https://developer.microsoft.com/en-us/microsoft-edge/webview2)
 - License: [BSD 3-clause "New" or "Revised" license](#bsd-3-clause-microsoft)
+
+### Microsoft.Data.Sqlite&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
+- Author: .NET Foundation and contributors
+- Source: [dotnet/efcore](https://github.com/dotnet/efcore)
+- License: [MIT](#mit_dotnet)
+
+### SkiaSharp&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
+- Author: Microsoft Corporation; Xamarin, Inc.
+- Source: [mono/SkiaSharp](https://github.com/mono/SkiaSharp)
+- License: [MIT](#mit-skiasharp)
+
+### Humanizer&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
+- Author: .NET Foundation and contributors
+- Source: [Humanizr/Humanizer](https://github.com/Humanizr/Humanizer)
+- License: [MIT](#mit_dotnet)
 
 ### SQLitePCL.raw&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
 - Author: Erik Sink
@@ -52,7 +77,7 @@ For more information about this software, please see its [third-party notices](h
 For more information about this software, please see its [third-party notices](https://raw.githubusercontent.com/ericsink/SQLitePCL.raw/master/NOTICE.TXT).
 
 ### SQLite&emsp;<sub><sup>*c*&ensp;</sup></sub>
-- Author: SQLite Contributors
+- Author: SQLite contributors
 - Source: [https://sqlite.org](https://sqlite.org)
 
 ### SQLCipher&emsp;<sub><sup>*c*&ensp;*tcl*&ensp;</sup></sub>
@@ -64,6 +89,9 @@ References
 ----------
 This section contains references to parts of the source code based on or
 inspired by third-party open-source software.
+
+### Luma&emsp;<sub><sup></sup></sub>
+- Source: [Luma (video) - Wikipedia](https://en.wikipedia.org/wiki/Luma_(video))
 
 Resources
 ---------
@@ -503,7 +531,7 @@ For more information, please see
 ```
 ________________________________________________________________________________
 
-### <a id='csvhelper'>MS-PL and Apache 2.0</a>
+### <a id='csvhelper'>Microsoft Public License and Apache license 2.0</a>
 
 ```
 Dual licensing under MS-PL and Apache 2.0
@@ -664,5 +692,85 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+```
+________________________________________________________________________________
+
+### <a id='mit_khudeira'>MIT</a>
+
+```
+The MIT License (MIT)
+
+Copyright 2013-2022 Omar Khudeira (http://omar.io)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the “Software”), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+```
+________________________________________________________________________________
+
+### <a id='mit_kirkland'>MIT</a>
+
+```
+The MIT License (MIT)
+
+Copyright 2013 Scott Kirkland
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the “Software”), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+```
+________________________________________________________________________________
+
+### <a id='mit-skiasharp'>MIT</a>
+
+```
+Copyright (c) 2015-2016 Xamarin, Inc.
+Copyright (c) 2017-2018 Microsoft Corporation.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 ```
 ________________________________________________________________________________

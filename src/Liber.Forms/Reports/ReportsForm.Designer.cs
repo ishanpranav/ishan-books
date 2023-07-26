@@ -1,4 +1,4 @@
-﻿namespace Liber.Forms
+﻿namespace Liber.Forms.Reports
 {
     partial class ReportsForm
     {

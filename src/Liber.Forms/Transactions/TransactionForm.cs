@@ -53,11 +53,8 @@ internal sealed partial class TransactionForm : Form
         nameComboBox.DataSource = array;
         debitColumn.ValueType = typeof(decimal);
         creditColumn.ValueType = typeof(decimal);
-
-        if (!_company.Color.IsEmpty)
-        {
-            _dataGridView.AlternatingRowsDefaultCellStyle.BackColor = _company.Color;
-        }
+        _dataGridView.AlternatingRowsDefaultCellStyle.BackColor = _company.Color;
+        _dataGridView.AlternatingRowsDefaultCellStyle.ForeColor = Colors.GetForeColor(_company.Color);
 
         _dataGridView.AutoResizeColumns();
         CreateNew();

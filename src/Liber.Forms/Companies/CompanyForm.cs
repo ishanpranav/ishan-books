@@ -23,6 +23,7 @@ internal abstract partial class CompanyForm : Form
         DialogResult = DialogResult.Cancel;
         nameTextBox.Text = company.Name;
         _colorButton.BackColor = company.Color;
+        _colorButton.ForeColor = Colors.GetForeColor(company.Color);
         passwordTextBox.Text = company.Password;
     }
 

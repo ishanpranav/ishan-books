@@ -12,10 +12,9 @@ namespace Liber
     public ref class XslExtensions
     {
     public:
-        XslExtensions(Report^ report, CultureInfo^ culture)
+        XslExtensions(Report^ report)
         {
             _report = report;
-            _culture = culture;
         }
 
         String^ fdate(DateTime value);
@@ -26,12 +25,11 @@ namespace Liber
         String^ pngets(String^ key, Decimal value);
         String^ gets(String^ key);
 
-        static String^ GetString(String^ key, CultureInfo^ culture);
+        static String^ GetString(String^ key);
 
     private:
         static ResourceManager^ s_resourceManager;
 
         Report^ _report;
-        CultureInfo^ _culture;
     };
 }

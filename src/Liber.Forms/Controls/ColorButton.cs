@@ -5,6 +5,7 @@
 using System.ComponentModel;
 using System.Text.Json;
 using Liber;
+using Liber.Forms;
 using Liber.Forms.Properties;
 
 namespace System.Windows.Forms;
@@ -24,6 +25,7 @@ internal sealed class ColorButton : Button
         if (colorDialog.ShowDialog() == DialogResult.OK)
         {
             BackColor = colorDialog.Color;
+            ForeColor = Colors.GetForeColor(colorDialog.Color);
             Settings.Default.CustomColors = JsonSerializer.Serialize(colorDialog.CustomColors);
 
             Settings.Default.Save();
