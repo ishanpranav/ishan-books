@@ -68,6 +68,7 @@
 
 *.generated.cs linguist-generated
 *.sql linguist-language=sql
+*.chk linguist-language=ini
 *.manifest binary
 *.application binary
 *.deploy binary

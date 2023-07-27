@@ -11,6 +11,10 @@
     "mit-humanizer": {
       "title": "MIT",
       "url": "https://raw.githubusercontent.com/Humanizr/Humanizer/main/LICENSE"
+    },
+    "gpl-gnucash": {
+      "title": "GNU General Public License family",
+      "url": "https://raw.githubusercontent.com/Gnucash/gnucash/stable/LICENSE"
     }
   },
   "dependencies": [
@@ -134,6 +138,79 @@
       "copyright": "2008 Ricardo Amores Hernández",
       "license": "mit_hernandez",
       "index": "Hernández, Ricardo Amores"
+    },
+    {
+      "title": "Deluxe:tm: Personal Checks US-Letter",
+      "formats": [ "ini" ],
+      "source": "https://github.com/Gnucash/gnucash",
+      "author": "GnuCash contributors",
+      "license": "gpl-gnucash",
+      "resource": "https://github.com/Gnucash/gnucash/blob/stable/data/checks/deluxe.chk",
+      "index": "GnuCash"
+    },
+    {
+      "title": "Liberty:tm: Personal Checks US-Letter",
+      "formats": [ "ini" ],
+      "source": "https://github.com/Gnucash/gnucash",
+      "author": "GnuCash contributors",
+      "license": "gpl-gnucash",
+      "resource": "https://github.com/Gnucash/gnucash/blob/stable/data/checks/liberty.chk",
+      "index": "GnuCash"
+    },
+    {
+      "title": "Quicken:tm:/QuickBooks:tm: US-Letter",
+      "formats": [ "ini" ],
+      "source": "https://github.com/Gnucash/gnucash",
+      "author": "GnuCash contributors",
+      "license": "gpl-gnucash",
+      "resource": "https://github.com/Gnucash/gnucash/blob/stable/data/checks/quicken.chk",
+      "index": "GnuCash"
+    },
+    {
+      "title": "Quicken:tm:/QuickBooks:tm: 3-Part US-Letter",
+      "formats": [ "ini" ],
+      "source": "https://github.com/Gnucash/gnucash",
+      "author": "GnuCash contributors",
+      "license": "gpl-gnucash",
+      "resource": "https://github.com/Gnucash/gnucash/blob/stable/data/checks/quicken_3part.chk",
+      "index": "GnuCash"
+    },
+    {
+      "title": "Quicken:tm: Check-21",
+      "formats": [ "ini" ],
+      "source": "https://github.com/Gnucash/gnucash",
+      "author": "GnuCash contributors",
+      "license": "gpl-gnucash",
+      "resource": "https://github.com/Gnucash/gnucash/blob/stable/data/checks/quicken_check_21.chk",
+      "index": "GnuCash"
+    },
+    {
+      "title": "Quicken:tm: Wallet Checks with Side Stub",
+      "formats": [ "ini" ],
+      "source": "https://github.com/Gnucash/gnucash",
+      "author": "GnuCash contributors",
+      "license": "gpl-gnucash",
+      "resource": "https://github.com/Gnucash/gnucash/blob/stable/data/checks/quicken_wallet.chk",
+      "index": "GnuCash"
+    },
+    {
+      "title": "Voucher Check 3-Part US-Letter",
+      "formats": [ "ini" ],
+      "source": "https://github.com/Gnucash/gnucash",
+      "author": "GnuCash contributors",
+      "license": "gpl-gnucash",
+      "resource": "https://github.com/Gnucash/gnucash/blob/stable/data/checks/voucher.chk",
+      "index": "GnuCash"
+    },
+    {
+      "title": "CPA 006 Cheque in Middle ASAP Cheques",
+      "formats": [ "ini" ],
+      "source": "https://github.com/dougransom/CPA-006-Asap-Cheques",
+      "author": "Doug Ransom",
+      "license": "mit_ransom",
+      "copyright": "2017 Doug Ransom",
+      "resource": "https://github.com/dougransom/CPA-006-Asap-Cheques/blob/master/CPA%20006%20Middle%20ASAP.chk",
+      "index": "Ransom"
     }
   ],
   "references": [

@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using Humanizer;
 using IniParser;
 using IniParser.Model;
+using IniParser.Model.Configuration;
+using IniParser.Parser;
 using SkiaSharp;
 
 namespace Liber.Skia;
@@ -28,19 +30,30 @@ public class DrawableCheck : DrawableReport
 
     public DrawableCheck(string path)
     {
-        FileIniDataParser parser = new FileIniDataParser();
+        IniDataParser baseParser = new IniDataParser(new IniParserConfiguration()
+        {
+            AllowDuplicateKeys = true,
+            CaseInsensitive = true,
+            CommentString = "#"
+        });
+        FileIniDataParser parser = new FileIniDataParser(baseParser);
         IniData data = parser.ReadFile(path);
         KeyDataCollection liber = data["Liber"];
         KeyDataCollection top = data["Top"];
         KeyDataCollection positions = data["Check Positions"];
         KeyDataCollection items = data["Check Items"];
-        string[] translation = top["Translation"].Split(';', Options);
 
-        X = float.Parse(translation[0]);
-        Y = float.Parse(translation[1]);
-        _rotationDegrees = float.Parse(top["Rotation"]);
-        _showBoxes = bool.Parse(top["Show_Boxes"]);
-        _showGrid = bool.Parse(top["Show_Grid"]);
+        if (liber.ContainsKey("Translation"))
+        {
+            string[] translation = top["Translation"].Split(';', Options);
+
+            X = float.Parse(translation[0]);
+            Y = float.Parse(translation[1]);
+        }
+
+        _rotationDegrees = float.Parse(top["Rotation"] ?? "0");
+        _showBoxes = bool.Parse(top["Show_Boxes"] ?? bool.FalseString);
+        _showGrid = bool.Parse(top["Show_Grid"] ?? bool.FalseString);
         //_positions = Enum.Parse<CheckPositions>(string.Join(", ", positions["Names"].Split(';', options)));
 
         if (liber.ContainsKey("Size"))
@@ -129,7 +142,7 @@ public class DrawableCheck : DrawableReport
 
     protected override void OnDraw(SKCanvas canvas)
     {
-        canvas.RotateDegrees(_rotationDegrees);
+        //canvas.RotateDegrees(_rotationDegrees);
 
         decimal amount = 9999.99m;
 
