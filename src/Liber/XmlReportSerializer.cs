@@ -37,7 +37,7 @@ public static class XmlReportSerializer
         return result;
     }
 
-    public static string Serialize(XslCompiledTransform transform, Report report)
+    public static string Serialize(XslCompiledTransform transform, XslReport report)
     {
         using MemoryStream memoryStream = new MemoryStream();
         using XmlWriter xmlWriter = new XmlReportWriter(memoryStream, report);

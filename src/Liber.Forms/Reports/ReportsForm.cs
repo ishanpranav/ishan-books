@@ -41,8 +41,8 @@ internal sealed partial class ReportsForm : Form
         InitializeReports(
             path: "styles",
             searchPattern: "*.xslt",
-            Report.GetString,
-            x => new XslReportView(x));
+            XslReport.GetString,
+            x => new XslReportView(_company, x));
 
         string getString(string value)
         {
@@ -64,9 +64,6 @@ internal sealed partial class ReportsForm : Form
             searchPattern: "*.ini",
             getString,
             createReportView);
-
-        startedDateTimePicker.Value = new DateTime(DateTime.Today.Year, 1, 1);
-        postedDateTimePicker.Value = DateTime.Today;
     }
 
     private void InitializeReports(string path, string searchPattern, Func<string, string> stringAccessor, Func<string, IReportView> reportViewFactory)
@@ -117,23 +114,19 @@ internal sealed partial class ReportsForm : Form
             return;
         }
 
-        _view.InitializeReport(_webView.CoreWebView2, new Report(_company, postedDateTimePicker.Value)
-        {
-            Started = startedDateTimePicker.Value
-        });
+        _view.InitializeReport(_webView.CoreWebView2);
     }
 
     private void OnListViewItemActivate(object sender, EventArgs e)
     {
         _view = (IReportView)_listView.SelectedItems[0].Tag;
+        _propertyGrid.SelectedObject = _view.Properties;
         saveAsToolStripButton.Enabled = true;
         saveAsToolStripMenuItem.Enabled = true;
         printPreviewToolStripButton.Enabled = true;
         printPreviewToolStripMenuItem.Enabled = true;
         printToolStripButton.Enabled = true;
         printToolStripMenuItem.Enabled = true;
-        startedDateTimePicker.Enabled = true;
-        postedDateTimePicker.Enabled = true;
 
         InitializeReport();
     }
@@ -151,20 +144,6 @@ internal sealed partial class ReportsForm : Form
         }
 
         await _view.PrintAsync(_saveFileDialog.FileName);
-    }
-
-    private void OnStartedDateTimePickerValueChanged(object sender, EventArgs e)
-    {
-        postedDateTimePicker.MinDate = startedDateTimePicker.Value;
-
-        InitializeReport();
-    }
-
-    private void OnPostedDateTimePickerValueChanged(object sender, EventArgs e)
-    {
-        startedDateTimePicker.MaxDate = postedDateTimePicker.Value;
-
-        InitializeReport();
     }
 
     protected override void Dispose(bool disposing)
@@ -188,5 +167,10 @@ internal sealed partial class ReportsForm : Form
         }
 
         base.Dispose(disposing);
+    }
+
+    private void OnPropertyGridPropertyValueChanged(object s, PropertyValueChangedEventArgs e)
+    {
+        InitializeReport();
     }
 }

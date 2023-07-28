@@ -30,7 +30,7 @@
 	    <Generator>PublicResXFileCodeGenerator</Generator>
 	    <LastGenOutput>Resources.Designer.cs</LastGenOutput>
 	  </EmbeddedResource>
-	  <EmbeddedResource Update="Report.resx">
+	  <EmbeddedResource Update="XslReport.resx">
 	    <Generator></Generator>
 	  </EmbeddedResource>
 	</ItemGroup>

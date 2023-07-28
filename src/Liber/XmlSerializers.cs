@@ -18,7 +18,7 @@ public static class XmlSerializers
     {
         get
         {
-            s_report ??= new XmlSerializer(typeof(Report));
+            s_report ??= new XmlSerializer(typeof(XslReport));
 
             return s_report;
         }

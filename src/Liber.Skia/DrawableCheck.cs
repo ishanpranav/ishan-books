@@ -4,7 +4,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
+using System.Runtime.Versioning;
 using Humanizer;
 using IniParser;
 using IniParser.Model;
@@ -39,7 +41,7 @@ public class DrawableCheck : DrawableReport
         KeyDataCollection liber = data["Liber"];
         KeyDataCollection top = data["Top"];
         KeyDataCollection items = data["Check Items"];
-        
+
         if (liber.ContainsKey("Translation"))
         {
             string[] translation = top["Translation"].Split(';', Options);
@@ -109,11 +111,31 @@ public class DrawableCheck : DrawableReport
         }
     }
 
-    public override float X { get; }
-    public override float Y { get; }
-    public override float Width { get; }
-    public override float Height { get; }
-    public override float RotationDegrees { get; }
+    [SupportedOSPlatform("windows")]
+    public Font? Font
+    {
+        get
+        {
+            if (_typeface == null || _font == null)
+            {
+                return null;
+            }
+
+            return new Font(_typeface.FamilyName, _font.Size);
+        }
+        set
+        {
+            FreeTypefaceAndFont();
+
+            if (value == null)
+            {
+                return;
+            }
+
+            _typeface = SKTypeface.FromFamilyName(value.FontFamily.Name);
+            _font = new SKFont(_typeface, value.Size);
+        }
+    }
 
     private static void Deconstruct(string key, out float first, out float second)
     {
@@ -179,22 +201,25 @@ public class DrawableCheck : DrawableReport
         base.OnDraw(canvas);
     }
 
+    private void FreeTypefaceAndFont()
+    {
+        if (_typeface != null)
+        {
+            _typeface.Dispose();
+            _typeface = null;
+        }
+
+        if (_font != null)
+        {
+            _font.Dispose();
+            _font = null;
+        }
+    }
+
     protected override void Dispose(bool disposing)
     {
         if (disposing)
         {
-            if (_typeface != null)
-            {
-                _typeface.Dispose();
-                _typeface = null;
-            }
-
-            if (_font != null)
-            {
-                _font.Dispose();
-                _font = null;
-            }
-
             if (_paint != null)
             {
                 _paint.Dispose();

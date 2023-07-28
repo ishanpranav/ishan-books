@@ -20,7 +20,20 @@ internal sealed class SkiaReportView : IDisposable, IReportView
         _report = report;
     }
 
-    public void InitializeReport(CoreWebView2 coreWebView2, Report report)
+    public object Properties
+    {
+        get
+        {
+            if (_report == null)
+            {
+                throw new InvalidOperationException();
+            }
+
+            return _report;
+        }
+    }
+
+    public void InitializeReport(CoreWebView2 coreWebView2)
     {
         if (_report == null)
         {

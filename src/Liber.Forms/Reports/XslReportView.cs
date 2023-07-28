@@ -15,16 +15,26 @@ internal sealed class XslReportView : IReportView
     private static readonly Dictionary<string, XslCompiledTransform> s_styles = new Dictionary<string, XslCompiledTransform>();
 
     private readonly string _path;
+    private readonly XslReport _report;
 
     private string? _xhtml;
     private CoreWebView2? _coreWebView2;
 
-    public XslReportView(string path)
+    public XslReportView(Company company, string path)
     {
+        _report = new XslReport(company);
         _path = path;
     }
 
-    public void InitializeReport(CoreWebView2 coreWebView2, Report report)
+    public object Properties
+    {
+        get
+        {
+            return _report;
+        }
+    }
+
+    public void InitializeReport(CoreWebView2 coreWebView2)
     {
         if (!s_styles.TryGetValue(_path, out XslCompiledTransform? style))
         {
@@ -32,7 +42,7 @@ internal sealed class XslReportView : IReportView
             s_styles[_path] = style;
         }
 
-        _xhtml = XmlReportSerializer.Serialize(style, report);
+        _xhtml = XmlReportSerializer.Serialize(style, _report);
         _coreWebView2 = coreWebView2;
 
         coreWebView2.NavigateToString(_xhtml);

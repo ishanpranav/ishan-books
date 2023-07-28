@@ -3,6 +3,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.ComponentModel;
 using System.Resources;
 using System.Xml;
 using System.Xml.Schema;
@@ -14,25 +15,28 @@ using Liber;
 namespace Liber;
 
 [XmlRoot("report")]
-public class Report : IXmlSerializable
+public class XslReport : IXmlSerializable
 { 
-    private static readonly ResourceManager s_resourceManager = new ResourceManager(typeof(Report));
+    private static readonly ResourceManager s_resourceManager = new ResourceManager(typeof(XslReport));
 
-    public Report()
+    public XslReport()
     {
         Company = new Company();
     }
 
-    public Report(Company company, DateTime posted)
+    public XslReport(Company company)
     {
         Company = company;
-        Posted = posted;
     }
 
+    [Browsable(false)]
     public Company Company { get; }
-    public DateTime Started { get; set; }
-    public DateTime Posted { get; }
 
+    public DateTime Started { get; set; } = new DateTime(DateTime.Today.Year, 1, 1);
+
+    public DateTime Posted { get; set; } = DateTime.Today;
+
+    [Browsable(false)]
     public Transaction MinTransaction
     {
         get
@@ -44,6 +48,7 @@ public class Report : IXmlSerializable
         }
     }
 
+    [Browsable(false)]
     public Transaction MaxTransaction
     {
         get

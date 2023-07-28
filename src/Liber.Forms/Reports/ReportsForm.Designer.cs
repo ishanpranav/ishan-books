@@ -18,14 +18,12 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReportsForm));
             splitContainer1 = new System.Windows.Forms.SplitContainer();
+            splitContainer2 = new System.Windows.Forms.SplitContainer();
             _listView = new System.Windows.Forms.ListViewEx();
             _imageList = new System.Windows.Forms.ImageList(components);
+            _propertyGrid = new System.Windows.Forms.PropertyGrid();
             _webView = new Microsoft.Web.WebView2.WinForms.WebView2();
             panel1 = new System.Windows.Forms.Panel();
-            label2 = new System.Windows.Forms.Label();
-            postedDateTimePicker = new System.Windows.Forms.DateTimePicker();
-            label1 = new System.Windows.Forms.Label();
-            startedDateTimePicker = new System.Windows.Forms.DateTimePicker();
             saveAsToolStripButton = new System.Windows.Forms.ToolStripButton();
             printToolStripButton = new System.Windows.Forms.ToolStripButton();
             _toolStrip = new System.Windows.Forms.ToolStrip();
@@ -41,8 +39,11 @@
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer2).BeginInit();
+            splitContainer2.Panel1.SuspendLayout();
+            splitContainer2.Panel2.SuspendLayout();
+            splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)_webView).BeginInit();
-            panel1.SuspendLayout();
             _toolStrip.SuspendLayout();
             _contextMenu.SuspendLayout();
             SuspendLayout();
@@ -54,7 +55,7 @@
             // 
             // splitContainer1.Panel1
             // 
-            splitContainer1.Panel1.Controls.Add(_listView);
+            splitContainer1.Panel1.Controls.Add(splitContainer2);
             _helpProvider.SetShowHelp(splitContainer1.Panel1, (bool)resources.GetObject("splitContainer1.Panel1.ShowHelp"));
             // 
             // splitContainer1.Panel2
@@ -63,6 +64,19 @@
             splitContainer1.Panel2.Controls.Add(panel1);
             _helpProvider.SetShowHelp(splitContainer1.Panel2, (bool)resources.GetObject("splitContainer1.Panel2.ShowHelp"));
             _helpProvider.SetShowHelp(splitContainer1, (bool)resources.GetObject("splitContainer1.ShowHelp"));
+            // 
+            // splitContainer2
+            // 
+            resources.ApplyResources(splitContainer2, "splitContainer2");
+            splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            splitContainer2.Panel1.Controls.Add(_listView);
+            // 
+            // splitContainer2.Panel2
+            // 
+            splitContainer2.Panel2.Controls.Add(_propertyGrid);
             // 
             // _listView
             // 
@@ -83,6 +97,12 @@
             resources.ApplyResources(_imageList, "_imageList");
             _imageList.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // _propertyGrid
+            // 
+            resources.ApplyResources(_propertyGrid, "_propertyGrid");
+            _propertyGrid.Name = "_propertyGrid";
+            _propertyGrid.PropertyValueChanged += OnPropertyGridPropertyValueChanged;
+            // 
             // _webView
             // 
             _webView.AllowExternalDrop = true;
@@ -95,43 +115,9 @@
             // 
             // panel1
             // 
-            panel1.Controls.Add(label2);
-            panel1.Controls.Add(postedDateTimePicker);
-            panel1.Controls.Add(label1);
-            panel1.Controls.Add(startedDateTimePicker);
             resources.ApplyResources(panel1, "panel1");
             panel1.Name = "panel1";
             _helpProvider.SetShowHelp(panel1, (bool)resources.GetObject("panel1.ShowHelp"));
-            // 
-            // label2
-            // 
-            resources.ApplyResources(label2, "label2");
-            label2.Name = "label2";
-            _helpProvider.SetShowHelp(label2, (bool)resources.GetObject("label2.ShowHelp"));
-            // 
-            // postedDateTimePicker
-            // 
-            resources.ApplyResources(postedDateTimePicker, "postedDateTimePicker");
-            postedDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            _helpProvider.SetHelpString(postedDateTimePicker, resources.GetString("postedDateTimePicker.HelpString"));
-            postedDateTimePicker.Name = "postedDateTimePicker";
-            _helpProvider.SetShowHelp(postedDateTimePicker, (bool)resources.GetObject("postedDateTimePicker.ShowHelp"));
-            postedDateTimePicker.ValueChanged += OnPostedDateTimePickerValueChanged;
-            // 
-            // label1
-            // 
-            resources.ApplyResources(label1, "label1");
-            label1.Name = "label1";
-            _helpProvider.SetShowHelp(label1, (bool)resources.GetObject("label1.ShowHelp"));
-            // 
-            // startedDateTimePicker
-            // 
-            resources.ApplyResources(startedDateTimePicker, "startedDateTimePicker");
-            startedDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            _helpProvider.SetHelpString(startedDateTimePicker, resources.GetString("startedDateTimePicker.HelpString"));
-            startedDateTimePicker.Name = "startedDateTimePicker";
-            _helpProvider.SetShowHelp(startedDateTimePicker, (bool)resources.GetObject("startedDateTimePicker.ShowHelp"));
-            startedDateTimePicker.ValueChanged += OnStartedDateTimePickerValueChanged;
             // 
             // saveAsToolStripButton
             // 
@@ -211,9 +197,11 @@
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
+            splitContainer2.Panel1.ResumeLayout(false);
+            splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer2).EndInit();
+            splitContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)_webView).EndInit();
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
             _toolStrip.ResumeLayout(false);
             _toolStrip.PerformLayout();
             _contextMenu.ResumeLayout(false);
@@ -238,10 +226,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton printPreviewToolStripButton;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DateTimePicker postedDateTimePicker;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DateTimePicker startedDateTimePicker;
         private System.Windows.Forms.HelpProvider _helpProvider;
+        private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.PropertyGrid _propertyGrid;
     }
 }

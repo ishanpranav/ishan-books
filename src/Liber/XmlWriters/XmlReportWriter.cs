@@ -13,7 +13,7 @@ internal sealed class XmlReportWriter : XmlWriter
 
     private XmlWriter? _writer;
 
-    public XmlReportWriter(Stream output, Report report)
+    public XmlReportWriter(Stream output, XslReport report)
     {
         _writer = Create(output, s_settings);
         Report = report;
@@ -34,7 +34,7 @@ internal sealed class XmlReportWriter : XmlWriter
         }
     }
 
-    public Report Report { get; }
+    public XslReport Report { get; }
 
     private XmlWriter Writer
     {
