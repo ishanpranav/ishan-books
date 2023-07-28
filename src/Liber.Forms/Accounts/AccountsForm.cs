@@ -178,7 +178,11 @@ internal sealed partial class AccountsForm : Form
             _company.AccountUpdated -= OnCompanyAccountUpdated;
             _company.AccountRemoved -= OnCompanyAccountRemoved;
 
-            components?.Dispose();
+            if (components != null)
+            {
+                components.Dispose();
+                components = null;
+            }
         }
 
         base.Dispose(disposing);

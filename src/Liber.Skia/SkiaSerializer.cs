@@ -40,7 +40,7 @@ public static class SkiaSerializer
     {
         using SKBitmap bitmap = new SKBitmap();
         using SKCanvas canvas = new SKCanvas(bitmap);
-        
+
         Draw(canvas, report);
         bitmap.Encode(output, format, quality: 100);
     }

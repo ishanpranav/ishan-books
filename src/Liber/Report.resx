@@ -222,9 +222,6 @@
   <data name="__fdatel{0}" xml:space="preserve">
     <value>As of {0:MMMM d, yyyy}</value>
   </data>
-  <data name="__fdate{0}" xml:space="preserve">
-    <value>{0:MM/dd/yyyy}</value>
-  </data>
   <data name="__ftspanl{0}{1}" xml:space="preserve">
     <value>{0:MMMM d, yyyy} - {1:MMMM d, yyyy}</value>
   </data>

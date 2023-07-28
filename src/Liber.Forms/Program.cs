@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Forms;
+using Humanizer.Configuration;
+using Humanizer.DateTimeHumanizeStrategy;
 using Liber.Forms.Properties;
 
 namespace Liber.Forms;

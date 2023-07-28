@@ -34,6 +34,9 @@ internal sealed partial class MainForm : Form
     {
         InitializeComponent();
         ClickOnce.Initialize(this);
+
+        Text = AssemblyInfo.Title;
+        aboutToolStripMenuItem.Text = FormattedStrings.AboutText;
     }
 
     public MainForm(string path) : this()
@@ -305,7 +308,7 @@ internal sealed partial class MainForm : Form
 
     private void OnAboutToolStripMenuItemClick(object sender, EventArgs e)
     {
-        _factory.AutoRegister(() => new UrlForm(FormattedStrings.GetHelpUrl()));
+        _factory.AutoRegister(() => new UrlForm(FormattedStrings.AboutUrl));
     }
 
     private async Task ExportMessagePackCompanyAsync(string path)
@@ -361,7 +364,7 @@ internal sealed partial class MainForm : Form
 
             switch (extension.ToUpperInvariant())
             {
-                case ".SHBK":
+                case ".IZBK":
                 case ".SQLITE":
                 case ".SQLITE3":
                 case ".DB":

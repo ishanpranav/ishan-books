@@ -13,7 +13,7 @@ namespace Liber.Forms.Reports;
 
 internal sealed class SkiaReportView : IDisposable, IReportView
 {
-    private readonly DrawableReport _report;
+    private DrawableReport? _report;
 
     public SkiaReportView(DrawableReport report)
     {
@@ -22,6 +22,11 @@ internal sealed class SkiaReportView : IDisposable, IReportView
 
     public void InitializeReport(CoreWebView2 coreWebView2, Report report)
     {
+        if (_report == null)
+        {
+            throw new InvalidOperationException();
+        }
+
         using (FileStream output = File.Create("document.pdf"))
         {
             SkiaSerializer.SerializePdf(output, _report);
@@ -32,6 +37,11 @@ internal sealed class SkiaReportView : IDisposable, IReportView
 
     public Task PrintAsync(string path)
     {
+        if (_report == null)
+        {
+            throw new InvalidOperationException();
+        }
+
         using FileStream output = File.Create(path);
 
         string extension = Path.GetExtension(path);
@@ -60,6 +70,10 @@ internal sealed class SkiaReportView : IDisposable, IReportView
 
     public void Dispose()
     {
-        _report.Dispose();
+        if (_report != null)
+        {
+            _report.Dispose();
+            _report = null;
+        }
     }
 }

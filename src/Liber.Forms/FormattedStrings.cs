@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Windows.Forms;
+using Liber.Forms.Properties;
 
 namespace Liber;
 
@@ -30,6 +31,22 @@ internal static class FormattedStrings
         JsonOptions.Converters.Add(new TypeConverterJsonConverterAdapter());
     }
 
+    public static string AboutText
+    {
+        get
+        {
+            return string.Format(GetString("AboutText{0}"), AssemblyInfo.Title);
+        }
+    }
+    
+    public static Uri AboutUrl
+    {
+        get
+        {
+            return new Uri(GetString());
+        }
+    }
+
     public static string GetString([CallerMemberName] string? key = null)
     {
         if (key == null)
@@ -40,14 +57,9 @@ internal static class FormattedStrings
         return s_resourceManager.GetString(key) ?? key;
     }
 
-    public static Uri GetHelpUrl()
-    {
-        return new Uri(GetString("HelpUrl"));
-    }
-
     public static string GetCancelText(this Company company)
     {
-        return string.Format(GetString("CancelText"), company.Name ?? Properties.Resources.DefaultCompanyName);
+        return string.Format(GetString("CancelText{0}"), company.Name ?? Properties.Resources.DefaultCompanyName);
     }
 
     public static void ShowNotSupportedMessage(string extension)
@@ -56,13 +68,13 @@ internal static class FormattedStrings
 
         if (extension.Length == 0)
         {
-            text = GetString("NotSupportedText_0");
+            text = GetString("NotSupportedText");
         }
         else
         {
-            text = string.Format(GetString("NotSupportedText_1"), extension.Substring(1).ToUpper());
+            text = string.Format(GetString("NotSupportedText{0}"), extension.Substring(1).ToUpper());
         }
 
-        MessageBox.Show(Forms.Properties.Resources.ExceptionCaption, text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        MessageBox.Show(Resources.ExceptionCaption, text, MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
 }

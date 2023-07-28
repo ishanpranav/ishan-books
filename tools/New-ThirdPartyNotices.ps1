@@ -128,7 +128,7 @@ $json = Get-Content -Path "licenses.json" -Raw | ConvertFrom-Json -AsHashtable
 
 Out-ThirdPartyNotices "Third-Party Notices
 ===================
-SharpBooks by Ishan Pranav
+IshanBooks by Ishan Pranav
 
 Copyright (c) 2023 Ishan Pranav
 

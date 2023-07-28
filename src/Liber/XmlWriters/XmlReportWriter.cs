@@ -11,7 +11,7 @@ internal sealed class XmlReportWriter : XmlWriter
 {
     private static readonly XmlWriterSettings s_settings = new XmlWriterSettings();
 
-    private readonly XmlWriter _writer;
+    private XmlWriter? _writer;
 
     public XmlReportWriter(Stream output, Report report)
     {
@@ -25,132 +25,154 @@ internal sealed class XmlReportWriter : XmlWriter
     {
         get
         {
+            if (_writer == null)
+            {
+                return WriteState.Closed;
+            }
+
             return _writer.WriteState;
         }
     }
 
     public Report Report { get; }
 
+    private XmlWriter Writer
+    {
+        get
+        {
+            if (_writer == null)
+            {
+                throw new InvalidOperationException();
+            }
+
+            return _writer;
+        }
+    }
+
     public override void Flush()
     {
-        _writer.Flush();
+        Writer.Flush();
     }
 
     public override string? LookupPrefix(string ns)
     {
-        return _writer.LookupPrefix(ns);
+        return Writer.LookupPrefix(ns);
     }
 
     public override void WriteBase64(byte[] buffer, int index, int count)
     {
-        _writer.WriteBase64(buffer, index, count);
+        Writer.WriteBase64(buffer, index, count);
     }
 
     public override void WriteCData(string? text)
     {
-        _writer.WriteCData(text);
+        Writer.WriteCData(text);
     }
 
     public override void WriteCharEntity(char ch)
     {
-        _writer.WriteCharEntity(ch);
+        Writer.WriteCharEntity(ch);
     }
 
     public override void WriteChars(char[] buffer, int index, int count)
     {
-        _writer.WriteChars(buffer, index, count);
+        Writer.WriteChars(buffer, index, count);
     }
 
     public override void WriteComment(string? text)
     {
-        _writer.WriteComment(text);
+        Writer.WriteComment(text);
     }
 
     public override void WriteDocType(string name, string? pubid, string? sysid, string? subset)
     {
-        _writer.WriteDocType(name, pubid, sysid, subset);
+        Writer.WriteDocType(name, pubid, sysid, subset);
     }
 
     public override void WriteEndAttribute()
     {
-        _writer.WriteEndAttribute();
+        Writer.WriteEndAttribute();
     }
 
     public override void WriteEndDocument()
     {
-        _writer.WriteEndDocument();
+        Writer.WriteEndDocument();
     }
 
     public override void WriteEndElement()
     {
-        _writer.WriteEndElement();
+        Writer.WriteEndElement();
     }
 
     public override void WriteEntityRef(string name)
     {
-        _writer.WriteEntityRef(name);
+        Writer.WriteEntityRef(name);
     }
 
     public override void WriteFullEndElement()
     {
-        _writer.WriteFullEndElement();
+        Writer.WriteFullEndElement();
     }
 
     public override void WriteProcessingInstruction(string name, string? text)
     {
-        _writer.WriteProcessingInstruction(name, text);
+        Writer.WriteProcessingInstruction(name, text);
     }
 
     public override void WriteRaw(char[] buffer, int index, int count)
     {
-        _writer.WriteRaw(buffer, index, count);
+        Writer.WriteRaw(buffer, index, count);
     }
 
     public override void WriteRaw(string data)
     {
-        _writer.WriteRaw(data);
+        Writer.WriteRaw(data);
     }
 
     public override void WriteStartAttribute(string? prefix, string localName, string? ns)
     {
-        _writer.WriteStartAttribute(prefix, localName, ns);
+        Writer.WriteStartAttribute(prefix, localName, ns);
     }
 
     public override void WriteStartDocument()
     {
-        _writer.WriteStartDocument();
+        Writer.WriteStartDocument();
     }
 
     public override void WriteStartDocument(bool standalone)
     {
-        _writer.WriteStartDocument(standalone);
+        Writer.WriteStartDocument(standalone);
     }
 
     public override void WriteStartElement(string? prefix, string localName, string? ns)
     {
-        _writer.WriteStartElement(prefix, localName, ns);
+        Writer.WriteStartElement(prefix, localName, ns);
     }
 
     public override void WriteString(string? text)
     {
-        _writer.WriteString(text);
+        Writer.WriteString(text);
     }
 
     public override void WriteSurrogateCharEntity(char lowChar, char highChar)
     {
-        _writer.WriteSurrogateCharEntity(lowChar, highChar);
+        Writer.WriteSurrogateCharEntity(lowChar, highChar);
     }
 
     public override void WriteWhitespace(string? ws)
     {
-        _writer.WriteWhitespace(ws);
+        Writer.WriteWhitespace(ws);
     }
 
     protected override void Dispose(bool disposing)
     {
         if (disposing)
         {
-            _writer.Dispose();
+            if (_writer != null)
+            {
+                _writer.Dispose();
+                _writer = null;
+            }
         }
 
         base.Dispose(disposing);

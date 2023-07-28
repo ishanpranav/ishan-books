@@ -4,6 +4,7 @@
 
 using System;
 using System.Drawing;
+using System.Globalization;
 using CsvHelper.Configuration;
 
 namespace CsvHelper.TypeConversion;
@@ -23,9 +24,9 @@ public class ColorConverter : DefaultTypeConverter
             .Split(',', StringSplitOptions.TrimEntries);
 
         return Color.FromArgb(
-            int.Parse(segments[0]),
-            int.Parse(segments[1]),
-            int.Parse(segments[2]));
+            int.Parse(segments[0], CultureInfo.InvariantCulture),
+            int.Parse(segments[1], CultureInfo.InvariantCulture),
+            int.Parse(segments[2], CultureInfo.InvariantCulture));
     }
 
     public override string? ConvertToString(object? value, IWriterRow row, MemberMapData memberMapData)

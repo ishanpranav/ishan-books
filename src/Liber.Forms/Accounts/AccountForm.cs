@@ -168,7 +168,11 @@ internal abstract partial class AccountForm : Form
             Company.AccountUpdated -= OnCompanyAccountUpdated;
             Company.AccountRemoved -= OnCompanyAccountRemoved;
 
-            components?.Dispose();
+            if (components != null)
+            {
+                components.Dispose();
+                components = null;
+            }
         }
 
         base.Dispose(disposing);

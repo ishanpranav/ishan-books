@@ -29,7 +29,7 @@ Licensed under the MIT License.
                 <meta charset="utf-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
                 <meta name="author" content="Ishan Pranav"/>
-                <meta name="description" content="Download SharpBooks"/>
+                <meta name="description" content="Download IshanBooks"/>
                 <title>
                     <xsl:value-of select="$CompanyName"/> - <xsl:value-of select="$ProductName"/>
                 </title>

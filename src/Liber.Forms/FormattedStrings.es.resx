@@ -117,7 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CancelText" xml:space="preserve">
-    <value>¿Desea Usted guardar los cambios en {0}?</value>
+  <data name="AboutText{0}" xml:space="preserve">
+    <value>Sobre {0}</value>
+  </data>
+  <data name="CancelText{0}" xml:space="preserve">
+    <value>¿Desea usted guardar los cambios en {0}?</value>
+  </data>
+  <data name="NotSupportedText" xml:space="preserve">
+    <value>Los archivos sin extensión no son compatibles con la operación que usted ha seleccionado. Por favor, especifique una extensión de nombre de archivo como '*.izbk' antes de guardar.</value>
+  </data>
+  <data name="NotSupportedText{0}" xml:space="preserve">
+    <value>Los archivos {0} no son compatibles con la operación que usted ha seleccionado. Por favor, especifique una extensión de nombre de archivo diferente.</value>
   </data>
 </root>

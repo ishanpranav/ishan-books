@@ -117,11 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CancelText" xml:space="preserve">
+  <data name="AboutText{0}" xml:space="preserve">
+    <value>About {0}</value>
+  </data>
+  <data name="AboutUrl" xml:space="preserve">
+    <value>https://github.com/ishanpranav/ishan-books</value>
+    <comment>@Invariant</comment>
+  </data>
+  <data name="CancelText{0}" xml:space="preserve">
     <value>Do you want to save changes to {0}?</value>
   </data>
-  <data name="HelpUrl" xml:space="preserve">
-    <value>https://github.com/ishanpranav/sharp-books</value>
-    <comment>@Invariant</comment>
+  <data name="NotSupportedText" xml:space="preserve">
+    <value>Files without an extension are not compatible with the operation you selected. Please specify a file name extension such as "*.izbk" before saving.</value>
+  </data>
+  <data name="NotSupportedText{0}" xml:space="preserve">
+    <value>{0} files are not compatible with the operation you selected. Please specify a different file name extension.</value>
   </data>
 </root>

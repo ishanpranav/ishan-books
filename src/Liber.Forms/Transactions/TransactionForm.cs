@@ -318,11 +318,15 @@ internal sealed partial class TransactionForm : Form
     {
         if (disposing)
         {
-            components?.Dispose();
-
             _company.AccountAdded -= OnCompanyAccountAdded;
             _company.AccountUpdated -= OnCompanyAccountUpdated;
             _company.AccountRemoved -= OnCompanyAccountRemoved;
+
+            if (components != null)
+            {
+                components.Dispose();
+                components = null;
+            }
         }
 
         base.Dispose(disposing);

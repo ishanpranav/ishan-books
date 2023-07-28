@@ -3,11 +3,12 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Reflection.Emit;
 using System.Resources;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
+using Humanizer;
+using Humanizer.Localisation;
 using Liber;
 
 namespace Liber;
@@ -56,12 +57,12 @@ public class Report : IXmlSerializable
 
     public string fdate(DateTime value)
     {
-        return string.Format(gets("__fdate{0}"), value);
+        return value.ToShortDateString();
     }
 
     public string fdatel()
     {
-        return string.Format(gets("__fdatel{0}"), Posted);
+        return Posted.ToLongDateString();
     }
 
     public string fm(decimal value)
@@ -71,12 +72,12 @@ public class Report : IXmlSerializable
 
     public string ftspanl()
     {
-        return string.Format(gets("__ftspanl{0}{1}"), Started, Posted);
+        return Started.ToShortDateString() + " - " + Posted.ToShortDateString();
     }
 
     public string ftspans()
     {
-        return string.Format(gets("__ftspans{0}{1}"), Started, Posted);
+        return (Posted - Started).Humanize(maxUnit: TimeUnit.Year);
     }
 
     public string pngets(string key, decimal value)
@@ -118,8 +119,6 @@ public class Report : IXmlSerializable
 
     public void WriteXml(XmlWriter writer)
     {
-        writer.WriteStartElement("company");
         XmlSerializers.Company.Serialize(writer, Company);
-        writer.WriteEndElement();
     }
 }

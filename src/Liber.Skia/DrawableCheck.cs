@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using Humanizer;
 using IniParser;
 using IniParser.Model;
@@ -19,14 +20,11 @@ public class DrawableCheck : DrawableReport
         StringSplitOptions.TrimEntries |
         StringSplitOptions.RemoveEmptyEntries;
 
-    private readonly float _rotationDegrees;
-    private readonly bool _showGrid;
-    private readonly bool _showBoxes;
-    private readonly SKTypeface _typeface;
-    private readonly SKFont _font;
-    private readonly SKPaint _paint;
-    private readonly CheckPositions _positions;
     private readonly List<CheckItem> _items = new List<CheckItem>();
+
+    private SKTypeface? _typeface;
+    private SKFont? _font;
+    private SKPaint? _paint;
 
     public DrawableCheck(string path)
     {
@@ -40,21 +38,15 @@ public class DrawableCheck : DrawableReport
         IniData data = parser.ReadFile(path);
         KeyDataCollection liber = data["Liber"];
         KeyDataCollection top = data["Top"];
-        KeyDataCollection positions = data["Check Positions"];
         KeyDataCollection items = data["Check Items"];
-
+        
         if (liber.ContainsKey("Translation"))
         {
             string[] translation = top["Translation"].Split(';', Options);
 
-            X = float.Parse(translation[0]);
-            Y = float.Parse(translation[1]);
+            X = float.Parse(translation[0], CultureInfo.InvariantCulture);
+            Y = float.Parse(translation[1], CultureInfo.InvariantCulture);
         }
-
-        _rotationDegrees = float.Parse(top["Rotation"] ?? "0");
-        _showBoxes = bool.Parse(top["Show_Boxes"] ?? bool.FalseString);
-        _showGrid = bool.Parse(top["Show_Grid"] ?? bool.FalseString);
-        //_positions = Enum.Parse<CheckPositions>(string.Join(", ", positions["Names"].Split(';', options)));
 
         if (liber.ContainsKey("Size"))
         {
@@ -69,12 +61,17 @@ public class DrawableCheck : DrawableReport
             Height = 11f * Inches;
         }
 
+        if (top.ContainsKey("Rotation"))
+        {
+            RotationDegrees = float.Parse(top["Rotation"], CultureInfo.InvariantCulture);
+        }
+
         if (top.ContainsKey("Font"))
         {
             string[] font = top["Font"].Split(' ', Options);
 
             _typeface = SKTypeface.FromFamilyName(font[0]);
-            _font = new SKFont(_typeface, float.Parse(font[1]) * Points);
+            _font = new SKFont(_typeface, float.Parse(font[1], CultureInfo.InvariantCulture) * Points);
         }
         else
         {
@@ -116,13 +113,14 @@ public class DrawableCheck : DrawableReport
     public override float Y { get; }
     public override float Width { get; }
     public override float Height { get; }
+    public override float RotationDegrees { get; }
 
     private static void Deconstruct(string key, out float first, out float second)
     {
         string[] values = key.Split(';', Options);
 
-        first = float.Parse(values[0]);
-        second = float.Parse(values[1]);
+        first = float.Parse(values[0], CultureInfo.InvariantCulture);
+        second = float.Parse(values[1], CultureInfo.InvariantCulture);
     }
 
     private void DrawCheckItem(SKCanvas canvas, CheckItem value, string text)
@@ -142,7 +140,7 @@ public class DrawableCheck : DrawableReport
 
     protected override void OnDraw(SKCanvas canvas)
     {
-        //canvas.RotateDegrees(_rotationDegrees);
+        //canvas.RotateDegrees(RotationDegrees);
 
         decimal amount = 9999.99m;
 
@@ -185,9 +183,23 @@ public class DrawableCheck : DrawableReport
     {
         if (disposing)
         {
-            _typeface.Dispose();
-            _font.Dispose();
-            _paint.Dispose();
+            if (_typeface != null)
+            {
+                _typeface.Dispose();
+                _typeface = null;
+            }
+
+            if (_font != null)
+            {
+                _font.Dispose();
+                _font = null;
+            }
+
+            if (_paint != null)
+            {
+                _paint.Dispose();
+                _paint = null;
+            }
         }
 
         base.Dispose(disposing);

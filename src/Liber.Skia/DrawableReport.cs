@@ -16,4 +16,5 @@ public abstract class DrawableReport : SKDrawable
     public abstract float Y { get; }
     public abstract float Width { get; }
     public abstract float Height { get; }
+    public abstract float RotationDegrees { get; }
 }

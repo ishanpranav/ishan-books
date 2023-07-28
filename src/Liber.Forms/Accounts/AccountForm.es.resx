@@ -99,24 +99,6 @@
   <data name="cancelButton.Text" xml:space="preserve">
     <value>&amp;Cancelar</value>
   </data>
-  <data name="_colorButton.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="_colorButton.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
-    <value>AssociateIndex</value>
-  </data>
-  <data name="_colorButton.HelpString" xml:space="preserve">
-    <value>Especifica el color mostrado en el registro de cuentas.</value>
-  </data>
-  <data name="_colorButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>144, 295</value>
-  </data>
-  <data name="_colorButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>238, 29</value>
-  </data>
-  <data name="_colorButton.Text" xml:space="preserve">
-    <value>Escoger</value>
-  </data>
   <data name="descriptionTextBox.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
@@ -341,5 +323,23 @@
   </data>
   <data name="typeComboBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>239, 28</value>
+  </data>
+  <data name="_colorButton.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="_colorButton.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="_colorButton.HelpString" xml:space="preserve">
+    <value>Especifica el color mostrado en el registro de cuentas.</value>
+  </data>
+  <data name="_colorButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>144, 295</value>
+  </data>
+  <data name="_colorButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>238, 29</value>
+  </data>
+  <data name="_colorButton.Text" xml:space="preserve">
+    <value>Escoger</value>
   </data>
 </root>

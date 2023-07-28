@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
@@ -57,69 +58,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="postedDateTimePicker.HelpString" xml:space="preserve">
-    <value>Especifica la fecha de la transacción.</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="postedDateTimePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>84, 41</value>
-  </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 20</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Fecha</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>Nú&amp;mero</value>
-  </data>
-  <data name="numberNumericUpDown.HelpString" xml:space="preserve">
-    <value>Especifica el número de transacción, número de asiento de ajuste o número de cheque.</value>
-  </data>
-  <data name="newToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAABiSURBVDhP7czBCoAwCIBhn80nifnq1cVDddHjQtogtjbb
-        NRJ+BuI+yCMi0UtVp3Rejx0gYjMiiszcRjKwb0eV7UOgPuIBy7z2EQ+w947Yffp6jQeUDQFlP/B94G2P
-        wGgAACcYuZjJw4fhNwAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="newToolStripButton.Text" xml:space="preserve">
-    <value>&amp;Nuevo entrada de diario general</value>
-  </data>
-  <data name="saveToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAABzSURBVDhPY/j69WvDt2/f/pODQXoZQIyYCfv+MwTPIQmD
-        9ID0gg3ApoAYjGHAh/cficLD2QBS8SA1AJufkTGyWtoagM5HFwdhmAEfkPMCukJkzcjiIAw24MuXLwbI
-        hqArRNaMLA7CYANAAGYISIA0/O0/AID67ECmnhNDAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="saveToolStripButton.Text" xml:space="preserve">
-    <value>Guardar</value>
-  </data>
-  <data name="copyToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAB4SURBVDhPtc9RCoAgDMbxzuZJAo9pN/KhetkejQWD/HLq
-        oAZ/ItIfbZEhomLFzOt9qDdyMITwKsZYcs5jRIFjP6tS2uYQC0DEXKkF6BrPzL+xAHw3V5oF5NlEPICk
-        iNxzAZgLwP4BsNZFTb5XAOYCcD4DRnWBuahc6R2LWkqXAfkAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="copyToolStripButton.Text" xml:space="preserve">
-    <value>&amp;Duplicar</value>
-  </data>
-  <data name="cancelButton.Text" xml:space="preserve">
-    <value>Borrar</value>
-  </data>
-  <data name="applyButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>424, 444</value>
-  </data>
-  <data name="applyButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 31</value>
-  </data>
-  <data name="applyButton.Text" xml:space="preserve">
-    <value>Guardar y nuevo</value>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Diario general</value>
   </data>
   <data name="acceptButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>270, 444</value>
@@ -133,20 +74,46 @@
   <data name="accountColumn.HeaderText" xml:space="preserve">
     <value>Cuenta</value>
   </data>
-  <data name="debitColumn.HeaderText" xml:space="preserve">
-    <value>Débito</value>
+  <data name="applyButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>424, 444</value>
+  </data>
+  <data name="applyButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>138, 31</value>
+  </data>
+  <data name="applyButton.Text" xml:space="preserve">
+    <value>Guardar y nuevo</value>
+  </data>
+  <data name="cancelButton.Text" xml:space="preserve">
+    <value>Borrar</value>
+  </data>
+  <data name="copyToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAB4SURBVDhPtc9RCoAgDMbxzuZJAo9pN/KhetkejQWD/HLq
+        oAZ/ItIfbZEhomLFzOt9qDdyMITwKsZYcs5jRIFjP6tS2uYQC0DEXKkF6BrPzL+xAHw3V5oF5NlEPICk
+        iNxzAZgLwP4BsNZFTb5XAOYCcD4DRnWBuahc6R2LWkqXAfkAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="copyToolStripButton.Text" xml:space="preserve">
+    <value>&amp;Duplicar</value>
   </data>
   <data name="creditColumn.HeaderText" xml:space="preserve">
     <value>Crédito</value>
   </data>
+  <data name="debitColumn.HeaderText" xml:space="preserve">
+    <value>Débito</value>
+  </data>
   <data name="descriptionColumn.HeaderText" xml:space="preserve">
     <value>Descripción</value>
   </data>
-  <data name="previousButton.Text" xml:space="preserve">
-    <value>Anterior</value>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 20</value>
   </data>
-  <data name="nextButton.Text" xml:space="preserve">
-    <value>Siguiente</value>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Fecha</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Nú&amp;mero</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 20</value>
@@ -160,12 +127,6 @@
   <data name="label4.Text" xml:space="preserve">
     <value>N&amp;ota</value>
   </data>
-  <data name="nameComboBox.HelpString" xml:space="preserve">
-    <value>Especifica el nombre del cliente o proveedor.</value>
-  </data>
-  <data name="nameComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>84, 81</value>
-  </data>
   <data name="memoTextBox.HelpString" xml:space="preserve">
     <value>Especifica una nota para el cheque o depósito.</value>
   </data>
@@ -175,7 +136,50 @@
   <data name="memoTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>570, 27</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Diario general</value>
+  <data name="nameComboBox.HelpString" xml:space="preserve">
+    <value>Especifica el nombre del cliente o proveedor.</value>
+  </data>
+  <data name="nameComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>84, 81</value>
+  </data>
+  <data name="newToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAABiSURBVDhP7czBCoAwCIBhn80nifnq1cVDddHjQtogtjbb
+        NRJ+BuI+yCMi0UtVp3Rejx0gYjMiiszcRjKwb0eV7UOgPuIBy7z2EQ+w947Yffp6jQeUDQFlP/B94G2P
+        wGgAACcYuZjJw4fhNwAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="newToolStripButton.Text" xml:space="preserve">
+    <value>&amp;Nuevo entrada de diario general</value>
+  </data>
+  <data name="nextButton.Text" xml:space="preserve">
+    <value>Siguiente</value>
+  </data>
+  <data name="numberNumericUpDown.HelpString" xml:space="preserve">
+    <value>Especifica el número de transacción, número de asiento de ajuste o número de cheque.</value>
+  </data>
+  <data name="postedDateTimePicker.HelpString" xml:space="preserve">
+    <value>Especifica la fecha de la transacción.</value>
+  </data>
+  <data name="postedDateTimePicker.Location" type="System.Drawing.Point, System.Drawing">
+    <value>84, 41</value>
+  </data>
+  <data name="previousButton.Text" xml:space="preserve">
+    <value>Anterior</value>
+  </data>
+  <data name="printToolStripButton.Text" xml:space="preserve">
+    <value>Im&amp;primir</value>
+  </data>
+  <data name="saveToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAABzSURBVDhPY/j69WvDt2/f/pODQXoZQIyYCfv+MwTPIQmD
+        9ID0gg3ApoAYjGHAh/cficLD2QBS8SA1AJufkTGyWtoagM5HFwdhmAEfkPMCukJkzcjiIAw24MuXLwbI
+        hqArRNaMLA7CYANAAGYISIA0/O0/AID67ECmnhNDAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="saveToolStripButton.Text" xml:space="preserve">
+    <value>Guardar</value>
   </data>
 </root>

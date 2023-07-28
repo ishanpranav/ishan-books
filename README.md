@@ -4,12 +4,12 @@ Copyright (c) 2023 Ishan Pranav. All rights reserved.
 Licensed under the MIT License.
 -->
 
-# SharpBooks
+# IshanBooks
 This is a cross-platform library and application for double-entry bookkeeping.
 The project includes a standalone class library and a Windows GUI application.
 
 You can download the software from the
-[repository website](https://ishanpranav.github.io/sharp-books).
+[repository website](https://ishanpranav.github.io/ishan-books).
 ## Features
 __Bookkeeping__
 - [X] Chart of accounts
@@ -24,7 +24,7 @@ __Reporting__
 - [ ] Equity statement
 
 __First-class data formats__
-- [X] SharpBooks Company (*.shbk)
+- [X] IshanBooks Company (*.izbk)
 - [X] JavaScript Object Notation (\*.json)
 - [X] MessagePack (\*.msgpack; \*.mpk)
 - [X] SQLite3 Database (\*.db; \*.sqlite)

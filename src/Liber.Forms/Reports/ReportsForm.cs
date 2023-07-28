@@ -78,11 +78,15 @@ internal sealed partial class ReportsForm : Form
             return;
         }
 
-        Icon? icon = Icon.ExtractAssociatedIcon(files[0]);
+        using Icon? icon = Icon.ExtractAssociatedIcon(files[0]);
 
         if (icon != null)
         {
-            _imageList.Images.Add(icon);
+            Bitmap bitmap = icon.ToBitmap();
+
+            _imageList.Images.Add(bitmap);
+
+            icon.Dispose();
         }
 
         foreach (string file in files)
@@ -95,7 +99,7 @@ internal sealed partial class ReportsForm : Form
             }
             catch
             {
-                throw; // continue;
+                continue;
             }
 
             string key = Path.GetFileNameWithoutExtension(file);
@@ -172,10 +176,15 @@ internal sealed partial class ReportsForm : Form
                 if (item.Tag is IDisposable disposable)
                 {
                     disposable.Dispose();
+                    item.Tag = null;
                 }
             }
 
-            components?.Dispose();
+            if (components != null)
+            {
+                components.Dispose();
+                components = null;
+            }
         }
 
         base.Dispose(disposing);
