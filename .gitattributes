@@ -67,6 +67,7 @@
 #*.RTF   diff=astextplain
 
 *.generated.cs linguist-generated
+*.sql linguist-detectable
 *.sql linguist-language=sql
 *.chk linguist-language=ini
 *.manifest binary
