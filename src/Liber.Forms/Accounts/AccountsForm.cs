@@ -57,7 +57,11 @@ internal sealed partial class AccountsForm : Form
         {
             value.Number.ToString(),
             value.Type.ToLocalizedString(),
-            value.Type.ToBalance(value.Balance).ToLocalizedString()
+            value.Type
+                .ToBalance(value.GetBalance(
+                    started: new DateTime(DateTime.Today.Year, 1, 1),
+                    posted: DateTime.Today))
+                .ToLocalizedString()
         });
 
         if (value.Placeholder)

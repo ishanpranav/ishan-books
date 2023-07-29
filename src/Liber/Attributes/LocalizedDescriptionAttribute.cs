@@ -6,12 +6,17 @@ using System.Resources;
 
 namespace System.ComponentModel;
 
-internal sealed class LocalizedDescriptionAttribute : DescriptionAttribute
+public sealed class LocalizedDescriptionAttribute : DescriptionAttribute
 {
     private static readonly ResourceManager s_resourceManager = new ResourceManager(typeof(LocalizedDescriptionAttribute));
 
-    public LocalizedDescriptionAttribute(string description) : base(description)
+    public override string Description
     {
-        DescriptionValue = s_resourceManager.GetString(description) ?? string.Empty;
+        get
+        {
+            return s_resourceManager.GetString(DescriptionValue) ?? string.Empty;
+        }
     }
+
+    public LocalizedDescriptionAttribute(string description) : base(description) { }
 }

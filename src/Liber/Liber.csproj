@@ -15,6 +15,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Attributes\LocalizedCategoryAttribute.Designer.cs">
+	    <DependentUpon>LocalizedCategoryAttribute.resx</DependentUpon>
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	  </Compile>
+	  <Compile Update="Attributes\LocalizedDescriptionAttribute.Designer.cs">
+	    <DependentUpon>LocalizedDescriptionAttribute.resx</DependentUpon>
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	  </Compile>
+	  <Compile Update="Attributes\LocalizedDisplayNameAttribute.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>LocalizedDisplayNameAttribute.resx</DependentUpon>
+	  </Compile>
 	  <Compile Update="Properties\Resources.Designer.cs">
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
@@ -25,6 +40,18 @@
 	<ItemGroup>
 	  <EmbeddedResource Update="AccountTypeExtensions.resx">
 	    <Generator></Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Attributes\LocalizedCategoryAttribute.resx">
+	    <LastGenOutput>LocalizedCategoryAttribute.Designer.cs</LastGenOutput>
+	    <Generator>ResXFileCodeGenerator</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Attributes\LocalizedDescriptionAttribute.resx">
+	    <LastGenOutput>LocalizedDescriptionAttribute.Designer.cs</LastGenOutput>
+	    <Generator>ResXFileCodeGenerator</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Attributes\LocalizedDisplayNameAttribute.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>LocalizedDisplayNameAttribute.Designer.cs</LastGenOutput>
 	  </EmbeddedResource>
 	  <EmbeddedResource Update="Properties\Resources.resx">
 	    <Generator>PublicResXFileCodeGenerator</Generator>

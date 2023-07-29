@@ -16,8 +16,11 @@ namespace Liber;
 
 [XmlRoot("report")]
 public class XslReport : IXmlSerializable
-{ 
+{
     private static readonly ResourceManager s_resourceManager = new ResourceManager(typeof(XslReport));
+
+    private DateTime _started = new DateTime(DateTime.Today.Year, 1, 1);
+    private DateTime _posted = DateTime.Today;
 
     public XslReport()
     {
@@ -32,9 +35,46 @@ public class XslReport : IXmlSerializable
     [Browsable(false)]
     public Company Company { get; }
 
-    public DateTime Started { get; set; } = new DateTime(DateTime.Today.Year, 1, 1);
 
-    public DateTime Posted { get; set; } = DateTime.Today;
+    [LocalizedCategory(nameof(Started))]
+    [LocalizedDescription(nameof(Started))]
+    [LocalizedDisplayName(nameof(Started))]
+    public DateTime Started
+    {
+        get
+        {
+            return _started;
+        }
+        set
+        {
+            if (value > _posted)
+            {
+                _posted = value;
+            }
+
+            _started = value;
+        }
+    }
+
+    [LocalizedCategory(nameof(Posted))]
+    [LocalizedDescription(nameof(Posted))]
+    [LocalizedDisplayName(nameof(Posted))]
+    public DateTime Posted
+    {
+        get
+        {
+            return _posted;
+        }
+        set
+        {
+            if (value < _started)
+            {
+                _started = value;
+            }
+
+            _posted = value;
+        }
+    }
 
     [Browsable(false)]
     public Transaction MinTransaction
@@ -82,7 +122,7 @@ public class XslReport : IXmlSerializable
 
     public string ftspans()
     {
-        return (Posted - Started).Humanize(maxUnit: TimeUnit.Year);
+        return (Posted - Started).Humanize(precision: 2, countEmptyUnits: true, maxUnit: TimeUnit.Year);
     }
 
     public string pngets(string key, decimal value)

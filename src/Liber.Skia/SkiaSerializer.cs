@@ -9,16 +9,11 @@ namespace Liber.Skia;
 
 public static class SkiaSerializer
 {
-    private static void Draw(SKCanvas canvas, DrawableReport report)
-    {
-        report.Draw(canvas, report.X, report.Y);
-    }
-
     private static void Serialize(SKDocument document, DrawableReport report)
     {
         using SKCanvas canvas = document.BeginPage(report.Width, report.Height);
 
-        Draw(canvas, report);
+        report.Draw(canvas);
         document.EndPage();
     }
 
@@ -41,7 +36,7 @@ public static class SkiaSerializer
         using SKBitmap bitmap = new SKBitmap();
         using SKCanvas canvas = new SKCanvas(bitmap);
 
-        Draw(canvas, report);
+        report.Draw(canvas);
         bitmap.Encode(output, format, quality: 100);
     }
 }

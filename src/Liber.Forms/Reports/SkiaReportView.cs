@@ -11,7 +11,7 @@ using SkiaSharp;
 
 namespace Liber.Forms.Reports;
 
-internal sealed class SkiaReportView : IDisposable, IReportView
+internal abstract class SkiaReportView : IDisposable, IReportView
 {
     private DrawableReport? _report;
 
@@ -81,12 +81,21 @@ internal sealed class SkiaReportView : IDisposable, IReportView
         return Task.CompletedTask;
     }
 
+    protected virtual void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            if (_report != null)
+            {
+                _report.Dispose();
+                _report = null;
+            }
+        }
+    }
+
     public void Dispose()
     {
-        if (_report != null)
-        {
-            _report.Dispose();
-            _report = null;
-        }
+        Dispose(disposing: true);
+        GC.SuppressFinalize(this);
     }
 }

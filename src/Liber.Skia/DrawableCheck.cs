@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
 using System.Runtime.Versioning;
@@ -16,7 +17,7 @@ using SkiaSharp;
 
 namespace Liber.Skia;
 
-public class DrawableCheck : DrawableReport
+public class DrawableCheck : DrawableReport, IDisposable
 {
     private const StringSplitOptions Options =
         StringSplitOptions.TrimEntries |
@@ -27,7 +28,7 @@ public class DrawableCheck : DrawableReport
     private SKTypeface? _typeface;
     private SKFont? _font;
     private SKPaint? _paint;
-
+    
     public DrawableCheck(string path)
     {
         IniDataParser baseParser = new IniDataParser(new IniParserConfiguration()
@@ -111,6 +112,9 @@ public class DrawableCheck : DrawableReport
         }
     }
 
+    [LocalizedCategory(nameof(Font))]
+    [LocalizedDescription(nameof(Font))]
+    [LocalizedDisplayName(nameof(Font))]
     [SupportedOSPlatform("windows")]
     public Font? Font
     {
@@ -125,7 +129,7 @@ public class DrawableCheck : DrawableReport
         }
         set
         {
-            FreeTypefaceAndFont();
+            FreeTypefaceFontAndPaint();
 
             if (value == null)
             {
@@ -134,6 +138,7 @@ public class DrawableCheck : DrawableReport
 
             _typeface = SKTypeface.FromFamilyName(value.FontFamily.Name);
             _font = new SKFont(_typeface, value.Size);
+            _paint = new SKPaint(_font);
         }
     }
 
@@ -157,10 +162,10 @@ public class DrawableCheck : DrawableReport
             text = $"***{text}***";
         }
 
-        canvas.DrawText(text, value.Location, _paint);
+        canvas.DrawText(text, new SKPoint(value.Location.X + X, value.Location.Y + Y), _paint);
     }
 
-    protected override void OnDraw(SKCanvas canvas)
+    public override void Draw(SKCanvas canvas)
     {
         //canvas.RotateDegrees(RotationDegrees);
 
@@ -197,11 +202,9 @@ public class DrawableCheck : DrawableReport
                     break;
             }
         }
-
-        base.OnDraw(canvas);
     }
 
-    private void FreeTypefaceAndFont()
+    private void FreeTypefaceFontAndPaint()
     {
         if (_typeface != null)
         {
@@ -214,17 +217,19 @@ public class DrawableCheck : DrawableReport
             _font.Dispose();
             _font = null;
         }
+
+        if (_paint != null)
+        {
+            _paint.Dispose();
+            _paint = null;
+        }
     }
 
     protected override void Dispose(bool disposing)
     {
         if (disposing)
         {
-            if (_paint != null)
-            {
-                _paint.Dispose();
-                _paint = null;
-            }
+            FreeTypefaceFontAndPaint();
         }
 
         base.Dispose(disposing);

@@ -51,7 +51,7 @@ internal sealed partial class ReportsForm : Form
 
         IReportView createReportView(string path)
         {
-            return new SkiaReportView(new DrawableCheck(path));
+            return new SkiaCheckReportView(path);
         }
 
         InitializeReports(

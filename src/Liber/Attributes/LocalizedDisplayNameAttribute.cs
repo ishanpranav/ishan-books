@@ -6,12 +6,17 @@ using System.Resources;
 
 namespace System.ComponentModel;
 
-internal sealed class LocalizedDisplayNameAttribute : DisplayNameAttribute
+public sealed class LocalizedDisplayNameAttribute : DisplayNameAttribute
 {
     private static readonly ResourceManager s_resourceManager = new ResourceManager(typeof(LocalizedDisplayNameAttribute));
 
-    public LocalizedDisplayNameAttribute(string displayName) : base(displayName)
+    public override string DisplayName
     {
-        DisplayNameValue = s_resourceManager.GetString(displayName) ?? displayName;
+        get
+        {
+            return s_resourceManager.GetString(DisplayNameValue) ?? DisplayNameValue;
+        }
     }
+
+    public LocalizedDisplayNameAttribute(string displayName) : base(displayName) { }
 }

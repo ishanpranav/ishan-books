@@ -6,7 +6,7 @@ using System.Resources;
 
 namespace System.ComponentModel;
 
-internal sealed class LocalizedCategoryAttribute : CategoryAttribute
+public sealed class LocalizedCategoryAttribute : CategoryAttribute
 {
     private static readonly ResourceManager s_resourceManager = new ResourceManager(typeof(LocalizedCategoryAttribute));
 
