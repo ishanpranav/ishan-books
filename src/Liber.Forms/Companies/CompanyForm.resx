@@ -194,7 +194,7 @@
     <value>Reverts the changes.</value>
   </data>
   <data name="cancelButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>390, 258</value>
+    <value>390, 259</value>
   </data>
   <data name="cancelButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
@@ -206,7 +206,7 @@
     <value>80, 31</value>
   </data>
   <data name="cancelButton.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="cancelButton.Text" xml:space="preserve">
     <value>&amp;Cancel</value>
@@ -230,7 +230,7 @@
     <value>Accepts the changes to the company.</value>
   </data>
   <data name="acceptButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>304, 257</value>
+    <value>304, 258</value>
   </data>
   <data name="acceptButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>
@@ -242,7 +242,7 @@
     <value>80, 31</value>
   </data>
   <data name="acceptButton.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="acceptButton.Text" xml:space="preserve">
     <value>O&amp;K</value>
@@ -389,29 +389,8 @@
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="accountComboBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>209, 185</value>
-  </data>
-  <data name="accountComboBox1.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="accountComboBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>289, 28</value>
-  </data>
-  <data name="accountComboBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;accountComboBox1.Name" xml:space="preserve">
-    <value>accountComboBox1</value>
-  </data>
-  <data name="&gt;&gt;accountComboBox1.Type" xml:space="preserve">
-    <value>Liber.Forms.Accounts.AccountComboBox, Liber.Forms, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;accountComboBox1.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;accountComboBox1.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="equityAccountComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="equityAccountComboBox.HelpString" xml:space="preserve">
     <value>Specifies the equity account used to hold the company's accumulated income and expenses. This account might be called Retained Earnings (if positive) or Accumulated Deficit (if negative), Owner's Equity in a sole proprietorship, or Partner's Equity in a partnership. If this is the only equity account, the account may simply be called Equity.</value>
@@ -426,7 +405,7 @@
     <value>446, 28</value>
   </data>
   <data name="equityAccountComboBox.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;equityAccountComboBox.Name" xml:space="preserve">
     <value>equityAccountComboBox</value>
@@ -438,7 +417,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;equityAccountComboBox.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="label5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -456,7 +435,7 @@
     <value>356, 20</value>
   </data>
   <data name="label5.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>2</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
     <value>Accumulated Other Comprehensive Income (or Loss)</value>
@@ -489,7 +468,7 @@
     <value>446, 28</value>
   </data>
   <data name="otherEquityAccountComboBox.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;otherEquityAccountComboBox.Name" xml:space="preserve">
     <value>otherEquityAccountComboBox</value>
@@ -502,6 +481,9 @@
   </data>
   <data name="&gt;&gt;otherEquityAccountComboBox.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="groupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -516,7 +498,7 @@
     <value>295, 20</value>
   </data>
   <data name="label4.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>0</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
     <value>Retained Earnings (or Accumulated Deficit)</value>
@@ -540,10 +522,10 @@
     <value>True</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>458, 139</value>
+    <value>458, 140</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>6</value>
   </data>
   <data name="groupBox1.Text" xml:space="preserve">
     <value>Closing Accounts</value>
@@ -567,7 +549,7 @@
     <value>8, 20</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>484, 303</value>
+    <value>484, 304</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 4, 3, 4</value>

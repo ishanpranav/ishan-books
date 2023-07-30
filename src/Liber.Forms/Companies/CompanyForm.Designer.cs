@@ -38,7 +38,6 @@ partial class CompanyForm
         label3 = new System.Windows.Forms.Label();
         _colorButton = new System.Windows.Forms.ColorButton();
         label2 = new System.Windows.Forms.Label();
-        accountComboBox1 = new Accounts.AccountComboBox();
         equityAccountComboBox = new Accounts.AccountComboBox();
         label5 = new System.Windows.Forms.Label();
         otherEquityAccountComboBox = new Accounts.AccountComboBox();
@@ -106,22 +105,12 @@ partial class CompanyForm
         label2.Name = "label2";
         _helpProvider.SetShowHelp(label2, (bool)resources.GetObject("label2.ShowHelp"));
         // 
-        // accountComboBox1
-        // 
-        accountComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-        accountComboBox1.FormattingEnabled = true;
-        _helpProvider.SetHelpString(accountComboBox1, resources.GetString("accountComboBox1.HelpString"));
-        resources.ApplyResources(accountComboBox1, "accountComboBox1");
-        accountComboBox1.Name = "accountComboBox1";
-        accountComboBox1.SelectedItem = new System.Guid("00000000-0000-0000-0000-000000000000");
-        _helpProvider.SetShowHelp(accountComboBox1, (bool)resources.GetObject("accountComboBox1.ShowHelp"));
-        // 
         // equityAccountComboBox
         // 
+        resources.ApplyResources(equityAccountComboBox, "equityAccountComboBox");
         equityAccountComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
         equityAccountComboBox.FormattingEnabled = true;
         _helpProvider.SetHelpString(equityAccountComboBox, resources.GetString("equityAccountComboBox.HelpString"));
-        resources.ApplyResources(equityAccountComboBox, "equityAccountComboBox");
         equityAccountComboBox.Name = "equityAccountComboBox";
         equityAccountComboBox.SelectedItem = new System.Guid("00000000-0000-0000-0000-000000000000");
         _helpProvider.SetShowHelp(equityAccountComboBox, (bool)resources.GetObject("equityAccountComboBox.ShowHelp"));
@@ -144,12 +133,11 @@ partial class CompanyForm
         // 
         // groupBox1
         // 
+        resources.ApplyResources(groupBox1, "groupBox1");
         groupBox1.Controls.Add(label5);
         groupBox1.Controls.Add(otherEquityAccountComboBox);
         groupBox1.Controls.Add(label4);
-        groupBox1.Controls.Add(accountComboBox1);
         groupBox1.Controls.Add(equityAccountComboBox);
-        resources.ApplyResources(groupBox1, "groupBox1");
         groupBox1.Name = "groupBox1";
         _helpProvider.SetShowHelp(groupBox1, (bool)resources.GetObject("groupBox1.ShowHelp"));
         groupBox1.TabStop = false;
@@ -197,7 +185,6 @@ partial class CompanyForm
     private System.Windows.Forms.Label label3;
     protected System.Windows.Forms.Button cancelButton;
     private System.Windows.Forms.GroupBox groupBox1;
-    private Accounts.AccountComboBox accountComboBox1;
     private Accounts.AccountComboBox equityAccountComboBox;
     private System.Windows.Forms.Label label4;
     private System.Windows.Forms.Label label5;
