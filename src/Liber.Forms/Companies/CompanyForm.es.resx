@@ -127,6 +127,12 @@
   <data name="cancelButton.Text" xml:space="preserve">
     <value>&amp;Cancelar</value>
   </data>
+  <data name="equityAccountComboBox.HelpString" xml:space="preserve">
+    <value>Especifica la cuenta de patrimonio utilizada para contener los ingresos y gastos acumulados de la empresa. Esta cuenta puede llamarse Utilidades Retenidas (si es positiva) o Déficit Acumulado (si es negativa), Patrimonio del Propietario en una empresa individual, o Patrimonio de los Socios en una sociedad.</value>
+  </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Cuentas de cierre</value>
+  </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 20</value>
   </data>
@@ -139,11 +145,29 @@
   <data name="label3.Text" xml:space="preserve">
     <value>Contraseña</value>
   </data>
+  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>288, 20</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Utilidades retenidas (o déficit acumulado)</value>
+  </data>
+  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>258, 20</value>
+  </data>
+  <data name="label5.Text" xml:space="preserve">
+    <value>acumulado de otros resultados integrales (o pérdidas)</value>
+  </data>
   <data name="nameTextBox.HelpString" xml:space="preserve">
     <value>Especifica el nombre de la empresa. Para una empresa individual, este es el nombre del proprietario.</value>
   </data>
+  <data name="otherEquityAccountComboBox.HelpString" xml:space="preserve">
+    <value>Especifica la cuenta de patrimonio utilizada para contener las ganancias y pérdidas no realizadas acumuladas de la empresa. Esta cuenta puede llamarse Acumulado de Otros Ingresos Integrales (si es positiva) o Acumulado de Otros Resultados Integrales (si es negativa).</value>
+  </data>
   <data name="passwordTextBox.HelpString" xml:space="preserve">
     <value>Especifica la contraseña utilizada para encriptar el archivo de la empresa.</value>
+  </data>
+  <data name="_colorButton.HelpString" xml:space="preserve">
+    <value>Especifica el color predeterminado para las cuentas nuevas.</value>
   </data>
   <data name="_colorButton.Text" xml:space="preserve">
     <value>Escoger</value>

@@ -3,11 +3,11 @@
 // Licensed under the MIT License.
 
 using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
-using Liber.Skia;
 using Microsoft.Web.WebView2.Core;
 
 namespace Liber.Forms.Reports;
@@ -30,7 +30,6 @@ internal sealed partial class ReportsForm : Form
     {
         await _webView.EnsureCoreWebView2Async();
 
-        _webView.CoreWebView2.DocumentTitleChanged += (_, _) => Text = _webView.CoreWebView2.DocumentTitle;
         _webView.CoreWebView2.ContextMenuRequested += (_, e) =>
         {
             e.MenuItems.Clear();

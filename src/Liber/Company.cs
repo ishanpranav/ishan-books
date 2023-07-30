@@ -39,7 +39,7 @@ public sealed class Company : IXmlSerializable
             Name = Resources.DefaultOtherEquityAccountName,
             Placeholder = true,
             Type = AccountType.Equity
-        });
+        }, Guid.Empty);
     }
 
     [JsonConstructor]
@@ -324,7 +324,22 @@ public sealed class Company : IXmlSerializable
 
         foreach (Account account in _accounts.Values)
         {
-            if (account.Temporary)
+            if (account.Temporary && account.Type != AccountType.OtherComprehensiveIncome)
+            {
+                result += account.GetBalance(posted);
+            }
+        }
+
+        return result;
+    }
+
+    public decimal GetOtherEquity(DateTime posted)
+    {
+        decimal result = 0;
+
+        foreach (Account account in _accounts.Values)
+        {
+            if (account.Type == AccountType.OtherComprehensiveIncome)
             {
                 result += account.GetBalance(posted);
             }

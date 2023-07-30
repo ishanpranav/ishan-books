@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -118,33 +118,30 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Font" xml:space="preserve">
-    <value>Specifies the font and font style to use for the report.</value>
+    <value>Especifica la fuente y el estilo de fuente a utilizar para el informe.</value>
   </data>
   <data name="Posted" xml:space="preserve">
-    <value>Specifies the end date for the report.</value>
-  </data>
-  <data name="RotationDegrees" xml:space="preserve">
-    <value />
+    <value>Especifica la fecha de finalización.</value>
   </data>
   <data name="SizeCentimeters" xml:space="preserve">
-    <value>Specifies the page size in centimeters.</value>
+    <value>Especifica el tamaño de la página en centimetros.</value>
   </data>
   <data name="SizeInches" xml:space="preserve">
-    <value>Specifies the page size in inches.</value>
+    <value>Especifica el tamaño de la página en pulgadas.</value>
   </data>
   <data name="Started" xml:space="preserve">
-    <value>Specifies the start date for the report.</value>
+    <value>Especifica la fecha de inicio.</value>
   </data>
   <data name="XCentimeters" xml:space="preserve">
-    <value>Specifies the X offset (left margin) in centimeters.</value>
+    <value>Especifica el desplazamiento X (margen izquierdo) en centímetros.</value>
   </data>
   <data name="XInches" xml:space="preserve">
-    <value>Specifies the X offset (left margin) in inches.</value>
+    <value>Especifica el desplazamiento X (margen izquierdo) en pulgadas.</value>
   </data>
   <data name="YCentimeters" xml:space="preserve">
-    <value>Specifies the Y offset (top margin) in centimeters.</value>
+    <value>Especifica el desplazamiento Y (margen superior) en centimetros.</value>
   </data>
   <data name="YInches" xml:space="preserve">
-    <value>Specifies the Y offset (top margin) in inches.</value>
+    <value>Especifica el desplazamiento Y (margen superior) en pulgadas.</value>
   </data>
 </root>

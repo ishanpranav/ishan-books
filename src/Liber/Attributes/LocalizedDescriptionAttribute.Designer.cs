@@ -61,7 +61,7 @@ namespace Liber.Attributes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Font.
+        ///   Looks up a localized string similar to Specifies the font and font style to use for the report..
         /// </summary>
         internal static string Font {
             get {
@@ -70,7 +70,7 @@ namespace Liber.Attributes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to To.
+        ///   Looks up a localized string similar to Specifies the end date for the report..
         /// </summary>
         internal static string Posted {
             get {
@@ -79,7 +79,7 @@ namespace Liber.Attributes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Rotation (degrees).
+        ///   Looks up a localized string similar to .
         /// </summary>
         internal static string RotationDegrees {
             get {
@@ -88,7 +88,7 @@ namespace Liber.Attributes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Size (cm).
+        ///   Looks up a localized string similar to Specifies the page size in centimeters..
         /// </summary>
         internal static string SizeCentimeters {
             get {
@@ -97,7 +97,7 @@ namespace Liber.Attributes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Size (in).
+        ///   Looks up a localized string similar to Specifies the page size in inches..
         /// </summary>
         internal static string SizeInches {
             get {
@@ -106,7 +106,7 @@ namespace Liber.Attributes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to From.
+        ///   Looks up a localized string similar to Specifies the start date for the report..
         /// </summary>
         internal static string Started {
             get {
@@ -115,7 +115,7 @@ namespace Liber.Attributes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Left Margin (cm).
+        ///   Looks up a localized string similar to Specifies the X offset (left margin) in centimeters..
         /// </summary>
         internal static string XCentimeters {
             get {
@@ -124,7 +124,7 @@ namespace Liber.Attributes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Left Margin (in).
+        ///   Looks up a localized string similar to Specifies the X offset (left margin) in inches..
         /// </summary>
         internal static string XInches {
             get {
@@ -133,7 +133,7 @@ namespace Liber.Attributes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Top Margin (cm).
+        ///   Looks up a localized string similar to Specifies the Y offset (top margin) in centimeters..
         /// </summary>
         internal static string YCentimeters {
             get {
@@ -142,7 +142,7 @@ namespace Liber.Attributes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Top Margin (in).
+        ///   Looks up a localized string similar to Specifies the Y offset (top margin) in inches..
         /// </summary>
         internal static string YInches {
             get {

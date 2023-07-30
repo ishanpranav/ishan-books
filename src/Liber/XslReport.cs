@@ -116,7 +116,7 @@ public class XslReport : IXmlSerializable
 
     public string ftspanl()
     {
-        return Started.ToShortDateString() + " - " + Posted.ToShortDateString();
+        return Started.ToShortDateString() + " \u2013 " + Posted.ToShortDateString();
     }
 
     public string ftspans()

@@ -9,6 +9,8 @@ internal sealed class NewAccountForm : AccountForm
     public NewAccountForm(Company company) : base(company)
     {
         numberNumericUpDown.Value = company.NextAccountNumber;
+        _colorButton.BackColor = company.Color;
+        _colorButton.ForeColor = Colors.GetForeColor(company.Color);
         parentComboBox.Initialize(company, validator: null);
     }
 

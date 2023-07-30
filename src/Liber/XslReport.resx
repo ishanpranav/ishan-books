@@ -219,13 +219,4 @@
   <data name="_p_other-comprehensive-income" xml:space="preserve">
     <value>Total other comprehensive income</value>
   </data>
-  <data name="__fdatel{0}" xml:space="preserve">
-    <value>As of {0:MMMM d, yyyy}</value>
-  </data>
-  <data name="__ftspanl{0}{1}" xml:space="preserve">
-    <value>{0:MMMM d, yyyy} - {1:MMMM d, yyyy}</value>
-  </data>
-  <data name="__ftspans{0}{1}" xml:space="preserve">
-    <value>{0:MMM d} - {1:MMM d}</value>
-  </data>
 </root>

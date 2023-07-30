@@ -19,7 +19,7 @@ internal sealed class EditAccountForm : AccountForm
         descriptionTextBox.Text = account.Description;
         memoTextBox.Text = account.Memo;
         _colorButton.BackColor = account.Color;
-        _colorButton.ForeColor = Colors.GetForeColor(company.Color);
+        _colorButton.ForeColor = Colors.GetForeColor(account.Color);
         Type = account.Type;
         TaxType = account.TaxType;
         parentComboBox.Initialize(company, x => x != Id);

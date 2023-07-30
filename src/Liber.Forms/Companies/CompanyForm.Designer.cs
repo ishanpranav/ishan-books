@@ -95,6 +95,7 @@ partial class CompanyForm
         // _colorButton
         // 
         resources.ApplyResources(_colorButton, "_colorButton");
+        _helpProvider.SetHelpString(_colorButton, resources.GetString("_colorButton.HelpString"));
         _colorButton.Name = "_colorButton";
         _helpProvider.SetShowHelp(_colorButton, (bool)resources.GetObject("_colorButton.ShowHelp"));
         _colorButton.UseVisualStyleBackColor = true;
@@ -136,6 +137,7 @@ partial class CompanyForm
         resources.ApplyResources(otherEquityAccountComboBox, "otherEquityAccountComboBox");
         otherEquityAccountComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
         otherEquityAccountComboBox.FormattingEnabled = true;
+        _helpProvider.SetHelpString(otherEquityAccountComboBox, resources.GetString("otherEquityAccountComboBox.HelpString"));
         otherEquityAccountComboBox.Name = "otherEquityAccountComboBox";
         otherEquityAccountComboBox.SelectedItem = new System.Guid("00000000-0000-0000-0000-000000000000");
         _helpProvider.SetShowHelp(otherEquityAccountComboBox, (bool)resources.GetObject("otherEquityAccountComboBox.ShowHelp"));
@@ -149,12 +151,14 @@ partial class CompanyForm
         groupBox1.Controls.Add(equityAccountComboBox);
         resources.ApplyResources(groupBox1, "groupBox1");
         groupBox1.Name = "groupBox1";
+        _helpProvider.SetShowHelp(groupBox1, (bool)resources.GetObject("groupBox1.ShowHelp"));
         groupBox1.TabStop = false;
         // 
         // label4
         // 
         resources.ApplyResources(label4, "label4");
         label4.Name = "label4";
+        _helpProvider.SetShowHelp(label4, (bool)resources.GetObject("label4.ShowHelp"));
         // 
         // CompanyForm
         // 

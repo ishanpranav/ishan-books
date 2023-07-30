@@ -329,11 +329,14 @@
   <data name="_colorButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="_colorButton.HelpString" xml:space="preserve">
+    <value>Specifies the default color for new accounts.</value>
+  </data>
   <data name="_colorButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>101, 42</value>
   </data>
   <data name="_colorButton.ShowHelp" type="System.Boolean, mscorlib">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="_colorButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>369, 29</value>
@@ -385,9 +388,6 @@
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
     <value>3</value>
-  </data>
-  <data name="accountComboBox1.HelpString" xml:space="preserve">
-    <value>Specifies the equity account used to hold the company's accumulated income and expenses. This account might be called Retained Earnings (if positive) or Accumulated Deficit (if negative), Owner's Equity in a sole proprietorship, or Partner's Equity in a partnership. If this is the only equity account, the account may simply be called Equity.</value>
   </data>
   <data name="accountComboBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>209, 185</value>
@@ -453,13 +453,13 @@
     <value>True</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>265, 20</value>
+    <value>356, 20</value>
   </data>
   <data name="label5.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
-    <value>Other Comprehensive Income (or Loss)</value>
+    <value>Accumulated Other Comprehensive Income (or Loss)</value>
   </data>
   <data name="&gt;&gt;label5.Name" xml:space="preserve">
     <value>label5</value>
@@ -476,11 +476,14 @@
   <data name="otherEquityAccountComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="otherEquityAccountComboBox.HelpString" xml:space="preserve">
+    <value>Specifies the equity account used to hold the company's accumulated unrealized gains and losses. This account might be called Accumulated Other Comprehensive Income (if positive) or Accumulated Other Comprehensive Loss (if negative).</value>
+  </data>
   <data name="otherEquityAccountComboBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 105</value>
   </data>
   <data name="otherEquityAccountComboBox.ShowHelp" type="System.Boolean, mscorlib">
-    <value>False</value>
+    <value>True</value>
   </data>
   <data name="otherEquityAccountComboBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>446, 28</value>
@@ -506,6 +509,9 @@
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 29</value>
   </data>
+  <data name="label4.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>295, 20</value>
   </data>
@@ -529,6 +535,9 @@
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>14, 112</value>
+  </data>
+  <data name="groupBox1.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>458, 139</value>

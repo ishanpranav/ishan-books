@@ -93,9 +93,6 @@
   <data name="makeGeneralJournalEntriesToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 22</value>
   </data>
-  <data name="makeGeneralJournalEntriesToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Diaro general</value>
-  </data>
   <data name="nameColumn.Text" xml:space="preserve">
     <value>Nombre</value>
   </data>
@@ -190,8 +187,17 @@
   <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
     <value>169, 6</value>
   </data>
-  <data name="transactionlToolStripMenuItem.Text" xml:space="preserve">
-    <value>Diario general</value>
+  <data name="transactionsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Usar &amp;registro</value>
+  </data>
+  <data name="transactionsToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Usar registro</value>
+  </data>
+  <data name="transactionToolStripMenuItem.Text" xml:space="preserve">
+    <value>Realizar asientos de diario generales</value>
+  </data>
+  <data name="transactionToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Realizar asientos de diario generales</value>
   </data>
   <data name="typeColumn.Text" xml:space="preserve">
     <value>Tipo</value>
@@ -199,14 +205,8 @@
   <data name="useRegisterToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>144, 22</value>
   </data>
-  <data name="useRegisterToolStripMenuItem.Text" xml:space="preserve">
-    <value>Usar &amp;registro</value>
-  </data>
   <data name="useRegisterToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 22</value>
-  </data>
-  <data name="useRegisterToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Usar registro</value>
   </data>
   <data name="_contextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
     <value>173, 164</value>
