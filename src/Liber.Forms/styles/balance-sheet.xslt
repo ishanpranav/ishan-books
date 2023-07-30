@@ -13,8 +13,211 @@ Licensed under the MIT License.
     exclude-result-prefixes="msxsl">
     <xsl:include href="base/financial-statement.xslt"/>
     <xsl:output method="html" indent="yes"/>
-    <xsl:variable name="title" select="liber:gets('balance-sheet')"/>
+    <xsl:template name="balance-sheet">
+        <xsl:param name="comparative" select="false"/>
+        <xsl:variable name="bank" select="sum(company/account[type = 'Bank']/balance)"/>
+        <xsl:variable name="bank2" select="sum(company/account[type = 'Bank']/previous)"/>
+        <xsl:variable name="otherCurrentAsset" select="sum(company/account[type = 'OtherCurrentAsset']/balance)"/>
+        <xsl:variable name="otherCurrentAsset2" select="sum(company/account[type = 'OtherCurrentAsset']/previous)"/>
+        <xsl:variable name="fixedAsset" select="sum(company/account[type = 'FixedAsset']/balance)"/>
+        <xsl:variable name="fixedAsset2" select="sum(company/account[type = 'FixedAsset']/previous)"/>
+        <xsl:variable name="otherAsset" select="sum(company/account[type = 'OtherAsset']/balance)"/>
+        <xsl:variable name="otherAsset2" select="sum(company/account[type = 'OtherAsset']/previous)"/>
+        <xsl:variable name="creditCard" select="sum(company/account[type = 'CreditCard']/balance)"/>
+        <xsl:variable name="creditCard2" select="sum(company/account[type = 'CreditCard']/previous)"/>
+        <xsl:variable name="otherCurrentLiability" select="sum(company/account[type = 'OtherCurrentLiability']/balance)"/>
+        <xsl:variable name="otherCurrentLiability2" select="sum(company/account[type = 'OtherCurrentLiability']/previous)"/>
+        <xsl:variable name="longTermLiability" select="sum(company/account[type = 'LongTermLiability']/balance)"/>
+        <xsl:variable name="longTermLiability2" select="sum(company/account[type = 'LongTermLiability']/previous)"/>
+        <xsl:variable name="equity" select="sum(company/account[type = 'Equity']/balance)"/>
+        <xsl:variable name="equity2" select="sum(company/account[type = 'Equity']/previous)"/>
+        <tbody>
+            <tr>
+                <th class="left">
+                    <xsl:value-of select="liber:gets('assets')"/>
+                </th>
+            </tr>
+            <tr>
+                <th class="in-1 left">
+                    <xsl:value-of select="liber:gets('current-assets')"/>
+                </th>
+            </tr>
+            <xsl:apply-templates select="company">
+                <xsl:with-param name="type">Bank</xsl:with-param>
+                <xsl:with-param name="balance" select="$bank"/>
+                <xsl:with-param name="previous" select="$bank2"/>
+                <xsl:with-param name="indent">2</xsl:with-param>
+                <xsl:with-param name="comparative" select="$comparative"/>
+            </xsl:apply-templates>
+            <xsl:apply-templates select="company">
+                <xsl:with-param name="type">OtherCurrentAsset</xsl:with-param>
+                <xsl:with-param name="balance" select="$otherCurrentAsset"/>
+                <xsl:with-param name="previous" select="$otherCurrentAsset2"/>
+                <xsl:with-param name="indent">2</xsl:with-param>
+                <xsl:with-param name="comparative" select="$comparative"/>
+            </xsl:apply-templates>
+            <tr>
+                <th class="in-1 left">
+                    <xsl:value-of select="liber:gets('total-current-assets')"/>
+                </th>
+                <td class="subtotal right">
+                    <xsl:value-of select="liber:fm($bank + $otherCurrentAsset)"/>
+                </td>
+                <xsl:choose>
+                    <xsl:when test="$comparative = 1">
+                        <td class="subtotal right">
+                            <xsl:value-of select="liber:fm($bank2 + $otherCurrentAsset2)"/>
+                        </td>
+                    </xsl:when>
+                </xsl:choose>
+            </tr>
+            <tr>
+                <th class="in-1 left">
+                    <xsl:value-of select="liber:gets('non-current-assets')"/>
+                </th>
+            </tr>
+            <xsl:apply-templates select="company">
+                <xsl:with-param name="type">FixedAsset</xsl:with-param>
+                <xsl:with-param name="balance" select="$fixedAsset"/>
+                <xsl:with-param name="previous" select="$fixedAsset2"/>
+                <xsl:with-param name="indent">2</xsl:with-param>
+                <xsl:with-param name="comparative" select="$comparative"/>
+            </xsl:apply-templates>
+            <xsl:apply-templates select="company">
+                <xsl:with-param name="type">OtherAsset</xsl:with-param>
+                <xsl:with-param name="balance" select="$otherAsset"/>
+                <xsl:with-param name="previous" select="$otherAsset2"/>
+                <xsl:with-param name="indent">2</xsl:with-param>
+                <xsl:with-param name="comparative" select="$comparative"/>
+            </xsl:apply-templates>
+            <tr>
+                <th class="in-1 left">
+                    <xsl:value-of select="liber:gets('total-non-current-assets')"/>
+                </th>
+                <td class="subtotal right">
+                    <xsl:value-of select="liber:fm($fixedAsset + $otherAsset)"/>
+                </td>
+                <xsl:choose>
+                    <xsl:when test="$comparative = 1">
+                        <td class="subtotal right">
+                            <xsl:value-of select="liber:fm($fixedAsset2 + $otherAsset2)"/>
+                        </td>
+                    </xsl:when>
+                </xsl:choose>
+            </tr>
+            <tr>
+                <th class="left">
+                    <xsl:value-of select="liber:gets('total-assets')"/>
+                </th>
+                <td class="total right">
+                    <xsl:value-of select="liber:fm($bank + $otherCurrentAsset + $fixedAsset + $otherAsset)"/>
+                </td>
+                <xsl:choose>
+                    <xsl:when test="$comparative = 1">
+                        <td class="total right">
+                            <xsl:value-of select="liber:fm($bank2 + $otherCurrentAsset2 + $fixedAsset2 + $otherAsset2)"/>
+                        </td>
+                    </xsl:when>
+                </xsl:choose>
+            </tr>
+            <tr></tr>
+            <tr>
+                <th class="left">
+                    <xsl:value-of select="liber:fgets('liabilities-equity{0}', liber:gets(company/type))"/>
+                </th>
+                <th></th>
+            </tr>
+            <tr>
+                <th class="in-1 left">
+                    <xsl:value-of select="liber:gets('liabilities')"/>
+                </th>
+                <th></th>
+            </tr>
+            <tr>
+                <th class="in-2 left">
+                    <xsl:value-of select="liber:gets('current-liabilities')"/>
+                </th>
+                <th></th>
+            </tr>
+            <xsl:apply-templates select="company">
+                <xsl:with-param name="type">CreditCard</xsl:with-param>
+                <xsl:with-param name="balance" select="-$creditCard"/>
+                <xsl:with-param name="previous" select="-$creditCard2"/>
+                <xsl:with-param name="indent">3</xsl:with-param>
+                <xsl:with-param name="comparative" select="$comparative"/>
+            </xsl:apply-templates>
+            <xsl:apply-templates select="company">
+                <xsl:with-param name="type">OtherCurrentLiability</xsl:with-param>
+                <xsl:with-param name="balance" select="-$otherCurrentLiability"/>
+                <xsl:with-param name="previous" select="-$otherCurrentLiability2"/>
+                <xsl:with-param name="indent">3</xsl:with-param>
+                <xsl:with-param name="comparative" select="$comparative"/>
+            </xsl:apply-templates>
+            <tr>
+                <th class="in-2 left">
+                    <xsl:value-of select="liber:gets('total-current-liabilities')"/>
+                </th>
+                <td class="subtotal right">
+                    <xsl:value-of select="liber:fm(-($creditCard + $otherCurrentLiability))"/>
+                </td>
+                <xsl:choose>
+                    <xsl:when test="$comparative = 1">
+                        <td class="subtotal right">
+                            <xsl:value-of select="liber:fm(-($creditCard2 + $otherCurrentLiability2))"/>
+                        </td>
+                    </xsl:when>
+                </xsl:choose>
+            </tr>
+            <xsl:apply-templates select="company">
+                <xsl:with-param name="type">LongTermLiability</xsl:with-param>
+                <xsl:with-param name="balance" select="-$longTermLiability"/>
+                <xsl:with-param name="previous" select="-$longTermLiability2"/>
+                <xsl:with-param name="indent">2</xsl:with-param>
+                <xsl:with-param name="comparative" select="$comparative"/>
+            </xsl:apply-templates>
+            <tr>
+                <th class="in-1 left">
+                    <xsl:value-of select="liber:gets('total-liabilities')"/>
+                </th>
+                <td class="subtotal right">
+                    <xsl:value-of select="liber:fm(-($creditCard + $otherCurrentLiability + $longTermLiability))"/>
+                </td>
+                <xsl:choose>
+                    <xsl:when test="$comparative = 1">
+                        <td class="subtotal right">
+                            <xsl:value-of select="liber:fm(-($creditCard2 + $otherCurrentLiability2 + $longTermLiability2))"/>
+                        </td>
+                    </xsl:when>
+                </xsl:choose>
+            </tr>
+            <xsl:apply-templates select="company">
+                <xsl:with-param name="type">Equity</xsl:with-param>
+                <xsl:with-param name="balance" select="-$equity"/>
+                <xsl:with-param name="previous" select="-$equity2"/>
+                <xsl:with-param name="indent">1</xsl:with-param>
+                <xsl:with-param name="title" select="liber:fgets('{0}', liber:gets(company/type))"/>
+                <xsl:with-param name="subtitle" select="liber:fgets('total-equity{0}', liber:gets(company/type))"/>
+                <xsl:with-param name="comparative" select="$comparative"/>
+            </xsl:apply-templates>
+            <tr>
+                <th class="left">
+                    <xsl:value-of select="liber:fgets('total-liabilities-equity{0}', liber:gets(company/type))"/>
+                </th>
+                <td class="total right">
+                    <xsl:value-of select="liber:fm(-($creditCard + $otherCurrentLiability + $longTermLiability + $equity))"/>
+                </td>
+                <xsl:choose>
+                    <xsl:when test="$comparative = 1">
+                        <td class="total right">
+                            <xsl:value-of select="liber:fm(-($creditCard2 + $otherCurrentLiability2 + $longTermLiability2 + $equity2))"/>
+                        </td>
+                    </xsl:when>
+                </xsl:choose>
+            </tr>
+        </tbody>
+    </xsl:template>
     <xsl:template match="/report">
+        <xsl:variable name="title" select="liber:gets('balance-sheet')"/>
         <xsl:call-template name="financial-statement">
             <xsl:with-param name="title" select="$title"/>
             <xsl:with-param name="table">
@@ -41,143 +244,7 @@ Licensed under the MIT License.
                         </th>
                     </tr>
                 </thead>
-                <xsl:variable name="bank" select="sum(company/account[type = 'Bank']/balance)"/>
-                <xsl:variable name="otherCurrentAsset" select="sum(company/account[type = 'OtherCurrentAsset']/balance)"/>
-                <xsl:variable name="fixedAsset" select="sum(company/account[type = 'FixedAsset']/balance)"/>
-                <xsl:variable name="otherAsset" select="sum(company/account[type = 'OtherAsset']/balance)"/>
-                <xsl:variable name="creditCard" select="sum(company/account[type = 'CreditCard']/balance)"/>
-                <xsl:variable name="otherCurrentLiability" select="sum(company/account[type = 'OtherCurrentLiability']/balance)"/>
-                <xsl:variable name="longTermLiability" select="sum(company/account[type = 'LongTermLiability']/balance)"/>
-                <xsl:variable name="equity" select="sum(company/account[type = 'Equity']/balance)"/>
-                <tbody>
-                    <tr>
-                        <th class="left">
-                            <xsl:value-of select="liber:gets('assets')"/>
-                        </th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <th class="in-1 left">
-                            <xsl:value-of select="liber:gets('current-assets')"/>
-                        </th>
-                        <th></th>
-                    </tr>
-                    <xsl:apply-templates select="company">
-                        <xsl:with-param name="type">Bank</xsl:with-param>
-                        <xsl:with-param name="balance" select="$bank"/>
-                        <xsl:with-param name="indent">2</xsl:with-param>
-                    </xsl:apply-templates>
-                    <xsl:apply-templates select="company">
-                        <xsl:with-param name="type">OtherCurrentAsset</xsl:with-param>
-                        <xsl:with-param name="balance" select="$otherCurrentAsset"/>
-                        <xsl:with-param name="indent">2</xsl:with-param>
-                    </xsl:apply-templates>
-                    <tr>
-                        <th class="in-1 left">
-                            <xsl:value-of select="liber:gets('total-current-assets')"/>
-                        </th>
-                        <td class="subtotal right">
-                            <xsl:value-of select="liber:fm($bank + $otherCurrentAsset)"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="in-1 left">
-                            <xsl:value-of select="liber:gets('non-current-assets')"/>
-                        </th>
-                        <th></th>
-                    </tr>
-                    <xsl:apply-templates select="company">
-                        <xsl:with-param name="type">FixedAsset</xsl:with-param>
-                        <xsl:with-param name="balance" select="$fixedAsset"/>
-                        <xsl:with-param name="indent">2</xsl:with-param>
-                    </xsl:apply-templates>
-                    <xsl:apply-templates select="company">
-                        <xsl:with-param name="type">OtherAsset</xsl:with-param>
-                        <xsl:with-param name="balance" select="$otherAsset"/>
-                        <xsl:with-param name="indent">2</xsl:with-param>
-                    </xsl:apply-templates>
-                    <tr>
-                        <th class="in-1 left">
-                            <xsl:value-of select="liber:gets('total-non-current-assets')"/>
-                        </th>
-                        <td class="subtotal right">
-                            <xsl:value-of select="liber:fm($fixedAsset + $otherAsset)"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th class="left">
-                            <xsl:value-of select="liber:gets('total-assets')"/>
-                        </th>
-                        <td class="total right">
-                            <xsl:value-of select="liber:fm($bank + $otherCurrentAsset + $fixedAsset + $otherAsset)"/>
-                        </td>
-                    </tr>
-                    <tr></tr>
-                    <tr>
-                        <th class="left">
-                            <xsl:value-of select="liber:fgets('liabilities-equity{0}', liber:gets(company/type))"/>
-                        </th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <th class="in-1 left">
-                            <xsl:value-of select="liber:gets('liabilities')"/>
-                        </th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <th class="in-2 left">
-                            <xsl:value-of select="liber:gets('current-liabilities')"/>
-                        </th>
-                        <th></th>
-                    </tr>
-                    <xsl:apply-templates select="company">
-                        <xsl:with-param name="type">CreditCard</xsl:with-param>
-                        <xsl:with-param name="balance" select="-$creditCard"/>
-                        <xsl:with-param name="indent">3</xsl:with-param>
-                    </xsl:apply-templates>
-                    <xsl:apply-templates select="company">
-                        <xsl:with-param name="type">OtherCurrentLiability</xsl:with-param>
-                        <xsl:with-param name="balance" select="-$otherCurrentLiability"/>
-                        <xsl:with-param name="indent">3</xsl:with-param>
-                    </xsl:apply-templates>
-                    <tr>
-                        <th class="in-2 left">
-                            <xsl:value-of select="liber:gets('total-current-liabilities')"/>
-                        </th>
-                        <td class="subtotal right">
-                            <xsl:value-of select="liber:fm(-($creditCard + $otherCurrentLiability))"/>
-                        </td>
-                    </tr>
-                    <xsl:apply-templates select="company">
-                        <xsl:with-param name="type">LongTermLiability</xsl:with-param>
-                        <xsl:with-param name="balance" select="-$longTermLiability"/>
-                        <xsl:with-param name="indent">2</xsl:with-param>
-                    </xsl:apply-templates>
-                    <tr>
-                        <th class="in-1 left">
-                            <xsl:value-of select="liber:gets('total-liabilities')"/>
-                        </th>
-                        <td class="subtotal right">
-                            <xsl:value-of select="liber:fm(-($creditCard + $otherCurrentLiability + $longTermLiability))"/>
-                        </td>
-                    </tr>
-                    <xsl:apply-templates select="company">
-                        <xsl:with-param name="type">Equity</xsl:with-param>
-                        <xsl:with-param name="balance" select="-$equity"/>
-                        <xsl:with-param name="indent">1</xsl:with-param>
-                        <xsl:with-param name="title" select="liber:fgets('{0}', liber:gets(company/type))"/>
-                        <xsl:with-param name="subtitle" select="liber:fgets('total-equity{0}', liber:gets(company/type))"/>
-                    </xsl:apply-templates>
-                    <tr>
-                        <th class="left">
-                            <xsl:value-of select="liber:fgets('total-liabilities-equity{0}', liber:gets(company/type))"/>
-                        </th>
-                        <td class="total right">
-                            <xsl:value-of select="liber:fm(-($creditCard + $otherCurrentLiability + $longTermLiability + $equity))"/>
-                        </td>
-                    </tr>
-                </tbody>
+                <xsl:call-template name="balance-sheet"/>
             </xsl:with-param>
         </xsl:call-template>
     </xsl:template>

@@ -13,8 +13,8 @@ Licensed under the MIT License.
     exclude-result-prefixes="msxsl">
     <xsl:include href="base/financial-statement.xslt"/>
     <xsl:output method="html" indent="yes"/>
-    <xsl:variable name="title" select="liber:gets('general-journal')"/>
     <xsl:template match="/report">
+        <xsl:variable name="title" select="liber:gets('general-journal')"/>
         <xsl:call-template name="financial-statement">
             <xsl:with-param name="title" select="$title"/>
             <xsl:with-param name="table">

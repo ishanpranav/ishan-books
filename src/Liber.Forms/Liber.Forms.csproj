@@ -8,6 +8,7 @@
 		<NeutralLanguage>en-US</NeutralLanguage>
 		<ApplicationIcon>favicon.ico</ApplicationIcon>
     <AssemblyTitle>IshanBooks</AssemblyTitle>
+    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -19,9 +20,12 @@
 	  <None Remove="checks\quicken_check_21.chk" />
 	  <None Remove="checks\quicken_wallet.chk" />
 	  <None Remove="checks\voucher.chk" />
+	  <None Remove="data\reports.json" />
 	  <None Remove="Properties\Resources.en.restext" />
 	  <None Remove="Properties\Resources.es-ES.restext" />
 	  <None Remove="styles\balance-sheet.xslt" />
+	  <None Remove="styles\cash-flow-statement.xslt" />
+	  <None Remove="styles\comparative-balance-sheet.xslt" />
 	  <None Remove="styles\comprehensive-income-statement.xslt" />
 	  <None Remove="styles\financial-statement.xslt" />
 	  <None Remove="styles\income-statement.xslt" />
@@ -50,6 +54,15 @@
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="checks\voucher.chk">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="data\reports.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="styles\cash-flow-statement.xslt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="styles\comparative-balance-sheet.xslt">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="styles\financial-statement.css">

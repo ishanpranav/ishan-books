@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!--
-income-statement.xslt
+cash-flow-statement.xslt
 Copyright (c) 2023 Ishan Pranav. All rights reserved.
 Licensed under the MIT License.
 -->
@@ -14,7 +14,7 @@ Licensed under the MIT License.
     <xsl:include href="base/financial-statement.xslt"/>
     <xsl:output method="html" indent="yes"/>
     <xsl:template match="/report">
-    <xsl:variable name="title" select="liber:gets('income-statement')"/>
+        <xsl:variable name="title" select="liber:gets('cash-flow-statement')"/>
         <xsl:call-template name="financial-statement">
             <xsl:with-param name="title" select="$title"/>
             <xsl:with-param name="table">
@@ -48,10 +48,10 @@ Licensed under the MIT License.
                 <xsl:variable name="incomeTaxExpense" select="sum(company/account[type = 'IncomeTaxExpense']/balance)"/>
                 <tbody>
                     <tr>
-                        <th class="in-1 left">
-                            <xsl:value-of select="liber:gets('ordinary-income')"/>
+                        <th class="left">
+                            <xsl:value-of select="concat(liber:gets('cash{0}'), ', ', liber:fdates(started))"/>
                         </th>
-                        <th></th>
+                        <th>0</th>
                     </tr>
                     <xsl:apply-templates select="company">
                         <xsl:with-param name="type">Income</xsl:with-param>
@@ -97,13 +97,12 @@ Licensed under the MIT License.
                 </tbody>
                 <tfoot>
                     <tr>
-                        <xsl:variable name="netIncome" select="$income + $otherIncomeExpense + $cost + $expense + $incomeTaxExpense"/>
                         <th class="left">
-                            <xsl:value-of select="liber:pngets('net-income', -$netIncome)"/>
+                            <xsl:value-of select="liber:fgets('cash{0}', liber:fdates(posted))"/>
                         </th>
-                        <td class="total right">
-                            <xsl:value-of select="liber:fm(-$netIncome)"/>
-                        </td>
+                        <th class="total right">
+                            0
+                        </th>
                     </tr>
                 </tfoot>
             </xsl:with-param>

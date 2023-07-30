@@ -32,18 +32,20 @@ Licensed under the MIT License.
     <xsl:template match="company">
         <xsl:param name="type"/>
         <xsl:param name="balance"/>
+        <xsl:param name="previous"/>
         <xsl:param name="indent"/>
         <xsl:param name="title" select="liber:gets($type)"/>
         <xsl:param name="subtitle" select="liber:pngets($type, $balance)"/>
+        <xsl:param name="comparative" select="0"/>
         <xsl:choose>
-            <xsl:when test="$balance != 0">
+            <xsl:when test="$balance != 0 or $previous != 0">
                 <tr>
                     <th class="in-{$indent} left">
                         <xsl:value-of select="$title"/>
                     </th>
                     <th></th>
                 </tr>
-                <xsl:for-each select="//account[type = $type and balance != 0]">
+                <xsl:for-each select="//account[type = $type and (balance != 0 or previous != 0)]">
                     <tr>
                         <td class="in-{$indent + 2} left">
                             <xsl:value-of select="name"/>
@@ -51,6 +53,13 @@ Licensed under the MIT License.
                         <td class="right">
                             <xsl:value-of select="liber:fm($type, balance)"/>
                         </td>
+                        <xsl:choose>
+                            <xsl:when test="$comparative = 1">
+                                <td class="right">
+                                    <xsl:value-of select="liber:fm($type, previous)"/>
+                                </td>
+                            </xsl:when>
+                        </xsl:choose>
                     </tr>
                 </xsl:for-each>
             </xsl:when>
@@ -62,6 +71,13 @@ Licensed under the MIT License.
             <td class="subtotal right">
                 <xsl:value-of select="liber:fm($balance)"/>
             </td>
+            <xsl:choose>
+                <xsl:when test="$comparative = 1">
+                    <td class="subtotal right">
+                        <xsl:value-of select="liber:fm($previous)"/>
+                    </td>
+                </xsl:when>
+            </xsl:choose>
         </tr>
     </xsl:template>
 </xsl:stylesheet>

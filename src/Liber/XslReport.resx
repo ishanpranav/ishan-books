@@ -132,6 +132,12 @@
   <data name="cash-flow-statement" xml:space="preserve">
     <value>Cash Flow Statement</value>
   </data>
+  <data name="cash{0}" xml:space="preserve">
+    <value>Cash and cash equivalents, {0}</value>
+  </data>
+  <data name="comparative-balance-sheet" xml:space="preserve">
+    <value>Comparative Balance Sheet</value>
+  </data>
   <data name="comprehensive-income-statement" xml:space="preserve">
     <value>Comprehensive Income Statement</value>
   </data>

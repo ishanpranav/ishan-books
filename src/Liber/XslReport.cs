@@ -100,6 +100,13 @@ public class XslReport
         }
     }
 
+    [LocalizedCategory(nameof(EquityMode))]
+    [LocalizedDescription(nameof(EquityMode))]
+    [LocalizedDisplayName(nameof(EquityMode))]
+    [ReadOnly(true)]
+    [XmlIgnore]
+    public EquityModes EquityMode { get; set; }
+
     public string fdatel(DateTime value)
     {
         return value.ToLongDateString();

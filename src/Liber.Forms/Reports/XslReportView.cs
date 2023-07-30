@@ -4,6 +4,7 @@
 
 using System.Collections.Generic;
 using System.IO;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml.Xsl;
 using Microsoft.Web.WebView2.Core;
@@ -13,6 +14,8 @@ namespace Liber.Forms.Reports;
 internal sealed class XslReportView : IReportView
 {
     private static readonly Dictionary<string, XslCompiledTransform> s_styles = new Dictionary<string, XslCompiledTransform>();
+
+    private static Dictionary<string, EquityModes>? s_reports;
 
     private readonly string _path;
     private readonly XslReport _report;
@@ -36,6 +39,11 @@ internal sealed class XslReportView : IReportView
 
     public void InitializeReport(CoreWebView2 coreWebView2)
     {
+        if (s_reports != null && s_reports.TryGetValue(Path.GetFileNameWithoutExtension(_path), out EquityModes value))
+        {
+            _report.EquityMode = value;
+        }
+
         if (!s_styles.TryGetValue(_path, out XslCompiledTransform? style))
         {
             style = XmlReportSerializer.DeserializeTransform(_path);
@@ -75,6 +83,16 @@ internal sealed class XslReportView : IReportView
             default:
                 FormattedStrings.ShowNotSupportedMessage(extension);
                 break;
+        }
+    }
+
+    public static void InitializeReports(string path)
+    {
+        if (s_reports == null)
+        {
+            using FileStream input = File.OpenRead(path);
+
+            s_reports = JsonSerializer.Deserialize<Dictionary<string, EquityModes>>(input, FormattedStrings.JsonOptions);
         }
     }
 }

@@ -19,7 +19,8 @@ __Reporting__
 - [X] Trial balance
 - [X] Income statement
 - [X] Comprehensive income statement
-- [ ] Balance sheet
+- [X] Balance sheet
+- [X] Comparative balance sheet
 - [ ] Cash flow statement
 - [ ] Equity statement
 

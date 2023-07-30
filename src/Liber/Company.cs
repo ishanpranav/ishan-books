@@ -333,6 +333,21 @@ public sealed class Company : IXmlSerializable
         return result;
     }
 
+    public decimal GetEquity(DateTime started, DateTime posted)
+    {
+        decimal result = 0;
+
+        foreach (Account account in _accounts.Values)
+        {
+            if (account.Temporary && account.Type != AccountType.OtherComprehensiveIncome)
+            {
+                result += account.GetBalance(started, posted);
+            }
+        }
+
+        return result;
+    }
+
     public decimal GetOtherEquity(DateTime posted)
     {
         decimal result = 0;

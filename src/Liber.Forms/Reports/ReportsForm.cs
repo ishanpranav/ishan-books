@@ -35,6 +35,7 @@ internal sealed partial class ReportsForm : Form
             _contextMenu.Show(_webView, e.Location);
         };
 
+        XslReportView.InitializeReports(Path.Combine("data", "reports.json"));
         _webView.CoreWebView2.SetVirtualHostNameToFolderMapping("liber.example", Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)!, CoreWebView2HostResourceAccessKind.DenyCors);
         InitializeReports(
             path: "styles",

@@ -231,47 +231,54 @@ public class Account : IXmlSerializable
         writer.WriteElementString("name", Name);
         writer.WriteElementString("type", Type.ToString());
 
-        decimal balance;
+        decimal balance = 0;
+        decimal previous = 0;
 
-        if (writer is XmlReportWriter reportWriter)
-        {
-            if (this == reportWriter.Report.Company.EquityAccount)
-            {
-                if (reportWriter.Report.Started != reportWriter.Report.Posted)
-                {
-                    balance = reportWriter.Report.Company.GetEquity(reportWriter.Report.Started);
-                }
-                else
-                {
-                    balance = reportWriter.Report.Company.GetEquity(reportWriter.Report.Posted);
-                }
-            }
-            else if (this == reportWriter.Report.Company.OtherEquityAccount)
-            {
-                if (reportWriter.Report.Started != reportWriter.Report.Posted)
-                {
-                    balance = reportWriter.Report.Company.GetOtherEquity(reportWriter.Report.Started);
-                }
-                else
-                {
-                    balance = reportWriter.Report.Company.GetOtherEquity(reportWriter.Report.Posted);
-                }
-            }
-            else if (Temporary)
-            {
-                balance = GetBalance(reportWriter.Report.Started, reportWriter.Report.Posted);
-            }
-            else
-            {
-                balance = GetBalance(reportWriter.Report.Posted);
-            }
-        }
-        else
+        if (writer is not XmlReportWriter reportWriter)
         {
             balance = Balance;
         }
+        else if (this == reportWriter.Report.Company.EquityAccount)
+        {
+            if (reportWriter.Report.EquityMode.HasFlag(EquityModes.CurrentPosted))
+            {
+                balance = reportWriter.Report.Company.GetEquity(reportWriter.Report.Posted);
+            }
+
+            if (reportWriter.Report.EquityMode.HasFlag(EquityModes.CurrentStarted))
+            {
+                balance = reportWriter.Report.Company.GetEquity(reportWriter.Report.Started);
+            }
+
+            previous = reportWriter.Report.Company.GetEquity(reportWriter.Report.Started);
+        }
+        else if (this == reportWriter.Report.Company.OtherEquityAccount)
+        {
+            if (reportWriter.Report.EquityMode.HasFlag(EquityModes.CurrentPosted))
+            {
+                balance = reportWriter.Report.Company.GetOtherEquity(reportWriter.Report.Posted);
+            }
+
+            if (reportWriter.Report.EquityMode.HasFlag(EquityModes.CurrentStarted))
+            {
+                balance = reportWriter.Report.Company.GetOtherEquity(reportWriter.Report.Started);
+            }
+
+            previous = reportWriter.Report.Company.GetOtherEquity(reportWriter.Report.Started);
+        }
+        else if (Temporary)
+        {
+            balance = GetBalance(reportWriter.Report.Started, reportWriter.Report.Posted);
+            previous = GetBalance(reportWriter.Report.Started, reportWriter.Report.Posted);
+        }
+        else
+        {
+            balance = GetBalance(reportWriter.Report.Posted);
+            previous = GetBalance(reportWriter.Report.Started);
+        }
 
         writer.WriteElementString("balance", XmlConvert.ToString(balance));
+        writer.WriteElementString("previous", XmlConvert.ToString(previous));
         Accounting.DebitCredit(balance, out decimal debit, out decimal credit);
         writer.WriteElementString("debit", XmlConvert.ToString(debit));
         writer.WriteElementString("credit", XmlConvert.ToString(credit));
