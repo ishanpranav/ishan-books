@@ -35,7 +35,7 @@ internal sealed partial class MainForm : Form
         InitializeComponent();
         ClickOnce.Initialize(this);
 
-        Text = AssemblyInfo.Title;
+        Text = ClickOnce.ApplicationName;
         aboutToolStripMenuItem.Text = FormattedStrings.AboutText;
         _company.AccountRemoved += (sender, e) => _factory.Kill(e.Id);
     }

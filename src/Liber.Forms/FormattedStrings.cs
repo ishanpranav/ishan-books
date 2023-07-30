@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Windows.Forms;
+using Liber.Forms;
 using Liber.Forms.Properties;
 
 namespace Liber;
@@ -35,7 +36,7 @@ internal static class FormattedStrings
     {
         get
         {
-            return string.Format(GetString("AboutText{0}"), AssemblyInfo.Title);
+            return string.Format(GetString("AboutText{0}"), ClickOnce.ApplicationName);
         }
     }
     

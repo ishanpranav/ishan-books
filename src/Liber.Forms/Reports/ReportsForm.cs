@@ -3,7 +3,6 @@
 // Licensed under the MIT License.
 
 using System;
-using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Reflection;

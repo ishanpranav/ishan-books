@@ -6,8 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Forms;
-using Humanizer.Configuration;
-using Humanizer.DateTimeHumanizeStrategy;
 using Liber.Forms.Properties;
 
 namespace Liber.Forms;
@@ -18,6 +16,7 @@ internal static class Program
     private static void Main(string[] args)
     {
         ApplicationConfiguration.Initialize();
+        ClickOnce.Initialize();
 
         if (!string.IsNullOrWhiteSpace(Settings.Default.Culture))
         {
@@ -25,6 +24,7 @@ internal static class Program
 
             CultureInfo.CurrentCulture = culture;
             CultureInfo.CurrentUICulture = culture;
+            Application.CurrentCulture = culture;
         }
 
         IReadOnlyList<string> arguments;

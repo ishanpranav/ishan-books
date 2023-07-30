@@ -5,8 +5,11 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 using Liber.Forms.Properties;
+using Microsoft.Win32;
 
 namespace Liber.Forms;
 
@@ -17,6 +20,14 @@ internal static class ClickOnce
         get
         {
             return bool.TryParse(Environment.GetEnvironmentVariable("CLICKONCE_ISNETWORKDEPLOYED"), out bool result) && result;
+        }
+    }
+
+    public static bool IsFirstRun
+    {
+        get
+        {
+            return bool.TryParse(Environment.GetEnvironmentVariable("CLICKONCE_ISFIRSTRUN"), out bool result) && result;
         }
     }
 
@@ -50,11 +61,25 @@ internal static class ClickOnce
         }
     }
 
-    public static string? ApplicationName
+    public static string ApplicationName
     {
         get
         {
-            return Environment.GetEnvironmentVariable("CLICKONCE_UPDATEDAPPLICATIONFULLNAME");
+            string? result = Environment.GetEnvironmentVariable("CLICKONCE_UPDATEDAPPLICATIONFULLNAME");
+
+            if (result != null)
+            {
+                return result;
+            }
+
+            AssemblyTitleAttribute? customAttribute = typeof(ClickOnce).Assembly.GetCustomAttribute<AssemblyTitleAttribute>();
+
+            if (customAttribute != null)
+            {
+                return customAttribute.Title;
+            }
+
+            return string.Empty;
         }
     }
 
@@ -104,6 +129,55 @@ internal static class ClickOnce
         while (result != null);
 
         return results;
+    }
+
+    public static void Initialize()
+    {
+        if (!IsFirstRun)
+        {
+            return;
+        }
+
+        try
+        {
+            Assembly assembly = typeof(ClickOnce).Assembly;
+
+            string path = Path.Combine(Application.StartupPath, "favicon.ico");
+
+            if (!File.Exists(path))
+            {
+                return;
+            }
+
+            RegistryKey? key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Uninstall");
+
+            if (key == null)
+            {
+                return;
+            }
+
+            string[] subKeyNames = key.GetSubKeyNames();
+
+            for (int i = 0; i < subKeyNames.Length; i++)
+            {
+                RegistryKey? subKey = key.OpenSubKey(subKeyNames[i], true);
+
+                if (subKey == null)
+                {
+                    continue;
+                }
+
+                object? displayNameValue = subKey.GetValue("DisplayName");
+
+                if (displayNameValue != null && displayNameValue.ToString() == ApplicationName)
+                {
+                    subKey.SetValue("DisplayIcon", path);
+
+                    break;
+                }
+            }
+        }
+        catch { }
     }
 
     public static void Initialize(Form value)
