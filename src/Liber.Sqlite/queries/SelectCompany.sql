@@ -7,6 +7,8 @@ SELECT
     "NextAccountNumber",
     "NextTransactionNumber",
     "Type",
-    "Color"
+    "Color",
+    "EquityAccount",
+    "OtherEquityAccount"
 FROM "main"."Company"
 LIMIT 1;

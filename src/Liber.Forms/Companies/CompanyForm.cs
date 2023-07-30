@@ -24,6 +24,10 @@ internal abstract partial class CompanyForm : Form
         nameTextBox.Text = company.Name;
         _colorButton.BackColor = company.Color;
         _colorButton.ForeColor = Colors.GetForeColor(company.Color);
+        equityAccountComboBox.Initialize(company, x => company.Accounts[x].Type == AccountType.Equity);
+        otherEquityAccountComboBox.Initialize(company, x => company.Accounts[x].Type == AccountType.Equity);
+        equityAccountComboBox.SelectedItem = company.EquityAccountId;
+        otherEquityAccountComboBox.SelectedItem = company.OtherEquityAccountId;
         passwordTextBox.Text = company.Password;
     }
 
@@ -33,6 +37,8 @@ internal abstract partial class CompanyForm : Form
     {
         Company.Name = nameTextBox.Text;
         Company.Color = _colorButton.BackColor;
+        Company.EquityAccountId = equityAccountComboBox.SelectedItem;
+        Company.OtherEquityAccountId = otherEquityAccountComboBox.SelectedItem;
         Company.Password = passwordTextBox.Text;
         DialogResult = DialogResult.OK;
 

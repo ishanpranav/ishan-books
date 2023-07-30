@@ -1,4 +1,4 @@
-﻿// AccountView.cs
+﻿// NullAccountView.cs
 // Copyright (c) 2023 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
@@ -6,22 +6,35 @@ using System;
 
 namespace Liber.Forms.Accounts;
 
-internal sealed class AccountView : IAccountView
+internal sealed class NullAccountView : IAccountView
 {
-    public AccountView(Guid id, Account value)
+    private static NullAccountView? s_instance;
+
+    public static NullAccountView Value
     {
-        Id = id;
-        Value = value;
+        get
+        {
+            s_instance ??= new NullAccountView();
+
+            return s_instance;
+        }
     }
 
-    public Guid Id { get; }
-    public Account Value { get; }
+    private NullAccountView() { }
+
+    public Guid Id
+    {
+        get
+        {
+            return Guid.Empty;
+        }
+    }
 
     public string DisplayName
     {
         get
         {
-            return Value.Name;
+            return "--- Split ---";
         }
     }
 

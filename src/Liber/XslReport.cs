@@ -35,7 +35,6 @@ public class XslReport : IXmlSerializable
     [Browsable(false)]
     public Company Company { get; }
 
-
     [LocalizedCategory(nameof(Started))]
     [LocalizedDescription(nameof(Started))]
     [LocalizedDisplayName(nameof(Started))]

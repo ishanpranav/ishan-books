@@ -9,6 +9,7 @@ internal sealed class NewAccountForm : AccountForm
     public NewAccountForm(Company company) : base(company)
     {
         numberNumericUpDown.Value = company.NextAccountNumber;
+        parentComboBox.Initialize(company, validator: null);
     }
 
     protected override void CommitChanges()
@@ -16,6 +17,6 @@ internal sealed class NewAccountForm : AccountForm
         Account account = new Account();
 
         ApplyChanges(account);
-        Company.AddAccount(account, ParentId);
+        Company.AddAccount(account, parentComboBox.SelectedItem);
     }
 }

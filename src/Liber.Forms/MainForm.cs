@@ -37,6 +37,7 @@ internal sealed partial class MainForm : Form
 
         Text = AssemblyInfo.Title;
         aboutToolStripMenuItem.Text = FormattedStrings.AboutText;
+        _company.AccountRemoved += (sender, e) => _factory.Kill(e.Id);
     }
 
     public MainForm(string path) : this()

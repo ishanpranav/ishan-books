@@ -21,8 +21,14 @@ internal sealed class EditAccountForm : AccountForm
         _colorButton.BackColor = account.Color;
         _colorButton.ForeColor = Colors.GetForeColor(company.Color);
         Type = account.Type;
-        ParentId = account.ParentId;
         TaxType = account.TaxType;
+        parentComboBox.Initialize(company, x => x != Id);
+        parentComboBox.SelectedItem = account.ParentId;
+
+        if (Id == company.EquityAccountId || Id == company.OtherEquityAccountId)
+        {
+            placeholderCheckBox.Enabled = false;
+        }
     }
 
     public Guid Id { get; }
@@ -32,11 +38,6 @@ internal sealed class EditAccountForm : AccountForm
         Account account = Company.Accounts[Id];
 
         ApplyChanges(account);
-        Company.UpdateAccount(Id, ParentId);
-    }
-
-    protected override bool IsValid(Guid parentId)
-    {
-        return parentId != Id;
+        Company.UpdateAccount(Id, parentComboBox.SelectedItem);
     }
 }

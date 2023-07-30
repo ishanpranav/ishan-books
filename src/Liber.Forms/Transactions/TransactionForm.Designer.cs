@@ -153,7 +153,6 @@
             _dataGridView.RowTemplate.Height = 25;
             _dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             _helpProvider.SetShowHelp(_dataGridView, (bool)resources.GetObject("_dataGridView.ShowHelp"));
-            _dataGridView.CellMouseDoubleClick += OnDataGridViewCellMousDoubleClick;
             // 
             // accountColumn
             // 

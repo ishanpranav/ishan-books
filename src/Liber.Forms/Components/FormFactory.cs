@@ -13,14 +13,15 @@ internal sealed class FormFactory : Component
 {
     private readonly Dictionary<Guid, Form> _forms = new Dictionary<Guid, Form>();
 
-    public Form? Parent { get; set; }
-
     public FormFactory() { }
 
     public FormFactory(IContainer container)
     {
         container.Add(this);
     }
+
+    [Browsable(false)]
+    public Form? Parent { get; set; }
 
     public void Register(Guid key, Form value)
     {

@@ -68,5 +68,23 @@ namespace Liber.Properties {
                 return ResourceManager.GetString("DefaultCompanyName", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Owner&apos;s Equity.
+        /// </summary>
+        public static string DefaultEquityAccountName {
+            get {
+                return ResourceManager.GetString("DefaultEquityAccountName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Accumulated Other Comprehensive Income.
+        /// </summary>
+        public static string DefaultOtherEquityAccountName {
+            get {
+                return ResourceManager.GetString("DefaultOtherEquityAccountName", resourceCulture);
+            }
+        }
     }
 }

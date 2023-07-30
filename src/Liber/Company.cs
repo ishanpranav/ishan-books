@@ -22,11 +22,24 @@ public sealed class Company : IXmlSerializable
 {
     private readonly Dictionary<Guid, Account> _accounts;
     private readonly SortedSet<Transaction> _transactions;
+    private readonly SortedSet<string> _names = new SortedSet<string>();
 
     public Company()
     {
         _accounts = new Dictionary<Guid, Account>();
         _transactions = new SortedSet<Transaction>();
+        EquityAccountId = AddAccount(new Account()
+        {
+            Name = Resources.DefaultEquityAccountName,
+            Placeholder = true,
+            Type = AccountType.Equity
+        }, Guid.Empty);
+        OtherEquityAccountId = AddAccount(new Account()
+        {
+            Name = Resources.DefaultOtherEquityAccountName,
+            Placeholder = true,
+            Type = AccountType.Equity
+        });
     }
 
     [JsonConstructor]
@@ -42,16 +55,18 @@ public sealed class Company : IXmlSerializable
         NextAccountNumber = nextAccountNumber;
         NextTransactionNumber = nextTransactionNumber;
 
-        foreach (Account account in accounts.Values)
+        foreach (KeyValuePair<Guid, Account> account in accounts)
         {
-            if (account.ParentId != Guid.Empty)
+            if (account.Value.ParentId != Guid.Empty)
             {
-                accounts[account.ParentId].children.Add(account);
+                accounts[account.Value.ParentId].children.Add(account.Value);
             }
         }
 
         foreach (Transaction transaction in transactions)
         {
+            AddName(transaction);
+
             foreach (Line line in transaction.Lines)
             {
                 accounts[line.AccountId].lines.Add(line);
@@ -94,6 +109,12 @@ public sealed class Company : IXmlSerializable
     [MessagePackFormatter(typeof(MessagePackColorFormatter))]
     public Color Color { get; set; }
 
+    [Key(7)]
+    public Guid EquityAccountId { get; set; }
+
+    [Key(8)]
+    public Guid OtherEquityAccountId { get; set; }
+
     [IgnoreMember]
     [JsonIgnore]
     public string? Password { get; set; }
@@ -108,9 +129,56 @@ public sealed class Company : IXmlSerializable
         }
     }
 
+    [IgnoreMember]
+    [JsonIgnore]
+    public Account EquityAccount
+    {
+        get
+        {
+            return _accounts[EquityAccountId];
+        }
+    }
+
+    [IgnoreMember]
+    [JsonIgnore]
+    public Account OtherEquityAccount
+    {
+        get
+        {
+            return _accounts[OtherEquityAccountId];
+        }
+    }
+
+    public decimal Equity
+    {
+        get
+        {
+            decimal result = 0;
+
+            foreach (Account account in _accounts.Values)
+            {
+                if (account.Temporary)
+                {
+                    result += account.Balance;
+                }
+            }
+
+            return result;
+        }
+    }
+
     public event EventHandler<GuidEventArgs>? AccountAdded;
     public event EventHandler<GuidEventArgs>? AccountUpdated;
     public event EventHandler<GuidEventArgs>? AccountRemoved;
+
+    public string[] GetNames()
+    {
+        string[] result = new string[_names.Count];
+
+        _names.CopyTo(result);
+
+        return result;
+    }
 
     private void AddChild(Account value, Guid parentId)
     {
@@ -165,7 +233,19 @@ public sealed class Company : IXmlSerializable
 
     public void RemoveAccount(Guid id)
     {
-        RemoveChild(_accounts[id]);
+        if (EquityAccountId == id || OtherEquityAccountId == id)
+        {
+            return;
+        }
+
+        Account value = _accounts[id];
+
+        if (value.Children.Count > 0 || value.Lines.Count > 0)
+        {
+            return;
+        }
+
+        RemoveChild(value);
         _accounts.Remove(id);
 
         AccountRemoved?.Invoke(sender: this, new GuidEventArgs(id));
@@ -208,6 +288,7 @@ public sealed class Company : IXmlSerializable
             account.lines.Add(line);
         }
 
+        AddName(value);
         _transactions.Add(value);
 
         NextTransactionNumber = Math.Max(value.Number, NextTransactionNumber) + 1;
@@ -224,16 +305,47 @@ public sealed class Company : IXmlSerializable
         _transactions.Remove(value);
     }
 
+    private void AddName(Transaction value)
+    {
+        if (string.IsNullOrWhiteSpace(value.Name))
+        {
+            value.Name = null;
+        }
+        else
+        {
+            value.Name = value.Name.Trim();
+            _names.Add(value.Name);
+        }
+    }
+
+    public decimal GetEquity(DateTime posted)
+    {
+        decimal result = 0;
+
+        foreach (Account account in _accounts.Values)
+        {
+            if (account.Temporary)
+            {
+                result += account.GetBalance(posted);
+            }
+        }
+
+        return result;
+    }
+
     public void CopyTo(Company other)
     {
         other.Name = Name;
         other.NextAccountNumber = NextAccountNumber;
         other.NextTransactionNumber = NextTransactionNumber;
         other.Color = Color;
+        other.EquityAccountId = EquityAccountId;
+        other.OtherEquityAccountId = OtherEquityAccountId;
         other.Password = Password;
 
         other._accounts.Clear();
         other._transactions.Clear();
+        other._names.Clear();
 
         foreach (KeyValuePair<Guid, Account> account in _accounts)
         {
@@ -243,6 +355,11 @@ public sealed class Company : IXmlSerializable
         foreach (Transaction transaction in _transactions)
         {
             other._transactions.Add(transaction);
+        }
+
+        foreach (string name in _names)
+        {
+            other._names.Add(name);
         }
     }
 

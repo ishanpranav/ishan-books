@@ -39,8 +39,22 @@ public class Transaction :
         }
     }
 
+    [Ignore]
     [Key(0)]
     public ICollection<Line> Lines { get; }
+
+    [Ignore]
+    [IgnoreMember]
+    [JsonIgnore]
+    public IOrderedEnumerable<Line> OrderedLines
+    {
+        get
+        {
+            return Lines
+                .OrderBy(x => x.Debit > 0 ? -1 : 1)
+                .ThenByDescending(x => Math.Abs(x.Balance));
+        }
+    }
 
     [Index(1)]
     [Key(1)]
@@ -76,6 +90,7 @@ public class Transaction :
 
     [Ignore]
     [IgnoreMember]
+    [JsonIgnore]
     public decimal Balance
     {
         get
@@ -89,6 +104,24 @@ public class Transaction :
 
             return result;
         }
+    }
+
+    public Line? GetDoubleEntry(Line value)
+    {
+        if (Lines.Count > 2)
+        {
+            return null;
+        }
+
+        foreach (Line line in Lines)
+        {
+            if (line != value)
+            {
+                return line;
+            }
+        }
+
+        return null;
     }
 
     int IComparable.CompareTo(object? obj)
@@ -185,9 +218,7 @@ public class Transaction :
 
         writer.WriteElementString("name", Name);
 
-        IOrderedEnumerable<Line> lines = Lines
-            .OrderBy(x => x.Debit > 0 ? -1 : 1)
-            .ThenByDescending(x => Math.Abs(x.Balance));
+        IOrderedEnumerable<Line> lines = OrderedLines;
 
         if (writer is XmlReportWriter reportWriter)
         {

@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Windows.Forms;
 using Liber.Forms.Accounts;
 using Liber.Forms.Properties;
@@ -27,34 +28,19 @@ internal sealed partial class TransactionForm : Form
         _company.AccountUpdated += OnCompanyAccountUpdated;
         _company.AccountRemoved += OnCompanyAccountRemoved;
         DialogResult = DialogResult.Cancel;
-        accountColumn.ValueMember = nameof(AccountView.Id);
-        accountColumn.DisplayMember = nameof(AccountView.DisplayName);
+        accountColumn.ValueMember = nameof(IAccountView.Id);
+        accountColumn.DisplayMember = nameof(IAccountView.DisplayName);
         numberNumericUpDown.Maximum = decimal.MaxValue;
+        nameComboBox.DataSource = _company.GetNames();
+        debitColumn.ValueType = typeof(decimal);
+        creditColumn.ValueType = typeof(decimal);
+        _dataGridView.AlternatingRowsDefaultCellStyle.BackColor = _company.Color;
+        _dataGridView.AlternatingRowsDefaultCellStyle.ForeColor = Colors.GetForeColor(_company.Color);
 
         foreach (KeyValuePair<Guid, Account> account in _company.Accounts)
         {
             InitializeAccount(account.Key, account.Value);
         }
-
-        SortedSet<string> names = new SortedSet<string>();
-
-        foreach (Transaction transaction in _company.Transactions)
-        {
-            if (!string.IsNullOrWhiteSpace(transaction.Name))
-            {
-                names.Add(transaction.Name);
-            }
-        }
-
-        string[] array = new string[names.Count];
-
-        names.CopyTo(array);
-
-        nameComboBox.DataSource = array;
-        debitColumn.ValueType = typeof(decimal);
-        creditColumn.ValueType = typeof(decimal);
-        _dataGridView.AlternatingRowsDefaultCellStyle.BackColor = _company.Color;
-        _dataGridView.AlternatingRowsDefaultCellStyle.ForeColor = Colors.GetForeColor(_company.Color);
 
         _dataGridView.AutoResizeColumns();
         CreateNew();
@@ -76,7 +62,7 @@ internal sealed partial class TransactionForm : Form
 
         _dataGridView.Rows.Clear();
 
-        foreach (Line line in transaction.Lines)
+        foreach (Line line in transaction.OrderedLines)
         {
             object? debit = null;
             object? credit = null;
@@ -188,16 +174,19 @@ internal sealed partial class TransactionForm : Form
 
     private void OnCompanyAccountUpdated(object? sender, GuidEventArgs e)
     {
-        _dataGridView.Refresh();
+        accountColumn.Items.Remove(e.Id);
+
+        if (!_company!.Accounts[e.Id].Placeholder)
+        {
+            accountColumn.Items.Add(e.Id);
+        }
+
+        Refresh();
     }
 
     private void OnCompanyAccountRemoved(object? sender, GuidEventArgs e)
     {
         accountColumn.Items.Remove(e.Id);
-    }
-
-    private void OnNumberNumericUpDownValueChanged(object sender, EventArgs e)
-    {
     }
 
     private void OnNewToolStripButtonClick(object sender, EventArgs e)
@@ -305,11 +294,6 @@ internal sealed partial class TransactionForm : Form
     }
 
     private void OnPrintToolStripButtonClick(object sender, EventArgs e)
-    {
-
-    }
-
-    private void OnDataGridViewCellMousDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
     {
 
     }

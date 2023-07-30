@@ -120,4 +120,10 @@
   <data name="DefaultCompanyName" xml:space="preserve">
     <value>Untitled Company</value>
   </data>
+  <data name="DefaultEquityAccountName" xml:space="preserve">
+    <value>Owner's Equity</value>
+  </data>
+  <data name="DefaultOtherEquityAccountName" xml:space="preserve">
+    <value>Accumulated Other Comprehensive Income</value>
+  </data>
 </root>

@@ -69,6 +69,22 @@ public class Line : IXmlSerializable
     [JsonIgnore]
     public Transaction? Transaction { get; internal set; }
 
+    [Ignore]
+    [IgnoreMember]
+    [JsonIgnore]
+    public Line? Sibling
+    {
+        get
+        {
+            if (Transaction == null)
+            {
+                return null;
+            }
+
+            return Transaction.GetDoubleEntry(this);
+        }
+    }
+
     public XmlSchema? GetSchema()
     {
         return null;
@@ -92,10 +108,9 @@ public class Line : IXmlSerializable
             account = AccountId.ToString();
         }
 
-        Accounting.DebitCredit(Balance, out decimal debit, out decimal credit);
         writer.WriteElementString("account", account);
-        writer.WriteElementString("debit", XmlConvert.ToString(debit));
-        writer.WriteElementString("credit", XmlConvert.ToString(credit));
+        writer.WriteElementString("debit", XmlConvert.ToString(Debit));
+        writer.WriteElementString("credit", XmlConvert.ToString(Credit));
         writer.WriteElementString("description", Description);
     }
 }

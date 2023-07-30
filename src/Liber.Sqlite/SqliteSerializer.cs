@@ -110,6 +110,8 @@ public static class SqliteSerializer
             command.Parameters.AddWithValue("@nextTransactionNumber", value.NextTransactionNumber);
             command.Parameters.AddWithValue("@type", value.Type);
             command.Parameters.AddWithValue("@color", ValueOf(value.Color));
+            command.Parameters.AddWithValue("@equityAccount", value.EquityAccountId);
+            command.Parameters.AddWithValue("@otherEquityAccount", value.OtherEquityAccount);
 
             await command.ExecuteNonQueryAsync();
         }
@@ -259,6 +261,8 @@ public static class SqliteSerializer
                     Name = await GetStringAsync(reader, 0),
                     Type = await reader.GetFieldValueAsync<CompanyType>(3),
                     Color = await GetColorAsync(reader, 4),
+                    EquityAccountId = reader.GetGuid(5),
+                    OtherEquityAccountId = reader.GetGuid(6),
                     Password = password
                 };
             }

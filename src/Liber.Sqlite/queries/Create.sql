@@ -18,7 +18,11 @@ CREATE TABLE "Company" (
     "NextTransactionNumber" INTEGER NOT NULL,
     "Type"                  INTEGER NOT NULL,
     "Color"                 INTEGER,
-    PRIMARY KEY("Id" AUTOINCREMENT)
+    "EquityAccount"         TEXT,
+    "OtherEquityAccount"    TEXT,
+    PRIMARY KEY("Id" AUTOINCREMENT),
+    FOREIGN KEY("EquityAccount") REFERENCES "Account"("Id"),
+    FOREIGN KEY("OtherEquityAccount") REFERENCES "Account"("Id")
 );
 
 CREATE TABLE "Account" (

@@ -3,7 +3,6 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
@@ -20,9 +19,6 @@ internal abstract partial class AccountForm : Form
         new ComponentResourceManager(GetType()).ApplyResources(this, "$this");
 
         Company = company;
-        Company.AccountAdded += OnCompanyAccountAdded;
-        Company.AccountUpdated += OnCompanyAccountUpdated;
-        Company.AccountRemoved += OnCompanyAccountRemoved;
         DialogResult = DialogResult.Cancel;
         typeComboBox.DataSource = Enum
             .GetValues<AccountType>()
@@ -30,11 +26,6 @@ internal abstract partial class AccountForm : Form
             .ToList();
         taxTypeComboBox.DataSource = Enum.GetValues<TaxType>();
         numberNumericUpDown.Maximum = decimal.MaxValue;
-
-        foreach (KeyValuePair<Guid, Account> account in Company.Accounts)
-        {
-            InitializeParent(account.Key, account.Value);
-        }
     }
 
     public Company Company { get; }
@@ -63,35 +54,6 @@ internal abstract partial class AccountForm : Form
         }
     }
 
-    protected Guid ParentId
-    {
-        get
-        {
-            if (parentComboBox.SelectedItem == null)
-            {
-                return Guid.Empty;
-            }
-
-            return ((AccountView)parentComboBox.SelectedItem).Id;
-        }
-        set
-        {
-            if (value == Guid.Empty)
-            {
-                parentComboBox.SelectedItem = null;
-
-                return;
-            }
-
-            parentComboBox.SelectedItem = value;
-        }
-    }
-
-    protected virtual bool IsValid(Guid parentId)
-    {
-        return true;
-    }
-
     protected abstract void CommitChanges();
 
     protected void ApplyChanges(Account account)
@@ -104,37 +66,6 @@ internal abstract partial class AccountForm : Form
         account.Memo = memoTextBox.Text;
         account.Color = _colorButton.BackColor;
         account.TaxType = TaxType;
-    }
-
-    private void InitializeParent(Guid id, Account value)
-    {
-        AccountView accountView = new AccountView(id, value);
-
-        parentComboBox.Items.Add(accountView);
-    }
-
-    private void OnCompanyAccountAdded(object? sender, GuidEventArgs e)
-    {
-        if (IsValid(e.Id))
-        {
-            InitializeParent(e.Id, Company.Accounts[e.Id]);
-        }
-    }
-
-    private void OnCompanyAccountUpdated(object? sender, GuidEventArgs e)
-    {
-        if (IsValid(e.Id))
-        {
-            parentComboBox.Refresh();
-        }
-    }
-
-    private void OnCompanyAccountRemoved(object? sender, GuidEventArgs e)
-    {
-        if (IsValid(e.Id))
-        {
-            parentComboBox.Items.Remove(e.Id);
-        }
     }
 
     private void OnTypeComboBoxFormat(object sender, ListControlConvertEventArgs e)
@@ -158,23 +89,5 @@ internal abstract partial class AccountForm : Form
     private void OnCancelButtonClick(object sender, EventArgs e)
     {
         Close();
-    }
-
-    protected override void Dispose(bool disposing)
-    {
-        if (disposing)
-        {
-            Company.AccountAdded -= OnCompanyAccountAdded;
-            Company.AccountUpdated -= OnCompanyAccountUpdated;
-            Company.AccountRemoved -= OnCompanyAccountRemoved;
-
-            if (components != null)
-            {
-                components.Dispose();
-                components = null;
-            }
-        }
-
-        base.Dispose(disposing);
     }
 }

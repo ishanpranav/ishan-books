@@ -30,9 +30,9 @@ namespace Liber.Forms.Accounts
             renameAccountToolStripMenuItem = new ToolStripMenuItem();
             removeAccountToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator2 = new ToolStripSeparator();
-            makeGeneralJournalEntriesToolStripMenuItem1 = new ToolStripMenuItem();
+            transactionToolStripMenuItem1 = new ToolStripMenuItem();
             reconcileToolStripMenuItem1 = new ToolStripMenuItem();
-            useRegisterToolStripMenuItem1 = new ToolStripMenuItem();
+            transactionsToolStripMenuItem1 = new ToolStripMenuItem();
             _statusStrip = new StatusStrip();
             toolStripDropDownButton1 = new ToolStripDropDownButton();
             newToolStripMenuItem = new ToolStripMenuItem();
@@ -40,9 +40,9 @@ namespace Liber.Forms.Accounts
             renameToolStripMenuItem = new ToolStripMenuItem();
             removeToolStripMenuItem = new ToolStripMenuItem();
             toolStripDropDownButton2 = new ToolStripDropDownButton();
-            transactionlToolStripMenuItem = new ToolStripMenuItem();
+            transactionToolStripMenuItem = new ToolStripMenuItem();
             reconcileToolStripMenuItem = new ToolStripMenuItem();
-            useRegisterToolStripMenuItem = new ToolStripMenuItem();
+            transactionsToolStripMenuItem = new ToolStripMenuItem();
             _contextMenu.SuspendLayout();
             _statusStrip.SuspendLayout();
             SuspendLayout();
@@ -62,7 +62,7 @@ namespace Liber.Forms.Accounts
             _listView.UseCompatibleStateImageBehavior = false;
             _listView.View = View.Details;
             _listView.AfterLabelEdit += OnListViewAfterLabelEdit;
-            _listView.ItemActivate += OnTransactionToolStripMenuItemClick;
+            _listView.ItemActivate += OnListViewItemActivate;
             // 
             // nameColumn
             // 
@@ -83,7 +83,7 @@ namespace Liber.Forms.Accounts
             // _contextMenu
             // 
             _contextMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
-            _contextMenu.Items.AddRange(new ToolStripItem[] { newAccountToolStripMenuItem, editAccountToolStripMenuItem, renameAccountToolStripMenuItem, removeAccountToolStripMenuItem, toolStripSeparator2, makeGeneralJournalEntriesToolStripMenuItem1, reconcileToolStripMenuItem1, useRegisterToolStripMenuItem1 });
+            _contextMenu.Items.AddRange(new ToolStripItem[] { newAccountToolStripMenuItem, editAccountToolStripMenuItem, renameAccountToolStripMenuItem, removeAccountToolStripMenuItem, toolStripSeparator2, transactionToolStripMenuItem1, reconcileToolStripMenuItem1, transactionsToolStripMenuItem1 });
             _contextMenu.Name = "contextMenuStrip1";
             resources.ApplyResources(_contextMenu, "_contextMenu");
             // 
@@ -116,21 +116,22 @@ namespace Liber.Forms.Accounts
             toolStripSeparator2.Name = "toolStripSeparator2";
             resources.ApplyResources(toolStripSeparator2, "toolStripSeparator2");
             // 
-            // makeGeneralJournalEntriesToolStripMenuItem1
+            // transactionToolStripMenuItem1
             // 
-            makeGeneralJournalEntriesToolStripMenuItem1.Name = "makeGeneralJournalEntriesToolStripMenuItem1";
-            resources.ApplyResources(makeGeneralJournalEntriesToolStripMenuItem1, "makeGeneralJournalEntriesToolStripMenuItem1");
-            makeGeneralJournalEntriesToolStripMenuItem1.Click += OnTransactionToolStripMenuItemClick;
+            transactionToolStripMenuItem1.Name = "transactionToolStripMenuItem1";
+            resources.ApplyResources(transactionToolStripMenuItem1, "transactionToolStripMenuItem1");
+            transactionToolStripMenuItem1.Click += OnTransactionToolStripMenuItemClick;
             // 
             // reconcileToolStripMenuItem1
             // 
             reconcileToolStripMenuItem1.Name = "reconcileToolStripMenuItem1";
             resources.ApplyResources(reconcileToolStripMenuItem1, "reconcileToolStripMenuItem1");
             // 
-            // useRegisterToolStripMenuItem1
+            // transactionsToolStripMenuItem1
             // 
-            useRegisterToolStripMenuItem1.Name = "useRegisterToolStripMenuItem1";
-            resources.ApplyResources(useRegisterToolStripMenuItem1, "useRegisterToolStripMenuItem1");
+            transactionsToolStripMenuItem1.Name = "transactionsToolStripMenuItem1";
+            resources.ApplyResources(transactionsToolStripMenuItem1, "transactionsToolStripMenuItem1");
+            transactionsToolStripMenuItem1.Click += OnTransactionsToolStripMenuItemClick;
             // 
             // _statusStrip
             // 
@@ -173,25 +174,26 @@ namespace Liber.Forms.Accounts
             // toolStripDropDownButton2
             // 
             toolStripDropDownButton2.DisplayStyle = ToolStripItemDisplayStyle.Text;
-            toolStripDropDownButton2.DropDownItems.AddRange(new ToolStripItem[] { transactionlToolStripMenuItem, reconcileToolStripMenuItem, useRegisterToolStripMenuItem });
+            toolStripDropDownButton2.DropDownItems.AddRange(new ToolStripItem[] { transactionToolStripMenuItem, reconcileToolStripMenuItem, transactionsToolStripMenuItem });
             resources.ApplyResources(toolStripDropDownButton2, "toolStripDropDownButton2");
             toolStripDropDownButton2.Name = "toolStripDropDownButton2";
             // 
-            // transactionlToolStripMenuItem
+            // transactionToolStripMenuItem
             // 
-            transactionlToolStripMenuItem.Name = "transactionlToolStripMenuItem";
-            resources.ApplyResources(transactionlToolStripMenuItem, "transactionlToolStripMenuItem");
-            transactionlToolStripMenuItem.Click += OnTransactionToolStripMenuItemClick;
+            transactionToolStripMenuItem.Name = "transactionToolStripMenuItem";
+            resources.ApplyResources(transactionToolStripMenuItem, "transactionToolStripMenuItem");
+            transactionToolStripMenuItem.Click += OnTransactionToolStripMenuItemClick;
             // 
             // reconcileToolStripMenuItem
             // 
             reconcileToolStripMenuItem.Name = "reconcileToolStripMenuItem";
             resources.ApplyResources(reconcileToolStripMenuItem, "reconcileToolStripMenuItem");
             // 
-            // useRegisterToolStripMenuItem
+            // transactionsToolStripMenuItem
             // 
-            useRegisterToolStripMenuItem.Name = "useRegisterToolStripMenuItem";
-            resources.ApplyResources(useRegisterToolStripMenuItem, "useRegisterToolStripMenuItem");
+            transactionsToolStripMenuItem.Name = "transactionsToolStripMenuItem";
+            resources.ApplyResources(transactionsToolStripMenuItem, "transactionsToolStripMenuItem");
+            transactionsToolStripMenuItem.Click += OnTransactionsToolStripMenuItemClick;
             // 
             // AccountsForm
             // 
@@ -212,28 +214,28 @@ namespace Liber.Forms.Accounts
         #endregion
 
         private ListViewEx _listView;
-        private System.Windows.Forms.StatusStrip _statusStrip;
-        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
-        private System.Windows.Forms.ContextMenuStrip _contextMenu;
-        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
-        private System.Windows.Forms.ColumnHeader numberColumn;
-        private System.Windows.Forms.ColumnHeader nameColumn;
-        private System.Windows.Forms.ColumnHeader typeColumn;
-        private System.Windows.Forms.ColumnHeader balanceColumn;
-        private System.Windows.Forms.ToolStripMenuItem editAccountToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem removeAccountToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem removeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem renameToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem renameAccountToolStripMenuItem;
+        private StatusStrip _statusStrip;
+        private ToolStripDropDownButton toolStripDropDownButton1;
+        private ContextMenuStrip _contextMenu;
+        private ToolStripMenuItem newToolStripMenuItem;
+        private ColumnHeader numberColumn;
+        private ColumnHeader nameColumn;
+        private ColumnHeader typeColumn;
+        private ColumnHeader balanceColumn;
+        private ToolStripMenuItem editAccountToolStripMenuItem;
+        private ToolStripMenuItem editToolStripMenuItem;
+        private ToolStripMenuItem removeAccountToolStripMenuItem;
+        private ToolStripMenuItem removeToolStripMenuItem;
+        private ToolStripMenuItem renameToolStripMenuItem;
+        private ToolStripMenuItem renameAccountToolStripMenuItem;
         private ToolStripDropDownButton toolStripDropDownButton2;
-        private ToolStripMenuItem transactionlToolStripMenuItem;
+        private ToolStripMenuItem transactionToolStripMenuItem;
         private ToolStripMenuItem reconcileToolStripMenuItem;
-        private ToolStripMenuItem useRegisterToolStripMenuItem;
+        private ToolStripMenuItem transactionsToolStripMenuItem;
         private ToolStripMenuItem newAccountToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator2;
-        private ToolStripMenuItem makeGeneralJournalEntriesToolStripMenuItem1;
+        private ToolStripMenuItem transactionToolStripMenuItem1;
         private ToolStripMenuItem reconcileToolStripMenuItem1;
-        private ToolStripMenuItem useRegisterToolStripMenuItem1;
+        private ToolStripMenuItem transactionsToolStripMenuItem1;
     }
 }

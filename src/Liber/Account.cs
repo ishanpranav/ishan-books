@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Text.Json.Serialization;
 using System.Xml;
 using System.Xml.Schema;
@@ -133,6 +134,24 @@ public class Account : IXmlSerializable
 
     [IgnoreMember]
     [JsonIgnore]
+    public bool Virtual
+    {
+        get
+        {
+            switch (Type)
+            {
+                case AccountType.Bank:
+                case AccountType.CreditCard:
+                    return false;
+
+                default:
+                    return true;
+            }
+        }
+    }
+
+    [IgnoreMember]
+    [JsonIgnore]
     public IReadOnlyCollection<Account> Children
     {
         get
@@ -148,6 +167,19 @@ public class Account : IXmlSerializable
         get
         {
             return lines;
+        }
+    }
+
+    [IgnoreMember]
+    [JsonIgnore]
+    public IOrderedEnumerable<Line> OrderedLines
+    {
+        get
+        {
+            return lines
+                .OrderBy(x => x.Transaction)
+                .ThenBy(x => x.Debit > 0 ? -1 : 1)
+                .ThenByDescending(x => Math.Abs(x.Balance));
         }
     }
 
@@ -183,11 +215,6 @@ public class Account : IXmlSerializable
         return result;
     }
 
-    public override string ToString()
-    {
-        return Name;
-    }
-
     public XmlSchema? GetSchema()
     {
         return null;
@@ -203,14 +230,33 @@ public class Account : IXmlSerializable
         writer.WriteElementString("name", Name);
         writer.WriteElementString("type", Type.ToString());
 
-        decimal debit;
-        decimal credit;
+        decimal balance;
 
         if (writer is XmlReportWriter reportWriter)
         {
-            decimal balance;
-
-            if (Temporary)
+            if (this == reportWriter.Report.Company.EquityAccount)
+            {
+                if (reportWriter.Report.Started != reportWriter.Report.Posted)
+                {
+                    balance = reportWriter.Report.Company.GetEquity(reportWriter.Report.Started);
+                }
+                else
+                {
+                    balance = reportWriter.Report.Company.GetEquity(reportWriter.Report.Posted);
+                }
+            }
+            else if (this == reportWriter.Report.Company.OtherEquityAccount)
+            {
+                if (reportWriter.Report.Started != reportWriter.Report.Posted)
+                {
+                    balance = reportWriter.Report.Company.GetOtherEquity(reportWriter.Report.Started);
+                }
+                else
+                {
+                    balance = reportWriter.Report.Company.GetOtherEquity(reportWriter.Report.Posted);
+                }
+            }
+            else if (Temporary)
             {
                 balance = GetBalance(reportWriter.Report.Started, reportWriter.Report.Posted);
             }
@@ -218,13 +264,13 @@ public class Account : IXmlSerializable
             {
                 balance = GetBalance(reportWriter.Report.Posted);
             }
-
-            Accounting.DebitCredit(balance, out debit, out credit);
         }
         else
         {
-            Accounting.DebitCredit(Balance, out debit, out credit);
+            balance = Balance;
         }
+
+        Accounting.DebitCredit(balance, out decimal debit, out decimal credit);
 
         writer.WriteElementString("debit", XmlConvert.ToString(debit));
         writer.WriteElementString("credit", XmlConvert.ToString(credit));

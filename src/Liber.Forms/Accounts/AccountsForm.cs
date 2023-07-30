@@ -23,11 +23,10 @@ internal sealed partial class AccountsForm : Form
         ClickOnce.Initialize(this);
 
         _company = company;
-        _factory = factory;
-
         company.AccountAdded += OnCompanyAccountAdded;
         company.AccountUpdated += OnCompanyAccountUpdated;
         company.AccountRemoved += OnCompanyAccountRemoved;
+        _factory = factory;
 
         foreach (KeyValuePair<Guid, Account> account in company.Accounts)
         {
@@ -49,18 +48,69 @@ internal sealed partial class AccountsForm : Form
         _items.Add(id, item);
     }
 
-    private static void AddSubItems(ListViewItem item, Account value)
+    private void InitializeTransaction(Guid id)
+    {
+        Guid key = typeof(TransactionForm).GUID;
+
+        if (_factory.TryKill(key))
+        {
+            return;
+        }
+
+        TransactionForm form = new TransactionForm(_company);
+        Transaction transaction = new Transaction()
+        {
+            Posted = DateTime.Today,
+            Number = _company.NextTransactionNumber
+        };
+
+        transaction.Lines.Add(new Line()
+        {
+            AccountId = id
+        });
+        form.InitializeTransaction(transaction);
+        _factory.Register(key, form);
+    }
+
+    private void InitializeTransactions(Guid id)
+    {
+        if (_factory.TryKill(id))
+        {
+            return;
+        }
+
+        TransactionsForm form = new TransactionsForm(_company, id);
+
+        _factory.Register(id, form);
+    }
+
+    private void AddSubItems(ListViewItem item, Account value)
     {
         item.Text = value.Name;
+
+        decimal balance;
+        DateTime posted = DateTime.Today;
+        DateTime started = new DateTime(posted.Year, 1, 1);
+
+        if (value == _company.EquityAccount)
+        {
+            balance = _company.GetEquity(started);
+        }
+        else if (value == _company.OtherEquityAccount)
+        {
+            balance = _company.GetOtherEquity(started);
+        }
+        else
+        {
+            balance = value.GetBalance(started, posted);
+        }
 
         item.SubItems.AddRange(new string[]
         {
             value.Number.ToString(),
             value.Type.ToLocalizedString(),
             value.Type
-                .ToBalance(value.GetBalance(
-                    started: new DateTime(DateTime.Today.Year, 1, 1),
-                    posted: DateTime.Today))
+                .ToBalance(balance)
                 .ToLocalizedString()
         });
 
@@ -103,14 +153,14 @@ internal sealed partial class AccountsForm : Form
 
     private void OnEditToolStripMenuItemClick(object sender, EventArgs e)
     {
-        if (!_listView.TryGetSelection(out Guid key) || _factory.TryKill(key))
+        if (!_listView.TryGetSelection(out Guid id) || _factory.TryKill(id))
         {
             return;
         }
 
-        EditAccountForm form = new EditAccountForm(_company, key);
+        EditAccountForm form = new EditAccountForm(_company, id);
 
-        _factory.Register(key, form);
+        _factory.Register(id, form);
     }
 
     private void OnRenameToolStripMenuItemClick(object sender, EventArgs e)
@@ -130,38 +180,23 @@ internal sealed partial class AccountsForm : Form
             return;
         }
 
-        Account value = _company.Accounts[id];
-
-        if (value.Children.Count > 0 || value.Lines.Count > 0)
-        {
-            return;
-        }
-
         _company.RemoveAccount(id);
     }
 
     private void OnTransactionToolStripMenuItemClick(object sender, EventArgs e)
     {
-        Guid key = typeof(TransactionForm).GUID;
-
-        if (!_listView.TryGetSelection(out Guid id) || _factory.TryKill(key))
+        if (_listView.TryGetSelection(out Guid id))
         {
-            return;
+            InitializeTransaction(id);
         }
+    }
 
-        TransactionForm form = new TransactionForm(_company);
-        Transaction transaction = new Transaction()
+    private void OnTransactionsToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        if (_listView.TryGetSelection(out Guid id))
         {
-            Posted = DateTime.Today,
-            Number = _company.NextTransactionNumber
-        };
-
-        transaction.Lines.Add(new Line()
-        {
-            AccountId = id
-        });
-        form.InitializeTransaction(transaction);
-        _factory.Register(key, form);
+            InitializeTransactions(id);
+        }
     }
 
     private void OnListViewAfterLabelEdit(object sender, LabelEditEventArgs e)
@@ -172,6 +207,29 @@ internal sealed partial class AccountsForm : Form
         value.Name = e.Label!;
 
         _company.UpdateAccount(id, value.ParentId);
+    }
+
+    private void OnListViewItemActivate(object sender, EventArgs e)
+    {
+        if (!_listView.TryGetSelection(out Guid id))
+        {
+            return;
+        }
+
+        Account value = _company.Accounts[id];
+
+        if (value.Placeholder)
+        {
+
+        }
+        else if (value.Virtual)
+        {
+            InitializeTransaction(id);
+        }
+        else
+        {
+            InitializeTransactions(id);
+        }
     }
 
     protected override void Dispose(bool disposing)
