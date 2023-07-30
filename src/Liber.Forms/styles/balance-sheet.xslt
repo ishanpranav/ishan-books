@@ -125,19 +125,16 @@ Licensed under the MIT License.
                 <th class="left">
                     <xsl:value-of select="liber:fgets('liabilities-equity{0}', liber:gets(company/type))"/>
                 </th>
-                <th></th>
             </tr>
             <tr>
                 <th class="in-1 left">
                     <xsl:value-of select="liber:gets('liabilities')"/>
                 </th>
-                <th></th>
             </tr>
             <tr>
                 <th class="in-2 left">
                     <xsl:value-of select="liber:gets('current-liabilities')"/>
                 </th>
-                <th></th>
             </tr>
             <xsl:apply-templates select="company">
                 <xsl:with-param name="type">CreditCard</xsl:with-param>

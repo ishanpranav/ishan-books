@@ -147,6 +147,13 @@ public class XslReport
             .Humanize(LetterCasing.Sentence);
     }
 
+    public string fgets(string key, object first, object second)
+    {
+        return string
+            .Format(gets(key), first, second)
+            .Humanize(LetterCasing.Sentence);
+    }
+
     public string pngets(string key, decimal value)
     {
         if (value < 0)

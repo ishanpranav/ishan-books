@@ -14,6 +14,7 @@ Licensed under the MIT License.
     <xsl:template name="financial-statement">
         <xsl:param name="title"/>
         <xsl:param name="table"/>
+        <xsl:param name="styles"/>
         <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
             <head>
                 <meta charset="utf-8"/>
@@ -21,6 +22,7 @@ Licensed under the MIT License.
                     <xsl:value-of select="$title"/>
                 </title>
                 <link rel="stylesheet" type="text/css" href="https://liber.example/styles/financial-statement.css"/>
+                <xsl:copy-of select="$styles"/>
             </head>
             <body>
                 <table>
