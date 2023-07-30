@@ -65,13 +65,6 @@ internal static class ClickOnce
     {
         get
         {
-            string? result = Environment.GetEnvironmentVariable("CLICKONCE_UPDATEDAPPLICATIONFULLNAME");
-
-            if (result != null)
-            {
-                return result;
-            }
-
             AssemblyTitleAttribute? customAttribute = typeof(ClickOnce).Assembly.GetCustomAttribute<AssemblyTitleAttribute>();
 
             if (customAttribute != null)
