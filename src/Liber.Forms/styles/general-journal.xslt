@@ -31,7 +31,7 @@ Licensed under the MIT License.
                     </tr>
                     <tr>
                         <th colspan="6" class="bar">
-                            <xsl:value-of select="liber:ftspanl()"/>
+                            <xsl:value-of select="liber:ftspanl(started, posted)"/>
                         </th>
                     </tr>
                     <tr>
@@ -67,7 +67,7 @@ Licensed under the MIT License.
                     <xsl:for-each select="company/transaction">
                         <tr>
                             <td class="left">
-                                <xsl:value-of select="liber:fdate(posted)"/>
+                                <xsl:value-of select="liber:fdates(posted)"/>
                             </td>
                             <td class="right">
                                 <xsl:value-of select="number"/>

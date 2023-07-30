@@ -43,6 +43,7 @@ __Localization__
 - [X] English (United States)
 - [X] Spanish
 - [X] Spanish (Spain)
+- [ ] Latin
 
 __Additional features__
 - [X] Password protection

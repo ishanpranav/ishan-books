@@ -5,8 +5,6 @@
 using System;
 using System.ComponentModel;
 using System.Resources;
-using System.Xml;
-using System.Xml.Schema;
 using System.Xml.Serialization;
 using Humanizer;
 using Humanizer.Localisation;
@@ -15,7 +13,7 @@ using Liber;
 namespace Liber;
 
 [XmlRoot("report")]
-public class XslReport : IXmlSerializable
+public class XslReport
 {
     private static readonly ResourceManager s_resourceManager = new ResourceManager(typeof(XslReport));
 
@@ -33,11 +31,13 @@ public class XslReport : IXmlSerializable
     }
 
     [Browsable(false)]
-    public Company Company { get; }
+    [XmlElement("company")]
+    public Company Company { get; set; }
 
     [LocalizedCategory(nameof(Started))]
     [LocalizedDescription(nameof(Started))]
     [LocalizedDisplayName(nameof(Started))]
+    [XmlElement("started")]
     public DateTime Started
     {
         get
@@ -58,6 +58,7 @@ public class XslReport : IXmlSerializable
     [LocalizedCategory(nameof(Posted))]
     [LocalizedDescription(nameof(Posted))]
     [LocalizedDisplayName(nameof(Posted))]
+    [XmlElement("posted")]
     public DateTime Posted
     {
         get
@@ -99,14 +100,14 @@ public class XslReport : IXmlSerializable
         }
     }
 
-    public string fdate(DateTime value)
+    public string fdatel(DateTime value)
     {
-        return value.ToShortDateString();
+        return value.ToLongDateString();
     }
 
-    public string fdatel()
+    public string fdates(DateTime value)
     {
-        return Posted.ToLongDateString();
+        return value.ToShortDateString();
     }
 
     public string fm(decimal value)
@@ -114,21 +115,41 @@ public class XslReport : IXmlSerializable
         return value.ToLocalizedString();
     }
 
-    public string ftspanl()
+    public string fm(string type, decimal balance)
     {
-        return Started.ToShortDateString() + " \u2013 " + Posted.ToShortDateString();
+        return Enum
+            .Parse<AccountType>(type)
+            .ToBalance(balance)
+            .ToLocalizedString();
     }
 
-    public string ftspans()
+    public string ftspanl(DateTime from, DateTime to)
     {
-        return (Posted - Started).Humanize(precision: 2, countEmptyUnits: true, maxUnit: TimeUnit.Year);
+        return from.ToShortDateString() + " \u2013 " + to.ToShortDateString();
+    }
+
+    public string ftspans(DateTime from, DateTime to)
+    {
+        return (to - from).Humanize(precision: 2, countEmptyUnits: true, maxUnit: TimeUnit.Year);
+    }
+
+    public string fgets(string key, object value)
+    {
+        return string
+            .Format(gets(key), value)
+            .Humanize(LetterCasing.Sentence);
     }
 
     public string pngets(string key, decimal value)
     {
         if (value < 0)
         {
-            return gets("_n_" + key);
+            string? result = s_resourceManager.GetString("_n_" + key);
+
+            if (result != null)
+            {
+                return result;
+            }
         }
 
         return gets("_p_" + key);
@@ -149,20 +170,5 @@ public class XslReport : IXmlSerializable
         }
 
         return result;
-    }
-
-    public XmlSchema? GetSchema()
-    {
-        return null;
-    }
-
-    void IXmlSerializable.ReadXml(XmlReader reader)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void WriteXml(XmlWriter writer)
-    {
-        XmlSerializers.Company.Serialize(writer, Company);
     }
 }

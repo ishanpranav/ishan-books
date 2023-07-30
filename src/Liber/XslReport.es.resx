@@ -129,10 +129,7 @@
   <data name="comprehensive-income-statement" xml:space="preserve">
     <value>Estado de Resultados Integral</value>
   </data>
-  <data name="cost-of-revenue" xml:space="preserve">
-    <value>Costo total de ventas</value>
-  </data>
-  <data name="costs-of-revenue" xml:space="preserve">
+  <data name="Cost" xml:space="preserve">
     <value>Costos de ventas</value>
   </data>
   <data name="credit" xml:space="preserve">
@@ -147,22 +144,19 @@
   <data name="description" xml:space="preserve">
     <value>Descripción</value>
   </data>
-  <data name="expense" xml:space="preserve">
-    <value>Gasto total</value>
-  </data>
-  <data name="expenses" xml:space="preserve">
+  <data name="Expense" xml:space="preserve">
     <value>Gastos</value>
   </data>
   <data name="general-journal" xml:space="preserve">
     <value>Diario General</value>
   </data>
+  <data name="Income" xml:space="preserve">
+    <value>Ingresos</value>
+  </data>
   <data name="income-statement" xml:space="preserve">
     <value>Estado de Resultados</value>
   </data>
-  <data name="income-tax-expense" xml:space="preserve">
-    <value>Impuesto total sobre la renta</value>
-  </data>
-  <data name="income-tax-expenses" xml:space="preserve">
+  <data name="IncomeTaxExpense" xml:space="preserve">
     <value>Impuestos sobre la renta</value>
   </data>
   <data name="name" xml:space="preserve">
@@ -177,17 +171,11 @@
   <data name="other-comprehensive-income" xml:space="preserve">
     <value>Otros ingresos integrales</value>
   </data>
-  <data name="other-income-expense" xml:space="preserve">
-    <value>Total de otros ingresos y gastos</value>
+  <data name="OtherComprehensiveIncome" xml:space="preserve">
+    <value>Ingreso integral acumulado total</value>
   </data>
-  <data name="other-income-expenses" xml:space="preserve">
+  <data name="OtherIncomeExpense" xml:space="preserve">
     <value>Otros ingresos y gastos</value>
-  </data>
-  <data name="revenue" xml:space="preserve">
-    <value>Ingresos totales</value>
-  </data>
-  <data name="revenues" xml:space="preserve">
-    <value>Ingresos</value>
   </data>
   <data name="total" xml:space="preserve">
     <value>Total</value>
@@ -204,11 +192,23 @@
   <data name="_n_ordinary-income" xml:space="preserve">
     <value>Pérdida neta ordinaria</value>
   </data>
-  <data name="_n_other-comprehensive-income" xml:space="preserve">
+  <data name="_n_t_OtherComprehensiveIncome" xml:space="preserve">
     <value>Pérdida integral acumulada total</value>
+  </data>
+  <data name="_p_Cost" xml:space="preserve">
+    <value>Costo total de ventas</value>
+  </data>
+  <data name="_p_Expense" xml:space="preserve">
+    <value>Gasto total</value>
   </data>
   <data name="_p_gross-profit" xml:space="preserve">
     <value>Utilidad bruta</value>
+  </data>
+  <data name="_p_Income" xml:space="preserve">
+    <value>Ingresos totales</value>
+  </data>
+  <data name="_p_IncomeTaxExpense" xml:space="preserve">
+    <value>Impuesto total sobre la renta</value>
   </data>
   <data name="_p_net-income" xml:space="preserve">
     <value>Ingreso neto</value>
@@ -216,7 +216,7 @@
   <data name="_p_ordinary-income" xml:space="preserve">
     <value>Ingreso neto ordinaro</value>
   </data>
-  <data name="_p_other-comprehensive-income" xml:space="preserve">
-    <value>Ingreso integral acumulado total</value>
+  <data name="_p_OtherIncomeExpense" xml:space="preserve">
+    <value>Total de otros ingresos y gastos</value>
   </data>
 </root>

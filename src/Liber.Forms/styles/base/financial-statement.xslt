@@ -32,25 +32,24 @@ Licensed under the MIT License.
     <xsl:template match="company">
         <xsl:param name="type"/>
         <xsl:param name="balance"/>
-        <xsl:param name="description"/>
-        <xsl:param name="total"/>
         <xsl:param name="indent"/>
-        <xsl:param name="sign" select="1"/>
+        <xsl:param name="title" select="liber:gets($type)"/>
+        <xsl:param name="subtitle" select="liber:pngets($type, $balance)"/>
         <xsl:choose>
             <xsl:when test="$balance != 0">
                 <tr>
                     <th class="in-{$indent} left">
-                        <xsl:value-of select="$description"/>
+                        <xsl:value-of select="$title"/>
                     </th>
                     <th></th>
                 </tr>
-                <xsl:for-each select="//account[type = $type]">
+                <xsl:for-each select="//account[type = $type and balance != 0]">
                     <tr>
                         <td class="in-{$indent + 2} left">
                             <xsl:value-of select="name"/>
                         </td>
                         <td class="right">
-                            <xsl:value-of select="liber:fm($sign * (debit - credit))"/>
+                            <xsl:value-of select="liber:fm($type, balance)"/>
                         </td>
                     </tr>
                 </xsl:for-each>
@@ -58,10 +57,10 @@ Licensed under the MIT License.
         </xsl:choose>
         <tr>
             <th class="in-{$indent} left">
-                <xsl:value-of select="$total"/>
+                <xsl:value-of select="$subtitle"/>
             </th>
             <td class="subtotal right">
-                <xsl:value-of select="liber:fm($sign * $balance)"/>
+                <xsl:value-of select="liber:fm($balance)"/>
             </td>
         </tr>
     </xsl:template>

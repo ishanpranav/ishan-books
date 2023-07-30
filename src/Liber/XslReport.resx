@@ -120,8 +120,14 @@
   <data name="account" xml:space="preserve">
     <value>Account</value>
   </data>
+  <data name="assets" xml:space="preserve">
+    <value>Assets</value>
+  </data>
   <data name="balance-sheet" xml:space="preserve">
     <value>Balance Sheet</value>
+  </data>
+  <data name="Bank" xml:space="preserve">
+    <value>Cash and cash equivalents</value>
   </data>
   <data name="cash-flow-statement" xml:space="preserve">
     <value>Cash Flow Statement</value>
@@ -129,14 +135,23 @@
   <data name="comprehensive-income-statement" xml:space="preserve">
     <value>Comprehensive Income Statement</value>
   </data>
-  <data name="cost-of-revenue" xml:space="preserve">
-    <value>Total cost of revenue</value>
+  <data name="Corporation" xml:space="preserve">
+    <value>shareholders' equity</value>
   </data>
-  <data name="costs-of-revenue" xml:space="preserve">
+  <data name="Cost" xml:space="preserve">
     <value>Costs of revenue</value>
   </data>
   <data name="credit" xml:space="preserve">
     <value>Credit</value>
+  </data>
+  <data name="CreditCard" xml:space="preserve">
+    <value>Credit cards</value>
+  </data>
+  <data name="current-assets" xml:space="preserve">
+    <value>Current assets</value>
+  </data>
+  <data name="current-liabilities" xml:space="preserve">
+    <value>Current liabilities</value>
   </data>
   <data name="date" xml:space="preserve">
     <value>Date</value>
@@ -147,26 +162,44 @@
   <data name="description" xml:space="preserve">
     <value>Description</value>
   </data>
-  <data name="expense" xml:space="preserve">
-    <value>Total expense</value>
-  </data>
-  <data name="expenses" xml:space="preserve">
+  <data name="Expense" xml:space="preserve">
     <value>Expenses</value>
+  </data>
+  <data name="FixedAsset" xml:space="preserve">
+    <value>Fixed assets</value>
   </data>
   <data name="general-journal" xml:space="preserve">
     <value>General Journal</value>
   </data>
+  <data name="Income" xml:space="preserve">
+    <value>Revenues</value>
+  </data>
   <data name="income-statement" xml:space="preserve">
     <value>Income Statement</value>
   </data>
-  <data name="income-tax-expense" xml:space="preserve">
-    <value>Total income tax expense</value>
-  </data>
-  <data name="income-tax-expenses" xml:space="preserve">
+  <data name="IncomeTaxExpense" xml:space="preserve">
     <value>Income tax expenses</value>
+  </data>
+  <data name="Individual" xml:space="preserve">
+    <value>owner's equity</value>
+  </data>
+  <data name="liabilities" xml:space="preserve">
+    <value>Liabilities</value>
+  </data>
+  <data name="liabilities-equity{0}" xml:space="preserve">
+    <value>Liabilities and {0}</value>
+  </data>
+  <data name="LongTermLiability" xml:space="preserve">
+    <value>Long-term liabilities</value>
   </data>
   <data name="name" xml:space="preserve">
     <value>Name</value>
+  </data>
+  <data name="non-current-assets" xml:space="preserve">
+    <value>Non-current assets</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>equity</value>
   </data>
   <data name="number" xml:space="preserve">
     <value>Number</value>
@@ -174,26 +207,53 @@
   <data name="ordinary-income" xml:space="preserve">
     <value>Ordinary revenue and expenses</value>
   </data>
-  <data name="other-comprehensive-income" xml:space="preserve">
+  <data name="OtherAsset" xml:space="preserve">
+    <value>Other assets</value>
+  </data>
+  <data name="OtherComprehensiveIncome" xml:space="preserve">
     <value>Other comprehensive income</value>
   </data>
-  <data name="other-income-expense" xml:space="preserve">
-    <value>Total other income and expense</value>
+  <data name="OtherCurrentAsset" xml:space="preserve">
+    <value>Other current assets</value>
   </data>
-  <data name="other-income-expenses" xml:space="preserve">
+  <data name="OtherCurrentLiability" xml:space="preserve">
+    <value>Other current liabilities</value>
+  </data>
+  <data name="OtherIncomeExpense" xml:space="preserve">
     <value>Other income and expenses</value>
   </data>
-  <data name="revenue" xml:space="preserve">
-    <value>Total revenue</value>
-  </data>
-  <data name="revenues" xml:space="preserve">
-    <value>Revenues</value>
+  <data name="Partnership" xml:space="preserve">
+    <value>partners' equity</value>
   </data>
   <data name="total" xml:space="preserve">
     <value>Total</value>
   </data>
+  <data name="total-assets" xml:space="preserve">
+    <value>Total assets</value>
+  </data>
+  <data name="total-current-assets" xml:space="preserve">
+    <value>Total current assets</value>
+  </data>
+  <data name="total-current-liabilities" xml:space="preserve">
+    <value>Total current liabilities</value>
+  </data>
+  <data name="total-equity{0}" xml:space="preserve">
+    <value>Total {0}</value>
+  </data>
+  <data name="total-liabilities" xml:space="preserve">
+    <value>Total liabilities</value>
+  </data>
+  <data name="total-liabilities-equity{0}" xml:space="preserve">
+    <value>Total liabilities and {0}</value>
+  </data>
+  <data name="total-non-current-assets" xml:space="preserve">
+    <value>Total non-current-assets</value>
+  </data>
   <data name="trial-balance" xml:space="preserve">
     <value>Trial Balance</value>
+  </data>
+  <data name="_n_CreditCard" xml:space="preserve">
+    <value>Total credit card payments</value>
   </data>
   <data name="_n_gross-profit" xml:space="preserve">
     <value>Gross loss</value>
@@ -204,11 +264,35 @@
   <data name="_n_ordinary-income" xml:space="preserve">
     <value>Net ordinary loss</value>
   </data>
-  <data name="_n_other-comprehensive-income" xml:space="preserve">
+  <data name="_n_t_OtherComprehensiveIncome" xml:space="preserve">
     <value>Total other comprehensive loss</value>
+  </data>
+  <data name="_p_Bank" xml:space="preserve">
+    <value>Total cash and cash equivalents</value>
+  </data>
+  <data name="_p_Cost" xml:space="preserve">
+    <value>Total cost of revenue</value>
+  </data>
+  <data name="_p_CreditCard" xml:space="preserve">
+    <value>Total credit card charges</value>
+  </data>
+  <data name="_p_Expense" xml:space="preserve">
+    <value>Total expense</value>
+  </data>
+  <data name="_p_FixedAsset" xml:space="preserve">
+    <value>Total fixed assets</value>
   </data>
   <data name="_p_gross-profit" xml:space="preserve">
     <value>Gross profit</value>
+  </data>
+  <data name="_p_Income" xml:space="preserve">
+    <value>Total revenue</value>
+  </data>
+  <data name="_p_IncomeTaxExpense" xml:space="preserve">
+    <value>Total income tax expense</value>
+  </data>
+  <data name="_p_LongTermLiability" xml:space="preserve">
+    <value>Total long-term liabilities</value>
   </data>
   <data name="_p_net-income" xml:space="preserve">
     <value>Net income</value>
@@ -216,7 +300,19 @@
   <data name="_p_ordinary-income" xml:space="preserve">
     <value>Net ordinary income</value>
   </data>
-  <data name="_p_other-comprehensive-income" xml:space="preserve">
+  <data name="_p_OtherAsset" xml:space="preserve">
+    <value>Total other assets</value>
+  </data>
+  <data name="_p_OtherComprehensiveIncome" xml:space="preserve">
     <value>Total other comprehensive income</value>
+  </data>
+  <data name="_p_OtherCurrentAsset" xml:space="preserve">
+    <value>Total other current assets</value>
+  </data>
+  <data name="_p_OtherCurrentLiability" xml:space="preserve">
+    <value>Total other current liabilities</value>
+  </data>
+  <data name="_p_OtherIncomeExpense" xml:space="preserve">
+    <value>Total other income and expense</value>
   </data>
 </root>

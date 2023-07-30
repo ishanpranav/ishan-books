@@ -31,13 +31,13 @@ Licensed under the MIT License.
                     </tr>
                     <tr>
                         <th colspan="3" class="bar">
-                            <xsl:value-of select="liber:fdatel()"/>
+                            <xsl:value-of select="liber:fdatel(posted)"/>
                         </th>
                     </tr>
                     <tr>
                         <th></th>
                         <th colspan="2" class="heading">
-                            <xsl:value-of select="liber:ftspans()"/>
+                            <xsl:value-of select="liber:fdates(posted)"/>
                         </th>
                     </tr>
                     <tr>

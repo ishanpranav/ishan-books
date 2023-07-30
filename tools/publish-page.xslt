@@ -76,7 +76,6 @@ Licensed under the MIT License.
                         <div class="row g-5">
                             <div class="col-md-6">
                                 <h2 class="text-body-emphasis">Features</h2>
-                                <p>Ready to beyond the starter template? Check out these open source projects that you can quickly duplicate to a new GitHub repository.</p>
                                 <ul class="list-unstyled ps-0">
                                     <li>
                                         <a class="icon-link mb-1" href="https://en.wikipedia.org/wiki/Chart_of_accounts">

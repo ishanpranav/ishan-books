@@ -21,6 +21,7 @@
 	  <None Remove="checks\voucher.chk" />
 	  <None Remove="Properties\Resources.en.restext" />
 	  <None Remove="Properties\Resources.es-ES.restext" />
+	  <None Remove="styles\balance-sheet.xslt" />
 	  <None Remove="styles\comprehensive-income-statement.xslt" />
 	  <None Remove="styles\financial-statement.xslt" />
 	  <None Remove="styles\income-statement.xslt" />
@@ -61,6 +62,9 @@
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="styles\comprehensive-income-statement.xslt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="styles\balance-sheet.xslt">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="styles\income-statement.xslt">

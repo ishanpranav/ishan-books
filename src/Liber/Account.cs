@@ -271,8 +271,8 @@ public class Account : IXmlSerializable
             balance = Balance;
         }
 
+        writer.WriteElementString("balance", XmlConvert.ToString(balance));
         Accounting.DebitCredit(balance, out decimal debit, out decimal credit);
-
         writer.WriteElementString("debit", XmlConvert.ToString(debit));
         writer.WriteElementString("credit", XmlConvert.ToString(credit));
     }

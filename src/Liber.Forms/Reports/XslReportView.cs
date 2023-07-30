@@ -61,6 +61,8 @@ internal sealed class XslReportView : IReportView
 
         switch (extension.ToUpperInvariant())
         {
+            // TODO: Investigate the PDF printing issue
+            // TODO: If PDF does not work, dismantle artificial save mechanism
             case ".PDF":
                 await _coreWebView2.PrintToPdfAsync(path);
                 break;
