@@ -41,9 +41,9 @@ partial class CompanyForm
         equityAccountComboBox = new Accounts.AccountComboBox();
         label5 = new System.Windows.Forms.Label();
         otherEquityAccountComboBox = new Accounts.AccountComboBox();
-        groupBox1 = new System.Windows.Forms.GroupBox();
+        closingAccountsGroupBox = new System.Windows.Forms.GroupBox();
         label4 = new System.Windows.Forms.Label();
-        groupBox1.SuspendLayout();
+        closingAccountsGroupBox.SuspendLayout();
         SuspendLayout();
         // 
         // label1
@@ -131,16 +131,16 @@ partial class CompanyForm
         otherEquityAccountComboBox.SelectedItem = new System.Guid("00000000-0000-0000-0000-000000000000");
         _helpProvider.SetShowHelp(otherEquityAccountComboBox, (bool)resources.GetObject("otherEquityAccountComboBox.ShowHelp"));
         // 
-        // groupBox1
+        // closingAccountsGroupBox
         // 
-        resources.ApplyResources(groupBox1, "groupBox1");
-        groupBox1.Controls.Add(label5);
-        groupBox1.Controls.Add(otherEquityAccountComboBox);
-        groupBox1.Controls.Add(label4);
-        groupBox1.Controls.Add(equityAccountComboBox);
-        groupBox1.Name = "groupBox1";
-        _helpProvider.SetShowHelp(groupBox1, (bool)resources.GetObject("groupBox1.ShowHelp"));
-        groupBox1.TabStop = false;
+        resources.ApplyResources(closingAccountsGroupBox, "closingAccountsGroupBox");
+        closingAccountsGroupBox.Controls.Add(label5);
+        closingAccountsGroupBox.Controls.Add(otherEquityAccountComboBox);
+        closingAccountsGroupBox.Controls.Add(label4);
+        closingAccountsGroupBox.Controls.Add(equityAccountComboBox);
+        closingAccountsGroupBox.Name = "closingAccountsGroupBox";
+        _helpProvider.SetShowHelp(closingAccountsGroupBox, (bool)resources.GetObject("closingAccountsGroupBox.ShowHelp"));
+        closingAccountsGroupBox.TabStop = false;
         // 
         // label4
         // 
@@ -154,7 +154,7 @@ partial class CompanyForm
         resources.ApplyResources(this, "$this");
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         CancelButton = cancelButton;
-        Controls.Add(groupBox1);
+        Controls.Add(closingAccountsGroupBox);
         Controls.Add(passwordTextBox);
         Controls.Add(label3);
         Controls.Add(label2);
@@ -167,8 +167,8 @@ partial class CompanyForm
         Name = "CompanyForm";
         _helpProvider.SetShowHelp(this, (bool)resources.GetObject("$this.ShowHelp"));
         ShowIcon = false;
-        groupBox1.ResumeLayout(false);
-        groupBox1.PerformLayout();
+        closingAccountsGroupBox.ResumeLayout(false);
+        closingAccountsGroupBox.PerformLayout();
         ResumeLayout(false);
         PerformLayout();
     }
@@ -189,4 +189,5 @@ partial class CompanyForm
     private System.Windows.Forms.Label label4;
     private System.Windows.Forms.Label label5;
     private Accounts.AccountComboBox otherEquityAccountComboBox;
+    protected System.Windows.Forms.GroupBox closingAccountsGroupBox;
 }

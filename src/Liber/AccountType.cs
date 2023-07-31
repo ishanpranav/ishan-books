@@ -20,7 +20,7 @@ public enum AccountType : short
     CreditCard = -21,
 
     [Name("EQUITY")]
-    Equity = -30,
+    Equity = -3000,
 
     [Name("EXPENSE")]
     Expense = 60,
@@ -47,7 +47,7 @@ public enum AccountType : short
     LongTermLiability = -2600,
 
     [Name("EQUITY")]
-    OtherComprehensiveIncome = -3900,
+    OtherComprehensiveIncome = -39,
 
     [Name("EXPENSE")]
     IncomeTaxExpense = 7000,

@@ -111,7 +111,7 @@ public static class SqliteSerializer
             command.Parameters.AddWithValue("@type", value.Type);
             command.Parameters.AddWithValue("@color", ValueOf(value.Color));
             command.Parameters.AddWithValue("@equityAccount", value.EquityAccountId);
-            command.Parameters.AddWithValue("@otherEquityAccount", value.OtherEquityAccount);
+            command.Parameters.AddWithValue("@otherEquityAccount", value.OtherEquityAccountId);
 
             await command.ExecuteNonQueryAsync();
         }

@@ -89,7 +89,6 @@
             resources.ApplyResources(numberNumericUpDown, "numberNumericUpDown");
             numberNumericUpDown.DecimalPlaces = 2;
             _helpProvider.SetHelpString(numberNumericUpDown, resources.GetString("numberNumericUpDown.HelpString"));
-            numberNumericUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             numberNumericUpDown.Name = "numberNumericUpDown";
             _helpProvider.SetShowHelp(numberNumericUpDown, (bool)resources.GetObject("numberNumericUpDown.ShowHelp"));
             numberNumericUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
@@ -144,6 +143,7 @@
             parentComboBox.FormattingEnabled = true;
             _helpProvider.SetHelpString(parentComboBox, resources.GetString("parentComboBox.HelpString"));
             parentComboBox.Name = "parentComboBox";
+            parentComboBox.SelectedItem = new System.Guid("00000000-0000-0000-0000-000000000000");
             _helpProvider.SetShowHelp(parentComboBox, (bool)resources.GetObject("parentComboBox.ShowHelp"));
             // 
             // label5

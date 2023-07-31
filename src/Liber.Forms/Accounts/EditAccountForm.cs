@@ -27,6 +27,7 @@ internal sealed class EditAccountForm : AccountForm
 
         if (Id == company.EquityAccountId || Id == company.OtherEquityAccountId)
         {
+            placeholderCheckBox.Checked = true;
             placeholderCheckBox.Enabled = false;
         }
     }

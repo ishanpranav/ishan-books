@@ -21,7 +21,7 @@ __Reporting__
 - [X] Comprehensive income statement
 - [X] Balance sheet
 - [X] Comparative balance sheet
-- [ ] Cash flow statement
+- [X] Cash flow statement
 - [ ] Equity statement
 
 __First-class data formats__

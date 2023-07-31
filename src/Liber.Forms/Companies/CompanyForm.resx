@@ -402,7 +402,7 @@
     <value>True</value>
   </data>
   <data name="equityAccountComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>446, 28</value>
+    <value>448, 28</value>
   </data>
   <data name="equityAccountComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -414,7 +414,7 @@
     <value>Liber.Forms.Accounts.AccountComboBox, Liber.Forms, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;equityAccountComboBox.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>closingAccountsGroupBox</value>
   </data>
   <data name="&gt;&gt;equityAccountComboBox.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -447,7 +447,7 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label5.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>closingAccountsGroupBox</value>
   </data>
   <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -465,7 +465,7 @@
     <value>True</value>
   </data>
   <data name="otherEquityAccountComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>446, 28</value>
+    <value>448, 28</value>
   </data>
   <data name="otherEquityAccountComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -477,12 +477,12 @@
     <value>Liber.Forms.Accounts.AccountComboBox, Liber.Forms, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;otherEquityAccountComboBox.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>closingAccountsGroupBox</value>
   </data>
   <data name="&gt;&gt;otherEquityAccountComboBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="groupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="closingAccountsGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="label4.AutoSize" type="System.Boolean, mscorlib">
@@ -510,36 +510,36 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label4.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>closingAccountsGroupBox</value>
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 112</value>
+  <data name="closingAccountsGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 112</value>
   </data>
-  <data name="groupBox1.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="closingAccountsGroupBox.ShowHelp" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>458, 140</value>
+  <data name="closingAccountsGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>460, 140</value>
   </data>
-  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="closingAccountsGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="groupBox1.Text" xml:space="preserve">
+  <data name="closingAccountsGroupBox.Text" xml:space="preserve">
     <value>Closing Accounts</value>
   </data>
-  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
-    <value>groupBox1</value>
+  <data name="&gt;&gt;closingAccountsGroupBox.Name" xml:space="preserve">
+    <value>closingAccountsGroupBox</value>
   </data>
-  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
+  <data name="&gt;&gt;closingAccountsGroupBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;closingAccountsGroupBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;closingAccountsGroupBox.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

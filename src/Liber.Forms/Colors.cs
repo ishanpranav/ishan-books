@@ -10,6 +10,11 @@ internal static class Colors
 {
     public static Color GetForeColor(Color backColor)
     {
+        if (backColor.IsEmpty)
+        {
+            return Color.Black;
+        }
+
         double luma = ((0.2126 * backColor.R) + (0.7152 * backColor.G) + (0.0722 * backColor.B)) / 255;
 
         if (luma < 0.5)

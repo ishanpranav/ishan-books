@@ -10,5 +10,6 @@ internal sealed class NewCompanyForm : CompanyForm
     {
         ControlBox = false;
         cancelButton.Enabled = false;
+        closingAccountsGroupBox.Enabled = false;
     }
 }

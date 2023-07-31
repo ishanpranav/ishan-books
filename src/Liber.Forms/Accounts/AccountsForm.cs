@@ -100,9 +100,13 @@ internal sealed partial class AccountsForm : Form
         {
             balance = _company.GetOtherEquity(started);
         }
-        else
+        else if (value.Temporary)
         {
             balance = value.GetBalance(started, posted);
+        }
+        else
+        {
+            balance = value.GetBalance(posted);
         }
 
         item.SubItems.AddRange(new string[]

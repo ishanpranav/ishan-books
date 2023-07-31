@@ -20,9 +20,7 @@ CREATE TABLE "Company" (
     "Color"                 INTEGER,
     "EquityAccount"         TEXT,
     "OtherEquityAccount"    TEXT,
-    PRIMARY KEY("Id" AUTOINCREMENT),
-    FOREIGN KEY("EquityAccount") REFERENCES "Account"("Id"),
-    FOREIGN KEY("OtherEquityAccount") REFERENCES "Account"("Id")
+    PRIMARY KEY("Id" AUTOINCREMENT)
 );
 
 CREATE TABLE "Account" (
@@ -63,11 +61,15 @@ INSERT INTO "main"."Company" (
     "NextAccountNumber",
     "NextTransactionNumber",
     "Type",
-    "Color"
+    "Color",
+    "EquityAccount",
+    "OtherEquityAccount"
 ) VALUES (
     @name,
     @nextAccountNumber,
     @nextTransactionNumber,
     @type,
-    @color
+    @color,
+    @equityAccount,
+    @otherEquityAccount
 );

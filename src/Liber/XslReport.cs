@@ -100,10 +100,10 @@ public class XslReport
         }
     }
 
+    [Browsable(false)]
     [LocalizedCategory(nameof(EquityMode))]
     [LocalizedDescription(nameof(EquityMode))]
     [LocalizedDisplayName(nameof(EquityMode))]
-    [ReadOnly(true)]
     [XmlIgnore]
     public EquityModes EquityMode { get; set; }
 
