@@ -14,9 +14,8 @@ Licensed under the MIT License.
     <xsl:include href="base/financial-statement.xslt"/>
     <xsl:output method="html" indent="yes"/>
     <xsl:template match="/report">
-        <xsl:variable name="title" select="liber:gets('cash-flow-statement')"/>
         <xsl:call-template name="financial-statement">
-            <xsl:with-param name="title" select="$title"/>
+            <xsl:with-param name="title" select="title"/>
             <xsl:with-param name="styles">
                 <link rel="stylesheet" type="text/css" href="https://liber.example/styles/cash-flow-statement.css"/>
             </xsl:with-param>
@@ -32,7 +31,7 @@ Licensed under the MIT License.
                     </tr>
                     <tr>
                         <th colspan="2" class="title">
-                            <xsl:value-of select="$title"/>
+                            <xsl:value-of select="title"/>
                         </th>
                     </tr>
                     <tr>

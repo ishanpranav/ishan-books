@@ -23,16 +23,24 @@ public class XslReport
     public XslReport()
     {
         Company = new Company();
+        Title = string.Empty;
     }
 
-    public XslReport(Company company)
+    public XslReport(string title, Company company)
     {
+        Title = title;
         Company = company;
     }
 
     [Browsable(false)]
     [XmlElement("company")]
     public Company Company { get; set; }
+
+    [LocalizedCategory(nameof(Title))]
+    [LocalizedDescription(nameof(Title))]
+    [LocalizedDisplayName(nameof(Title))]
+    [XmlElement("title")]
+    public string Title { get; set; }
 
     [LocalizedCategory(nameof(Started))]
     [LocalizedDescription(nameof(Started))]
@@ -144,14 +152,14 @@ public class XslReport
     {
         return string
             .Format(gets(key), value)
-            .Humanize(LetterCasing.Sentence);
+            .Transform(To.SentenceCase);
     }
 
     public string fgets(string key, object first, object second)
     {
         return string
             .Format(gets(key), first, second)
-            .Humanize(LetterCasing.Sentence);
+            .Transform(To.SentenceCase);
     }
 
     public string pngets(string key, decimal value)

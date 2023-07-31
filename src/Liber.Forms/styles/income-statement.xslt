@@ -14,9 +14,8 @@ Licensed under the MIT License.
     <xsl:include href="base/financial-statement.xslt"/>
     <xsl:output method="html" indent="yes"/>
     <xsl:template match="/report">
-    <xsl:variable name="title" select="liber:gets('income-statement')"/>
         <xsl:call-template name="financial-statement">
-            <xsl:with-param name="title" select="$title"/>
+            <xsl:with-param name="title" select="title"/>
             <xsl:with-param name="table">
                 <thead>
                     <tr>
@@ -26,7 +25,7 @@ Licensed under the MIT License.
                     </tr>
                     <tr>
                         <th colspan="2" class="title">
-                            <xsl:value-of select="$title"/>
+                            <xsl:value-of select="title"/>
                         </th>
                     </tr>
                     <tr>
@@ -54,14 +53,14 @@ Licensed under the MIT License.
                         <th></th>
                     </tr>
                     <xsl:apply-templates select="company">
-                        <xsl:with-param name="type">Income</xsl:with-param>
+                        <xsl:with-param name="type" select="'Income'"/>
                         <xsl:with-param name="balance" select="-$income"/>
-                        <xsl:with-param name="indent">3</xsl:with-param>
+                        <xsl:with-param name="indent" select="3"/>
                     </xsl:apply-templates>
                     <xsl:apply-templates select="company">
-                        <xsl:with-param name="type">Cost</xsl:with-param>
+                        <xsl:with-param name="type" select="'Cost'"/>
                         <xsl:with-param name="balance" select="$cost"/>
-                        <xsl:with-param name="indent">3</xsl:with-param>
+                        <xsl:with-param name="indent" select="3"/>
                     </xsl:apply-templates>
                     <tr>
                         <th class="in-2 left">
@@ -72,9 +71,9 @@ Licensed under the MIT License.
                         </td>
                     </tr>
                     <xsl:apply-templates select="company">
-                        <xsl:with-param name="type">Expense</xsl:with-param>
+                        <xsl:with-param name="type" select="'Expense'"/>
                         <xsl:with-param name="balance" select="$expense"/>
-                        <xsl:with-param name="indent">3</xsl:with-param>
+                        <xsl:with-param name="indent" select="3"/>
                     </xsl:apply-templates>
                     <tr>
                         <th class="in-1 left">
@@ -85,14 +84,14 @@ Licensed under the MIT License.
                         </td>
                     </tr>
                     <xsl:apply-templates select="company">
-                        <xsl:with-param name="type">OtherIncomeExpense</xsl:with-param>
+                        <xsl:with-param name="type" select="'OtherIncomeExpense'"/>
                         <xsl:with-param name="balance" select="$otherIncomeExpense"/>
-                        <xsl:with-param name="indent">2</xsl:with-param>
+                        <xsl:with-param name="indent" select="2"/>
                     </xsl:apply-templates>
                     <xsl:apply-templates select="company">
                         <xsl:with-param name="type">IncomeTaxExpense</xsl:with-param>
                         <xsl:with-param name="balance" select="$incomeTaxExpense"/>
-                        <xsl:with-param name="indent">2</xsl:with-param>
+                        <xsl:with-param name="indent" select="2"/>
                     </xsl:apply-templates>
                 </tbody>
                 <tfoot>

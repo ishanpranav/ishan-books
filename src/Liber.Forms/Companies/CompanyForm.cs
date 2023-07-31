@@ -24,6 +24,8 @@ internal abstract partial class CompanyForm : Form
         nameTextBox.Text = company.Name;
         _colorButton.BackColor = company.Color;
         _colorButton.ForeColor = Colors.GetForeColor(company.Color);
+        typeComboBox.DataSource = Enum.GetValues<CompanyType>();
+        typeComboBox.SelectedItem = company.Type;
         equityAccountComboBox.Initialize(company, x => company.Accounts[x].Type == AccountType.Equity);
         otherEquityAccountComboBox.Initialize(company, x => company.Accounts[x].Type == AccountType.Equity);
         equityAccountComboBox.SelectedItem = company.EquityAccountId;
@@ -33,10 +35,16 @@ internal abstract partial class CompanyForm : Form
 
     public Company Company { get; }
 
+    private void OnTypeComboBoxFormat(object sender, ListControlConvertEventArgs e)
+    {
+        e.Value = ((CompanyType)e.ListItem!).ToLocalizedString();
+    }
+
     private void OnAcceptButtonClick(object sender, EventArgs e)
     {
         Company.Name = nameTextBox.Text;
         Company.Color = _colorButton.BackColor;
+        Company.Type = (CompanyType)typeComboBox.SelectedItem!;
         Company.EquityAccountId = equityAccountComboBox.SelectedItem;
         Company.OtherEquityAccountId = otherEquityAccountComboBox.SelectedItem;
         Company.Password = passwordTextBox.Text;

@@ -43,17 +43,17 @@ Licensed under the MIT License.
                 </th>
             </tr>
             <xsl:apply-templates select="company">
-                <xsl:with-param name="type">Bank</xsl:with-param>
+                <xsl:with-param name="type" select="'Bank'"/>
                 <xsl:with-param name="balance" select="$bank"/>
                 <xsl:with-param name="previous" select="$bank2"/>
-                <xsl:with-param name="indent">2</xsl:with-param>
+                <xsl:with-param name="indent" select="2"/>
                 <xsl:with-param name="comparative" select="$comparative"/>
             </xsl:apply-templates>
             <xsl:apply-templates select="company">
-                <xsl:with-param name="type">OtherCurrentAsset</xsl:with-param>
+                <xsl:with-param name="type" select="'OtherCurrentAsset'"/>
                 <xsl:with-param name="balance" select="$otherCurrentAsset"/>
                 <xsl:with-param name="previous" select="$otherCurrentAsset2"/>
-                <xsl:with-param name="indent">2</xsl:with-param>
+                <xsl:with-param name="indent" select="2"/>
                 <xsl:with-param name="comparative" select="$comparative"/>
             </xsl:apply-templates>
             <tr>
@@ -77,17 +77,17 @@ Licensed under the MIT License.
                 </th>
             </tr>
             <xsl:apply-templates select="company">
-                <xsl:with-param name="type">FixedAsset</xsl:with-param>
+                <xsl:with-param name="type" select="'FixedAsset'"/>
                 <xsl:with-param name="balance" select="$fixedAsset"/>
                 <xsl:with-param name="previous" select="$fixedAsset2"/>
-                <xsl:with-param name="indent">2</xsl:with-param>
+                <xsl:with-param name="indent" select="2"/>
                 <xsl:with-param name="comparative" select="$comparative"/>
             </xsl:apply-templates>
             <xsl:apply-templates select="company">
-                <xsl:with-param name="type">OtherAsset</xsl:with-param>
+                <xsl:with-param name="type" select="'OtherAsset'"/>
                 <xsl:with-param name="balance" select="$otherAsset"/>
                 <xsl:with-param name="previous" select="$otherAsset2"/>
-                <xsl:with-param name="indent">2</xsl:with-param>
+                <xsl:with-param name="indent" select="2"/>
                 <xsl:with-param name="comparative" select="$comparative"/>
             </xsl:apply-templates>
             <tr>
@@ -137,17 +137,17 @@ Licensed under the MIT License.
                 </th>
             </tr>
             <xsl:apply-templates select="company">
-                <xsl:with-param name="type">CreditCard</xsl:with-param>
+                <xsl:with-param name="type" select="'CreditCard'"/>
                 <xsl:with-param name="balance" select="-$creditCard"/>
                 <xsl:with-param name="previous" select="-$creditCard2"/>
-                <xsl:with-param name="indent">3</xsl:with-param>
+                <xsl:with-param name="indent" select="3"/>
                 <xsl:with-param name="comparative" select="$comparative"/>
             </xsl:apply-templates>
             <xsl:apply-templates select="company">
-                <xsl:with-param name="type">OtherCurrentLiability</xsl:with-param>
+                <xsl:with-param name="type" select="'OtherCurrentLiability'"/>
                 <xsl:with-param name="balance" select="-$otherCurrentLiability"/>
                 <xsl:with-param name="previous" select="-$otherCurrentLiability2"/>
-                <xsl:with-param name="indent">3</xsl:with-param>
+                <xsl:with-param name="indent" select="3"/>
                 <xsl:with-param name="comparative" select="$comparative"/>
             </xsl:apply-templates>
             <tr>
@@ -166,10 +166,10 @@ Licensed under the MIT License.
                 </xsl:choose>
             </tr>
             <xsl:apply-templates select="company">
-                <xsl:with-param name="type">LongTermLiability</xsl:with-param>
+                <xsl:with-param name="type" select="'LongTermLiability'"/>
                 <xsl:with-param name="balance" select="-$longTermLiability"/>
                 <xsl:with-param name="previous" select="-$longTermLiability2"/>
-                <xsl:with-param name="indent">2</xsl:with-param>
+                <xsl:with-param name="indent" select="2"/>
                 <xsl:with-param name="comparative" select="$comparative"/>
             </xsl:apply-templates>
             <tr>
@@ -188,10 +188,10 @@ Licensed under the MIT License.
                 </xsl:choose>
             </tr>
             <xsl:apply-templates select="company">
-                <xsl:with-param name="type">Equity</xsl:with-param>
+                <xsl:with-param name="type" select="'Equity'"/>
                 <xsl:with-param name="balance" select="-$equity"/>
                 <xsl:with-param name="previous" select="-$equity2"/>
-                <xsl:with-param name="indent">1</xsl:with-param>
+                <xsl:with-param name="indent" select="1"/>
                 <xsl:with-param name="title" select="liber:fgets('{0}', liber:gets(company/type))"/>
                 <xsl:with-param name="subtitle" select="liber:fgets('total-equity{0}', liber:gets(company/type))"/>
                 <xsl:with-param name="comparative" select="$comparative"/>
@@ -214,9 +214,8 @@ Licensed under the MIT License.
         </tbody>
     </xsl:template>
     <xsl:template match="/report">
-        <xsl:variable name="title" select="liber:gets('balance-sheet')"/>
         <xsl:call-template name="financial-statement">
-            <xsl:with-param name="title" select="$title"/>
+            <xsl:with-param name="title" select="title"/>
             <xsl:with-param name="table">
                 <thead>
                     <tr>
@@ -226,7 +225,7 @@ Licensed under the MIT License.
                     </tr>
                     <tr>
                         <th colspan="2" class="title">
-                            <xsl:value-of select="$title"/>
+                            <xsl:value-of select="title"/>
                         </th>
                     </tr>
                     <tr>

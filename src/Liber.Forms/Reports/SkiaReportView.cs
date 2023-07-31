@@ -4,10 +4,8 @@
 
 using System;
 using System.IO;
-using System.Threading.Tasks;
 using Liber.Skia;
 using Microsoft.Web.WebView2.Core;
-using SkiaSharp;
 
 namespace Liber.Forms.Reports;
 
@@ -46,39 +44,6 @@ internal abstract class SkiaReportView : IDisposable, IReportView
         }
 
         coreWebView2.Navigate(Path.GetFullPath("document.pdf"));
-    }
-
-    public Task PrintAsync(string path)
-    {
-        if (_report == null)
-        {
-            throw new InvalidOperationException();
-        }
-
-        using FileStream output = File.Create(path);
-
-        string extension = Path.GetExtension(path);
-
-        switch (extension.ToUpperInvariant())
-        {
-            case ".PDF":
-                SkiaSerializer.SerializePdf(output, _report);
-                break;
-
-            case ".XPS":
-                SkiaSerializer.SerializeXps(output, _report);
-                break;
-
-            case ".PNG":
-                SkiaSerializer.SerializeImage(output, _report, SKEncodedImageFormat.Png);
-                break;
-
-            default:
-                FormattedStrings.ShowNotSupportedMessage(extension);
-                break;
-        }
-
-        return Task.CompletedTask;
     }
 
     protected virtual void Dispose(bool disposing)

@@ -29,12 +29,6 @@ internal sealed partial class ReportsForm : Form
     {
         await _webView.EnsureCoreWebView2Async();
 
-        _webView.CoreWebView2.ContextMenuRequested += (_, e) =>
-        {
-            e.MenuItems.Clear();
-            _contextMenu.Show(_webView, e.Location);
-        };
-
         XslReportView.InitializeReports(Path.Combine("data", "reports.json"));
         _webView.CoreWebView2.SetVirtualHostNameToFolderMapping("liber.example", Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)!, CoreWebView2HostResourceAccessKind.DenyCors);
         InitializeReports(
@@ -120,29 +114,8 @@ internal sealed partial class ReportsForm : Form
     {
         _view = (IReportView)_listView.SelectedItems[0].Tag;
         _propertyGrid.SelectedObject = _view.Properties;
-        saveAsToolStripButton.Enabled = true;
-        saveAsToolStripMenuItem.Enabled = true;
-        printPreviewToolStripButton.Enabled = true;
-        printPreviewToolStripMenuItem.Enabled = true;
-        printToolStripButton.Enabled = true;
-        printToolStripMenuItem.Enabled = true;
 
         InitializeReport();
-    }
-
-    private void OnPrintPreviewToolStripButtonClick(object sender, EventArgs e)
-    {
-        _webView.CoreWebView2.ShowPrintUI();
-    }
-
-    private async void OnSaveAsToolStripButtonClick(object sender, EventArgs e)
-    {
-        if (_view == null || _saveFileDialog.ShowDialog() != DialogResult.OK)
-        {
-            return;
-        }
-
-        await _view.PrintAsync(_saveFileDialog.FileName);
     }
 
     protected override void Dispose(bool disposing)

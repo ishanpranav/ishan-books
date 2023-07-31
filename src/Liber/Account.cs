@@ -269,7 +269,6 @@ public class Account : IXmlSerializable
         else if (Temporary)
         {
             balance = GetBalance(reportWriter.Report.Started, reportWriter.Report.Posted);
-            previous = 0;
         }
         else
         {

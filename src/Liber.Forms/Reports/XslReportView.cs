@@ -5,7 +5,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
-using System.Threading.Tasks;
 using System.Xml.Xsl;
 using Microsoft.Web.WebView2.Core;
 
@@ -25,7 +24,7 @@ internal sealed class XslReportView : IReportView
 
     public XslReportView(Company company, string path)
     {
-        _report = new XslReport(company);
+        _report = new XslReport(XslReport.GetString(Path.GetFileNameWithoutExtension(path)), company);
         _path = path;
     }
 
@@ -54,36 +53,6 @@ internal sealed class XslReportView : IReportView
         _coreWebView2 = coreWebView2;
 
         coreWebView2.NavigateToString(_xhtml);
-    }
-
-    public async Task PrintAsync(string path)
-    {
-        if (_coreWebView2 == null)
-        {
-            return;
-        }
-
-        await using FileStream output = File.Create(path);
-
-        string extension = Path.GetExtension(path);
-
-        switch (extension.ToUpperInvariant())
-        {
-            // TODO: Investigate the PDF printing issue
-            // TODO: If PDF does not work, dismantle artificial save mechanism
-            case ".PDF":
-                await _coreWebView2.PrintToPdfAsync(path);
-                break;
-
-            case ".HTM":
-            case ".HTML":
-                await File.WriteAllTextAsync(path, _xhtml);
-                break;
-
-            default:
-                FormattedStrings.ShowNotSupportedMessage(extension);
-                break;
-        }
     }
 
     public static void InitializeReports(string path)

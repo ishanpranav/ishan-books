@@ -43,6 +43,8 @@ partial class CompanyForm
         otherEquityAccountComboBox = new Accounts.AccountComboBox();
         closingAccountsGroupBox = new System.Windows.Forms.GroupBox();
         label4 = new System.Windows.Forms.Label();
+        label6 = new System.Windows.Forms.Label();
+        typeComboBox = new System.Windows.Forms.ComboBox();
         closingAccountsGroupBox.SuspendLayout();
         SuspendLayout();
         // 
@@ -148,12 +150,28 @@ partial class CompanyForm
         label4.Name = "label4";
         _helpProvider.SetShowHelp(label4, (bool)resources.GetObject("label4.ShowHelp"));
         // 
+        // label6
+        // 
+        resources.ApplyResources(label6, "label6");
+        label6.Name = "label6";
+        _helpProvider.SetShowHelp(label6, (bool)resources.GetObject("label6.ShowHelp"));
+        // 
+        // typeComboBox
+        // 
+        resources.ApplyResources(typeComboBox, "typeComboBox");
+        typeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+        typeComboBox.FormattingEnabled = true;
+        typeComboBox.Name = "typeComboBox";
+        typeComboBox.Format += OnTypeComboBoxFormat;
+        // 
         // CompanyForm
         // 
         AcceptButton = acceptButton;
         resources.ApplyResources(this, "$this");
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         CancelButton = cancelButton;
+        Controls.Add(label6);
+        Controls.Add(typeComboBox);
         Controls.Add(closingAccountsGroupBox);
         Controls.Add(passwordTextBox);
         Controls.Add(label3);
@@ -190,4 +208,6 @@ partial class CompanyForm
     private System.Windows.Forms.Label label5;
     private Accounts.AccountComboBox otherEquityAccountComboBox;
     protected System.Windows.Forms.GroupBox closingAccountsGroupBox;
+    private System.Windows.Forms.ComboBox typeComboBox;
+    private System.Windows.Forms.Label label6;
 }

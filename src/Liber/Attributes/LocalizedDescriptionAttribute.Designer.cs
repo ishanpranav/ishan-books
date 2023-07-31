@@ -79,15 +79,6 @@ namespace Liber.Attributes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string RotationDegrees {
-            get {
-                return ResourceManager.GetString("RotationDegrees", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Specifies the page size in centimeters..
         /// </summary>
         internal static string SizeCentimeters {
@@ -111,6 +102,15 @@ namespace Liber.Attributes {
         internal static string Started {
             get {
                 return ResourceManager.GetString("Started", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specifies the title of the report..
+        /// </summary>
+        internal static string Title {
+            get {
+                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
         

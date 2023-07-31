@@ -28,6 +28,7 @@
 	  <None Remove="styles\cash-flow-statement.xslt" />
 	  <None Remove="styles\comparative-balance-sheet.xslt" />
 	  <None Remove="styles\comprehensive-income-statement.xslt" />
+	  <None Remove="styles\equity-statement.xslt" />
 	  <None Remove="styles\financial-statement.xslt" />
 	  <None Remove="styles\income-statement.xslt" />
 	</ItemGroup>
@@ -67,6 +68,9 @@
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="styles\comparative-balance-sheet.xslt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="styles\equity-statement.xslt">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="styles\financial-statement.css">

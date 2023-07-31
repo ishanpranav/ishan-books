@@ -14,9 +14,8 @@ Licensed under the MIT License.
     <xsl:include href="balance-sheet.xslt"/>
     <xsl:output method="html" indent="yes"/>
     <xsl:template match="/report">
-        <xsl:variable name="title" select="liber:gets('comparative-balance-sheet')"/>
         <xsl:call-template name="financial-statement">
-            <xsl:with-param name="title" select="$title"/>
+            <xsl:with-param name="title" select="title"/>
             <xsl:with-param name="table">
                 <thead>
                     <tr>
@@ -26,7 +25,7 @@ Licensed under the MIT License.
                     </tr>
                     <tr>
                         <th colspan="3" class="title">
-                            <xsl:value-of select="$title"/>
+                            <xsl:value-of select="title"/>
                         </th>
                     </tr>
                     <tr>

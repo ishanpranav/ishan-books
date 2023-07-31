@@ -20,10 +20,7 @@ internal abstract partial class AccountForm : Form
 
         Company = company;
         DialogResult = DialogResult.Cancel;
-        typeComboBox.DataSource = Enum
-            .GetValues<AccountType>()
-            .OrderBy(x => Math.Abs((short)x))
-            .ToList();
+        typeComboBox.DataSource = Enum.GetValues<AccountType>();
         taxTypeComboBox.DataSource = Enum.GetValues<TaxType>();
         numberNumericUpDown.Maximum = decimal.MaxValue;
     }

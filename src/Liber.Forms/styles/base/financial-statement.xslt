@@ -34,7 +34,7 @@ Licensed under the MIT License.
     <xsl:template match="company">
         <xsl:param name="type"/>
         <xsl:param name="balance"/>
-        <xsl:param name="previous"/>
+        <xsl:param name="previous" select="0"/>
         <xsl:param name="indent"/>
         <xsl:param name="title" select="liber:gets($type)"/>
         <xsl:param name="subtitle" select="liber:pngets($type, $balance)"/>

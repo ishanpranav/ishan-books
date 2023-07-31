@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!--
-comprehensive-income-statement.xslt
+equity-statement.xslt
 Copyright (c) 2023 Ishan Pranav. All rights reserved.
 Licensed under the MIT License.
 -->
@@ -40,30 +40,19 @@ Licensed under the MIT License.
                         </th>
                     </tr>
                 </thead>
-                <xsl:variable name="netIncome" select="sum(company/account[type = 'Income' or type = 'OtherIncome' or type = 'Cost' or type = 'Expense' or type = 'OtherExpense' or type = 'IncomeTaxExpense']/balance)"/>
-                <xsl:variable name="otherComprehensiveIncome" select="sum(company/account[type = 'OtherComprehensiveIncome']/balance)"/>
                 <tbody>
                     <tr>
-                        <th class="in-1 left">
-                            <xsl:value-of select="liber:pngets('net-income', -$netIncome)"/>
-                        </th>
-                        <th class="right">
-                            <xsl:value-of select="liber:fm(-$netIncome)"/>
-                        </th>
+                        
                     </tr>
-                    <xsl:apply-templates select="company">
-                        <xsl:with-param name="type" select="'OtherComprehensiveIncome'"/>
-                        <xsl:with-param name="balance" select="-$otherComprehensiveIncome"/>
-                    </xsl:apply-templates>
                 </tbody>
                 <tfoot>
                     <tr>
                         <th class="left">
-                            <xsl:value-of select="liber:gets('comprehensive-income')"/>
+                            <xsl:value-of select="liber:fgets('total-equity{0}', liber:gets(company/type))"/>
                         </th>
-                        <td class="total right">
-                            <xsl:value-of select="liber:fm(-($netIncome + $otherComprehensiveIncome))"/>
-                        </td>
+                        <th class="total right">
+                            <xsl:value-of select="liber:fm(sum(company/account[type = 'Equity']/balance))"/>
+                        </th>
                     </tr>
                 </tfoot>
             </xsl:with-param>

@@ -138,6 +138,9 @@
   <data name="comparative-balance-sheet" xml:space="preserve">
     <value>Comparative Balance Sheet</value>
   </data>
+  <data name="comprehensive-income" xml:space="preserve">
+    <value>Comprehensive income</value>
+  </data>
   <data name="comprehensive-income-statement" xml:space="preserve">
     <value>Comprehensive Income Statement</value>
   </data>
@@ -262,7 +265,7 @@
     <value>Total liabilities and {0}</value>
   </data>
   <data name="total-non-current-assets" xml:space="preserve">
-    <value>Total non-current-assets</value>
+    <value>Total non-current assets</value>
   </data>
   <data name="trial-balance" xml:space="preserve">
     <value>Trial Balance</value>

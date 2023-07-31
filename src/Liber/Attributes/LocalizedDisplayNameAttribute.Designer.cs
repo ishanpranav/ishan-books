@@ -115,6 +115,15 @@ namespace Liber.Attributes {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Title.
+        /// </summary>
+        internal static string Title {
+            get {
+                return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Left Margin (cm).
         /// </summary>
         internal static string XCentimeters {

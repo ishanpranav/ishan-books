@@ -123,9 +123,6 @@
   <data name="Posted" xml:space="preserve">
     <value>Specifies the end date for the report.</value>
   </data>
-  <data name="RotationDegrees" xml:space="preserve">
-    <value />
-  </data>
   <data name="SizeCentimeters" xml:space="preserve">
     <value>Specifies the page size in centimeters.</value>
   </data>
@@ -134,6 +131,9 @@
   </data>
   <data name="Started" xml:space="preserve">
     <value>Specifies the start date for the report.</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Specifies the title of the report.</value>
   </data>
   <data name="XCentimeters" xml:space="preserve">
     <value>Specifies the X offset (left margin) in centimeters.</value>

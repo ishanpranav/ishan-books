@@ -53,6 +53,9 @@
 	    <Generator>ResXFileCodeGenerator</Generator>
 	    <LastGenOutput>LocalizedDisplayNameAttribute.Designer.cs</LastGenOutput>
 	  </EmbeddedResource>
+	  <EmbeddedResource Update="CompanyTypeExtensions.resx">
+	    <Generator></Generator>
+	  </EmbeddedResource>
 	  <EmbeddedResource Update="Properties\Resources.resx">
 	    <Generator>PublicResXFileCodeGenerator</Generator>
 	    <LastGenOutput>Resources.Designer.cs</LastGenOutput>
