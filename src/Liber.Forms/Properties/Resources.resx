@@ -120,6 +120,9 @@
   <data name="CancelCaption" xml:space="preserve">
     <value>Save Changes</value>
   </data>
+  <data name="CompaniesJumpListCustomCategory" xml:space="preserve">
+    <value>Companies</value>
+  </data>
   <data name="ExceptionCaption" xml:space="preserve">
     <value>Error</value>
   </data>

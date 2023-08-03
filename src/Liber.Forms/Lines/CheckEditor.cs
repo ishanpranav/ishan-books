@@ -1,4 +1,4 @@
-﻿// LineEditor.cs
+﻿// CheckEditor.cs
 // Copyright (c) 2023 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
@@ -19,7 +19,7 @@ internal sealed class CheckEditor : UITypeEditor
 
     public override object? EditValue(ITypeDescriptorContext? context, IServiceProvider provider, object? value)
     {
-        if (provider.GetService(typeof(IWindowsFormsEditorService)) is  IWindowsFormsEditorService service && value is CheckView view)
+        if (provider.GetService(typeof(IWindowsFormsEditorService)) is IWindowsFormsEditorService service && value is CheckView view)
         {
             using CheckForm form = new CheckForm(view);
 

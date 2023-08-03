@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -20,7 +19,6 @@ using Liber.Forms.Reports;
 using Liber.Forms.Transactions;
 using Liber.Sqlite;
 using MessagePack;
-using Microsoft.WindowsAPICodePack.Shell;
 using Microsoft.WindowsAPICodePack.Taskbar;
 
 namespace Liber.Forms;
@@ -37,6 +35,7 @@ internal sealed partial class MainForm : Form
     public MainForm()
     {
         InitializeComponent();
+        SystemFeatures.Initialize(this);
 
         Text = SystemFeatures.ApplicationName;
         aboutToolStripMenuItem.Text = FormattedStrings.AboutText;
@@ -50,7 +49,6 @@ internal sealed partial class MainForm : Form
 
     private async void OnLoad(object sender, EventArgs e)
     {
-        SystemFeatures.Initialize(this);
         InitializeRecentPaths();
 
         if (!_recentPathManager.Empty)
@@ -103,6 +101,8 @@ internal sealed partial class MainForm : Form
         }
 
         int i = 1;
+        JumpList list = JumpList.CreateJumpListForIndividualWindow(TaskbarManager.Instance.ApplicationId, Handle);
+        JumpListCustomCategory companiesCategory = new JumpListCustomCategory(Resources.CompaniesJumpListCustomCategory);
 
         foreach (string path in _recentPathManager.Paths)
         {
@@ -125,10 +125,20 @@ internal sealed partial class MainForm : Form
                 _openFileDialog.CustomPlaces.Add(customPlace);
                 _saveFileDialog.CustomPlaces.Add(customPlace);
             }
+
+            JumpListLink link = new JumpListLink(path, Path.GetFileName(path))
+            {
+                Arguments = "-1"
+            };
+
+            companiesCategory.AddJumpListItems(link);
         }
 
         recentPathsToolStripMenuItem.Visible = true;
         recentPathsToolStripSeparator.Visible = true;
+
+        list.AddCustomCategories(companiesCategory);
+        list.Refresh();
     }
 
     private async void OnNewToolStripMenuItemClick(object sender, EventArgs e)

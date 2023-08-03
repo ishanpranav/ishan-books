@@ -27,7 +27,7 @@ internal sealed partial class CheckForm : Form
             foreach (Line line in account.Value.GetChecks())
             {
                 Transaction transaction = line.Transaction!;
-                ListViewItem item = _listView.Items.Add(transaction.Name ?? string.Empty) ;
+                ListViewItem item = _listView.Items.Add(transaction.Name ?? string.Empty);
 
                 item.Group = group;
                 item.Tag = line;

@@ -135,7 +135,7 @@ internal static class SystemFeatures
         {
             Assembly assembly = typeof(SystemFeatures).Assembly;
 
-            string path = Path.Combine(Application.StartupPath, "favicon.ico");
+            string path = Path.Combine(Application.StartupPath, Path.ChangeExtension("favicon", "ico"));
 
             if (!File.Exists(path))
             {

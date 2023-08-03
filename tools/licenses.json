@@ -132,7 +132,7 @@
       "index": "Hernández, Ricardo Amores"
     },
     {
-      "title": "Deluxe:tm: Personal Checks US-Letter",
+      "title": "Deluxe&trade; Personal Checks US-Letter",
       "formats": [ "ini" ],
       "source": "https://github.com/Gnucash/gnucash",
       "author": "GnuCash contributors",
@@ -141,7 +141,7 @@
       "index": "GnuCash"
     },
     {
-      "title": "Liberty:tm: Personal Checks US-Letter",
+      "title": "Liberty&trade; Personal Checks US-Letter",
       "formats": [ "ini" ],
       "source": "https://github.com/Gnucash/gnucash",
       "author": "GnuCash contributors",
@@ -150,7 +150,7 @@
       "index": "GnuCash"
     },
     {
-      "title": "Quicken:tm:/QuickBooks:tm: US-Letter",
+      "title": "Quicken&trade;/QuickBooks&trade; US-Letter",
       "formats": [ "ini" ],
       "source": "https://github.com/Gnucash/gnucash",
       "author": "GnuCash contributors",
@@ -159,7 +159,7 @@
       "index": "GnuCash"
     },
     {
-      "title": "Quicken:tm:/QuickBooks:tm: 3-Part US-Letter",
+      "title": "Quicken&trade;/QuickBooks&trade; 3-Part US-Letter",
       "formats": [ "ini" ],
       "source": "https://github.com/Gnucash/gnucash",
       "author": "GnuCash contributors",
@@ -168,7 +168,7 @@
       "index": "GnuCash"
     },
     {
-      "title": "Quicken:tm: Check-21",
+      "title": "Quicken&trade; Check-21",
       "formats": [ "ini" ],
       "source": "https://github.com/Gnucash/gnucash",
       "author": "GnuCash contributors",
@@ -177,7 +177,7 @@
       "index": "GnuCash"
     },
     {
-      "title": "Quicken:tm: Wallet Checks with Side Stub",
+      "title": "Quicken&trade; Wallet Checks with Side Stub",
       "formats": [ "ini" ],
       "source": "https://github.com/Gnucash/gnucash",
       "author": "GnuCash contributors",

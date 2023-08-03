@@ -8,6 +8,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Text.Json;
+using System.Windows.Shell;
 using Liber.Forms.Properties;
 
 namespace Liber.Forms.Components;
@@ -62,6 +63,8 @@ internal sealed class RecentPathManager : Component
 
     public void Add(string path)
     {
+        JumpList.AddToRecentCategory(path);
+
         DateTime modified = DateTime.Now;
 
         if (_paths == null)

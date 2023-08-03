@@ -70,6 +70,15 @@ namespace Liber.Forms.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Companies.
+        /// </summary>
+        internal static string CompaniesJumpListCustomCategory {
+            get {
+                return ResourceManager.GetString("CompaniesJumpListCustomCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         internal static string ExceptionCaption {

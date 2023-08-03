@@ -27,42 +27,42 @@ the application.
 
 See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/voucher.chk) for the resource included from the repository.
 
-### Quicken:tm: Wallet Checks with Side Stub&emsp;<sub><sup>*ini*&ensp;</sup></sub>
+### Quicken&trade; Wallet Checks with Side Stub&emsp;<sub><sup>*ini*&ensp;</sup></sub>
 - Author: GnuCash contributors
 - Source: [Gnucash/gnucash](https://github.com/Gnucash/gnucash)
 - License: [GNU General Public License family](#gpl-gnucash)
 
 See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/quicken_wallet.chk) for the resource included from the repository.
 
-### Quicken:tm: Check-21&emsp;<sub><sup>*ini*&ensp;</sup></sub>
+### Quicken&trade; Check-21&emsp;<sub><sup>*ini*&ensp;</sup></sub>
 - Author: GnuCash contributors
 - Source: [Gnucash/gnucash](https://github.com/Gnucash/gnucash)
 - License: [GNU General Public License family](#gpl-gnucash)
 
 See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/quicken_check_21.chk) for the resource included from the repository.
 
-### Quicken:tm:/QuickBooks:tm: 3-Part US-Letter&emsp;<sub><sup>*ini*&ensp;</sup></sub>
+### Quicken&trade;/QuickBooks&trade; 3-Part US-Letter&emsp;<sub><sup>*ini*&ensp;</sup></sub>
 - Author: GnuCash contributors
 - Source: [Gnucash/gnucash](https://github.com/Gnucash/gnucash)
 - License: [GNU General Public License family](#gpl-gnucash)
 
 See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/quicken_3part.chk) for the resource included from the repository.
 
-### Quicken:tm:/QuickBooks:tm: US-Letter&emsp;<sub><sup>*ini*&ensp;</sup></sub>
+### Quicken&trade;/QuickBooks&trade; US-Letter&emsp;<sub><sup>*ini*&ensp;</sup></sub>
 - Author: GnuCash contributors
 - Source: [Gnucash/gnucash](https://github.com/Gnucash/gnucash)
 - License: [GNU General Public License family](#gpl-gnucash)
 
 See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/quicken.chk) for the resource included from the repository.
 
-### Liberty:tm: Personal Checks US-Letter&emsp;<sub><sup>*ini*&ensp;</sup></sub>
+### Liberty&trade; Personal Checks US-Letter&emsp;<sub><sup>*ini*&ensp;</sup></sub>
 - Author: GnuCash contributors
 - Source: [Gnucash/gnucash](https://github.com/Gnucash/gnucash)
 - License: [GNU General Public License family](#gpl-gnucash)
 
 See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/liberty.chk) for the resource included from the repository.
 
-### Deluxe:tm: Personal Checks US-Letter&emsp;<sub><sup>*ini*&ensp;</sup></sub>
+### Deluxe&trade; Personal Checks US-Letter&emsp;<sub><sup>*ini*&ensp;</sup></sub>
 - Author: GnuCash contributors
 - Source: [Gnucash/gnucash](https://github.com/Gnucash/gnucash)
 - License: [GNU General Public License family](#gpl-gnucash)
