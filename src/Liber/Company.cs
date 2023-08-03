@@ -84,6 +84,21 @@ public sealed class Company : IXmlSerializable
         }
     }
 
+    [IgnoreMember]
+    [JsonIgnore]
+    public IEnumerable<KeyValuePair<Guid, Account>> OrderedAccounts
+    {
+        get
+        {
+            return _accounts
+                .OrderBy(x => x.Value.Number)
+                .ThenBy(x => x.Value.Name)
+                .ThenBy(x => !x.Value.Placeholder)
+                .ThenBy(x => x.Value.Type)
+                .ThenByDescending(x => x.Value.Balance);
+        }
+    }
+
     [Key(1)]
     public IReadOnlyCollection<Transaction> Transactions
     {
@@ -146,24 +161,6 @@ public sealed class Company : IXmlSerializable
         get
         {
             return _accounts[OtherEquityAccountId];
-        }
-    }
-
-    public decimal Equity
-    {
-        get
-        {
-            decimal result = 0;
-
-            foreach (Account account in _accounts.Values)
-            {
-                if (account.Temporary)
-                {
-                    result += account.Balance;
-                }
-            }
-
-            return result;
         }
     }
 
@@ -408,9 +405,9 @@ public sealed class Company : IXmlSerializable
         writer.WriteElementString("name", Name ?? Resources.DefaultCompanyName);
         writer.WriteElementString("type", Type.ToString());
 
-        foreach (Account account in _accounts.Values)
+        foreach (KeyValuePair<Guid, Account> account in OrderedAccounts)
         {
-            XmlSerializers.Account.Serialize(writer, account);
+            XmlSerializers.Account.Serialize(writer, account.Value);
         }
 
         IEnumerable<Transaction> transactions;

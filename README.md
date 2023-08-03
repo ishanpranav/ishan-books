@@ -11,9 +11,12 @@ The project includes a standalone class library and a Windows GUI application.
 You can download the software from the
 [repository website](https://ishanpranav.github.io/ishan-books).
 ## Features
-__Bookkeeping__
+__Bookkeeping and personal finance__
 - [X] Chart of accounts
-- [X] General journal
+- [X] Make general journal entries
+- [X] Write checks
+- [ ] Use register
+- [ ] Reconcile
 
 __Reporting__
 - [X] Trial balance
@@ -22,7 +25,7 @@ __Reporting__
 - [X] Balance sheet
 - [X] Comparative balance sheet
 - [X] Cash flow statement
-- [ ] Equity statement
+- [X] Equity statement
 
 __First-class data formats__
 - [X] IshanBooks Company (*.izbk)

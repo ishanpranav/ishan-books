@@ -1,4 +1,4 @@
-﻿// ClickOnce.cs
+﻿// SystemFeatures.cs
 // Copyright (c) 2023 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
@@ -13,7 +13,7 @@ using Microsoft.Win32;
 
 namespace Liber.Forms;
 
-internal static class ClickOnce
+internal static class SystemFeatures
 {
     public static bool IsNetworkDeployed
     {
@@ -65,7 +65,7 @@ internal static class ClickOnce
     {
         get
         {
-            AssemblyTitleAttribute? customAttribute = typeof(ClickOnce).Assembly.GetCustomAttribute<AssemblyTitleAttribute>();
+            AssemblyTitleAttribute? customAttribute = typeof(SystemFeatures).Assembly.GetCustomAttribute<AssemblyTitleAttribute>();
 
             if (customAttribute != null)
             {
@@ -133,7 +133,7 @@ internal static class ClickOnce
 
         try
         {
-            Assembly assembly = typeof(ClickOnce).Assembly;
+            Assembly assembly = typeof(SystemFeatures).Assembly;
 
             string path = Path.Combine(Application.StartupPath, "favicon.ico");
 

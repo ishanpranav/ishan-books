@@ -120,6 +120,9 @@
   <data name="account" xml:space="preserve">
     <value>Account</value>
   </data>
+  <data name="accumulated-other-comprehensive-income" xml:space="preserve">
+    <value>Accumulated other comprehensive income or loss</value>
+  </data>
   <data name="adjustments{0}{1}" xml:space="preserve">
     <value>Adjustments to reconcile {0} to {1}</value>
   </data>
@@ -143,9 +146,6 @@
   </data>
   <data name="comprehensive-income-statement" xml:space="preserve">
     <value>Comprehensive Income Statement</value>
-  </data>
-  <data name="Corporation" xml:space="preserve">
-    <value>shareholders' equity</value>
   </data>
   <data name="Cost" xml:space="preserve">
     <value>Costs of revenue</value>
@@ -171,6 +171,9 @@
   <data name="description" xml:space="preserve">
     <value>Description</value>
   </data>
+  <data name="equity-statement" xml:space="preserve">
+    <value>Equity Statement</value>
+  </data>
   <data name="Expense" xml:space="preserve">
     <value>Expenses</value>
   </data>
@@ -192,9 +195,6 @@
   <data name="IncomeTaxExpense" xml:space="preserve">
     <value>Income tax expenses</value>
   </data>
-  <data name="Individual" xml:space="preserve">
-    <value>owner's equity</value>
-  </data>
   <data name="investing" xml:space="preserve">
     <value>Investing activities</value>
   </data>
@@ -212,9 +212,6 @@
   </data>
   <data name="non-current-assets" xml:space="preserve">
     <value>Non-current assets</value>
-  </data>
-  <data name="None" xml:space="preserve">
-    <value>equity</value>
   </data>
   <data name="number" xml:space="preserve">
     <value>Number</value>
@@ -240,8 +237,8 @@
   <data name="OtherIncomeExpense" xml:space="preserve">
     <value>Other income and expenses</value>
   </data>
-  <data name="Partnership" xml:space="preserve">
-    <value>partners' equity</value>
+  <data name="retained-earnings" xml:space="preserve">
+    <value>Retained earnings or accumulated deficit</value>
   </data>
   <data name="total" xml:space="preserve">
     <value>Total</value>
@@ -270,6 +267,12 @@
   <data name="trial-balance" xml:space="preserve">
     <value>Trial Balance</value>
   </data>
+  <data name="_n_accumulated-other-comprehensive-income" xml:space="preserve">
+    <value>Accumulated other comprehensive loss</value>
+  </data>
+  <data name="_n_Corporation" xml:space="preserve">
+    <value>shareholders' deficit</value>
+  </data>
   <data name="_n_CreditCard" xml:space="preserve">
     <value>Total credit card payments</value>
   </data>
@@ -279,11 +282,17 @@
   <data name="_n_gross-profit" xml:space="preserve">
     <value>Gross loss</value>
   </data>
+  <data name="_n_Individual" xml:space="preserve">
+    <value>owner's deficit</value>
+  </data>
   <data name="_n_investing" xml:space="preserve">
     <value>Net cash used in investing activities</value>
   </data>
   <data name="_n_net-income" xml:space="preserve">
     <value>Net loss</value>
+  </data>
+  <data name="_n_None" xml:space="preserve">
+    <value>deficit</value>
   </data>
   <data name="_n_operating" xml:space="preserve">
     <value>Net cash used in operating activities</value>
@@ -291,11 +300,23 @@
   <data name="_n_ordinary-income" xml:space="preserve">
     <value>Net ordinary loss</value>
   </data>
-  <data name="_n_t_OtherComprehensiveIncome" xml:space="preserve">
+  <data name="_n_Partnership" xml:space="preserve">
+    <value>partners' deficit</value>
+  </data>
+  <data name="_n_retained-earnings" xml:space="preserve">
+    <value>Accumulated deficit</value>
+  </data>
+  <data name="_n_OtherComprehensiveIncome" xml:space="preserve">
     <value>Total other comprehensive loss</value>
+  </data>
+  <data name="_p_accumulated-other-comprehensive-income" xml:space="preserve">
+    <value>Accumulated other comprehensive income</value>
   </data>
   <data name="_p_Bank" xml:space="preserve">
     <value>Total cash and cash equivalents</value>
+  </data>
+  <data name="_p_Corporation" xml:space="preserve">
+    <value>shareholders' equity</value>
   </data>
   <data name="_p_Cost" xml:space="preserve">
     <value>Total cost of revenue</value>
@@ -321,6 +342,9 @@
   <data name="_p_IncomeTaxExpense" xml:space="preserve">
     <value>Total income tax expense</value>
   </data>
+  <data name="_p_Individual" xml:space="preserve">
+    <value>owner's equity</value>
+  </data>
   <data name="_p_investing" xml:space="preserve">
     <value>Net cash provided by investing activities</value>
   </data>
@@ -329,6 +353,9 @@
   </data>
   <data name="_p_net-income" xml:space="preserve">
     <value>Net income</value>
+  </data>
+  <data name="_p_None" xml:space="preserve">
+    <value>equity</value>
   </data>
   <data name="_p_operating" xml:space="preserve">
     <value>Net cash provided by operating activities</value>
@@ -350,5 +377,11 @@
   </data>
   <data name="_p_OtherIncomeExpense" xml:space="preserve">
     <value>Total other income and expense</value>
+  </data>
+  <data name="_p_Partnership" xml:space="preserve">
+    <value>partners' equity</value>
+  </data>
+  <data name="_p_retained-earnings" xml:space="preserve">
+    <value>Retained earnings</value>
   </data>
 </root>

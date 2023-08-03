@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace System.Windows.Forms;
 
-internal class ListViewItemComparer : Comparer<ListViewItem>
+internal sealed class ListViewItemComparer : Comparer<ListViewItem>
 {
     private readonly ListViewEx _listView;
 
@@ -17,9 +17,24 @@ internal class ListViewItemComparer : Comparer<ListViewItem>
 
     public override int Compare(ListViewItem? x, ListViewItem? y)
     {
-        int comparison = string.Compare(
-             x?.SubItems[_listView.SortColumn].Text,
-             y?.SubItems[_listView.SortColumn].Text);
+        object? xTag = x?.SubItems[_listView.SortColumn].Tag;
+        object? yTag = y?.SubItems[_listView.SortColumn].Tag;
+        int comparison;
+
+        if (xTag is DateTime xDateTime && yTag is DateTime yDateTime)
+        {
+            comparison = xDateTime.CompareTo(yDateTime);
+        }
+        else if (xTag is decimal xDecimal && yTag is decimal yDecimal)
+        {
+            comparison = xDecimal.CompareTo(yDecimal);
+        }
+        else
+        {
+            comparison = string.Compare(
+                x?.SubItems[_listView.SortColumn].Text,
+                y?.SubItems[_listView.SortColumn].Text);
+        }
 
         switch (_listView.SortOrder)
         {

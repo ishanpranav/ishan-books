@@ -127,6 +127,9 @@
   <data name="CancelText{0}" xml:space="preserve">
     <value>Do you want to save changes to {0}?</value>
   </data>
+  <data name="CheckWords{0}{1}" xml:space="preserve">
+    <value>{0} and {1}/XX</value>
+  </data>
   <data name="NotSupportedText" xml:space="preserve">
     <value>Files without an extension are not compatible with the operation you selected. Please specify a file name extension such as "*.izbk" before saving.</value>
   </data>

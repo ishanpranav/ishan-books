@@ -163,10 +163,10 @@
     <value>Otro resultado integral</value>
   </data>
   <data name="OtherCurrentAsset" xml:space="preserve">
-    <value>Otro activo circulante</value>
+    <value>Otro activo corriente</value>
   </data>
   <data name="OtherCurrentLiability" xml:space="preserve">
-    <value>Otro pasivo circulante</value>
+    <value>Otro pasivo corriente</value>
   </data>
   <data name="OtherIncomeExpense" xml:space="preserve">
     <value>Otro ingreso/gasto</value>

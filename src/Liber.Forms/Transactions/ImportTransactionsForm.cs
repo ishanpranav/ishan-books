@@ -5,7 +5,6 @@
 using System;
 using System.Collections.Generic;
 using Liber.Forms.Accounts;
-using Liber.Forms.Components;
 
 namespace Liber.Forms.Transactions;
 
@@ -13,7 +12,7 @@ internal sealed class ImportTransactionsForm : ImportForm
 {
     private readonly Dictionary<Guid, Transaction> _transactions = new Dictionary<Guid, Transaction>();
 
-    public ImportTransactionsForm(Company company, FormFactory factory, IReadOnlyCollection<GnuCashLine> lines) : base(company, factory)
+    public ImportTransactionsForm(Company company, IReadOnlyCollection<GnuCashLine> lines) : base(company)
     {
         Dictionary<string, Guid> accounts = new Dictionary<string, Guid>(company.Accounts.Count);
 

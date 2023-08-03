@@ -123,7 +123,7 @@ Licensed under the MIT License.
             <tr></tr>
             <tr>
                 <th class="left">
-                    <xsl:value-of select="liber:fgets('liabilities-equity{0}', liber:gets(company/type))"/>
+                    <xsl:value-of select="liber:fgets('liabilities-equity{0}', liber:pngets(company/type, -$equity2))"/>
                 </th>
             </tr>
             <tr>
@@ -192,13 +192,13 @@ Licensed under the MIT License.
                 <xsl:with-param name="balance" select="-$equity"/>
                 <xsl:with-param name="previous" select="-$equity2"/>
                 <xsl:with-param name="indent" select="1"/>
-                <xsl:with-param name="title" select="liber:fgets('{0}', liber:gets(company/type))"/>
-                <xsl:with-param name="subtitle" select="liber:fgets('total-equity{0}', liber:gets(company/type))"/>
+                <xsl:with-param name="title" select="liber:fgets('{0}', liber:pngets(company/type, -$equity2))"/>
+                <xsl:with-param name="subtitle" select="liber:fgets('total-equity{0}', liber:pngets(company/type, -$equity2))"/>
                 <xsl:with-param name="comparative" select="$comparative"/>
             </xsl:apply-templates>
             <tr>
                 <th class="left">
-                    <xsl:value-of select="liber:fgets('total-liabilities-equity{0}', liber:gets(company/type))"/>
+                    <xsl:value-of select="liber:fgets('total-liabilities-equity{0}', liber:pngets(company/type, -$equity2))"/>
                 </th>
                 <td class="total right">
                     <xsl:value-of select="liber:fm(-($creditCard + $otherCurrentLiability + $longTermLiability + $equity))"/>

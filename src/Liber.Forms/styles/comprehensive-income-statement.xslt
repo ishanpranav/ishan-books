@@ -40,7 +40,6 @@ Licensed under the MIT License.
                         </th>
                     </tr>
                 </thead>
-                <xsl:variable name="netIncome" select="sum(company/account[type = 'Income' or type = 'OtherIncome' or type = 'Cost' or type = 'Expense' or type = 'OtherExpense' or type = 'IncomeTaxExpense']/balance)"/>
                 <xsl:variable name="otherComprehensiveIncome" select="sum(company/account[type = 'OtherComprehensiveIncome']/balance)"/>
                 <tbody>
                     <tr>

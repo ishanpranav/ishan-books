@@ -36,10 +36,10 @@ internal static class FormattedStrings
     {
         get
         {
-            return string.Format(GetString("AboutText{0}"), ClickOnce.ApplicationName);
+            return string.Format(GetString("AboutText{0}"), SystemFeatures.ApplicationName);
         }
     }
-    
+
     public static Uri AboutUrl
     {
         get
@@ -61,6 +61,14 @@ internal static class FormattedStrings
     public static string GetCancelText(this Company company)
     {
         return string.Format(GetString("CancelText{0}"), company.Name ?? Properties.Resources.DefaultCompanyName);
+    }
+
+    public static string GetCheckWords(decimal amount)
+    {
+        int integral = (int)amount;
+        int fractional = (int)((amount - integral) * 100);
+
+        return string.Format(GetString("CheckWords{0}{1}"), integral, fractional);
     }
 
     public static void ShowNotSupportedMessage(string extension)

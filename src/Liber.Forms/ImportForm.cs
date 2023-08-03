@@ -5,25 +5,22 @@
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
-using Liber.Forms.Components;
 
 namespace Liber.Forms.Accounts;
 
 internal abstract partial class ImportForm : Form
 {
-    protected ImportForm(Company company, FormFactory factory)
+    protected ImportForm(Company company)
     {
         InitializeComponent();
-        ClickOnce.Initialize(this);
+        SystemFeatures.Initialize(this);
 
         new ComponentResourceManager(GetType()).ApplyResources(this, "$this");
 
         Company = company;
-        Factory = factory;
     }
 
     protected Company Company { get; }
-    protected FormFactory Factory { get; }
 
     protected abstract void CommitChanges();
 

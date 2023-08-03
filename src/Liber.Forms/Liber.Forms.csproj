@@ -9,6 +9,7 @@
 		<ApplicationIcon>favicon.ico</ApplicationIcon>
     <AssemblyTitle>IshanBooks</AssemblyTitle>
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+    <UseWPF>true</UseWPF>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -102,11 +103,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="ini-parser-netstandard" Version="2.5.2" />
 	  <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1905-prerelease" />
+	  <PackageReference Include="WindowsAPICodePack" Version="7.0.4" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Liber.Skia\Liber.Skia.csproj" />
 	  <ProjectReference Include="..\Liber.Sqlite\Liber.Sqlite.csproj" />
 	</ItemGroup>
 
@@ -134,6 +136,9 @@
 	  </Compile>
 	  <Compile Update="Controls\ListViewEx.cs">
 	    <SubType>Component</SubType>
+	  </Compile>
+	  <Compile Update="Lines\CheckForm.cs">
+	    <SubType>Form</SubType>
 	  </Compile>
 	  <Compile Update="Transactions\TransactionForm.cs">
 	    <SubType>Form</SubType>

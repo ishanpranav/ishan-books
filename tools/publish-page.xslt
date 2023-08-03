@@ -57,7 +57,6 @@ Licensed under the MIT License.
                             <xsl:value-of select="$ProductName"/>
                         </h1>
                         <p class="fs-5 col-md-8">Double-entry accounting.</p>
-
                         <div class="mb-5">
                             <a href="{$InstallerHref}"
                                class="btn btn-primary btn-lg px-4 mr-1">
@@ -70,9 +69,7 @@ Licensed under the MIT License.
                                 View source
                             </a>
                         </div>
-
                         <hr class="col-3 col-md-2 mb-5"/>
-
                         <div class="row g-5">
                             <div class="col-md-6">
                                 <h2 class="text-body-emphasis">Features</h2>
@@ -90,12 +87,19 @@ Licensed under the MIT License.
                                             <svg class="bi" width="16" height="16">
                                                 <use href="#arrow-right-circle"/>
                                             </svg>
-                                            General journal
+                                            Make general journal entries
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="icon-link mb-1" href="https://en.wikipedia.org/wiki/Checkwriter">
+                                            <svg class="bi" width="16" height="16">
+                                                <use href="#arrow-right-circle"/>
+                                            </svg>
+                                            Write checks
                                         </a>
                                     </li>
                                 </ul>
                             </div>
-
                             <div class="col-md-6">
                                 <h2 class="text-body-emphasis">Prerequisities</h2>
                                 <p>
@@ -129,3 +133,4 @@ Licensed under the MIT License.
         </html>
     </xsl:template>
 </xsl:stylesheet>
+

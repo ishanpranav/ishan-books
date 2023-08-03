@@ -11,6 +11,7 @@ Licensed under the MIT License.
     xmlns:liber="urn:liber"
     exclude-result-prefixes="msxsl">
     <xsl:output method="html" indent="yes"/>
+    <xsl:variable name="netIncome" select="sum(report/company/account[type = 'Income' or type = 'Cost' or type = 'Expense' or type = 'OtherIncomeExpense' or type ='IncomeTaxExpense']/balance)"/>
     <xsl:template name="financial-statement">
         <xsl:param name="title"/>
         <xsl:param name="table"/>
@@ -47,7 +48,7 @@ Licensed under the MIT License.
                     </th>
                     <th></th>
                 </tr>
-                <xsl:for-each select="//account[type = $type and (balance != 0 or previous != 0)]">
+                <xsl:for-each select="//account[type = $type and (balance != 0 or ($comparative = 1 and previous != 0))]">
                     <tr>
                         <td class="in-{$indent + 2} left">
                             <xsl:value-of select="name"/>

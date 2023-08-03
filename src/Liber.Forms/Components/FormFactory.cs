@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
+using Liber.Forms.Reports;
 
 namespace Liber.Forms.Components;
 
@@ -26,7 +27,6 @@ internal sealed class FormFactory : Component
     public void Register(Guid key, Form value)
     {
         _forms.Add(key, value);
-
         value.MdiParent = Parent;
         value.FormClosed += (_, _) => _forms.Remove(key);
 

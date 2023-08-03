@@ -8,7 +8,9 @@ namespace Liber.Forms.Reports;
 
 internal interface IReportView
 {
+    string Title { get; }
     object Properties { get; }
 
-    void InitializeReport(CoreWebView2 coreWebView);
+    void InitializeReport();
+    void Navigate(CoreWebView2 coreWebView2);
 }

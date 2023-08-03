@@ -121,7 +121,7 @@
     <value>Compañía sin título</value>
   </data>
   <data name="DefaultEquityAccountName" xml:space="preserve">
-    <value>Patrimonio del Propietario</value>
+    <value>Patrimonio del dueño</value>
   </data>
   <data name="DefaultOtherEquityAccountName" xml:space="preserve">
     <value>acumulado de otros resultados integrales</value>

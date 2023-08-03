@@ -66,10 +66,6 @@ partial class MainForm
         otherWindowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         newAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-        contentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-        indexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-        searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-        toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
         aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         _toolStrip = new System.Windows.Forms.ToolStrip();
         newToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -245,6 +241,7 @@ partial class MainForm
         // 
         checkToolStripMenuItem.Name = "checkToolStripMenuItem";
         resources.ApplyResources(checkToolStripMenuItem, "checkToolStripMenuItem");
+        checkToolStripMenuItem.Click += OnCheckToolStripMenuItemClick;
         // 
         // toolStripSeparator4
         // 
@@ -276,29 +273,9 @@ partial class MainForm
         // 
         // helpToolStripMenuItem
         // 
-        helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { contentsToolStripMenuItem, indexToolStripMenuItem, searchToolStripMenuItem, toolStripSeparator5, aboutToolStripMenuItem });
+        helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { aboutToolStripMenuItem });
         helpToolStripMenuItem.Name = "helpToolStripMenuItem";
         resources.ApplyResources(helpToolStripMenuItem, "helpToolStripMenuItem");
-        // 
-        // contentsToolStripMenuItem
-        // 
-        contentsToolStripMenuItem.Name = "contentsToolStripMenuItem";
-        resources.ApplyResources(contentsToolStripMenuItem, "contentsToolStripMenuItem");
-        // 
-        // indexToolStripMenuItem
-        // 
-        indexToolStripMenuItem.Name = "indexToolStripMenuItem";
-        resources.ApplyResources(indexToolStripMenuItem, "indexToolStripMenuItem");
-        // 
-        // searchToolStripMenuItem
-        // 
-        searchToolStripMenuItem.Name = "searchToolStripMenuItem";
-        resources.ApplyResources(searchToolStripMenuItem, "searchToolStripMenuItem");
-        // 
-        // toolStripSeparator5
-        // 
-        toolStripSeparator5.Name = "toolStripSeparator5";
-        resources.ApplyResources(toolStripSeparator5, "toolStripSeparator5");
         // 
         // aboutToolStripMenuItem
         // 
@@ -405,10 +382,6 @@ partial class MainForm
     private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem1;
     private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-    private System.Windows.Forms.ToolStripMenuItem contentsToolStripMenuItem;
-    private System.Windows.Forms.ToolStripMenuItem indexToolStripMenuItem;
-    private System.Windows.Forms.ToolStripMenuItem searchToolStripMenuItem;
-    private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
     private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     private System.Windows.Forms.ToolStrip _toolStrip;
     private System.Windows.Forms.ToolStripButton newToolStripButton;

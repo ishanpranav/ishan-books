@@ -123,6 +123,9 @@
   <data name="CancelText{0}" xml:space="preserve">
     <value>¿Desea usted guardar los cambios en {0}?</value>
   </data>
+  <data name="CheckWords{0}{1}" xml:space="preserve">
+    <value>{0} y {1}/XX</value>
+  </data>
   <data name="NotSupportedText" xml:space="preserve">
     <value>Los archivos sin extensión no son compatibles con la operación que usted ha seleccionado. Por favor, especifique una extensión de nombre de archivo como '*.izbk' antes de guardar.</value>
   </data>

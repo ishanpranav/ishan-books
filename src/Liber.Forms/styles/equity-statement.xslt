@@ -40,18 +40,79 @@ Licensed under the MIT License.
                         </th>
                     </tr>
                 </thead>
+                <xsl:variable name="equity1" select="sum(company/account[equity = 'true']/previous)"/>
+                <xsl:variable name="equity2" select="sum(company/account[equity = 'true']/balance)"/>
+                <xsl:variable name="otherEquity1" select="sum(company/account[other-equity = 'true']/previous)"/>
+                <xsl:variable name="otherEquity2" select="sum(company/account[other-equity = 'true']/balance)"/>
+                <xsl:variable name="otherComprehensiveIncome" select="sum(company/account[type = 'OtherComprehensiveIncome']/balance)"/>
                 <tbody>
                     <tr>
-                        
+                        <th class="in-1 left">
+                            <xsl:value-of select="liber:gets('retained-earnings')"/>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td class="in-2 left">
+                            <xsl:value-of select="concat(liber:pngets('retained-earnings', -$equity1), ', ', liber:fdates(started))"/>
+                        </td>
+                        <td class="right">
+                            <xsl:value-of select="liber:fm(-$equity1)"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="in-2 left">
+                            <xsl:value-of select="liber:pngets('net-income', -$netIncome)"/>
+                        </td>
+                        <td class="right">
+                            <xsl:value-of select="liber:fm(-$netIncome)"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="in-2 left">
+                            <xsl:value-of select="concat(liber:pngets('retained-earnings', -$equity2), ', ', liber:fdates(posted))"/>
+                        </td>
+                        <td class="right">
+                            <xsl:value-of select="liber:fm(-$equity2)"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="in-1 left">
+                            <xsl:value-of select="liber:gets('accumulated-other-comprehensive-income')"/>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td class="in-2 left">
+                            <xsl:value-of select="concat(liber:pngets('accumulated-other-comprehensive-income', -$otherEquity1), ', ', liber:fdates(started))"/>
+                        </td>
+                        <td class="right">
+                            <xsl:value-of select="liber:fm(-$otherEquity1)"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="in-2 left">
+                            <xsl:value-of select="liber:pngets('OtherComprehensiveIncome', -$otherComprehensiveIncome)"/>
+                        </td>
+                        <td class="right">
+                            <xsl:value-of select="liber:fm(-$otherComprehensiveIncome)"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="in-2 left">
+                            <xsl:value-of select="concat(liber:pngets('accumulated-other-comprehensive-income', -$otherEquity2), ', ', liber:fdates(posted))"/>
+                        </td>
+                        <td class="right">
+                            <xsl:value-of select="liber:fm(-$otherEquity2)"/>
+                        </td>
                     </tr>
                 </tbody>
                 <tfoot>
                     <tr>
+                        <xsl:variable name="equity" select="sum(company/account[type = 'Equity']/balance)"/>
                         <th class="left">
-                            <xsl:value-of select="liber:fgets('total-equity{0}', liber:gets(company/type))"/>
+                            <xsl:value-of select="liber:fgets('total-equity{0}', liber:pngets(company/type, -$equity2 - $otherEquity2))"/>
                         </th>
                         <th class="total right">
-                            <xsl:value-of select="liber:fm(sum(company/account[type = 'Equity']/balance))"/>
+                            <xsl:value-of select="liber:fm(-$equity2 - $otherEquity2)"/>
                         </th>
                     </tr>
                 </tfoot>

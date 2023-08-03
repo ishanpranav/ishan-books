@@ -108,20 +108,7 @@ public class Transaction :
 
     public Line? GetDoubleEntry(Line value)
     {
-        if (Lines.Count > 2)
-        {
-            return null;
-        }
-
-        foreach (Line line in Lines)
-        {
-            if (line != value)
-            {
-                return line;
-            }
-        }
-
-        return null;
+        return Lines.SingleOrDefault(x => x.Balance == -value.Balance);
     }
 
     int IComparable.CompareTo(object? obj)

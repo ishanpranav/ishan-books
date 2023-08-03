@@ -17,7 +17,7 @@ internal sealed partial class UrlForm : Form
     public UrlForm(Uri uri)
     {
         InitializeComponent();
-        ClickOnce.Initialize(this);
+        SystemFeatures.Initialize(this);
 
         _uri = uri;
     }

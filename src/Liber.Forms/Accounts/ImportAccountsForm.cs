@@ -11,9 +11,10 @@ namespace Liber.Forms.Accounts;
 
 internal sealed class ImportAccountsForm : ImportForm
 {
+    private readonly FormFactory _factory;
     private readonly IReadOnlyCollection<GnuCashAccount> _accounts;
 
-    public ImportAccountsForm(Company company, FormFactory factory, IReadOnlyCollection<GnuCashAccount> accounts) : base(company, factory)
+    public ImportAccountsForm(Company company, FormFactory factory, IReadOnlyCollection<GnuCashAccount> accounts) : base(company)
     {
         _accounts = accounts;
 
@@ -45,7 +46,7 @@ internal sealed class ImportAccountsForm : ImportForm
 
     protected override void CommitChanges()
     {
-        Factory.Kill(typeof(AccountsForm).GUID);
+        _factory.Kill(typeof(AccountsForm).GUID);
 
         foreach (GnuCashAccount account in _accounts)
         {
@@ -71,6 +72,6 @@ internal sealed class ImportAccountsForm : ImportForm
             Company.UpdateAccount(account.Id, parentId);
         }
 
-        Factory.Register(typeof(AccountsForm).GUID, new AccountsForm(Company, Factory));
+        _factory.Register(typeof(AccountsForm).GUID, new AccountsForm(Company, _factory));
     }
 }

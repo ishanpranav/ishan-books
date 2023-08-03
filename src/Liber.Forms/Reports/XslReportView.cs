@@ -20,12 +20,19 @@ internal sealed class XslReportView : IReportView
     private readonly XslReport _report;
 
     private string? _xhtml;
-    private CoreWebView2? _coreWebView2;
 
     public XslReportView(Company company, string path)
     {
         _report = new XslReport(XslReport.GetString(Path.GetFileNameWithoutExtension(path)), company);
         _path = path;
+    }
+
+    public string Title
+    {
+        get
+        {
+            return XslReport.GetString(Path.GetFileNameWithoutExtension(_path));
+        }
     }
 
     public object Properties
@@ -36,7 +43,7 @@ internal sealed class XslReportView : IReportView
         }
     }
 
-    public void InitializeReport(CoreWebView2 coreWebView2)
+    public void InitializeReport()
     {
         if (s_reports != null && s_reports.TryGetValue(Path.GetFileNameWithoutExtension(_path), out EquityModes value))
         {
@@ -50,18 +57,22 @@ internal sealed class XslReportView : IReportView
         }
 
         _xhtml = XmlReportSerializer.Serialize(style, _report);
-        _coreWebView2 = coreWebView2;
+    }
 
+    public void Navigate(CoreWebView2 coreWebView2)
+    {
         coreWebView2.NavigateToString(_xhtml);
     }
 
     public static void InitializeReports(string path)
     {
-        if (s_reports == null)
+        if (s_reports != null)
         {
-            using FileStream input = File.OpenRead(path);
-
-            s_reports = JsonSerializer.Deserialize<Dictionary<string, EquityModes>>(input, FormattedStrings.JsonOptions);
+            return;
         }
+
+        using FileStream input = File.OpenRead(path);
+
+        s_reports = JsonSerializer.Deserialize<Dictionary<string, EquityModes>>(input, FormattedStrings.JsonOptions);
     }
 }

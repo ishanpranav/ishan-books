@@ -3,10 +3,13 @@
 // Licensed under the MIT License.
 
 using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
+using Liber.Forms.Lines;
+using Liber.Forms.Reports.Gdi;
 using Microsoft.Web.WebView2.Core;
 
 namespace Liber.Forms.Reports;
@@ -20,46 +23,42 @@ internal sealed partial class ReportsForm : Form
     public ReportsForm(Company company)
     {
         InitializeComponent();
-        ClickOnce.Initialize(this);
+        SystemFeatures.Initialize(this);
 
         _company = company;
     }
 
     private async void OnLoad(object sender, EventArgs e)
     {
-        await _webView.EnsureCoreWebView2Async();
+        XslReportView.InitializeReports(Path.Combine("data", Path.ChangeExtension("reports", "json")));
 
-        XslReportView.InitializeReports(Path.Combine("data", "reports.json"));
-        _webView.CoreWebView2.SetVirtualHostNameToFolderMapping("liber.example", Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)!, CoreWebView2HostResourceAccessKind.DenyCors);
         InitializeReports(
             path: "styles",
             searchPattern: "*.xslt",
-            XslReport.GetString,
             x => new XslReportView(_company, x));
-
-        string getString(string value)
-        {
-            return value;
-        }
 
         IReportView createReportView(string path)
         {
-            return new SkiaCheckReportView(path);
+            GdiCheckReport report = IniSerializer.DeserializeGdiCheckReport(_company, path);
+
+            return new GdiReportView(report);
         }
 
         InitializeReports(
             path: "checks",
             searchPattern: "*.chk",
-            getString,
             createReportView);
         InitializeReports(
             path: "checks",
             searchPattern: "*.ini",
-            getString,
             createReportView);
+
+        await _webView.EnsureCoreWebView2Async();
+
+        _webView.CoreWebView2.SetVirtualHostNameToFolderMapping("liber.example", Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)!, CoreWebView2HostResourceAccessKind.DenyCors);
     }
 
-    private void InitializeReports(string path, string searchPattern, Func<string, string> stringAccessor, Func<string, IReportView> reportViewFactory)
+    private void InitializeReports(string path, string searchPattern, Func<string, IReportView> reportViewFactory)
     {
         string[] files = Directory.GetFiles(path, searchPattern);
 
@@ -93,7 +92,7 @@ internal sealed partial class ReportsForm : Form
             }
 
             string key = Path.GetFileNameWithoutExtension(file);
-            ListViewItem item = _listView.Items.Add(stringAccessor(key));
+            ListViewItem item = _listView.Items.Add(reportView.Title);
 
             item.ImageIndex = _imageList.Images.Count - 1;
             item.Tag = reportView;
@@ -102,20 +101,59 @@ internal sealed partial class ReportsForm : Form
 
     private void InitializeReport()
     {
-        if (_view == null)
+        if (!_backgroundWorker.IsBusy)
         {
-            return;
+            _backgroundWorker.RunWorkerAsync();
+        }
+    }
+
+    public void InitializeCheck(CheckView value)
+    {
+        foreach (ListViewItem item in _listView.Items)
+        {
+            _view = (IReportView)item.Tag;
+
+            if (_view.Properties is GdiCheckReport checkReport)
+            {
+                checkReport.Check = value;
+            }
         }
 
-        _view.InitializeReport(_webView.CoreWebView2);
+        InitializeReport();
     }
 
     private void OnListViewItemActivate(object sender, EventArgs e)
     {
         _view = (IReportView)_listView.SelectedItems[0].Tag;
         _propertyGrid.SelectedObject = _view.Properties;
-
         InitializeReport();
+    }
+
+    private void OnPropertyGridPropertyValueChanged(object s, PropertyValueChangedEventArgs e)
+    {
+        InitializeReport();
+    }
+
+    private void OnBackgroundWorkerDoWork(object sender, DoWorkEventArgs e)
+    {
+        if (_view == null)
+        {
+            e.Cancel = true;
+
+            return;
+        }
+
+        _view.InitializeReport();
+    }
+
+    private void OnBackgroundWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+    {
+        if (e.Cancelled || _view == null)
+        {
+            return;
+        }
+
+        _view.Navigate(_webView.CoreWebView2);
     }
 
     protected override void Dispose(bool disposing)
@@ -139,10 +177,5 @@ internal sealed partial class ReportsForm : Form
         }
 
         base.Dispose(disposing);
-    }
-
-    private void OnPropertyGridPropertyValueChanged(object s, PropertyValueChangedEventArgs e)
-    {
-        InitializeReport();
     }
 }

@@ -9,15 +9,15 @@ namespace Liber.Forms;
 
 internal sealed partial class PasswordForm : Form
 {
-    public string Password { get; private set; } = string.Empty;
-
     public PasswordForm()
     {
         InitializeComponent();
-        ClickOnce.Initialize(this);
+        SystemFeatures.Initialize(this);
 
         DialogResult = DialogResult.Cancel;
     }
+
+    public string Password { get; private set; } = string.Empty;
 
     private void OnAcceptButtonClick(object sender, EventArgs e)
     {

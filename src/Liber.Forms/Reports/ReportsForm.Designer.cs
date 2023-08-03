@@ -25,6 +25,7 @@
             _webView = new Microsoft.Web.WebView2.WinForms.WebView2();
             panel1 = new System.Windows.Forms.Panel();
             _helpProvider = new System.Windows.Forms.HelpProvider();
+            _backgroundWorker = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -107,6 +108,12 @@
             panel1.Name = "panel1";
             _helpProvider.SetShowHelp(panel1, (bool)resources.GetObject("panel1.ShowHelp"));
             // 
+            // _backgroundWorker
+            // 
+            _backgroundWorker.WorkerSupportsCancellation = true;
+            _backgroundWorker.DoWork += OnBackgroundWorkerDoWork;
+            _backgroundWorker.RunWorkerCompleted += OnBackgroundWorkerRunWorkerCompleted;
+            // 
             // ReportsForm
             // 
             resources.ApplyResources(this, "$this");
@@ -138,5 +145,6 @@
         private System.Windows.Forms.HelpProvider _helpProvider;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.PropertyGrid _propertyGrid;
+        private System.ComponentModel.BackgroundWorker _backgroundWorker;
     }
 }

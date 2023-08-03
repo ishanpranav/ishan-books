@@ -124,7 +124,7 @@
     <value>Individual</value>
   </data>
   <data name="None" xml:space="preserve">
-    <value>None</value>
+    <value>(None)</value>
   </data>
   <data name="Partnership" xml:space="preserve">
     <value>Partnership</value>

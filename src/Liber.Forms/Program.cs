@@ -16,7 +16,7 @@ internal static class Program
     private static void Main(string[] args)
     {
         ApplicationConfiguration.Initialize();
-        ClickOnce.Initialize();
+        SystemFeatures.Initialize();
 
         if (!string.IsNullOrWhiteSpace(Settings.Default.Culture))
         {
@@ -29,9 +29,9 @@ internal static class Program
 
         IReadOnlyList<string> arguments;
 
-        if (ClickOnce.IsNetworkDeployed)
+        if (SystemFeatures.IsNetworkDeployed)
         {
-            arguments = ClickOnce.GetArguments();
+            arguments = SystemFeatures.GetArguments();
         }
         else
         {

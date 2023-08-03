@@ -4,7 +4,6 @@
 
 using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace Liber.Forms.Accounts;
@@ -14,7 +13,7 @@ internal abstract partial class AccountForm : Form
     protected AccountForm(Company company)
     {
         InitializeComponent();
-        ClickOnce.Initialize(this);
+        SystemFeatures.Initialize(this);
 
         new ComponentResourceManager(GetType()).ApplyResources(this, "$this");
 

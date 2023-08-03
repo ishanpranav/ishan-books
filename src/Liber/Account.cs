@@ -216,6 +216,22 @@ public class Account : IXmlSerializable
         return result;
     }
 
+    public IEnumerable<Line> GetChecks()
+    {
+        if (Type != AccountType.Bank)
+        {
+            yield break;
+        }
+
+        foreach (Line line in lines)
+        {
+            if (line.Balance < 0)
+            {
+                yield return line;
+            }
+        }
+    }
+
     public XmlSchema? GetSchema()
     {
         return null;
@@ -233,6 +249,8 @@ public class Account : IXmlSerializable
 
         decimal balance = 0;
         decimal previous = 0;
+        decimal debit;
+        decimal credit;
 
         if (writer is not XmlReportWriter reportWriter)
         {
@@ -240,6 +258,8 @@ public class Account : IXmlSerializable
         }
         else if (this == reportWriter.Report.Company.EquityAccount)
         {
+            writer.WriteElementString("equity", XmlConvert.ToString(true));
+
             if (reportWriter.Report.EquityMode.HasFlag(EquityModes.CurrentPosted))
             {
                 balance = reportWriter.Report.Company.GetEquity(reportWriter.Report.Posted);
@@ -254,6 +274,8 @@ public class Account : IXmlSerializable
         }
         else if (this == reportWriter.Report.Company.OtherEquityAccount)
         {
+            writer.WriteElementString("other-equity", XmlConvert.ToString(true));
+
             if (reportWriter.Report.EquityMode.HasFlag(EquityModes.CurrentPosted))
             {
                 balance = reportWriter.Report.Company.GetOtherEquity(reportWriter.Report.Posted);
@@ -276,9 +298,19 @@ public class Account : IXmlSerializable
             previous = GetBalance(reportWriter.Report.Started);
         }
 
+        if (balance < 0)
+        {
+            debit = 0;
+            credit = -balance;
+        }
+        else
+        {
+            debit = balance;
+            credit = 0;
+        }
+
         writer.WriteElementString("balance", XmlConvert.ToString(balance));
         writer.WriteElementString("previous", XmlConvert.ToString(previous));
-        Accounting.DebitCredit(balance, out decimal debit, out decimal credit);
         writer.WriteElementString("debit", XmlConvert.ToString(debit));
         writer.WriteElementString("credit", XmlConvert.ToString(credit));
     }

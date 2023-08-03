@@ -13,7 +13,7 @@ internal abstract partial class CompanyForm : Form
     protected CompanyForm(Company company)
     {
         InitializeComponent();
-        ClickOnce.Initialize(this);
+        SystemFeatures.Initialize(this);
 
         ComponentResourceManager resourceManager = new ComponentResourceManager(GetType());
 

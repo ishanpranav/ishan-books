@@ -96,7 +96,6 @@ Licensed under the MIT License.
                 </tbody>
                 <tfoot>
                     <tr>
-                        <xsl:variable name="netIncome" select="$income + $otherIncomeExpense + $cost + $expense + $incomeTaxExpense"/>
                         <th class="left">
                             <xsl:value-of select="liber:pngets('net-income', -$netIncome)"/>
                         </th>

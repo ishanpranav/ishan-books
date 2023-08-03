@@ -5,7 +5,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Windows.Forms;
 using Liber.Forms.Accounts;
 using Liber.Forms.Properties;
@@ -21,7 +20,7 @@ internal sealed partial class TransactionForm : Form
     public TransactionForm(Company company)
     {
         InitializeComponent();
-        ClickOnce.Initialize(this);
+        SystemFeatures.Initialize(this);
 
         _company = company;
         _company.AccountAdded += OnCompanyAccountAdded;

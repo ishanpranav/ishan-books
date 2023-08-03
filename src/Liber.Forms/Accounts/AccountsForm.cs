@@ -20,7 +20,7 @@ internal sealed partial class AccountsForm : Form
     public AccountsForm(Company company, FormFactory factory)
     {
         InitializeComponent();
-        ClickOnce.Initialize(this);
+        SystemFeatures.Initialize(this);
 
         _company = company;
         company.AccountAdded += OnCompanyAccountAdded;
@@ -28,12 +28,16 @@ internal sealed partial class AccountsForm : Form
         company.AccountRemoved += OnCompanyAccountRemoved;
         _factory = factory;
 
-        foreach (KeyValuePair<Guid, Account> account in company.Accounts)
+        _listView.BeginUpdate();
+
+        foreach (KeyValuePair<Guid, Account> account in company.OrderedAccounts)
         {
             InitializeAccount(account.Key, account.Value);
         }
 
         _listView.AutoResizeColumns();
+        _listView.Sort();
+        _listView.EndUpdate();
     }
 
     private void InitializeAccount(Guid id, Account value)
@@ -109,14 +113,11 @@ internal sealed partial class AccountsForm : Form
             balance = value.GetBalance(posted);
         }
 
-        item.SubItems.AddRange(new string[]
-        {
-            value.Number.ToString(),
-            value.Type.ToLocalizedString(),
-            value.Type
-                .ToBalance(balance)
-                .ToLocalizedString()
-        });
+        balance = value.Type.ToBalance(balance);
+
+        item.SubItems.Add(value.Number.ToString()).Tag = value.Number;
+        item.SubItems.Add(value.Type.ToLocalizedString());
+        item.SubItems.Add(balance.ToLocalizedString()).Tag = balance;
 
         if (value.Placeholder)
         {
@@ -224,7 +225,7 @@ internal sealed partial class AccountsForm : Form
 
         if (value.Placeholder)
         {
-
+            // TODO: QuickReport
         }
         else if (value.Virtual)
         {

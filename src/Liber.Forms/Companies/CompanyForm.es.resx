@@ -127,11 +127,11 @@
   <data name="cancelButton.Text" xml:space="preserve">
     <value>&amp;Cancelar</value>
   </data>
+  <data name="closingAccountsGroupBox.Text" xml:space="preserve">
+    <value>Cuentas de cierre</value>
+  </data>
   <data name="equityAccountComboBox.HelpString" xml:space="preserve">
     <value>Especifica la cuenta de patrimonio utilizada para contener los ingresos y gastos acumulados de la empresa. Esta cuenta puede llamarse Utilidades Retenidas (si es positiva) o Déficit Acumulado (si es negativa), Patrimonio del Propietario en una empresa individual, o Patrimonio de los Socios en una sociedad.</value>
-  </data>
-  <data name="groupBox1.Text" xml:space="preserve">
-    <value>Cuentas de cierre</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 20</value>
@@ -155,7 +155,10 @@
     <value>258, 20</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
-    <value>acumulado de otros resultados integrales (o pérdidas)</value>
+    <value>Acumulado de otros resultados integrales (o pérdidas)</value>
+  </data>
+  <data name="label6.Text" xml:space="preserve">
+    <value>&amp;Tipo</value>
   </data>
   <data name="nameTextBox.HelpString" xml:space="preserve">
     <value>Especifica el nombre de la empresa. Para una empresa individual, este es el nombre del proprietario.</value>

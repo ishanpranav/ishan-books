@@ -7,17 +7,21 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using Liber.Forms.Accounts;
 using Liber.Forms.Companies;
+using Liber.Forms.Lines;
 using Liber.Forms.Properties;
 using Liber.Forms.Reports;
 using Liber.Forms.Transactions;
 using Liber.Sqlite;
 using MessagePack;
+using Microsoft.WindowsAPICodePack.Shell;
+using Microsoft.WindowsAPICodePack.Taskbar;
 
 namespace Liber.Forms;
 
@@ -33,9 +37,8 @@ internal sealed partial class MainForm : Form
     public MainForm()
     {
         InitializeComponent();
-        ClickOnce.Initialize(this);
 
-        Text = ClickOnce.ApplicationName;
+        Text = SystemFeatures.ApplicationName;
         aboutToolStripMenuItem.Text = FormattedStrings.AboutText;
         _company.AccountRemoved += (sender, e) => _factory.Kill(e.Id);
     }
@@ -47,6 +50,7 @@ internal sealed partial class MainForm : Form
 
     private async void OnLoad(object sender, EventArgs e)
     {
+        SystemFeatures.Initialize(this);
         InitializeRecentPaths();
 
         if (!_recentPathManager.Empty)
@@ -460,7 +464,7 @@ internal sealed partial class MainForm : Form
 
             IReadOnlyCollection<GnuCashLine> lines = await GnuCashSerializer.DeserializeAsync<GnuCashLine>(input);
 
-            _factory.Register(Guid.NewGuid(), new ImportTransactionsForm(_company, _factory, lines));
+            _factory.Register(Guid.NewGuid(), new ImportTransactionsForm(_company, lines));
         });
     }
 
@@ -514,6 +518,25 @@ internal sealed partial class MainForm : Form
 
             return Task.CompletedTask;
         });
+    }
+
+    private void OnCheckToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        using CheckForm checkForm = new CheckForm(new CheckView(_company));
+
+        if (checkForm.ShowDialog() == DialogResult.OK)
+        {
+            Guid key = Guid.NewGuid();
+            ReportsForm form = new ReportsForm(_company);
+
+            form.Load += (sender, e) =>
+            {
+                form.InitializeCheck(checkForm.Value);
+            };
+
+            _factory.Kill(key);
+            _factory.Register(key, form);
+        }
     }
 
     private void OnReportsToolStripMenuItemClick(object sender, EventArgs e)

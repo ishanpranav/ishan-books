@@ -197,9 +197,6 @@
   <data name="printPreviewToolStripButton.Text" xml:space="preserve">
     <value>Pre&amp;visualización de impresión</value>
   </data>
-  <data name="_saveFileDialog.Filter" xml:space="preserve">
-    <value>Documento PDF (*.pdf)|*.pdf|Documento HTML (*.htm; *.html)|*.htm;*.html</value>
-  </data>
   <data name="_contextMenu.ShowHelp" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>

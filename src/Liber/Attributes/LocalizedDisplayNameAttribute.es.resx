@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Check" xml:space="preserve">
+    <value>Cheque</value>
+  </data>
   <data name="Font" xml:space="preserve">
     <value>Fuente</value>
   </data>
@@ -134,6 +137,9 @@
   </data>
   <data name="Started" xml:space="preserve">
     <value>Desde</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Título</value>
   </data>
   <data name="XCentimeters" xml:space="preserve">
     <value>Margen izquierdo (cm)</value>

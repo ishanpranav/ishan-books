@@ -71,6 +71,9 @@
   <data name="accountsToolStripMenuItem.Text" xml:space="preserve">
     <value>Pl&amp;an de cuentaas</value>
   </data>
+  <data name="checkToolStripMenuItem.Text" xml:space="preserve">
+    <value>Hacer cheques</value>
+  </data>
   <data name="contentsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>213, 26</value>
   </data>

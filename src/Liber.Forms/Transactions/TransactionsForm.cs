@@ -17,7 +17,7 @@ internal sealed partial class TransactionsForm : Form
     public TransactionsForm(Company company, Guid id)
     {
         InitializeComponent();
-        ClickOnce.Initialize(this);
+        SystemFeatures.Initialize(this);
 
         company.AccountAdded += OnCompanyAccountAdded;
         company.AccountUpdated += OnCompanyAccountUpdated;
