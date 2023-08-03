@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Windows.Forms;
+using Humanizer;
 using Liber.Forms;
 using Liber.Forms.Properties;
 
@@ -68,7 +69,7 @@ internal static class FormattedStrings
         int integral = (int)amount;
         int fractional = (int)((amount - integral) * 100);
 
-        return string.Format(GetString("CheckWords{0}{1}"), integral, fractional);
+        return string.Format(GetString("CheckWords{0}{1}"), integral.ToWords(), fractional);
     }
 
     public static void ShowNotSupportedMessage(string extension)

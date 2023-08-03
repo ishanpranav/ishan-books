@@ -23,7 +23,6 @@
 	  <None Remove="checks\voucher.chk" />
 	  <None Remove="data\reports.json" />
 	  <None Remove="Properties\Resources.en.restext" />
-	  <None Remove="Properties\Resources.es-ES.restext" />
 	  <None Remove="styles\balance-sheet.xslt" />
 	  <None Remove="styles\cash-flow-statement.css" />
 	  <None Remove="styles\cash-flow-statement.xslt" />
@@ -99,7 +98,6 @@
 
 	<ItemGroup>
 	  <EmbeddedResource Include="Properties\Resources.en.restext" />
-	  <EmbeddedResource Include="Properties\Resources.es-ES.restext" />
 	</ItemGroup>
 
 	<ItemGroup>

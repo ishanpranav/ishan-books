@@ -21,6 +21,7 @@ internal sealed class IniSerializer
             StringSplitOptions.TrimEntries |
             StringSplitOptions.RemoveEmptyEntries;
 
+        GdiCheckReport result = new GdiCheckReport(company);
         IniDataParser baseParser = new IniDataParser(new IniParserConfiguration()
         {
             AllowDuplicateKeys = true,
@@ -32,23 +33,27 @@ internal sealed class IniSerializer
         KeyDataCollection top = data["Top"];
         KeyDataCollection items = data["Check Items"];
         string? font = top["Font"];
-        string title = top["Title"] ?? Path.GetFileNameWithoutExtension(path) ?? string.Empty;
+        string? title = top["Title"] ?? Path.GetFileNameWithoutExtension(path);
         string? translation = top["Translation"];
-        GdiCheckReport result = new GdiCheckReport(company, title);
+
+        if (title != null)
+        {
+            result.Title = title;
+        }
 
         if (translation != null)
         {
             string[] values = translation.Split(';', options);
 
-            result.X = float.Parse(values[0], CultureInfo.InvariantCulture);
-            result.Y = float.Parse(values[1], CultureInfo.InvariantCulture);
+            result.PageSettings.Margins.Left = (int)(float.Parse(values[0], CultureInfo.InvariantCulture) * 100);
+            result.PageSettings.Margins.Top = (int)(float.Parse(values[1], CultureInfo.InvariantCulture) * 100);
         }
 
         if (font != null)
         {
             string[] fonts = font.Split(' ', options);
 
-            result.Font = new Font(fonts[0], float.Parse(fonts[1], CultureInfo.InvariantCulture) * GdiReport.Points, FontStyle.Regular, GraphicsUnit.Point);
+            result.Font = new Font(fonts[0], float.Parse(fonts[1], CultureInfo.InvariantCulture), FontStyle.Regular, GraphicsUnit.Point);
         }
 
         for (int i = 1; true; i++)
@@ -67,7 +72,7 @@ internal sealed class IniSerializer
 
             if (bounds != null)
             {
-                string[] values = bounds.Split(' ');
+                string[] values = bounds.Split(';', options);
                 float x = float.Parse(values[0], CultureInfo.InvariantCulture);
                 float y = float.Parse(values[1], CultureInfo.InvariantCulture);
                 float width = 0;

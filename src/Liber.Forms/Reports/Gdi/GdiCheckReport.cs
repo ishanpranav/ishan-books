@@ -12,16 +12,15 @@ namespace Liber.Forms.Reports.Gdi;
 
 internal sealed class GdiCheckReport : GdiReport, IDisposable
 {
-    private Font? _font = new Font("Courier New", 10 * Points, FontStyle.Regular, GraphicsUnit.Point);
+    private Font? _font = new Font("Courier New", 10, FontStyle.Regular, GraphicsUnit.Point);
     private SolidBrush? _brush = new SolidBrush(Color.Black);
 
-    public GdiCheckReport(Company company, string title)
+    public GdiCheckReport(Company company)
     {
         Check = new CheckView(company);
-        Title = title;
     }
 
-    public override string Title { get; }
+    public override string Title { get; set; } = string.Empty;
 
     [LocalizedCategory(nameof(Font))]
     [LocalizedDescription(nameof(Font))]
@@ -163,8 +162,6 @@ internal sealed class GdiCheckReport : GdiReport, IDisposable
                     break;
             }
         }
-
-        graphics.TranslateTransform(X, Y);
     }
 
     private void FreeFont()

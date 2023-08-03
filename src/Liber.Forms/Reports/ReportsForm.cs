@@ -119,13 +119,29 @@ internal sealed partial class ReportsForm : Form
             }
         }
 
-        InitializeReport();
+        if (_view != null)
+        {
+            _propertyGrid.SelectedObject = _view.Properties;
+
+            InitializeReport();
+        }
     }
 
     private void OnListViewItemActivate(object sender, EventArgs e)
     {
         _view = (IReportView)_listView.SelectedItems[0].Tag;
         _propertyGrid.SelectedObject = _view.Properties;
+
+        if (_view.Properties is GdiCheckReport checkReport && checkReport.Check.Value == null)
+        {
+            using CheckForm checkForm = new CheckForm(checkReport.Check);
+
+            if (checkForm.ShowDialog() == DialogResult.OK)
+            {
+                checkReport.Check = checkForm.Value;
+            }
+        }
+
         InitializeReport();
     }
 

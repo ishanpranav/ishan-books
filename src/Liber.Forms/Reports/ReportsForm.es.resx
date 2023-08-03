@@ -165,9 +165,6 @@
         Ykk6tLkDP0SRNRvmiVAAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="saveAsToolStripButton.Text" xml:space="preserve">
-    <value>Guardar como</value>
-  </data>
   <data name="printToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -177,9 +174,6 @@
         MFDX9zG7ZKughKCAcrMdS1BwBLsEvjcmhJ3dJWBfgpv1ClzcK/PBjC+7EDRNow/YMCQRuHk6Z4EPqcDX
         Afp3YS9+WJwgJIEM2almexmBe8vfEAtiWAuUegP2KOVPR93FhAAAAABJRU5ErkJggg==
 </value>
-  </data>
-  <data name="printToolStripButton.Text" xml:space="preserve">
-    <value>Im&amp;primir</value>
   </data>
   <data name="_toolStrip.ShowHelp" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -193,9 +187,6 @@
         7ySOQDfNzgjjGRX9vXiEBc3uczR/ncCEq+X28rv7pG/QDqNyzqmRjv8LVgAwgRdpmlK2yQZxrmDQk+NR
         9AE47sSEPD2a+wAAAABJRU5ErkJggg==
 </value>
-  </data>
-  <data name="printPreviewToolStripButton.Text" xml:space="preserve">
-    <value>Pre&amp;visualización de impresión</value>
   </data>
   <data name="_contextMenu.ShowHelp" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -214,9 +205,6 @@
   <data name="saveAsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>278, 26</value>
   </data>
-  <data name="saveAsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Guardar como</value>
-  </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
     <value>275, 6</value>
   </data>
@@ -232,9 +220,6 @@
   <data name="printToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>278, 26</value>
   </data>
-  <data name="printToolStripMenuItem.Text" xml:space="preserve">
-    <value>Imprimir</value>
-  </data>
   <data name="printPreviewToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -247,9 +232,6 @@
   </data>
   <data name="printPreviewToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>278, 26</value>
-  </data>
-  <data name="printPreviewToolStripMenuItem.Text" xml:space="preserve">
-    <value>Previsualización de impresión</value>
   </data>
   <data name="$this.ShowHelp" type="System.Boolean, mscorlib">
     <value>False</value>

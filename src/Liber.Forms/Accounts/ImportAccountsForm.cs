@@ -16,6 +16,7 @@ internal sealed class ImportAccountsForm : ImportForm
 
     public ImportAccountsForm(Company company, FormFactory factory, IReadOnlyCollection<GnuCashAccount> accounts) : base(company)
     {
+        _factory = factory;
         _accounts = accounts;
 
         foreach (GnuCashAccount account in accounts)

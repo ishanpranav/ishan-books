@@ -62,9 +62,6 @@
   <data name="aboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>213, 26</value>
   </data>
-  <data name="aboutToolStripMenuItem.Text" xml:space="preserve">
-    <value>Sobre Sh&amp;arpBooks</value>
-  </data>
   <data name="accountsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>295, 26</value>
   </data>
@@ -334,7 +331,7 @@
     <value>&amp;Ver</value>
   </data>
   <data name="_openFileDialog.Filter" xml:space="preserve">
-    <value>Todos los archivos (*.*)|*.*|Todos los archivos compatibles (*.izbk;*.mpk;*.msgpack;*.json;*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3)|*.izbk;*.json;*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3|Empresa de IshanBooks (*.izbk)|*.izbk|MessagePack (*.mpk;*.msgpack)|*.mpk;*.msgpack|Notación de objetos JavaScript (JSON) (*.json)|*.json|Base de datos SQLite3 (*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3)|*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3|Delimitado por comas (*.csv)|*.csv</value>
+    <value>Todos los archivos (*.*)|*.*|Todos los archivos compatibles (*.izbk;*.mpk;*.msgpack;*.json;*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3)|*.izbk;*.mpk;*.msgpack;*.json;*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3|Empresa de IshanBooks (*.izbk)|*.izbk|MessagePack (*.mpk;*.msgpack)|*.mpk;*.msgpack|Notación de objetos JavaScript (JSON) (*.json)|*.json|Base de datos SQLite3 (*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3)|*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3|Delimitado por comas (*.csv)|*.csv</value>
   </data>
   <data name="_saveFileDialog.Filter" xml:space="preserve">
     <value>Empresa de IshanBooks (*.izbk)|*.izbk|MessagePack (*.mpk;*.msgpack)|*.mpk;*.msgpack|Notación de objetos JavaScript (JSON) (*.json)|*.json|Base de datos SQLite3 (*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3)|*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3|Delimitado por comas (*.csv)|*.csv|Documento XML (*.xml)|*.xml</value>

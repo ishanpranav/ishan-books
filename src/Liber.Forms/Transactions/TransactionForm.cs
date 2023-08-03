@@ -102,6 +102,7 @@ internal sealed partial class TransactionForm : Form
 
         Transaction transaction = new Transaction()
         {
+            Id = Guid.NewGuid(),
             Number = numberNumericUpDown.Value,
             Posted = postedDateTimePicker.Value,
             Name = nameComboBox.Text,
@@ -207,8 +208,9 @@ internal sealed partial class TransactionForm : Form
 
         Transaction clone = new Transaction()
         {
-            Posted = _current.Posted,
-            Number = _current.Number + 1,
+            Id = Guid.NewGuid(),
+            Posted = DateTime.Today,
+            Number = _company.NextTransactionNumber,
             Name = _current.Name,
             Memo = _current.Memo
         };

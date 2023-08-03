@@ -222,9 +222,6 @@
   <data name="ordinary-income" xml:space="preserve">
     <value>Ingresos y gastos ordinarios</value>
   </data>
-  <data name="other-comprehensive-income" xml:space="preserve">
-    <value>Otros ingresos integrales</value>
-  </data>
   <data name="OtherAsset" xml:space="preserve">
     <value>Otros activos</value>
   </data>

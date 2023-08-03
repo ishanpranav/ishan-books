@@ -225,7 +225,7 @@ public class Account : IXmlSerializable
 
         foreach (Line line in lines)
         {
-            if (line.Balance < 0)
+            if (line.Transaction?.Name != null && line.Balance < 0)
             {
                 yield return line;
             }

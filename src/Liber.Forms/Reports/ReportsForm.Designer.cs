@@ -23,8 +23,6 @@
             _imageList = new System.Windows.Forms.ImageList(components);
             _propertyGrid = new System.Windows.Forms.PropertyGrid();
             _webView = new Microsoft.Web.WebView2.WinForms.WebView2();
-            panel1 = new System.Windows.Forms.Panel();
-            _helpProvider = new System.Windows.Forms.HelpProvider();
             _backgroundWorker = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
@@ -45,14 +43,10 @@
             // splitContainer1.Panel1
             // 
             splitContainer1.Panel1.Controls.Add(splitContainer2);
-            _helpProvider.SetShowHelp(splitContainer1.Panel1, (bool)resources.GetObject("splitContainer1.Panel1.ShowHelp"));
             // 
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.Controls.Add(_webView);
-            splitContainer1.Panel2.Controls.Add(panel1);
-            _helpProvider.SetShowHelp(splitContainer1.Panel2, (bool)resources.GetObject("splitContainer1.Panel2.ShowHelp"));
-            _helpProvider.SetShowHelp(splitContainer1, (bool)resources.GetObject("splitContainer1.ShowHelp"));
             // 
             // splitContainer2
             // 
@@ -74,7 +68,6 @@
             _listView.LargeImageList = _imageList;
             _listView.MultiSelect = false;
             _listView.Name = "_listView";
-            _helpProvider.SetShowHelp(_listView, (bool)resources.GetObject("_listView.ShowHelp"));
             _listView.SortColumn = 0;
             _listView.SortOrder = System.Windows.Forms.SortOrder.None;
             _listView.UseCompatibleStateImageBehavior = false;
@@ -99,14 +92,7 @@
             _webView.DefaultBackgroundColor = System.Drawing.Color.White;
             resources.ApplyResources(_webView, "_webView");
             _webView.Name = "_webView";
-            _helpProvider.SetShowHelp(_webView, (bool)resources.GetObject("_webView.ShowHelp"));
             _webView.ZoomFactor = 1D;
-            // 
-            // panel1
-            // 
-            resources.ApplyResources(panel1, "panel1");
-            panel1.Name = "panel1";
-            _helpProvider.SetShowHelp(panel1, (bool)resources.GetObject("panel1.ShowHelp"));
             // 
             // _backgroundWorker
             // 
@@ -120,7 +106,6 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             Controls.Add(splitContainer1);
             Name = "ReportsForm";
-            _helpProvider.SetShowHelp(this, (bool)resources.GetObject("$this.ShowHelp"));
             ShowIcon = false;
             WindowState = System.Windows.Forms.FormWindowState.Maximized;
             Load += OnLoad;
@@ -141,8 +126,6 @@
         private System.Windows.Forms.ListViewEx _listView;
         private Microsoft.Web.WebView2.WinForms.WebView2 _webView;
         private System.Windows.Forms.ImageList _imageList;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.HelpProvider _helpProvider;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.PropertyGrid _propertyGrid;
         private System.ComponentModel.BackgroundWorker _backgroundWorker;

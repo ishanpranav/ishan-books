@@ -32,24 +32,19 @@
             cancelButton = new System.Windows.Forms.Button();
             acceptButton = new System.Windows.Forms.Button();
             _listView = new System.Windows.Forms.ListViewEx();
-            _helpProvider = new System.Windows.Forms.HelpProvider();
             SuspendLayout();
             // 
             // cancelButton
             // 
             resources.ApplyResources(cancelButton, "cancelButton");
-            _helpProvider.SetHelpString(cancelButton, resources.GetString("cancelButton.HelpString"));
             cancelButton.Name = "cancelButton";
-            _helpProvider.SetShowHelp(cancelButton, (bool)resources.GetObject("cancelButton.ShowHelp"));
             cancelButton.UseVisualStyleBackColor = true;
             cancelButton.Click += OnCancelButtonClick;
             // 
             // acceptButton
             // 
             resources.ApplyResources(acceptButton, "acceptButton");
-            _helpProvider.SetHelpString(acceptButton, resources.GetString("acceptButton.HelpString"));
             acceptButton.Name = "acceptButton";
-            _helpProvider.SetShowHelp(acceptButton, (bool)resources.GetObject("acceptButton.ShowHelp"));
             acceptButton.UseVisualStyleBackColor = true;
             acceptButton.Click += OnAcceptButtonClick;
             // 
@@ -81,6 +76,5 @@
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button acceptButton;
         protected System.Windows.Forms.ListViewEx _listView;
-        private System.Windows.Forms.HelpProvider _helpProvider;
     }
 }

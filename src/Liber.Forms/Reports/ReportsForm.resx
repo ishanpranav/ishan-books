@@ -146,16 +146,10 @@
   <data name="_listView.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <metadata name="_helpProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>340, 17</value>
-  </metadata>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="_listView.ShowHelp" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="_listView.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 215</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="_listView.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -240,9 +234,6 @@
   <data name="&gt;&gt;splitContainer2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="splitContainer1.Panel1.ShowHelp" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="&gt;&gt;splitContainer1.Panel1.Name" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
   </data>
@@ -259,13 +250,10 @@
     <value>Fill</value>
   </data>
   <data name="_webView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 42</value>
-  </data>
-  <data name="_webView.ShowHelp" type="System.Boolean, mscorlib">
-    <value>False</value>
+    <value>0, 0</value>
   </data>
   <data name="_webView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>513, 401</value>
+    <value>513, 443</value>
   </data>
   <data name="_webView.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -282,36 +270,6 @@
   <data name="&gt;&gt;_webView.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="panel1.ShowHelp" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>513, 42</value>
-  </data>
-  <data name="panel1.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
-    <value>panel1</value>
-  </data>
-  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
-    <value>splitContainer1.Panel2</value>
-  </data>
-  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="splitContainer1.Panel2.ShowHelp" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="&gt;&gt;splitContainer1.Panel2.Name" xml:space="preserve">
     <value>splitContainer1.Panel2</value>
   </data>
@@ -323,9 +281,6 @@
   </data>
   <data name="&gt;&gt;splitContainer1.Panel2.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="splitContainer1.ShowHelp" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
     <value>655, 443</value>
@@ -363,9 +318,6 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>655, 443</value>
   </data>
-  <data name="$this.ShowHelp" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Report Center</value>
   </data>
@@ -374,12 +326,6 @@
   </data>
   <data name="&gt;&gt;_imageList.Type" xml:space="preserve">
     <value>System.Windows.Forms.ImageList, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_helpProvider.Name" xml:space="preserve">
-    <value>_helpProvider</value>
-  </data>
-  <data name="&gt;&gt;_helpProvider.Type" xml:space="preserve">
-    <value>System.Windows.Forms.HelpProvider, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;_backgroundWorker.Name" xml:space="preserve">
     <value>_backgroundWorker</value>

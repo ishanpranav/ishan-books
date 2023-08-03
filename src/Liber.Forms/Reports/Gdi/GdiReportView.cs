@@ -44,7 +44,13 @@ internal sealed class GdiReportView : IReportView
                 PrinterName = "Microsoft Print to PDF",
                 PrintToFile = true,
                 PrintFileName = s_path
-            }
+            },
+            DocumentName = Title
+        };
+
+        document.QueryPageSettings += (sender, e) =>
+        {
+            e.PageSettings = _report.PageSettings;
         };
 
         document.PrintPage += (sender, e) =>

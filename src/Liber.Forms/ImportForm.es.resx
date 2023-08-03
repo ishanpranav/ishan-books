@@ -58,14 +58,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="acceptButton.HelpString" xml:space="preserve">
-    <value>Acepta los ítems importados.</value>
-  </data>
   <data name="acceptButton.Text" xml:space="preserve">
     <value>I&amp;mportar</value>
-  </data>
-  <data name="cancelButton.HelpString" xml:space="preserve">
-    <value>Deshacer los cambios.</value>
   </data>
   <data name="cancelButton.Text" xml:space="preserve">
     <value>&amp;Cancelar</value>
