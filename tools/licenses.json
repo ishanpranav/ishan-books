@@ -96,14 +96,6 @@
       "index": "Microsoft Corporation"
     },
     {
-      "title": "SkiaSharp",
-      "formats": [ "c#" ],
-      "source": "https://github.com/mono/SkiaSharp",
-      "author": "Microsoft Corporation; Xamarin, Inc.",
-      "license": "mit-skiasharp",
-      "index": "Microsoft Corporation"
-    },
-    {
       "title": "Humanizer",
       "formats": [ "c#" ],
       "source": "https://github.com/Humanizr/Humanizer",
@@ -211,6 +203,15 @@
       "copyright": "2017 Doug Ransom",
       "resource": "https://github.com/dougransom/CPA-006-Asap-Cheques/blob/master/CPA%20006%20Middle%20ASAP.chk",
       "index": "Ransom"
+    },
+    {
+      "title": "Microsoft Windows API Codepack",
+      "formats": [ "c#", "c++", "visual basic" ],
+      "source": "https://github.com/Wagnerp/Windows-API-CodePack-NET",
+      "author": "Microsoft Corporation",
+      "license": "mit_windowsapicodepack",
+      "copyright": "2009 - 2010 Microsoft Corporation, then modifications by Jacob Slusser 2014, Peter William Wagner 2017 - 2023",
+      "index": "Microsoft Corporation"
     }
   ],
   "references": [

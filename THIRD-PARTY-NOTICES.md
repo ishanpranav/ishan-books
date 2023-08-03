@@ -1,6 +1,6 @@
 Third-Party Notices
 ===================
-SharpBooks by Ishan Pranav
+IshanBooks by Ishan Pranav
 
 Copyright (c) 2023 Ishan Pranav
 
@@ -19,6 +19,13 @@ the application.
 - Author: Josh Close
 - Source: [JoshClose/CsvHelper](https://github.com/JoshClose/CsvHelper)
 - License: [Microsoft Public License and Apache license 2.0](#csvhelper)
+
+### Voucher Check 3-Part US-Letter&emsp;<sub><sup>*ini*&ensp;</sup></sub>
+- Author: GnuCash contributors
+- Source: [Gnucash/gnucash](https://github.com/Gnucash/gnucash)
+- License: [GNU General Public License family](#gpl-gnucash)
+
+See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/voucher.chk) for the resource included from the repository.
 
 ### Quicken:tm: Wallet Checks with Side Stub&emsp;<sub><sup>*ini*&ensp;</sup></sub>
 - Author: GnuCash contributors
@@ -61,13 +68,6 @@ See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/liberty.ch
 - License: [GNU General Public License family](#gpl-gnucash)
 
 See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/deluxe.chk) for the resource included from the repository.
-
-### Voucher Check 3-Part US-Letter&emsp;<sub><sup>*ini*&ensp;</sup></sub>
-- Author: GnuCash contributors
-- Source: [Gnucash/gnucash](https://github.com/Gnucash/gnucash)
-- License: [GNU General Public License family](#gpl-gnucash)
-
-See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/voucher.chk) for the resource included from the repository.
 
 ### ini-parser&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
 - Author: Ricardo Amores Hernández
@@ -118,10 +118,10 @@ For more information about this software, please see its [third-party notices](h
 - Source: [https://developer.microsoft.com/en-us/microsoft-edge/webview2](https://developer.microsoft.com/en-us/microsoft-edge/webview2)
 - License: [BSD 3-clause "New" or "Revised" license](#bsd-3-clause-microsoft)
 
-### SkiaSharp&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
-- Author: Microsoft Corporation; Xamarin, Inc.
-- Source: [mono/SkiaSharp](https://github.com/mono/SkiaSharp)
-- License: [MIT](#mit-skiasharp)
+### Microsoft Windows API Codepack&emsp;<sub><sup>*c\#*&ensp;*c++*&ensp;*visual basic*&ensp;</sup></sub>
+- Author: Microsoft Corporation
+- Source: [Wagnerp/Windows-API-CodePack-NET](https://github.com/Wagnerp/Windows-API-CodePack-NET)
+- License: [MIT](#mit_windowsapicodepack)
 
 ### CPA 006 Cheque in Middle ASAP Cheques&emsp;<sub><sup>*ini*&ensp;</sup></sub>
 - Author: Doug Ransom
@@ -1245,28 +1245,29 @@ THE SOFTWARE.
 ```
 ________________________________________________________________________________
 
-### <a id='mit-skiasharp'>MIT</a>
+### <a id='mit_windowsapicodepack'>MIT</a>
 
 ```
-Copyright (c) 2015-2016 Xamarin, Inc.
-Copyright (c) 2017-2018 Microsoft Corporation.
+The MIT License (MIT)
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-this software and associated documentation files (the "Software"), to deal in
-the Software without restriction, including without limitation the rights to
-use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
-the Software, and to permit persons to whom the Software is furnished to do so,
-subject to the following conditions:
+Copyright 2009 - 2010 Microsoft Corporation, then modifications by Jacob Slusser 2014, Peter William Wagner 2017 - 2023
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the “Software”), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
 
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
 ```
 ________________________________________________________________________________
