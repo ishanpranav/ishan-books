@@ -33,7 +33,7 @@ internal sealed class AccountComboBox : ComboBox
             return;
         }
 
-        foreach (KeyValuePair<Guid, Account> account in company.Accounts)
+        foreach (KeyValuePair<Guid, Account> account in company.OrderedAccounts)
         {
             InitializeAccount(account.Key, account.Value);
         }

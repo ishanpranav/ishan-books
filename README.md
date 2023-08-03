@@ -40,6 +40,7 @@ __Export-friendly formats__
 - [X] Comma-delimited (*.csv)
 - [X] XML Document (*.xml)
 - [X] PDF Document (*.pdf)
+- [X] XPS Document (*.xps)
 - [X] HTML Document (*.html)
 
 __Localization__

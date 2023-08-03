@@ -143,7 +143,7 @@
     <value>86, 31</value>
   </data>
   <data name="cancelButton.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>18</value>
   </data>
   <data name="cancelButton.Text" xml:space="preserve">
     <value>&amp;Cancel</value>
@@ -179,7 +179,7 @@
     <value>86, 31</value>
   </data>
   <data name="acceptButton.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>17</value>
   </data>
   <data name="acceptButton.Text" xml:space="preserve">
     <value>O&amp;K</value>
@@ -348,7 +348,7 @@
     <value>277, 27</value>
   </data>
   <data name="descriptionTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>9</value>
   </data>
   <data name="&gt;&gt;descriptionTextBox.Name" xml:space="preserve">
     <value>descriptionTextBox</value>
@@ -447,7 +447,7 @@
     <value>50, 20</value>
   </data>
   <data name="label4.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>6</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
     <value>&amp;Parent</value>
@@ -483,7 +483,7 @@
     <value>109, 24</value>
   </data>
   <data name="placeholderCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>16</value>
   </data>
   <data name="placeholderCheckBox.Text" xml:space="preserve">
     <value>&amp;Placeholder</value>
@@ -516,7 +516,7 @@
     <value>277, 28</value>
   </data>
   <data name="parentComboBox.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;parentComboBox.Name" xml:space="preserve">
     <value>parentComboBox</value>
@@ -546,7 +546,7 @@
     <value>85, 20</value>
   </data>
   <data name="label5.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>8</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
     <value>&amp;Description</value>
@@ -579,7 +579,7 @@
     <value>48, 20</value>
   </data>
   <data name="label6.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>12</value>
   </data>
   <data name="label6.Text" xml:space="preserve">
     <value>N&amp;otes</value>
@@ -612,7 +612,7 @@
     <value>45, 20</value>
   </data>
   <data name="label7.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+    <value>14</value>
   </data>
   <data name="label7.Text" xml:space="preserve">
     <value>Co&amp;lor</value>
@@ -645,7 +645,7 @@
     <value>277, 28</value>
   </data>
   <data name="taxTypeComboBox.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
+    <value>11</value>
   </data>
   <data name="&gt;&gt;taxTypeComboBox.Name" xml:space="preserve">
     <value>taxTypeComboBox</value>
@@ -675,7 +675,7 @@
     <value>65, 20</value>
   </data>
   <data name="label8.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
+    <value>10</value>
   </data>
   <data name="label8.Text" xml:space="preserve">
     <value>Ta&amp;x Type</value>
@@ -711,7 +711,7 @@
     <value>277, 69</value>
   </data>
   <data name="memoTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>13</value>
   </data>
   <data name="&gt;&gt;memoTextBox.Name" xml:space="preserve">
     <value>memoTextBox</value>
@@ -741,7 +741,7 @@
     <value>278, 29</value>
   </data>
   <data name="_colorButton.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
+    <value>15</value>
   </data>
   <data name="_colorButton.Text" xml:space="preserve">
     <value>&amp;Select</value>

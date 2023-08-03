@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Drawing;
-using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
 using SQLitePCL;
@@ -98,9 +97,7 @@ public static class SqliteSerializer
 
     public static async Task SerializeAsync(string path, Company value)
     {
-        string intermediatePath = Path.ChangeExtension("document", "db");
-
-        await using SqliteConnection connection = CreateConnection(intermediatePath, value.Password);
+        await using SqliteConnection connection = CreateConnection(path, value.Password);
 
         await connection.OpenAsync();
 
@@ -175,8 +172,6 @@ public static class SqliteSerializer
 
             await dbTransaction.CommitAsync();
         }
-
-        File.Copy(intermediatePath, path, overwrite: true);
     }
 
     public static async Task<Company> DeserializeAsync(string path, string password)
