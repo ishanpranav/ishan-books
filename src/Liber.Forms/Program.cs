@@ -26,7 +26,7 @@ internal static class Program
             CultureInfo.CurrentUICulture = culture;
             Application.CurrentCulture = culture;
         }
-
+        
         IReadOnlyList<string> arguments;
 
         if (SystemFeatures.IsNetworkDeployed)

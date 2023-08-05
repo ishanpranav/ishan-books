@@ -120,19 +120,283 @@
   <data name="AboutText{0}" xml:space="preserve">
     <value>Sobre {0}</value>
   </data>
-  <data name="AccountCount{0}" xml:space="preserve">
-    <value>({0:n0} cuentas)</value>
+  <data name="account" xml:space="preserve">
+    <value>Cuenta</value>
+  </data>
+  <data name="accumulated-other-comprehensive-income" xml:space="preserve">
+    <value>Acumulado de otros resultados o pérdidas integrales</value>
+  </data>
+  <data name="adjustments{0}{1}" xml:space="preserve">
+    <value>Ajustes para conciliar el {0} con el {1}</value>
+  </data>
+  <data name="assets" xml:space="preserve">
+    <value>Activos</value>
+  </data>
+  <data name="balance-sheet" xml:space="preserve">
+    <value>Balance General</value>
+  </data>
+  <data name="Bank" xml:space="preserve">
+    <value>Efectivo y equivalentes al efectivo</value>
   </data>
   <data name="CancelText{0}" xml:space="preserve">
     <value>¿Desea usted guardar los cambios en {0}?</value>
   </data>
+  <data name="cash-flow-statement" xml:space="preserve">
+    <value>Estado de Flujo de Efectivo</value>
+  </data>
   <data name="CheckWords{0}{1}" xml:space="preserve">
     <value>{0} y {1}/XX</value>
+  </data>
+  <data name="comparative-balance-sheet" xml:space="preserve">
+    <value>Balance General Comparativo</value>
+  </data>
+  <data name="comprehensive-income" xml:space="preserve">
+    <value>Resultados integrales</value>
+  </data>
+  <data name="comprehensive-income-statement" xml:space="preserve">
+    <value>Estado de Resultados Integrales</value>
+  </data>
+  <data name="Cost" xml:space="preserve">
+    <value>Costos de ventas</value>
+  </data>
+  <data name="credit" xml:space="preserve">
+    <value>Crédito</value>
+  </data>
+  <data name="CreditCard" xml:space="preserve">
+    <value>Tarjetas de crédito</value>
+  </data>
+  <data name="current-assets" xml:space="preserve">
+    <value>Activos corrientes</value>
+  </data>
+  <data name="current-liabilities" xml:space="preserve">
+    <value>Pasivos corrientes</value>
+  </data>
+  <data name="date" xml:space="preserve">
+    <value>Fecha</value>
+  </data>
+  <data name="debit" xml:space="preserve">
+    <value>Débito</value>
+  </data>
+  <data name="description" xml:space="preserve">
+    <value>Descripción</value>
+  </data>
+  <data name="equity-statement" xml:space="preserve">
+    <value>Estado del Patrimonio</value>
+  </data>
+  <data name="Expense" xml:space="preserve">
+    <value>Gastos</value>
+  </data>
+  <data name="financing" xml:space="preserve">
+    <value>Actividades de financiamiento</value>
+  </data>
+  <data name="FixedAsset" xml:space="preserve">
+    <value>Activos fijos</value>
+  </data>
+  <data name="general-journal" xml:space="preserve">
+    <value>Diario General</value>
+  </data>
+  <data name="Income" xml:space="preserve">
+    <value>Ingresos</value>
+  </data>
+  <data name="income-statement" xml:space="preserve">
+    <value>Estado de Resultados</value>
+  </data>
+  <data name="IncomeTaxExpense" xml:space="preserve">
+    <value>Impuestos sobre la renta</value>
+  </data>
+  <data name="investing" xml:space="preserve">
+    <value>Actividades de inversión</value>
+  </data>
+  <data name="liabilities" xml:space="preserve">
+    <value>Pasivos</value>
+  </data>
+  <data name="liabilities-equity{0}" xml:space="preserve">
+    <value>Pasivos y {0}</value>
+  </data>
+  <data name="LongTermLiability" xml:space="preserve">
+    <value>Pasivos a largo plazo</value>
+  </data>
+  <data name="name" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="non-current-assets" xml:space="preserve">
+    <value>Activos no corrientes</value>
   </data>
   <data name="NotSupportedText" xml:space="preserve">
     <value>Los archivos sin extensión no son compatibles con la operación que usted ha seleccionado. Por favor, especifique una extensión de nombre de archivo como '*.izbk' antes de guardar.</value>
   </data>
   <data name="NotSupportedText{0}" xml:space="preserve">
     <value>Los archivos {0} no son compatibles con la operación que usted ha seleccionado. Por favor, especifique una extensión de nombre de archivo diferente.</value>
+  </data>
+  <data name="number" xml:space="preserve">
+    <value>Número</value>
+  </data>
+  <data name="operating" xml:space="preserve">
+    <value>Actividades de operación</value>
+  </data>
+  <data name="ordinary-income" xml:space="preserve">
+    <value>Ingresos y gastos ordinarios</value>
+  </data>
+  <data name="OtherAsset" xml:space="preserve">
+    <value>Otros activos</value>
+  </data>
+  <data name="OtherComprehensiveIncome" xml:space="preserve">
+    <value>Resultado integral acumulado total</value>
+  </data>
+  <data name="OtherCurrentAsset" xml:space="preserve">
+    <value>Otros activos corrientes</value>
+  </data>
+  <data name="OtherCurrentLiability" xml:space="preserve">
+    <value>Otros pasivos corrientes</value>
+  </data>
+  <data name="OtherIncomeExpense" xml:space="preserve">
+    <value>Otros ingresos y gastos</value>
+  </data>
+  <data name="retained-earnings" xml:space="preserve">
+    <value>Utilidades retenidas o déficit acumulado</value>
+  </data>
+  <data name="total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="total-assets" xml:space="preserve">
+    <value>Activos totales</value>
+  </data>
+  <data name="total-current-assets" xml:space="preserve">
+    <value>Activos corrientes totales</value>
+  </data>
+  <data name="total-current-liabilities" xml:space="preserve">
+    <value>Pasivos corrientes totales</value>
+  </data>
+  <data name="total-equity{0}" xml:space="preserve">
+    <value>{0} total</value>
+  </data>
+  <data name="total-liabilities" xml:space="preserve">
+    <value>Pasivos totales</value>
+  </data>
+  <data name="total-liabilities-equity{0}" xml:space="preserve">
+    <value>Pasivos y {0} totales</value>
+  </data>
+  <data name="total-non-current-assets" xml:space="preserve">
+    <value>Activos no corrientes totales</value>
+  </data>
+  <data name="trial-balance" xml:space="preserve">
+    <value>Balance de Prueba</value>
+  </data>
+  <data name="_n_accumulated-other-comprehensive-income" xml:space="preserve">
+    <value>Acumuladas de otras pérdidas integrales</value>
+  </data>
+  <data name="_n_Corporation" xml:space="preserve">
+    <value>déficit de los accionistas</value>
+  </data>
+  <data name="_n_CreditCard" xml:space="preserve">
+    <value>Pagos totales con tarjeta de crédito</value>
+  </data>
+  <data name="_n_financing" xml:space="preserve">
+    <value>Flujo de efectivo neto utilizado en actividades de financiamiento</value>
+  </data>
+  <data name="_n_gross-profit" xml:space="preserve">
+    <value>Pérdida bruta</value>
+  </data>
+  <data name="_n_Individual" xml:space="preserve">
+    <value>déficit del dueño</value>
+  </data>
+  <data name="_n_investing" xml:space="preserve">
+    <value>Flujo de efectivo neto utilizado en actividades de inversión</value>
+  </data>
+  <data name="_n_net-income" xml:space="preserve">
+    <value>Pérdida neta</value>
+  </data>
+  <data name="_n_None" xml:space="preserve">
+    <value>déficit</value>
+  </data>
+  <data name="_n_operating" xml:space="preserve">
+    <value>Flujo de efectivo neto utilizado en actividades de operación</value>
+  </data>
+  <data name="_n_ordinary-income" xml:space="preserve">
+    <value>Pérdida neta ordinaria</value>
+  </data>
+  <data name="_n_OtherComprehensiveIncome" xml:space="preserve">
+    <value>Pérdida integral acumulada total</value>
+  </data>
+  <data name="_n_Partnership" xml:space="preserve">
+    <value>déficit de los socios</value>
+  </data>
+  <data name="_n_retained-earnings" xml:space="preserve">
+    <value>Déficit acumulado</value>
+  </data>
+  <data name="_p_accumulated-other-comprehensive-income" xml:space="preserve">
+    <value>Acumulados de otros resultados integrales</value>
+  </data>
+  <data name="_p_Bank" xml:space="preserve">
+    <value>Total de efectivo y equivalentes al efectivo</value>
+  </data>
+  <data name="_p_Corporation" xml:space="preserve">
+    <value>Patrimonio de los accionistas</value>
+  </data>
+  <data name="_p_Cost" xml:space="preserve">
+    <value>Costo total de ventas</value>
+  </data>
+  <data name="_p_CreditCard" xml:space="preserve">
+    <value>Cargos totales de tarjeta de crédito</value>
+  </data>
+  <data name="_p_Expense" xml:space="preserve">
+    <value>Gasto total</value>
+  </data>
+  <data name="_p_financing" xml:space="preserve">
+    <value>Flujo de efectivo neto proporcionado por actividades de financiamiento</value>
+  </data>
+  <data name="_p_FixedAsset" xml:space="preserve">
+    <value>Activos fijos totales</value>
+  </data>
+  <data name="_p_gross-profit" xml:space="preserve">
+    <value>Utilidad bruta</value>
+  </data>
+  <data name="_p_Income" xml:space="preserve">
+    <value>Ingresos totales</value>
+  </data>
+  <data name="_p_IncomeTaxExpense" xml:space="preserve">
+    <value>Impuesto total sobre la renta</value>
+  </data>
+  <data name="_p_Individual" xml:space="preserve">
+    <value>patrimonio del dueño</value>
+  </data>
+  <data name="_p_investing" xml:space="preserve">
+    <value>Flujo de efectivo neto proporcionado por actividades de inversión</value>
+  </data>
+  <data name="_p_LongTermLiability" xml:space="preserve">
+    <value>Pasivos a largo plazo totales</value>
+  </data>
+  <data name="_p_net-income" xml:space="preserve">
+    <value>Ingreso neto</value>
+  </data>
+  <data name="_p_None" xml:space="preserve">
+    <value>patrimonio</value>
+  </data>
+  <data name="_p_operating" xml:space="preserve">
+    <value>Flujo de efectivo neto proporcionado por actividades de operación</value>
+  </data>
+  <data name="_p_ordinary-income" xml:space="preserve">
+    <value>Ingreso neto ordinaro</value>
+  </data>
+  <data name="_p_OtherAsset" xml:space="preserve">
+    <value>Otros activos totales</value>
+  </data>
+  <data name="_p_OtherComprehensiveIncome" xml:space="preserve">
+    <value>Pérdida integral acumulada total</value>
+  </data>
+  <data name="_p_OtherCurrentAsset" xml:space="preserve">
+    <value>Activos corrientes totales</value>
+  </data>
+  <data name="_p_OtherCurrentLiability" xml:space="preserve">
+    <value>Pasivos corrientes totales</value>
+  </data>
+  <data name="_p_OtherIncomeExpense" xml:space="preserve">
+    <value>Total de otros ingresos y gastos</value>
+  </data>
+  <data name="_p_Partnership" xml:space="preserve">
+    <value>patrimonio de los socios</value>
+  </data>
+  <data name="_p_retained-earnings" xml:space="preserve">
+    <value>Utilidades retenidas</value>
   </data>
 </root>

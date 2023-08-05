@@ -24,7 +24,6 @@ internal static class FormattedStrings
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
         WriteIndented = true
     };
-    private static readonly ResourceManager s_resourceManager = new ResourceManager(typeof(FormattedStrings));
 
     static FormattedStrings()
     {
@@ -49,6 +48,8 @@ internal static class FormattedStrings
         }
     }
 
+    public static ResourceManager ResourceManager { get; } = new ResourceManager(typeof(FormattedStrings));
+
     public static string GetString([CallerMemberName] string? key = null)
     {
         if (key == null)
@@ -56,7 +57,7 @@ internal static class FormattedStrings
             return string.Empty;
         }
 
-        return s_resourceManager.GetString(key) ?? key;
+        return ResourceManager.GetString(key) ?? key;
     }
 
     public static string GetCancelText(this Company company)
@@ -70,12 +71,6 @@ internal static class FormattedStrings
         int fractional = (int)((amount - integral) * 100);
 
         return string.Format(GetString("CheckWords{0}{1}"), integral.ToWords(), fractional);
-    }
-
-
-    public static string GetAccountCount(int value)
-    {
-        return string.Format(GetString("AccountCount{0}"), value);
     }
 
     public static void ShowNotSupportedMessage(string extension)

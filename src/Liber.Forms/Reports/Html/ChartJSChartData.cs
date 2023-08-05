@@ -3,7 +3,6 @@
 // Licensed under the MIT License.
 
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace Liber.Forms.Reports.Html;
 

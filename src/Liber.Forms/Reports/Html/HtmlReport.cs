@@ -15,8 +15,8 @@ namespace Liber.Forms.Reports.Html;
 [ComVisible(true)]
 public class HtmlReport
 {
-    private DateTime _started;
-    private DateTime _posted;
+    private DateTime _started = new DateTime(DateTime.Today.Year, 1, 1);
+    private DateTime _posted = DateTime.Today;
 
     public HtmlReport(string title, Company company)
     {
@@ -78,6 +78,12 @@ public class HtmlReport
         }
     }
 
+    [LocalizedCategory(nameof(Periodicity))]
+    [LocalizedDescription(nameof(Periodicity))]
+    [LocalizedDisplayName(nameof(Periodicity))]
+    [TypeConverter(typeof(LocalizedEnumConverter))]
+    public Periodicity Periodicity { get; set; }
+
     public string GetTimeSeries()
     {
         TimeSpan increment = TimeSpan.FromDays(14);
@@ -103,7 +109,14 @@ public class HtmlReport
                 DateTime started = Started + (increment * (label - 1));
                 DateTime posted = Started + (increment * label);
 
-                data[label] = (double)Math.Abs(account.GetBalance(started, posted));
+                if (account.Temporary)
+                {
+                    data[label] = Math.Abs((double)account.GetBalance(started, posted));
+                }
+                else
+                {
+                    data[label] = Math.Abs((double)account.GetBalance(posted));
+                }
 
                 if (data[label] != 0)
                 {
@@ -116,7 +129,8 @@ public class HtmlReport
                 datasets.Add(new ChartJSChartDataset(data)
                 {
                     Label = account.Name,
-                    BorderWidth = 1
+                    BorderWidth = 1,
+                    LineTension = 0.25
                 });
             }
         }

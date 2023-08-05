@@ -5,6 +5,7 @@
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using Humanizer;
 
 namespace Liber.Forms.Companies;
 
@@ -37,7 +38,7 @@ internal abstract partial class CompanyForm : Form
 
     private void OnTypeComboBoxFormat(object sender, ListControlConvertEventArgs e)
     {
-        e.Value = ((CompanyType)e.ListItem!).ToLocalizedString();
+        e.Value = ((CompanyType)e.ListItem!).Humanize();
     }
 
     private void OnAcceptButtonClick(object sender, EventArgs e)

@@ -2,26 +2,21 @@
 // Copyright (c) 2023 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
-using System.Resources;
+using System.ComponentModel;
 
 namespace Liber;
 
 public enum CompanyType
 {
+    [LocalizedDescription(nameof(None))]
     None = 0,
+
+    [LocalizedDescription(nameof(Individual))]
     Individual = 1,
+
+    [LocalizedDescription(nameof(Partnership))]
     Partnership = 2,
+
+    [LocalizedDescription(nameof(Corporation))]
     Corporation = 3
-}
-
-public static class CompanyTypeExtensions
-{
-    private static readonly ResourceManager s_resourceManager = new ResourceManager(typeof(CompanyTypeExtensions));
-
-    public static string ToLocalizedString(this CompanyType value)
-    {
-        string key = value.ToString();
-
-        return s_resourceManager.GetString(key) ?? key;
-    }
 }

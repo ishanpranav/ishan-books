@@ -23,7 +23,7 @@ internal sealed class XslReportView : IReportView
 
     public XslReportView(Company company, string path)
     {
-        _report = new XslReport(XslReport.GetString(Path.GetFileNameWithoutExtension(path)), company);
+        _report = new XslReport(FormattedStrings.GetString(Path.GetFileNameWithoutExtension(path)), company);
         _path = path;
     }
 
@@ -31,7 +31,7 @@ internal sealed class XslReportView : IReportView
     {
         get
         {
-            return XslReport.GetString(Path.GetFileNameWithoutExtension(_path));
+            return _report.Title;
         }
     }
 

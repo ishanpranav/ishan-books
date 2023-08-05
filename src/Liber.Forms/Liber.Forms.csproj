@@ -176,9 +176,6 @@
 	    <LastGenOutput>Resources.Designer.cs</LastGenOutput>
 	    <Generator>ResXFileCodeGenerator</Generator>
 	  </EmbeddedResource>
-	  <EmbeddedResource Update="Reports\Xsl\XslReport.es.resx">
-	    <SubType>Designer</SubType>
-	  </EmbeddedResource>
 	</ItemGroup>
 
 	<ItemGroup>

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using Humanizer;
 using Liber.Forms.Components;
 using Liber.Forms.Transactions;
 
@@ -116,7 +117,7 @@ internal sealed partial class AccountsForm : Form
         balance = value.Type.ToBalance(balance);
 
         item.SubItems.Add(value.Number.ToString()).Tag = value.Number;
-        item.SubItems.Add(value.Type.ToLocalizedString());
+        item.SubItems.Add(value.Type.Humanize());
         item.SubItems.Add(balance.ToLocalizedString()).Tag = balance;
 
         if (value.Placeholder)

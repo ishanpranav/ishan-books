@@ -15,5 +15,6 @@ internal sealed class ChartJSChartDataset
 
     public string? Label { get; set; }
     public int BorderWidth { get; set; }
+    public double LineTension { get; set; }
     public IReadOnlyList<double> Data { get; }
 }

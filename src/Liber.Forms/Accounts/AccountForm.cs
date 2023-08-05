@@ -5,6 +5,7 @@
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using Humanizer;
 
 namespace Liber.Forms.Accounts;
 
@@ -70,12 +71,12 @@ internal abstract partial class AccountForm : Form
 
     private void OnTypeComboBoxFormat(object sender, ListControlConvertEventArgs e)
     {
-        e.Value = ((AccountType)e.ListItem!).ToLocalizedString();
+        e.Value = ((AccountType)e.ListItem!).Humanize();
     }
 
     private void OnTaxTypeComboBoxFormat(object sender, ListControlConvertEventArgs e)
     {
-        e.Value = ((TaxType)e.ListItem!).ToLocalizedString();
+        e.Value = ((TaxType)e.ListItem!).Humanize();
     }
 
     private void OnAcceptButtonClick(object sender, EventArgs e)

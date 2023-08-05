@@ -5,7 +5,6 @@
 using System;
 using System.ComponentModel;
 using System.Linq;
-using System.Resources;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
@@ -19,8 +18,6 @@ namespace Liber.Forms.Reports.Xsl;
 [XmlRoot("report")]
 public class XslReport : IXmlSerializable
 {
-    private static readonly ResourceManager s_resourceManager = new ResourceManager(typeof(XslReport));
-
     private DateTime _started = new DateTime(DateTime.Today.Year, 1, 1);
     private DateTime _posted = DateTime.Today;
 
@@ -148,7 +145,7 @@ public class XslReport : IXmlSerializable
     {
         if (value < 0)
         {
-            string? result = s_resourceManager.GetString("_n_" + key);
+            string? result = FormattedStrings.ResourceManager.GetString("_n_" + key);
 
             if (result != null)
             {
@@ -161,19 +158,7 @@ public class XslReport : IXmlSerializable
 
     public string gets(string key)
     {
-        return GetString(key);
-    }
-
-    public static string GetString(string key)
-    {
-        string? result = s_resourceManager.GetString(key);
-
-        if (result == null)
-        {
-            return key;
-        }
-
-        return result;
+        return FormattedStrings.GetString(key);
     }
 
     public XmlSchema? GetSchema()
