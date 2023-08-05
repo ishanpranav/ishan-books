@@ -26,7 +26,7 @@ internal sealed class FormFactory : Component
     public void Register(Guid key, Form value)
     {
         _forms.Add(key, value);
-        value.MdiParent = Parent;
+
         value.FormClosed += (_, _) => _forms.Remove(key);
 
         value.Show();

@@ -3,24 +3,23 @@
 // Licensed under the MIT License.
 
 using System;
+using System.ComponentModel;
 using System.Globalization;
 using System.Text.Json.Serialization;
-using System.Xml;
-using System.Xml.Schema;
-using System.Xml.Serialization;
 using CsvHelper.Configuration.Attributes;
 using MessagePack;
 
 namespace Liber;
 
 [MessagePackObject]
-[XmlRoot("line")]
-public class Line : IXmlSerializable
+public class Line
 {
+    [Browsable(false)]
     [Ignore]
     [Key(0)]
     public Guid AccountId { get; set; }
 
+    [Browsable(false)]
     [Index(14)]
     [Key(1)]
     [Name("Value Num.")]
@@ -29,6 +28,7 @@ public class Line : IXmlSerializable
 
     [IgnoreMember]
     [JsonIgnore]
+    [LocalizedDisplayName(nameof(Debit))]
     public decimal Debit
     {
         get
@@ -44,6 +44,7 @@ public class Line : IXmlSerializable
 
     [IgnoreMember]
     [JsonIgnore]
+    [LocalizedDisplayName(nameof(Credit))]
     public decimal Credit
     {
         get
@@ -59,16 +60,19 @@ public class Line : IXmlSerializable
 
     [Index(8)]
     [Key(2)]
+    [LocalizedDisplayName(nameof(Description))]
     [Name("Memo")]
     [NullValues("")]
     [Optional]
     public string? Description { get; set; }
 
+    [Browsable(false)]
     [Ignore]
     [IgnoreMember]
     [JsonIgnore]
     public Transaction? Transaction { get; internal set; }
 
+    [Browsable(false)]
     [Ignore]
     [IgnoreMember]
     [JsonIgnore]
@@ -83,34 +87,5 @@ public class Line : IXmlSerializable
 
             return Transaction.GetDoubleEntry(this);
         }
-    }
-
-    public XmlSchema? GetSchema()
-    {
-        return null;
-    }
-
-    void IXmlSerializable.ReadXml(XmlReader reader)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void WriteXml(XmlWriter writer)
-    {
-        string account;
-
-        if (writer is XmlReportWriter reportWriter)
-        {
-            account = reportWriter.Report.Company!.Accounts[AccountId].Name;
-        }
-        else
-        {
-            account = AccountId.ToString();
-        }
-
-        writer.WriteElementString("account", account);
-        writer.WriteElementString("debit", XmlConvert.ToString(Debit));
-        writer.WriteElementString("credit", XmlConvert.ToString(Credit));
-        writer.WriteElementString("description", Description);
     }
 }

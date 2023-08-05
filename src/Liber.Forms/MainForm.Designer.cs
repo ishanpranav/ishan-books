@@ -43,8 +43,6 @@ partial class MainForm
         saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-        exportCompanyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-        toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
         exportAccountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         exportTransactionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -143,20 +141,9 @@ partial class MainForm
         // 
         // exportToolStripMenuItem
         // 
-        exportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { exportCompanyToolStripMenuItem, toolStripSeparator3, exportAccountsToolStripMenuItem, exportTransactionsToolStripMenuItem });
+        exportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { exportAccountsToolStripMenuItem, exportTransactionsToolStripMenuItem });
         exportToolStripMenuItem.Name = "exportToolStripMenuItem";
         resources.ApplyResources(exportToolStripMenuItem, "exportToolStripMenuItem");
-        // 
-        // exportCompanyToolStripMenuItem
-        // 
-        exportCompanyToolStripMenuItem.Name = "exportCompanyToolStripMenuItem";
-        resources.ApplyResources(exportCompanyToolStripMenuItem, "exportCompanyToolStripMenuItem");
-        exportCompanyToolStripMenuItem.Click += OnExportCompanyToolStripMenuItemClick;
-        // 
-        // toolStripSeparator3
-        // 
-        toolStripSeparator3.Name = "toolStripSeparator3";
-        resources.ApplyResources(toolStripSeparator3, "toolStripSeparator3");
         // 
         // exportAccountsToolStripMenuItem
         // 
@@ -352,7 +339,6 @@ partial class MainForm
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         Controls.Add(_toolStrip);
         Controls.Add(_menuStrip);
-        IsMdiContainer = true;
         MainMenuStrip = _menuStrip;
         Name = "MainForm";
         WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -411,8 +397,6 @@ partial class MainForm
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     private System.Windows.Forms.ToolStripMenuItem importTransactionsToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem exportTransactionsToolStripMenuItem;
-    private System.Windows.Forms.ToolStripMenuItem exportCompanyToolStripMenuItem;
-    private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
     private System.Windows.Forms.ToolStripMenuItem checkToolStripMenuItem;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
 }

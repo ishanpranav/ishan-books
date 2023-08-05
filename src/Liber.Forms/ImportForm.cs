@@ -5,6 +5,7 @@
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using Liber.Forms.Properties;
 
 namespace Liber.Forms.Accounts;
 
@@ -23,6 +24,14 @@ internal abstract partial class ImportForm : Form
     protected Company Company { get; }
 
     protected abstract void CommitChanges();
+
+    private void OnDataGridViewDataError(object sender, DataGridViewDataErrorEventArgs e)
+    {
+        if (e.Exception != null)
+        {
+            MessageBox.Show(e.Exception.Message, Resources.ExceptionCaption, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+    }
 
     private void OnAcceptButtonClick(object sender, EventArgs e)
     {

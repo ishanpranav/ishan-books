@@ -4,7 +4,7 @@
 
 namespace Liber.Forms.Lines;
 
-partial class CheckForm
+partial class CheckDialog
 {
     /// <summary>
     /// Required designer variable.
@@ -32,7 +32,7 @@ partial class CheckForm
     /// </summary>
     private void InitializeComponent()
     {
-        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CheckForm));
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CheckDialog));
         _listView = new System.Windows.Forms.ListViewEx();
         nameColumn = new System.Windows.Forms.ColumnHeader();
         postedColumn = new System.Windows.Forms.ColumnHeader();

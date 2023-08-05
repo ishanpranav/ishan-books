@@ -124,6 +124,9 @@
     <value>https://github.com/ishanpranav/ishan-books</value>
     <comment>@Invariant</comment>
   </data>
+  <data name="AccountCount{0}" xml:space="preserve">
+    <value>({0:n0} accounts)</value>
+  </data>
   <data name="CancelText{0}" xml:space="preserve">
     <value>Do you want to save changes to {0}?</value>
   </data>

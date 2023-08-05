@@ -38,7 +38,6 @@ __Import-friendly formats__
 
 __Export-friendly formats__
 - [X] Comma-delimited (*.csv)
-- [X] XML Document (*.xml)
 - [X] PDF Document (*.pdf)
 - [X] XPS Document (*.xps)
 - [X] HTML Document (*.html)

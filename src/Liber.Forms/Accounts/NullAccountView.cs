@@ -34,7 +34,7 @@ internal sealed class NullAccountView : IAccountView
     {
         get
         {
-            return "--- Split ---";
+            return string.Empty;
         }
     }
 

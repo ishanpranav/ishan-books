@@ -8,7 +8,7 @@ using System.Text.Json;
 using System.Xml.Xsl;
 using Microsoft.Web.WebView2.Core;
 
-namespace Liber.Forms.Reports;
+namespace Liber.Forms.Reports.Xsl;
 
 internal sealed class XslReportView : IReportView
 {

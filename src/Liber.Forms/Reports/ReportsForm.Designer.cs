@@ -107,7 +107,6 @@
             Controls.Add(splitContainer1);
             Name = "ReportsForm";
             ShowIcon = false;
-            WindowState = System.Windows.Forms.FormWindowState.Maximized;
             Load += OnLoad;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel2.ResumeLayout(false);

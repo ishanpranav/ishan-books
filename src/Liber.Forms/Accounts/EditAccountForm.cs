@@ -22,12 +22,20 @@ internal sealed class EditAccountForm : AccountForm
         _colorButton.ForeColor = Colors.GetForeColor(account.Color);
         Type = account.Type;
         TaxType = account.TaxType;
+
+        parentComboBox.Items.Add(NullAccountView.Value);
         parentComboBox.Initialize(company, x => x != Id);
+
         parentComboBox.SelectedItem = account.ParentId;
 
         if (Id == company.EquityAccountId || Id == company.OtherEquityAccountId)
         {
             placeholderCheckBox.Checked = true;
+            placeholderCheckBox.Enabled = false;
+        }
+        else if (account.Lines.Count > 0)
+        {
+            placeholderCheckBox.Checked = false;
             placeholderCheckBox.Enabled = false;
         }
     }

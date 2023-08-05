@@ -135,7 +135,7 @@
 	  <Compile Update="Controls\ListViewEx.cs">
 	    <SubType>Component</SubType>
 	  </Compile>
-	  <Compile Update="Lines\CheckForm.cs">
+	  <Compile Update="Lines\CheckDialog.cs">
 	    <SubType>Form</SubType>
 	  </Compile>
 	  <Compile Update="Transactions\TransactionForm.cs">
@@ -163,6 +163,9 @@
 	  <EmbeddedResource Update="Properties\Resources.resx">
 	    <LastGenOutput>Resources.Designer.cs</LastGenOutput>
 	    <Generator>ResXFileCodeGenerator</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Reports\Xsl\XslReport.es.resx">
+	    <SubType>Designer</SubType>
 	  </EmbeddedResource>
 	</ItemGroup>
 

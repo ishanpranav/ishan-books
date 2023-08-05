@@ -153,7 +153,14 @@ internal sealed partial class AccountsForm : Form
 
     private void OnNewToolStripMenuItemClick(object sender, EventArgs e)
     {
-        _factory.AutoRegister(() => new NewAccountForm(_company));
+        if (_listView.TryGetSelection(out Guid id))
+        {
+            _factory.AutoRegister(() => new NewAccountForm(_company, id));
+        }
+        else
+        {
+            _factory.AutoRegister(() => new NewAccountForm(_company));
+        }
     }
 
     private void OnEditToolStripMenuItemClick(object sender, EventArgs e)
@@ -219,6 +226,15 @@ internal sealed partial class AccountsForm : Form
         if (!_listView.TryGetSelection(out Guid id))
         {
             return;
+        }
+
+        if (id == _company.EquityAccountId)
+        {
+            // TODO: QuickReport
+        }
+        else if (id == _company.OtherEquityAccountId)
+        {
+            // TODO: QuickReport
         }
 
         Account value = _company.Accounts[id];

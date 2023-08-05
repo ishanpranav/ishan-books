@@ -42,9 +42,6 @@
 	    <Generator>PublicResXFileCodeGenerator</Generator>
 	    <LastGenOutput>Resources.Designer.cs</LastGenOutput>
 	  </EmbeddedResource>
-	  <EmbeddedResource Update="XslReport.resx">
-	    <Generator></Generator>
-	  </EmbeddedResource>
 	</ItemGroup>
 
 </Project>

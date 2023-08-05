@@ -22,8 +22,8 @@ internal sealed class CheckView
         Value = value;
     }
 
-    public Line? Value { get; }
     public Company Company { get; }
+    public Line? Value { get; }
 
     public override string ToString()
     {

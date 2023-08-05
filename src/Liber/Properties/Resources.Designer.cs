@@ -70,7 +70,7 @@ namespace Liber.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Owner&apos;s Equity.
+        ///   Looks up a localized string similar to Retained Earnings.
         /// </summary>
         public static string DefaultEquityAccountName {
             get {

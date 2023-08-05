@@ -101,9 +101,6 @@
   <data name="exportCompanyToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>238, 26</value>
   </data>
-  <data name="exportCompanyToolStripMenuItem.Text" xml:space="preserve">
-    <value>Empresa (*.xml)</value>
-  </data>
   <data name="exportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>228, 26</value>
   </data>
@@ -334,6 +331,6 @@
     <value>Todos los archivos (*.*)|*.*|Todos los archivos compatibles (*.izbk;*.mpk;*.msgpack;*.json;*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3)|*.izbk;*.mpk;*.msgpack;*.json;*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3|Empresa de IshanBooks (*.izbk)|*.izbk|MessagePack (*.mpk;*.msgpack)|*.mpk;*.msgpack|Notación de objetos JavaScript (JSON) (*.json)|*.json|Base de datos SQLite3 (*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3)|*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3|Delimitado por comas (*.csv)|*.csv</value>
   </data>
   <data name="_saveFileDialog.Filter" xml:space="preserve">
-    <value>Empresa de IshanBooks (*.izbk)|*.izbk|MessagePack (*.mpk;*.msgpack)|*.mpk;*.msgpack|Notación de objetos JavaScript (JSON) (*.json)|*.json|Base de datos SQLite3 (*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3)|*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3|Delimitado por comas (*.csv)|*.csv|Documento XML (*.xml)|*.xml</value>
+    <value>Empresa de IshanBooks (*.izbk)|*.izbk|MessagePack (*.mpk;*.msgpack)|*.mpk;*.msgpack|Notación de objetos JavaScript (JSON) (*.json)|*.json|Base de datos SQLite3 (*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3)|*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3|Delimitado por comas (*.csv)|*.csv</value>
   </data>
 </root>

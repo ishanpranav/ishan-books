@@ -120,6 +120,9 @@
   <data name="AboutText{0}" xml:space="preserve">
     <value>Sobre {0}</value>
   </data>
+  <data name="AccountCount{0}" xml:space="preserve">
+    <value>({0:n0} cuentas)</value>
+  </data>
   <data name="CancelText{0}" xml:space="preserve">
     <value>¿Desea usted guardar los cambios en {0}?</value>
   </data>

@@ -8,8 +8,10 @@ using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
+using Liber.Forms.Components;
 using Liber.Forms.Lines;
 using Liber.Forms.Reports.Gdi;
+using Liber.Forms.Reports.Xsl;
 using Microsoft.Web.WebView2.Core;
 
 namespace Liber.Forms.Reports;
@@ -134,7 +136,7 @@ internal sealed partial class ReportsForm : Form
 
         if (_view.Properties is GdiCheckReport checkReport && checkReport.Check.Value == null)
         {
-            using CheckForm checkForm = new CheckForm(checkReport.Check);
+            using CheckDialog checkForm = new CheckDialog(checkReport.Check);
 
             if (checkForm.ShowDialog() == DialogResult.OK)
             {

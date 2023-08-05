@@ -72,6 +72,12 @@ internal static class FormattedStrings
         return string.Format(GetString("CheckWords{0}{1}"), integral.ToWords(), fractional);
     }
 
+
+    public static string GetAccountCount(int value)
+    {
+        return string.Format(GetString("AccountCount{0}"), value);
+    }
+
     public static void ShowNotSupportedMessage(string extension)
     {
         string text;

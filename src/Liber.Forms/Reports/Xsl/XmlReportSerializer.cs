@@ -4,8 +4,9 @@
 
 using System.IO;
 using System.Xml;
-using System.Xml.Resolvers;
+using System.Xml.Serialization;
 using System.Xml.Xsl;
+using Liber.Forms.Reports.Xsl;
 
 namespace Liber;
 
@@ -25,6 +26,7 @@ public static class XmlReportSerializer
         Indent = true,
         NewLineOnAttributes = true
     };
+    private static readonly XmlSerializer s_serializer = new XmlSerializer(typeof(XslReport));
 
     public static XslCompiledTransform DeserializeTransform(string path)
     {
@@ -39,9 +41,16 @@ public static class XmlReportSerializer
 
     public static string Serialize(XslCompiledTransform transform, XslReport report)
     {
-        using MemoryStream memoryStream = new MemoryStream();
-        using XmlWriter xmlWriter = new XmlReportWriter(memoryStream, report);
+        using StringWriter str = new StringWriter();
 
+        s_serializer.Serialize(str, report);
+
+        string x = str.ToString();
+
+        using MemoryStream memoryStream = new MemoryStream();
+        using XmlWriter xmlWriter = XmlWriter.Create(memoryStream);
+
+        s_serializer.Serialize(xmlWriter, report);
         memoryStream.Seek(offset: 0, SeekOrigin.Begin);
 
         using XmlReader xmlReader = XmlReader.Create(memoryStream, s_xslSettings);

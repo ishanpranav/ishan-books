@@ -2,7 +2,10 @@
 // Copyright (c) 2023 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
-namespace System.Xml.Resolvers;
+using System;
+using System.Xml;
+
+namespace Liber.Forms.Reports.Xsl;
 
 internal sealed class XmlReportResolver : XmlResolver
 {

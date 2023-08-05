@@ -120,4 +120,7 @@
   <data name="Check" xml:space="preserve">
     <value>Specifies the cheque to use as a data source.</value>
   </data>
+  <data name="Color" xml:space="preserve">
+    <value>Specifies the text colour.</value>
+  </data>
 </root>

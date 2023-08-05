@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Accounts" xml:space="preserve">
+    <value>Determina las cuentas incluidas en el documento.</value>
+  </data>
   <data name="Check" xml:space="preserve">
     <value>Especifica el cheque para usar como fuente de datos.</value>
   </data>
@@ -124,33 +127,18 @@
     <value>Especifica el color del texto.</value>
   </data>
   <data name="Font" xml:space="preserve">
-    <value>Especifica la fuente y el estilo de fuente a utilizar para el informe.</value>
+    <value>Especifica la fuente y el estilo de fuente a utilizar para el documento.</value>
+  </data>
+  <data name="PageSettings" xml:space="preserve">
+    <value>Especifica los márgenes, la orientación de la página y el tamaño del papel.</value>
   </data>
   <data name="Posted" xml:space="preserve">
     <value>Especifica la fecha de finalización.</value>
-  </data>
-  <data name="SizeCentimeters" xml:space="preserve">
-    <value>Especifica el tamaño de la página en centimetros.</value>
-  </data>
-  <data name="SizeInches" xml:space="preserve">
-    <value>Especifica el tamaño de la página en pulgadas.</value>
   </data>
   <data name="Started" xml:space="preserve">
     <value>Especifica la fecha de inicio.</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Especifica el título del reporte.</value>
-  </data>
-  <data name="XCentimeters" xml:space="preserve">
-    <value>Especifica el desplazamiento X (margen izquierdo) en centímetros.</value>
-  </data>
-  <data name="XInches" xml:space="preserve">
-    <value>Especifica el desplazamiento X (margen izquierdo) en pulgadas.</value>
-  </data>
-  <data name="YCentimeters" xml:space="preserve">
-    <value>Especifica el desplazamiento Y (margen superior) en centimetros.</value>
-  </data>
-  <data name="YInches" xml:space="preserve">
-    <value>Especifica el desplazamiento Y (margen superior) en pulgadas.</value>
   </data>
 </root>

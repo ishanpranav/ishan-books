@@ -2,7 +2,6 @@
 // Copyright (c) 2023 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
-using System.ComponentModel;
 using System.Text.Json;
 using Liber;
 using Liber.Forms;
@@ -10,7 +9,6 @@ using Liber.Forms.Properties;
 
 namespace System.Windows.Forms;
 
-[Localizable(true)]
 internal sealed class ColorButton : Button
 {
     protected override void OnClick(EventArgs e)

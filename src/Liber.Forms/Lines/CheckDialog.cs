@@ -1,4 +1,4 @@
-﻿// CheckForm.cs
+﻿// CheckDialog.cs
 // Copyright (c) 2023 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace Liber.Forms.Lines;
 
-internal sealed partial class CheckForm : Form
+internal sealed partial class CheckDialog : Form
 {
-    public CheckForm(CheckView value)
+    public CheckDialog(CheckView value)
     {
         InitializeComponent();
         SystemFeatures.Initialize(this);

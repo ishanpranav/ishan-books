@@ -4,7 +4,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
+using System.Linq;
 using Liber.Forms.Components;
 
 namespace Liber.Forms.Accounts;
@@ -18,13 +18,11 @@ internal sealed class ImportAccountsForm : ImportForm
     {
         _factory = factory;
         _accounts = accounts;
+        _dataGridView.DataSource = accounts
+            .Select(x => x.Value)
+            .ToList();
 
-        foreach (GnuCashAccount account in accounts)
-        {
-            account.Value.Name = account.Value.Name;
-
-            _listView.Items.Add(new ListViewItem(account.Value.Name));
-        }
+        _dataGridView.AutoResizeColumns();
     }
 
     private Guid GetParentId(Guid id, string value)

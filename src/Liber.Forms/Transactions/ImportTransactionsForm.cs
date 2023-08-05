@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Liber.Forms.Accounts;
 
 namespace Liber.Forms.Transactions;
@@ -41,24 +42,11 @@ internal sealed class ImportTransactionsForm : ImportForm
             transaction.Lines.Add(line.Value);
         }
 
-        foreach (Transaction transaction in _transactions.Values)
-        {
-            if (!string.IsNullOrWhiteSpace(transaction.Name))
-            {
-                _listView.Items.Add(transaction.Name);
+        _dataGridView.DataSource = lines
+            .Select(x => x.Value)
+            .ToList();
 
-                continue;
-            }
-
-            if (!string.IsNullOrWhiteSpace(transaction.Memo))
-            {
-                _listView.Items.Add(transaction.Memo);
-
-                continue;
-            }
-
-            _listView.Items.Add(transaction.Posted.ToLongDateString());
-        }
+        _dataGridView.AutoResizeColumns();
     }
 
     protected override void CommitChanges()

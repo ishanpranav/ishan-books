@@ -8,9 +8,6 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Text.Json.Serialization;
-using System.Xml;
-using System.Xml.Schema;
-using System.Xml.Serialization;
 using CsvHelper.Configuration.Attributes;
 using MessagePack;
 using MessagePack.Formatters;
@@ -18,8 +15,7 @@ using MessagePack.Formatters;
 namespace Liber;
 
 [MessagePackObject]
-[XmlRoot("account")]
-public class Account : IXmlSerializable
+public class Account
 {
     internal readonly HashSet<Account> children = new HashSet<Account>();
     internal readonly HashSet<Line> lines = new HashSet<Line>();
@@ -33,6 +29,7 @@ public class Account : IXmlSerializable
         ParentId = parentId;
     }
 
+    [Browsable(false)]
     [Ignore]
     [Key(0)]
     public Guid ParentId { get; internal set; }
@@ -40,18 +37,21 @@ public class Account : IXmlSerializable
     [Default(0)]
     [Index(3)]
     [Key(2)]
+    [LocalizedDisplayName(nameof(Number))]
     [Name("Account Code")]
     [Optional]
     public decimal Number { get; set; }
 
     [Index(2)]
     [Key(1)]
+    [LocalizedDisplayName(nameof(Name))]
     [Name("Account Name")]
     [Optional]
     public string Name { get; set; } = string.Empty;
 
     [Index(0)]
     [Key(3)]
+    [LocalizedDisplayName(nameof(Type))]
     [Name("Type")]
     [Optional]
     public AccountType Type { get; set; }
@@ -60,12 +60,14 @@ public class Account : IXmlSerializable
     [BooleanTrueValues("T")]
     [Index(11)]
     [Key(4)]
+    [LocalizedDisplayName(nameof(Placeholder))]
     [Name("Placeholder")]
     [Optional]
     public bool Placeholder { get; set; }
 
     [Index(4)]
     [Key(5)]
+    [LocalizedDisplayName(nameof(Description))]
     [Name("Description")]
     [NullValues("")]
     [Optional]
@@ -73,14 +75,15 @@ public class Account : IXmlSerializable
 
     [Index(6)]
     [Key(6)]
+    [LocalizedDisplayName(nameof(Memo))]
     [Name("Notes")]
     [NullValues("")]
     [Optional]
     public string? Memo { get; set; }
 
     [Index(5)]
-    [Browsable(false)]
     [Key(7)]
+    [LocalizedDisplayName(nameof(Color))]
     [MessagePackFormatter(typeof(MessagePackColorFormatter))]
     [Name("Account Color")]
     [Optional]
@@ -89,10 +92,12 @@ public class Account : IXmlSerializable
 
     [Index(10)]
     [Key(8)]
+    [LocalizedDisplayName(nameof(TaxType))]
     [Name("Tax Info")]
     [Optional]
     public TaxType TaxType { get; set; }
 
+    [Browsable(false)]
     [Ignore]
     [IgnoreMember]
     [JsonIgnore]
@@ -111,6 +116,7 @@ public class Account : IXmlSerializable
         }
     }
 
+    [Browsable(false)]
     [IgnoreMember]
     [JsonIgnore]
     public bool Temporary
@@ -133,6 +139,7 @@ public class Account : IXmlSerializable
         }
     }
 
+    [Browsable(false)]
     [IgnoreMember]
     [JsonIgnore]
     public bool Virtual
@@ -151,6 +158,7 @@ public class Account : IXmlSerializable
         }
     }
 
+    [Browsable(false)]
     [IgnoreMember]
     [JsonIgnore]
     public IReadOnlyCollection<Account> Children
@@ -161,6 +169,7 @@ public class Account : IXmlSerializable
         }
     }
 
+    [Browsable(false)]
     [IgnoreMember]
     [JsonIgnore]
     public IReadOnlyCollection<Line> Lines
@@ -171,6 +180,7 @@ public class Account : IXmlSerializable
         }
     }
 
+    [Browsable(false)]
     [IgnoreMember]
     [JsonIgnore]
     public IOrderedEnumerable<Line> OrderedLines
@@ -232,86 +242,8 @@ public class Account : IXmlSerializable
         }
     }
 
-    public XmlSchema? GetSchema()
+    public override string ToString()
     {
-        return null;
-    }
-
-    void IXmlSerializable.ReadXml(XmlReader reader)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void WriteXml(XmlWriter writer)
-    {
-        writer.WriteElementString("name", Name);
-        writer.WriteElementString("type", Type.ToString());
-
-        decimal balance = 0;
-        decimal previous = 0;
-        decimal debit;
-        decimal credit;
-
-        if (writer is not XmlReportWriter reportWriter)
-        {
-            balance = Balance;
-        }
-        else if (this == reportWriter.Report.Company.EquityAccount)
-        {
-            writer.WriteElementString("equity", XmlConvert.ToString(true));
-
-            if (reportWriter.Report.EquityMode.HasFlag(EquityModes.CurrentPosted))
-            {
-                balance = reportWriter.Report.Company.GetEquity(reportWriter.Report.Posted);
-            }
-
-            if (reportWriter.Report.EquityMode.HasFlag(EquityModes.CurrentStarted))
-            {
-                balance = reportWriter.Report.Company.GetEquity(reportWriter.Report.Started);
-            }
-
-            previous = reportWriter.Report.Company.GetEquity(reportWriter.Report.Started);
-        }
-        else if (this == reportWriter.Report.Company.OtherEquityAccount)
-        {
-            writer.WriteElementString("other-equity", XmlConvert.ToString(true));
-
-            if (reportWriter.Report.EquityMode.HasFlag(EquityModes.CurrentPosted))
-            {
-                balance = reportWriter.Report.Company.GetOtherEquity(reportWriter.Report.Posted);
-            }
-
-            if (reportWriter.Report.EquityMode.HasFlag(EquityModes.CurrentStarted))
-            {
-                balance = reportWriter.Report.Company.GetOtherEquity(reportWriter.Report.Started);
-            }
-
-            previous = reportWriter.Report.Company.GetOtherEquity(reportWriter.Report.Started);
-        }
-        else if (Temporary)
-        {
-            balance = GetBalance(reportWriter.Report.Started, reportWriter.Report.Posted);
-        }
-        else
-        {
-            balance = GetBalance(reportWriter.Report.Posted);
-            previous = GetBalance(reportWriter.Report.Started);
-        }
-
-        if (balance < 0)
-        {
-            debit = 0;
-            credit = -balance;
-        }
-        else
-        {
-            debit = balance;
-            credit = 0;
-        }
-
-        writer.WriteElementString("balance", XmlConvert.ToString(balance));
-        writer.WriteElementString("previous", XmlConvert.ToString(previous));
-        writer.WriteElementString("debit", XmlConvert.ToString(debit));
-        writer.WriteElementString("credit", XmlConvert.ToString(credit));
+        return Name;
     }
 }

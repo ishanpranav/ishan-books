@@ -6,21 +6,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
-using System.Xml;
-using System.Xml.Schema;
-using System.Xml.Serialization;
 using CsvHelper.Configuration.Attributes;
 using MessagePack;
 
 namespace Liber;
 
 [MessagePackObject]
-[XmlRoot("transaction")]
 public class Transaction :
     IComparable,
     IComparable<Transaction>,
-    IEquatable<Transaction>,
-    IXmlSerializable
+    IEquatable<Transaction>
 {
     public Transaction()
     {
@@ -178,44 +173,6 @@ public class Transaction :
     public override int GetHashCode()
     {
         return Id.GetHashCode();
-    }
-
-    public XmlSchema? GetSchema()
-    {
-        return null;
-    }
-
-    void IXmlSerializable.ReadXml(XmlReader reader)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void WriteXml(XmlWriter writer)
-    {
-        writer.WriteElementString("posted", XmlConvert.ToString(Posted, XmlDateTimeSerializationMode.Utc));
-
-        if (Number == 0)
-        {
-            writer.WriteElementString("number", value: null);
-        }
-        else
-        {
-            writer.WriteElementString("number", XmlConvert.ToString(Number));
-        }
-
-        writer.WriteElementString("name", Name);
-
-        IOrderedEnumerable<Line> lines = OrderedLines;
-
-        if (writer is XmlReportWriter reportWriter)
-        {
-            lines = lines.ThenBy(x => reportWriter.Report.Company!.Accounts[x.AccountId].Number);
-        }
-
-        foreach (Line line in lines)
-        {
-            XmlSerializers.Line.Serialize(writer, line);
-        }
     }
 
     public static bool operator ==(Transaction? left, Transaction? right)

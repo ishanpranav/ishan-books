@@ -18,6 +18,9 @@ internal abstract class GdiReport
     public abstract string Title { get; set; }
 
     [Editor(typeof(PageSettingsEditor), typeof(UITypeEditor))]
+    [LocalizedCategory(nameof(PageSettings))]
+    [LocalizedDescription(nameof(PageSettings))]
+    [LocalizedDisplayName(nameof(PageSettings))]
     [TypeConverter(typeof(ExpandableObjectConverter))]
     public PageSettings PageSettings { get; set; } = new PageSettings();
 

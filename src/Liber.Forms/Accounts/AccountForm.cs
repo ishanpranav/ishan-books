@@ -17,9 +17,13 @@ internal abstract partial class AccountForm : Form
 
         new ComponentResourceManager(GetType()).ApplyResources(this, "$this");
 
+        AccountType[] types = Enum.GetValues<AccountType>();
+
+        Array.Sort(types, (x, y) => Math.Abs((short)x) - Math.Abs((short)y));
+
         Company = company;
         DialogResult = DialogResult.Cancel;
-        typeComboBox.DataSource = Enum.GetValues<AccountType>();
+        typeComboBox.DataSource = types;
         taxTypeComboBox.DataSource = Enum.GetValues<TaxType>();
         numberNumericUpDown.Maximum = decimal.MaxValue;
     }

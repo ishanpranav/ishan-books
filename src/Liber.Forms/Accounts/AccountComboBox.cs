@@ -41,28 +41,21 @@ internal sealed class AccountComboBox : ComboBox
         company.AccountAdded += OnCompanyAccountAdded;
         company.AccountUpdated += OnCompanyAccountUpdated;
         company.AccountRemoved += OnCompanyAccountRemoved;
+
+        if (Items.Contains(Guid.Empty))
+        {
+            SelectedItem = Guid.Empty;
+        }
     }
 
     public new Guid SelectedItem
     {
         get
         {
-            if (base.SelectedItem == null)
-            {
-                return Guid.Empty;
-            }
-
-            return ((AccountView)base.SelectedItem).Id;
+            return ((IAccountView)base.SelectedItem).Id;
         }
         set
         {
-            if (value == Guid.Empty)
-            {
-                base.SelectedItem = null;
-
-                return;
-            }
-
             base.SelectedItem = value;
         }
     }

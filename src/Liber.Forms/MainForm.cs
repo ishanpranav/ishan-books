@@ -10,7 +10,6 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml;
 using Liber.Forms.Accounts;
 using Liber.Forms.Companies;
 using Liber.Forms.Lines;
@@ -513,26 +512,9 @@ internal sealed partial class MainForm : Form
         });
     }
 
-    private async void OnExportCompanyToolStripMenuItemClick(object sender, EventArgs e)
-    {
-        if (!TryGetSavePath(FilterIndex.Xml, out string? path))
-        {
-            return;
-        }
-
-        await AbortRetryIgnoreAsync(() =>
-        {
-            using XmlWriter writer = XmlWriter.Create(path);
-
-            XmlSerializers.Company.Serialize(writer, _company);
-
-            return Task.CompletedTask;
-        });
-    }
-
     private void OnCheckToolStripMenuItemClick(object sender, EventArgs e)
     {
-        using CheckForm checkForm = new CheckForm(new CheckView(_company));
+        using CheckDialog checkForm = new CheckDialog(new CheckView(_company));
 
         if (checkForm.ShowDialog() == DialogResult.OK)
         {
@@ -551,7 +533,7 @@ internal sealed partial class MainForm : Form
 
     private void OnReportsToolStripMenuItemClick(object sender, EventArgs e)
     {
-        _factory.AutoRegister(() => new ReportsForm(_company));
+        _factory.Register(Guid.NewGuid(), new ReportsForm(_company));
     }
 
     private void OnTransactionToolStripMenuItemClick(object sender, EventArgs e)

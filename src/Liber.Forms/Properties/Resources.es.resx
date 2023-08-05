@@ -118,7 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CancelCaption" xml:space="preserve">
-    <value>Guarda cambios</value>
+    <value>Guardar cambios</value>
+  </data>
+  <data name="CompaniesJumpListCustomCategory" xml:space="preserve">
+    <value>Empresas</value>
   </data>
   <data name="ImbalanceError" xml:space="preserve">
     <value>La transacción no está balanceada. Por favor, asegúrate de que la suma de la columna de débito sea igual a la suma de la columna de crédito.</value>

@@ -121,7 +121,7 @@
     <value>Untitled Company</value>
   </data>
   <data name="DefaultEquityAccountName" xml:space="preserve">
-    <value>Owner's Equity</value>
+    <value>Retained Earnings</value>
   </data>
   <data name="DefaultOtherEquityAccountName" xml:space="preserve">
     <value>Accumulated Other Comprehensive Income</value>

@@ -117,43 +117,55 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Color" xml:space="preserve">
-    <value>Color</value>
-  </data>
-  <data name="Font" xml:space="preserve">
-    <value>Font</value>
+  <data name="Accounts" xml:space="preserve">
+    <value>Accounts</value>
   </data>
   <data name="Check" xml:space="preserve">
     <value>Check</value>
   </data>
+  <data name="Color" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="Credit" xml:space="preserve">
+    <value>Credit</value>
+  </data>
+  <data name="Debit" xml:space="preserve">
+    <value>Debit</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Font" xml:space="preserve">
+    <value>Font</value>
+  </data>
+  <data name="Memo" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Number" xml:space="preserve">
+    <value>Number</value>
+  </data>
+  <data name="PageSettings" xml:space="preserve">
+    <value>Page Setup</value>
+  </data>
+  <data name="Placeholder" xml:space="preserve">
+    <value>Placeholder</value>
+  </data>
   <data name="Posted" xml:space="preserve">
     <value>To</value>
-  </data>
-  <data name="RotationDegrees" xml:space="preserve">
-    <value>Rotation (degrees)</value>
-  </data>
-  <data name="SizeCentimeters" xml:space="preserve">
-    <value>Size (cm)</value>
-  </data>
-  <data name="SizeInches" xml:space="preserve">
-    <value>Size (in)</value>
   </data>
   <data name="Started" xml:space="preserve">
     <value>From</value>
   </data>
+  <data name="TaxType" xml:space="preserve">
+    <value>Tax Type</value>
+  </data>
   <data name="Title" xml:space="preserve">
     <value>Title</value>
   </data>
-  <data name="XCentimeters" xml:space="preserve">
-    <value>Left Margin (cm)</value>
-  </data>
-  <data name="XInches" xml:space="preserve">
-    <value>Left Margin (in)</value>
-  </data>
-  <data name="YCentimeters" xml:space="preserve">
-    <value>Top Margin (cm)</value>
-  </data>
-  <data name="YInches" xml:space="preserve">
-    <value>Top Margin (in)</value>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
   </data>
 </root>

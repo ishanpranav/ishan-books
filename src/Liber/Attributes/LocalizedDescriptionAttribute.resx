@@ -117,40 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Accounts" xml:space="preserve">
+    <value>Determines the accounts included in the report.</value>
+  </data>
+  <data name="Check" xml:space="preserve">
+    <value>Specifies the check to use as a data source.</value>
+  </data>
   <data name="Color" xml:space="preserve">
     <value>Specifies the text color.</value>
   </data>
   <data name="Font" xml:space="preserve">
     <value>Specifies the font and font style to use for the report.</value>
   </data>
-  <data name="Check" xml:space="preserve">
-    <value>Specifies the check to use as a data source.</value>
+  <data name="PageSettings" xml:space="preserve">
+    <value>Specifies the margins, page orientation, and paper size.</value>
   </data>
   <data name="Posted" xml:space="preserve">
     <value>Specifies the end date for the report.</value>
-  </data>
-  <data name="SizeCentimeters" xml:space="preserve">
-    <value>Specifies the page size in centimeters.</value>
-  </data>
-  <data name="SizeInches" xml:space="preserve">
-    <value>Specifies the page size in inches.</value>
   </data>
   <data name="Started" xml:space="preserve">
     <value>Specifies the start date for the report.</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Specifies the title of the report.</value>
-  </data>
-  <data name="XCentimeters" xml:space="preserve">
-    <value>Specifies the X offset (left margin) in centimeters.</value>
-  </data>
-  <data name="XInches" xml:space="preserve">
-    <value>Specifies the X offset (left margin) in inches.</value>
-  </data>
-  <data name="YCentimeters" xml:space="preserve">
-    <value>Specifies the Y offset (top margin) in centimeters.</value>
-  </data>
-  <data name="YInches" xml:space="preserve">
-    <value>Specifies the Y offset (top margin) in inches.</value>
   </data>
 </root>

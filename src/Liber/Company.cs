@@ -7,9 +7,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text.Json.Serialization;
-using System.Xml;
-using System.Xml.Schema;
-using System.Xml.Serialization;
 using Liber.Properties;
 using MessagePack;
 using MessagePack.Formatters;
@@ -17,8 +14,7 @@ using MessagePack.Formatters;
 namespace Liber;
 
 [MessagePackObject]
-[XmlRoot("company")]
-public sealed class Company : IXmlSerializable
+public sealed class Company
 {
     private readonly Dictionary<Guid, Account> _accounts;
     private readonly SortedSet<Transaction> _transactions;
@@ -275,6 +271,13 @@ public sealed class Company : IXmlSerializable
             .Last();
     }
 
+    public IEnumerable<Transaction> GetTransactionsBetween(DateTime started, DateTime posted)
+    {
+        return _transactions.GetViewBetween(
+            new Transaction() { Posted = started },
+            new Transaction() { Posted = posted });
+    }
+
     public void AddTransaction(Transaction value)
     {
         foreach (Line line in value.Lines)
@@ -387,43 +390,6 @@ public sealed class Company : IXmlSerializable
         foreach (string name in _names)
         {
             other._names.Add(name);
-        }
-    }
-
-    public XmlSchema? GetSchema()
-    {
-        return null;
-    }
-
-    void IXmlSerializable.ReadXml(XmlReader reader)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void WriteXml(XmlWriter writer)
-    {
-        writer.WriteElementString("name", Name ?? Resources.DefaultCompanyName);
-        writer.WriteElementString("type", Type.ToString());
-
-        foreach (KeyValuePair<Guid, Account> account in OrderedAccounts)
-        {
-            XmlSerializers.Account.Serialize(writer, account.Value);
-        }
-
-        IEnumerable<Transaction> transactions;
-
-        if (writer is XmlReportWriter reportWriter)
-        {
-            transactions = _transactions.GetViewBetween(reportWriter.Report.MinTransaction, reportWriter.Report.MaxTransaction);
-        }
-        else
-        {
-            transactions = _transactions;
-        }
-
-        foreach (Transaction transaction in transactions)
-        {
-            XmlSerializers.Transaction.Serialize(writer, transaction);
         }
     }
 }

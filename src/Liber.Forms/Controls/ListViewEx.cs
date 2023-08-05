@@ -2,12 +2,10 @@
 // Copyright (c) 2023 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
-using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 
 namespace System.Windows.Forms;
 
-[Localizable(true)]
 internal sealed class ListViewEx : ListView
 {
     public ListViewEx()
