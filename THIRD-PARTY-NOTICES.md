@@ -15,6 +15,11 @@ Dependencies
 This section contains notices for binary dependencies redistributed alongside
 the application.
 
+### Chart.js&emsp;<sub><sup>*javascript*&ensp;*typescript*&ensp;</sup></sub>
+- Author: Chart.js contributors
+- Source: [chartjs/Chart.js](https://github.com/chartjs/Chart.js)
+- License: [MIT](#mit_chartjs)
+
 ### CsvHelper&emsp;<sub><sup>*c\#*&ensp;*css*&ensp;</sup></sub>
 - Author: Josh Close
 - Source: [JoshClose/CsvHelper](https://github.com/JoshClose/CsvHelper)
@@ -96,13 +101,6 @@ For more information about this software, please see its [third-party notices](h
 - Source: [MiloszKrajewski/lz4net](https://github.com/MiloszKrajewski/lz4net)
 - License: [BSD 2-clause "Simplified" license](#bsd-2-clause_krajewski)
 
-### .NET Runtime&emsp;<sub><sup>*c\#*&ensp;*c++*&ensp;*c*&ensp;</sup></sub>
-- Author: .NET Foundation and contributors
-- Source: [dotnet/runtime](https://github.com/dotnet/runtime)
-- License: [MIT](#mit_dotnet)
-
-For more information about this software, please see its [third-party notices](https://github.com/dotnet/runtime/blob/main/THIRD-PARTY-NOTICES.TXT).
-
 ### Humanizer&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
 - Author: .NET Foundation and contributors
 - Source: [Humanizr/Humanizer](https://github.com/Humanizr/Humanizer)
@@ -122,6 +120,13 @@ For more information about this software, please see its [third-party notices](h
 - Author: Microsoft Corporation
 - Source: [Wagnerp/Windows-API-CodePack-NET](https://github.com/Wagnerp/Windows-API-CodePack-NET)
 - License: [MIT](#mit_windowsapicodepack)
+
+### .NET Runtime&emsp;<sub><sup>*c\#*&ensp;*c++*&ensp;*c*&ensp;</sup></sub>
+- Author: .NET Foundation and contributors
+- Source: [dotnet/runtime](https://github.com/dotnet/runtime)
+- License: [MIT](#mit_dotnet)
+
+For more information about this software, please see its [third-party notices](https://github.com/dotnet/runtime/blob/main/THIRD-PARTY-NOTICES.TXT).
 
 ### CPA 006 Cheque in Middle ASAP Cheques&emsp;<sub><sup>*ini*&ensp;</sup></sub>
 - Author: Doug Ransom
@@ -1080,6 +1085,33 @@ consider it more useful to permit linking proprietary applications with the
 library.  If this is what you want to do, use the GNU Library General
 Public License instead of this License.
 
+```
+________________________________________________________________________________
+
+### <a id='mit_chartjs'>MIT</a>
+
+```
+The MIT License (MIT)
+
+Copyright 2014-2022 Chart.js Contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the “Software”), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
 ```
 ________________________________________________________________________________
 

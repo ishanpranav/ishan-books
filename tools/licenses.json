@@ -212,6 +212,15 @@
       "license": "mit_windowsapicodepack",
       "copyright": "2009 - 2010 Microsoft Corporation, then modifications by Jacob Slusser 2014, Peter William Wagner 2017 - 2023",
       "index": "Microsoft Corporation"
+    },
+    {
+      "title": "Chart.js",
+      "formats": [ "javascript", "typescript" ],
+      "source": "https://github.com/chartjs/Chart.js",
+      "author": "Chart.js contributors",
+      "license": "mit_chartjs",
+      "copyright": "2014-2022 Chart.js Contributors",
+      "index": "Chart.js"
     }
   ],
   "references": [

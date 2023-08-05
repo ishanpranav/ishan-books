@@ -74,3 +74,4 @@
 *.application binary
 *.deploy binary
 docs/*.css linguist-detectable
+src/Liber.Forms/scripts/chart.js linguist-vendored

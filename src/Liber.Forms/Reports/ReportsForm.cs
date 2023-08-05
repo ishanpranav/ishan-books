@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using Liber.Forms.Components;
 using Liber.Forms.Lines;
 using Liber.Forms.Reports.Gdi;
+using Liber.Forms.Reports.Html;
 using Liber.Forms.Reports.Xsl;
 using Microsoft.Web.WebView2.Core;
 
@@ -54,6 +55,10 @@ internal sealed partial class ReportsForm : Form
             path: "checks",
             searchPattern: "*.ini",
             createReportView);
+        InitializeReports(
+            path: "pages",
+            searchPattern: "*.html",
+            x => new HtmlReportView(x));
 
         await _webView.EnsureCoreWebView2Async();
 
@@ -93,7 +98,6 @@ internal sealed partial class ReportsForm : Form
                 continue;
             }
 
-            string key = Path.GetFileNameWithoutExtension(file);
             ListViewItem item = _listView.Items.Add(reportView.Title);
 
             item.ImageIndex = _imageList.Images.Count - 1;
