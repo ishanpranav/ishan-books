@@ -58,7 +58,7 @@ internal sealed partial class ReportsForm : Form
         InitializeReports(
             path: "pages",
             searchPattern: "*.html",
-            x => new HtmlReportView(x));
+            x => new HtmlReportView(_company, x));
 
         await _webView.EnsureCoreWebView2Async();
 

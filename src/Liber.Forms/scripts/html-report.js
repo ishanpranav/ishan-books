@@ -1,24 +1,26 @@
 ﻿// html-report.js
-// Copyright(c) 2023 Ishan Pranav.All rights reserved.
+// Copyright(c) 2023 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
-const ctx = document.getElementById('myChart');
+const report = window.chrome.webview.hostObjects.report;
+const chart = document.getElementById('chart');
 
-new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            borderWidth: 1
-        }]
-    },
+const config = {
+    type: 'line',
     options: {
-        scales: {
-            y: {
-                beginAtZero: true
+        plugins: {
+            title: {
+                display: true
             }
         }
     }
+};
+
+async function main() {
+    config.options.plugins.title.text = await report.title;
+    config.data = JSON.parse(await report.getTimeSeries);
+}
+
+main().then(() => {
+    new Chart(chart, config);
 });

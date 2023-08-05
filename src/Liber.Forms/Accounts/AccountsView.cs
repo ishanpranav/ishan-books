@@ -6,9 +6,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing.Design;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace Liber.Forms.Accounts;
 
+[ClassInterface(ClassInterfaceType.AutoDual)]
+[ComVisible(true)]
 [Editor(typeof(AccountsEditor), typeof(UITypeEditor))]
 public class AccountsView
 {

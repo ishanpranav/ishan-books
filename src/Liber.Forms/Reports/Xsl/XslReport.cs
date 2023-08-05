@@ -120,14 +120,14 @@ public class XslReport : IXmlSerializable
             .ToLocalizedString();
     }
 
-    public string ftspanl(DateTime from, DateTime to)
+    public string ftspanl(DateTime started, DateTime posted)
     {
-        return from.ToShortDateString() + " \u2013 " + to.ToShortDateString();
+        return started.ToShortDateString() + " \u2013 " + posted.ToShortDateString();
     }
 
-    public string ftspans(DateTime from, DateTime to)
+    public string ftspans(DateTime started, DateTime posted)
     {
-        return (to - from).Humanize(precision: 2, countEmptyUnits: true, maxUnit: TimeUnit.Year);
+        return (posted - started).Humanize(precision: 2, countEmptyUnits: true, maxUnit: TimeUnit.Year);
     }
 
     public string fgets(string key, object value)
