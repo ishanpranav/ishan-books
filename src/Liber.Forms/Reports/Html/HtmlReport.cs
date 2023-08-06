@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Text.Json;
 using Liber.Forms.Accounts;
@@ -84,44 +85,79 @@ public class HtmlReport
     [TypeConverter(typeof(LocalizedEnumConverter))]
     public Periodicity Periodicity { get; set; }
 
+    private DateTime Next(DateTime current)
+    {
+        Calendar calendar = CultureInfo.CurrentCulture.Calendar;
+
+        switch (Periodicity)
+        {
+            case Periodicity.Daily:
+                return calendar.AddDays(current, days: 1);
+
+            case Periodicity.Weekly:
+                return calendar.AddWeeks(current, weeks: 1);
+
+            case Periodicity.Biweekly:
+                return calendar.AddWeeks(current, weeks: 2);
+
+            case Periodicity.Monthly:
+                return calendar.AddMonths(current, months: 1);
+
+            case Periodicity.Annually:
+                return calendar.AddYears(current, years: 1);
+
+            default:
+                return Posted;
+        }
+    }
+
+    private IEnumerable<(DateTime started, DateTime posted)> EnumerateRanges()
+    {
+        DateTime current = Started;
+
+        while (current < Posted)
+        {
+            DateTime next = Next(current);
+
+            yield return (current, next);
+
+            current = next;
+        }
+    }
+
     public string GetTimeSeries()
     {
-        TimeSpan increment = TimeSpan.FromDays(14);
-        int labelCount = (int)Math.Ceiling((Posted - Started) / increment);
-        string[] labels = new string[labelCount];
+        List<string> labels = new List<string>();
         List<ChartJSChartDataset> datasets = new List<ChartJSChartDataset>();
 
-        for (int i = 1; i < labelCount; i++)
+        foreach ((DateTime started, DateTime posted) in EnumerateRanges())
         {
-            DateTime started = Started + (increment * (i - 1));
-            DateTime posted = Started + (increment * i);
-
-            labels[i] = started.ToShortDateString() + " \u2013 " + posted.ToShortDateString();
+            labels.Add(started.ToShortDateString() + " \u2013 " + posted.ToShortDateString());
         }
 
         foreach (Account account in Accounts.Values)
         {
+            int label = 0;
             bool nonZero = false;
-            double[] data = new double[labelCount];
+            double[] data = new double[labels.Count];
 
-            for (int label = 1; label < labelCount; label++)
+            foreach ((DateTime started, DateTime posted) in EnumerateRanges())
             {
-                DateTime started = Started + (increment * (label - 1));
-                DateTime posted = Started + (increment * label);
-
                 if (account.Temporary)
                 {
-                    data[label] = Math.Abs((double)account.GetBalance(started, posted));
+                    data[label] = (double)account.Type.ToBalance(account.GetBalance(started, posted));
                 }
                 else
                 {
-                    data[label] = Math.Abs((double)account.GetBalance(posted));
+                    data[label] = (double)account.Type.ToBalance(account.GetBalance(posted));
                 }
 
                 if (data[label] != 0)
                 {
                     nonZero = true;
                 }
+
+                label++;
             }
 
             if (nonZero)
@@ -136,5 +172,33 @@ public class HtmlReport
         }
 
         return JsonSerializer.Serialize(new ChartJSChartData(labels, datasets), FormattedStrings.JsonOptions);
+    }
+
+    public string GetAnalysis()
+    {
+        List<string> labels = new List<string>();
+        List<double> data = new List<double>();
+
+        foreach (Account account in Accounts.Values)
+        {
+            decimal balance;
+
+            if (account.Temporary)
+            {
+                balance = account.GetBalance(Started, Posted);
+            }
+            else
+            {
+                balance = account.GetBalance(Posted);
+            }
+
+            if (balance != 0)
+            {
+                labels.Add(account.Name);
+                data.Add((double)account.Type.ToBalance(balance));
+            }
+        }
+
+        return JsonSerializer.Serialize(new ChartJSChartData(labels, new ChartJSChartDataset[] { new ChartJSChartDataset(data) }), FormattedStrings.JsonOptions);
     }
 }

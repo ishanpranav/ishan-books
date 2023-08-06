@@ -1,4 +1,4 @@
-﻿// html-report.js
+﻿// time-series.js
 // Copyright(c) 2023 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
