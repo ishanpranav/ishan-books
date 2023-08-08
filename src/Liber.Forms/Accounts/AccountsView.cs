@@ -6,14 +6,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing.Design;
 using System.Linq;
-using System.Runtime.InteropServices;
 using Humanizer;
 using Liber.Forms.Properties;
 
 namespace Liber.Forms.Accounts;
 
-[ClassInterface(ClassInterfaceType.AutoDual)]
-[ComVisible(true)]
 [Editor(typeof(AccountsEditor), typeof(UITypeEditor))]
 public class AccountsView
 {

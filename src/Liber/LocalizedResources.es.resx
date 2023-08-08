@@ -147,6 +147,9 @@
   <data name="PageSettings" xml:space="preserve">
     <value>Configuración de página</value>
   </data>
+  <data name="Periodicity" xml:space="preserve">
+    <value>Periodicidad</value>
+  </data>
   <data name="Placeholder" xml:space="preserve">
     <value>Marcador de posición</value>
   </data>
@@ -201,11 +204,17 @@
   <data name="_d_Accounts" xml:space="preserve">
     <value>Determina las cuentas incluidas en el documento.</value>
   </data>
+  <data name="_d_Annually" xml:space="preserve">
+    <value>Anualmente</value>
+  </data>
   <data name="_d_Asset" xml:space="preserve">
     <value>Activo</value>
   </data>
   <data name="_d_Bank" xml:space="preserve">
     <value>Banco</value>
+  </data>
+  <data name="_d_Biweekly" xml:space="preserve">
+    <value>Quincenalmente</value>
   </data>
   <data name="_d_Check" xml:space="preserve">
     <value>Especifica el cheque para usar como fuente de datos.</value>
@@ -221,6 +230,9 @@
   </data>
   <data name="_d_CreditCard" xml:space="preserve">
     <value>Tarjeta de crédito</value>
+  </data>
+  <data name="_d_Daily" xml:space="preserve">
+    <value>Diariamente</value>
   </data>
   <data name="_d_Equity" xml:space="preserve">
     <value>Patrimonio</value>
@@ -245,6 +257,9 @@
   </data>
   <data name="_d_LongTermLiability" xml:space="preserve">
     <value>Pasivo a largo plazo</value>
+  </data>
+  <data name="_d_Monthly" xml:space="preserve">
+    <value>Mensualmente</value>
   </data>
   <data name="_d_None" xml:space="preserve">
     <value>(Sin categoría)</value>
@@ -273,6 +288,9 @@
   <data name="_d_Partnership" xml:space="preserve">
     <value>Sociedad</value>
   </data>
+  <data name="_d_Periodicity" xml:space="preserve">
+    <value>Especifica la frecuencia de los puntos de datos.</value>
+  </data>
   <data name="_d_Posted" xml:space="preserve">
     <value>Especifica la fecha de finalización.</value>
   </data>
@@ -281,5 +299,8 @@
   </data>
   <data name="_d_Title" xml:space="preserve">
     <value>Especifica el título del reporte.</value>
+  </data>
+  <data name="_d_Weekly" xml:space="preserve">
+    <value>Semanalmente</value>
   </data>
 </root>

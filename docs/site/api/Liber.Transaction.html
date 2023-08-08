@@ -1,0 +1,936 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class Transaction
+ </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class Transaction
+ ">
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/ishanpranav/ishan-books/new/master/apiSpec/new?filename=Liber_Transaction.md&amp;value=---%0Auid%3A%20Liber.Transaction%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+  </head>
+
+  <script type="module">
+    import options from './../public/main.js'
+    import { init } from './../public/docfx.min.js'
+    init(options)
+  </script>
+
+  <script>
+    const theme = localStorage.getItem('theme') || 'auto'
+    document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+  </script>
+
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" style="margin-top: -.65em; margin-left: -.8em" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Liber.Transaction">
+
+
+
+  <h1 id="Liber_Transaction" data-uid="Liber.Transaction" class="text-break">
+    Class Transaction
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Transaction.cs/#L14"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Liber.html">Liber</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Liber.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"></div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[MessagePackObject(false)]
+public class Transaction : IComparable, IComparable&lt;Transaction&gt;, IEquatable&lt;Transaction&gt;</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">Transaction</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.icomparable">IComparable</a></div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.icomparable-1">IComparable</a>&lt;<a class="xref" href="Liber.Transaction.html">Transaction</a>&gt;</div>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a class="xref" href="Liber.Transaction.html">Transaction</a>&gt;</div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist derived">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Liber_Transaction__ctor_" data-uid="Liber.Transaction.#ctor*"></a>
+
+  <h3 id="Liber_Transaction__ctor" data-uid="Liber.Transaction.#ctor">
+  Transaction()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Transaction.cs/#L20"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Transaction()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Liber_Transaction__ctor_" data-uid="Liber.Transaction.#ctor*"></a>
+
+  <h3 id="Liber_Transaction__ctor_System_Collections_Generic_ICollection_Liber_Line__" data-uid="Liber.Transaction.#ctor(System.Collections.Generic.ICollection{Liber.Line})">
+  Transaction(ICollection&lt;Line&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Transaction.cs/#L25"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[JsonConstructor]
+[SerializationConstructor]
+public Transaction(ICollection&lt;Line&gt; lines)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>lines</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Liber.Line.html">Line</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="properties">Properties
+</h2>
+
+
+  <a id="Liber_Transaction_Balance_" data-uid="Liber.Transaction.Balance*"></a>
+
+  <h3 id="Liber_Transaction_Balance" data-uid="Liber.Transaction.Balance">
+  Balance
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Transaction.cs/#L86"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Ignore]
+[IgnoreMember]
+[JsonIgnore]
+public decimal Balance { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.decimal">decimal</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Liber_Transaction_Id_" data-uid="Liber.Transaction.Id*"></a>
+
+  <h3 id="Liber_Transaction_Id" data-uid="Liber.Transaction.Id">
+  Id
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Transaction.cs/#L54"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Index(1, -1)]
+[Key(1)]
+[Name(&quot;Transaction ID&quot;)]
+public Guid Id { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Liber_Transaction_Lines_" data-uid="Liber.Transaction.Lines*"></a>
+
+  <h3 id="Liber_Transaction_Lines" data-uid="Liber.Transaction.Lines">
+  Lines
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Transaction.cs/#L37"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Ignore]
+[Key(0)]
+public ICollection&lt;Line&gt; Lines { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;<a class="xref" href="Liber.Line.html">Line</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Liber_Transaction_Memo_" data-uid="Liber.Transaction.Memo*"></a>
+
+  <h3 id="Liber_Transaction_Memo" data-uid="Liber.Transaction.Memo">
+  Memo
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Transaction.cs/#L79"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Index(4, -1)]
+[Key(5)]
+[Name(&quot;Notes&quot;)]
+[NullValues(&quot;&quot;)]
+[Optional]
+public string? Memo { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Liber_Transaction_Name_" data-uid="Liber.Transaction.Name*"></a>
+
+  <h3 id="Liber_Transaction_Name" data-uid="Liber.Transaction.Name">
+  Name
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Transaction.cs/#L72"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Index(3, -1)]
+[Key(4)]
+[Name(&quot;Description&quot;)]
+[NullValues(&quot;&quot;)]
+[Optional]
+public string? Name { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Liber_Transaction_Number_" data-uid="Liber.Transaction.Number*"></a>
+
+  <h3 id="Liber_Transaction_Number" data-uid="Liber.Transaction.Number">
+  Number
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Transaction.cs/#L65"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Default(0)]
+[Index(2, -1)]
+[Key(3)]
+[Name(&quot;Number&quot;)]
+[Optional]
+public decimal Number { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.decimal">decimal</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Liber_Transaction_OrderedLines_" data-uid="Liber.Transaction.OrderedLines*"></a>
+
+  <h3 id="Liber_Transaction_OrderedLines" data-uid="Liber.Transaction.OrderedLines">
+  OrderedLines
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Transaction.cs/#L41"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Ignore]
+[IgnoreMember]
+[JsonIgnore]
+public IOrderedEnumerable&lt;Line&gt; OrderedLines { get; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.linq.iorderedenumerable-1">IOrderedEnumerable</a>&lt;<a class="xref" href="Liber.Line.html">Line</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <a id="Liber_Transaction_Posted_" data-uid="Liber.Transaction.Posted*"></a>
+
+  <h3 id="Liber_Transaction_Posted" data-uid="Liber.Transaction.Posted">
+  Posted
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Transaction.cs/#L59"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Format(&quot;M/d/yyyy&quot;)]
+[Index(0, -1)]
+[Key(2)]
+[Name(&quot;Date&quot;)]
+public DateTime Posted { get; set; }</code></pre>
+  </div>
+
+
+
+
+
+  <h4 class="section">Property Value</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.datetime">DateTime</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Liber_Transaction_CompareTo_" data-uid="Liber.Transaction.CompareTo*"></a>
+
+  <h3 id="Liber_Transaction_CompareTo_Liber_Transaction_" data-uid="Liber.Transaction.CompareTo(Liber.Transaction)">
+  CompareTo(Transaction?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Transaction.cs/#L124"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int CompareTo(Transaction? other)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>other</code> <a class="xref" href="Liber.Transaction.html">Transaction</a></dt>
+    <dd><p>An object to compare with this instance.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>A value that indicates the relative order of the objects being compared. The return value has these meanings:</p>
+ <table><thead><tr><th class="term"> Value</th><th class="description"> Meaning</th></tr></thead><tbody><tr><td class="term"> Less than zero</td><td class="description"> This instance precedes <code class="paramref">other</code> in the sort order.</td></tr><tr><td class="term"> Zero</td><td class="description"> This instance occurs in the same position in the sort order as <code class="paramref">other</code>.</td></tr><tr><td class="term"> Greater than zero</td><td class="description"> This instance follows <code class="paramref">other</code> in the sort order.</td></tr></tbody></table>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Liber_Transaction_Equals_" data-uid="Liber.Transaction.Equals*"></a>
+
+  <h3 id="Liber_Transaction_Equals_Liber_Transaction_" data-uid="Liber.Transaction.Equals(Liber.Transaction)">
+  Equals(Transaction?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Transaction.cs/#L163"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Indicates whether the current object is equal to another object of the same type.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Equals(Transaction? other)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>other</code> <a class="xref" href="Liber.Transaction.html">Transaction</a></dt>
+    <dd><p>An object to compare with this object.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the current object is equal to the <code class="paramref">other</code> parameter; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Liber_Transaction_Equals_" data-uid="Liber.Transaction.Equals*"></a>
+
+  <h3 id="Liber_Transaction_Equals_System_Object_" data-uid="Liber.Transaction.Equals(System.Object)">
+  Equals(object?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Transaction.cs/#L148"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Determines whether the specified object is equal to the current object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Equals(object? obj)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>obj</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></dt>
+    <dd><p>The object to compare with the current object.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd><p><a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the specified object  is equal to the current object; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Liber_Transaction_GetDoubleEntry_" data-uid="Liber.Transaction.GetDoubleEntry*"></a>
+
+  <h3 id="Liber_Transaction_GetDoubleEntry_Liber_Line_" data-uid="Liber.Transaction.GetDoubleEntry(Liber.Line)">
+  GetDoubleEntry(Line)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Transaction.cs/#L104"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Line? GetDoubleEntry(Line value)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>value</code> <a class="xref" href="Liber.Line.html">Line</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Liber.Line.html">Line</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Liber_Transaction_GetHashCode_" data-uid="Liber.Transaction.GetHashCode*"></a>
+
+  <h3 id="Liber_Transaction_GetHashCode" data-uid="Liber.Transaction.GetHashCode">
+  GetHashCode()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Transaction.cs/#L173"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Serves as the default hash function.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
+  </div>
+
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></dt>
+    <dd><p>A hash code for the current object.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="operators">Operators
+</h2>
+
+
+  <a id="Liber_Transaction_op_Equality_" data-uid="Liber.Transaction.op_Equality*"></a>
+
+  <h3 id="Liber_Transaction_op_Equality_Liber_Transaction_Liber_Transaction_" data-uid="Liber.Transaction.op_Equality(Liber.Transaction,Liber.Transaction)">
+  operator ==(Transaction?, Transaction?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Transaction.cs/#L178"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator ==(Transaction? left, Transaction? right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Liber.Transaction.html">Transaction</a></dt>
+    <dd></dd>
+    <dt><code>right</code> <a class="xref" href="Liber.Transaction.html">Transaction</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Liber_Transaction_op_GreaterThan_" data-uid="Liber.Transaction.op_GreaterThan*"></a>
+
+  <h3 id="Liber_Transaction_op_GreaterThan_Liber_Transaction_Liber_Transaction_" data-uid="Liber.Transaction.op_GreaterThan(Liber.Transaction,Liber.Transaction)">
+  operator &gt;(Transaction?, Transaction?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Transaction.cs/#L203"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator &gt;(Transaction? left, Transaction? right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Liber.Transaction.html">Transaction</a></dt>
+    <dd></dd>
+    <dt><code>right</code> <a class="xref" href="Liber.Transaction.html">Transaction</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Liber_Transaction_op_GreaterThanOrEqual_" data-uid="Liber.Transaction.op_GreaterThanOrEqual*"></a>
+
+  <h3 id="Liber_Transaction_op_GreaterThanOrEqual_Liber_Transaction_Liber_Transaction_" data-uid="Liber.Transaction.op_GreaterThanOrEqual(Liber.Transaction,Liber.Transaction)">
+  operator &gt;=(Transaction?, Transaction?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Transaction.cs/#L208"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator &gt;=(Transaction? left, Transaction? right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Liber.Transaction.html">Transaction</a></dt>
+    <dd></dd>
+    <dt><code>right</code> <a class="xref" href="Liber.Transaction.html">Transaction</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Liber_Transaction_op_Inequality_" data-uid="Liber.Transaction.op_Inequality*"></a>
+
+  <h3 id="Liber_Transaction_op_Inequality_Liber_Transaction_Liber_Transaction_" data-uid="Liber.Transaction.op_Inequality(Liber.Transaction,Liber.Transaction)">
+  operator !=(Transaction?, Transaction?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Transaction.cs/#L188"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator !=(Transaction? left, Transaction? right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Liber.Transaction.html">Transaction</a></dt>
+    <dd></dd>
+    <dt><code>right</code> <a class="xref" href="Liber.Transaction.html">Transaction</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Liber_Transaction_op_LessThan_" data-uid="Liber.Transaction.op_LessThan*"></a>
+
+  <h3 id="Liber_Transaction_op_LessThan_Liber_Transaction_Liber_Transaction_" data-uid="Liber.Transaction.op_LessThan(Liber.Transaction,Liber.Transaction)">
+  operator &lt;(Transaction?, Transaction?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Transaction.cs/#L193"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator &lt;(Transaction? left, Transaction? right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Liber.Transaction.html">Transaction</a></dt>
+    <dd></dd>
+    <dt><code>right</code> <a class="xref" href="Liber.Transaction.html">Transaction</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Liber_Transaction_op_LessThanOrEqual_" data-uid="Liber.Transaction.op_LessThanOrEqual*"></a>
+
+  <h3 id="Liber_Transaction_op_LessThanOrEqual_Liber_Transaction_Liber_Transaction_" data-uid="Liber.Transaction.op_LessThanOrEqual(Liber.Transaction,Liber.Transaction)">
+  operator &lt;=(Transaction?, Transaction?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Transaction.cs/#L198"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool operator &lt;=(Transaction? left, Transaction? right)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>left</code> <a class="xref" href="Liber.Transaction.html">Transaction</a></dt>
+    <dd></dd>
+    <dt><code>right</code> <a class="xref" href="Liber.Transaction.html">Transaction</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Transaction.cs/#L14" class="edit-link">Edit this page</a>
+        </div>
+
+        
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+
+    <footer class="border-top">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

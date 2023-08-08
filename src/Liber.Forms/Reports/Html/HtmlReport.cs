@@ -82,7 +82,6 @@ public class HtmlReport
     [LocalizedCategory(nameof(Periodicity))]
     [LocalizedDescription(nameof(Periodicity))]
     [LocalizedDisplayName(nameof(Periodicity))]
-    [TypeConverter(typeof(LocalizedEnumConverter))]
     public Periodicity Periodicity { get; set; }
 
     private DateTime Next(DateTime current)

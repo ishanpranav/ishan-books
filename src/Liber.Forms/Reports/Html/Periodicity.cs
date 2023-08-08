@@ -6,11 +6,21 @@ using System.ComponentModel;
 
 namespace Liber.Forms.Reports.Html;
 
+[TypeConverter(typeof(LocalizedEnumConverter))]
 public enum Periodicity
 {
+    [LocalizedDescription(nameof(Daily))]
     Daily,
+
+    [LocalizedDescription(nameof(Weekly))]
     Weekly,
+
+    [LocalizedDescription(nameof(Biweekly))]
     Biweekly,
+
+    [LocalizedDescription(nameof(Monthly))]
     Monthly,
+
+    [LocalizedDescription(nameof(Annually))]
     Annually
 }

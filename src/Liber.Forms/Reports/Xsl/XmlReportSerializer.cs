@@ -9,7 +9,7 @@ using System.Xml.Xsl;
 
 namespace Liber.Forms.Reports.Xsl;
 
-public static class XmlReportSerializer
+internal static class XmlReportSerializer
 {
     private static readonly XsltSettings s_xsltSettings = new XsltSettings()
     {

@@ -1,0 +1,552 @@
+{
+  "homepages": [],
+  "source_base_path": "C:/Users/ishan/source/repos/liberty/tools/docfx",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CsvHelper.TypeConversion.ColorConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CsvHelper.TypeConversion.ColorConverter.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/CsvHelper.TypeConversion.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/CsvHelper.TypeConversion.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liber.Account.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liber.Account.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liber.AccountType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liber.AccountType.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liber.AccountTypeExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liber.AccountTypeExtensions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liber.Company.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liber.Company.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liber.CompanyType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liber.CompanyType.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liber.EquityModes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liber.EquityModes.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liber.Forms.Accounts.AccountsView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liber.Forms.Accounts.AccountsView.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liber.Forms.Accounts.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liber.Forms.Accounts.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liber.Forms.Reports.Html.HtmlReport.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liber.Forms.Reports.Html.HtmlReport.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liber.Forms.Reports.Html.Periodicity.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liber.Forms.Reports.Html.Periodicity.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liber.Forms.Reports.Html.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liber.Forms.Reports.Html.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liber.Forms.Reports.Xsl.XslReport.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liber.Forms.Reports.Xsl.XslReport.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liber.Forms.Reports.Xsl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liber.Forms.Reports.Xsl.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liber.GnuCashAccount.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liber.GnuCashAccount.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liber.GnuCashLine.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liber.GnuCashLine.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liber.GuidEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liber.GuidEventArgs.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liber.IifAccount.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liber.IifAccount.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liber.IifExtra.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liber.IifExtra.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liber.IifRecordType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liber.IifRecordType.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liber.Line.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liber.Line.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liber.Properties.Resources.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liber.Properties.Resources.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liber.Properties.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liber.Properties.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liber.Sqlite.SqliteSerializer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liber.Sqlite.SqliteSerializer.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liber.Sqlite.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liber.Sqlite.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liber.TaxType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liber.TaxType.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liber.Transaction.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liber.Transaction.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liber.Writers.GnuCashAccountWriter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liber.Writers.GnuCashAccountWriter.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liber.Writers.GnuCashSerializer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liber.Writers.GnuCashSerializer.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liber.Writers.GnuCashTransactionWriter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liber.Writers.GnuCashTransactionWriter.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liber.Writers.IWriter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liber.Writers.IWriter.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liber.Writers.IifAccountWriter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liber.Writers.IifAccountWriter.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liber.Writers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liber.Writers.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Liber.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Liber.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.Collections.Specialized.ReverseDateTimeComparer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.Collections.Specialized.ReverseDateTimeComparer.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.Collections.Specialized.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.Collections.Specialized.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.ComponentModel.LocalizedCategoryAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.ComponentModel.LocalizedCategoryAttribute.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.ComponentModel.LocalizedDescriptionAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.ComponentModel.LocalizedDescriptionAttribute.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.ComponentModel.LocalizedDisplayNameAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.ComponentModel.LocalizedDisplayNameAttribute.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.ComponentModel.LocalizedEnumConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.ComponentModel.LocalizedEnumConverter.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.ComponentModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.ComponentModel.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.DecimalExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.DecimalExtensions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.Text.Json.Serialization.JsonColorConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.Text.Json.Serialization.JsonColorConverter.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.Text.Json.Serialization.TypeConverterJsonConverterAdapter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.Text.Json.Serialization.TypeConverterJsonConverterAdapter.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.Text.Json.Serialization.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.Text.Json.Serialization.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/System.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/System.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html"
+        },
+        ".json": {
+          "relative_path": "api/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/intro.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html"
+        },
+        ".json": {
+          "relative_path": "articles/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html"
+        },
+        ".json": {
+          "relative_path": "toc.json"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
