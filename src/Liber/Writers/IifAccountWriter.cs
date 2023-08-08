@@ -6,6 +6,7 @@ using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
 using CsvHelper;
+using CsvHelper.Configuration;
 
 namespace Liber.Writers;
 
@@ -38,13 +39,20 @@ public class IifAccountWriter : IWriter
         }
 
         await using StreamWriter streamWriter = new StreamWriter(output);
-        await using CsvWriter csvWriter = new CsvWriter(streamWriter, CultureInfo.InvariantCulture);
+        await using CsvWriter csvWriter = new CsvWriter(streamWriter, new CsvConfiguration(CultureInfo.InvariantCulture)
+        {
+            Delimiter = "\t"
+        });
 
         csvWriter.WriteHeader<IifCompany>();
 
         await csvWriter.NextRecordAsync();
 
         csvWriter.WriteRecord(new IifCompany());
+
+        await csvWriter.NextRecordAsync();
+
+        csvWriter.WriteHeader<IifAccount>();
 
         await csvWriter.NextRecordAsync();
         await csvWriter.WriteRecordsAsync(accounts);

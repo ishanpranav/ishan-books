@@ -723,7 +723,7 @@
     <value>Liber.Forms.Components.RecentPathManager, Liber.Forms, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="_saveFileDialog.Filter" xml:space="preserve">
-    <value>IshanBooks Company File (*.izbk)|*.izbk|MessagePack (*.mpk;*.msgpack)|*.mpk;*.msgpack|JavaScript Object Notation (*.json)|*.json|SQLite3 Database File (*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3)|*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3|Comma-delimited (*.csv)|*.csv|Extensible Markup Language (*.xml)|*.xml</value>
+    <value>IshanBooks Company File (*.izbk)|*.izbk|MessagePack (*.mpk;*.msgpack)|*.mpk;*.msgpack|JavaScript Object Notation (*.json)|*.json|SQLite3 Database File (*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3)|*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3|Comma-delimited (*.csv)|*.csv|Intuit Interchange Format (*.iif)|*.iif|XML Document (*.xml)|*.xml</value>
   </data>
   <data name="&gt;&gt;_saveFileDialog.Name" xml:space="preserve">
     <value>_saveFileDialog</value>

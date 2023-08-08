@@ -55,7 +55,7 @@ internal sealed class IifCompany
         }
     }
 
-    [Format("YYYY-MM-dd")]
+    [Format("yyyy-MM-dd")]
     [Name("DATE")]
     public DateTime Date
     {

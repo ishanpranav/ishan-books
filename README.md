@@ -41,6 +41,8 @@ __Export-friendly formats__
 - [X] PDF Document (*.pdf)
 - [X] XPS Document (*.xps)
 - [X] HTML Document (*.html)
+- [ ] Intuit Interchange Format (*.iif)
+- [X] XML Document (*.xml)
 
 __Localization__
 - [X] English
