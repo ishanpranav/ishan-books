@@ -114,7 +114,6 @@ partial class CompanyForm
         equityAccountComboBox.FormattingEnabled = true;
         _helpProvider.SetHelpString(equityAccountComboBox, resources.GetString("equityAccountComboBox.HelpString"));
         equityAccountComboBox.Name = "equityAccountComboBox";
-        equityAccountComboBox.SelectedItem = new System.Guid("00000000-0000-0000-0000-000000000000");
         _helpProvider.SetShowHelp(equityAccountComboBox, (bool)resources.GetObject("equityAccountComboBox.ShowHelp"));
         // 
         // label5
@@ -130,7 +129,6 @@ partial class CompanyForm
         otherEquityAccountComboBox.FormattingEnabled = true;
         _helpProvider.SetHelpString(otherEquityAccountComboBox, resources.GetString("otherEquityAccountComboBox.HelpString"));
         otherEquityAccountComboBox.Name = "otherEquityAccountComboBox";
-        otherEquityAccountComboBox.SelectedItem = new System.Guid("00000000-0000-0000-0000-000000000000");
         _helpProvider.SetShowHelp(otherEquityAccountComboBox, (bool)resources.GetObject("otherEquityAccountComboBox.ShowHelp"));
         // 
         // closingAccountsGroupBox
@@ -201,8 +199,6 @@ partial class CompanyForm
     private System.Windows.Forms.Label label2;
     protected System.Windows.Forms.TextBox passwordTextBox;
     private System.Windows.Forms.Label label3;
-    protected System.Windows.Forms.Button cancelButton;
-    private System.Windows.Forms.GroupBox groupBox1;
     private Accounts.AccountComboBox equityAccountComboBox;
     private System.Windows.Forms.Label label4;
     private System.Windows.Forms.Label label5;
@@ -210,4 +206,5 @@ partial class CompanyForm
     protected System.Windows.Forms.GroupBox closingAccountsGroupBox;
     private System.Windows.Forms.ComboBox typeComboBox;
     private System.Windows.Forms.Label label6;
+    private System.Windows.Forms.Button cancelButton;
 }

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -118,9 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Check" xml:space="preserve">
-    <value>Specifies the cheque to use as a data source.</value>
+    <value>Cheque</value>
   </data>
   <data name="Color" xml:space="preserve">
+    <value>Colour</value>
+  </data>
+  <data name="_d_Check" xml:space="preserve">
+    <value>Specifies the cheque to use as a data source.</value>
+  </data>
+  <data name="_d_Color" xml:space="preserve">
     <value>Specifies the text colour.</value>
   </data>
 </root>

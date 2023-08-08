@@ -29,9 +29,14 @@ internal sealed partial class AccountsForm : Form
         company.AccountRemoved += OnCompanyAccountRemoved;
         _factory = factory;
 
+        InitializeAccounts();
+    }
+
+    private void InitializeAccounts()
+    {
         _listView.BeginUpdate();
 
-        foreach (KeyValuePair<Guid, Account> account in company.OrderedAccounts)
+        foreach (KeyValuePair<Guid, Account> account in _company.OrderedAccounts)
         {
             InitializeAccount(account.Key, account.Value);
         }
@@ -100,10 +105,6 @@ internal sealed partial class AccountsForm : Form
         if (value == _company.EquityAccount)
         {
             balance = _company.GetEquity(started);
-        }
-        else if (value == _company.OtherEquityAccount)
-        {
-            balance = _company.GetOtherEquity(started);
         }
         else if (value.Temporary)
         {
@@ -252,6 +253,14 @@ internal sealed partial class AccountsForm : Form
         {
             InitializeTransactions(id);
         }
+    }
+
+    private void OnRefreshToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        _items.Clear();
+        _listView.Items.Clear();
+
+        InitializeAccounts();
     }
 
     protected override void Dispose(bool disposing)

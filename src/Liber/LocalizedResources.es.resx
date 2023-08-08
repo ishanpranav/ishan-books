@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,100 +117,169 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AccountPayable" xml:space="preserve">
-    <value>Cuenta por pagar</value>
-  </data>
-  <data name="AccountReceivable" xml:space="preserve">
-    <value>Cuenta por cobrar</value>
-  </data>
   <data name="Accounts" xml:space="preserve">
-    <value>Determina las cuentas incluidas en el documento.</value>
-  </data>
-  <data name="Asset" xml:space="preserve">
-    <value>Activo</value>
-  </data>
-  <data name="Bank" xml:space="preserve">
-    <value>Banco</value>
+    <value>Cuentas</value>
   </data>
   <data name="Check" xml:space="preserve">
-    <value>Especifica el cheque para usar como fuente de datos.</value>
+    <value>Cheque</value>
   </data>
-  <data name="Color" xml:space="preserve">
-    <value>Especifica el color del texto.</value>
+  <data name="Credit" xml:space="preserve">
+    <value>Crédito</value>
   </data>
-  <data name="Corporation" xml:space="preserve">
-    <value>Corporación</value>
+  <data name="Debit" xml:space="preserve">
+    <value>Débito</value>
   </data>
-  <data name="Cost" xml:space="preserve">
-    <value>Costo de ventas</value>
-  </data>
-  <data name="CreditCard" xml:space="preserve">
-    <value>Tarjeta de crédito</value>
-  </data>
-  <data name="Equity" xml:space="preserve">
-    <value>Patrimonio</value>
-  </data>
-  <data name="Expense" xml:space="preserve">
-    <value>Gasto</value>
-  </data>
-  <data name="FixedAsset" xml:space="preserve">
-    <value>Activo fijo</value>
+  <data name="Description" xml:space="preserve">
+    <value>Descripción</value>
   </data>
   <data name="Font" xml:space="preserve">
-    <value>Especifica la fuente y el estilo de fuente a utilizar para el documento.</value>
+    <value>Fuente</value>
   </data>
-  <data name="Income" xml:space="preserve">
-    <value>Ingreso</value>
+  <data name="Memo" xml:space="preserve">
+    <value>Notas</value>
   </data>
-  <data name="IncomeTaxExpense" xml:space="preserve">
-    <value>Impuesto sobre la renta</value>
+  <data name="Name" xml:space="preserve">
+    <value>Nombre</value>
   </data>
-  <data name="Individual" xml:space="preserve">
-    <value>Individuo</value>
-  </data>
-  <data name="LongTermLiability" xml:space="preserve">
-    <value>Pasivo a largo plazo</value>
-  </data>
-  <data name="None" xml:space="preserve">
-    <value>(Sin categoría)</value>
-  </data>
-  <data name="None1" xml:space="preserve">
-    <value>(Sin categoría)</value>
-  </data>
-  <data name="None2" xml:space="preserve">
-    <value>(Sin categoría)</value>
-  </data>
-  <data name="Other" xml:space="preserve">
-    <value>Otro</value>
-  </data>
-  <data name="OtherAsset" xml:space="preserve">
-    <value>Otro activo</value>
-  </data>
-  <data name="OtherComprehensiveIncome" xml:space="preserve">
-    <value>Otro resultado integral</value>
-  </data>
-  <data name="OtherCurrentAsset" xml:space="preserve">
-    <value>Otro activo corriente</value>
-  </data>
-  <data name="OtherCurrentLiability" xml:space="preserve">
-    <value>Otro pasivo corriente</value>
-  </data>
-  <data name="OtherIncomeExpense" xml:space="preserve">
-    <value>Otro ingreso/gasto</value>
+  <data name="Number" xml:space="preserve">
+    <value>Número</value>
   </data>
   <data name="PageSettings" xml:space="preserve">
-    <value>Especifica los márgenes, la orientación de la página y el tamaño del papel.</value>
+    <value>Configuración de página</value>
   </data>
-  <data name="Partnership" xml:space="preserve">
-    <value>Sociedad</value>
+  <data name="Placeholder" xml:space="preserve">
+    <value>Marcador de posición</value>
   </data>
   <data name="Posted" xml:space="preserve">
-    <value>Especifica la fecha de finalización.</value>
+    <value>Hasta</value>
   </data>
   <data name="Started" xml:space="preserve">
-    <value>Especifica la fecha de inicio.</value>
+    <value>Desde</value>
+  </data>
+  <data name="TaxType" xml:space="preserve">
+    <value>Tipo de impuesto</value>
   </data>
   <data name="Title" xml:space="preserve">
+    <value>Título</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Tipo</value>
+  </data>
+  <data name="_c_Accounts" xml:space="preserve">
+    <value>Fuente de datos</value>
+  </data>
+  <data name="_c_Check" xml:space="preserve">
+    <value>Fuente de datos</value>
+  </data>
+  <data name="_c_Color" xml:space="preserve">
+    <value>Diseño</value>
+  </data>
+  <data name="_c_Font" xml:space="preserve">
+    <value>Diseño</value>
+  </data>
+  <data name="_c_PageSettings" xml:space="preserve">
+    <value>Diseño</value>
+  </data>
+  <data name="_c_Periodicity" xml:space="preserve">
+    <value>Fuente de datos</value>
+  </data>
+  <data name="_c_Posted" xml:space="preserve">
+    <value>Rango de fechas</value>
+  </data>
+  <data name="_c_Started" xml:space="preserve">
+    <value>Rango de fechas</value>
+  </data>
+  <data name="_c_Title" xml:space="preserve">
+    <value>Diseño</value>
+  </data>
+  <data name="_d_AccountPayable" xml:space="preserve">
+    <value>Cuenta por pagar</value>
+  </data>
+  <data name="_d_AccountReceivable" xml:space="preserve">
+    <value>Cuenta por cobrar</value>
+  </data>
+  <data name="_d_Accounts" xml:space="preserve">
+    <value>Determina las cuentas incluidas en el documento.</value>
+  </data>
+  <data name="_d_Asset" xml:space="preserve">
+    <value>Activo</value>
+  </data>
+  <data name="_d_Bank" xml:space="preserve">
+    <value>Banco</value>
+  </data>
+  <data name="_d_Check" xml:space="preserve">
+    <value>Especifica el cheque para usar como fuente de datos.</value>
+  </data>
+  <data name="_d_Color" xml:space="preserve">
+    <value>Especifica el color del texto.</value>
+  </data>
+  <data name="_d_Corporation" xml:space="preserve">
+    <value>Corporación</value>
+  </data>
+  <data name="_d_Cost" xml:space="preserve">
+    <value>Costo de ventas</value>
+  </data>
+  <data name="_d_CreditCard" xml:space="preserve">
+    <value>Tarjeta de crédito</value>
+  </data>
+  <data name="_d_Equity" xml:space="preserve">
+    <value>Patrimonio</value>
+  </data>
+  <data name="_d_Expense" xml:space="preserve">
+    <value>Gasto</value>
+  </data>
+  <data name="_d_FixedAsset" xml:space="preserve">
+    <value>Activo fijo</value>
+  </data>
+  <data name="_d_Font" xml:space="preserve">
+    <value>Especifica la fuente y el estilo de fuente a utilizar para el documento.</value>
+  </data>
+  <data name="_d_Income" xml:space="preserve">
+    <value>Ingreso</value>
+  </data>
+  <data name="_d_IncomeTaxExpense" xml:space="preserve">
+    <value>Impuesto sobre la renta</value>
+  </data>
+  <data name="_d_Individual" xml:space="preserve">
+    <value>Individuo</value>
+  </data>
+  <data name="_d_LongTermLiability" xml:space="preserve">
+    <value>Pasivo a largo plazo</value>
+  </data>
+  <data name="_d_None" xml:space="preserve">
+    <value>(Sin categoría)</value>
+  </data>
+  <data name="_d_Other" xml:space="preserve">
+    <value>Otro</value>
+  </data>
+  <data name="_d_OtherAsset" xml:space="preserve">
+    <value>Otro activo</value>
+  </data>
+  <data name="_d_OtherComprehensiveIncome" xml:space="preserve">
+    <value>Otro resultado integral</value>
+  </data>
+  <data name="_d_OtherCurrentAsset" xml:space="preserve">
+    <value>Otro activo corriente</value>
+  </data>
+  <data name="_d_OtherCurrentLiability" xml:space="preserve">
+    <value>Otro pasivo corriente</value>
+  </data>
+  <data name="_d_OtherIncomeExpense" xml:space="preserve">
+    <value>Otro ingreso/gasto</value>
+  </data>
+  <data name="_d_PageSettings" xml:space="preserve">
+    <value>Especifica los márgenes, la orientación de la página y el tamaño del papel.</value>
+  </data>
+  <data name="_d_Partnership" xml:space="preserve">
+    <value>Sociedad</value>
+  </data>
+  <data name="_d_Posted" xml:space="preserve">
+    <value>Especifica la fecha de finalización.</value>
+  </data>
+  <data name="_d_Started" xml:space="preserve">
+    <value>Especifica la fecha de inicio.</value>
+  </data>
+  <data name="_d_Title" xml:space="preserve">
     <value>Especifica el título del reporte.</value>
   </data>
 </root>

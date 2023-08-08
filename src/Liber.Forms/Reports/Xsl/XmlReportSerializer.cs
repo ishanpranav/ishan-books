@@ -6,9 +6,8 @@ using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 using System.Xml.Xsl;
-using Liber.Forms.Reports.Xsl;
 
-namespace Liber;
+namespace Liber.Forms.Reports.Xsl;
 
 public static class XmlReportSerializer
 {
@@ -21,12 +20,33 @@ public static class XmlReportSerializer
         XmlResolver = s_resolver
     };
     private static readonly XmlReportResolver s_resolver = new XmlReportResolver(s_xslSettings);
-    private static readonly XmlWriterSettings s_xhtmlSettings = new XmlWriterSettings()
+
+    private static XmlWriterSettings? s_settings;
+    private static XmlSerializer? s_serializer;
+
+    public static XmlSerializer Serializer
     {
-        Indent = true,
-        NewLineOnAttributes = true
-    };
-    private static readonly XmlSerializer s_serializer = new XmlSerializer(typeof(XslReport));
+        get
+        {
+            s_serializer ??= new XmlSerializer(typeof(XslReport));
+
+            return s_serializer;
+        }
+    }
+
+    public static XmlWriterSettings Settings
+    {
+        get
+        {
+            s_settings ??= new XmlWriterSettings()
+            {
+                Indent = true,
+                NewLineOnAttributes = true
+            };
+
+            return s_settings;
+        }
+    }
 
     public static XslCompiledTransform DeserializeTransform(string path)
     {
@@ -41,21 +61,15 @@ public static class XmlReportSerializer
 
     public static string Serialize(XslCompiledTransform transform, XslReport report)
     {
-        using StringWriter str = new StringWriter();
-
-        s_serializer.Serialize(str, report);
-
-        string x = str.ToString();
-
         using MemoryStream memoryStream = new MemoryStream();
         using XmlWriter xmlWriter = XmlWriter.Create(memoryStream);
 
-        s_serializer.Serialize(xmlWriter, report);
+        Serializer.Serialize(xmlWriter, report);
         memoryStream.Seek(offset: 0, SeekOrigin.Begin);
 
         using XmlReader xmlReader = XmlReader.Create(memoryStream, s_xslSettings);
         using StringWriter stringWriter = new StringWriter();
-        using XmlWriter xhtmlWriter = XmlWriter.Create(stringWriter, s_xhtmlSettings);
+        using XmlWriter xhtmlWriter = XmlWriter.Create(stringWriter, Settings);
 
         XsltArgumentList arguments = new XsltArgumentList();
 

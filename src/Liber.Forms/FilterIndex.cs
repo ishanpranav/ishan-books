@@ -14,5 +14,7 @@ internal enum FilterIndex
     MessagePack = 4,
     Json = 5,
     Sqlite = 6,
-    Csv = 7
+    Csv = 7,
+    Iif = 8,
+    Xml = 9
 }

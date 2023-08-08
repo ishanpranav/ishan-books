@@ -198,22 +198,6 @@ public class XslReport : IXmlSerializable
 
             previous = Company.GetEquity(Started);
         }
-        else if (value == Company.OtherEquityAccount)
-        {
-            writer.WriteElementString("other-equity", XmlConvert.ToString(true));
-
-            if (EquityMode.HasFlag(EquityModes.CurrentPosted))
-            {
-                balance = Company.GetOtherEquity(Posted);
-            }
-
-            if (EquityMode.HasFlag(EquityModes.CurrentStarted))
-            {
-                balance = Company.GetOtherEquity(Started);
-            }
-
-            previous = Company.GetOtherEquity(Started);
-        }
         else if (value.Temporary)
         {
             balance = value.GetBalance(Started, Posted);
@@ -284,7 +268,7 @@ public class XslReport : IXmlSerializable
         writer.WriteElementString("posted", XmlConvert.ToString(Posted, XmlDateTimeSerializationMode.Utc));
         writer.WriteElementString("title", Title);
         writer.WriteStartElement("company");
-        writer.WriteElementString("name", Company.Name ?? Liber.Properties.Resources.DefaultCompanyName);
+        writer.WriteElementString("name", Company.DisplayName);
         writer.WriteElementString("type", Company.Type.ToString());
 
         foreach (Account account in Accounts.Values)

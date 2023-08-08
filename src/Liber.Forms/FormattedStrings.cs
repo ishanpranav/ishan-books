@@ -62,7 +62,7 @@ internal static class FormattedStrings
 
     public static string GetCancelText(this Company company)
     {
-        return string.Format(GetString("CancelText{0}"), company.Name ?? Properties.Resources.DefaultCompanyName);
+        return string.Format(GetString("CancelText{0}"), company.DisplayName);
     }
 
     public static string GetCheckWords(decimal amount)

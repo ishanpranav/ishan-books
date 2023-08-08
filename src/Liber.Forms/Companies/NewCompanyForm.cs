@@ -8,8 +8,6 @@ internal sealed class NewCompanyForm : CompanyForm
 {
     public NewCompanyForm() : base(new Company())
     {
-        ControlBox = false;
-        cancelButton.Enabled = false;
         closingAccountsGroupBox.Enabled = false;
     }
 }

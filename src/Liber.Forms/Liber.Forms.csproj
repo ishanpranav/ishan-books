@@ -25,6 +25,7 @@
 	  <None Remove="pages\analysis.html" />
 	  <None Remove="pages\time-series.html" />
 	  <None Remove="Properties\Resources.en.restext" />
+	  <None Remove="Properties\Resources.es-ES.restext" />
 	  <None Remove="scripts\analysis.js" />
 	  <None Remove="scripts\chart.js" />
 	  <None Remove="scripts\time-series.js" />
@@ -118,6 +119,7 @@
 
 	<ItemGroup>
 	  <EmbeddedResource Include="Properties\Resources.en.restext" />
+	  <EmbeddedResource Include="Properties\Resources.es-ES.restext" />
 	</ItemGroup>
 
 	<ItemGroup>

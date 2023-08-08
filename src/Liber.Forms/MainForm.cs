@@ -16,7 +16,9 @@ using Liber.Forms.Lines;
 using Liber.Forms.Properties;
 using Liber.Forms.Reports;
 using Liber.Forms.Transactions;
+using Liber.Forms.Writers;
 using Liber.Sqlite;
+using Liber.Writers;
 using MessagePack;
 using Microsoft.WindowsAPICodePack.Taskbar;
 
@@ -39,6 +41,10 @@ internal sealed partial class MainForm : Form
         Text = SystemFeatures.ApplicationName;
         aboutToolStripMenuItem.Text = FormattedStrings.AboutText;
         _company.AccountRemoved += (sender, e) => _factory.Kill(e.Id);
+        exportCompanyXmlToolStripMenuItem.Tag = new Writer(FilterIndex.Xml, new XmlReportWriter());
+        exportAccountsToolStripMenuItem.Tag = new Writer(FilterIndex.Csv, new GnuCashAccountWriter());
+        exportTransactionsToolStripMenuItem.Tag = new Writer(FilterIndex.Csv, new GnuCashTransactionWriter());
+        exportAccountsIifToolStripMenuItem.Tag = new Writer(FilterIndex.Iif, new IifAccountWriter());
     }
 
     public MainForm(string path) : this()
@@ -142,13 +148,6 @@ internal sealed partial class MainForm : Form
 
     private async void OnNewToolStripMenuItemClick(object sender, EventArgs e)
     {
-        Guid key = new Guid("3441FF73-E251-4AC0-972C-7584E9481EDF");
-
-        if (_factory.TryKill(key))
-        {
-            return;
-        }
-
         if (await TryCancelAsync())
         {
             return;
@@ -158,17 +157,12 @@ internal sealed partial class MainForm : Form
 
         CloseChildren();
 
-        NewCompanyForm form = new NewCompanyForm();
+        using NewCompanyForm form = new NewCompanyForm();
 
-        form.FormClosed += (_, _) =>
+        if (form.ShowDialog() == DialogResult.OK)
         {
-            if (form.DialogResult == DialogResult.OK)
-            {
-                form.Company.CopyTo(_company);
-            }
-        };
-
-        _factory.Register(key, form);
+            form.Company.CopyTo(_company);
+        }
     }
 
     private void CloseChildren()
@@ -443,6 +437,11 @@ internal sealed partial class MainForm : Form
         _factory.AutoRegister(() => new NewAccountForm(_company));
     }
 
+    private void OnSettingsToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        _factory.AutoRegister(() => new SettingsForm());
+    }
+
     private async void OnImportAccountsToolStripMenuItemClick(object sender, EventArgs e)
     {
         if (!TryGetOpenPath(FilterIndex.Csv, out string? path))
@@ -477,14 +476,11 @@ internal sealed partial class MainForm : Form
         });
     }
 
-    private void OnSettingsToolStripMenuItemClick(object sender, EventArgs e)
+    private async void OnExportToolStripMenuItemClick(object sender, EventArgs e)
     {
-        _factory.AutoRegister(() => new SettingsForm());
-    }
+        Writer writer = (Writer)((ToolStripMenuItem)sender).Tag!;
 
-    private async void OnExportAccountsToolStripMenuItemClick(object sender, EventArgs e)
-    {
-        if (!TryGetSavePath(FilterIndex.Csv, out string? path))
+        if (!TryGetSavePath(writer.Index, out string? path))
         {
             return;
         }
@@ -493,22 +489,7 @@ internal sealed partial class MainForm : Form
         {
             await using FileStream output = File.Create(path);
 
-            await GnuCashSerializer.SerializeAccountsAsync(output, _company);
-        });
-    }
-
-    private async void OnExportTransactionsToolStripMenuItemClick(object sender, EventArgs e)
-    {
-        if (!TryGetSavePath(FilterIndex.Csv, out string? path))
-        {
-            return;
-        }
-
-        await AbortRetryIgnoreAsync(async () =>
-        {
-            await using FileStream output = File.Create(path);
-
-            await GnuCashSerializer.SerializeTransactionsAsync(output, _company);
+            await writer.Value.SerializeAsync(output, _company);
         });
     }
 

@@ -154,6 +154,7 @@ internal sealed partial class TransactionForm : Form
     {
         postedDateTimePicker.Value = DateTime.Today;
         nameComboBox.Text = string.Empty;
+        nameComboBox.SelectedItem = null;
 
         memoTextBox.Clear();
         _dataGridView.Rows.Clear();

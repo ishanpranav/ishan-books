@@ -26,16 +26,10 @@
 	  <EmbeddedResource Update="AccountTypeExtensions.resx">
 	    <Generator></Generator>
 	  </EmbeddedResource>
-	  <EmbeddedResource Update="Attributes\LocalizedCategoryAttribute.resx">
-	    <Generator></Generator>
-	  </EmbeddedResource>
-	  <EmbeddedResource Update="Attributes\LocalizedDescriptionAttribute.resx">
-	    <Generator></Generator>
-	  </EmbeddedResource>
-	  <EmbeddedResource Update="Attributes\LocalizedDisplayNameAttribute.resx">
-	    <Generator></Generator>
-	  </EmbeddedResource>
 	  <EmbeddedResource Update="CompanyTypeExtensions.resx">
+	    <Generator></Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="LocalizedResources.resx">
 	    <Generator></Generator>
 	  </EmbeddedResource>
 	  <EmbeddedResource Update="Properties\Resources.resx">

@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text.Json.Serialization;
 using CsvHelper.Configuration.Attributes;
+using Liber.TypeConverters;
 using MessagePack;
 using MessagePack.Formatters;
 
@@ -50,10 +51,11 @@ public class Account
     public string Name { get; set; } = string.Empty;
 
     [Index(0)]
-    [Key(3)]
     [LocalizedDisplayName(nameof(Type))]
+    [Key(3)]
     [Name("Type")]
     [Optional]
+    [CsvHelper.Configuration.Attributes.TypeConverter(typeof(GnuCashAccountTypeConverter))]
     public AccountType Type { get; set; }
 
     [BooleanFalseValues("F")]
@@ -130,7 +132,6 @@ public class Account
                 case AccountType.Cost:
                 case AccountType.OtherIncomeExpense:
                 case AccountType.IncomeTaxExpense:
-                case AccountType.OtherComprehensiveIncome:
                     return true;
 
                 default:

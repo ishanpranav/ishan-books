@@ -2,19 +2,17 @@
 // Copyright (c) 2019-2023 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
-using System.Resources;
+using Liber;
 
 namespace System.ComponentModel;
 
 public sealed class LocalizedDescriptionAttribute : DescriptionAttribute
 {
-    private static readonly ResourceManager s_resourceManager = new ResourceManager(typeof(LocalizedDescriptionAttribute));
-
     public override string Description
     {
         get
         {
-            return s_resourceManager.GetString(DescriptionValue) ?? string.Empty;
+            return LocalizedResources.GetString("_d_" + DescriptionValue);
         }
     }
 

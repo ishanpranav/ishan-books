@@ -113,6 +113,16 @@ public sealed class Company
     [Key(4)]
     public string? Name { get; set; }
 
+    [IgnoreMember]
+    [JsonIgnore]
+    public string DisplayName
+    {
+        get
+        {
+            return Name ?? Resources.DefaultCompanyName;
+        }
+    }
+
     [Key(5)]
     public CompanyType Type { get; set; }
 
@@ -324,7 +334,7 @@ public sealed class Company
 
         foreach (Account account in _accounts.Values)
         {
-            if (account.Temporary && account.Type != AccountType.OtherComprehensiveIncome)
+            if (account.Temporary)
             {
                 result += account.GetBalance(posted);
             }
@@ -339,24 +349,9 @@ public sealed class Company
 
         foreach (Account account in _accounts.Values)
         {
-            if (account.Temporary && account.Type != AccountType.OtherComprehensiveIncome)
+            if (account.Temporary)
             {
                 result += account.GetBalance(started, posted);
-            }
-        }
-
-        return result;
-    }
-
-    public decimal GetOtherEquity(DateTime posted)
-    {
-        decimal result = 0;
-
-        foreach (Account account in _accounts.Values)
-        {
-            if (account.Type == AccountType.OtherComprehensiveIncome)
-            {
-                result += account.GetBalance(posted);
             }
         }
 

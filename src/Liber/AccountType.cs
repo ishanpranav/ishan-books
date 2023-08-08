@@ -11,15 +11,14 @@ namespace Liber;
 public enum AccountType : short
 {
     [LocalizedDescription(nameof(None))]
-    [Name("", "STOCK", "MUTUAL", "TRADING")]
     None = 0,
 
     [LocalizedDescription(nameof(Bank))]
-    [Name("BANK", "CASH")]
+    [Name("BANK")]
     Bank = 1100,
 
     [LocalizedDescription(nameof(CreditCard))]
-    [Name("CREDIT")]
+    [Name("CCARD")]
     CreditCard = -2100,
 
     [LocalizedDescription(nameof(Equity))]
@@ -27,40 +26,43 @@ public enum AccountType : short
     Equity = -3000,
 
     [LocalizedDescription(nameof(Expense))]
-    [Name("EXPENSE")]
+    [Name("EXP")]
     Expense = 6000,
 
     [LocalizedDescription(nameof(Income))]
-    [Name("INCOME")]
+    [Name("INC")]
     Income = -4000,
 
     [LocalizedDescription(nameof(OtherCurrentAsset))]
-    [Name("ASSET", "A/RECEIVABLE")]
+    [Name("OCASSET")]
     OtherCurrentAsset = 1300,
 
     [LocalizedDescription(nameof(OtherCurrentLiability))]
-    [Name("LIABILITY", "A/PAYABLE")]
+    [Name("OCLIAB")]
     OtherCurrentLiability = -2300,
 
     [LocalizedDescription(nameof(Cost))]
+    [Name("COGS")]
     Cost = 5000,
 
     [LocalizedDescription(nameof(FixedAsset))]
+    [Name("FIXASSET")]
     FixedAsset = 1600,
 
     [LocalizedDescription(nameof(OtherAsset))]
+    [Name("OASSET")]
     OtherAsset = 1800,
 
     [LocalizedDescription(nameof(LongTermLiability))]
+    [Name("LTLIAB")]
     LongTermLiability = -2600,
 
-    [LocalizedDescription(nameof(OtherComprehensiveIncome))]
-    OtherComprehensiveIncome = -3900,
-
     [LocalizedDescription(nameof(IncomeTaxExpense))]
+    [Name("INC")]
     IncomeTaxExpense = 7000,
 
     [LocalizedDescription(nameof(OtherIncomeExpense))]
+    [Name("EXEXP", "EXINC")]
     OtherIncomeExpense = -9000
 }
 
