@@ -84,6 +84,31 @@ public class HtmlReport
     [LocalizedDisplayName(nameof(Periodicity))]
     public Periodicity Periodicity { get; set; }
 
+    private DateTime Start(DateTime current)
+    {
+        CultureInfo culture = CultureInfo.CurrentCulture;
+        DayOfWeek first = culture.DateTimeFormat.FirstDayOfWeek;
+        DayOfWeek actual = current.DayOfWeek;
+
+        switch (Periodicity)
+        {
+            case Periodicity.Weekly:
+                return culture.Calendar.AddDays(current, first - actual);
+
+            case Periodicity.Biweekly:
+                return culture.Calendar.AddDays(current, first - actual + 14);
+
+            case Periodicity.Monthly:
+                return new DateTime(current.Year, current.Month, 1);
+
+            case Periodicity.Annually:
+                return new DateTime(current.Year, 1, 1);
+
+            default:
+                return current;
+        }
+    }
+
     private DateTime Next(DateTime current)
     {
         Calendar calendar = CultureInfo.CurrentCulture.Calendar;
@@ -112,15 +137,15 @@ public class HtmlReport
 
     private IEnumerable<(DateTime started, DateTime posted)> EnumerateRanges()
     {
-        DateTime current = Started;
+        DateTime current = Start(Started);
 
-        while (current < Posted)
+        while (current <= Posted)
         {
             DateTime next = Next(current);
 
             yield return (current, next);
 
-            current = next;
+            current = CultureInfo.CurrentCulture.Calendar.AddDays(next, days: 1);
         }
     }
 
