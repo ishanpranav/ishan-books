@@ -37,20 +37,25 @@ public class LocalizedEnumConverter : EnumConverter
         return sourceType == typeof(string);
     }
 
-    public override object ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)
+    public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)
     {
         if (value is not string text)
         {
-            return 0;
+            return Activator.CreateInstance(_type);
         }
 
         object? result = text.DehumanizeTo(_type, OnNoMatch.ReturnsNull);
 
-        if (result == null)
+        if (result != null)
         {
-            return 0;
+            return result;
         }
 
-        return result;
+        if (Enum.TryParse(_type, text, ignoreCase: true, out result))
+        {
+            return result;
+        }
+
+        return Activator.CreateInstance(_type);
     }
 }

@@ -40,7 +40,7 @@ Licensed under the MIT License.
                         </th>
                     </tr>
                 </thead>
-                <xsl:variable name="otherComprehensiveIncome" select="sum(company/account[type = 'OtherComprehensiveIncome']/balance)"/>
+                <xsl:variable name="otherComprehensiveIncome" select="sum(company/account[other-equity = 'true']/balance) - sum(company/account[other-equity = 'true']/previous)"/>
                 <tbody>
                     <tr>
                         <th class="in-1 left">
@@ -50,10 +50,15 @@ Licensed under the MIT License.
                             <xsl:value-of select="liber:fm(-$netIncome)"/>
                         </th>
                     </tr>
-                    <xsl:apply-templates select="company">
-                        <xsl:with-param name="type" select="'OtherComprehensiveIncome'"/>
-                        <xsl:with-param name="balance" select="-$otherComprehensiveIncome"/>
-                    </xsl:apply-templates>
+
+                    <tr>
+                        <th class="in-1 left">
+                            <xsl:value-of select="liber:pngets('other-comprehensive-income', -$otherComprehensiveIncome)"/>
+                        </th>
+                        <th class="right">
+                            <xsl:value-of select="liber:fm(-$otherComprehensiveIncome)"/>
+                        </th>
+                    </tr>
                 </tbody>
                 <tfoot>
                     <tr>

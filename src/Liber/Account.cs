@@ -56,6 +56,7 @@ public class Account
     [Name("Type")]
     [Optional]
     [CsvHelper.Configuration.Attributes.TypeConverter(typeof(GnuCashAccountTypeConverter))]
+    [System.ComponentModel.TypeConverter(typeof(LocalizedEnumConverter))]
     public AccountType Type { get; set; }
 
     [BooleanFalseValues("F")]
@@ -97,6 +98,7 @@ public class Account
     [LocalizedDisplayName(nameof(TaxType))]
     [Name("Tax Info")]
     [Optional]
+    [System.ComponentModel.TypeConverter(typeof(LocalizedEnumConverter))]
     public TaxType TaxType { get; set; }
 
     [Browsable(false)]

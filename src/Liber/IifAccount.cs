@@ -31,7 +31,29 @@ public class IifAccount
     {
         get
         {
-            return Value.Name;
+            string result = Value.Name;
+            int index = result.IndexOf(" - ");
+            int startIndex = 0;
+            int length = result.Length;
+
+            if (index != -1)
+            {
+                startIndex += index + 3;
+                length -= startIndex;
+            }
+
+            while (result.Length > startIndex && char.IsWhiteSpace(result[startIndex]))
+            {
+                startIndex++;
+                length--;
+            }
+
+            if (length > 31)
+            {
+                length = 31;
+            }
+
+            return result.Substring(startIndex, length).TrimEnd();
         }
     }
 

@@ -322,7 +322,7 @@
   <data name="_n_ordinary-income" xml:space="preserve">
     <value>Net ordinary loss</value>
   </data>
-  <data name="_n_OtherComprehensiveIncome" xml:space="preserve">
+  <data name="_n_other-comprehensive-income" xml:space="preserve">
     <value>Total other comprehensive loss</value>
   </data>
   <data name="_n_Partnership" xml:space="preserve">
@@ -385,11 +385,11 @@
   <data name="_p_ordinary-income" xml:space="preserve">
     <value>Net ordinary income</value>
   </data>
+  <data name="_p_other-comprehensive-income" xml:space="preserve">
+    <value>Total other comprehensive income</value>
+  </data>
   <data name="_p_OtherAsset" xml:space="preserve">
     <value>Total other assets</value>
-  </data>
-  <data name="_p_OtherComprehensiveIncome" xml:space="preserve">
-    <value>Total other comprehensive income</value>
   </data>
   <data name="_p_OtherCurrentAsset" xml:space="preserve">
     <value>Total other current assets</value>
