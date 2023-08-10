@@ -4,6 +4,16 @@
   "xrefmap": "xrefmap.yml",
   "files": [
     {
+      "type": "Resource",
+      "source_relative_path": "../../docs/favicon.ico",
+      "output": {
+        "resource": {
+          "relative_path": "favicon.ico"
+        }
+      },
+      "version": ""
+    },
+    {
       "type": "ManagedReference",
       "source_relative_path": "api/CsvHelper.TypeConversion.ColorConverter.yml",
       "output": {
@@ -515,6 +525,16 @@
         },
         ".json": {
           "relative_path": "articles/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/logo.svg",
+      "output": {
+        "resource": {
+          "relative_path": "logo.svg"
         }
       },
       "version": ""

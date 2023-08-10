@@ -39,8 +39,15 @@
     ],
     "resource": [
       {
+        "src": "images",
         "files": [
-          "images/**"
+          "logo.svg"
+        ]
+      },
+      {
+        "src": "../../docs",
+        "files": [
+          "favicon.ico"
         ]
       }
     ],

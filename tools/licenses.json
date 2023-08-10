@@ -29,6 +29,26 @@
       "index": "Microsoft Corporation"
     },
     {
+      "title": "TypeConverter to JsonConverter Adapter",
+      "formats": [ "c#" ],
+      "source": "https://github.com/dotnet/runtime/issues/1761",
+      "author": ".NET Foundation and contributors",
+      "copyright": ".NET Foundation and Contributors",
+      "license": "mit_dotnet",
+      "notices": "https://github.com/dotnet/runtime/blob/main/THIRD-PARTY-NOTICES.TXT",
+      "resource": "https://github.com/dotnet/runtime/issues/1761",
+      "index": "Microsoft Corporation"
+    },
+    {
+      "title": "DocFX",
+      "formats": [ "c#", "html" ],
+      "source": "https://github.com/dotnet/docfx",
+      "author": ".NET Foundation and contributors",
+      "copyright": ".NET Foundation and Contributors",
+      "license": "mit_dotnet",
+      "index": "Microsoft Corporation"
+    },
+    {
       "title": "MessagePack for C#",
       "formats": [ "c#" ],
       "source": "https://github.com/neuecc/MessagePack-CSharp",

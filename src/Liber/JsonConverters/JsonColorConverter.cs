@@ -6,7 +6,7 @@ using System.Drawing;
 
 namespace System.Text.Json.Serialization;
 
-public class JsonColorConverter : JsonConverter<Color>
+internal sealed class JsonColorConverter : JsonConverter<Color>
 {
     public override Color Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {

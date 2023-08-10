@@ -33,50 +33,44 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 
-namespace System.Text.Json.Serialization
-{
-    /// <summary>
-    /// Provides an adapter between the <see cref="TypeConverter"/> and <see cref="JsonConverter"/> classes.
-    /// </summary>
-    public class TypeConverterJsonConverterAdapter : JsonConverterFactory
-    {
-        /// <inheritdoc/>
-        public override bool CanConvert(Type typeToConvert)
-        {
-            return typeToConvert
-                .GetCustomAttributes<TypeConverterAttribute>(inherit: true)
-                .Any();
-        }
+namespace System.Text.Json.Serialization;
 
-        /// <inheritdoc/>
-        public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
-        {
-            return (JsonConverter)Activator.CreateInstance(typeof(TypeConverterJsonConverterAdapter<>).MakeGenericType(typeToConvert));
-        }
+internal sealed class TypeConverterJsonConverterAdapter : JsonConverterFactory
+{
+    public override bool CanConvert(Type typeToConvert)
+    {
+        return typeToConvert
+            .GetCustomAttributes<TypeConverterAttribute>(inherit: true)
+            .Any();
     }
 
-    internal sealed class TypeConverterJsonConverterAdapter<T> : JsonConverter<T>
+    public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
     {
-        public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-        {
-            return (T)TypeDescriptor
-                .GetConverter(typeToConvert)
-                .ConvertFromString(reader.GetString());
-        }
+        return (JsonConverter)Activator.CreateInstance(typeof(TypeConverterJsonConverterAdapter<>).MakeGenericType(typeToConvert));
+    }
+}
 
-        public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
-        {
-            writer.WriteStringValue(TypeDescriptor
-                .GetConverter(value)
-                .ConvertToString(value));
-        }
+internal sealed class TypeConverterJsonConverterAdapter<T> : JsonConverter<T>
+{
+    public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    {
+        return (T)TypeDescriptor
+            .GetConverter(typeToConvert)
+            .ConvertFromString(reader.GetString());
+    }
 
-        public override bool CanConvert(Type typeToConvert)
-        {
-            return typeToConvert
-                .GetCustomAttributes<TypeConverterAttribute>(inherit: true)
-                .Any();
-        }
+    public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+    {
+        writer.WriteStringValue(TypeDescriptor
+            .GetConverter(value)
+            .ConvertToString(value));
+    }
+
+    public override bool CanConvert(Type typeToConvert)
+    {
+        return typeToConvert
+            .GetCustomAttributes<TypeConverterAttribute>(inherit: true)
+            .Any();
     }
 }
 #nullable enable

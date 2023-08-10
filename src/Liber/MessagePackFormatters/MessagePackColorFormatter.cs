@@ -6,7 +6,7 @@ using System.Drawing;
 
 namespace MessagePack.Formatters;
 
-internal sealed class MessagePackColorFormatter : IMessagePackFormatter<Color>
+public class MessagePackColorFormatter : IMessagePackFormatter<Color>
 {
     public Color Deserialize(ref MessagePackReader reader, MessagePackSerializerOptions options)
     {

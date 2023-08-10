@@ -116,6 +116,20 @@ For more information about this software, please see its [third-party notices](h
 - Source: [https://developer.microsoft.com/en-us/microsoft-edge/webview2](https://developer.microsoft.com/en-us/microsoft-edge/webview2)
 - License: [BSD 3-clause "New" or "Revised" license](#bsd-3-clause-microsoft)
 
+### DocFX&emsp;<sub><sup>*c\#*&ensp;*html*&ensp;</sup></sub>
+- Author: .NET Foundation and contributors
+- Source: [dotnet/docfx](https://github.com/dotnet/docfx)
+- License: [MIT](#mit_dotnet)
+
+### TypeConverter to JsonConverter Adapter&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
+- Author: .NET Foundation and contributors
+- Source: [dotnet/runtime/issues/1761](https://github.com/dotnet/runtime/issues/1761)
+- License: [MIT](#mit_dotnet)
+
+See [here](https://github.com/dotnet/runtime/issues/1761) for the resource included from the repository.
+
+For more information about this software, please see its [third-party notices](https://github.com/dotnet/runtime/blob/main/THIRD-PARTY-NOTICES.TXT).
+
 ### Microsoft Windows API Codepack&emsp;<sub><sup>*c\#*&ensp;*c++*&ensp;*visual basic*&ensp;</sup></sub>
 - Author: Microsoft Corporation
 - Source: [Wagnerp/Windows-API-CodePack-NET](https://github.com/Wagnerp/Windows-API-CodePack-NET)
