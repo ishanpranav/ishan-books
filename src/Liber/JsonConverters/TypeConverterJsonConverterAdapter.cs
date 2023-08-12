@@ -35,8 +35,17 @@ using System.Reflection;
 
 namespace System.Text.Json.Serialization;
 
-internal sealed class TypeConverterJsonConverterAdapter : JsonConverterFactory
+/// <summary>
+/// Provides an adapter between the <see cref="TypeConverter"/> class and the <see cref="JsonConverter"/> class.
+/// </summary>
+public sealed class TypeConverterJsonConverterAdapter : JsonConverterFactory
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="TypeConverterJsonConverterAdapter"/> class.
+    /// </summary>
+    public TypeConverterJsonConverterAdapter() { }
+
+    /// <inheritdoc/>
     public override bool CanConvert(Type typeToConvert)
     {
         return typeToConvert
@@ -44,6 +53,7 @@ internal sealed class TypeConverterJsonConverterAdapter : JsonConverterFactory
             .Any();
     }
 
+    /// <inheritdoc/>
     public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
     {
         return (JsonConverter)Activator.CreateInstance(typeof(TypeConverterJsonConverterAdapter<>).MakeGenericType(typeToConvert));

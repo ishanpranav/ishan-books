@@ -10,8 +10,16 @@ using CsvHelper.Configuration;
 
 namespace Liber.Writers;
 
+/// <summary>
+/// An <see cref="IWriter"/> for Intuit QuickBooks (IIF) account data.
+/// </summary>
 public class IifAccountWriter : IWriter
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="IifAccountWriter"/> class.
+    /// </summary>
+    public IifAccountWriter() { }
+
     private static IifExtra GetExtra(Company company, Account account)
     {
         if (account.Type == AccountType.Cost)
@@ -27,7 +35,8 @@ public class IifAccountWriter : IWriter
         return IifExtra.None;
     }
 
-    public async Task SerializeAsync(Stream output, Company company)
+    /// <inheritdoc/>
+    public async Task WriteAsync(Stream output, Company company)
     {
         int i = 0;
         IifAccount[] accounts = new IifAccount[company.Accounts.Count];

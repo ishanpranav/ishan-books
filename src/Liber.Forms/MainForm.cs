@@ -489,7 +489,7 @@ internal sealed partial class MainForm : Form
         {
             await using FileStream output = File.Create(path);
 
-            await writer.Value.SerializeAsync(output, _company);
+            await writer.Value.WriteAsync(output, _company);
         });
     }
 

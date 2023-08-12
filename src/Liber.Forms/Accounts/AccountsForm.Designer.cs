@@ -110,7 +110,7 @@ namespace Liber.Forms.Accounts
             // 
             resources.ApplyResources(removeAccountToolStripMenuItem, "removeAccountToolStripMenuItem");
             removeAccountToolStripMenuItem.Name = "removeAccountToolStripMenuItem";
-            removeAccountToolStripMenuItem.Click += OnRemoveToolStripMenuItem;
+            removeAccountToolStripMenuItem.Click += OnRemoveToolStripMenuItemClick;
             // 
             // toolStripSeparator2
             // 
@@ -169,7 +169,7 @@ namespace Liber.Forms.Accounts
             // 
             resources.ApplyResources(removeToolStripMenuItem, "removeToolStripMenuItem");
             removeToolStripMenuItem.Name = "removeToolStripMenuItem";
-            removeToolStripMenuItem.Click += OnRemoveToolStripMenuItem;
+            removeToolStripMenuItem.Click += OnRemoveToolStripMenuItemClick;
             // 
             // toolStripDropDownButton2
             // 

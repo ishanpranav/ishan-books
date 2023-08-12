@@ -79,7 +79,7 @@
 
   <h1 id="Liber_Writers_IWriter" data-uid="Liber.Writers.IWriter" class="text-break">
     Interface IWriter
-  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Writers/IWriter.cs/#L10"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Writers/IWriter.cs/#L13"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -87,7 +87,8 @@
   <dl><dt>Assembly</dt><dd>Liber.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"></div>
+  <div class="markdown summary"><p>Defines a method for writing company data.</p>
+</div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
@@ -110,32 +111,36 @@
 </h2>
 
 
-  <a id="Liber_Writers_IWriter_SerializeAsync_" data-uid="Liber.Writers.IWriter.SerializeAsync*"></a>
+  <a id="Liber_Writers_IWriter_WriteAsync_" data-uid="Liber.Writers.IWriter.WriteAsync*"></a>
 
-  <h3 id="Liber_Writers_IWriter_SerializeAsync_System_IO_Stream_Liber_Company_" data-uid="Liber.Writers.IWriter.SerializeAsync(System.IO.Stream,Liber.Company)">
-  SerializeAsync(Stream, Company)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Writers/IWriter.cs/#L12"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Liber_Writers_IWriter_WriteAsync_System_IO_Stream_Liber_Company_" data-uid="Liber.Writers.IWriter.WriteAsync(System.IO.Stream,Liber.Company)">
+  WriteAsync(Stream, Company)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Writers/IWriter.cs/#L21"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Asynchronously writes company data to a stream.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">Task SerializeAsync(Stream output, Company company)</code></pre>
+    <pre><code class="lang-csharp hljs">Task WriteAsync(Stream output, Company company)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>output</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></dt>
-    <dd></dd>
+    <dd><p>The output stream.</p>
+</dd>
     <dt><code>company</code> <a class="xref" href="Liber.Company.html">Company</a></dt>
-    <dd></dd>
+    <dd><p>The company whose data to write.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
-    <dd></dd>
+    <dd><p>A task representing the asynchronous write operation.</p>
+</dd>
   </dl>
 
 
@@ -152,7 +157,7 @@
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Writers/IWriter.cs/#L10" class="edit-link">Edit this page</a>
+          <a href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Writers/IWriter.cs/#L13" class="edit-link">Edit this page</a>
         </div>
 
         

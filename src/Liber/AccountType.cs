@@ -68,6 +68,38 @@ public enum AccountType : short
 
 public static class AccountTypeExtensions
 {
+    public static bool IsAsset(this AccountType value)
+    {
+        switch (value)
+        {
+            case AccountType.Bank:
+            case AccountType.OtherCurrentAsset:
+            case AccountType.OtherCurrentLiability:
+            case AccountType.FixedAsset:
+            case AccountType.OtherAsset:
+                return true;
+
+            default:
+                return false;
+        }
+    }
+
+    public static bool IsTemporary(this AccountType value)
+    {
+        switch (value)
+        {
+            case AccountType.Expense:
+            case AccountType.Income:
+            case AccountType.Cost:
+            case AccountType.OtherIncomeExpense:
+            case AccountType.IncomeTaxExpense:
+                return true;
+
+            default:
+                return false;
+        }
+    }
+
     public static decimal ToBalance(this AccountType value, decimal debit)
     {
         return Math.Sign((short)value) * debit;

@@ -167,7 +167,7 @@ public class HtmlReport
 
             foreach ((DateTime started, DateTime posted) in EnumerateRanges())
             {
-                if (account.Temporary)
+                if (account.Type.IsTemporary())
                 {
                     data[label] = (double)account.Type.ToBalance(account.GetBalance(started, posted));
                 }
@@ -207,7 +207,7 @@ public class HtmlReport
         {
             decimal balance;
 
-            if (account.Temporary)
+            if (account.Type.IsTemporary())
             {
                 balance = account.GetBalance(Started, Posted);
             }

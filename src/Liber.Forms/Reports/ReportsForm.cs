@@ -8,7 +8,6 @@ using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
-using Liber.Forms.Components;
 using Liber.Forms.Lines;
 using Liber.Forms.Reports.Gdi;
 using Liber.Forms.Reports.Html;
@@ -175,7 +174,11 @@ internal sealed partial class ReportsForm : Form
             return;
         }
 
-        _view.Navigate(_webView.CoreWebView2);
+        try
+        {
+            _view.Navigate(_webView.CoreWebView2);
+        }
+        catch { }
     }
 
     protected override void Dispose(bool disposing)

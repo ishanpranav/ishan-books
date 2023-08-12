@@ -162,19 +162,6 @@ references:
   isSpec: "True"
   fullName: Liber.Account.GetBalance
   nameWithType: Account.GetBalance
-- uid: Liber.Account.GetChecks
-  name: GetChecks()
-  href: api/Liber.Account.html#Liber_Account_GetChecks
-  commentId: M:Liber.Account.GetChecks
-  fullName: Liber.Account.GetChecks()
-  nameWithType: Account.GetChecks()
-- uid: Liber.Account.GetChecks*
-  name: GetChecks
-  href: api/Liber.Account.html#Liber_Account_GetChecks_
-  commentId: Overload:Liber.Account.GetChecks
-  isSpec: "True"
-  fullName: Liber.Account.GetChecks
-  nameWithType: Account.GetChecks
 - uid: Liber.Account.Lines
   name: Lines
   href: api/Liber.Account.html#Liber_Account_Lines
@@ -279,19 +266,6 @@ references:
   isSpec: "True"
   fullName: Liber.Account.TaxType
   nameWithType: Account.TaxType
-- uid: Liber.Account.Temporary
-  name: Temporary
-  href: api/Liber.Account.html#Liber_Account_Temporary
-  commentId: P:Liber.Account.Temporary
-  fullName: Liber.Account.Temporary
-  nameWithType: Account.Temporary
-- uid: Liber.Account.Temporary*
-  name: Temporary
-  href: api/Liber.Account.html#Liber_Account_Temporary_
-  commentId: Overload:Liber.Account.Temporary
-  isSpec: "True"
-  fullName: Liber.Account.Temporary
-  nameWithType: Account.Temporary
 - uid: Liber.Account.ToString
   name: ToString()
   href: api/Liber.Account.html#Liber_Account_ToString
@@ -318,19 +292,6 @@ references:
   isSpec: "True"
   fullName: Liber.Account.Type
   nameWithType: Account.Type
-- uid: Liber.Account.Virtual
-  name: Virtual
-  href: api/Liber.Account.html#Liber_Account_Virtual
-  commentId: P:Liber.Account.Virtual
-  fullName: Liber.Account.Virtual
-  nameWithType: Account.Virtual
-- uid: Liber.Account.Virtual*
-  name: Virtual
-  href: api/Liber.Account.html#Liber_Account_Virtual_
-  commentId: Overload:Liber.Account.Virtual
-  isSpec: "True"
-  fullName: Liber.Account.Virtual
-  nameWithType: Account.Virtual
 - uid: Liber.AccountType
   name: AccountType
   href: api/Liber.AccountType.html
@@ -427,6 +388,32 @@ references:
   commentId: T:Liber.AccountTypeExtensions
   fullName: Liber.AccountTypeExtensions
   nameWithType: AccountTypeExtensions
+- uid: Liber.AccountTypeExtensions.IsAsset(Liber.AccountType)
+  name: IsAsset(AccountType)
+  href: api/Liber.AccountTypeExtensions.html#Liber_AccountTypeExtensions_IsAsset_Liber_AccountType_
+  commentId: M:Liber.AccountTypeExtensions.IsAsset(Liber.AccountType)
+  fullName: Liber.AccountTypeExtensions.IsAsset(Liber.AccountType)
+  nameWithType: AccountTypeExtensions.IsAsset(AccountType)
+- uid: Liber.AccountTypeExtensions.IsAsset*
+  name: IsAsset
+  href: api/Liber.AccountTypeExtensions.html#Liber_AccountTypeExtensions_IsAsset_
+  commentId: Overload:Liber.AccountTypeExtensions.IsAsset
+  isSpec: "True"
+  fullName: Liber.AccountTypeExtensions.IsAsset
+  nameWithType: AccountTypeExtensions.IsAsset
+- uid: Liber.AccountTypeExtensions.IsTemporary(Liber.AccountType)
+  name: IsTemporary(AccountType)
+  href: api/Liber.AccountTypeExtensions.html#Liber_AccountTypeExtensions_IsTemporary_Liber_AccountType_
+  commentId: M:Liber.AccountTypeExtensions.IsTemporary(Liber.AccountType)
+  fullName: Liber.AccountTypeExtensions.IsTemporary(Liber.AccountType)
+  nameWithType: AccountTypeExtensions.IsTemporary(AccountType)
+- uid: Liber.AccountTypeExtensions.IsTemporary*
+  name: IsTemporary
+  href: api/Liber.AccountTypeExtensions.html#Liber_AccountTypeExtensions_IsTemporary_
+  commentId: Overload:Liber.AccountTypeExtensions.IsTemporary
+  isSpec: "True"
+  fullName: Liber.AccountTypeExtensions.IsTemporary
+  nameWithType: AccountTypeExtensions.IsTemporary
 - uid: Liber.AccountTypeExtensions.ToBalance(Liber.AccountType,System.Decimal)
   name: ToBalance(AccountType, decimal)
   href: api/Liber.AccountTypeExtensions.html#Liber_AccountTypeExtensions_ToBalance_Liber_AccountType_System_Decimal_
@@ -599,6 +586,45 @@ references:
   isSpec: "True"
   fullName: Liber.Company.EquityAccountId
   nameWithType: Company.EquityAccountId
+- uid: Liber.Company.GetCharges
+  name: GetCharges()
+  href: api/Liber.Company.html#Liber_Company_GetCharges
+  commentId: M:Liber.Company.GetCharges
+  fullName: Liber.Company.GetCharges()
+  nameWithType: Company.GetCharges()
+- uid: Liber.Company.GetCharges*
+  name: GetCharges
+  href: api/Liber.Company.html#Liber_Company_GetCharges_
+  commentId: Overload:Liber.Company.GetCharges
+  isSpec: "True"
+  fullName: Liber.Company.GetCharges
+  nameWithType: Company.GetCharges
+- uid: Liber.Company.GetChecks
+  name: GetChecks()
+  href: api/Liber.Company.html#Liber_Company_GetChecks
+  commentId: M:Liber.Company.GetChecks
+  fullName: Liber.Company.GetChecks()
+  nameWithType: Company.GetChecks()
+- uid: Liber.Company.GetChecks*
+  name: GetChecks
+  href: api/Liber.Company.html#Liber_Company_GetChecks_
+  commentId: Overload:Liber.Company.GetChecks
+  isSpec: "True"
+  fullName: Liber.Company.GetChecks
+  nameWithType: Company.GetChecks
+- uid: Liber.Company.GetDeposits
+  name: GetDeposits()
+  href: api/Liber.Company.html#Liber_Company_GetDeposits
+  commentId: M:Liber.Company.GetDeposits
+  fullName: Liber.Company.GetDeposits()
+  nameWithType: Company.GetDeposits()
+- uid: Liber.Company.GetDeposits*
+  name: GetDeposits
+  href: api/Liber.Company.html#Liber_Company_GetDeposits_
+  commentId: Overload:Liber.Company.GetDeposits
+  isSpec: "True"
+  fullName: Liber.Company.GetDeposits
+  nameWithType: Company.GetDeposits
 - uid: Liber.Company.GetEquity(System.DateTime)
   name: GetEquity(DateTime)
   href: api/Liber.Company.html#Liber_Company_GetEquity_System_DateTime_
@@ -637,6 +663,19 @@ references:
   isSpec: "True"
   fullName: Liber.Company.GetNames
   nameWithType: Company.GetNames
+- uid: Liber.Company.GetPayments
+  name: GetPayments()
+  href: api/Liber.Company.html#Liber_Company_GetPayments
+  commentId: M:Liber.Company.GetPayments
+  fullName: Liber.Company.GetPayments()
+  nameWithType: Company.GetPayments()
+- uid: Liber.Company.GetPayments*
+  name: GetPayments
+  href: api/Liber.Company.html#Liber_Company_GetPayments_
+  commentId: Overload:Liber.Company.GetPayments
+  isSpec: "True"
+  fullName: Liber.Company.GetPayments
+  nameWithType: Company.GetPayments
 - uid: Liber.Company.GetTransactionAfter(Liber.Transaction)
   name: GetTransactionAfter(Transaction)
   href: api/Liber.Company.html#Liber_Company_GetTransactionAfter_Liber_Transaction_
@@ -679,6 +718,19 @@ references:
   isSpec: "True"
   fullName: Liber.Company.GetTransactionsBetween
   nameWithType: Company.GetTransactionsBetween
+- uid: Liber.Company.GetTransfers
+  name: GetTransfers()
+  href: api/Liber.Company.html#Liber_Company_GetTransfers
+  commentId: M:Liber.Company.GetTransfers
+  fullName: Liber.Company.GetTransfers()
+  nameWithType: Company.GetTransfers()
+- uid: Liber.Company.GetTransfers*
+  name: GetTransfers
+  href: api/Liber.Company.html#Liber_Company_GetTransfers_
+  commentId: Overload:Liber.Company.GetTransfers
+  isSpec: "True"
+  fullName: Liber.Company.GetTransfers
+  nameWithType: Company.GetTransfers
 - uid: Liber.Company.LastTransaction
   name: LastTransaction
   href: api/Liber.Company.html#Liber_Company_LastTransaction
@@ -2586,19 +2638,38 @@ references:
   commentId: T:Liber.Writers.GnuCashAccountWriter
   fullName: Liber.Writers.GnuCashAccountWriter
   nameWithType: GnuCashAccountWriter
-- uid: Liber.Writers.GnuCashAccountWriter.SerializeAsync(System.IO.Stream,Liber.Company)
-  name: SerializeAsync(Stream, Company)
-  href: api/Liber.Writers.GnuCashAccountWriter.html#Liber_Writers_GnuCashAccountWriter_SerializeAsync_System_IO_Stream_Liber_Company_
-  commentId: M:Liber.Writers.GnuCashAccountWriter.SerializeAsync(System.IO.Stream,Liber.Company)
-  fullName: Liber.Writers.GnuCashAccountWriter.SerializeAsync(System.IO.Stream, Liber.Company)
-  nameWithType: GnuCashAccountWriter.SerializeAsync(Stream, Company)
-- uid: Liber.Writers.GnuCashAccountWriter.SerializeAsync*
-  name: SerializeAsync
-  href: api/Liber.Writers.GnuCashAccountWriter.html#Liber_Writers_GnuCashAccountWriter_SerializeAsync_
-  commentId: Overload:Liber.Writers.GnuCashAccountWriter.SerializeAsync
+- uid: Liber.Writers.GnuCashAccountWriter.#ctor
+  name: GnuCashAccountWriter()
+  href: api/Liber.Writers.GnuCashAccountWriter.html#Liber_Writers_GnuCashAccountWriter__ctor
+  commentId: M:Liber.Writers.GnuCashAccountWriter.#ctor
+  name.vb: New()
+  fullName: Liber.Writers.GnuCashAccountWriter.GnuCashAccountWriter()
+  fullName.vb: Liber.Writers.GnuCashAccountWriter.New()
+  nameWithType: GnuCashAccountWriter.GnuCashAccountWriter()
+  nameWithType.vb: GnuCashAccountWriter.New()
+- uid: Liber.Writers.GnuCashAccountWriter.#ctor*
+  name: GnuCashAccountWriter
+  href: api/Liber.Writers.GnuCashAccountWriter.html#Liber_Writers_GnuCashAccountWriter__ctor_
+  commentId: Overload:Liber.Writers.GnuCashAccountWriter.#ctor
   isSpec: "True"
-  fullName: Liber.Writers.GnuCashAccountWriter.SerializeAsync
-  nameWithType: GnuCashAccountWriter.SerializeAsync
+  name.vb: New
+  fullName: Liber.Writers.GnuCashAccountWriter.GnuCashAccountWriter
+  fullName.vb: Liber.Writers.GnuCashAccountWriter.New
+  nameWithType: GnuCashAccountWriter.GnuCashAccountWriter
+  nameWithType.vb: GnuCashAccountWriter.New
+- uid: Liber.Writers.GnuCashAccountWriter.WriteAsync(System.IO.Stream,Liber.Company)
+  name: WriteAsync(Stream, Company)
+  href: api/Liber.Writers.GnuCashAccountWriter.html#Liber_Writers_GnuCashAccountWriter_WriteAsync_System_IO_Stream_Liber_Company_
+  commentId: M:Liber.Writers.GnuCashAccountWriter.WriteAsync(System.IO.Stream,Liber.Company)
+  fullName: Liber.Writers.GnuCashAccountWriter.WriteAsync(System.IO.Stream, Liber.Company)
+  nameWithType: GnuCashAccountWriter.WriteAsync(Stream, Company)
+- uid: Liber.Writers.GnuCashAccountWriter.WriteAsync*
+  name: WriteAsync
+  href: api/Liber.Writers.GnuCashAccountWriter.html#Liber_Writers_GnuCashAccountWriter_WriteAsync_
+  commentId: Overload:Liber.Writers.GnuCashAccountWriter.WriteAsync
+  isSpec: "True"
+  fullName: Liber.Writers.GnuCashAccountWriter.WriteAsync
+  nameWithType: GnuCashAccountWriter.WriteAsync
 - uid: Liber.Writers.GnuCashSerializer
   name: GnuCashSerializer
   href: api/Liber.Writers.GnuCashSerializer.html
@@ -2656,57 +2727,158 @@ references:
   commentId: T:Liber.Writers.GnuCashTransactionWriter
   fullName: Liber.Writers.GnuCashTransactionWriter
   nameWithType: GnuCashTransactionWriter
-- uid: Liber.Writers.GnuCashTransactionWriter.SerializeAsync(System.IO.Stream,Liber.Company)
-  name: SerializeAsync(Stream, Company)
-  href: api/Liber.Writers.GnuCashTransactionWriter.html#Liber_Writers_GnuCashTransactionWriter_SerializeAsync_System_IO_Stream_Liber_Company_
-  commentId: M:Liber.Writers.GnuCashTransactionWriter.SerializeAsync(System.IO.Stream,Liber.Company)
-  fullName: Liber.Writers.GnuCashTransactionWriter.SerializeAsync(System.IO.Stream, Liber.Company)
-  nameWithType: GnuCashTransactionWriter.SerializeAsync(Stream, Company)
-- uid: Liber.Writers.GnuCashTransactionWriter.SerializeAsync*
-  name: SerializeAsync
-  href: api/Liber.Writers.GnuCashTransactionWriter.html#Liber_Writers_GnuCashTransactionWriter_SerializeAsync_
-  commentId: Overload:Liber.Writers.GnuCashTransactionWriter.SerializeAsync
+- uid: Liber.Writers.GnuCashTransactionWriter.#ctor
+  name: GnuCashTransactionWriter()
+  href: api/Liber.Writers.GnuCashTransactionWriter.html#Liber_Writers_GnuCashTransactionWriter__ctor
+  commentId: M:Liber.Writers.GnuCashTransactionWriter.#ctor
+  name.vb: New()
+  fullName: Liber.Writers.GnuCashTransactionWriter.GnuCashTransactionWriter()
+  fullName.vb: Liber.Writers.GnuCashTransactionWriter.New()
+  nameWithType: GnuCashTransactionWriter.GnuCashTransactionWriter()
+  nameWithType.vb: GnuCashTransactionWriter.New()
+- uid: Liber.Writers.GnuCashTransactionWriter.#ctor*
+  name: GnuCashTransactionWriter
+  href: api/Liber.Writers.GnuCashTransactionWriter.html#Liber_Writers_GnuCashTransactionWriter__ctor_
+  commentId: Overload:Liber.Writers.GnuCashTransactionWriter.#ctor
   isSpec: "True"
-  fullName: Liber.Writers.GnuCashTransactionWriter.SerializeAsync
-  nameWithType: GnuCashTransactionWriter.SerializeAsync
+  name.vb: New
+  fullName: Liber.Writers.GnuCashTransactionWriter.GnuCashTransactionWriter
+  fullName.vb: Liber.Writers.GnuCashTransactionWriter.New
+  nameWithType: GnuCashTransactionWriter.GnuCashTransactionWriter
+  nameWithType.vb: GnuCashTransactionWriter.New
+- uid: Liber.Writers.GnuCashTransactionWriter.WriteAsync(System.IO.Stream,Liber.Company)
+  name: WriteAsync(Stream, Company)
+  href: api/Liber.Writers.GnuCashTransactionWriter.html#Liber_Writers_GnuCashTransactionWriter_WriteAsync_System_IO_Stream_Liber_Company_
+  commentId: M:Liber.Writers.GnuCashTransactionWriter.WriteAsync(System.IO.Stream,Liber.Company)
+  fullName: Liber.Writers.GnuCashTransactionWriter.WriteAsync(System.IO.Stream, Liber.Company)
+  nameWithType: GnuCashTransactionWriter.WriteAsync(Stream, Company)
+- uid: Liber.Writers.GnuCashTransactionWriter.WriteAsync*
+  name: WriteAsync
+  href: api/Liber.Writers.GnuCashTransactionWriter.html#Liber_Writers_GnuCashTransactionWriter_WriteAsync_
+  commentId: Overload:Liber.Writers.GnuCashTransactionWriter.WriteAsync
+  isSpec: "True"
+  fullName: Liber.Writers.GnuCashTransactionWriter.WriteAsync
+  nameWithType: GnuCashTransactionWriter.WriteAsync
 - uid: Liber.Writers.IWriter
   name: IWriter
   href: api/Liber.Writers.IWriter.html
   commentId: T:Liber.Writers.IWriter
   fullName: Liber.Writers.IWriter
   nameWithType: IWriter
-- uid: Liber.Writers.IWriter.SerializeAsync(System.IO.Stream,Liber.Company)
-  name: SerializeAsync(Stream, Company)
-  href: api/Liber.Writers.IWriter.html#Liber_Writers_IWriter_SerializeAsync_System_IO_Stream_Liber_Company_
-  commentId: M:Liber.Writers.IWriter.SerializeAsync(System.IO.Stream,Liber.Company)
-  fullName: Liber.Writers.IWriter.SerializeAsync(System.IO.Stream, Liber.Company)
-  nameWithType: IWriter.SerializeAsync(Stream, Company)
-- uid: Liber.Writers.IWriter.SerializeAsync*
-  name: SerializeAsync
-  href: api/Liber.Writers.IWriter.html#Liber_Writers_IWriter_SerializeAsync_
-  commentId: Overload:Liber.Writers.IWriter.SerializeAsync
+- uid: Liber.Writers.IWriter.WriteAsync(System.IO.Stream,Liber.Company)
+  name: WriteAsync(Stream, Company)
+  href: api/Liber.Writers.IWriter.html#Liber_Writers_IWriter_WriteAsync_System_IO_Stream_Liber_Company_
+  commentId: M:Liber.Writers.IWriter.WriteAsync(System.IO.Stream,Liber.Company)
+  fullName: Liber.Writers.IWriter.WriteAsync(System.IO.Stream, Liber.Company)
+  nameWithType: IWriter.WriteAsync(Stream, Company)
+- uid: Liber.Writers.IWriter.WriteAsync*
+  name: WriteAsync
+  href: api/Liber.Writers.IWriter.html#Liber_Writers_IWriter_WriteAsync_
+  commentId: Overload:Liber.Writers.IWriter.WriteAsync
   isSpec: "True"
-  fullName: Liber.Writers.IWriter.SerializeAsync
-  nameWithType: IWriter.SerializeAsync
+  fullName: Liber.Writers.IWriter.WriteAsync
+  nameWithType: IWriter.WriteAsync
 - uid: Liber.Writers.IifAccountWriter
   name: IifAccountWriter
   href: api/Liber.Writers.IifAccountWriter.html
   commentId: T:Liber.Writers.IifAccountWriter
   fullName: Liber.Writers.IifAccountWriter
   nameWithType: IifAccountWriter
-- uid: Liber.Writers.IifAccountWriter.SerializeAsync(System.IO.Stream,Liber.Company)
-  name: SerializeAsync(Stream, Company)
-  href: api/Liber.Writers.IifAccountWriter.html#Liber_Writers_IifAccountWriter_SerializeAsync_System_IO_Stream_Liber_Company_
-  commentId: M:Liber.Writers.IifAccountWriter.SerializeAsync(System.IO.Stream,Liber.Company)
-  fullName: Liber.Writers.IifAccountWriter.SerializeAsync(System.IO.Stream, Liber.Company)
-  nameWithType: IifAccountWriter.SerializeAsync(Stream, Company)
-- uid: Liber.Writers.IifAccountWriter.SerializeAsync*
-  name: SerializeAsync
-  href: api/Liber.Writers.IifAccountWriter.html#Liber_Writers_IifAccountWriter_SerializeAsync_
-  commentId: Overload:Liber.Writers.IifAccountWriter.SerializeAsync
+- uid: Liber.Writers.IifAccountWriter.#ctor
+  name: IifAccountWriter()
+  href: api/Liber.Writers.IifAccountWriter.html#Liber_Writers_IifAccountWriter__ctor
+  commentId: M:Liber.Writers.IifAccountWriter.#ctor
+  name.vb: New()
+  fullName: Liber.Writers.IifAccountWriter.IifAccountWriter()
+  fullName.vb: Liber.Writers.IifAccountWriter.New()
+  nameWithType: IifAccountWriter.IifAccountWriter()
+  nameWithType.vb: IifAccountWriter.New()
+- uid: Liber.Writers.IifAccountWriter.#ctor*
+  name: IifAccountWriter
+  href: api/Liber.Writers.IifAccountWriter.html#Liber_Writers_IifAccountWriter__ctor_
+  commentId: Overload:Liber.Writers.IifAccountWriter.#ctor
   isSpec: "True"
-  fullName: Liber.Writers.IifAccountWriter.SerializeAsync
-  nameWithType: IifAccountWriter.SerializeAsync
+  name.vb: New
+  fullName: Liber.Writers.IifAccountWriter.IifAccountWriter
+  fullName.vb: Liber.Writers.IifAccountWriter.New
+  nameWithType: IifAccountWriter.IifAccountWriter
+  nameWithType.vb: IifAccountWriter.New
+- uid: Liber.Writers.IifAccountWriter.WriteAsync(System.IO.Stream,Liber.Company)
+  name: WriteAsync(Stream, Company)
+  href: api/Liber.Writers.IifAccountWriter.html#Liber_Writers_IifAccountWriter_WriteAsync_System_IO_Stream_Liber_Company_
+  commentId: M:Liber.Writers.IifAccountWriter.WriteAsync(System.IO.Stream,Liber.Company)
+  fullName: Liber.Writers.IifAccountWriter.WriteAsync(System.IO.Stream, Liber.Company)
+  nameWithType: IifAccountWriter.WriteAsync(Stream, Company)
+- uid: Liber.Writers.IifAccountWriter.WriteAsync*
+  name: WriteAsync
+  href: api/Liber.Writers.IifAccountWriter.html#Liber_Writers_IifAccountWriter_WriteAsync_
+  commentId: Overload:Liber.Writers.IifAccountWriter.WriteAsync
+  isSpec: "True"
+  fullName: Liber.Writers.IifAccountWriter.WriteAsync
+  nameWithType: IifAccountWriter.WriteAsync
+- uid: MessagePack.Formatters
+  name: MessagePack.Formatters
+  href: api/MessagePack.Formatters.html
+  commentId: N:MessagePack.Formatters
+  fullName: MessagePack.Formatters
+  nameWithType: MessagePack.Formatters
+- uid: MessagePack.Formatters.MessagePackColorFormatter
+  name: MessagePackColorFormatter
+  href: api/MessagePack.Formatters.MessagePackColorFormatter.html
+  commentId: T:MessagePack.Formatters.MessagePackColorFormatter
+  fullName: MessagePack.Formatters.MessagePackColorFormatter
+  nameWithType: MessagePackColorFormatter
+- uid: MessagePack.Formatters.MessagePackColorFormatter.#ctor
+  name: MessagePackColorFormatter()
+  href: api/MessagePack.Formatters.MessagePackColorFormatter.html#MessagePack_Formatters_MessagePackColorFormatter__ctor
+  commentId: M:MessagePack.Formatters.MessagePackColorFormatter.#ctor
+  name.vb: New()
+  fullName: MessagePack.Formatters.MessagePackColorFormatter.MessagePackColorFormatter()
+  fullName.vb: MessagePack.Formatters.MessagePackColorFormatter.New()
+  nameWithType: MessagePackColorFormatter.MessagePackColorFormatter()
+  nameWithType.vb: MessagePackColorFormatter.New()
+- uid: MessagePack.Formatters.MessagePackColorFormatter.#ctor*
+  name: MessagePackColorFormatter
+  href: api/MessagePack.Formatters.MessagePackColorFormatter.html#MessagePack_Formatters_MessagePackColorFormatter__ctor_
+  commentId: Overload:MessagePack.Formatters.MessagePackColorFormatter.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: MessagePack.Formatters.MessagePackColorFormatter.MessagePackColorFormatter
+  fullName.vb: MessagePack.Formatters.MessagePackColorFormatter.New
+  nameWithType: MessagePackColorFormatter.MessagePackColorFormatter
+  nameWithType.vb: MessagePackColorFormatter.New
+- uid: MessagePack.Formatters.MessagePackColorFormatter.Deserialize(MessagePack.MessagePackReader@,MessagePack.MessagePackSerializerOptions)
+  name: Deserialize(ref MessagePackReader, MessagePackSerializerOptions)
+  href: api/MessagePack.Formatters.MessagePackColorFormatter.html#MessagePack_Formatters_MessagePackColorFormatter_Deserialize_MessagePack_MessagePackReader__MessagePack_MessagePackSerializerOptions_
+  commentId: M:MessagePack.Formatters.MessagePackColorFormatter.Deserialize(MessagePack.MessagePackReader@,MessagePack.MessagePackSerializerOptions)
+  name.vb: Deserialize(MessagePackReader, MessagePackSerializerOptions)
+  fullName: MessagePack.Formatters.MessagePackColorFormatter.Deserialize(ref MessagePack.MessagePackReader, MessagePack.MessagePackSerializerOptions)
+  fullName.vb: MessagePack.Formatters.MessagePackColorFormatter.Deserialize(MessagePack.MessagePackReader, MessagePack.MessagePackSerializerOptions)
+  nameWithType: MessagePackColorFormatter.Deserialize(ref MessagePackReader, MessagePackSerializerOptions)
+  nameWithType.vb: MessagePackColorFormatter.Deserialize(MessagePackReader, MessagePackSerializerOptions)
+- uid: MessagePack.Formatters.MessagePackColorFormatter.Deserialize*
+  name: Deserialize
+  href: api/MessagePack.Formatters.MessagePackColorFormatter.html#MessagePack_Formatters_MessagePackColorFormatter_Deserialize_
+  commentId: Overload:MessagePack.Formatters.MessagePackColorFormatter.Deserialize
+  isSpec: "True"
+  fullName: MessagePack.Formatters.MessagePackColorFormatter.Deserialize
+  nameWithType: MessagePackColorFormatter.Deserialize
+- uid: MessagePack.Formatters.MessagePackColorFormatter.Serialize(MessagePack.MessagePackWriter@,System.Drawing.Color,MessagePack.MessagePackSerializerOptions)
+  name: Serialize(ref MessagePackWriter, Color, MessagePackSerializerOptions)
+  href: api/MessagePack.Formatters.MessagePackColorFormatter.html#MessagePack_Formatters_MessagePackColorFormatter_Serialize_MessagePack_MessagePackWriter__System_Drawing_Color_MessagePack_MessagePackSerializerOptions_
+  commentId: M:MessagePack.Formatters.MessagePackColorFormatter.Serialize(MessagePack.MessagePackWriter@,System.Drawing.Color,MessagePack.MessagePackSerializerOptions)
+  name.vb: Serialize(MessagePackWriter, Color, MessagePackSerializerOptions)
+  fullName: MessagePack.Formatters.MessagePackColorFormatter.Serialize(ref MessagePack.MessagePackWriter, System.Drawing.Color, MessagePack.MessagePackSerializerOptions)
+  fullName.vb: MessagePack.Formatters.MessagePackColorFormatter.Serialize(MessagePack.MessagePackWriter, System.Drawing.Color, MessagePack.MessagePackSerializerOptions)
+  nameWithType: MessagePackColorFormatter.Serialize(ref MessagePackWriter, Color, MessagePackSerializerOptions)
+  nameWithType.vb: MessagePackColorFormatter.Serialize(MessagePackWriter, Color, MessagePackSerializerOptions)
+- uid: MessagePack.Formatters.MessagePackColorFormatter.Serialize*
+  name: Serialize
+  href: api/MessagePack.Formatters.MessagePackColorFormatter.html#MessagePack_Formatters_MessagePackColorFormatter_Serialize_
+  commentId: Overload:MessagePack.Formatters.MessagePackColorFormatter.Serialize
+  isSpec: "True"
+  fullName: MessagePack.Formatters.MessagePackColorFormatter.Serialize
+  nameWithType: MessagePackColorFormatter.Serialize
 - uid: System
   name: System
   href: api/System.html
@@ -2984,6 +3156,25 @@ references:
   commentId: T:System.Text.Json.Serialization.JsonColorConverter
   fullName: System.Text.Json.Serialization.JsonColorConverter
   nameWithType: JsonColorConverter
+- uid: System.Text.Json.Serialization.JsonColorConverter.#ctor
+  name: JsonColorConverter()
+  href: api/System.Text.Json.Serialization.JsonColorConverter.html#System_Text_Json_Serialization_JsonColorConverter__ctor
+  commentId: M:System.Text.Json.Serialization.JsonColorConverter.#ctor
+  name.vb: New()
+  fullName: System.Text.Json.Serialization.JsonColorConverter.JsonColorConverter()
+  fullName.vb: System.Text.Json.Serialization.JsonColorConverter.New()
+  nameWithType: JsonColorConverter.JsonColorConverter()
+  nameWithType.vb: JsonColorConverter.New()
+- uid: System.Text.Json.Serialization.JsonColorConverter.#ctor*
+  name: JsonColorConverter
+  href: api/System.Text.Json.Serialization.JsonColorConverter.html#System_Text_Json_Serialization_JsonColorConverter__ctor_
+  commentId: Overload:System.Text.Json.Serialization.JsonColorConverter.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: System.Text.Json.Serialization.JsonColorConverter.JsonColorConverter
+  fullName.vb: System.Text.Json.Serialization.JsonColorConverter.New
+  nameWithType: JsonColorConverter.JsonColorConverter
+  nameWithType.vb: JsonColorConverter.New
 - uid: System.Text.Json.Serialization.JsonColorConverter.Read(System.Text.Json.Utf8JsonReader@,System.Type,System.Text.Json.JsonSerializerOptions)
   name: Read(ref Utf8JsonReader, Type, JsonSerializerOptions)
   href: api/System.Text.Json.Serialization.JsonColorConverter.html#System_Text_Json_Serialization_JsonColorConverter_Read_System_Text_Json_Utf8JsonReader__System_Type_System_Text_Json_JsonSerializerOptions_
@@ -3019,6 +3210,25 @@ references:
   commentId: T:System.Text.Json.Serialization.TypeConverterJsonConverterAdapter
   fullName: System.Text.Json.Serialization.TypeConverterJsonConverterAdapter
   nameWithType: TypeConverterJsonConverterAdapter
+- uid: System.Text.Json.Serialization.TypeConverterJsonConverterAdapter.#ctor
+  name: TypeConverterJsonConverterAdapter()
+  href: api/System.Text.Json.Serialization.TypeConverterJsonConverterAdapter.html#System_Text_Json_Serialization_TypeConverterJsonConverterAdapter__ctor
+  commentId: M:System.Text.Json.Serialization.TypeConverterJsonConverterAdapter.#ctor
+  name.vb: New()
+  fullName: System.Text.Json.Serialization.TypeConverterJsonConverterAdapter.TypeConverterJsonConverterAdapter()
+  fullName.vb: System.Text.Json.Serialization.TypeConverterJsonConverterAdapter.New()
+  nameWithType: TypeConverterJsonConverterAdapter.TypeConverterJsonConverterAdapter()
+  nameWithType.vb: TypeConverterJsonConverterAdapter.New()
+- uid: System.Text.Json.Serialization.TypeConverterJsonConverterAdapter.#ctor*
+  name: TypeConverterJsonConverterAdapter
+  href: api/System.Text.Json.Serialization.TypeConverterJsonConverterAdapter.html#System_Text_Json_Serialization_TypeConverterJsonConverterAdapter__ctor_
+  commentId: Overload:System.Text.Json.Serialization.TypeConverterJsonConverterAdapter.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: System.Text.Json.Serialization.TypeConverterJsonConverterAdapter.TypeConverterJsonConverterAdapter
+  fullName.vb: System.Text.Json.Serialization.TypeConverterJsonConverterAdapter.New
+  nameWithType: TypeConverterJsonConverterAdapter.TypeConverterJsonConverterAdapter
+  nameWithType.vb: TypeConverterJsonConverterAdapter.New
 - uid: System.Text.Json.Serialization.TypeConverterJsonConverterAdapter.CanConvert(System.Type)
   name: CanConvert(Type)
   href: api/System.Text.Json.Serialization.TypeConverterJsonConverterAdapter.html#System_Text_Json_Serialization_TypeConverterJsonConverterAdapter_CanConvert_System_Type_

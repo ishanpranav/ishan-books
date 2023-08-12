@@ -15,14 +15,24 @@ using MessagePack.Formatters;
 
 namespace Liber;
 
+/// <summary>
+/// Represents a financial account.
+/// </summary>
 [MessagePackObject]
 public class Account
 {
     internal readonly HashSet<Account> children = new HashSet<Account>();
     internal readonly HashSet<Line> lines = new HashSet<Line>();
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Account"/> class.
+    /// </summary>
     public Account() { }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Account"/> class with a specified parent identifier.
+    /// </summary>
+    /// <param name="parentId">The identifier of the parent account.</param>
     [JsonConstructor]
     [SerializationConstructor]
     public Account(Guid parentId)
@@ -30,11 +40,19 @@ public class Account
         ParentId = parentId;
     }
 
+    /// <summary>
+    /// Gets the identifier of the parent account.
+    /// </summary>
+    /// <value>The parent identifier.</value>
     [Browsable(false)]
     [Ignore]
     [Key(0)]
     public Guid ParentId { get; internal set; }
 
+    /// <summary>
+    /// Gets or sets the account number.
+    /// </summary>
+    /// <value>The account number.</value>
     [Default(0)]
     [Index(3)]
     [Key(2)]
@@ -43,6 +61,10 @@ public class Account
     [Optional]
     public decimal Number { get; set; }
 
+    /// <summary>
+    /// Gets or sets the account name.
+    /// </summary>
+    /// <value>The account name.</value>
     [Index(2)]
     [Key(1)]
     [LocalizedDisplayName(nameof(Name))]
@@ -50,6 +72,10 @@ public class Account
     [Optional]
     public string Name { get; set; } = string.Empty;
 
+    /// <summary>
+    /// Gets or sets the account type.
+    /// </summary>
+    /// <value>The account type.</value>
     [Index(0)]
     [LocalizedDisplayName(nameof(Type))]
     [Key(3)]
@@ -59,6 +85,10 @@ public class Account
     [System.ComponentModel.TypeConverter(typeof(LocalizedEnumConverter))]
     public AccountType Type { get; set; }
 
+    /// <summary>
+    /// Gets or sets a value indicating whether the account is a placeholder.
+    /// </summary>
+    /// <value><see langword="true"/> if the account is a placeholder; otherwise, <see langword="false"/>.</value>
     [BooleanFalseValues("F")]
     [BooleanTrueValues("T")]
     [Index(11)]
@@ -68,6 +98,10 @@ public class Account
     [Optional]
     public bool Placeholder { get; set; }
 
+    /// <summary>
+    /// Gets or sets the description of the account.
+    /// </summary>
+    /// <value>The description of the account.</value>
     [Index(4)]
     [Key(5)]
     [LocalizedDisplayName(nameof(Description))]
@@ -76,6 +110,10 @@ public class Account
     [Optional]
     public string? Description { get; set; }
 
+    /// <summary>
+    /// Gets or sets the memo associated with the account.
+    /// </summary>
+    /// <value>The memo associated with the account.</value>
     [Index(6)]
     [Key(6)]
     [LocalizedDisplayName(nameof(Memo))]
@@ -84,6 +122,10 @@ public class Account
     [Optional]
     public string? Memo { get; set; }
 
+    /// <summary>
+    /// Gets or sets the color associated with the account.
+    /// </summary>
+    /// <value>The color associated with the account.</value>
     [Index(5)]
     [Key(7)]
     [LocalizedDisplayName(nameof(Color))]
@@ -93,6 +135,10 @@ public class Account
     [CsvHelper.Configuration.Attributes.TypeConverter(typeof(CsvHelper.TypeConversion.ColorConverter))]
     public Color Color { get; set; }
 
+    /// <summary>
+    /// Gets or sets the tax category associated with the account.
+    /// </summary>
+    /// <value>The tax category associated with the account.</value>
     [Index(10)]
     [Key(8)]
     [LocalizedDisplayName(nameof(TaxType))]
@@ -101,6 +147,10 @@ public class Account
     [System.ComponentModel.TypeConverter(typeof(LocalizedEnumConverter))]
     public TaxType TaxType { get; set; }
 
+    /// <summary>
+    /// Gets the current balance of the account.
+    /// </summary>
+    /// <value>The current balance of the account.</value>
     [Browsable(false)]
     [Ignore]
     [IgnoreMember]
@@ -120,47 +170,10 @@ public class Account
         }
     }
 
-    [Browsable(false)]
-    [IgnoreMember]
-    [JsonIgnore]
-    public bool Temporary
-    {
-        get
-        {
-            switch (Type)
-            {
-                case AccountType.Expense:
-                case AccountType.Income:
-                case AccountType.Cost:
-                case AccountType.OtherIncomeExpense:
-                case AccountType.IncomeTaxExpense:
-                    return true;
-
-                default:
-                    return false;
-            }
-        }
-    }
-
-    [Browsable(false)]
-    [IgnoreMember]
-    [JsonIgnore]
-    public bool Virtual
-    {
-        get
-        {
-            switch (Type)
-            {
-                case AccountType.Bank:
-                case AccountType.CreditCard:
-                    return false;
-
-                default:
-                    return true;
-            }
-        }
-    }
-
+    /// <summary>
+    /// Gets the subaccounts of the current account.
+    /// </summary>
+    /// <value>The account children.</value>
     [Browsable(false)]
     [IgnoreMember]
     [JsonIgnore]
@@ -172,6 +185,10 @@ public class Account
         }
     }
 
+    /// <summary>
+    /// Gets the line items posted to the account.
+    /// </summary>
+    /// <value>The line items posted to the account.</value>
     [Browsable(false)]
     [IgnoreMember]
     [JsonIgnore]
@@ -183,6 +200,10 @@ public class Account
         }
     }
 
+    /// <summary>
+    /// Gets the line items posted to the account, ordered chronologically by date with debits listed before credits and balances ordered by magnitude from greatest to least.
+    /// </summary>
+    /// <value>Gets the line items posted to the account, sorted in their natural order.</value>
     [Browsable(false)]
     [IgnoreMember]
     [JsonIgnore]
@@ -197,6 +218,11 @@ public class Account
         }
     }
 
+    /// <summary>
+    /// Gets the balance of the account up to a specific posted date.
+    /// </summary>
+    /// <param name="posted">The inclusive posted date up to which to calculate the balance.</param>
+    /// <returns>The balance of the account up to (and including) the specified posted date.</returns>
     public decimal GetBalance(DateTime posted)
     {
         decimal result = 0;
@@ -212,6 +238,12 @@ public class Account
         return result;
     }
 
+    /// <summary>
+    /// Gets the balance of the account within a specific date range.
+    /// </summary>
+    /// <param name="started">The inclusive start date of the date range.</param>
+    /// <param name="posted">The inclusive end date of the date range.</param>
+    /// <returns>The balance of the account within the specified date range, including the start and end dates.</returns>
     public decimal GetBalance(DateTime started, DateTime posted)
     {
         decimal result = 0;
@@ -229,22 +261,7 @@ public class Account
         return result;
     }
 
-    public IEnumerable<Line> GetChecks()
-    {
-        if (Type != AccountType.Bank)
-        {
-            yield break;
-        }
-
-        foreach (Line line in lines)
-        {
-            if (line.Transaction?.Name != null && line.Balance < 0)
-            {
-                yield return line;
-            }
-        }
-    }
-
+    /// <inheritdoc/>
     public override string ToString()
     {
         return Name;

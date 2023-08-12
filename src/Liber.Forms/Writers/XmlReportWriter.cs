@@ -13,7 +13,7 @@ namespace Liber.Forms.Writers;
 
 internal sealed class XmlReportWriter : IWriter
 {
-    public Task SerializeAsync(Stream output, Company company)
+    public Task WriteAsync(Stream output, Company company)
     {
         XmlWriter writer = XmlWriter.Create(output, XmlReportSerializer.Settings);
 

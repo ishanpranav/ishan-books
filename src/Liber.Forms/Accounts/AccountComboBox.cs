@@ -9,7 +9,6 @@ using System.Windows.Forms;
 
 namespace Liber.Forms.Accounts;
 
-[Localizable(true)]
 internal sealed class AccountComboBox : ComboBox
 {
     private Company? _company;

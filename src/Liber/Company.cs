@@ -328,13 +328,100 @@ public sealed class Company
         }
     }
 
+    public IEnumerable<Transaction> GetTransfers()
+    {
+        foreach (Transaction transaction in _transactions)
+        {
+            if (transaction.Lines.All(x => _accounts[x.AccountId].Type.IsAsset()))
+            {
+                yield return transaction;
+            }
+        }
+    }
+
+    public IEnumerable<Line> GetChecks()
+    {
+        foreach (Account account in _accounts.Values)
+        {
+            if (account.Type != AccountType.Bank)
+            {
+                continue;
+            }
+
+            foreach (Line line in account.lines)
+            {
+                if (line.Transaction?.Name != null && line.Balance < 0)
+                {
+                    yield return line;
+                }
+            }
+        }
+    }
+
+    public IEnumerable<Line> GetDeposits()
+    {
+        foreach (Account account in _accounts.Values)
+        {
+            if (account.Type != AccountType.Bank)
+            {
+                continue;
+            }
+
+            foreach (Line line in account.lines)
+            {
+                if (line.Transaction?.Name != null && line.Balance > 0)
+                {
+                    yield return line;
+                }
+            }
+        }
+    }
+
+    public IEnumerable<Line> GetPayments()
+    {
+        foreach (Account account in _accounts.Values)
+        {
+            if (account.Type != AccountType.CreditCard)
+            {
+                continue;
+            }
+
+            foreach (Line line in account.lines)
+            {
+                if (line.Balance < 0)
+                {
+                    yield return line;
+                }
+            }
+        }
+    }
+
+    public IEnumerable<Line> GetCharges()
+    {
+        foreach (Account account in _accounts.Values)
+        {
+            if (account.Type != AccountType.CreditCard)
+            {
+                continue;
+            }
+
+            foreach (Line line in account.lines)
+            {
+                if (line.Balance > 0)
+                {
+                    yield return line;
+                }
+            }
+        }
+    }
+
     public decimal GetEquity(DateTime posted)
     {
         decimal result = 0;
 
         foreach (Account account in _accounts.Values)
         {
-            if (account.Temporary)
+            if (account.Type.IsTemporary())
             {
                 result += account.GetBalance(posted);
             }
@@ -349,7 +436,7 @@ public sealed class Company
 
         foreach (Account account in _accounts.Values)
         {
-            if (account.Temporary)
+            if (account.Type.IsTemporary())
             {
                 result += account.GetBalance(started, posted);
             }

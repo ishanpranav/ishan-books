@@ -8,7 +8,7 @@ using CsvHelper.TypeConversion;
 
 namespace Liber.TypeConverters;
 
-internal class GnuCashAccountTypeConverter : DefaultTypeConverter
+internal sealed class GnuCashAccountTypeConverter : DefaultTypeConverter
 {
     public override object? ConvertFromString(string? text, IReaderRow row, MemberMapData memberMapData)
     {

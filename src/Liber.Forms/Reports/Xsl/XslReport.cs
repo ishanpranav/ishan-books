@@ -198,7 +198,7 @@ public class XslReport : IXmlSerializable
 
             previous = Company.GetEquity(Started);
         }
-        else if (value.Temporary)
+        else if (value.Type.IsTemporary())
         {
             balance = value.GetBalance(Started, Posted);
         }

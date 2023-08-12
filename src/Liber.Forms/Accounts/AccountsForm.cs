@@ -106,7 +106,7 @@ internal sealed partial class AccountsForm : Form
         {
             balance = _company.GetEquity(started);
         }
-        else if (value.Temporary)
+        else if (value.Type.IsTemporary())
         {
             balance = value.GetBalance(started, posted);
         }
@@ -187,7 +187,7 @@ internal sealed partial class AccountsForm : Form
         _listView.SelectedItems[0].BeginEdit();
     }
 
-    private void OnRemoveToolStripMenuItem(object sender, EventArgs e)
+    private void OnRemoveToolStripMenuItemClick(object sender, EventArgs e)
     {
         if (!_listView.TryGetSelection(out Guid id))
         {
@@ -245,7 +245,7 @@ internal sealed partial class AccountsForm : Form
         {
             // TODO: QuickReport
         }
-        else if (value.Virtual)
+        else if (value.Type == AccountType.Bank || value.Type == AccountType.CreditCard)
         {
             InitializeTransaction(id);
         }

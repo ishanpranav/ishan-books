@@ -79,7 +79,7 @@
 
   <h1 id="Liber_Writers_GnuCashSerializer" data-uid="Liber.Writers.GnuCashSerializer" class="text-break">
     Class GnuCashSerializer
-  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Writers/GnuCashSerializer.cs/#L16"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Writers/GnuCashSerializer.cs/#L19"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -87,11 +87,12 @@
   <dl><dt>Assembly</dt><dd>Liber.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"></div>
+  <div class="markdown summary"><p>Provides methods for serializing and deserializing data using the CSV format for GnuCash integration.</p>
+</div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class GnuCashSerializer</code></pre>
+    <pre><code class="lang-csharp hljs">public static class GnuCashSerializer</code></pre>
   </div>
 
 
@@ -146,10 +147,11 @@
 
   <h3 id="Liber_Writers_GnuCashSerializer_DeserializeAsync__1_System_IO_Stream_" data-uid="Liber.Writers.GnuCashSerializer.DeserializeAsync``1(System.IO.Stream)">
   DeserializeAsync&lt;T&gt;(Stream)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Writers/GnuCashSerializer.cs/#L26"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Writers/GnuCashSerializer.cs/#L42"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Asynchronously deserializes a stream of CSV data into a collection of items.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -159,19 +161,22 @@
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>input</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></dt>
-    <dd></dd>
+    <dd><p>The input stream to read from.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1">IReadOnlyCollection</a>&lt;T&gt;&gt;</dt>
-    <dd></dd>
+    <dd><p>A task representing the asynchronous deserialization operation.</p>
+</dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>T</code></dt>
-    <dd></dd>
+    <dd><p>The type of items to deserialize.</p>
+</dd>
   </dl>
 
 
@@ -187,10 +192,11 @@
 
   <h3 id="Liber_Writers_GnuCashSerializer_GetPath_Liber_Company_Liber_Account_" data-uid="Liber.Writers.GnuCashSerializer.GetPath(Liber.Company,Liber.Account)">
   GetPath(Company, Account)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Writers/GnuCashSerializer.cs/#L41"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Writers/GnuCashSerializer.cs/#L63"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Constructs the account path for a given company and account.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -200,15 +206,18 @@
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>company</code> <a class="xref" href="Liber.Company.html">Company</a></dt>
-    <dd></dd>
+    <dd><p>The company containing the account.</p>
+</dd>
     <dt><code>account</code> <a class="xref" href="Liber.Account.html">Account</a></dt>
-    <dd></dd>
+    <dd><p>The account for which to construct the path.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
-    <dd></dd>
+    <dd><p>The constructed path for the account.</p>
+</dd>
   </dl>
 
 
@@ -225,10 +234,11 @@
 
   <h3 id="Liber_Writers_GnuCashSerializer_SerializeAsync__1_System_IO_Stream_System_Collections_Generic_IEnumerable___0__" data-uid="Liber.Writers.GnuCashSerializer.SerializeAsync``1(System.IO.Stream,System.Collections.Generic.IEnumerable{``0})">
   SerializeAsync&lt;T&gt;(Stream, IEnumerable&lt;T&gt;)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Writers/GnuCashSerializer.cs/#L18"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Writers/GnuCashSerializer.cs/#L28"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Asynchronously Serializes a collection of items to a stream using the CSV format.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
@@ -238,21 +248,25 @@
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>output</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></dt>
-    <dd></dd>
+    <dd><p>The output stream.</p>
+</dd>
     <dt><code>items</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;</dt>
-    <dd></dd>
+    <dd><p>The items to serialize.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
-    <dd></dd>
+    <dd><p>A task representing the asynchronous serialization operation.</p>
+</dd>
   </dl>
 
   <h4 class="section">Type Parameters</h4>
   <dl class="parameters">
     <dt><code>T</code></dt>
-    <dd></dd>
+    <dd><p>The type of items to serialize.</p>
+</dd>
   </dl>
 
 
@@ -268,7 +282,7 @@
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Writers/GnuCashSerializer.cs/#L16" class="edit-link">Edit this page</a>
+          <a href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Writers/GnuCashSerializer.cs/#L19" class="edit-link">Edit this page</a>
         </div>
 
         

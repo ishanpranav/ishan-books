@@ -79,7 +79,7 @@
 
   <h1 id="Liber_Writers_GnuCashTransactionWriter" data-uid="Liber.Writers.GnuCashTransactionWriter" class="text-break">
     Class GnuCashTransactionWriter
-  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Writers/GnuCashTransactionWriter.cs/#L11"><i class="bi bi-code-slash"></i></a>
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Writers/GnuCashTransactionWriter.cs/#L14"><i class="bi bi-code-slash"></i></a>
   </h1>
 
   <div class="facts text-secondary">
@@ -87,7 +87,8 @@
   <dl><dt>Assembly</dt><dd>Liber.dll</dd></dl>
   </div>
 
-  <div class="markdown summary"></div>
+  <div class="markdown summary"><p>An <a class="xref" href="Liber.Writers.IWriter.html">IWriter</a> for GnuCash (CSV) transaction data.</p>
+</div>
   <div class="markdown conceptual"></div>
 
   <div class="codewrapper">
@@ -144,36 +145,71 @@
 
 
 
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="Liber_Writers_GnuCashTransactionWriter__ctor_" data-uid="Liber.Writers.GnuCashTransactionWriter.#ctor*"></a>
+
+  <h3 id="Liber_Writers_GnuCashTransactionWriter__ctor" data-uid="Liber.Writers.GnuCashTransactionWriter.#ctor">
+  GnuCashTransactionWriter()
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Writers/GnuCashTransactionWriter.cs/#L19"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Liber.Writers.GnuCashTransactionWriter.html">GnuCashTransactionWriter</a> class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GnuCashTransactionWriter()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
   <h2 class="section" id="methods">Methods
 </h2>
 
 
-  <a id="Liber_Writers_GnuCashTransactionWriter_SerializeAsync_" data-uid="Liber.Writers.GnuCashTransactionWriter.SerializeAsync*"></a>
+  <a id="Liber_Writers_GnuCashTransactionWriter_WriteAsync_" data-uid="Liber.Writers.GnuCashTransactionWriter.WriteAsync*"></a>
 
-  <h3 id="Liber_Writers_GnuCashTransactionWriter_SerializeAsync_System_IO_Stream_Liber_Company_" data-uid="Liber.Writers.GnuCashTransactionWriter.SerializeAsync(System.IO.Stream,Liber.Company)">
-  SerializeAsync(Stream, Company)
-  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Writers/GnuCashTransactionWriter.cs/#L13"><i class="bi bi-code-slash"></i></a>
+  <h3 id="Liber_Writers_GnuCashTransactionWriter_WriteAsync_System_IO_Stream_Liber_Company_" data-uid="Liber.Writers.GnuCashTransactionWriter.WriteAsync(System.IO.Stream,Liber.Company)">
+  WriteAsync(Stream, Company)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Writers/GnuCashTransactionWriter.cs/#L22"><i class="bi bi-code-slash"></i></a>
   </h3>
 
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Asynchronously writes company data to a stream.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Task SerializeAsync(Stream output, Company company)</code></pre>
+    <pre><code class="lang-csharp hljs">public Task WriteAsync(Stream output, Company company)</code></pre>
   </div>
 
   <h4 class="section">Parameters</h4>
   <dl class="parameters">
     <dt><code>output</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.io.stream">Stream</a></dt>
-    <dd></dd>
+    <dd><p>The output stream.</p>
+</dd>
     <dt><code>company</code> <a class="xref" href="Liber.Company.html">Company</a></dt>
-    <dd></dd>
+    <dd><p>The company whose data to write.</p>
+</dd>
   </dl>
 
   <h4 class="section">Returns</h4>
   <dl class="parameters">
     <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></dt>
-    <dd></dd>
+    <dd><p>A task representing the asynchronous write operation.</p>
+</dd>
   </dl>
 
 
@@ -190,7 +226,7 @@
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Writers/GnuCashTransactionWriter.cs/#L11" class="edit-link">Edit this page</a>
+          <a href="https://github.com/ishanpranav/ishan-books/blob/master/src/Liber/Writers/GnuCashTransactionWriter.cs/#L14" class="edit-link">Edit this page</a>
         </div>
 
         

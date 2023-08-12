@@ -3,7 +3,6 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Liber.Forms.Lines;
@@ -20,22 +19,18 @@ internal sealed partial class CheckDialog : Form
 
         _listView.BeginUpdate();
 
-        foreach (KeyValuePair<Guid, Account> account in value.Company.Accounts)
+        foreach (Line line in value.Company.GetDeposits())
         {
-            ListViewGroup group = _listView.Groups.Add(account.Key.ToString(), account.Value.Name);
+            Transaction transaction = line.Transaction!;
+            string key = line.AccountId.ToString();
+            ListViewItem item = _listView.Items.Add(transaction.Name ?? string.Empty);
 
-            foreach (Line line in account.Value.GetChecks())
-            {
-                Transaction transaction = line.Transaction!;
-                ListViewItem item = _listView.Items.Add(transaction.Name ?? string.Empty);
+            item.Group = _listView.Groups[key] ?? _listView.Groups.Add(key, value.Company.Accounts[line.AccountId].Name);
+            item.Tag = line;
 
-                item.Group = group;
-                item.Tag = line;
-
-                item.SubItems.Add(transaction.Posted.ToShortDateString()).Tag = transaction.Posted;
-                item.SubItems.Add(transaction.Number.ToString()).Tag = transaction.Number;
-                item.SubItems.Add(line.Credit.ToLocalizedString()).Tag = line.Credit;
-            }
+            item.SubItems.Add(transaction.Posted.ToShortDateString()).Tag = transaction.Posted;
+            item.SubItems.Add(transaction.Number.ToString()).Tag = transaction.Number;
+            item.SubItems.Add(line.Credit.ToLocalizedString()).Tag = line.Credit;
         }
 
         _listView.AutoResizeColumns();

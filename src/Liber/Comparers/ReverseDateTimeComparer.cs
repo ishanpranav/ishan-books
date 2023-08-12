@@ -30,6 +30,8 @@ public class ReverseDateTimeComparer : Comparer<DateTime>
         }
     }
 
+    private ReverseDateTimeComparer() { }
+
     /// <inheritdoc/>
     public override int Compare(DateTime x, DateTime y)
     {

@@ -8,9 +8,18 @@ using System.Threading.Tasks;
 
 namespace Liber.Writers;
 
+/// <summary>
+/// An <see cref="IWriter"/> for GnuCash (CSV) transaction data.
+/// </summary>
 public class GnuCashTransactionWriter : IWriter
 {
-    public  async Task SerializeAsync(Stream output, Company company)
+    /// <summary>
+    /// Initializes a new instance of the <see cref="GnuCashTransactionWriter"/> class.
+    /// </summary>
+    public GnuCashTransactionWriter() { }
+
+    /// <inheritdoc/>
+    public async Task WriteAsync(Stream output, Company company)
     {
         List<GnuCashLine> lines = new List<GnuCashLine>();
 
