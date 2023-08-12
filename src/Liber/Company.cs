@@ -388,7 +388,7 @@ public sealed class Company
 
             foreach (Line line in account.lines)
             {
-                if (line.Balance < 0)
+                if (line.Balance > 0)
                 {
                     yield return line;
                 }
@@ -407,7 +407,7 @@ public sealed class Company
 
             foreach (Line line in account.lines)
             {
-                if (line.Balance > 0)
+                if (line.Balance < 0)
                 {
                     yield return line;
                 }

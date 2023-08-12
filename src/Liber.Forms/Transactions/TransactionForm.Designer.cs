@@ -16,7 +16,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TransactionForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             postedDateTimePicker = new System.Windows.Forms.DateTimePicker();
             label1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
@@ -91,6 +91,7 @@
             _helpProvider.SetHelpKeyword(toolStrip1, resources.GetString("toolStrip1.HelpKeyword"));
             _helpProvider.SetHelpNavigator(toolStrip1, (System.Windows.Forms.HelpNavigator)resources.GetObject("toolStrip1.HelpNavigator"));
             _helpProvider.SetHelpString(toolStrip1, resources.GetString("toolStrip1.HelpString"));
+            toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripButton, saveToolStripButton, toolStripSeparator3, copyToolStripButton, printToolStripButton });
             toolStrip1.Name = "toolStrip1";
             _helpProvider.SetShowHelp(toolStrip1, (bool)resources.GetObject("toolStrip1.ShowHelp"));
@@ -165,8 +166,8 @@
             // 
             resources.ApplyResources(_dataGridView, "_dataGridView");
             _dataGridView.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Info;
-            _dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Info;
+            _dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             _dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             _dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { accountColumn, debitColumn, creditColumn, descriptionColumn });
             _helpProvider.SetHelpKeyword(_dataGridView, resources.GetString("_dataGridView.HelpKeyword"));
