@@ -47,7 +47,7 @@ Licensed under the MIT License.
                     </tr>
                 </thead>
                 <xsl:variable name="operating" select="sum(company/account[type = 'OtherCurrentAsset' or type = 'OtherCurrentLiability' or type = 'CreditCard']/previous) - sum(company/account[type = 'OtherCurrentAsset' or type = 'OtherCurrentLiability' or type = 'CreditCard']/balance) - sum(company/account[type = 'OtherIncomeExpense']/balance)"/>
-                <xsl:variable name="investing" select="sum(company/account[(type = 'FixedAsset' or type = 'OtherAsset')]/previous) - sum(company/account[(type = 'FixedAsset' or type = 'OtherAsset')]/balance) + sum(company/account[type = 'OtherIncomeExpense']/balance)"/>
+                <xsl:variable name="investing" select="sum(company/account[(type = 'FixedAsset' or type = 'OtherAsset')]/previous) - sum(company/account[(type = 'FixedAsset' or type = 'OtherAsset')]/balance) - sum(company/account[type = 'OtherIncomeExpense']/balance)"/>
                 <xsl:variable name="financing" select="sum(company/account[(type = 'LongTermLiability')]/previous) - sum(company/account[(type = 'LongTermLiability')]/balance)"/>
                 <tbody>
                     <tr>
@@ -131,7 +131,7 @@ Licensed under the MIT License.
                                         <xsl:value-of select="name"/>
                                     </td>
                                     <td class="right">
-                                        <xsl:value-of select="liber:fm(balance)"/>
+                                        <xsl:value-of select="liber:fm(-balance)"/>
                                     </td>
                                 </tr>
                             </xsl:for-each>
