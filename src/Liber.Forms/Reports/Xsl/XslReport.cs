@@ -10,7 +10,6 @@ using System.Xml.Schema;
 using System.Xml.Serialization;
 using Humanizer;
 using Humanizer.Localisation;
-using Liber;
 using Liber.Forms.Accounts;
 
 namespace Liber.Forms.Reports.Xsl;
@@ -182,7 +181,7 @@ public class XslReport : IXmlSerializable
         decimal debit;
         decimal credit;
 
-        if (value == Company.EquityAccount)
+        if (value == Company.Accounts[Company.EquityAccountId])
         {
             writer.WriteElementString("equity", XmlConvert.ToString(true));
 

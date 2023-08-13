@@ -150,26 +150,6 @@ public sealed class Company
         }
     }
 
-    [IgnoreMember]
-    [JsonIgnore]
-    public Account EquityAccount
-    {
-        get
-        {
-            return _accounts[EquityAccountId];
-        }
-    }
-
-    [IgnoreMember]
-    [JsonIgnore]
-    public Account OtherEquityAccount
-    {
-        get
-        {
-            return _accounts[OtherEquityAccountId];
-        }
-    }
-
     public event EventHandler<GuidEventArgs>? AccountAdded;
     public event EventHandler<GuidEventArgs>? AccountUpdated;
     public event EventHandler<GuidEventArgs>? AccountRemoved;
@@ -302,6 +282,30 @@ public sealed class Company
         _transactions.Add(value);
 
         NextTransactionNumber = Math.Max(value.Number, NextTransactionNumber) + 1;
+
+        if (string.IsNullOrWhiteSpace(value.Memo))
+        {
+            value.Memo = GetSuggestedMemo(value);
+        }
+    }
+
+    private string? GetSuggestedMemo(Transaction value)
+    {
+        if (value.Lines.All(x => _accounts[x.AccountId].Type.IsAsset()))
+        {
+            return Resources.TransferMemo;
+        }
+
+        List<Line> bankLines = value.Lines
+            .Where(x => _accounts[x.AccountId].Type == AccountType.Bank)
+            .ToList();
+
+        if (bankLines.TrueForAll(x => x.Balance > 0))
+        {
+            return Resources.DepositMemo;
+        }
+
+        return null;
     }
 
     public void RemoveTransaction(Transaction value)

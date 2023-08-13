@@ -2232,6 +2232,19 @@ references:
   isSpec: "True"
   fullName: Liber.Properties.Resources.DefaultOtherEquityAccountName
   nameWithType: Resources.DefaultOtherEquityAccountName
+- uid: Liber.Properties.Resources.DepositMemo
+  name: DepositMemo
+  href: api/Liber.Properties.Resources.html#Liber_Properties_Resources_DepositMemo
+  commentId: P:Liber.Properties.Resources.DepositMemo
+  fullName: Liber.Properties.Resources.DepositMemo
+  nameWithType: Resources.DepositMemo
+- uid: Liber.Properties.Resources.DepositMemo*
+  name: DepositMemo
+  href: api/Liber.Properties.Resources.html#Liber_Properties_Resources_DepositMemo_
+  commentId: Overload:Liber.Properties.Resources.DepositMemo
+  isSpec: "True"
+  fullName: Liber.Properties.Resources.DepositMemo
+  nameWithType: Resources.DepositMemo
 - uid: Liber.Properties.Resources.ResourceManager
   name: ResourceManager
   href: api/Liber.Properties.Resources.html#Liber_Properties_Resources_ResourceManager
@@ -2245,6 +2258,19 @@ references:
   isSpec: "True"
   fullName: Liber.Properties.Resources.ResourceManager
   nameWithType: Resources.ResourceManager
+- uid: Liber.Properties.Resources.TransferMemo
+  name: TransferMemo
+  href: api/Liber.Properties.Resources.html#Liber_Properties_Resources_TransferMemo
+  commentId: P:Liber.Properties.Resources.TransferMemo
+  fullName: Liber.Properties.Resources.TransferMemo
+  nameWithType: Resources.TransferMemo
+- uid: Liber.Properties.Resources.TransferMemo*
+  name: TransferMemo
+  href: api/Liber.Properties.Resources.html#Liber_Properties_Resources_TransferMemo_
+  commentId: Overload:Liber.Properties.Resources.TransferMemo
+  isSpec: "True"
+  fullName: Liber.Properties.Resources.TransferMemo
+  nameWithType: Resources.TransferMemo
 - uid: Liber.Sqlite
   name: Liber.Sqlite
   href: api/Liber.Sqlite.html
@@ -3128,6 +3154,12 @@ references:
   commentId: T:System.DecimalExtensions
   fullName: System.DecimalExtensions
   nameWithType: DecimalExtensions
+- uid: System.DecimalExtensions.Format
+  name: Format
+  href: api/System.DecimalExtensions.html#System_DecimalExtensions_Format
+  commentId: F:System.DecimalExtensions.Format
+  fullName: System.DecimalExtensions.Format
+  nameWithType: DecimalExtensions.Format
 - uid: System.DecimalExtensions.ToLocalizedString(System.Decimal)
   name: ToLocalizedString(decimal)
   href: api/System.DecimalExtensions.html#System_DecimalExtensions_ToLocalizedString_System_Decimal_

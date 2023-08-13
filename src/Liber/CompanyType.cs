@@ -6,7 +6,7 @@ using System.ComponentModel;
 
 namespace Liber;
 
-public enum CompanyType
+public enum CompanyType : byte
 {
     [LocalizedDescription(nameof(None))]
     None = 0,

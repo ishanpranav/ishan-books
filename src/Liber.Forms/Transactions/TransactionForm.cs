@@ -32,7 +32,9 @@ internal sealed partial class TransactionForm : Form
         numberNumericUpDown.Maximum = decimal.MaxValue;
         nameComboBox.DataSource = _company.GetNames();
         debitColumn.ValueType = typeof(decimal);
+        debitColumn.DefaultCellStyle.Format = DecimalExtensions.Format;
         creditColumn.ValueType = typeof(decimal);
+        creditColumn.DefaultCellStyle.Format = DecimalExtensions.Format;
         _dataGridView.AlternatingRowsDefaultCellStyle.BackColor = _company.Color;
         _dataGridView.AlternatingRowsDefaultCellStyle.ForeColor = Colors.GetForeColor(_company.Color);
 
@@ -43,6 +45,26 @@ internal sealed partial class TransactionForm : Form
 
         _dataGridView.AutoResizeColumns();
         CreateNew();
+    }
+
+    public bool ShowApplyButton
+    {
+        get
+        {
+            return applyButton.Enabled;
+        }
+        set
+        {
+            applyButton.Enabled = value;
+        }
+    }
+
+    public Transaction? Value
+    {
+        get
+        {
+            return _current;
+        }
     }
 
     private void InitializeAccount(Guid key, Account value)
@@ -63,20 +85,7 @@ internal sealed partial class TransactionForm : Form
 
         foreach (Line line in transaction.OrderedLines)
         {
-            object? debit = null;
-            object? credit = null;
-
-            if (line.Debit > 0)
-            {
-                debit = line.Debit;
-            }
-
-            if (line.Credit > 0)
-            {
-                credit = line.Credit;
-            }
-
-            _dataGridView.Rows.Add(line.AccountId, debit, credit, line.Description);
+            _dataGridView.Rows.Add(line.AccountId, line.Debit, line.Credit, line.Description);
         }
 
         _dataGridView.AutoResizeColumns();
@@ -297,7 +306,7 @@ internal sealed partial class TransactionForm : Form
 
     private void OnPrintToolStripButtonClick(object sender, EventArgs e)
     {
-
+        // TODO: Print transaction
     }
 
     protected override void Dispose(bool disposing)

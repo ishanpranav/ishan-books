@@ -86,5 +86,23 @@ namespace Liber.Properties {
                 return ResourceManager.GetString("DefaultOtherEquityAccountName", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deposit.
+        /// </summary>
+        public static string DepositMemo {
+            get {
+                return ResourceManager.GetString("DepositMemo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Funds Transfer.
+        /// </summary>
+        public static string TransferMemo {
+            get {
+                return ResourceManager.GetString("TransferMemo", resourceCulture);
+            }
+        }
     }
 }

@@ -34,10 +34,13 @@ partial class TransactionsForm
         // _dataGridView
         // 
         resources.ApplyResources(_dataGridView, "_dataGridView");
+        _dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
         _dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
         _dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { postedColumn, numberColumn, accountColumn, nameColumn, debitColumn, creditColumn, balanceColumn });
         _dataGridView.Name = "_dataGridView";
         _dataGridView.RowTemplate.Height = 29;
+        _dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+        _dataGridView.CellDoubleClick += OnDataGridViewCellDoubleClick;
         _dataGridView.EditingControlShowing += OnDataGridViewEditingControlShowing;
         // 
         // postedColumn
@@ -81,7 +84,6 @@ partial class TransactionsForm
         balanceColumn.Frozen = true;
         resources.ApplyResources(balanceColumn, "balanceColumn");
         balanceColumn.Name = "balanceColumn";
-        balanceColumn.ReadOnly = true;
         // 
         // TransactionsForm
         // 

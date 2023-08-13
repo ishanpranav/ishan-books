@@ -13,6 +13,7 @@ internal sealed partial class TransactionsForm : Form
 {
     private readonly Company _company;
     private readonly Account _account;
+    private readonly List<Transaction> _transactions = new List<Transaction>();
 
     public TransactionsForm(Company company, Guid id)
     {
@@ -28,9 +29,14 @@ internal sealed partial class TransactionsForm : Form
         accountColumn.ValueMember = nameof(IAccountView.Id);
         accountColumn.DisplayMember = nameof(IAccountView.DisplayName);
         debitColumn.ValueType = typeof(decimal);
+        debitColumn.DefaultCellStyle.Format = DecimalExtensions.Format;
         creditColumn.ValueType = typeof(decimal);
+        creditColumn.DefaultCellStyle.Format = DecimalExtensions.Format;
         balanceColumn.ValueType = typeof(decimal);
-        balanceColumn.ReadOnly = false;
+        balanceColumn.DefaultCellStyle.Format = DecimalExtensions.Format;
+        _dataGridView.AlternatingRowsDefaultCellStyle.BackColor = _company.Color;
+        _dataGridView.AlternatingRowsDefaultCellStyle.ForeColor = Colors.GetForeColor(_company.Color);
+        Text = _account.Name;
 
         accountColumn.Items.Add(NullAccountView.Value);
 
@@ -39,36 +45,59 @@ internal sealed partial class TransactionsForm : Form
             InitializeAccount(account.Key, account.Value);
         }
 
-        decimal balance = 0;
+        InitializeTransactions();
 
-        foreach (Line line in _account.OrderedLines)
+        if (_dataGridView.Rows.Count > 0)
         {
-            if (line.Transaction == null)
-            {
-                continue;
-            }
-
-            balance += line.Balance;
-
-            Guid accountId;
-            Line? sibling = line.Sibling;
-
-            if (sibling == null)
-            {
-                accountId = Guid.Empty;
-            }
-            else
-            {
-                accountId = sibling.AccountId;
-            }
-
-            _dataGridView.Rows.Add(line.Transaction.Posted, line.Transaction.Number, accountId, line.Debit, line.Credit, balance);
+            _dataGridView.CurrentCell = _dataGridView[0, _dataGridView.Rows.Count - 1];
         }
     }
 
     private void InitializeAccount(Guid key, Account value)
     {
         accountColumn.Items.Add(new AccountView(key, value));
+    }
+
+    private void InitializeTransactions()
+    {
+        _transactions.Clear();
+        _dataGridView.Rows.Clear();
+
+        decimal balance = 0;
+
+        foreach (Line line in _account.OrderedLines)
+        {
+            Transaction transaction = line.Transaction!;
+            Guid accountId;
+            Line? sibling = line.Sibling;
+            bool readOnly;
+
+            if (sibling == null)
+            {
+                accountId = Guid.Empty;
+                readOnly = true;
+            }
+            else
+            {
+                accountId = sibling.AccountId;
+                readOnly = false;
+            }
+
+            balance += line.Balance;
+
+            int row = _dataGridView.Rows.Add(transaction.Posted, transaction.Number, accountId, transaction.Name, line.Debit, line.Credit, balance);
+
+            for (int column = 0; column < _dataGridView.Columns.Count; column++)
+            {
+                _dataGridView[column, row].ReadOnly = readOnly;
+            }
+
+            _dataGridView[balanceColumn.Index, row].ReadOnly = true;
+
+            _transactions.Add(transaction);
+        }
+
+        _dataGridView.AutoResizeColumns();
     }
 
     private void OnCompanyAccountAdded(object? sender, GuidEventArgs e)
@@ -91,6 +120,30 @@ internal sealed partial class TransactionsForm : Form
     private void OnCompanyAccountRemoved(object? sender, GuidEventArgs e)
     {
         accountColumn.Items.Remove(e.Id);
+    }
+
+    private void OnDataGridViewCellDoubleClick(object sender, DataGridViewCellEventArgs e)
+    {
+        if (e.RowIndex == -1 || e.ColumnIndex == balanceColumn.Index || !_dataGridView[e.ColumnIndex, e.RowIndex].ReadOnly)
+        {
+            return;
+        }
+
+        using TransactionForm form = new TransactionForm(_company)
+        {
+            ShowApplyButton = false
+        };
+
+        form.InitializeTransaction(_transactions[e.RowIndex]);
+
+        if (form.ShowDialog() == DialogResult.OK && form.Value != null)
+        {
+            _transactions[e.RowIndex] = form.Value;
+
+            InitializeTransactions();
+
+            _dataGridView.CurrentCell = _dataGridView[e.ColumnIndex, e.RowIndex];
+        }
     }
 
     private void OnDataGridViewEditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)

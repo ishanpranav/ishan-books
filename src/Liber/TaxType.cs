@@ -7,7 +7,7 @@ using CsvHelper.Configuration.Attributes;
 
 namespace Liber;
 
-public enum TaxType
+public enum TaxType : byte
 {
     [LocalizedDescription(nameof(None))]
     [Name("F")]

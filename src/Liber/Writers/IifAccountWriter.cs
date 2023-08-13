@@ -2,6 +2,8 @@
 // Copyright (c) 2023 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
@@ -20,14 +22,16 @@ public class IifAccountWriter : IWriter
     /// </summary>
     public IifAccountWriter() { }
 
-    private static IifExtra GetExtra(Company company, Account account)
+    private static IifExtra GetExtra(Company company, Guid accountId)
     {
+        Account account = company.Accounts[accountId];
+
         if (account.Type == AccountType.Cost)
         {
             return IifExtra.Cost;
         }
 
-        if (company.EquityAccount == account)
+        if (accountId == company.EquityAccountId)
         {
             return IifExtra.Equity;
         }
@@ -41,9 +45,9 @@ public class IifAccountWriter : IWriter
         int i = 0;
         IifAccount[] accounts = new IifAccount[company.Accounts.Count];
 
-        foreach (Account account in company.Accounts.Values)
+        foreach (KeyValuePair<Guid, Account> account in company.Accounts)
         {
-            accounts[i] = new IifAccount(account, i + 1, GetExtra(company, account));
+            accounts[i] = new IifAccount(account.Value, i + 1, GetExtra(company, account.Key));
             i++;
         }
 

@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Liber.Forms.Lines;
 using Liber.Forms.Reports.Gdi;
@@ -59,7 +60,11 @@ internal sealed partial class ReportsForm : Form
             searchPattern: "*.html",
             x => new HtmlReportView(_company, x));
 
-        await _webView.EnsureCoreWebView2Async();
+        try
+        {
+            await _webView.EnsureCoreWebView2Async();
+        }
+        catch (COMException) { }
 
         _webView.CoreWebView2.SetVirtualHostNameToFolderMapping("liber.example", Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)!, CoreWebView2HostResourceAccessKind.DenyCors);
     }

@@ -12,6 +12,7 @@ using Liber.Forms.Transactions;
 
 namespace Liber.Forms.Accounts;
 
+// TODO: Make sure that accounts without certain permissions cannot use all the menu options
 internal sealed partial class AccountsForm : Form
 {
     private readonly Company _company;
@@ -102,7 +103,7 @@ internal sealed partial class AccountsForm : Form
         DateTime posted = DateTime.Today;
         DateTime started = new DateTime(posted.Year, 1, 1);
 
-        if (value == _company.EquityAccount)
+        if (value == _company.Accounts[_company.EquityAccountId])
         {
             balance = _company.GetEquity(started);
         }
@@ -247,11 +248,11 @@ internal sealed partial class AccountsForm : Form
         }
         else if (value.Type == AccountType.Bank || value.Type == AccountType.CreditCard)
         {
-            InitializeTransaction(id);
+            InitializeTransactions(id);
         }
         else
         {
-            InitializeTransactions(id);
+            InitializeTransaction(id);
         }
     }
 

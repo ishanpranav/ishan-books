@@ -126,4 +126,10 @@
   <data name="DefaultOtherEquityAccountName" xml:space="preserve">
     <value>Accumulated Other Comprehensive Income</value>
   </data>
+  <data name="DepositMemo" xml:space="preserve">
+    <value>Deposit</value>
+  </data>
+  <data name="TransferMemo" xml:space="preserve">
+    <value>Funds Transfer</value>
+  </data>
 </root>

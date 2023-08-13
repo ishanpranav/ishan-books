@@ -129,7 +129,7 @@
     <value>6</value>
   </data>
   <data name="postedColumn.Width" type="System.Int32, mscorlib">
-    <value>125</value>
+    <value>70</value>
   </data>
   <data name="numberColumn.HeaderText" xml:space="preserve">
     <value>Number</value>
@@ -138,7 +138,7 @@
     <value>6</value>
   </data>
   <data name="numberColumn.Width" type="System.Int32, mscorlib">
-    <value>125</value>
+    <value>92</value>
   </data>
   <data name="accountColumn.HeaderText" xml:space="preserve">
     <value>Account</value>
@@ -147,7 +147,7 @@
     <value>6</value>
   </data>
   <data name="accountColumn.Width" type="System.Int32, mscorlib">
-    <value>125</value>
+    <value>69</value>
   </data>
   <data name="nameColumn.HeaderText" xml:space="preserve">
     <value>Name</value>
@@ -156,7 +156,7 @@
     <value>6</value>
   </data>
   <data name="nameColumn.Width" type="System.Int32, mscorlib">
-    <value>125</value>
+    <value>78</value>
   </data>
   <data name="debitColumn.HeaderText" xml:space="preserve">
     <value>Debit</value>
@@ -165,7 +165,7 @@
     <value>6</value>
   </data>
   <data name="debitColumn.Width" type="System.Int32, mscorlib">
-    <value>125</value>
+    <value>75</value>
   </data>
   <data name="creditColumn.HeaderText" xml:space="preserve">
     <value>Credit</value>
@@ -174,7 +174,7 @@
     <value>6</value>
   </data>
   <data name="creditColumn.Width" type="System.Int32, mscorlib">
-    <value>125</value>
+    <value>78</value>
   </data>
   <data name="balanceColumn.HeaderText" xml:space="preserve">
     <value>Balance</value>
@@ -183,7 +183,7 @@
     <value>6</value>
   </data>
   <data name="balanceColumn.Width" type="System.Int32, mscorlib">
-    <value>125</value>
+    <value>90</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="_dataGridView.Location" type="System.Drawing.Point, System.Drawing">

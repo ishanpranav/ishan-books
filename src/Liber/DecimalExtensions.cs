@@ -6,8 +6,10 @@ namespace System;
 
 public static class DecimalExtensions
 {
+    public const string Format = " #,##0.00 ;(#,##0.00);   -   ";
+
     public static string ToLocalizedString(this decimal value)
     {
-        return string.Format("{0: #,##0.00 ;(#,##0.00);   -   }", value);
+        return value.ToString(Format);
     }
 }
