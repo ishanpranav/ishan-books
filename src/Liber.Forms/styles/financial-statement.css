@@ -47,6 +47,7 @@ th {
 
 .right {
     text-align: right;
+    white-space: pre;
 }
 
 .in-1 {

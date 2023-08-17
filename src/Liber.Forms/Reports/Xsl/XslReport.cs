@@ -14,12 +14,18 @@ using Liber.Forms.Accounts;
 
 namespace Liber.Forms.Reports.Xsl;
 
+/// <summary>
+/// Represents an XSL template for generating formatted financial reports.
+/// </summary>
 [XmlRoot("report")]
 public class XslReport : IXmlSerializable
 {
     private DateTime _started = new DateTime(DateTime.Today.Year, 1, 1);
     private DateTime _posted = DateTime.Today;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="XslReport"/> class.
+    /// </summary>
     public XslReport()
     {
         Title = string.Empty;
@@ -27,6 +33,11 @@ public class XslReport : IXmlSerializable
         Accounts = new AccountsView(Company);
     }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="XslReport"/> class with the specified title and company.
+    /// </summary>
+    /// <param name="title">The title of the report.</param>
+    /// <param name="company">The <see cref="Company"/> associated with the report.</param>
     public XslReport(string title, Company company)
     {
         Title = title;
@@ -34,6 +45,10 @@ public class XslReport : IXmlSerializable
         Accounts = new AccountsView(company);
     }
 
+    /// <summary>
+    /// Gets or sets the <see cref="Company"/> associated with the report.
+    /// </summary>
+    /// <value>The company associated with the report.</value>
     [Browsable(false)]
     public Company Company { get; set; }
 
@@ -93,6 +108,12 @@ public class XslReport : IXmlSerializable
     [LocalizedDisplayName(nameof(Accounts))]
     public AccountsView Accounts { get; set; }
 
+    /// <summary>
+    /// Formats a date value as a long date string.
+    /// </summary>
+    /// <remarks>This method corresponds to the <c>liber:fdatel</c> XSL function.</remarks>
+    /// <param name="value">The date value to format.</param>
+    /// <returns>The formatted long date string.</returns>
     public string fdatel(DateTime value)
     {
         return value.ToLongDateString();
@@ -121,8 +142,22 @@ public class XslReport : IXmlSerializable
         return started.ToShortDateString() + " \u2013 " + posted.ToShortDateString();
     }
 
+    /// <summary>
+    /// Formats the time span between two dates, representing an accounting period, as a human-readable string.
+    /// </summary>
+    /// <remarks>This method corresponds to the <c>liber:ftspans</c> XSL function.</remarks>
+    /// <param name="started">The start date of the accounting period.</param>
+    /// <param name="posted">The end date of the accounting period.</param>
+    /// <returns>A human-readable string representing the time span between the start and end dates.</returns>
     public string ftspans(DateTime started, DateTime posted)
     {
+        int year = started.Year;
+
+        if (posted.Year == year && started.Month == 1 && started.Day == 1 && posted.Month == 12 && posted.Day == 31)
+        {
+            return year.ToString();
+        }
+
         return (posted - started).Humanize(precision: 2, countEmptyUnits: true, maxUnit: TimeUnit.Year);
     }
 

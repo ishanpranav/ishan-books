@@ -13,6 +13,9 @@ using MessagePack.Formatters;
 
 namespace Liber;
 
+/// <summary>
+/// Represents an individual sole proprietorship, partnership, or stock corporation, or other entity.
+/// </summary>
 [MessagePackObject]
 public sealed class Company
 {
@@ -20,6 +23,9 @@ public sealed class Company
     private readonly SortedSet<Transaction> _transactions;
     private readonly SortedSet<string> _names = new SortedSet<string>();
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Company"/> class.
+    /// </summary>
     public Company()
     {
         _accounts = new Dictionary<Guid, Account>();
@@ -38,6 +44,13 @@ public sealed class Company
         }, Guid.Empty);
     }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Company"/> class with the specified accounts, journal entries, account number sequence, and journal entry number sequence.
+    /// </summary>
+    /// <param name="accounts">The account dictionary.</param>
+    /// <param name="transactions">The transaction collection.</param>
+    /// <param name="nextAccountNumber">The next account number to be assigned.</param>
+    /// <param name="nextTransactionNumber">The next journal entry number to be assigned.</param>
     [JsonConstructor]
     [SerializationConstructor]
     public Company(
@@ -261,11 +274,17 @@ public sealed class Company
             .Last();
     }
 
+    /// <summary>
+    /// Retrieves a collection of transactions that fall within a specified date range.
+    /// </summary>
+    /// <param name="started">The start date of the date range.</param>
+    /// <param name="posted">The end date of the date range.</param>
+    /// <returns>A collection of transactions within the specified date range.</returns>
     public IEnumerable<Transaction> GetTransactionsBetween(DateTime started, DateTime posted)
     {
         return _transactions.GetViewBetween(
             new Transaction() { Posted = started },
-            new Transaction() { Posted = posted });
+            new Transaction() { Posted = posted.AddDays(1) });
     }
 
     public void AddTransaction(Transaction value)
@@ -449,6 +468,10 @@ public sealed class Company
         return result;
     }
 
+    /// <summary>
+    /// Copies the data from the current <see cref="Company"/> instance to another <see cref="Company"/> instance.
+    /// </summary>
+    /// <param name="other">The target <see cref="Company"/> instance to which the data will be copied.</param>
     public void CopyTo(Company other)
     {
         other.Name = Name;
@@ -458,6 +481,7 @@ public sealed class Company
         other.EquityAccountId = EquityAccountId;
         other.OtherEquityAccountId = OtherEquityAccountId;
         other.Password = Password;
+        other.Type = Type;
 
         other._accounts.Clear();
         other._transactions.Clear();
