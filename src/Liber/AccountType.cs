@@ -27,53 +27,11 @@ public enum AccountType : short
     Bank = 1100,
 
     /// <summary>
-    /// Specifies a credit card or line of credit. This account type records payments and charges.
-    /// </summary>
-    [LocalizedDescription(nameof(CreditCard))]
-    [Name("CCARD")]
-    CreditCard = -2100,
-
-    /// <summary>
-    /// Specifies an equity account. This account type records opening balance equity, common stock, preferred stock, retained earnings, and accumulated other comprehensive income.
-    /// </summary>
-    [LocalizedDescription(nameof(Equity))]
-    [Name("EQUITY")]
-    Equity = -3000,
-
-    /// <summary>
-    /// Specifies an expense account. This account type records selling, general, and administrative expenses.
-    /// </summary>
-    [LocalizedDescription(nameof(Expense))]
-    [Name("EXP")]
-    Expense = 6000,
-
-    /// <summary>
-    /// Specifies an income account. This account type records income, revenue, sales, and sales returns and allowances.
-    /// </summary>
-    [LocalizedDescription(nameof(Income))]
-    [Name("INC")]
-    Income = -4000,
-
-    /// <summary>
     /// Specifies a current asset (other than cash and accounts receivable). This account type records accrued revenue, prepayments, tax withholdings, short-term notes receivable, and the current portion of long-term receivables.
     /// </summary>
     [LocalizedDescription(nameof(OtherCurrentAsset))]
     [Name("OCASSET")]
     OtherCurrentAsset = 1300,
-
-    /// <summary>
-    /// Specifies a current liability (other than credit cards and accounts payable). This account type records unearned revenue, accrued expenses, tax liabilities, short-term notes payable, and the current portion of long-term payables.
-    /// </summary>
-    [LocalizedDescription(nameof(OtherCurrentLiability))]
-    [Name("OCLIAB")]
-    OtherCurrentLiability = -2300,
-
-    /// <summary>
-    /// Specifies a cost of goods sold, cost of revenue, or cost of sales account. This account type records inventory costs.
-    /// </summary>
-    [LocalizedDescription(nameof(Cost))]
-    [Name("COGS")]
-    Cost = 5000,
 
     /// <summary>
     /// Specifies a fixed asset. This account type records property, plant, and equipment.
@@ -90,11 +48,53 @@ public enum AccountType : short
     OtherAsset = 1800,
 
     /// <summary>
+    /// Specifies a credit card or line of credit. This account type records payments and charges.
+    /// </summary>
+    [LocalizedDescription(nameof(CreditCard))]
+    [Name("CCARD")]
+    CreditCard = -2100,
+
+    /// <summary>
+    /// Specifies a current liability (other than credit cards and accounts payable). This account type records unearned revenue, accrued expenses, tax liabilities, short-term notes payable, and the current portion of long-term payables.
+    /// </summary>
+    [LocalizedDescription(nameof(OtherCurrentLiability))]
+    [Name("OCLIAB")]
+    OtherCurrentLiability = -2300,
+
+    /// <summary>
     /// Specifies a long-term liability. This account type records long-term notes and loans payable, warranties, and legal liabilities.
     /// </summary>
     [LocalizedDescription(nameof(LongTermLiability))]
     [Name("LTLIAB")]
     LongTermLiability = -2600,
+
+    /// <summary>
+    /// Specifies an equity account. This account type records opening balance equity, common stock, preferred stock, retained earnings, and accumulated other comprehensive income.
+    /// </summary>
+    [LocalizedDescription(nameof(Equity))]
+    [Name("EQUITY")]
+    Equity = -3000,
+
+    /// <summary>
+    /// Specifies an income account. This account type records income, revenue, sales, and sales returns and allowances.
+    /// </summary>
+    [LocalizedDescription(nameof(Income))]
+    [Name("INC")]
+    Income = -4000,
+
+    /// <summary>
+    /// Specifies a cost of goods sold, cost of revenue, or cost of sales account. This account type records inventory costs.
+    /// </summary>
+    [LocalizedDescription(nameof(Cost))]
+    [Name("COGS")]
+    Cost = 5000,
+
+    /// <summary>
+    /// Specifies an expense account. This account type records selling, general, and administrative expenses.
+    /// </summary>
+    [LocalizedDescription(nameof(Expense))]
+    [Name("EXP")]
+    Expense = 6000,
 
     /// <summary>
     /// Specifies an income tax expense. This account type records taxes.

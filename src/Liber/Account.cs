@@ -9,7 +9,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text.Json.Serialization;
 using CsvHelper.Configuration.Attributes;
-using Liber.TypeConverters;
+using CsvHelper.TypeConversion;
 using MessagePack;
 using MessagePack.Formatters;
 
@@ -139,11 +139,8 @@ public class Account
     /// Gets or sets the tax category associated with the account.
     /// </summary>
     /// <value>The tax category associated with the account.</value>
-    [Index(10)]
     [Key(8)]
     [LocalizedDisplayName(nameof(TaxType))]
-    [Name("Tax Info")]
-    [Optional]
     [System.ComponentModel.TypeConverter(typeof(LocalizedEnumConverter))]
     public TaxType TaxType { get; set; }
 

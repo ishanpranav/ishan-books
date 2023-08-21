@@ -2,11 +2,10 @@
 // Copyright (c) 2023 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
-using CsvHelper;
 using CsvHelper.Configuration;
-using CsvHelper.TypeConversion;
+using Liber;
 
-namespace Liber.TypeConverters;
+namespace CsvHelper.TypeConversion;
 
 internal sealed class GnuCashAccountTypeConverter : DefaultTypeConverter
 {
@@ -18,23 +17,23 @@ internal sealed class GnuCashAccountTypeConverter : DefaultTypeConverter
             case "CASH":
                 return AccountType.Bank;
 
+            case "ASSET":
+                return AccountType.OtherCurrentAsset;
+
+            case "LIABILITY":
+                return AccountType.OtherCurrentLiability;
+
             case "CREDIT":
                 return AccountType.CreditCard;
 
             case "EQUITY":
                 return AccountType.Equity;
 
-            case "EXPENSE":
-                return AccountType.Expense;
-
             case "INCOME":
                 return AccountType.Income;
 
-            case "ASSET":
-                return AccountType.OtherCurrentAsset;
-
-            case "LIABILITY":
-                return AccountType.OtherCurrentLiability;
+            case "EXPENSE":
+                return AccountType.Expense;
 
             default:
                 return AccountType.None;
@@ -53,29 +52,29 @@ internal sealed class GnuCashAccountTypeConverter : DefaultTypeConverter
             case AccountType.Bank:
                 return "BANK";
 
-            case AccountType.CreditCard:
-                return "CREDIT";
-
-            case AccountType.Equity:
-                return "EQUITY";
-
-            case AccountType.Expense:
-            case AccountType.Cost:
-            case AccountType.IncomeTaxExpense:
-            case AccountType.OtherIncomeExpense:
-                return "EXPENSE";
-
-            case AccountType.Income:
-                return "INCOME";
-
             case AccountType.OtherCurrentAsset:
             case AccountType.FixedAsset:
             case AccountType.OtherAsset:
                 return "ASSET";
 
+            case AccountType.CreditCard:
+                return "CREDIT";
+
             case AccountType.OtherCurrentLiability:
             case AccountType.LongTermLiability:
                 return "LIABILITY";
+
+            case AccountType.Equity:
+                return "EQUITY";
+
+            case AccountType.Income:
+            case AccountType.OtherIncomeExpense:
+                return "INCOME";
+
+            case AccountType.Expense:
+            case AccountType.Cost:
+            case AccountType.IncomeTaxExpense:
+                return "EXPENSE";
 
             default:
                 return string.Empty;

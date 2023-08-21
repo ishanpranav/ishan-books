@@ -19,7 +19,7 @@ internal sealed partial class CheckDialog : Form
 
         _listView.BeginUpdate();
 
-        foreach (Line line in value.Company.GetDeposits())
+        foreach (Line line in value.Company.GetChecks())
         {
             Transaction transaction = line.Transaction!;
             string key = line.AccountId.ToString();

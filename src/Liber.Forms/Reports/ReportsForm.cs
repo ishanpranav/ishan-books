@@ -126,14 +126,11 @@ internal sealed partial class ReportsForm : Form
             if (_view.Properties is GdiCheckReport checkReport)
             {
                 checkReport.Check = value;
+
+                InitializeReport();
+
+                break;
             }
-        }
-
-        if (_view != null)
-        {
-            _propertyGrid.SelectedObject = _view.Properties;
-
-            InitializeReport();
         }
     }
 

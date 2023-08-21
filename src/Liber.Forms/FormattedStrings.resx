@@ -136,6 +136,9 @@
   <data name="adjustments{0}{1}" xml:space="preserve">
     <value>Adjustments to reconcile {0} to {1}</value>
   </data>
+  <data name="aging-summary" xml:space="preserve">
+    <value>Aging Summary</value>
+  </data>
   <data name="assets" xml:space="preserve">
     <value>Assets</value>
   </data>
@@ -172,6 +175,9 @@
   <data name="CreditCard" xml:space="preserve">
     <value>Credit cards</value>
   </data>
+  <data name="current" xml:space="preserve">
+    <value>Current</value>
+  </data>
   <data name="current-assets" xml:space="preserve">
     <value>Current assets</value>
   </data>
@@ -180,6 +186,12 @@
   </data>
   <data name="date" xml:space="preserve">
     <value>Date</value>
+  </data>
+  <data name="days{0}" xml:space="preserve">
+    <value>&gt; {0}</value>
+  </data>
+  <data name="days{0}{1}" xml:space="preserve">
+    <value>{0} – {1}</value>
   </data>
   <data name="debit" xml:space="preserve">
     <value>Debit</value>

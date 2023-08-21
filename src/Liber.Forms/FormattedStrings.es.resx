@@ -129,6 +129,9 @@
   <data name="adjustments{0}{1}" xml:space="preserve">
     <value>Ajustes para conciliar el {0} con el {1}</value>
   </data>
+  <data name="aging-summary" xml:space="preserve">
+    <value>Resumen de antigüedad de saldos</value>
+  </data>
   <data name="assets" xml:space="preserve">
     <value>Activos</value>
   </data>
@@ -164,6 +167,9 @@
   </data>
   <data name="CreditCard" xml:space="preserve">
     <value>Tarjetas de crédito</value>
+  </data>
+  <data name="current" xml:space="preserve">
+    <value>Corriente</value>
   </data>
   <data name="current-assets" xml:space="preserve">
     <value>Activos corrientes</value>
