@@ -18,7 +18,7 @@
     <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
     <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
     <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
-    <data name="Color1" type="System.Drawing.Color, System.Drawing"">Blue</data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
     <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
         <value>[base64 mime encoded serialized .NET Framework object]</value>
     </data>
@@ -117,10 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="_dataGridView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
   <data name="postedColumn.HeaderText" xml:space="preserve">
     <value>Date</value>
   </data>
@@ -129,7 +125,7 @@
     <value>6</value>
   </data>
   <data name="postedColumn.Width" type="System.Int32, mscorlib">
-    <value>70</value>
+    <value>47</value>
   </data>
   <data name="numberColumn.HeaderText" xml:space="preserve">
     <value>Number</value>
@@ -138,7 +134,7 @@
     <value>6</value>
   </data>
   <data name="numberColumn.Width" type="System.Int32, mscorlib">
-    <value>92</value>
+    <value>69</value>
   </data>
   <data name="accountColumn.HeaderText" xml:space="preserve">
     <value>Account</value>
@@ -156,7 +152,7 @@
     <value>6</value>
   </data>
   <data name="nameColumn.Width" type="System.Int32, mscorlib">
-    <value>78</value>
+    <value>55</value>
   </data>
   <data name="debitColumn.HeaderText" xml:space="preserve">
     <value>Debit</value>
@@ -165,7 +161,7 @@
     <value>6</value>
   </data>
   <data name="debitColumn.Width" type="System.Int32, mscorlib">
-    <value>75</value>
+    <value>52</value>
   </data>
   <data name="creditColumn.HeaderText" xml:space="preserve">
     <value>Credit</value>
@@ -174,7 +170,7 @@
     <value>6</value>
   </data>
   <data name="creditColumn.Width" type="System.Int32, mscorlib">
-    <value>78</value>
+    <value>55</value>
   </data>
   <data name="balanceColumn.HeaderText" xml:space="preserve">
     <value>Balance</value>
@@ -183,17 +179,36 @@
     <value>6</value>
   </data>
   <data name="balanceColumn.Width" type="System.Int32, mscorlib">
-    <value>90</value>
+    <value>67</value>
+  </data>
+  <metadata name="transactionColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="transactionColumn.HeaderText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="transactionColumn.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="transactionColumn.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="transactionColumn.Width" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="_dataGridView.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="_dataGridView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 12</value>
+    <value>0, 0</value>
   </data>
   <data name="_dataGridView.RowHeadersWidth" type="System.Int32, mscorlib">
     <value>51</value>
   </data>
   <data name="_dataGridView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>776, 426</value>
+    <value>800, 450</value>
   </data>
   <data name="_dataGridView.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -259,6 +274,12 @@
     <value>balanceColumn</value>
   </data>
   <data name="&gt;&gt;balanceColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;transactionColumn.Name" xml:space="preserve">
+    <value>transactionColumn</value>
+  </data>
+  <data name="&gt;&gt;transactionColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

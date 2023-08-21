@@ -18,11 +18,8 @@ internal sealed class ImportAccountsForm : ImportForm
     {
         _factory = factory;
         _accounts = accounts;
-        _dataGridView.DataSource = accounts
-            .Select(x => x.Value)
-            .ToList();
 
-        _dataGridView.AutoResizeColumns();
+        SetDataSource(accounts.Select(x => x.Value).ToList());
     }
 
     private Guid GetParentId(Guid id, string value)

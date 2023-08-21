@@ -31,10 +31,6 @@
             applyButton = new System.Windows.Forms.Button();
             acceptButton = new System.Windows.Forms.Button();
             _dataGridView = new System.Windows.Forms.DataGridView();
-            accountColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            debitColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            creditColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            descriptionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             previousButton = new System.Windows.Forms.Button();
             nextButton = new System.Windows.Forms.Button();
             label3 = new System.Windows.Forms.Label();
@@ -42,6 +38,10 @@
             nameComboBox = new System.Windows.Forms.ComboBox();
             memoTextBox = new System.Windows.Forms.TextBox();
             _helpProvider = new System.Windows.Forms.HelpProvider();
+            accountColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            debitColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            creditColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            descriptionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)numberNumericUpDown).BeginInit();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)_dataGridView).BeginInit();
@@ -77,6 +77,7 @@
             // 
             // toolStrip1
             // 
+            toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripButton, saveToolStripButton, toolStripSeparator3, copyToolStripButton, printToolStripButton });
             resources.ApplyResources(toolStrip1, "toolStrip1");
             toolStrip1.Name = "toolStrip1";
@@ -154,26 +155,6 @@
             _dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             _helpProvider.SetShowHelp(_dataGridView, (bool)resources.GetObject("_dataGridView.ShowHelp"));
             // 
-            // accountColumn
-            // 
-            resources.ApplyResources(accountColumn, "accountColumn");
-            accountColumn.Name = "accountColumn";
-            // 
-            // debitColumn
-            // 
-            resources.ApplyResources(debitColumn, "debitColumn");
-            debitColumn.Name = "debitColumn";
-            // 
-            // creditColumn
-            // 
-            resources.ApplyResources(creditColumn, "creditColumn");
-            creditColumn.Name = "creditColumn";
-            // 
-            // descriptionColumn
-            // 
-            resources.ApplyResources(descriptionColumn, "descriptionColumn");
-            descriptionColumn.Name = "descriptionColumn";
-            // 
             // previousButton
             // 
             resources.ApplyResources(previousButton, "previousButton");
@@ -216,6 +197,27 @@
             _helpProvider.SetHelpString(memoTextBox, resources.GetString("memoTextBox.HelpString"));
             memoTextBox.Name = "memoTextBox";
             _helpProvider.SetShowHelp(memoTextBox, (bool)resources.GetObject("memoTextBox.ShowHelp"));
+            // 
+            // accountColumn
+            // 
+            resources.ApplyResources(accountColumn, "accountColumn");
+            accountColumn.Name = "accountColumn";
+            accountColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // debitColumn
+            // 
+            resources.ApplyResources(debitColumn, "debitColumn");
+            debitColumn.Name = "debitColumn";
+            // 
+            // creditColumn
+            // 
+            resources.ApplyResources(creditColumn, "creditColumn");
+            creditColumn.Name = "creditColumn";
+            // 
+            // descriptionColumn
+            // 
+            resources.ApplyResources(descriptionColumn, "descriptionColumn");
+            descriptionColumn.Name = "descriptionColumn";
             // 
             // TransactionForm
             // 
@@ -262,10 +264,6 @@
         private System.Windows.Forms.Button applyButton;
         private System.Windows.Forms.Button acceptButton;
         private System.Windows.Forms.DataGridView _dataGridView;
-        private System.Windows.Forms.DataGridViewComboBoxColumn accountColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn debitColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn creditColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn descriptionColumn;
         private System.Windows.Forms.Button previousButton;
         private System.Windows.Forms.Button nextButton;
         private System.Windows.Forms.Label label3;
@@ -274,5 +272,9 @@
         private System.Windows.Forms.TextBox memoTextBox;
         private System.Windows.Forms.HelpProvider _helpProvider;
         private System.Windows.Forms.ToolStripButton printToolStripButton;
+        private System.Windows.Forms.DataGridViewComboBoxColumn accountColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn debitColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn creditColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn descriptionColumn;
     }
 }

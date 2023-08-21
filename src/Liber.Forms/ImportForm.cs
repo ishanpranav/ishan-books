@@ -3,6 +3,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections;
 using System.ComponentModel;
 using System.Windows.Forms;
 using Liber.Forms.Properties;
@@ -24,6 +25,18 @@ internal abstract partial class ImportForm : Form
     protected Company Company { get; }
 
     protected abstract void CommitChanges();
+
+    protected void SetDataSource(IList value)
+    {
+        _dataGridView.DataSource = value;
+
+        foreach (DataGridViewColumn column in _dataGridView.Columns)
+        {
+            column.SortMode = DataGridViewColumnSortMode.Automatic;
+        }
+
+        _dataGridView.AutoResizeColumns();
+    }
 
     private void OnDataGridViewDataError(object sender, DataGridViewDataErrorEventArgs e)
     {

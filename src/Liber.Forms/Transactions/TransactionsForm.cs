@@ -13,7 +13,6 @@ internal sealed partial class TransactionsForm : Form
 {
     private readonly Company _company;
     private readonly Account _account;
-    private readonly List<Transaction> _transactions = new List<Transaction>();
 
     public TransactionsForm(Company company, Guid id)
     {
@@ -34,6 +33,7 @@ internal sealed partial class TransactionsForm : Form
         creditColumn.DefaultCellStyle.Format = DecimalExtensions.Format;
         balanceColumn.ValueType = typeof(decimal);
         balanceColumn.DefaultCellStyle.Format = DecimalExtensions.Format;
+        transactionColumn.ValueType = typeof(Transaction);
         _dataGridView.AlternatingRowsDefaultCellStyle.BackColor = _company.Color;
         _dataGridView.AlternatingRowsDefaultCellStyle.ForeColor = Colors.GetForeColor(_company.Color);
         Text = _account.Name;
@@ -60,7 +60,6 @@ internal sealed partial class TransactionsForm : Form
 
     private void InitializeTransactions()
     {
-        _transactions.Clear();
         _dataGridView.Rows.Clear();
 
         decimal balance = 0;
@@ -85,7 +84,7 @@ internal sealed partial class TransactionsForm : Form
 
             balance += line.Balance;
 
-            int row = _dataGridView.Rows.Add(transaction.Posted, transaction.Number, accountId, transaction.Name, line.Debit, line.Credit, balance);
+            int row = _dataGridView.Rows.Add(transaction.Posted, transaction.Number, accountId, transaction.Name, line.Debit, line.Credit, balance, transaction);
 
             for (int column = 0; column < _dataGridView.Columns.Count; column++)
             {
@@ -93,8 +92,6 @@ internal sealed partial class TransactionsForm : Form
             }
 
             _dataGridView[balanceColumn.Index, row].ReadOnly = true;
-
-            _transactions.Add(transaction);
         }
 
         _dataGridView.AutoResizeColumns();
@@ -134,11 +131,13 @@ internal sealed partial class TransactionsForm : Form
             ShowApplyButton = false
         };
 
-        form.InitializeTransaction(_transactions[e.RowIndex]);
+        DataGridViewCell cell = _dataGridView[transactionColumn.Index, e.RowIndex];
+
+        form.InitializeTransaction((Transaction)cell.Value);
 
         if (form.ShowDialog() == DialogResult.OK && form.Value != null)
         {
-            _transactions[e.RowIndex] = form.Value;
+            cell.Value = form.Value;
 
             InitializeTransactions();
 
@@ -164,6 +163,31 @@ internal sealed partial class TransactionsForm : Form
         textBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
         textBox.AutoCompleteCustomSource = new AutoCompleteStringCollection();
         textBox.AutoCompleteCustomSource.AddRange(_company.GetNames());
+    }
+
+    private void OnDataGridViewUserAddedRow(object sender, DataGridViewRowEventArgs e)
+    {
+        //Transaction transaction = new Transaction()
+        //{
+        //    Id = Guid.NewGuid(),
+        //    Number = (decimal)e.Row.Cells[numberColumn.Index].Value,
+        //    Posted = (DateTime)e.Row.Cells[postedColumn.Index].Value,
+        //    Name = (string)e.Row.Cells[nameColumn.Index].Value
+        //};
+
+        //e.Row.Cells[transactionColumn.Index].Value = transaction;
+
+        //transaction.Lines.Add(new Line()
+        //{
+        //    AccountId = ((IAccountView)e.Row.Cells[accountColumn.Index].Value).Id,
+        //    Balance = (decimal)e.Row.Cells[balanceColumn.Index].Value
+        //});
+        //_company.AddTransaction(transaction);
+    }
+
+    private void OnDataGridViewUserDeletedRow(object sender, DataGridViewRowEventArgs e)
+    {
+        _company.RemoveTransaction((Transaction)e.Row.Cells[transactionColumn.Index].Value);
     }
 
     protected override void Dispose(bool disposing)

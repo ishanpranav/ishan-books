@@ -42,11 +42,7 @@ internal sealed class ImportTransactionsForm : ImportForm
             transaction.Lines.Add(line.Value);
         }
 
-        _dataGridView.DataSource = lines
-            .Select(x => x.Value)
-            .ToList();
-
-        _dataGridView.AutoResizeColumns();
+        SetDataSource(lines.Select(x => x.Value).ToList());
     }
 
     protected override void CommitChanges()

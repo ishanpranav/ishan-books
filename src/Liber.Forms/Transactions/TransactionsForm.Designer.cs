@@ -28,32 +28,37 @@ partial class TransactionsForm
         debitColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
         creditColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
         balanceColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        transactionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
         ((System.ComponentModel.ISupportInitialize)_dataGridView).BeginInit();
         SuspendLayout();
         // 
         // _dataGridView
         // 
-        resources.ApplyResources(_dataGridView, "_dataGridView");
         _dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
         _dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        _dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { postedColumn, numberColumn, accountColumn, nameColumn, debitColumn, creditColumn, balanceColumn });
+        _dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { postedColumn, numberColumn, accountColumn, nameColumn, debitColumn, creditColumn, balanceColumn, transactionColumn });
+        resources.ApplyResources(_dataGridView, "_dataGridView");
         _dataGridView.Name = "_dataGridView";
         _dataGridView.RowTemplate.Height = 29;
         _dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
         _dataGridView.CellDoubleClick += OnDataGridViewCellDoubleClick;
         _dataGridView.EditingControlShowing += OnDataGridViewEditingControlShowing;
+        _dataGridView.UserAddedRow += OnDataGridViewUserAddedRow;
+        _dataGridView.UserDeletedRow += OnDataGridViewUserDeletedRow;
         // 
         // postedColumn
         // 
         postedColumn.Frozen = true;
         resources.ApplyResources(postedColumn, "postedColumn");
         postedColumn.Name = "postedColumn";
+        postedColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
         // 
         // numberColumn
         // 
         numberColumn.Frozen = true;
         resources.ApplyResources(numberColumn, "numberColumn");
         numberColumn.Name = "numberColumn";
+        numberColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
         // 
         // accountColumn
         // 
@@ -66,24 +71,33 @@ partial class TransactionsForm
         nameColumn.Frozen = true;
         resources.ApplyResources(nameColumn, "nameColumn");
         nameColumn.Name = "nameColumn";
+        nameColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
         // 
         // debitColumn
         // 
         debitColumn.Frozen = true;
         resources.ApplyResources(debitColumn, "debitColumn");
         debitColumn.Name = "debitColumn";
+        debitColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
         // 
         // creditColumn
         // 
         creditColumn.Frozen = true;
         resources.ApplyResources(creditColumn, "creditColumn");
         creditColumn.Name = "creditColumn";
+        creditColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
         // 
         // balanceColumn
         // 
         balanceColumn.Frozen = true;
         resources.ApplyResources(balanceColumn, "balanceColumn");
         balanceColumn.Name = "balanceColumn";
+        balanceColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+        // 
+        // transactionColumn
+        // 
+        resources.ApplyResources(transactionColumn, "transactionColumn");
+        transactionColumn.Name = "transactionColumn";
         // 
         // TransactionsForm
         // 
@@ -105,4 +119,5 @@ partial class TransactionsForm
     private System.Windows.Forms.DataGridViewTextBoxColumn debitColumn;
     private System.Windows.Forms.DataGridViewTextBoxColumn creditColumn;
     private System.Windows.Forms.DataGridViewTextBoxColumn balanceColumn;
+    private System.Windows.Forms.DataGridViewTextBoxColumn transactionColumn;
 }
