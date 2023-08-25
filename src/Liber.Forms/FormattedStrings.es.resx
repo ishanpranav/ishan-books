@@ -153,9 +153,6 @@
   <data name="comparative-balance-sheet" xml:space="preserve">
     <value>Balance General Comparativo</value>
   </data>
-  <data name="comprehensive-income" xml:space="preserve">
-    <value>Resultados integrales</value>
-  </data>
   <data name="comprehensive-income-statement" xml:space="preserve">
     <value>Estado de Resultados Integrales</value>
   </data>
@@ -291,6 +288,9 @@
   <data name="_n_accumulated-other-comprehensive-income" xml:space="preserve">
     <value>Acumuladas de otras pérdidas integrales</value>
   </data>
+  <data name="_n_comprehensive-income" xml:space="preserve">
+    <value>Pérdida integral</value>
+  </data>
   <data name="_n_Corporation" xml:space="preserve">
     <value>déficit de los accionistas</value>
   </data>
@@ -322,7 +322,7 @@
     <value>Pérdida neta ordinaria</value>
   </data>
   <data name="_n_other-comprehensive-income" xml:space="preserve">
-    <value>Pérdida integral acumulada total</value>
+    <value>Otra pérdida integral total</value>
   </data>
   <data name="_n_Partnership" xml:space="preserve">
     <value>déficit de los socios</value>
@@ -335,6 +335,9 @@
   </data>
   <data name="_p_Bank" xml:space="preserve">
     <value>Total de efectivo y equivalentes al efectivo</value>
+  </data>
+  <data name="_p_comprehensive-income" xml:space="preserve">
+    <value>Resultados integrales</value>
   </data>
   <data name="_p_Corporation" xml:space="preserve">
     <value>Patrimonio de los accionistas</value>
@@ -385,7 +388,7 @@
     <value>Ingreso neto ordinaro</value>
   </data>
   <data name="_p_other-comprehensive-income" xml:space="preserve">
-    <value>Pérdida integral acumulada total</value>
+    <value>Otro resultado integral total</value>
   </data>
   <data name="_p_OtherAsset" xml:space="preserve">
     <value>Otros activos totales</value>

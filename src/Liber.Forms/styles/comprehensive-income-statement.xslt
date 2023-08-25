@@ -63,7 +63,7 @@ Licensed under the MIT License.
                 <tfoot>
                     <tr>
                         <th class="left">
-                            <xsl:value-of select="liber:gets('comprehensive-income')"/>
+                            <xsl:value-of select="liber:pngets('comprehensive-income', -($netIncome + $otherComprehensiveIncome))"/>
                         </th>
                         <td class="total right">
                             <xsl:value-of select="liber:fm(-($netIncome + $otherComprehensiveIncome))"/>

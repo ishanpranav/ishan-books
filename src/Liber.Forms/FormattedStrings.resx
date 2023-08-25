@@ -160,9 +160,6 @@
   <data name="comparative-balance-sheet" xml:space="preserve">
     <value>Comparative Balance Sheet</value>
   </data>
-  <data name="comprehensive-income" xml:space="preserve">
-    <value>Comprehensive income</value>
-  </data>
   <data name="comprehensive-income-statement" xml:space="preserve">
     <value>Comprehensive Income Statement</value>
   </data>
@@ -304,6 +301,9 @@
   <data name="_n_accumulated-other-comprehensive-income" xml:space="preserve">
     <value>Accumulated other comprehensive loss</value>
   </data>
+  <data name="_n_comprehensive-income" xml:space="preserve">
+    <value>Comprehensive loss</value>
+  </data>
   <data name="_n_Corporation" xml:space="preserve">
     <value>shareholders' deficit</value>
   </data>
@@ -348,6 +348,9 @@
   </data>
   <data name="_p_Bank" xml:space="preserve">
     <value>Total cash and cash equivalents</value>
+  </data>
+  <data name="_p_comprehensive-income" xml:space="preserve">
+    <value>Comprehensive income</value>
   </data>
   <data name="_p_Corporation" xml:space="preserve">
     <value>shareholders' equity</value>
