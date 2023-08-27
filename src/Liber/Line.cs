@@ -66,6 +66,14 @@ public class Line
     [Optional]
     public string? Description { get; set; }
 
+    [Index(16)]
+    [Key(3)]
+    [LocalizedDisplayName(nameof(Reconciled))]
+    [Name("Reconcile Date")]
+    [NullValues("")]
+    [Optional]
+    public DateTime? Reconciled { get; set; }
+
     [Browsable(false)]
     [Ignore]
     [IgnoreMember]

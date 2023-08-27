@@ -34,6 +34,7 @@ CREATE TABLE "Account" (
 	"Memo"	        TEXT,
 	"Color"	        INTEGER,
 	"TaxType"	    INTEGER          DEFAULT 0,
+    "Hidden"        INTEGER NOT NULL DEFAULT 0,
 	PRIMARY KEY("Id"),
     FOREIGN KEY("ParentId") REFERENCES "Account"("Id")
 );
@@ -52,6 +53,7 @@ CREATE TABLE "Line" (
     "AccountId"     TEXT    NOT NULL,
     "Balance"       INTEGER,
     "Description"   TEXT,
+    "Reconciled"    TEXT,
     FOREIGN KEY("TransactionId") REFERENCES "Transaction"("Id"),
     FOREIGN KEY("AccountId")     REFERENCES "Account"("Id")
 );

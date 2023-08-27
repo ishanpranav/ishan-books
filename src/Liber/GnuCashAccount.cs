@@ -30,13 +30,6 @@ public class GnuCashAccount
 
     [BooleanFalseValues("F")]
     [BooleanTrueValues("T")]
-    [Index(9)]
-    [Name("Hidden")]
-    [Optional]
-    public bool Hidden { get; set; }
-
-    [BooleanFalseValues("F")]
-    [BooleanTrueValues("T")]
     [Index(10)]
     [Name("Tax Info")]
     [Optional]

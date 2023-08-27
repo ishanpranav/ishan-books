@@ -28,16 +28,12 @@ public class GnuCashTransactionWriter : IWriter
             foreach (Line line in transaction.Lines)
             {
                 Account account = company.Accounts[line.AccountId];
-                string balanceWithSymbol = line.Balance.ToString("c");
 
                 lines.Add(new GnuCashLine()
                 {
                     Value = line,
                     AccountName = account.Name,
-                    AccountPath = GnuCashSerializer.GetPath(company, account),
-                    Amount = line.Balance,
-                    AmountWithSymbol = balanceWithSymbol,
-                    ValueWithSymbol = balanceWithSymbol
+                    AccountPath = GnuCashSerializer.GetPath(company, account)
                 });
             }
         }

@@ -141,8 +141,17 @@ public class Account
     /// <value>The tax category associated with the account.</value>
     [Key(8)]
     [LocalizedDisplayName(nameof(TaxType))]
+    [CsvHelper.Configuration.Attributes.TypeConverter(typeof(GnuCashTaxTypeConverter))]
     [System.ComponentModel.TypeConverter(typeof(LocalizedEnumConverter))]
     public TaxType TaxType { get; set; }
+
+    [BooleanFalseValues("F")]
+    [BooleanTrueValues("T")]
+    [Index(9)]
+    [Key(9)]
+    [Name("Hidden")]
+    [Optional]
+    public bool Hidden { get; set; }
 
     /// <summary>
     /// Gets the current balance of the account.
