@@ -46,8 +46,8 @@ Licensed under the MIT License.
                         </th>
                     </tr>
                 </thead>
-                <xsl:variable name="operating" select="sum(company/account[type = 'OtherCurrentAsset' or type = 'OtherCurrentLiability' or type = 'CreditCard']/previous) - sum(company/account[type = 'OtherCurrentAsset' or type = 'OtherCurrentLiability' or type = 'CreditCard']/balance) - sum(company/account[type = 'OtherIncomeExpense']/balance) - $netIncome"/>
-                <xsl:variable name="investing" select="sum(company/account[(type = 'FixedAsset' or type = 'OtherAsset')]/previous) - sum(company/account[(type = 'FixedAsset' or type = 'OtherAsset')]/balance) - sum(company/account[type = 'OtherIncomeExpense']/balance)"/>
+                <xsl:variable name="operating" select="sum(company/account[type = 'OtherCurrentAsset' or type = 'OtherCurrentLiability' or type = 'CreditCard']/previous) - sum(company/account[type = 'OtherCurrentAsset' or type = 'OtherCurrentLiability' or type = 'CreditCard' or type = 'OtherIncomeExpense']/balance) - $netIncome"/>
+                <xsl:variable name="investing" select="sum(company/account[(type = 'FixedAsset' or type = 'OtherAsset')]/previous) - sum(company/account[type = 'FixedAsset' or type = 'OtherAsset' or type = 'OtherIncomeExpense' or other-equity = 'true']/balance)"/>
                 <xsl:variable name="financing" select="sum(company/account[(type = 'LongTermLiability')]/previous) - sum(company/account[(type = 'LongTermLiability')]/balance)"/>
                 <tbody>
                     <tr>
@@ -88,7 +88,7 @@ Licensed under the MIT License.
                                     </td>
                                 </tr>
                             </xsl:for-each>
-                            <xsl:for-each select="company/account[type = 'OtherIncomeExpense' and balance != 0]">
+                            <xsl:for-each select="company/account[(type = 'OtherIncomeExpense') and balance != 0]">
                                 <tr>
                                     <td class="in-4 left">
                                         <xsl:value-of select="name"/>
@@ -125,7 +125,7 @@ Licensed under the MIT License.
                                     </td>
                                 </tr>
                             </xsl:for-each>
-                            <xsl:for-each select="company/account[type = 'OtherIncomeExpense' and balance != 0]">
+                            <xsl:for-each select="company/account[(type = 'OtherIncomeExpense' or other-equity = 'true') and balance != 0]">
                                 <tr>
                                     <td class="in-3 left">
                                         <xsl:value-of select="name"/>

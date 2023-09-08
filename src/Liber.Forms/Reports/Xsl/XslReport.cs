@@ -232,6 +232,13 @@ public class XslReport : IXmlSerializable
 
             previous = Company.GetEquity(Started);
         }
+        else if (value == Company.Accounts[Company.OtherEquityAccountId])
+        {
+            writer.WriteElementString("other-equity", XmlConvert.ToString(true));
+
+            balance = value.GetBalance(Posted);
+            previous = value.GetBalance(Started);
+        }
         else if (value.Type.IsTemporary())
         {
             balance = value.GetBalance(Started, Posted);

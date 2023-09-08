@@ -138,6 +138,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Reference Include="AlphaVantageCore">
+	    <HintPath>..\..\lib\AlphaVantageCore.dll</HintPath>
+	  </Reference>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <Compile Update="Accounts\AccountForm.cs">
 	    <SubType>Form</SubType>
 	  </Compile>

@@ -39,7 +39,6 @@ public sealed class Company
         OtherEquityAccountId = AddAccount(new Account()
         {
             Name = Resources.DefaultOtherEquityAccountName,
-            Placeholder = true,
             Type = AccountType.Equity
         }, Guid.Empty);
     }
