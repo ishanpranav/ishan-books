@@ -142,6 +142,7 @@ public class Account
     /// <value>The tax category associated with the account.</value>
     [Key(8)]
     [LocalizedDisplayName(nameof(TaxType))]
+    [Name("Tax Info")]
     [CsvHelper.Configuration.Attributes.TypeConverter(typeof(GnuCashTaxTypeConverter))]
     [System.ComponentModel.TypeConverter(typeof(LocalizedEnumConverter))]
     public TaxType TaxType { get; set; }
