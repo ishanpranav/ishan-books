@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using Liber.Forms.Accounts;
 
 namespace Liber.Forms.Reports.Html;
@@ -78,6 +79,12 @@ public class HtmlReport
             _posted = value;
         }
     }
+
+    [LocalizedCategory(nameof(Filter))]
+    [LocalizedDescription(nameof(Filter))]
+    [LocalizedDisplayName(nameof(Filter))]
+    [TypeConverter(typeof(RegexConverter))]
+    public Regex Filter { get; set; } = Filters.Any();
 
     [LocalizedCategory(nameof(Periodicity))]
     [LocalizedDescription(nameof(Periodicity))]
@@ -169,11 +176,11 @@ public class HtmlReport
             {
                 if (account.Type.IsTemporary())
                 {
-                    data[label] = (double)account.Type.ToBalance(account.GetBalance(started, posted));
+                    data[label] = (double)account.Type.ToBalance(account.GetBalance(started, posted, Filter));
                 }
                 else
                 {
-                    data[label] = (double)account.Type.ToBalance(account.GetBalance(posted));
+                    data[label] = (double)account.Type.ToBalance(account.GetBalance(posted, Filter));
                 }
 
                 if (data[label] != 0)
@@ -209,11 +216,11 @@ public class HtmlReport
 
             if (account.Type.IsTemporary())
             {
-                balance = account.GetBalance(Started, Posted);
+                balance = account.GetBalance(Started, Posted, Filter);
             }
             else
             {
-                balance = account.GetBalance(Posted);
+                balance = account.GetBalance(Posted, Filter);
             }
 
             if (balance != 0)

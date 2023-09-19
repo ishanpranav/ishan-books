@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Humanizer;
 using Liber.Forms.Components;
@@ -105,15 +106,15 @@ internal sealed partial class AccountsForm : Form
 
         if (value == _company.Accounts[_company.EquityAccountId])
         {
-            balance = _company.GetEquity(started);
+            balance = _company.GetEquity(started, Filters.Any());
         }
         else if (value.Type.IsTemporary())
         {
-            balance = value.GetBalance(started, posted);
+            balance = value.GetBalance(started, posted, Filters.Any());
         }
         else
         {
-            balance = value.GetBalance(posted);
+            balance = value.GetBalance(posted, Filters.Any());
         }
 
         balance = value.Type.ToBalance(balance);

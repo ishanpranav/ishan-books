@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
 using Liber.Properties;
 using MessagePack;
 using MessagePack.Formatters;
@@ -437,7 +438,7 @@ public sealed class Company
         }
     }
 
-    public decimal GetEquity(DateTime posted)
+    public decimal GetEquity(DateTime posted, Regex filter)
     {
         decimal result = 0;
 
@@ -445,14 +446,14 @@ public sealed class Company
         {
             if (account.Type.IsTemporary())
             {
-                result += account.GetBalance(posted);
+                result += account.GetBalance(posted, filter);
             }
         }
 
         return result;
     }
 
-    public decimal GetEquity(DateTime started, DateTime posted)
+    public decimal GetEquity(DateTime started, DateTime posted, Regex filter)
     {
         decimal result = 0;
 
@@ -460,7 +461,7 @@ public sealed class Company
         {
             if (account.Type.IsTemporary())
             {
-                result += account.GetBalance(started, posted);
+                result += account.GetBalance(started, posted, filter);
             }
         }
 

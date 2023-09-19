@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
 using CsvHelper.Configuration.Attributes;
 using CsvHelper.TypeConversion;
 using MessagePack;
@@ -229,13 +230,15 @@ public class Account
     /// </summary>
     /// <param name="posted">The inclusive posted date up to which to calculate the balance.</param>
     /// <returns>The balance of the account up to (and including) the specified posted date.</returns>
-    public decimal GetBalance(DateTime posted)
+    public decimal GetBalance(DateTime posted, Regex filter)
     {
         decimal result = 0;
 
         foreach (Line line in lines)
         {
-            if (line.Transaction!.Posted <= posted)
+            Transaction transaction = line.Transaction!;
+
+            if (transaction!.Posted <= posted && filter.IsMatch(transaction.Memo ?? string.Empty))
             {
                 result += line.Balance;
             }
@@ -250,7 +253,7 @@ public class Account
     /// <param name="started">The inclusive start date of the date range.</param>
     /// <param name="posted">The inclusive end date of the date range.</param>
     /// <returns>The balance of the account within the specified date range, including the start and end dates.</returns>
-    public decimal GetBalance(DateTime started, DateTime posted)
+    public decimal GetBalance(DateTime started, DateTime posted, Regex filter)
     {
         decimal result = 0;
 
@@ -258,7 +261,7 @@ public class Account
         {
             Transaction transaction = line.Transaction!;
 
-            if (transaction.Posted >= started && transaction.Posted <= posted)
+            if (transaction.Posted >= started && transaction.Posted <= posted && filter.IsMatch(transaction.Memo ?? string.Empty))
             {
                 result += line.Balance;
             }

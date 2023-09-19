@@ -5,6 +5,7 @@
 using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
@@ -96,6 +97,12 @@ public class XslReport : IXmlSerializable
             _posted = value;
         }
     }
+
+    [LocalizedCategory(nameof(Filter))]
+    [LocalizedDescription(nameof(Filter))]
+    [LocalizedDisplayName(nameof(Filter))]
+    [TypeConverter(typeof(RegexConverter))]
+    public Regex Filter { get; set; } = Filters.Any();
 
     [Browsable(false)]
     [LocalizedCategory(nameof(EquityMode))]
@@ -222,31 +229,31 @@ public class XslReport : IXmlSerializable
 
             if (EquityMode.HasFlag(EquityModes.CurrentPosted))
             {
-                balance = Company.GetEquity(Posted);
+                balance = Company.GetEquity(Posted, Filter);
             }
 
             if (EquityMode.HasFlag(EquityModes.CurrentStarted))
             {
-                balance = Company.GetEquity(Started);
+                balance = Company.GetEquity(Started, Filter);
             }
 
-            previous = Company.GetEquity(Started);
+            previous = Company.GetEquity(Started, Filter);
         }
         else if (value == Company.Accounts[Company.OtherEquityAccountId])
         {
             writer.WriteElementString("other-equity", XmlConvert.ToString(true));
 
-            balance = value.GetBalance(Posted);
-            previous = value.GetBalance(Started);
+            balance = value.GetBalance(Posted, Filter);
+            previous = value.GetBalance(Started, Filter);
         }
         else if (value.Type.IsTemporary())
         {
-            balance = value.GetBalance(Started, Posted);
+            balance = value.GetBalance(Started, Posted, Filter);
         }
         else
         {
-            balance = value.GetBalance(Posted);
-            previous = value.GetBalance(Started);
+            balance = value.GetBalance(Posted, Filter);
+            previous = value.GetBalance(Started, Filter);
         }
 
         if (balance < 0)

@@ -184,9 +184,6 @@
   <metadata name="transactionColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="transactionColumn.HeaderText" xml:space="preserve">
-    <value />
-  </data>
   <data name="transactionColumn.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>

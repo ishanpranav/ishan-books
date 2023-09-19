@@ -25,23 +25,6 @@ public class LocalizedEnumConverter : EnumConverter
     }
 
     /// <inheritdoc/>
-    public override bool CanConvertTo(ITypeDescriptorContext? context, [NotNullWhen(true)] Type? destinationType)
-    {
-        return destinationType == typeof(string);
-    }
-
-    /// <inheritdoc/>
-    public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
-    {
-        if (value is not Enum enumValue)
-        {
-            return null;
-        }
-
-        return enumValue.Humanize();
-    }
-
-    /// <inheritdoc/>
     public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
     {
         return sourceType == typeof(string);
@@ -68,5 +51,22 @@ public class LocalizedEnumConverter : EnumConverter
         }
 
         return Activator.CreateInstance(_type);
+    }
+
+    /// <inheritdoc/>
+    public override bool CanConvertTo(ITypeDescriptorContext? context, [NotNullWhen(true)] Type? destinationType)
+    {
+        return destinationType == typeof(string);
+    }
+
+    /// <inheritdoc/>
+    public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
+    {
+        if (value is not Enum enumValue)
+        {
+            return null;
+        }
+
+        return enumValue.Humanize();
     }
 }

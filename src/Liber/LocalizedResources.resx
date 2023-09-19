@@ -135,6 +135,9 @@
   <data name="Description" xml:space="preserve">
     <value>Description</value>
   </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
   <data name="Font" xml:space="preserve">
     <value>Font</value>
   </data>
@@ -179,6 +182,9 @@
   </data>
   <data name="_c_Color" xml:space="preserve">
     <value>Design</value>
+  </data>
+  <data name="_c_Filter" xml:space="preserve">
+    <value>Data Source</value>
   </data>
   <data name="_c_Font" xml:space="preserve">
     <value>Design</value>
@@ -242,6 +248,9 @@
   </data>
   <data name="_d_Expense" xml:space="preserve">
     <value>Expense</value>
+  </data>
+  <data name="_d_Filter" xml:space="preserve">
+    <value>Provides the regular expression used to filter transactions. Only transactions with memos matching the given regular expression are included in the report.</value>
   </data>
   <data name="_d_FixedAsset" xml:space="preserve">
     <value>Fixed Asset</value>
