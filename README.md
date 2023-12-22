@@ -44,13 +44,6 @@ __Export-friendly formats__
 - [ ] Intuit Interchange Format (*.iif)
 - [X] XML Document (*.xml)
 
-__Localization__
-- [X] English
-- [X] English (United States)
-- [X] Spanish
-- [X] Spanish (Spain)
-- [ ] Latin
-
 __Additional features__
 - [X] Password protection
 ## License
