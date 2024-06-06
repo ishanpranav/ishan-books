@@ -103,8 +103,6 @@ Licensed under the MIT License.
                             <xsl:value-of select="liber:fm(-$otherEquity2)"/>
                         </td>
                     </tr>
-                </tbody>
-                <tfoot>
                     <tr>
                         <xsl:variable name="equity" select="sum(company/account[type = 'Equity']/balance)"/>
                         <th class="left">
@@ -114,7 +112,7 @@ Licensed under the MIT License.
                             <xsl:value-of select="liber:fm(-$equity2 - $otherEquity2)"/>
                         </th>
                     </tr>
-                </tfoot>
+                </tbody>
             </xsl:with-param>
         </xsl:call-template>
     </xsl:template>

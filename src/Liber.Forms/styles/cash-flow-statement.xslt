@@ -172,8 +172,6 @@ Licensed under the MIT License.
                             <xsl:value-of select="liber:fm($financing)"/>
                         </th>
                     </tr>
-                </tbody>
-                <tfoot>
                     <tr>
                         <th class="left">
                             <xsl:value-of select="concat(liber:gets('Bank'), ', ', liber:fdates(posted))"/>
@@ -182,7 +180,7 @@ Licensed under the MIT License.
                             <xsl:value-of select="liber:fm(sum(company/account[type = 'Bank']/balance))"/>
                         </th>
                     </tr>
-                </tfoot>
+                </tbody>
             </xsl:with-param>
         </xsl:call-template>
     </xsl:template>

@@ -85,7 +85,7 @@ Licensed under the MIT License.
                     </tr>
                     <xsl:apply-templates select="company">
                         <xsl:with-param name="type" select="'OtherIncomeExpense'"/>
-                        <xsl:with-param name="balance" select="$otherIncomeExpense"/>
+                        <xsl:with-param name="balance" select="-$otherIncomeExpense"/>
                         <xsl:with-param name="indent" select="2"/>
                     </xsl:apply-templates>
                     <xsl:apply-templates select="company">
@@ -93,8 +93,6 @@ Licensed under the MIT License.
                         <xsl:with-param name="balance" select="$incomeTaxExpense"/>
                         <xsl:with-param name="indent" select="2"/>
                     </xsl:apply-templates>
-                </tbody>
-                <tfoot>
                     <tr>
                         <th class="left">
                             <xsl:value-of select="liber:pngets('net-income', -$netIncome)"/>
@@ -103,7 +101,7 @@ Licensed under the MIT License.
                             <xsl:value-of select="liber:fm(-$netIncome)"/>
                         </td>
                     </tr>
-                </tfoot>
+                </tbody>
             </xsl:with-param>
         </xsl:call-template>
     </xsl:template>
