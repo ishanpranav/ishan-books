@@ -63,8 +63,6 @@ Licensed under the MIT License.
                             </td>
                         </tr>
                     </xsl:for-each>
-                </tbody>
-                <tfoot>
                     <tr>
                         <th class="left">
                             <xsl:value-of select="liber:gets('total')"/>
@@ -76,7 +74,7 @@ Licensed under the MIT License.
                             <xsl:value-of select="liber:fm(sum(company/account/credit))"/>
                         </td>
                     </tr>
-                </tfoot>
+                </tbody>
             </xsl:with-param>
         </xsl:call-template>
     </xsl:template>
