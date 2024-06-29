@@ -1,0 +1,6 @@
+﻿{
+  "trial-balance": "CurrentStarted",
+  "balance-sheet": "CurrentPosted",
+  "comparative-balance-sheet": "CurrentPosted",
+  "equity-statement": "CurrentPosted"
+}
