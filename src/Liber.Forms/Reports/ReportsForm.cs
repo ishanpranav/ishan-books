@@ -66,7 +66,10 @@ internal sealed partial class ReportsForm : Form
         }
         catch (COMException) { }
 
-        _webView.CoreWebView2.SetVirtualHostNameToFolderMapping("liber.example", Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)!, CoreWebView2HostResourceAccessKind.DenyCors);
+        _webView.CoreWebView2.SetVirtualHostNameToFolderMapping(
+            "liber.example",
+            Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)!,
+            CoreWebView2HostResourceAccessKind.DenyCors);
     }
 
     private void InitializeReports(string path, string searchPattern, Func<string, IReportView> reportViewFactory)
