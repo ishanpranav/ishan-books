@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html>
+<!--
+time-series.html
+Copyright (c) 2023 Ishan Pranav. All rights reserved.
+Licensed under the MIT License.
+-->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div>
+        <canvas id="chart"></canvas>
+    </div>
+    <script type="text/javascript" src="https://liber.example/scripts/chart.js"></script>
+    <script type="text/javascript" src="https://liber.example/scripts/time-series.js"></script>
+</body>
+</html>
