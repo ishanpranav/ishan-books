@@ -65,6 +65,7 @@ partial class PasswordForm
         Controls.Add(label1);
         Controls.Add(passwordTextBox);
         Controls.Add(acceptButton);
+        FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
         MaximizeBox = false;
         MinimizeBox = false;
         Name = "PasswordForm";

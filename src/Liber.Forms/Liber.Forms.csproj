@@ -86,9 +86,6 @@
 	  <Content Include="scripts\time-series.js">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
-	  <Content Include="styles\general-ledger.xslt">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </Content>
 	  <Content Include="styles\cash-flow-statement.css">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
