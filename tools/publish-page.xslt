@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
 publish-page.xslt
-Copyright (c) 2023 Ishan Pranav. All rights reserved.
+Copyright (c) 2023-2024 Ishan Pranav. All rights reserved.
 Licensed under the MIT License.
 -->
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
@@ -126,7 +126,7 @@ Licensed under the MIT License.
                         </div>
                     </main>
                     <footer class="pt-5 my-5 text-body-secondary border-top">
-                        Created by <xsl:value-of select="$CompanyName"/> &#183; &#169; 2023
+                        Created by <xsl:value-of select="$CompanyName"/> &#183; &#169; 2023-2024
                     </footer>
                 </div>
             </body>

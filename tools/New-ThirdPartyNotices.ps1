@@ -1,5 +1,5 @@
 # New-ThirdPartyNotices.ps1
-# Copyright (c) 2023 Ishan Pranav. All rights reserved.
+# Copyright (c) 2023-2024 Ishan Pranav. All rights reserved.
 # Licensed under the MIT License.
 
 $path = "../THIRD-PARTY-NOTICES.md"
@@ -130,7 +130,7 @@ Out-ThirdPartyNotices "Third-Party Notices
 ===================
 IshanBooks by Ishan Pranav
 
-Copyright (c) 2023 Ishan Pranav
+Copyright (c) 2023-2024 Ishan Pranav
 
 This software uses third-party libraries or other resources that may be
 distributed under licenses different than the software.
