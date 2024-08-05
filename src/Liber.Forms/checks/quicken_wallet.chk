@@ -2,7 +2,7 @@
 # Copyright (c) GnuCash contributors
 # Licensed under the GNU General Public License v2.0.
 
-#[2023-07-26] Modified: Added license header
+#[2024-07-26] Modified: Added license header
 
 Guid = 617da3b6-21d8-4340-af07-6a4f38bdeb3f
 Title = Quicken(tm) Wallet Checks w/ side stub

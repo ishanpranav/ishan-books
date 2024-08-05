@@ -33,6 +33,7 @@
 	  <None Remove="scripts\time-series.js" />
 	  <None Remove="styles\aging-summary.xslt" />
 	  <None Remove="styles\balance-sheet.xslt" />
+	  <None Remove="styles\base\general-ledger.xslt" />
 	  <None Remove="styles\cash-flow-statement.css" />
 	  <None Remove="styles\cash-flow-statement.xslt" />
 	  <None Remove="styles\comparative-balance-sheet.xslt" />
@@ -83,6 +84,9 @@
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="scripts\time-series.js">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="styles\general-ledger.xslt">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="styles\cash-flow-statement.css">
