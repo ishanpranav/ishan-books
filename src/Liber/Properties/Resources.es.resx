@@ -126,4 +126,10 @@
   <data name="DefaultOtherEquityAccountName" xml:space="preserve">
     <value>Acumulado de otros resultados integrales</value>
   </data>
+  <data name="DepositMemo" xml:space="preserve">
+    <value>Depósito</value>
+  </data>
+  <data name="TransferMemo" xml:space="preserve">
+    <value>Transferencia de fondos</value>
+  </data>
 </root>

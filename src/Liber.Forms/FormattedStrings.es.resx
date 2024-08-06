@@ -123,6 +123,9 @@
   <data name="account" xml:space="preserve">
     <value>Cuenta</value>
   </data>
+  <data name="AccountCount{0}" xml:space="preserve">
+    <value>({0:n0} cuentas)</value>
+  </data>
   <data name="accumulated-other-comprehensive-income" xml:space="preserve">
     <value>Acumulado de otros resultados o pérdidas integrales</value>
   </data>
