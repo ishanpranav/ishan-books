@@ -50,7 +50,7 @@ Licensed under the MIT License.
                 </tr>
                 <xsl:for-each select="//account[type = $type and (balance != 0 or ($comparative = 1 and previous != 0))]">
                     <tr>
-                        <td class="in-{$indent + 2} left">
+                        <td class="in-{$indent + 2} left account">
                             <xsl:value-of select="name"/>
                         </td>
                         <td class="right">

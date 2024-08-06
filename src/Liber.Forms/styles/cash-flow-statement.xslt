@@ -16,16 +16,10 @@ Licensed under the MIT License.
     <xsl:template match="/report">
         <xsl:call-template name="financial-statement">
             <xsl:with-param name="title" select="title"/>
-            <xsl:with-param name="styles">
-                <link rel="stylesheet" type="text/css" href="https://liber.example/styles/cash-flow-statement.css"/>
-            </xsl:with-param>
             <xsl:with-param name="table">
-                <colgroup>
-                    <col class="wide"></col>
-                </colgroup>
                 <thead>
                     <tr>
-                        <th colspan="2">
+                        <th colspan="2" class="subtitle">
                             <xsl:value-of select="company/name"/>
                         </th>
                     </tr>
@@ -35,7 +29,7 @@ Licensed under the MIT License.
                         </th>
                     </tr>
                     <tr>
-                        <th colspan="2" class="bar">
+                        <th colspan="2" class="bar dateline">
                             <xsl:value-of select="liber:ftspanl(started, posted)"/>
                         </th>
                     </tr>
@@ -80,7 +74,7 @@ Licensed under the MIT License.
                             </tr>
                             <xsl:for-each select="company/account[(type = 'OtherCurrentAsset' or type = 'OtherCurrentLiability' or type = 'CreditCard') and (previous - balance != 0)]">
                                 <tr>
-                                    <td class="in-4 left">
+                                    <td class="in-4 left account">
                                         <xsl:value-of select="name"/>
                                     </td>
                                     <td class="right">
@@ -90,7 +84,7 @@ Licensed under the MIT License.
                             </xsl:for-each>
                             <xsl:for-each select="company/account[(type = 'OtherIncomeExpense') and balance != 0]">
                                 <tr>
-                                    <td class="in-4 left">
+                                    <td class="in-4 left account">
                                         <xsl:value-of select="name"/>
                                     </td>
                                     <td class="right">
@@ -117,7 +111,7 @@ Licensed under the MIT License.
                             </tr>
                             <xsl:for-each select="company/account[(type = 'FixedAsset' or type = 'OtherAsset') and (previous - balance != 0)]">
                                 <tr>
-                                    <td class="in-3 left">
+                                    <td class="in-3 left account">
                                         <xsl:value-of select="name"/>
                                     </td>
                                     <td class="right">
@@ -127,7 +121,7 @@ Licensed under the MIT License.
                             </xsl:for-each>
                             <xsl:for-each select="company/account[(type = 'OtherIncomeExpense' or other-equity = 'true') and balance != 0]">
                                 <tr>
-                                    <td class="in-3 left">
+                                    <td class="in-3 left account">
                                         <xsl:value-of select="name"/>
                                     </td>
                                     <td class="right">
@@ -154,7 +148,7 @@ Licensed under the MIT License.
                             </tr>
                             <xsl:for-each select="company/account[(type = 'LongTermLiability') and (previous - balance != 0)]">
                                 <tr>
-                                    <td class="in-3 left">
+                                    <td class="in-3 left account">
                                         <xsl:value-of select="name"/>
                                     </td>
                                     <td class="right">
