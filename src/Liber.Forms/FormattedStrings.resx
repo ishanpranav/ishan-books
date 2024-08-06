@@ -186,9 +186,11 @@
   </data>
   <data name="days{0}" xml:space="preserve">
     <value>&gt; {0}</value>
+    <comment>@Invariant</comment>
   </data>
   <data name="days{0}{1}" xml:space="preserve">
     <value>{0} – {1}</value>
+    <comment>@Invariant</comment>
   </data>
   <data name="debit" xml:space="preserve">
     <value>Debit</value>

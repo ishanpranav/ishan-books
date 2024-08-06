@@ -132,6 +132,9 @@
   <data name="Description" xml:space="preserve">
     <value>Descripción</value>
   </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filtro</value>
+  </data>
   <data name="Font" xml:space="preserve">
     <value>Fuente</value>
   </data>
@@ -176,6 +179,9 @@
   </data>
   <data name="_c_Color" xml:space="preserve">
     <value>Diseño</value>
+  </data>
+  <data name="_c_Filter" xml:space="preserve">
+    <value>Fuente de datos</value>
   </data>
   <data name="_c_Font" xml:space="preserve">
     <value>Diseño</value>
@@ -239,6 +245,9 @@
   </data>
   <data name="_d_Expense" xml:space="preserve">
     <value>Gasto</value>
+  </data>
+  <data name="_d_Filter" xml:space="preserve">
+    <value>Especifica la expresión regular utilizada para filtrar las transacciones. Solo se incluyen en el informe las transacciones con memorandos que coincidan con la expresión regular dada.</value>
   </data>
   <data name="_d_FixedAsset" xml:space="preserve">
     <value>Activo fijo</value>
