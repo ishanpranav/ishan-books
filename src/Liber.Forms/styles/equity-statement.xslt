@@ -19,7 +19,7 @@ Licensed under the MIT License.
             <xsl:with-param name="table">
                 <thead>
                     <tr>
-                        <th colspan="2">
+                        <th colspan="2" class="subtitle">
                             <xsl:value-of select="company/name"/>
                         </th>
                     </tr>
@@ -29,7 +29,7 @@ Licensed under the MIT License.
                         </th>
                     </tr>
                     <tr>
-                        <th colspan="2" class="bar">
+                        <th colspan="2" class="bar dateline">
                             <xsl:value-of select="liber:ftspanl(started, posted)"/>
                         </th>
                     </tr>
