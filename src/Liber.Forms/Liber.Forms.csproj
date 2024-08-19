@@ -36,8 +36,10 @@
 	  <None Remove="styles\cash-flow-statement.xslt" />
 	  <None Remove="styles\comparative-balance-sheet.xslt" />
 	  <None Remove="styles\comprehensive-income-statement.xslt" />
+	  <None Remove="styles\customer-report.xslt" />
 	  <None Remove="styles\equity-statement.xslt" />
 	  <None Remove="styles\financial-statement.xslt" />
+	  <None Remove="styles\general-ledger.xslt" />
 	  <None Remove="styles\income-statement.xslt" />
 	</ItemGroup>
 
@@ -97,6 +99,12 @@
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="styles\base\financial-statement.xslt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="styles\customer-report.xslt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="styles\general-ledger.xslt">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="styles\general-journal.xslt">
