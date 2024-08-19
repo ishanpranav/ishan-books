@@ -31,6 +31,7 @@ public class XslReport : IXmlSerializable
     {
         Title = string.Empty;
         Company = new Company();
+        Account = new EditableAccountView(Company);
         Accounts = new AccountsView(Company);
     }
 
@@ -43,6 +44,7 @@ public class XslReport : IXmlSerializable
     {
         Title = title;
         Company = company;
+        Account = new EditableAccountView(company);
         Accounts = new AccountsView(company);
     }
 
@@ -109,6 +111,11 @@ public class XslReport : IXmlSerializable
     [LocalizedDescription(nameof(EquityMode))]
     [LocalizedDisplayName(nameof(EquityMode))]
     public EquityModes EquityMode { get; set; }
+    
+    [LocalizedCategory(nameof(Account))]
+    [LocalizedDescription(nameof(Account))]
+    [LocalizedDisplayName(nameof(Account))]
+    public EditableAccountView Account { get; set; }
 
     [LocalizedCategory(nameof(Accounts))]
     [LocalizedDescription(nameof(Accounts))]
