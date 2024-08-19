@@ -32,6 +32,7 @@
             cancelButton = new System.Windows.Forms.Button();
             acceptButton = new System.Windows.Forms.Button();
             _dataGridView = new System.Windows.Forms.DataGridView();
+            label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)_dataGridView).BeginInit();
             SuspendLayout();
             // 
@@ -61,12 +62,19 @@
             _dataGridView.RowTemplate.Height = 29;
             _dataGridView.DataError += OnDataGridViewDataError;
             // 
+            // label1
+            // 
+            resources.ApplyResources(label1, "label1");
+            label1.AutoEllipsis = true;
+            label1.Name = "label1";
+            // 
             // ImportForm
             // 
             AcceptButton = acceptButton;
             resources.ApplyResources(this, "$this");
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             CancelButton = cancelButton;
+            Controls.Add(label1);
             Controls.Add(_dataGridView);
             Controls.Add(acceptButton);
             Controls.Add(cancelButton);
@@ -80,5 +88,6 @@
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button acceptButton;
         protected System.Windows.Forms.DataGridView _dataGridView;
+        private System.Windows.Forms.Label label1;
     }
 }

@@ -35,7 +35,11 @@
             label2 = new System.Windows.Forms.Label();
             groupBox1 = new System.Windows.Forms.GroupBox();
             _helpProvider = new System.Windows.Forms.HelpProvider();
+            importRulesDataGridView = new System.Windows.Forms.DataGridView();
+            groupBox2 = new System.Windows.Forms.GroupBox();
             groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)importRulesDataGridView).BeginInit();
+            groupBox2.SuspendLayout();
             SuspendLayout();
             // 
             // acceptButton
@@ -80,12 +84,28 @@
             groupBox1.Name = "groupBox1";
             groupBox1.TabStop = false;
             // 
+            // importRulesDataGridView
+            // 
+            importRulesDataGridView.AllowUserToOrderColumns = true;
+            importRulesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            resources.ApplyResources(importRulesDataGridView, "importRulesDataGridView");
+            importRulesDataGridView.Name = "importRulesDataGridView";
+            importRulesDataGridView.RowTemplate.Height = 25;
+            // 
+            // groupBox2
+            // 
+            resources.ApplyResources(groupBox2, "groupBox2");
+            groupBox2.Controls.Add(importRulesDataGridView);
+            groupBox2.Name = "groupBox2";
+            groupBox2.TabStop = false;
+            // 
             // SettingsForm
             // 
             AcceptButton = acceptButton;
             resources.ApplyResources(this, "$this");
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             CancelButton = cancelButton;
+            Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Controls.Add(acceptButton);
             Controls.Add(cancelButton);
@@ -93,6 +113,8 @@
             Name = "SettingsForm";
             ShowIcon = false;
             groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)importRulesDataGridView).EndInit();
+            groupBox2.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -104,5 +126,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.HelpProvider _helpProvider;
+        private System.Windows.Forms.DataGridView importRulesDataGridView;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }

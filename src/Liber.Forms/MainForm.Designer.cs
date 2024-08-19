@@ -80,13 +80,14 @@ partial class MainForm
         _saveFileDialog = new System.Windows.Forms.SaveFileDialog();
         _recentPathManager = new RecentPathManager(components);
         _factory = new FormFactory(components);
+        reportsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
         _menuStrip.SuspendLayout();
         _toolStrip.SuspendLayout();
         SuspendLayout();
         // 
         // _menuStrip
         // 
-        _menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { fileToolStripMenuItem, editToolStripMenuItem1, viewToolStripMenuItem, helpToolStripMenuItem });
+        _menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { fileToolStripMenuItem, editToolStripMenuItem1, viewToolStripMenuItem, reportsToolStripMenuItem1, helpToolStripMenuItem });
         resources.ApplyResources(_menuStrip, "_menuStrip");
         _menuStrip.Name = "_menuStrip";
         // 
@@ -363,6 +364,11 @@ partial class MainForm
         // 
         _factory.Parent = this;
         // 
+        // reportsToolStripMenuItem1
+        // 
+        reportsToolStripMenuItem1.Name = "reportsToolStripMenuItem1";
+        resources.ApplyResources(reportsToolStripMenuItem1, "reportsToolStripMenuItem1");
+        // 
         // MainForm
         // 
         AllowDrop = true;
@@ -435,4 +441,5 @@ partial class MainForm
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
     private System.Windows.Forms.ToolStripMenuItem exportAccountsIifToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem transactionsToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem1;
 }

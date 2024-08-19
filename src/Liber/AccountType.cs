@@ -113,6 +113,9 @@ public enum AccountType : short
 
 public static class AccountTypeExtensions
 {
+    public const AccountType Debit = (AccountType)1;
+    public const AccountType Credit = (AccountType)(-1);
+
     public static AccountType[] GetSortedValues()
     {
         AccountType[] types = Enum.GetValues<AccountType>();
@@ -152,6 +155,11 @@ public static class AccountTypeExtensions
             default:
                 return false;
         }
+    }
+
+    public static bool IsUncategorized(this AccountType value)
+    {
+        return value == Debit || value == Credit;
     }
 
     public static decimal ToBalance(this AccountType value, decimal debit)
