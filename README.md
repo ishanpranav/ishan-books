@@ -26,9 +26,12 @@ __Reporting__
 - [X] Comparative balance sheet
 - [X] Cash flow statement
 - [X] Equity statement
+- [X] General journal
+- [X] General ledger
 
 __Accounts receivable__
-- [ ] Create invoices
+- [X] Generate invoice
+- [X] Generate credit note
 
 __First-class data formats__
 - [X] IshanBooks Company (*.izbk)
@@ -47,9 +50,10 @@ __Export-friendly formats__
 - [ ] Intuit Interchange Format (*.iif)
 - [X] XML Document (*.xml)
 
-__Security__
+__Miscellaneous__
 - [X] Password protection
-
+- [X] Globalization and localization
+ 
 ## License
 This repository is licensed with the [MIT](LICENSE.txt) license.
 ## Attribution

@@ -142,6 +142,9 @@
   <data name="assets" xml:space="preserve">
     <value>Assets</value>
   </data>
+  <data name="balance" xml:space="preserve">
+    <value>Balance</value>
+  </data>
   <data name="balance-sheet" xml:space="preserve">
     <value>Balance Sheet</value>
   </data>
@@ -180,6 +183,9 @@
   </data>
   <data name="current-liabilities" xml:space="preserve">
     <value>Current liabilities</value>
+  </data>
+  <data name="customer-report" xml:space="preserve">
+    <value>Customer Report</value>
   </data>
   <data name="date" xml:space="preserve">
     <value>Date</value>
@@ -315,6 +321,9 @@
   <data name="_n_CreditCard" xml:space="preserve">
     <value>Total credit card payments</value>
   </data>
+  <data name="_n_customer-report" xml:space="preserve">
+    <value>Credit Note</value>
+  </data>
   <data name="_n_financing" xml:space="preserve">
     <value>Net cash used in financing activities</value>
   </data>
@@ -365,6 +374,9 @@
   </data>
   <data name="_p_CreditCard" xml:space="preserve">
     <value>Total credit card charges</value>
+  </data>
+  <data name="_p_customer-report" xml:space="preserve">
+    <value>Invoice</value>
   </data>
   <data name="_p_Expense" xml:space="preserve">
     <value>Total expense</value>

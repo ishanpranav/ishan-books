@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!--
-general-ledger.xslt
+customer-report.xslt
 Copyright (c) 2023-2024 Ishan Pranav. All rights reserved.
 Licensed under the MIT License.
 -->
@@ -17,20 +17,24 @@ Licensed under the MIT License.
         <xsl:call-template name="financial-statement">
             <xsl:with-param name="title" select="title"/>
             <xsl:with-param name="table">
+                <xsl:variable name="debit" select="sum(company/transaction/line[account = //account/name]/debit) - sum(company/transaction/line[account = //account/name]/credit)"/>
                 <thead>
                     <tr>
-                        <th colspan="5" class="subtitle">
+                        <th colspan="4" class="title left">
+                            <xsl:value-of select="liber:pngets('customer-report', $debit)"/>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th colspan="3" class="subtitle left">
                             <xsl:value-of select="company/name"/>
                         </th>
-                    </tr>
-                    <tr>
-                        <th colspan="5" class="title">
-                            <xsl:value-of select="title"/>
+                        <th colspan="1" class="subtitle dateline right">
+                            <xsl:value-of select="liber:fdatel(posted)"/>
                         </th>
                     </tr>
                     <tr>
-                        <th colspan="5" class="bar dateline">
-                            <xsl:value-of select="liber:ftspanl(started, posted)"/>
+                        <th colspan="4" class="subtitle left bar">
+                            <xsl:value-of select="title"/>
                         </th>
                     </tr>
                     <tr>
@@ -40,50 +44,29 @@ Licensed under the MIT License.
                         <th class="left">
                             <xsl:value-of select="liber:gets('name')"/>
                         </th>
-                        <th></th>
-                        <th>
-                            <xsl:value-of select="liber:gets('debit')"/>
-                        </th>
-                        <th>
-                            <xsl:value-of select="liber:gets('credit')"/>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th class="heading" colspan="1"></th>
-                        <td class="heading left">
+                        <th class="left">
                             <xsl:value-of select="liber:gets('description')"/>
-                        </td>
-                        <th class="heading">
-                            <xsl:value-of select="liber:gets('account')"/>
                         </th>
-                        <th class="heading" colspan="2"></th>
+                        <th class="right">
+                            <xsl:value-of select="liber:gets('balance')"/>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     <xsl:for-each select="company/transaction">
-                        <tr>
-                            <td class="left">
-                                <xsl:value-of select="liber:fdates(posted)"/>
-                            </td>
-                            <td class="left" colspan="2">
-                                <xsl:value-of select="name"/>
-                            </td>
-                            <td class="subtotal" colspan="2"></td>
-                        </tr>
                         <xsl:for-each select="line[account = //account/name]">
                             <tr>
-                                <td colspan="1"></td>
+                                <td class="left">
+                                    <xsl:value-of select="liber:fdates(../posted)"/>
+                                </td>
+                                <td class="left" colspan="1">
+                                    <xsl:value-of select="../name"/>
+                                </td>
                                 <td class="left">
                                     <xsl:value-of select="description"/>
                                 </td>
-                                <td class="left in-2">
-                                    <xsl:value-of select="account"/>
-                                </td>
                                 <td class="right">
-                                    <xsl:value-of select="liber:fm(debit)"/>
-                                </td>
-                                <td class="right">
-                                    <xsl:value-of select="liber:fm(credit)"/>
+                                    <xsl:value-of select="liber:fm(debit - credit)"/>
                                 </td>
                             </tr>
                         </xsl:for-each>
@@ -95,10 +78,7 @@ Licensed under the MIT License.
                             <xsl:value-of select="liber:gets('total')"/>
                         </th>
                         <td class="total right">
-                            <xsl:value-of select="liber:fm(sum(company/transaction/line[account = //account/name]/debit))"/>
-                        </td>
-                        <td class="total right">
-                            <xsl:value-of select="liber:fm(sum(company/transaction/line[account = //account/name]/credit))"/>
+                            <xsl:value-of select="liber:fm($debit)"/>
                         </td>
                     </tr>
                 </tfoot>
