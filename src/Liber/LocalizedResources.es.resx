@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Account" xml:space="preserve">
+    <value>Cuenta</value>
+  </data>
   <data name="Accounts" xml:space="preserve">
     <value>Cuentas</value>
   </data>
@@ -171,6 +174,9 @@
   <data name="Type" xml:space="preserve">
     <value>Tipo</value>
   </data>
+  <data name="_c_Account" xml:space="preserve">
+    <value>Fuente de datos</value>
+  </data>
   <data name="_c_Accounts" xml:space="preserve">
     <value>Fuente de datos</value>
   </data>
@@ -201,6 +207,9 @@
   <data name="_c_Title" xml:space="preserve">
     <value>Diseño</value>
   </data>
+  <data name="_d_Account" xml:space="preserve">
+    <value>Determina la cuenta incluida en el reporte. Los elementos de datos 'Cuenta' y 'Cuentas' son mutuamente excluyentes.</value>
+  </data>
   <data name="_d_AccountPayable" xml:space="preserve">
     <value>Cuenta por pagar</value>
   </data>
@@ -208,7 +217,7 @@
     <value>Cuenta por cobrar</value>
   </data>
   <data name="_d_Accounts" xml:space="preserve">
-    <value>Determina las cuentas incluidas en el documento.</value>
+    <value>Determina las cuentas incluidas en el reporte. Los elementos de datos 'Cuenta' y 'Cuentas' son mutuamente excluyentes.</value>
   </data>
   <data name="_d_Annually" xml:space="preserve">
     <value>Anualmente</value>

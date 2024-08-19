@@ -97,22 +97,31 @@ public enum AccountType : short
     Expense = 6000,
 
     /// <summary>
-    /// Specifies an income tax expense. This account type records taxes.
-    /// </summary>
-    [LocalizedDescription(nameof(IncomeTaxExpense))]
-    [Name("INC")]
-    IncomeTaxExpense = 7000,
-
-    /// <summary>
     /// Specifies an other income or expense account. This account is used for realized capital gains and losses and extraordinary income and expenses.
     /// </summary>
     [LocalizedDescription(nameof(OtherIncomeExpense))]
     [Name("EXEXP", "EXINC")]
-    OtherIncomeExpense = -9000
+    OtherIncomeExpense = -6900,
+
+    /// <summary>
+    /// Specifies an income tax expense. This account type records taxes.
+    /// </summary>
+    [LocalizedDescription(nameof(IncomeTaxExpense))]
+    [Name("INC")]
+    IncomeTaxExpense = 7000
 }
 
 public static class AccountTypeExtensions
 {
+    public static AccountType[] GetSortedValues()
+    {
+        AccountType[] types = Enum.GetValues<AccountType>();
+
+        Array.Sort(types, (x, y) => Math.Abs((short)x) - Math.Abs((short)y));
+
+        return types;
+    }
+
     public static bool IsAsset(this AccountType value)
     {
         switch (value)

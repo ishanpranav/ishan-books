@@ -309,6 +309,11 @@ public class XslReport : IXmlSerializable
 
     private void WriteLineXml(XmlWriter writer, Line value)
     {
+        if (value.AccountId != Account.Id)
+        {
+            return;
+        }
+
         writer.WriteStartElement("line");
         writer.WriteElementString("account", Company.Accounts[value.AccountId].Name);
         writer.WriteElementString("debit", XmlConvert.ToString(value.Debit));
