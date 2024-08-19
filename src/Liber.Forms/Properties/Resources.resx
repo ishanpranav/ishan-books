@@ -139,8 +139,14 @@
   <data name="InvalidAccountError" xml:space="preserve">
     <value>Please select a valid account.</value>
   </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
   <data name="NoAccount" xml:space="preserve">
     <value>(None)</value>
+  </data>
+  <data name="Number" xml:space="preserve">
+    <value>Number</value>
   </data>
   <data name="WarningText" xml:space="preserve">
     <value>You are about to close the company file without saving your changes.</value>

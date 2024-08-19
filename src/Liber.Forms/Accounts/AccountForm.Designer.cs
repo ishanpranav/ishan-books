@@ -143,7 +143,6 @@
             parentComboBox.FormattingEnabled = true;
             _helpProvider.SetHelpString(parentComboBox, resources.GetString("parentComboBox.HelpString"));
             parentComboBox.Name = "parentComboBox";
-            parentComboBox.SelectedItem = new System.Guid("00000000-0000-0000-0000-000000000000");
             _helpProvider.SetShowHelp(parentComboBox, (bool)resources.GetObject("parentComboBox.ShowHelp"));
             // 
             // label5
