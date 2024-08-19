@@ -21,7 +21,7 @@ internal sealed partial class AccountDialog : Form
 
         _listView.BeginUpdate();
 
-        foreach (AccountType type in Enum.GetValues<AccountType>())
+        foreach (AccountType type in AccountTypeExtensions.GetSortedValues())
         {
             _listView.Groups.Add(type.ToString(), type.Humanize());
         }
