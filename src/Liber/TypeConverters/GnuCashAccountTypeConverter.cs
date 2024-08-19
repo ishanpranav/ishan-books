@@ -64,7 +64,7 @@ internal sealed class GnuCashAccountTypeConverter : DefaultTypeConverter
             case "EXPENSE":
                 if (code != null)
                 {
-                    if (code.StartsWith("69"))
+                    if (code.StartsWith("49") || code.StartsWith("69"))
                     {
                         return AccountType.OtherIncomeExpense;
                     }
