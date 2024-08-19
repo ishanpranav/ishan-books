@@ -34,11 +34,6 @@ internal sealed class AccountComboBox : ComboBox
 
         foreach (KeyValuePair<Guid, Account> account in company.OrderedAccounts)
         {
-            if (account.Value.Placeholder)
-            {
-                continue;
-            }
-
             InitializeAccount(account.Key, account.Value);
         }
 
@@ -66,7 +61,7 @@ internal sealed class AccountComboBox : ComboBox
 
     private void InitializeAccount(Guid id, Account value)
     {
-        if (_validator == null || _validator(id))
+        if ((_validator == null || _validator(id)) && !value.Placeholder)
         {
             Items.Add(new AccountView(id, value));
         }
