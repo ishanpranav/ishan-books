@@ -213,6 +213,9 @@
   <data name="general-journal" xml:space="preserve">
     <value>General Journal</value>
   </data>
+  <data name="general-ledger" xml:space="preserve">
+    <value>General Ledger</value>
+  </data>
   <data name="Income" xml:space="preserve">
     <value>Revenues</value>
   </data>
