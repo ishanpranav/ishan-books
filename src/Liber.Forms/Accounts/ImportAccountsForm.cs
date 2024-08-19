@@ -5,7 +5,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using Liber.Forms.Components;
+using Liber.Forms.Import;
+using Liber.Forms.Properties;
 
 namespace Liber.Forms.Accounts;
 
@@ -19,7 +22,32 @@ internal sealed class ImportAccountsForm : ImportForm
         _factory = factory;
         _accounts = accounts;
 
-        SetDataSource(accounts.Select(x => x.Value).ToList());
+        List<Account> values = accounts.Select(x => x.Value).ToList();
+        ImportRule[]? rules = JsonSerializer.Deserialize<ImportRule[]>(Settings.Default.ImportRules, FormattedStrings.JsonOptions);
+
+        if (rules != null)
+        {
+            foreach (ImportRule rule in rules)
+            {
+                rule.Apply(values);
+            }
+        }
+
+        foreach (Account account in values)
+        {
+            switch (account.Type)
+            {
+                case AccountTypeExtensions.Debit:
+                    account.Type = AccountType.OtherCurrentAsset;
+                    break;
+
+                case AccountTypeExtensions.Credit:
+                    account.Type = AccountType.OtherCurrentLiability;
+                    break;
+            }
+        }
+
+        SetDataSource(values);
     }
 
     private Guid GetParentId(Guid id, string value)

@@ -168,6 +168,9 @@
   <data name="Started" xml:space="preserve">
     <value>From</value>
   </data>
+  <data name="Strict" xml:space="preserve">
+    <value>Override</value>
+  </data>
   <data name="TaxType" xml:space="preserve">
     <value>Tax Type</value>
   </data>

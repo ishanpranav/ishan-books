@@ -4,15 +4,19 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.Resources;
+using System.Text.Json;
 using System.Windows.Forms;
+using Liber.Forms.Import;
 using Liber.Forms.Properties;
 
 namespace Liber.Forms;
 
 internal sealed partial class SettingsForm : Form
 {
+    private readonly BindingList<ImportRule> _rules = new BindingList<ImportRule>();
     private static IEnumerable<CultureInfo>? s_availableCultures;
 
     public SettingsForm()
@@ -28,6 +32,20 @@ internal sealed partial class SettingsForm : Form
         DialogResult = DialogResult.Cancel;
         cultureComboBox.DataSource = s_availableCultures;
         cultureComboBox.SelectedItem = CultureInfo.CurrentUICulture;
+
+        ImportRule[]? rules = JsonSerializer.Deserialize<ImportRule[]>(Settings.Default.ImportRules, FormattedStrings.JsonOptions);
+
+        if (rules != null)
+        {
+            foreach (ImportRule rule in rules)
+            {
+                _rules.Add(rule);
+            }
+        }
+
+        importRulesDataGridView.DataSource = _rules;
+
+        importRulesDataGridView.AutoResizeColumns();
     }
 
     private static IEnumerable<CultureInfo> GetAvailableCultures()
@@ -72,6 +90,7 @@ internal sealed partial class SettingsForm : Form
         }
 
         Settings.Default.Culture = culture.Name;
+        Settings.Default.ImportRules = JsonSerializer.Serialize(_rules, FormattedStrings.JsonOptions);
         CultureInfo.CurrentUICulture = culture;
         DialogResult = DialogResult.OK;
 

@@ -22,7 +22,7 @@ internal static class FormattedStrings
         DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
         PropertyNameCaseInsensitive = true,
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-        WriteIndented = true
+        WriteIndented = false
     };
 
     static FormattedStrings()

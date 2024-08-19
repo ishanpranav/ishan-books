@@ -361,6 +361,12 @@
   <data name="viewToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;View</value>
   </data>
+  <data name="reportsToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 20</value>
+  </data>
+  <data name="reportsToolStripMenuItem1.Text" xml:space="preserve">
+    <value>&amp;Reports</value>
+  </data>
   <data name="aboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>67, 22</value>
   </data>
@@ -411,7 +417,7 @@
     <value>Magenta</value>
   </data>
   <data name="newToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 24</value>
+    <value>23, 22</value>
   </data>
   <data name="newToolStripButton.Text" xml:space="preserve">
     <value>&amp;New</value>
@@ -434,7 +440,7 @@
     <value>Magenta</value>
   </data>
   <data name="openToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 24</value>
+    <value>23, 22</value>
   </data>
   <data name="openToolStripButton.Text" xml:space="preserve">
     <value>&amp;Open</value>
@@ -453,13 +459,13 @@
     <value>Magenta</value>
   </data>
   <data name="saveToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 24</value>
+    <value>23, 22</value>
   </data>
   <data name="saveToolStripButton.Text" xml:space="preserve">
     <value>&amp;Save</value>
   </data>
   <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 27</value>
+    <value>6, 25</value>
   </data>
   <data name="helpToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -480,7 +486,7 @@
     <value>Magenta</value>
   </data>
   <data name="helpToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>24, 24</value>
+    <value>23, 22</value>
   </data>
   <data name="helpToolStripButton.Text" xml:space="preserve">
     <value>He&amp;lp</value>
@@ -489,7 +495,7 @@
     <value>0, 24</value>
   </data>
   <data name="_toolStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>449, 27</value>
+    <value>449, 25</value>
   </data>
   <data name="_toolStrip.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -814,6 +820,12 @@
   </data>
   <data name="&gt;&gt;_factory.Type" xml:space="preserve">
     <value>Liber.Forms.Components.FormFactory, Liber.Forms, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;reportsToolStripMenuItem1.Name" xml:space="preserve">
+    <value>reportsToolStripMenuItem1</value>
+  </data>
+  <data name="&gt;&gt;reportsToolStripMenuItem1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainForm</value>

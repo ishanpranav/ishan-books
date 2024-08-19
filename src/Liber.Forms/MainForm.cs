@@ -15,6 +15,7 @@ using Liber.Forms.Companies;
 using Liber.Forms.Lines;
 using Liber.Forms.Properties;
 using Liber.Forms.Reports;
+using Liber.Forms.Reports.Xsl;
 using Liber.Forms.Transactions;
 using Liber.Forms.Writers;
 using Liber.Sqlite;
@@ -30,6 +31,7 @@ internal sealed partial class MainForm : Form
         .WithSecurity(MessagePackSecurity.UntrustedData);
 
     private readonly Company _company = new Company();
+    private readonly ReportEngine _engine;
 
     private string? _path;
 
@@ -45,6 +47,36 @@ internal sealed partial class MainForm : Form
         exportAccountsToolStripMenuItem.Tag = new Writer(FilterIndex.Csv, new GnuCashAccountWriter());
         exportTransactionsToolStripMenuItem.Tag = new Writer(FilterIndex.Csv, new GnuCashTransactionWriter());
         exportAccountsIifToolStripMenuItem.Tag = new Writer(FilterIndex.Iif, new IifAccountWriter());
+        _engine = new ReportEngine(_company);
+
+        if (_engine.Views.Count == 0)
+        {
+            reportsToolStripMenuItem1.Visible = false;
+        }
+
+        foreach (KeyValuePair<string, IReportView> view in _engine.Views)
+        {
+            if (view.Value is not XslReportView)
+            {
+                continue;
+            }
+
+            ToolStripItem item = reportsToolStripMenuItem1.DropDownItems.Add(view.Value.Title);
+
+            item.Click += (sender, e) =>
+            {
+                Guid key = Guid.NewGuid();
+                ReportsForm form = new ReportsForm(_engine);
+
+                form.Load += (sender, e) =>
+                {
+                    form.InitializeXslReport(view.Key);
+                };
+
+                _factory.Kill(key);
+                _factory.Register(key, form);
+            };
+        }
     }
 
     public MainForm(string path) : this()
@@ -500,7 +532,7 @@ internal sealed partial class MainForm : Form
         if (checkForm.ShowDialog() == DialogResult.OK)
         {
             Guid key = Guid.NewGuid();
-            ReportsForm form = new ReportsForm(_company);
+            ReportsForm form = new ReportsForm(_engine);
 
             form.Load += (sender, e) =>
             {
@@ -514,7 +546,7 @@ internal sealed partial class MainForm : Form
 
     private void OnReportsToolStripMenuItemClick(object sender, EventArgs e)
     {
-        _factory.Register(Guid.NewGuid(), new ReportsForm(_company));
+        _factory.Register(Guid.NewGuid(), new ReportsForm(_engine));
     }
 
     private void OnTransactionToolStripMenuItemClick(object sender, EventArgs e)

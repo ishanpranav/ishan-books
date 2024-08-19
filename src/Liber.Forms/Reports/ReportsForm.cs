@@ -3,15 +3,15 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using Liber.Forms.Accounts;
 using Liber.Forms.Lines;
 using Liber.Forms.Reports.Gdi;
-using Liber.Forms.Reports.Html;
 using Liber.Forms.Reports.Xsl;
 using Microsoft.Web.WebView2.Core;
 
@@ -19,103 +19,41 @@ namespace Liber.Forms.Reports;
 
 internal sealed partial class ReportsForm : Form
 {
-    private readonly Company _company;
-
     private IReportView? _view;
 
-    public ReportsForm(Company company)
+    public ReportsForm(ReportEngine engine)
     {
         InitializeComponent();
         SystemFeatures.Initialize(this);
 
-        _company = company;
+        foreach (KeyValuePair<string, IReportView> view in engine.Views)
+        {
+            ListViewItem item = _listView.Items.Add(view.Key, view.Value.Title, imageIndex: 0);
+
+            item.ImageIndex = _imageList.Images.Count - 1;
+            item.Tag = view.Value;
+        }
     }
 
     private async void OnLoad(object sender, EventArgs e)
     {
-        XslReportView.InitializeReports(Path.Combine("data", Path.ChangeExtension("reports", "json")));
-
-        InitializeReports(
-            path: "styles",
-            searchPattern: "*.xslt",
-            x => new XslReportView(_company, x));
-
-        IReportView createReportView(string path)
-        {
-            GdiCheckReport report = IniSerializer.DeserializeGdiCheckReport(_company, path);
-
-            return new GdiReportView(report);
-        }
-
-        InitializeReports(
-            path: "checks",
-            searchPattern: "*.chk",
-            createReportView);
-        InitializeReports(
-            path: "checks",
-            searchPattern: "*.ini",
-            createReportView);
-        InitializeReports(
-            path: "pages",
-            searchPattern: "*.html",
-            x => new HtmlReportView(_company, x));
-
         try
         {
             await _webView.EnsureCoreWebView2Async();
+
+            _webView.CoreWebView2.SetVirtualHostNameToFolderMapping(
+                "liber.example",
+                Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)!,
+                CoreWebView2HostResourceAccessKind.DenyCors);
         }
         catch (COMException) { }
 
-        _webView.CoreWebView2.SetVirtualHostNameToFolderMapping(
-            "liber.example",
-            Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)!,
-            CoreWebView2HostResourceAccessKind.DenyCors);
-    }
-
-    private void InitializeReports(string path, string searchPattern, Func<string, IReportView> reportViewFactory)
-    {
-        string[] files = Directory.GetFiles(path, searchPattern);
-
-        if (files.Length == 0)
-        {
-            return;
-        }
-
-        using Icon? icon = Icon.ExtractAssociatedIcon(files[0]);
-
-        if (icon != null)
-        {
-            Bitmap bitmap = icon.ToBitmap();
-
-            _imageList.Images.Add(bitmap);
-
-            icon.Dispose();
-        }
-
-        foreach (string file in files)
-        {
-            IReportView reportView;
-
-            try
-            {
-                reportView = reportViewFactory(file);
-            }
-            catch
-            {
-                continue;
-            }
-
-            string key = Path.GetFileNameWithoutExtension(file);
-            ListViewItem item = _listView.Items.Add(key, reportView.Title, imageIndex: 0);
-
-            item.ImageIndex = _imageList.Images.Count - 1;
-            item.Tag = reportView;
-        }
+        InitializeReport();
     }
 
     private void InitializeReport()
     {
-        if (!_backgroundWorker.IsBusy)
+        if (_view != null && !_backgroundWorker.IsBusy)
         {
             _backgroundWorker.RunWorkerAsync();
         }
@@ -136,6 +74,17 @@ internal sealed partial class ReportsForm : Form
                 break;
             }
         }
+    }
+
+    public void InitializeXslReport(string key)
+    {
+        _view = (IReportView)_listView.Items[key].Tag;
+
+        XslReport report = (XslReport)_view.Properties;
+
+        report.Accounts = new AccountsView(report.Accounts.Company);
+
+        InitializeReport();
     }
 
     private void OnListViewItemActivate(object sender, EventArgs e)
