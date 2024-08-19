@@ -27,6 +27,9 @@ __Reporting__
 - [X] Cash flow statement
 - [X] Equity statement
 
+__Accounts receivable__
+- [ ] Create invoices
+
 __First-class data formats__
 - [X] IshanBooks Company (*.izbk)
 - [X] JavaScript Object Notation (\*.json)
@@ -44,8 +47,9 @@ __Export-friendly formats__
 - [ ] Intuit Interchange Format (*.iif)
 - [X] XML Document (*.xml)
 
-__Additional features__
+__Security__
 - [X] Password protection
+
 ## License
 This repository is licensed with the [MIT](LICENSE.txt) license.
 ## Attribution

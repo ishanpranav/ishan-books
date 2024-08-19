@@ -18,7 +18,7 @@
     <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
     <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
     <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
-    <data name="Color1" type="System.Drawing.Color, System.Drawing"">Blue</data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
     <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
         <value>[base64 mime encoded serialized .NET Framework object]</value>
     </data>
@@ -130,10 +130,10 @@
     <value>656, 413</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>AccountsDialog</value>
+    <value>AccountDialog</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Accounts</value>
+    <value>Account</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -157,17 +157,16 @@
     <value>94, 29</value>
   </data>
   <data name="acceptButton.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>1</value>
   </data>
   <data name="acceptButton.Text" xml:space="preserve">
     <value>O&amp;K</value>
-    <comment>@Invariant</comment>
   </data>
   <data name="&gt;&gt;acceptButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;acceptButton.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>1</value>
   </data>
   <data name="cancelButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -188,7 +187,7 @@
     <value>94, 29</value>
   </data>
   <data name="cancelButton.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>2</value>
   </data>
   <data name="cancelButton.Text" xml:space="preserve">
     <value>&amp;Cancel</value>
@@ -197,111 +196,54 @@
     <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cancelButton.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="deselectAllButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
-  </data>
-  <data name="deselectAllButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>112, 372</value>
-  </data>
-  <data name="&gt;&gt;deselectAllButton.Name" xml:space="preserve">
-    <value>deselectAllButton</value>
-  </data>
-  <data name="&gt;&gt;deselectAllButton.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="deselectAllButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 29</value>
-  </data>
-  <data name="deselectAllButton.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="deselectAllButton.Text" xml:space="preserve">
-    <value>&amp;Deselect All</value>
-  </data>
-  <data name="&gt;&gt;deselectAllButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;deselectAllButton.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="selectAllButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
-  </data>
-  <data name="selectAllButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 372</value>
-  </data>
-  <data name="&gt;&gt;selectAllButton.Name" xml:space="preserve">
-    <value>selectAllButton</value>
-  </data>
-  <data name="&gt;&gt;selectAllButton.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="selectAllButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 29</value>
-  </data>
-  <data name="selectAllButton.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="selectAllButton.Text" xml:space="preserve">
-    <value>&amp;Select All</value>
-  </data>
-  <data name="&gt;&gt;selectAllButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;selectAllButton.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="toggleAllButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
+  <data name="nameColumn.DisplayIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
-  <data name="toggleAllButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>233, 372</value>
+  <data name="&gt;&gt;nameColumn.Name" xml:space="preserve">
+    <value>nameColumn</value>
   </data>
-  <data name="&gt;&gt;toggleAllButton.Name" xml:space="preserve">
-    <value>toggleAllButton</value>
+  <data name="nameColumn.Text" xml:space="preserve">
+    <value>Name</value>
   </data>
-  <data name="&gt;&gt;toggleAllButton.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;nameColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="toggleAllButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 29</value>
-  </data>
-  <data name="toggleAllButton.TabIndex" type="System.Int32, mscorlib">
+  <data name="numberColumn.DisplayIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="toggleAllButton.Text" xml:space="preserve">
-    <value>To&amp;ggle All</value>
+  <data name="&gt;&gt;numberColumn.Name" xml:space="preserve">
+    <value>numberColumn</value>
   </data>
-  <data name="&gt;&gt;toggleAllButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="numberColumn.Text" xml:space="preserve">
+    <value>Number</value>
   </data>
-  <data name="&gt;&gt;toggleAllButton.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;numberColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="_checkedListBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="_listView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="_checkedListBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_listView.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 12</value>
   </data>
-  <data name="&gt;&gt;_checkedListBox.Name" xml:space="preserve">
-    <value>_checkedListBox</value>
+  <data name="&gt;&gt;_listView.Name" xml:space="preserve">
+    <value>_listView</value>
   </data>
-  <data name="&gt;&gt;_checkedListBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_listView.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="_checkedListBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>632, 356</value>
+  <data name="_listView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>632, 354</value>
   </data>
-  <data name="_checkedListBox.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="_listView.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="&gt;&gt;_checkedListBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckedListBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;_listView.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListViewEx, Liber.Forms, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;_checkedListBox.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;_listView.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
 </root>
