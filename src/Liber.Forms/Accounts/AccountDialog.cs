@@ -9,7 +9,7 @@ using Humanizer;
 
 namespace Liber.Forms.Accounts;
 
-internal sealed partial class AccountDialog : Form
+internal partial class AccountDialog : Form
 {
     public AccountDialog(EditableAccountView value)
     {
@@ -19,34 +19,47 @@ internal sealed partial class AccountDialog : Form
         DialogResult = DialogResult.Cancel;
         Value = value;
 
-        _listView.BeginUpdate();
+        AccountListView.BeginUpdate();
 
         foreach (AccountType type in AccountTypeExtensions.GetSortedValues())
         {
-            _listView.Groups.Add(type.ToString(), type.Humanize());
+            AccountListView.Groups.Add(type.ToString(), type.Humanize());
         }
 
         foreach (KeyValuePair<Guid, Account> account in value.Company.Accounts)
         {
-            ListViewItem item = _listView.Items.Add(account.Value.Name);
+            if (account.Value.Placeholder)
+            {
+                continue;
+            }
+
+            ListViewItem item = AccountListView.Items.Add(account.Value.Name);
             AccountType type = account.Value.Type;
             string key = type.ToString();
 
             item.Tag = account.Key;
-            item.Group = _listView.Groups[key];
+            item.Group = AccountListView.Groups[key];
+            item.Selected = account.Key == value.Id;
             item.SubItems.Add(account.Value.Number.ToString());
         }
 
-        _listView.AutoResizeColumns();
-        _listView.Sort();
-        _listView.EndUpdate();
+        AccountListView.AutoResizeColumns();
+        AccountListView.Sort();
+        AccountListView.EndUpdate();
     }
 
-    public EditableAccountView Value { get; }
+    public EditableAccountView Value { get; private set; }
 
     private void OnAcceptButtonClick(object sender, EventArgs e)
     {
-        Value.Id = (Guid)_listView.SelectedItems[0].Tag;
+        if (AccountListView.SelectedItems.Count < 1)
+        {
+            return;
+        }
+
+        Guid id = (Guid)AccountListView.SelectedItems[0].Tag;
+
+        Value = new EditableAccountView(Value.Company, id);
         DialogResult = DialogResult.OK;
 
         Close();

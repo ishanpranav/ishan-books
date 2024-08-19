@@ -185,8 +185,17 @@
   <data name="transactionsToolStripMenuItem1.Text" xml:space="preserve">
     <value>Use Register</value>
   </data>
+  <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>265, 6</value>
+  </data>
+  <data name="quickReportToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>268, 24</value>
+  </data>
+  <data name="quickReportToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Quick Report</value>
+  </data>
   <data name="_contextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>269, 178</value>
+    <value>269, 208</value>
   </data>
   <data name="&gt;&gt;_contextMenu.Name" xml:space="preserve">
     <value>_contextMenu</value>
@@ -217,7 +226,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;_listView.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <metadata name="_statusStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -292,6 +301,15 @@
   </data>
   <data name="transactionsToolStripMenuItem.Text" xml:space="preserve">
     <value>Use &amp;Register</value>
+  </data>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>279, 6</value>
+  </data>
+  <data name="quickReportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>282, 26</value>
+  </data>
+  <data name="quickReportToolStripMenuItem.Text" xml:space="preserve">
+    <value>Quick Report</value>
   </data>
   <data name="toolStripDropDownButton2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -506,6 +524,18 @@
   <data name="&gt;&gt;transactionsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
+    <value>toolStripSeparator1</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;quickReportToolStripMenuItem.Name" xml:space="preserve">
+    <value>quickReportToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;quickReportToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;toolStripDropDownButton3.Name" xml:space="preserve">
     <value>toolStripDropDownButton3</value>
   </data>
@@ -516,6 +546,18 @@
     <value>refreshToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;refreshToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator3.Name" xml:space="preserve">
+    <value>toolStripSeparator3</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;quickReportToolStripMenuItem1.Name" xml:space="preserve">
+    <value>quickReportToolStripMenuItem1</value>
+  </data>
+  <data name="&gt;&gt;quickReportToolStripMenuItem1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

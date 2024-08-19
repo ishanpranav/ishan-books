@@ -70,7 +70,7 @@ namespace Liber.Forms.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save Changes.
+        ///   Looks up a localized string similar to Save changes.
         /// </summary>
         internal static string CancelCaption {
             get {
@@ -121,6 +121,15 @@ namespace Liber.Forms.Properties {
         internal static string InvalidAccountError {
             get {
                 return ResourceManager.GetString("InvalidAccountError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (None).
+        /// </summary>
+        internal static string NoAccount {
+            get {
+                return ResourceManager.GetString("NoAccount", resourceCulture);
             }
         }
         

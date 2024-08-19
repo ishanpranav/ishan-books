@@ -132,6 +132,9 @@
   <data name="InvalidAccountError" xml:space="preserve">
     <value>Por favor, selecciona una cuenta válida.</value>
   </data>
+  <data name="NoAccount" xml:space="preserve">
+    <value>Ninguna cuenta</value>
+  </data>
   <data name="WarningText" xml:space="preserve">
     <value>Usted está a punto de cerrar el archivo de la empresa sin guardar los cambios.</value>
   </data>

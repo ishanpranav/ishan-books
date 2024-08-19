@@ -5,6 +5,7 @@
 using System;
 using System.ComponentModel;
 using System.Drawing.Design;
+using Liber.Forms.Properties;
 
 namespace Liber.Forms.Accounts;
 
@@ -16,8 +17,13 @@ public class EditableAccountView : IAccountView
         Company = company;
     }
 
+    public EditableAccountView(Company company, Guid id) : this(company)
+    {
+        Id = id;
+    }
+
     public Company Company { get; }
-    public Guid Id { get; set; }
+    public Guid Id { get; }
 
     public Account? Value
     {
@@ -38,7 +44,7 @@ public class EditableAccountView : IAccountView
         {
             if (Value == null)
             {
-                return string.Empty;
+                return Resources.NoAccount;
             }
 
             return Value.Name;

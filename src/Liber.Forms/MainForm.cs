@@ -521,4 +521,25 @@ internal sealed partial class MainForm : Form
     {
         _factory.AutoRegister(() => new TransactionForm(_company));
     }
+
+    private void OnTransactionsToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        using AccountDialog accountDialog = new AccountDialog(new EditableAccountView(_company));
+
+        if (accountDialog.ShowDialog() != DialogResult.OK)
+        {
+            return;
+        }
+
+        Guid id = accountDialog.Value.Id;
+
+        if (_factory.TryKill(id))
+        {
+            return;
+        }
+
+        TransactionsForm transactionsForm = new TransactionsForm(_company, id);
+
+        _factory.Register(id, transactionsForm);
+    }
 }

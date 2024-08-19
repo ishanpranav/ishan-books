@@ -63,7 +63,7 @@ internal sealed partial class AccountsForm : Form
     {
         Guid key = typeof(TransactionForm).GUID;
 
-        if (_factory.TryKill(key))
+        if (_factory.TryKill(key) || _company.Accounts[id].Placeholder)
         {
             return;
         }
@@ -85,7 +85,7 @@ internal sealed partial class AccountsForm : Form
 
     private void InitializeTransactions(Guid id)
     {
-        if (_factory.TryKill(id))
+        if (_factory.TryKill(id) || _company.Accounts[id].Placeholder)
         {
             return;
         }
@@ -231,24 +231,27 @@ internal sealed partial class AccountsForm : Form
             return;
         }
 
-        if (id == _company.EquityAccountId)
-        {
-            // TODO: QuickReport
-        }
-        else if (id == _company.OtherEquityAccountId)
-        {
-            // TODO: QuickReport
-        }
-
         Account value = _company.Accounts[id];
 
         if (value.Placeholder)
         {
             // TODO: QuickReport
+
+            return;
         }
-        else if (value.Type == AccountType.Bank || value.Type == AccountType.CreditCard)
+
+        if (value.Type == AccountType.Equity)
+        {
+
+        }
+
+        if (value.Type == AccountType.Bank || value.Type == AccountType.CreditCard)
         {
             InitializeTransactions(id);
+        }
+        else if (value.Type.IsTemporary())
+        {
+
         }
         else
         {

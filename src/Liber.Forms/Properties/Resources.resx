@@ -121,7 +121,7 @@
     <value>account</value>
   </data>
   <data name="CancelCaption" xml:space="preserve">
-    <value>Save Changes</value>
+    <value>Save changes</value>
   </data>
   <data name="CompaniesJumpListCustomCategory" xml:space="preserve">
     <value>Companies</value>
@@ -138,6 +138,9 @@
   </data>
   <data name="InvalidAccountError" xml:space="preserve">
     <value>Please select a valid account.</value>
+  </data>
+  <data name="NoAccount" xml:space="preserve">
+    <value>(None)</value>
   </data>
   <data name="WarningText" xml:space="preserve">
     <value>You are about to close the company file without saving your changes.</value>

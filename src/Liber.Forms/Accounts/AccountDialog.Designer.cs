@@ -35,7 +35,7 @@ partial class AccountDialog
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AccountDialog));
         acceptButton = new System.Windows.Forms.Button();
         cancelButton = new System.Windows.Forms.Button();
-        _listView = new System.Windows.Forms.ListViewEx();
+        AccountListView = new System.Windows.Forms.ListViewEx();
         nameColumn = new System.Windows.Forms.ColumnHeader();
         numberColumn = new System.Windows.Forms.ColumnHeader();
         SuspendLayout();
@@ -54,20 +54,20 @@ partial class AccountDialog
         cancelButton.UseVisualStyleBackColor = true;
         cancelButton.Click += OnCancelButtonClick;
         // 
-        // _listView
+        // AccountListView
         // 
-        _listView.AllowColumnReorder = true;
-        resources.ApplyResources(_listView, "_listView");
-        _listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { nameColumn, numberColumn });
-        _listView.FullRowSelect = true;
-        _listView.MultiSelect = false;
-        _listView.Name = "_listView";
-        _listView.SortColumn = 0;
-        _listView.Sorting = System.Windows.Forms.SortOrder.Ascending;
-        _listView.SortOrder = System.Windows.Forms.SortOrder.None;
-        _listView.UseCompatibleStateImageBehavior = false;
-        _listView.View = System.Windows.Forms.View.Details;
-        _listView.ItemActivate += OnAcceptButtonClick;
+        AccountListView.AllowColumnReorder = true;
+        resources.ApplyResources(AccountListView, "AccountListView");
+        AccountListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { nameColumn, numberColumn });
+        AccountListView.FullRowSelect = true;
+        AccountListView.MultiSelect = false;
+        AccountListView.Name = "AccountListView";
+        AccountListView.SortColumn = 0;
+        AccountListView.Sorting = System.Windows.Forms.SortOrder.Ascending;
+        AccountListView.SortOrder = System.Windows.Forms.SortOrder.None;
+        AccountListView.UseCompatibleStateImageBehavior = false;
+        AccountListView.View = System.Windows.Forms.View.Details;
+        AccountListView.ItemActivate += OnAcceptButtonClick;
         // 
         // nameColumn
         // 
@@ -83,7 +83,7 @@ partial class AccountDialog
         resources.ApplyResources(this, "$this");
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         CancelButton = cancelButton;
-        Controls.Add(_listView);
+        Controls.Add(AccountListView);
         Controls.Add(acceptButton);
         Controls.Add(cancelButton);
         Name = "AccountDialog";
@@ -93,7 +93,7 @@ partial class AccountDialog
     #endregion
     private System.Windows.Forms.Button acceptButton;
     private System.Windows.Forms.Button cancelButton;
-    private System.Windows.Forms.ListViewEx _listView;
     private System.Windows.Forms.ColumnHeader numberColumn;
     private System.Windows.Forms.ColumnHeader nameColumn;
+    protected internal System.Windows.Forms.ListViewEx AccountListView;
 }
