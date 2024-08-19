@@ -63,7 +63,7 @@ Licensed under the MIT License.
                                 Download v<xsl:value-of select="$Version"/>
                             </a>
                             <xsl:text> </xsl:text>
-                            <a href="https://github.com/ishanpranav/novatel-gnss-log-parser"
+                            <a href="https://github.com/ishanpranav/ishan-books"
                                target="_blank"
                                class="btn btn-light btn-lg px-4">
                                 View source
