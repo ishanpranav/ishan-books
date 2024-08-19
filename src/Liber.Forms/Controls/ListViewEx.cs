@@ -6,12 +6,12 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Windows.Forms;
 
-internal sealed class ListViewEx : ListView
+internal class ListViewEx : ListView
 {
     public ListViewEx()
     {
-        ListViewItemSorter = new ListViewItemComparer(this);
         AllowColumnReorder = true;
+        ListViewItemSorter = new ListViewItemComparer(this);
     }
 
     public SortOrder SortOrder { get; set; }

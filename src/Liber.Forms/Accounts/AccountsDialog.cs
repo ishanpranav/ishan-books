@@ -17,25 +17,7 @@ internal sealed partial class AccountsDialog : Form
 
         DialogResult = DialogResult.Cancel;
         Value = value;
-
-        _checkedListBox.BeginUpdate();
-
-        foreach (Account account in value.Company.Accounts.Values)
-        {
-            if (account.Placeholder)
-            {
-                continue;
-            }
-
-            int index = _checkedListBox.Items.Add(account);
-
-            if (value.Values.Contains(account))
-            {
-                _checkedListBox.SetItemChecked(index, value: true);
-            }
-        }
-
-        _checkedListBox.EndUpdate();
+        _accountListView.Initialize(value.Company, value.Values);
     }
 
     public AccountsView Value { get; private set; }
@@ -50,40 +32,35 @@ internal sealed partial class AccountsDialog : Form
 
     private void OnSelectAllButtonClick(object sender, EventArgs e)
     {
-        for (int i = 0; i < _checkedListBox.Items.Count; i++)
+        foreach (ListViewItem item in _accountListView.Items)
         {
-            _checkedListBox.SetItemChecked(i, value: true);
+            item.Checked = true;
         }
     }
 
     private void OnDeselectAllButtonClick(object sender, EventArgs e)
     {
-        for (int i = 0; i < _checkedListBox.Items.Count; i++)
+        foreach (ListViewItem item in _accountListView.Items)
         {
-            _checkedListBox.SetItemChecked(i, value: false);
+            item.Checked = false;
         }
     }
 
     private void OnToggleAllButtonClick(object sender, EventArgs e)
     {
-        for (int i = 0; i < _checkedListBox.Items.Count; i++)
+        foreach (ListViewItem item in _accountListView.Items)
         {
-            _checkedListBox.SetItemChecked(i, !_checkedListBox.GetItemChecked(i));
+            item.Checked = !item.Checked;
         }
     }
 
     private void OnAcceptButtonClick(object sender, EventArgs e)
     {
-        if (_checkedListBox.CheckedItems.Count < 1)
+        IReadOnlySet<Account> accounts = _accountListView.GetCheckedAccounts();
+
+        if (accounts.Count == 0)
         {
             return;
-        }
-
-        HashSet<Account> accounts = new HashSet<Account>();
-
-        foreach (Account item in _checkedListBox.CheckedItems)
-        {
-            accounts.Add(item);
         }
 
         Value = new AccountsView(Value.Company, accounts);
