@@ -105,7 +105,8 @@ internal sealed partial class ReportsForm : Form
                 continue;
             }
 
-            ListViewItem item = _listView.Items.Add(reportView.Title);
+            string key = Path.GetFileNameWithoutExtension(file);
+            ListViewItem item = _listView.Items.Add(key, reportView.Title, imageIndex: 0);
 
             item.ImageIndex = _imageList.Images.Count - 1;
             item.Tag = reportView;

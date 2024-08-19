@@ -141,7 +141,7 @@ public sealed class Company
 
     [Key(6)]
     [MessagePackFormatter(typeof(MessagePackColorFormatter))]
-    public Color Color { get; set; }
+    public Color Color { get; set; } = Color.FromArgb(221, 237, 224);
 
     [Key(7)]
     public Guid EquityAccountId { get; set; }
@@ -280,7 +280,7 @@ public sealed class Company
     /// <param name="started">The start date of the date range.</param>
     /// <param name="posted">The end date of the date range.</param>
     /// <returns>A collection of transactions within the specified date range.</returns>
-    public IEnumerable<Transaction> GetTransactionsBetween(DateTime started, DateTime posted)
+    public IReadOnlySet<Transaction> GetTransactionsBetween(DateTime started, DateTime posted)
     {
         return _transactions.GetViewBetween(
             new Transaction() { Posted = started },

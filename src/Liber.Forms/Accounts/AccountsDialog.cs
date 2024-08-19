@@ -22,6 +22,11 @@ internal sealed partial class AccountsDialog : Form
 
         foreach (Account account in value.Company.Accounts.Values)
         {
+            if (account.Placeholder)
+            {
+                continue;
+            }
+
             int index = _checkedListBox.Items.Add(account);
 
             if (value.Values.Contains(account))

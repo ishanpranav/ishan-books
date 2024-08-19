@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Account" xml:space="preserve">
-    <value>Account</value>
+    <value>Transactions</value>
   </data>
   <data name="Accounts" xml:space="preserve">
     <value>Accounts</value>
@@ -211,7 +211,7 @@
     <value>Design</value>
   </data>
   <data name="_d_Account" xml:space="preserve">
-    <value>Determines the account used in the report. The 'Account' and 'Accounts' fields are mutually exclusive.</value>
+    <value>Determines the account used in the report. The 'Transactions' and 'Accounts' fields are mutually exclusive.</value>
   </data>
   <data name="_d_AccountPayable" xml:space="preserve">
     <value>Account Payable</value>
@@ -220,7 +220,7 @@
     <value>Account Receivable</value>
   </data>
   <data name="_d_Accounts" xml:space="preserve">
-    <value>Determines the accounts included in the report. The 'Account' and 'Accounts' fields are mutually exclusive.</value>
+    <value>Determines the accounts included in the report. The 'Transactions' and 'Accounts' fields are mutually exclusive.</value>
   </data>
   <data name="_d_Annually" xml:space="preserve">
     <value>Annually</value>
