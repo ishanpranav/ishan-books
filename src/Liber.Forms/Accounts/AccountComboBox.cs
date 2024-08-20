@@ -61,7 +61,7 @@ internal sealed class AccountComboBox : ComboBox
 
     private void InitializeAccount(Guid id, Account value)
     {
-        if ((_validator == null || _validator(id)) && !value.Placeholder)
+        if (_validator == null || _validator(id))
         {
             Items.Add(new AccountView(id, value));
         }
@@ -81,7 +81,7 @@ internal sealed class AccountComboBox : ComboBox
 
         Items.Remove(e.Id);
 
-        if (!_company!.Accounts[e.Id].Placeholder)
+        if (!_company!.Accounts[e.Id].Hidden)
         {
             Items.Add(e.Id);
         }

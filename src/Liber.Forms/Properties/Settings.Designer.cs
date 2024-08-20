@@ -93,5 +93,17 @@ namespace Liber.Forms.Properties {
                 this["ImportRules"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Inactive {
+            get {
+                return ((bool)(this["Inactive"]));
+            }
+            set {
+                this["Inactive"] = value;
+            }
+        }
     }
 }

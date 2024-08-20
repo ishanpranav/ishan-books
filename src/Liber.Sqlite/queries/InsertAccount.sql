@@ -13,7 +13,8 @@ INSERT INTO "main"."Account" (
     "Memo",
     "Color",
     "TaxType",
-    "Hidden"
+    "Inactive",
+    "Adjustment"
 ) VALUES (
     @id,
     @parentId,
@@ -25,5 +26,6 @@ INSERT INTO "main"."Account" (
     @memo,
     @color,
     @taxType,
-    @hidden
+    @inactive,
+    @adjustment
 );

@@ -50,6 +50,8 @@
             memoTextBox = new System.Windows.Forms.TextBox();
             _colorButton = new System.Windows.Forms.ColorButton();
             _helpProvider = new System.Windows.Forms.HelpProvider();
+            adjustmentCheckBox = new System.Windows.Forms.CheckBox();
+            inactiveCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)numberNumericUpDown).BeginInit();
             SuspendLayout();
             // 
@@ -194,12 +196,29 @@
             _helpProvider.SetShowHelp(_colorButton, (bool)resources.GetObject("_colorButton.ShowHelp"));
             _colorButton.UseVisualStyleBackColor = true;
             // 
+            // adjustmentCheckBox
+            // 
+            resources.ApplyResources(adjustmentCheckBox, "adjustmentCheckBox");
+            adjustmentCheckBox.Name = "adjustmentCheckBox";
+            _helpProvider.SetShowHelp(adjustmentCheckBox, (bool)resources.GetObject("adjustmentCheckBox.ShowHelp"));
+            adjustmentCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // inactiveCheckBox
+            // 
+            resources.ApplyResources(inactiveCheckBox, "inactiveCheckBox");
+            _helpProvider.SetHelpString(inactiveCheckBox, resources.GetString("inactiveCheckBox.HelpString"));
+            inactiveCheckBox.Name = "inactiveCheckBox";
+            _helpProvider.SetShowHelp(inactiveCheckBox, (bool)resources.GetObject("inactiveCheckBox.ShowHelp"));
+            inactiveCheckBox.UseVisualStyleBackColor = true;
+            // 
             // AccountForm
             // 
             AcceptButton = acceptButton;
             resources.ApplyResources(this, "$this");
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             CancelButton = cancelButton;
+            Controls.Add(inactiveCheckBox);
+            Controls.Add(adjustmentCheckBox);
             Controls.Add(taxTypeComboBox);
             Controls.Add(label8);
             Controls.Add(_colorButton);
@@ -250,5 +269,7 @@
         private System.Windows.Forms.ComboBox taxTypeComboBox;
         private System.Windows.Forms.Label label8;
         protected AccountComboBox parentComboBox;
+        protected System.Windows.Forms.CheckBox adjustmentCheckBox;
+        protected System.Windows.Forms.CheckBox inactiveCheckBox;
     }
 }

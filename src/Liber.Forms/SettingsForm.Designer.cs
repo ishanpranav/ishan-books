@@ -111,6 +111,7 @@
             Controls.Add(cancelButton);
             MaximizeBox = false;
             Name = "SettingsForm";
+            _helpProvider.SetShowHelp(this, (bool)resources.GetObject("$this.ShowHelp"));
             ShowIcon = false;
             groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)importRulesDataGridView).EndInit();

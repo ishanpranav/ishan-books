@@ -63,6 +63,8 @@ internal abstract partial class AccountForm : Form
         account.Memo = memoTextBox.Text;
         account.Color = _colorButton.BackColor;
         account.TaxType = TaxType;
+        account.Inactive = inactiveCheckBox.Checked;
+        account.Adjustment = adjustmentCheckBox.Checked;
     }
 
     private void OnTypeComboBoxFormat(object sender, ListControlConvertEventArgs e)

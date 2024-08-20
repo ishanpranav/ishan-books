@@ -132,14 +132,18 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="acceptButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>348, 362</value>
+    <value>289, 329</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="acceptButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="acceptButton.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="acceptButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 23</value>
+    <value>80, 31</value>
   </data>
   <data name="acceptButton.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -169,13 +173,16 @@
     <value>NoControl</value>
   </data>
   <data name="cancelButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>424, 362</value>
+    <value>376, 329</value>
+  </data>
+  <data name="cancelButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
   </data>
   <data name="cancelButton.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="cancelButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 23</value>
+    <value>80, 31</value>
   </data>
   <data name="cancelButton.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -202,13 +209,16 @@
     <value>Specifies the preferred language, region, and culture settings.</value>
   </data>
   <data name="cultureComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 22</value>
+    <value>7, 29</value>
+  </data>
+  <data name="cultureComboBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
   </data>
   <data name="cultureComboBox.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="cultureComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>468, 23</value>
+    <value>425, 28</value>
   </data>
   <data name="cultureComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -229,10 +239,10 @@
     <value>Bottom</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 48</value>
+    <value>3, 64</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>477, 39</value>
+    <value>437, 52</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -256,10 +266,16 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 12</value>
+    <value>14, 16</value>
+  </data>
+  <data name="groupBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="groupBox1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>483, 90</value>
+    <value>443, 120</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -283,10 +299,16 @@
     <value>Fill</value>
   </data>
   <data name="importRulesDataGridView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 19</value>
+    <value>3, 24</value>
+  </data>
+  <data name="importRulesDataGridView.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="importRulesDataGridView.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
   </data>
   <data name="importRulesDataGridView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>477, 226</value>
+    <value>437, 149</value>
   </data>
   <data name="importRulesDataGridView.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -307,10 +329,16 @@
     <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 108</value>
+    <value>14, 144</value>
+  </data>
+  <data name="groupBox2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
+  </data>
+  <data name="groupBox2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>483, 248</value>
+    <value>443, 177</value>
   </data>
   <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -334,13 +362,19 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>7, 15</value>
+    <value>8, 20</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>506, 397</value>
+    <value>469, 375</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 4</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>275, 181</value>
+    <value>437, 376</value>
+  </data>
+  <data name="$this.ShowHelp" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Preferences</value>
