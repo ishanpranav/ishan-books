@@ -127,6 +127,7 @@ public class Account
     /// Gets or sets the color associated with the account.
     /// </summary>
     /// <value>The color associated with the account.</value>
+    [Browsable(false)]
     [Index(5)]
     [Key(7)]
     [LocalizedDisplayName(nameof(Color))]

@@ -110,7 +110,7 @@ public class XslReport : IXmlSerializable
     public Regex Filter { get; set; } = Filters.Any();
 
     [Browsable(false)]
-    public ReportData Metadata { get; set; } = new ReportData();
+    public ReportTypes Type { get; set; }
 
     [LocalizedCategory(nameof(Accounts))]
     [LocalizedDescription(nameof(Accounts))]
@@ -226,7 +226,7 @@ public class XslReport : IXmlSerializable
 
     private void WriteAccountXml(XmlWriter writer, Account value)
     {
-        if (Metadata.CashBasis && value.Adjustment)
+        if (Type.HasFlag(ReportTypes.CashBasis) && value.Adjustment)
         {
             return;
         }
@@ -244,14 +244,14 @@ public class XslReport : IXmlSerializable
         {
             writer.WriteElementString("equity", XmlConvert.ToString(true));
 
-            if (Metadata.EquityMode.HasFlag(EquityModes.CurrentPosted))
+            if (Type.HasFlag(ReportTypes.CurrentPosted))
             {
                 balance = Company.GetEquity(Posted, Filter);
             }
 
-            if (Metadata.EquityMode.HasFlag(EquityModes.CurrentStarted))
+            if (Type.HasFlag(ReportTypes.CurrentStarted))
             {
-                balance = Company.GetEquity(Started, Filter);
+                balance = Company.GetEquity(Started.AddDays(-1), Filter);
             }
 
             previous = Company.GetEquity(Started, Filter);
