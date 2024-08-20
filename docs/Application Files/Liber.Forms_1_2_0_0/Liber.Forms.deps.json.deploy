@@ -18,11 +18,11 @@
           "Liber.Forms.dll": {}
         },
         "resources": {
-          "en/Liber.Forms.resources.dll": {
-            "locale": "en"
-          },
           "es/Liber.Forms.resources.dll": {
             "locale": "es"
+          },
+          "en/Liber.Forms.resources.dll": {
+            "locale": "en"
           },
           "es-ES/Liber.Forms.resources.dll": {
             "locale": "es-ES"

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <!--
 App.config
-Copyright (c) 2023 Ishan Pranav. All rights reserved.
+Copyright (c) 2023-2024 Ishan Pranav. All rights reserved.
 Licensed under the MIT License.
 -->
 <configuration>
@@ -19,7 +19,36 @@ Licensed under the MIT License.
                 <value />
             </setting>
             <setting name="CustomColors" serializeAs="String">
-                <value>null</value>
+                <value>[]</value>
+            </setting>
+            <setting name="ImportRules" serializeAs="String">
+                <value>[
+  {
+    "filter": "^7",
+    "type": "incomeTaxExpense",
+    "strict": true
+  },
+  {
+    "filter": "^[46]9",
+    "type": "otherIncomeExpense",
+    "strict": true
+  },
+  {
+    "filter": "^1[689]",
+    "type": "otherAsset"
+  },
+  {
+    "filter": "^17",
+    "type": "fixedAsset"
+  },
+  {
+    "filter": "^2[5-9]",
+    "type": "longTermLiability"
+  }
+]</value>
+            </setting>
+            <setting name="Inactive" serializeAs="String">
+                <value>False</value>
             </setting>
         </Liber.Forms.Properties.Settings>
     </userSettings>
