@@ -12,30 +12,7 @@
       <Value Profile="(Default)">[]</Value>
     </Setting>
     <Setting Name="ImportRules" Type="System.String" Scope="User">
-      <Value Profile="(Default)">[
-  {
-    "filter": "^7",
-    "type": "incomeTaxExpense",
-    "strict": true
-  },
-  {
-    "filter": "^[46]9",
-    "type": "otherIncomeExpense",
-    "strict": true
-  },
-  {
-    "filter": "^1[689]",
-    "type": "otherAsset"
-  },
-  {
-    "filter": "^17",
-    "type": "fixedAsset"
-  },
-  {
-    "filter": "^2[5-9]",
-    "type": "longTermLiability"
-  }
-]</Value>
+      <Value Profile="(Default)">[{"filter":"^7","type":"incomeTaxExpense","strict":true},{"filter":"^[46]9","type":"otherIncomeExpense","strict":true},{"filter":"^1[689]","type":"otherAsset"},{"filter":"^17","type":"fixedAsset"},{"filter":"^2[5-9]","type":"longTermLiability"},{"filter":"Adjustment","adjustment":"true"},{"filter":"^[12]8","adjustment":"true"},{"filter":"^2428","adjustment":"true"},{"filter":"Rebate","adjustment":"true"},{"filter":"Accumulated Other Comprehensive Income","adjustment":"true"},{"filter":"Accumulated Other Comprehensive Loss","adjustment":"true"}]</Value>
     </Setting>
     <Setting Name="Inactive" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

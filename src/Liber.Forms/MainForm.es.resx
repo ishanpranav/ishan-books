@@ -255,6 +255,9 @@
   <data name="reportsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Centro de reportes contables</value>
   </data>
+  <data name="reportsToolStripMenuItem1.Text" xml:space="preserve">
+    <value>&amp;Reportes</value>
+  </data>
   <data name="saveAsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>184, 22</value>
   </data>

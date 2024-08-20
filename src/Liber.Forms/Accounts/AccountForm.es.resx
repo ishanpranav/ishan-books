@@ -18,7 +18,7 @@
     <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
     <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
     <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
-    <data name="Color1" type="System.Drawing.Color, System.Drawing"">Blue</data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
     <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
         <value>[base64 mime encoded serialized .NET Framework object]</value>
     </data>
@@ -117,24 +117,79 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>395, 404</value>
+    <value>395, 433</value>
+  </data>
+  <data name="$this.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="$this.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="$this.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="acceptButton.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="acceptButton.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
   </data>
   <data name="acceptButton.HelpString" xml:space="preserve">
     <value>Acepta los cambios en la cuenta.</value>
   </data>
+  <data name="acceptButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="acceptButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>205, 360</value>
+    <value>204, 389</value>
+  </data>
+  <data name="adjustmentCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="adjustmentCheckBox.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="adjustmentCheckBox.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="adjustmentCheckBox.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="adjustmentCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>250, 358</value>
+  </data>
+  <data name="adjustmentCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 24</value>
+  </data>
+  <data name="adjustmentCheckBox.Text" xml:space="preserve">
+    <value>No en effectivo</value>
+  </data>
+  <data name="cancelButton.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="cancelButton.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
   </data>
   <data name="cancelButton.HelpString" xml:space="preserve">
     <value>Deshacer los cambios.</value>
   </data>
+  <data name="cancelButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="cancelButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>297, 360</value>
+    <value>296, 389</value>
   </data>
   <data name="cancelButton.Text" xml:space="preserve">
     <value>&amp;Cancelar</value>
+  </data>
+  <data name="descriptionTextBox.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="descriptionTextBox.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
   </data>
   <data name="descriptionTextBox.HelpString" xml:space="preserve">
     <value>Proporciona una descripción detallada para la cuenta.</value>
@@ -145,14 +200,59 @@
   <data name="descriptionTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>239, 27</value>
   </data>
+  <data name="inactiveCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="inactiveCheckBox.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="inactiveCheckBox.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="inactiveCheckBox.HelpString" xml:space="preserve">
+    <value>Especifica si la cuenta está inactiva y debe ocultarse.</value>
+  </data>
+  <data name="inactiveCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>301, 328</value>
+  </data>
+  <data name="inactiveCheckBox.Text" xml:space="preserve">
+    <value>Inactiva</value>
+  </data>
+  <data name="label1.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="label1.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="label1.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 20</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>&amp;Nombre</value>
   </data>
+  <data name="label2.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="label2.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="label2.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="label2.Text" xml:space="preserve">
     <value>Nú&amp;mero</value>
+  </data>
+  <data name="label3.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="label3.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="label3.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>39, 20</value>
@@ -160,11 +260,29 @@
   <data name="label3.Text" xml:space="preserve">
     <value>&amp;Tipo</value>
   </data>
+  <data name="label4.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="label4.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="label4.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>102, 20</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
     <value>Cuenta madre</value>
+  </data>
+  <data name="label5.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="label5.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="label5.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 20</value>
@@ -172,14 +290,50 @@
   <data name="label5.Text" xml:space="preserve">
     <value>&amp;Descripción</value>
   </data>
+  <data name="label6.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="label6.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="label6.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="label6.Text" xml:space="preserve">
     <value>N&amp;otas</value>
+  </data>
+  <data name="label7.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="label7.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="label7.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="label7.Text" xml:space="preserve">
+    <value>Co&amp;lor</value>
+  </data>
+  <data name="label8.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="label8.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="label8.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
   <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 20</value>
   </data>
   <data name="label8.Text" xml:space="preserve">
     <value>Tipo de impuesto</value>
+  </data>
+  <data name="memoTextBox.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="memoTextBox.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
   </data>
   <data name="memoTextBox.HelpString" xml:space="preserve">
     <value>Especifica notas adicionales asociadas con la cuenta.</value>
@@ -190,6 +344,12 @@
   <data name="memoTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>239, 69</value>
   </data>
+  <data name="nameTextBox.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="nameTextBox.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
   <data name="nameTextBox.HelpString" xml:space="preserve">
     <value>Especifica el nombre de la cuenta.</value>
   </data>
@@ -199,8 +359,20 @@
   <data name="nameTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>239, 27</value>
   </data>
+  <data name="numberNumericUpDown.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="numberNumericUpDown.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
   <data name="numberNumericUpDown.HelpString" xml:space="preserve">
     <value>Especifica el número utilizado para identificar de forma única la cuenta.</value>
+  </data>
+  <data name="parentComboBox.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="parentComboBox.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
   </data>
   <data name="parentComboBox.HelpString" xml:space="preserve">
     <value>Especifica la cuenta madre.</value>
@@ -211,17 +383,32 @@
   <data name="parentComboBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>239, 28</value>
   </data>
+  <data name="placeholderCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="placeholderCheckBox.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="placeholderCheckBox.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
   <data name="placeholderCheckBox.HelpString" xml:space="preserve">
     <value>Especifica si la cuenta es un marcador de posición. No se pueden registrar transacciones en cuentas marcador de posición.</value>
   </data>
   <data name="placeholderCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 330</value>
+    <value>68, 358</value>
   </data>
   <data name="placeholderCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>176, 24</value>
   </data>
   <data name="placeholderCheckBox.Text" xml:space="preserve">
     <value>Marcador de posición</value>
+  </data>
+  <data name="taxTypeComboBox.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="taxTypeComboBox.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
   </data>
   <data name="taxTypeComboBox.HelpString" xml:space="preserve">
     <value>Especifica la información fiscal para la cuenta.</value>
@@ -232,6 +419,12 @@
   <data name="taxTypeComboBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>238, 28</value>
   </data>
+  <data name="typeComboBox.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="typeComboBox.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
   <data name="typeComboBox.HelpString" xml:space="preserve">
     <value>Especifica el tipo de cuenta.</value>
   </data>
@@ -240,6 +433,12 @@
   </data>
   <data name="typeComboBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>239, 28</value>
+  </data>
+  <data name="_colorButton.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="_colorButton.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
   </data>
   <data name="_colorButton.HelpString" xml:space="preserve">
     <value>Especifica el color mostrado en el registro de cuentas.</value>

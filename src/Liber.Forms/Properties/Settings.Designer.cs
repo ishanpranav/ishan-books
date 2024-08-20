@@ -61,30 +61,7 @@ namespace Liber.Forms.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"[
-  {
-    ""filter"": ""^7"",
-    ""type"": ""incomeTaxExpense"",
-    ""strict"": true
-  },
-  {
-    ""filter"": ""^[46]9"",
-    ""type"": ""otherIncomeExpense"",
-    ""strict"": true
-  },
-  {
-    ""filter"": ""^1[689]"",
-    ""type"": ""otherAsset""
-  },
-  {
-    ""filter"": ""^17"",
-    ""type"": ""fixedAsset""
-  },
-  {
-    ""filter"": ""^2[5-9]"",
-    ""type"": ""longTermLiability""
-  }
-]")]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"[{""filter"":""^7"",""type"":""incomeTaxExpense"",""strict"":true},{""filter"":""^[46]9"",""type"":""otherIncomeExpense"",""strict"":true},{""filter"":""^1[689]"",""type"":""otherAsset""},{""filter"":""^17"",""type"":""fixedAsset""},{""filter"":""^2[5-9]"",""type"":""longTermLiability""},{""filter"":""Adjustment"",""adjustment"":""true""},{""filter"":""^[12]8"",""adjustment"":""true""},{""filter"":""^2428"",""adjustment"":""true""},{""filter"":""Rebate"",""adjustment"":""true""},{""filter"":""Accumulated Other Comprehensive Income"",""adjustment"":""true""},{""filter"":""Accumulated Other Comprehensive Loss"",""adjustment"":""true""}]")]
         public string ImportRules {
             get {
                 return ((string)(this["ImportRules"]));
