@@ -165,6 +165,9 @@
   <data name="Posted" xml:space="preserve">
     <value>To</value>
   </data>
+  <data name="Redaction" xml:space="preserve">
+    <value>Redaction</value>
+  </data>
   <data name="Started" xml:space="preserve">
     <value>From</value>
   </data>
@@ -206,6 +209,9 @@
   </data>
   <data name="_c_Posted" xml:space="preserve">
     <value>Date Range</value>
+  </data>
+  <data name="_c_Redaction" xml:space="preserve">
+    <value>Design</value>
   </data>
   <data name="_c_Started" xml:space="preserve">
     <value>Date Range</value>
@@ -317,6 +323,9 @@
   </data>
   <data name="_d_Posted" xml:space="preserve">
     <value>Specifies the end date for the report.</value>
+  </data>
+  <data name="_d_Redaction" xml:space="preserve">
+    <value>Specifies a pattern used to redact numbers. If this field is left blank, the output is not redacted.</value>
   </data>
   <data name="_d_Started" xml:space="preserve">
     <value>Specifies the start date for the report.</value>

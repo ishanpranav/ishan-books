@@ -17,7 +17,7 @@ public class AccountsView
     public AccountsView(Company company)
     {
         Company = company;
-        Values = company.Accounts.Values.ToHashSet();
+        Values = company.Accounts.Values.Where(x => !x.Placeholder).ToHashSet();
     }
 
     public AccountsView(Company company, IReadOnlySet<Account> values)

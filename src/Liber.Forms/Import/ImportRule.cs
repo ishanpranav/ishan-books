@@ -40,7 +40,10 @@ internal sealed class ImportRule
 
             if (Filter.IsMatch(account.Name))
             {
-                account.Type = Type;
+                if (Type != AccountType.None)
+                {
+                    account.Type = Type;
+                }
             }
         }
     }

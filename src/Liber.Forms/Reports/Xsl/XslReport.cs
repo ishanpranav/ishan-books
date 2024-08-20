@@ -58,6 +58,11 @@ public class XslReport : IXmlSerializable
     [LocalizedDisplayName(nameof(Title))]
     public string Title { get; set; }
 
+    [LocalizedCategory(nameof(Redaction))]
+    [LocalizedDescription(nameof(Redaction))]
+    [LocalizedDisplayName(nameof(Redaction))]
+    public string? Redaction { get; set; }
+
     [LocalizedCategory(nameof(Started))]
     [LocalizedDescription(nameof(Started))]
     [LocalizedDisplayName(nameof(Started))]
@@ -133,11 +138,21 @@ public class XslReport : IXmlSerializable
 
     public string fm(decimal value)
     {
+        if (!string.IsNullOrEmpty(Redaction))
+        {
+            return Redaction;
+        }
+
         return value.ToLocalizedString();
     }
 
     public string fm(string type, decimal balance)
     {
+        if (!string.IsNullOrEmpty(Redaction))
+        {
+            return Redaction;
+        }
+
         return Enum
             .Parse<AccountType>(type)
             .ToBalance(balance)
