@@ -127,6 +127,9 @@
   <data name="account" xml:space="preserve">
     <value>Account</value>
   </data>
+  <data name="account-summary" xml:space="preserve">
+    <value>Account Summary</value>
+  </data>
   <data name="AccountCount{0}" xml:space="preserve">
     <value>({0:n0} accounts)</value>
   </data>

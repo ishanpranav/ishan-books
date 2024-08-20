@@ -14,7 +14,7 @@ internal sealed class XslReportView : IReportView
 {
     private static readonly Dictionary<string, XslCompiledTransform> s_styles = new Dictionary<string, XslCompiledTransform>();
 
-    private static Dictionary<string, ReportData>? s_reports;
+    private static Dictionary<string, ReportTypes>? s_reports;
 
     private readonly string _path;
     private readonly XslReport _report;
@@ -45,9 +45,9 @@ internal sealed class XslReportView : IReportView
 
     public void InitializeReport()
     {
-        if (s_reports != null && s_reports.TryGetValue(Path.GetFileNameWithoutExtension(_path), out ReportData? value))
+        if (s_reports != null && s_reports.TryGetValue(Path.GetFileNameWithoutExtension(_path), out ReportTypes value))
         {
-            _report.Metadata = value;
+            _report.Type = value;
         }
 
         if (!s_styles.TryGetValue(_path, out XslCompiledTransform? style))
@@ -73,6 +73,6 @@ internal sealed class XslReportView : IReportView
 
         using FileStream input = File.OpenRead(path);
 
-        s_reports = JsonSerializer.Deserialize<Dictionary<string, ReportData>>(input, FormattedStrings.JsonOptions);
+        s_reports = JsonSerializer.Deserialize<Dictionary<string, ReportTypes>>(input, FormattedStrings.JsonOptions);
     }
 }

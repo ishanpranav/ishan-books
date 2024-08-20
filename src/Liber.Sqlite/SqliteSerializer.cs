@@ -202,9 +202,9 @@ public static class SqliteSerializer
                         Description = await GetStringAsync(reader, 6),
                         Memo = await GetStringAsync(reader, 7),
                         Color = await GetColorAsync(reader, 8),
-                        TaxType = TaxType.None,
-                        Inactive = reader.GetBoolean(9),
-                        Adjustment = reader.GetBoolean(10)
+                        TaxType = await reader.GetFieldValueAsync<TaxType>(9),
+                        Inactive = reader.GetBoolean(10),
+                        Adjustment = reader.GetBoolean(11)
                     });
                 }
             }
