@@ -1,6 +1,17 @@
 ﻿{
-  "trial-balance": "CurrentStarted",
-  "balance-sheet": "CurrentPosted",
-  "comparative-balance-sheet": "CurrentPosted",
-  "equity-statement": "CurrentPosted"
+    "trial-balance": {
+        "equityMode": "CurrentStarted"
+    },
+    "balance-sheet": {
+        "equityMode": "CurrentPosted"
+    },
+    "comparative-balance-sheet": {
+        "equityMode": "CurrentPosted"
+    },
+    "equity-statement": {
+        "equityMode": "CurrentPosted"
+    },
+    "cash-flow-statement": {
+        "cashBasis": true
+    }
 }

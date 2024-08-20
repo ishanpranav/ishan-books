@@ -34,7 +34,8 @@ CREATE TABLE "Account" (
 	"Memo"	        TEXT,
 	"Color"	        INTEGER,
 	"TaxType"	    INTEGER          DEFAULT 0,
-    "Hidden"        INTEGER NOT NULL DEFAULT 0,
+    "Inactive"      INTEGER NOT NULL DEFAULT 0,
+    "Adjustment"    INTEGER NOT NULL DEFAULT 0,
 	PRIMARY KEY("Id"),
     FOREIGN KEY("ParentId") REFERENCES "Account"("Id")
 );

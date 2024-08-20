@@ -176,5 +176,6 @@ internal static class SystemFeatures
     public static void Initialize(Form value)
     {
         value.Icon = Resources.Icon;
+        value.ShowIcon = true;
     }
 }

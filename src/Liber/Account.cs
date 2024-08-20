@@ -153,7 +153,11 @@ public class Account
     [Key(9)]
     [Name("Hidden")]
     [Optional]
-    public bool Hidden { get; set; }
+    public bool Inactive { get; set; }
+
+    [Ignore]
+    [Key(10)]
+    public bool Adjustment { get; set; }
 
     /// <summary>
     /// Gets the current balance of the account.
@@ -223,6 +227,14 @@ public class Account
                 .OrderBy(x => x.Transaction)
                 .ThenBy(x => x.Debit > 0 ? -1 : 1)
                 .ThenByDescending(x => Math.Abs(x.Balance));
+        }
+    }
+
+    public bool Hidden
+    {
+        get
+        {
+            return Inactive || Placeholder;
         }
     }
 

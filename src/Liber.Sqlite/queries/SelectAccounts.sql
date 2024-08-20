@@ -12,5 +12,7 @@ SELECT
     "Description",
     "Memo",
     "Color",
-    "TaxType"
+    "TaxType",
+    "Inactive",
+    "Adjustment"
 FROM "main"."Account";

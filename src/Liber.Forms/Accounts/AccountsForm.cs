@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Humanizer;
 using Liber.Forms.Components;
+using Liber.Forms.Properties;
 using Liber.Forms.Transactions;
 
 namespace Liber.Forms.Accounts;
@@ -29,13 +30,16 @@ internal sealed partial class AccountsForm : Form
         company.AccountUpdated += OnCompanyAccountUpdated;
         company.AccountRemoved += OnCompanyAccountRemoved;
         _factory = factory;
+        inactiveToolStripMenuItem.Checked = Settings.Default.Inactive;
 
         InitializeAccounts();
     }
 
     private void InitializeAccounts()
     {
+        _items.Clear();
         _listView.BeginUpdate();
+        _listView.Items.Clear();
 
         foreach (KeyValuePair<Guid, Account> account in _company.OrderedAccounts)
         {
@@ -49,6 +53,11 @@ internal sealed partial class AccountsForm : Form
 
     private void InitializeAccount(Guid id, Account value)
     {
+        if (value.Inactive && !inactiveToolStripMenuItem.Checked)
+        {
+            return;
+        }
+
         ListViewItem item = _listView.Items.Add(new ListViewItem()
         {
             Tag = id,
@@ -261,9 +270,14 @@ internal sealed partial class AccountsForm : Form
 
     private void OnRefreshToolStripMenuItemClick(object sender, EventArgs e)
     {
-        _items.Clear();
-        _listView.Items.Clear();
+        InitializeAccounts();
+    }
 
+    private void OnInactiveToolStripMenuItemCheckedChanged(object sender, EventArgs e)
+    {
+        Settings.Default.Inactive = inactiveToolStripMenuItem.Checked;
+
+        Settings.Default.Save();
         InitializeAccounts();
     }
 

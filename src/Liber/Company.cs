@@ -102,7 +102,6 @@ public sealed class Company
             return _accounts
                 .OrderBy(x => x.Value.Number)
                 .ThenBy(x => x.Value.Name)
-                .ThenBy(x => !x.Value.Placeholder)
                 .ThenBy(x => x.Value.Type)
                 .ThenByDescending(x => x.Value.Balance);
         }

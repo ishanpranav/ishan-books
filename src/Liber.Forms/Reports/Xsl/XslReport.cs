@@ -110,10 +110,7 @@ public class XslReport : IXmlSerializable
     public Regex Filter { get; set; } = Filters.Any();
 
     [Browsable(false)]
-    [LocalizedCategory(nameof(EquityMode))]
-    [LocalizedDescription(nameof(EquityMode))]
-    [LocalizedDisplayName(nameof(EquityMode))]
-    public EquityModes EquityMode { get; set; }
+    public ReportData Metadata { get; set; } = new ReportData();
 
     [LocalizedCategory(nameof(Accounts))]
     [LocalizedDescription(nameof(Accounts))]
@@ -242,12 +239,12 @@ public class XslReport : IXmlSerializable
         {
             writer.WriteElementString("equity", XmlConvert.ToString(true));
 
-            if (EquityMode.HasFlag(EquityModes.CurrentPosted))
+            if (Metadata.EquityMode.HasFlag(EquityModes.CurrentPosted))
             {
                 balance = Company.GetEquity(Posted, Filter);
             }
 
-            if (EquityMode.HasFlag(EquityModes.CurrentStarted))
+            if (Metadata.EquityMode.HasFlag(EquityModes.CurrentStarted))
             {
                 balance = Company.GetEquity(Started, Filter);
             }

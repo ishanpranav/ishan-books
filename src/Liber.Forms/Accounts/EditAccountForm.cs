@@ -22,6 +22,8 @@ internal sealed class EditAccountForm : AccountForm
         _colorButton.ForeColor = Colors.GetForeColor(account.Color);
         Type = account.Type;
         TaxType = account.TaxType;
+        inactiveCheckBox.Checked = account.Inactive;
+        adjustmentCheckBox.Checked = account.Adjustment;
 
         parentComboBox.Items.Add(NullAccountView.Value);
         parentComboBox.Initialize(company, x => x != Id);

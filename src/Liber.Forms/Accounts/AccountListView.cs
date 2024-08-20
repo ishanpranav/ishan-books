@@ -35,7 +35,7 @@ internal sealed class AccountListView : ListViewEx
 
         foreach (KeyValuePair<Guid, Account> account in company.Accounts)
         {
-            if (account.Value.Placeholder)
+            if (account.Value.Hidden)
             {
                 continue;
             }
