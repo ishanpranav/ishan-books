@@ -80,6 +80,7 @@
             Controls.Add(cancelButton);
             Name = "ImportForm";
             ShowIcon = false;
+            WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)_dataGridView).EndInit();
             ResumeLayout(false);
         }
