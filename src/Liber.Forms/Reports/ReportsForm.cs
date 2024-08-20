@@ -32,6 +32,30 @@ internal sealed partial class ReportsForm : Form
 
             item.ImageIndex = _imageList.Images.Count - 1;
             item.Tag = view.Value;
+
+            if (view.Value is XslReportView)
+            {
+                XslReport report = (XslReport)view.Value.Properties;
+
+                report.Accounts = new AccountsView(report.Accounts.Company);
+            }
+        }
+    }
+
+    private IReportView? View
+    {
+        get
+        {
+            return _view;
+        }
+        set
+        {
+            _view = value;
+
+            if (value != null)
+            {
+                _propertyGrid.SelectedObject = value.Properties;
+            }
         }
     }
 
@@ -53,7 +77,7 @@ internal sealed partial class ReportsForm : Form
 
     private void InitializeReport()
     {
-        if (_view != null && !_backgroundWorker.IsBusy)
+        if (View != null && !_backgroundWorker.IsBusy)
         {
             _backgroundWorker.RunWorkerAsync();
         }
@@ -63,9 +87,9 @@ internal sealed partial class ReportsForm : Form
     {
         foreach (ListViewItem item in _listView.Items)
         {
-            _view = (IReportView)item.Tag;
+            View = (IReportView)item.Tag;
 
-            if (_view.Properties is GdiCheckReport checkReport)
+            if (View.Properties is GdiCheckReport checkReport)
             {
                 checkReport.Check = value;
 
@@ -76,23 +100,18 @@ internal sealed partial class ReportsForm : Form
         }
     }
 
-    public void InitializeXslReport(string key)
+    public void InitializeReport(string key)
     {
-        _view = (IReportView)_listView.Items[key].Tag;
-
-        XslReport report = (XslReport)_view.Properties;
-
-        report.Accounts = new AccountsView(report.Accounts.Company);
+        View = (IReportView)_listView.Items[key].Tag;
 
         InitializeReport();
     }
 
     private void OnListViewItemActivate(object sender, EventArgs e)
     {
-        _view = (IReportView)_listView.SelectedItems[0].Tag;
-        _propertyGrid.SelectedObject = _view.Properties;
+        View = (IReportView)_listView.SelectedItems[0].Tag;
 
-        if (_view.Properties is GdiCheckReport checkReport && checkReport.Check.Value == null)
+        if (View.Properties is GdiCheckReport checkReport && checkReport.Check.Value == null)
         {
             using CheckDialog checkForm = new CheckDialog(checkReport.Check);
 
@@ -124,14 +143,14 @@ internal sealed partial class ReportsForm : Form
 
     private void OnBackgroundWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
     {
-        if (e.Cancelled || _view == null)
+        if (e.Cancelled || View == null)
         {
             return;
         }
 
         try
         {
-            _view.Navigate(_webView.CoreWebView2);
+            View.Navigate(_webView.CoreWebView2);
         }
         catch { }
     }

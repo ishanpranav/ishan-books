@@ -15,8 +15,6 @@ internal sealed partial class TransactionForm : Form
 {
     private readonly Company _company;
 
-    private Transaction? _current;
-
     public TransactionForm(Company company)
     {
         InitializeComponent();
@@ -59,23 +57,17 @@ internal sealed partial class TransactionForm : Form
         }
     }
 
-    public Transaction? Value
-    {
-        get
-        {
-            return _current;
-        }
-    }
+    public Transaction? Value { get; private set; }
 
     private void InitializeAccount(Guid key, Account value)
     {
         accountColumn.Items.Add(new AccountView(key, value));
     }
 
-    [MemberNotNull(nameof(_current))]
+    [MemberNotNull(nameof(Value))]
     public void InitializeTransaction(Transaction transaction)
     {
-        _current = transaction;
+        Value = transaction;
         numberNumericUpDown.Value = transaction.Number;
         postedDateTimePicker.Value = transaction.Posted;
         nameComboBox.Text = transaction.Name;
@@ -101,12 +93,12 @@ internal sealed partial class TransactionForm : Form
         return (decimal)cellValue;
     }
 
-    [MemberNotNullWhen(true, nameof(_current))]
+    [MemberNotNullWhen(true, nameof(Value))]
     private bool Save()
     {
-        if (_current != null)
+        if (Value != null)
         {
-            _company.RemoveTransaction(_current);
+            _company.RemoveTransaction(Value);
         }
 
         Transaction transaction = new Transaction()
@@ -173,7 +165,7 @@ internal sealed partial class TransactionForm : Form
     {
         Clear();
 
-        _current = null;
+        Value = null;
         numberNumericUpDown.Value = _company.NextTransactionNumber;
     }
 
@@ -221,11 +213,11 @@ internal sealed partial class TransactionForm : Form
             Id = Guid.NewGuid(),
             Posted = DateTime.Today,
             Number = _company.NextTransactionNumber,
-            Name = _current.Name,
-            Memo = _current.Memo
+            Name = Value.Name,
+            Memo = Value.Memo
         };
 
-        foreach (Line line in _current.Lines)
+        foreach (Line line in Value.Lines)
         {
             clone.Lines.Add(new Line()
             {
@@ -266,14 +258,14 @@ internal sealed partial class TransactionForm : Form
 
     private void OnNextButtonClick(object sender, EventArgs e)
     {
-        if (_current == null)
+        if (Value == null)
         {
             CreateNew();
 
             return;
         }
 
-        Transaction? next = _company.GetTransactionAfter(_current);
+        Transaction? next = _company.GetTransactionAfter(Value);
 
         if (next == null)
         {
@@ -289,13 +281,13 @@ internal sealed partial class TransactionForm : Form
     {
         Transaction? previous;
 
-        if (_current == null)
+        if (Value == null)
         {
             previous = _company.LastTransaction;
         }
         else
         {
-            previous = _company.GetTransactionBefore(_current);
+            previous = _company.GetTransactionBefore(Value);
         }
 
         if (previous != null)

@@ -70,7 +70,7 @@ internal sealed partial class MainForm : Form
 
                 form.Load += (sender, e) =>
                 {
-                    form.InitializeXslReport(view.Key);
+                    form.InitializeReport(view.Key);
                 };
 
                 _factory.Kill(key);

@@ -13,7 +13,7 @@ namespace Liber.Forms.Reports;
 
 internal sealed class ReportEngine
 {
-    private Dictionary<string, IReportView> _views = new Dictionary<string, IReportView>();
+    private readonly Dictionary<string, IReportView> _views = new Dictionary<string, IReportView>();
 
     public ReportEngine(Company company)
     {
