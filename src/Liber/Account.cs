@@ -151,12 +151,14 @@ public class Account
     [BooleanTrueValues("T")]
     [Index(9)]
     [Key(9)]
+    [LocalizedDisplayName(nameof(Inactive))]
     [Name("Hidden")]
     [Optional]
     public bool Inactive { get; set; }
 
     [Ignore]
     [Key(10)]
+    [LocalizedDisplayName(nameof(Adjustment))]
     public bool Adjustment { get; set; }
 
     /// <summary>
@@ -230,6 +232,9 @@ public class Account
         }
     }
 
+    [Browsable(false)]
+    [IgnoreMember]
+    [JsonIgnore]
     public bool Hidden
     {
         get

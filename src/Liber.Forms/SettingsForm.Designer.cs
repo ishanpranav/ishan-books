@@ -87,6 +87,7 @@
             // importRulesDataGridView
             // 
             importRulesDataGridView.AllowUserToOrderColumns = true;
+            importRulesDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             importRulesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             resources.ApplyResources(importRulesDataGridView, "importRulesDataGridView");
             importRulesDataGridView.Name = "importRulesDataGridView";
@@ -109,7 +110,6 @@
             Controls.Add(groupBox1);
             Controls.Add(acceptButton);
             Controls.Add(cancelButton);
-            MaximizeBox = false;
             Name = "SettingsForm";
             _helpProvider.SetShowHelp(this, (bool)resources.GetObject("$this.ShowHelp"));
             ShowIcon = false;

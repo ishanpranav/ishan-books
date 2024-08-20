@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
+using Microsoft.VisualBasic;
 
 namespace Liber.Forms.Import;
 
@@ -20,29 +21,40 @@ internal sealed class ImportRule
     [TypeConverter(typeof(LocalizedEnumConverter))]
     public AccountType Type { get; set; }
 
+    [LocalizedDisplayName(nameof(Adjustment))]
+    [TypeConverter(typeof(LocalizedEnumConverter))]
+    public TriState Adjustment { get; set; }
+
     [LocalizedDisplayName(nameof(Strict))]
     [TypeConverter(typeof(LocalizedEnumConverter))]
     public bool Strict { get; set; }
 
     public void Apply(IEnumerable<Account> accounts)
     {
-        if (Type == AccountType.None)
+        if (Type == AccountType.None && Adjustment == TriState.UseDefault)
         {
             return;
         }
 
         foreach (Account account in accounts)
         {
-            if (!Strict && !account.Type.IsUncategorized())
-            {
-                continue;
-            }
-
             if (Filter.IsMatch(account.Name))
             {
-                if (Type != AccountType.None)
+                if (Type != AccountType.None &&
+                    (Strict || account.Type.IsUncategorized()))
                 {
                     account.Type = Type;
+                }
+
+                switch (Adjustment)
+                {
+                    case TriState.True:
+                        account.Adjustment = true;
+                        break;
+
+                    case TriState.False:
+                        account.Adjustment = false;
+                        break;
                 }
             }
         }

@@ -226,6 +226,11 @@ public class XslReport : IXmlSerializable
 
     private void WriteAccountXml(XmlWriter writer, Account value)
     {
+        if (Metadata.CashBasis && value.Adjustment)
+        {
+            return;
+        }
+
         writer.WriteStartElement("account");
         writer.WriteElementString("name", value.Name);
         writer.WriteElementString("type", value.Type.ToString());
