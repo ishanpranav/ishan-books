@@ -123,6 +123,9 @@
   <data name="account" xml:space="preserve">
     <value>Cuenta</value>
   </data>
+  <data name="account-summary" xml:space="preserve">
+    <value>Resumen de Cuentas</value>
+  </data>
   <data name="AccountCount{0}" xml:space="preserve">
     <value>({0:n0} cuentas)</value>
   </data>
@@ -137,6 +140,9 @@
   </data>
   <data name="assets" xml:space="preserve">
     <value>Activos</value>
+  </data>
+  <data name="balance" xml:space="preserve">
+    <value>Saldo</value>
   </data>
   <data name="balance-sheet" xml:space="preserve">
     <value>Balance General</value>
@@ -177,6 +183,9 @@
   <data name="current-liabilities" xml:space="preserve">
     <value>Pasivos corrientes</value>
   </data>
+  <data name="customer-report" xml:space="preserve">
+    <value>Reporte del Cliente</value>
+  </data>
   <data name="date" xml:space="preserve">
     <value>Fecha</value>
   </data>
@@ -200,6 +209,9 @@
   </data>
   <data name="general-journal" xml:space="preserve">
     <value>Diario General</value>
+  </data>
+  <data name="general-ledger" xml:space="preserve">
+    <value>Libro Mayor</value>
   </data>
   <data name="Income" xml:space="preserve">
     <value>Ingresos</value>
@@ -300,6 +312,9 @@
   <data name="_n_CreditCard" xml:space="preserve">
     <value>Pagos totales con tarjeta de crédito</value>
   </data>
+  <data name="_n_customer-report" xml:space="preserve">
+    <value>Nota de crédito</value>
+  </data>
   <data name="_n_financing" xml:space="preserve">
     <value>Flujo de efectivo neto utilizado en actividades de financiamiento</value>
   </data>
@@ -350,6 +365,9 @@
   </data>
   <data name="_p_CreditCard" xml:space="preserve">
     <value>Cargos totales de tarjeta de crédito</value>
+  </data>
+  <data name="_p_customer-report" xml:space="preserve">
+    <value>Factura</value>
   </data>
   <data name="_p_Expense" xml:space="preserve">
     <value>Gasto total</value>

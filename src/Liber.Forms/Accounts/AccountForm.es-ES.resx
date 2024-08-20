@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,16 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="_d_Account" xml:space="preserve">
-    <value>Determina la cuenta incluida en el informe. Los elementos de datos 'Transacciones' y 'Cuentas' son mutuamente excluyentes.</value>
-  </data>
-  <data name="_d_Accounts" xml:space="preserve">
-    <value>Determina las cuentas incluidas en el informe. Los elementos de datos 'Transacciones' y 'Cuentas' son mutuamente excluyentes.</value>
-  </data>
-  <data name="_d_Redaction" xml:space="preserve">
-    <value>Especifica los caracteres utilizados para redactar números. Si no se especifica redacción, el informe no se redactará.</value>
-  </data>
-  <data name="_d_Title" xml:space="preserve">
-    <value>Especifica el título del informe.</value>
-  </data>
 </root>

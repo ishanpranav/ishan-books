@@ -117,14 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Account" xml:space="preserve">
-    <value>Transacciones</value>
-  </data>
   <data name="Accounts" xml:space="preserve">
     <value>Cuentas</value>
   </data>
   <data name="Check" xml:space="preserve">
     <value>Cheque</value>
+  </data>
+  <data name="Color" xml:space="preserve">
+    <value>Color</value>
   </data>
   <data name="Credit" xml:space="preserve">
     <value>Crédito</value>
@@ -162,8 +162,14 @@
   <data name="Posted" xml:space="preserve">
     <value>Hasta</value>
   </data>
+  <data name="Redaction" xml:space="preserve">
+    <value>Redacción</value>
+  </data>
   <data name="Started" xml:space="preserve">
     <value>Desde</value>
+  </data>
+  <data name="Strict" xml:space="preserve">
+    <value>Anular</value>
   </data>
   <data name="TaxType" xml:space="preserve">
     <value>Tipo de impuesto</value>
@@ -200,6 +206,9 @@
   </data>
   <data name="_c_Posted" xml:space="preserve">
     <value>Rango de fechas</value>
+  </data>
+  <data name="_c_Redaction" xml:space="preserve">
+    <value>Diseño</value>
   </data>
   <data name="_c_Started" xml:space="preserve">
     <value>Rango de fechas</value>
@@ -311,6 +320,9 @@
   </data>
   <data name="_d_Posted" xml:space="preserve">
     <value>Especifica la fecha de finalización.</value>
+  </data>
+  <data name="_d_Redaction" xml:space="preserve">
+    <value>Especifica los caracteres utilizados para redactar números. Si no se especifica redacción, el reporte no se redactará.</value>
   </data>
   <data name="_d_Started" xml:space="preserve">
     <value>Especifica la fecha de inicio.</value>

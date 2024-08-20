@@ -120,4 +120,7 @@
   <data name="reportsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Centro de informes contables</value>
   </data>
+  <data name="reportsToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Info&amp;rmes</value>
+  </data>
 </root>

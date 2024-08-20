@@ -126,14 +126,23 @@
   <data name="CompaniesJumpListCustomCategory" xml:space="preserve">
     <value>Empresas</value>
   </data>
+  <data name="ExceptionCaption" xml:space="preserve">
+    <value>Error</value>
+  </data>
   <data name="ImbalanceError" xml:space="preserve">
     <value>La transacción no está balanceada. Por favor, asegúrate de que la suma de la columna de débito sea igual a la suma de la columna de crédito.</value>
   </data>
   <data name="InvalidAccountError" xml:space="preserve">
     <value>Por favor, selecciona una cuenta válida.</value>
   </data>
+  <data name="Name" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
   <data name="NoAccount" xml:space="preserve">
     <value>Ninguna cuenta</value>
+  </data>
+  <data name="Number" xml:space="preserve">
+    <value>Número</value>
   </data>
   <data name="WarningText" xml:space="preserve">
     <value>Usted está a punto de cerrar el archivo de la empresa sin guardar los cambios.</value>

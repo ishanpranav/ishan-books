@@ -92,7 +92,7 @@ namespace Liber.Forms.Accounts
             // _contextMenu
             // 
             _contextMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
-            _contextMenu.Items.AddRange(new ToolStripItem[] { newAccountToolStripMenuItem, editAccountToolStripMenuItem, renameAccountToolStripMenuItem, removeAccountToolStripMenuItem, toolStripSeparator2, transactionToolStripMenuItem1, reconcileToolStripMenuItem1, transactionsToolStripMenuItem1, toolStripSeparator3, quickReportToolStripMenuItem1 });
+            _contextMenu.Items.AddRange(new ToolStripItem[] { quickReportToolStripMenuItem1, toolStripSeparator3, newAccountToolStripMenuItem, editAccountToolStripMenuItem, renameAccountToolStripMenuItem, removeAccountToolStripMenuItem, toolStripSeparator2, transactionToolStripMenuItem1, reconcileToolStripMenuItem1, transactionsToolStripMenuItem1 });
             _contextMenu.Name = "contextMenuStrip1";
             resources.ApplyResources(_contextMenu, "_contextMenu");
             // 
@@ -194,7 +194,7 @@ namespace Liber.Forms.Accounts
             // toolStripDropDownButton2
             // 
             toolStripDropDownButton2.DisplayStyle = ToolStripItemDisplayStyle.Text;
-            toolStripDropDownButton2.DropDownItems.AddRange(new ToolStripItem[] { transactionToolStripMenuItem, reconcileToolStripMenuItem, transactionsToolStripMenuItem, toolStripSeparator1, quickReportToolStripMenuItem });
+            toolStripDropDownButton2.DropDownItems.AddRange(new ToolStripItem[] { quickReportToolStripMenuItem, toolStripSeparator1, transactionToolStripMenuItem, reconcileToolStripMenuItem, transactionsToolStripMenuItem });
             resources.ApplyResources(toolStripDropDownButton2, "toolStripDropDownButton2");
             toolStripDropDownButton2.Name = "toolStripDropDownButton2";
             // 

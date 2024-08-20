@@ -64,4 +64,7 @@
   <data name="cancelButton.Text" xml:space="preserve">
     <value>&amp;Cancelar</value>
   </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Utilice la ventana de Preferencias para ajustar cómo se clasifican automáticamente las transacciones y cuentas.</value>
+  </data>
 </root>
