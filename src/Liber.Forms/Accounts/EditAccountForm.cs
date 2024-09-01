@@ -23,7 +23,7 @@ internal sealed class EditAccountForm : AccountForm
         Type = account.Type;
         TaxType = account.TaxType;
         inactiveCheckBox.Checked = account.Inactive;
-        adjustmentCheckBox.Checked = account.Adjustment;
+        CashFlow = account.CashFlow;
 
         parentComboBox.Items.Add(NullAccountView.Value);
         parentComboBox.Initialize(company, x => x != Id);

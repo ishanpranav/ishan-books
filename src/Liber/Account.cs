@@ -148,6 +148,12 @@ public class Account
     [System.ComponentModel.TypeConverter(typeof(LocalizedEnumConverter))]
     public TaxType TaxType { get; set; }
 
+    [Ignore]
+    [Key(10)]
+    [LocalizedDisplayName(nameof(CashFlow))]
+    [System.ComponentModel.TypeConverter(typeof(LocalizedEnumConverter))]
+    public CashFlow CashFlow { get; set; }
+
     [BooleanFalseValues("F")]
     [BooleanTrueValues("T")]
     [Index(9)]
@@ -156,11 +162,6 @@ public class Account
     [Name("Hidden")]
     [Optional]
     public bool Inactive { get; set; }
-
-    [Ignore]
-    [Key(10)]
-    [LocalizedDisplayName(nameof(Adjustment))]
-    public bool Adjustment { get; set; }
 
     /// <summary>
     /// Gets the current balance of the account.

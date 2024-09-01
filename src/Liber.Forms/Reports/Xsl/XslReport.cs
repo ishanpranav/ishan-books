@@ -226,7 +226,7 @@ public class XslReport : IXmlSerializable
 
     private void WriteAccountXml(XmlWriter writer, Account value)
     {
-        if (Type.HasFlag(ReportTypes.CashBasis) && value.Adjustment)
+        if (Type.HasFlag(ReportTypes.CashBasis) && value.CashFlow == CashFlow.Adjustment)
         {
             return;
         }

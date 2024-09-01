@@ -14,7 +14,7 @@ INSERT INTO "main"."Account" (
     "Color",
     "TaxType",
     "Inactive",
-    "Adjustment"
+    "CashFlow"
 ) VALUES (
     @id,
     @parentId,
@@ -27,5 +27,5 @@ INSERT INTO "main"."Account" (
     @color,
     @taxType,
     @inactive,
-    @adjustment
+    @cashFlow
 );

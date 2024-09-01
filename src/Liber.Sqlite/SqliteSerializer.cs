@@ -135,7 +135,7 @@ public static class SqliteSerializer
                     command.Parameters.AddWithValue("@color", ValueOf(account.Value.Color));
                     command.Parameters.AddWithValue("@taxType", account.Value.TaxType);
                     command.Parameters.AddWithValue("@inactive", account.Value.Inactive);
-                    command.Parameters.AddWithValue("@adjustment", account.Value.Adjustment);
+                    command.Parameters.AddWithValue("@cashFlow", account.Value.CashFlow);
 
                     await command.ExecuteNonQueryAsync();
                 }
@@ -204,7 +204,7 @@ public static class SqliteSerializer
                         Color = await GetColorAsync(reader, 8),
                         TaxType = await reader.GetFieldValueAsync<TaxType>(9),
                         Inactive = reader.GetBoolean(10),
-                        Adjustment = reader.GetBoolean(11)
+                        CashFlow = await reader.GetFieldValueAsync<CashFlow>(11)
                     });
                 }
             }

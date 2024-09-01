@@ -120,6 +120,9 @@
   <data name="Accounts" xml:space="preserve">
     <value>Accounts</value>
   </data>
+  <data name="CashFlow" xml:space="preserve">
+    <value>Cash Flow</value>
+  </data>
   <data name="Check" xml:space="preserve">
     <value>Check</value>
   </data>
@@ -228,6 +231,9 @@
   <data name="_d_Accounts" xml:space="preserve">
     <value>Determines the accounts included in the report. The 'Transactions' and 'Accounts' fields are mutually exclusive.</value>
   </data>
+  <data name="_d_Adjustment" xml:space="preserve">
+    <value>(Adjustment)</value>
+  </data>
   <data name="_d_Annually" xml:space="preserve">
     <value>Annually</value>
   </data>
@@ -267,6 +273,9 @@
   <data name="_d_Filter" xml:space="preserve">
     <value>Provides the regular expression used to filter transactions. Only transactions with memos matching the given regular expression are included in the report.</value>
   </data>
+  <data name="_d_Financing" xml:space="preserve">
+    <value>Financing</value>
+  </data>
   <data name="_d_FixedAsset" xml:space="preserve">
     <value>Fixed Asset</value>
   </data>
@@ -282,6 +291,9 @@
   <data name="_d_Individual" xml:space="preserve">
     <value>Individual</value>
   </data>
+  <data name="_d_Investing" xml:space="preserve">
+    <value>Investing</value>
+  </data>
   <data name="_d_LongTermLiability" xml:space="preserve">
     <value>Long-Term Liability</value>
   </data>
@@ -290,6 +302,9 @@
   </data>
   <data name="_d_None" xml:space="preserve">
     <value>(None)</value>
+  </data>
+  <data name="_d_Operating" xml:space="preserve">
+    <value>Operating</value>
   </data>
   <data name="_d_Other" xml:space="preserve">
     <value>Other</value>
