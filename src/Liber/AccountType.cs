@@ -166,4 +166,31 @@ public static class AccountTypeExtensions
     {
         return Math.Sign((short)value) * debit;
     }
+
+    public static CashFlow ToCashFlow(this AccountType value)
+    {
+        switch (value)
+        {
+            case AccountType.Bank:
+            case AccountType.OtherCurrentAsset:
+            case AccountType.CreditCard:
+            case AccountType.OtherCurrentLiability:
+            case AccountType.Income:
+            case AccountType.Expense:
+            case AccountType.Cost:
+            case AccountType.IncomeTaxExpense:
+                return CashFlow.Operating;
+                
+            case AccountType.FixedAsset:
+            case AccountType.OtherAsset:
+            case AccountType.OtherIncomeExpense:
+                return CashFlow.Investing;
+
+            case AccountType.LongTermLiability:
+            case AccountType.Equity:
+                return CashFlow.Financing;
+
+            default: return CashFlow.None;
+        }
+    }
 }

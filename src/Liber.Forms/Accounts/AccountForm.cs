@@ -22,6 +22,7 @@ internal abstract partial class AccountForm : Form
         DialogResult = DialogResult.Cancel;
         typeComboBox.DataSource = AccountTypeExtensions.GetSortedValues();
         taxTypeComboBox.DataSource = Enum.GetValues<TaxType>();
+        cashFlowComboBox.DataSource = Enum.GetValues<CashFlow>();
         numberNumericUpDown.Maximum = decimal.MaxValue;
     }
 
@@ -51,6 +52,18 @@ internal abstract partial class AccountForm : Form
         }
     }
 
+    protected CashFlow CashFlow
+    {
+        get
+        {
+            return (CashFlow)cashFlowComboBox.SelectedItem;
+        }
+        set
+        {
+            cashFlowComboBox.SelectedItem = value;
+        }
+    }
+
     protected abstract void CommitChanges();
 
     protected void ApplyChanges(Account account)
@@ -64,17 +77,20 @@ internal abstract partial class AccountForm : Form
         account.Color = _colorButton.BackColor;
         account.TaxType = TaxType;
         account.Inactive = inactiveCheckBox.Checked;
-        account.Adjustment = adjustmentCheckBox.Checked;
+        account.CashFlow = CashFlow;
     }
 
-    private void OnTypeComboBoxFormat(object sender, ListControlConvertEventArgs e)
+    private void OnComboBoxFormat(object sender, ListControlConvertEventArgs e)
     {
-        e.Value = ((AccountType)e.ListItem!).Humanize();
+        e.Value = ((Enum)e.ListItem!).Humanize();
     }
 
-    private void OnTaxTypeComboBoxFormat(object sender, ListControlConvertEventArgs e)
+    private void OnTypeComboBoxSelectedIndexChanged(object sender, EventArgs e)
     {
-        e.Value = ((TaxType)e.ListItem!).Humanize();
+        if (CashFlow == CashFlow.None)
+        {
+            CashFlow = Type.ToCashFlow();
+        }
     }
 
     private void OnAcceptButtonClick(object sender, EventArgs e)

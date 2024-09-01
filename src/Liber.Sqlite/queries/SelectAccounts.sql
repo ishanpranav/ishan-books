@@ -14,5 +14,5 @@ SELECT
     "Color",
     "TaxType",
     "Inactive",
-    "Adjustment"
+    "CashFlow"
 FROM "main"."Account";

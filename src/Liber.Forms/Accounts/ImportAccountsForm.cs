@@ -22,7 +22,9 @@ internal sealed class ImportAccountsForm : ImportForm
         _factory = factory;
         _accounts = accounts;
 
-        List<Account> values = accounts.Select(x => x.Value).ToList();
+        List<Account> values = accounts
+            .Select(x => x.Value)
+            .ToList();
         ImportRule[]? rules = JsonSerializer.Deserialize<ImportRule[]>(Settings.Default.ImportRules, FormattedStrings.JsonOptions);
 
         if (rules != null)
@@ -44,6 +46,14 @@ internal sealed class ImportAccountsForm : ImportForm
                 case AccountTypeExtensions.Credit:
                     account.Type = AccountType.OtherCurrentLiability;
                     break;
+            }
+        }
+
+        foreach (Account value in values)
+        {
+            if (value.CashFlow == CashFlow.None)
+            {
+                value.CashFlow = value.Type.ToCashFlow();
             }
         }
 

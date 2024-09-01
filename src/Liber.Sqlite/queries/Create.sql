@@ -35,7 +35,7 @@ CREATE TABLE "Account" (
 	"Color"	        INTEGER,
 	"TaxType"	    INTEGER          DEFAULT 0,
     "Inactive"      INTEGER NOT NULL DEFAULT 0,
-    "Adjustment"    INTEGER NOT NULL DEFAULT 0,
+    "CashFlow"    INTEGER NOT NULL DEFAULT 0,
 	PRIMARY KEY("Id"),
     FOREIGN KEY("ParentId") REFERENCES "Account"("Id")
 );
