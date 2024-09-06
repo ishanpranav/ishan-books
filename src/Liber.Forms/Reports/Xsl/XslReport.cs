@@ -226,11 +226,6 @@ public class XslReport : IXmlSerializable
 
     private void WriteAccountXml(XmlWriter writer, Account value)
     {
-        if (Type.HasFlag(ReportTypes.CashBasis) && value.CashFlow == CashFlow.Adjustment)
-        {
-            return;
-        }
-
         writer.WriteStartElement("account");
         writer.WriteElementString("name", value.Name);
         writer.WriteElementString("type", value.Type.ToString());
@@ -288,6 +283,7 @@ public class XslReport : IXmlSerializable
         writer.WriteElementString("previous", XmlConvert.ToString(previous));
         writer.WriteElementString("debit", XmlConvert.ToString(debit));
         writer.WriteElementString("credit", XmlConvert.ToString(credit));
+        writer.WriteElementString("cash-flow", value.CashFlow.ToString());
         writer.WriteEndElement();
     }
 

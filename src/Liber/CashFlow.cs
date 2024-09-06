@@ -11,6 +11,9 @@ public enum CashFlow
     [LocalizedDescription(nameof(None))]
     None,
 
+    [LocalizedDescription(nameof(Cash))]
+    Cash,
+
     [LocalizedDescription(nameof(Operating))]
     Operating,
 
@@ -20,6 +23,9 @@ public enum CashFlow
     [LocalizedDescription(nameof(Financing))]
     Financing,
 
-    [LocalizedDescription(nameof(Adjustment))]
-    Adjustment
+    [LocalizedDescription(nameof(OtherEquity))]
+    OtherEquity,
+
+    [LocalizedDescription(nameof(GainLoss))]
+    GainLoss
 }
