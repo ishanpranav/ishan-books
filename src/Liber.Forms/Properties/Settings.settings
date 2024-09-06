@@ -11,11 +11,65 @@
     <Setting Name="CustomColors" Type="System.String" Scope="User">
       <Value Profile="(Default)">[]</Value>
     </Setting>
-    <Setting Name="ImportRules" Type="System.String" Scope="User">
-      <Value Profile="(Default)">[{"filter":"^7","type":"incomeTaxExpense","strict":true},{"filter":"^[46]9","type":"otherIncomeExpense","strict":true},{"filter":"^1[689]","type":"otherAsset"},{"filter":"^17","type":"fixedAsset"},{"filter":"^2[5-9]","type":"longTermLiability"},{"filter":"Adjustment","adjustment":"true"},{"filter":"^[12]8","adjustment":"true"},{"filter":"^2428","adjustment":"true"},{"filter":"Rebate","adjustment":"true"},{"filter":"Accumulated Other Comprehensive Income","adjustment":"true"},{"filter":"Accumulated Other Comprehensive Loss","adjustment":"true"}]</Value>
-    </Setting>
     <Setting Name="Inactive" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ImportRules" Type="System.String" Scope="User">
+      <Value Profile="(Default)">[
+    {
+        "filter": "^7",
+        "type": "incomeTaxExpense",
+        "strict": true
+    },
+    {
+        "filter": "^[46]9",
+        "type": "otherIncomeExpense",
+        "strict": true
+    },
+    {
+        "filter": "^1[689]",
+        "type": "otherAsset"
+    },
+    {
+        "filter": "^17",
+        "type": "fixedAsset"
+    },
+    {
+        "filter": "^2[5-9]",
+        "type": "longTermLiability"
+    },
+    {
+        "filter": "Accumulated Other Comprehensive",
+        "cashFlow": "otherEquity"
+    },
+    {
+        "filter": "Capital Gain",
+        "type": "otherIncomeExpense",
+        "cashFlow": "gainLoss",
+        "strict": true
+    },
+    {
+        "filter": "Capital Loss",
+        "type": "otherIncomeExpense",
+        "cashFlow": "gainLoss",
+        "strict": true
+    },
+    {
+        "filter": "Adjustment",
+        "cashFlow": "otherEquity",
+        "strict": true
+    },
+    {
+        "filter": "Deferred Tax",
+        "cashFlow": "operating",
+        "strict": true
+    },
+    {
+        "filter": "US Treasury Bill",
+        "cashFlow": "investing",
+        "strict": true
+    }
+]</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -29,23 +29,9 @@ internal sealed partial class SettingsForm : Form
             s_availableCultures = GetAvailableCultures();
         }
 
+        InitializeSettings();
+
         DialogResult = DialogResult.Cancel;
-        cultureComboBox.DataSource = s_availableCultures;
-        cultureComboBox.SelectedItem = CultureInfo.CurrentUICulture;
-
-        ImportRule[]? rules = JsonSerializer.Deserialize<ImportRule[]>(Settings.Default.ImportRules, FormattedStrings.JsonOptions);
-
-        if (rules != null)
-        {
-            foreach (ImportRule rule in rules)
-            {
-                _rules.Add(rule);
-            }
-        }
-
-        importRulesDataGridView.DataSource = _rules;
-
-        importRulesDataGridView.AutoResizeColumns();
     }
 
     private static IEnumerable<CultureInfo> GetAvailableCultures()
@@ -80,6 +66,28 @@ internal sealed partial class SettingsForm : Form
         return result;
     }
 
+    private void InitializeSettings()
+    {
+        cultureComboBox.DataSource = s_availableCultures;
+        cultureComboBox.SelectedItem = CultureInfo.CurrentUICulture;
+
+        _rules.Clear();
+
+        ImportRule[]? rules = JsonSerializer.Deserialize<ImportRule[]>(Settings.Default.ImportRules, FormattedStrings.JsonOptions);
+
+        if (rules != null)
+        {
+            foreach (ImportRule rule in rules)
+            {
+                _rules.Add(rule);
+            }
+        }
+
+        importRulesDataGridView.DataSource = _rules;
+
+        importRulesDataGridView.AutoResizeColumns();
+    }
+
     private void OnAcceptButtonClick(object sender, EventArgs e)
     {
         CultureInfo? culture = (CultureInfo?)cultureComboBox.SelectedItem;
@@ -101,6 +109,13 @@ internal sealed partial class SettingsForm : Form
     private void OnCancelButtonClick(object sender, EventArgs e)
     {
         Close();
+    }
+
+    private void OnResetButtonClick(object sender, EventArgs e)
+    {
+        Settings.Default.Reset();
+        
+        InitializeSettings();
     }
 
     private void OnCultureComboBoxFormat(object sender, ListControlConvertEventArgs e)
