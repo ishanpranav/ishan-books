@@ -35,6 +35,7 @@
             label2 = new System.Windows.Forms.Label();
             groupBox1 = new System.Windows.Forms.GroupBox();
             _helpProvider = new System.Windows.Forms.HelpProvider();
+            resetButton = new System.Windows.Forms.Button();
             importRulesDataGridView = new System.Windows.Forms.DataGridView();
             groupBox2 = new System.Windows.Forms.GroupBox();
             groupBox1.SuspendLayout();
@@ -84,6 +85,15 @@
             groupBox1.Name = "groupBox1";
             groupBox1.TabStop = false;
             // 
+            // resetButton
+            // 
+            resources.ApplyResources(resetButton, "resetButton");
+            _helpProvider.SetHelpString(resetButton, resources.GetString("resetButton.HelpString"));
+            resetButton.Name = "resetButton";
+            _helpProvider.SetShowHelp(resetButton, (bool)resources.GetObject("resetButton.ShowHelp"));
+            resetButton.UseVisualStyleBackColor = true;
+            resetButton.Click += OnResetButtonClick;
+            // 
             // importRulesDataGridView
             // 
             importRulesDataGridView.AllowUserToOrderColumns = true;
@@ -106,6 +116,7 @@
             resources.ApplyResources(this, "$this");
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             CancelButton = cancelButton;
+            Controls.Add(resetButton);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Controls.Add(acceptButton);
@@ -129,5 +140,6 @@
         private System.Windows.Forms.HelpProvider _helpProvider;
         private System.Windows.Forms.DataGridView importRulesDataGridView;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button resetButton;
     }
 }
