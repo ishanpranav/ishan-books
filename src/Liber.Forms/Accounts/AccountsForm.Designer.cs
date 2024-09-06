@@ -23,8 +23,11 @@ namespace Liber.Forms.Accounts
             nameColumn = new ColumnHeader();
             numberColumn = new ColumnHeader();
             typeColumn = new ColumnHeader();
+            cashFlowColumn = new ColumnHeader();
             balanceColumn = new ColumnHeader();
             _contextMenu = new ContextMenuStrip(components);
+            quickReportToolStripMenuItem1 = new ToolStripMenuItem();
+            toolStripSeparator3 = new ToolStripSeparator();
             newAccountToolStripMenuItem = new ToolStripMenuItem();
             editAccountToolStripMenuItem = new ToolStripMenuItem();
             renameAccountToolStripMenuItem = new ToolStripMenuItem();
@@ -33,8 +36,6 @@ namespace Liber.Forms.Accounts
             transactionToolStripMenuItem1 = new ToolStripMenuItem();
             reconcileToolStripMenuItem1 = new ToolStripMenuItem();
             transactionsToolStripMenuItem1 = new ToolStripMenuItem();
-            toolStripSeparator3 = new ToolStripSeparator();
-            quickReportToolStripMenuItem1 = new ToolStripMenuItem();
             _statusStrip = new StatusStrip();
             toolStripDropDownButton1 = new ToolStripDropDownButton();
             newToolStripMenuItem = new ToolStripMenuItem();
@@ -42,11 +43,11 @@ namespace Liber.Forms.Accounts
             renameToolStripMenuItem = new ToolStripMenuItem();
             removeToolStripMenuItem = new ToolStripMenuItem();
             toolStripDropDownButton2 = new ToolStripDropDownButton();
+            quickReportToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator1 = new ToolStripSeparator();
             transactionToolStripMenuItem = new ToolStripMenuItem();
             reconcileToolStripMenuItem = new ToolStripMenuItem();
             transactionsToolStripMenuItem = new ToolStripMenuItem();
-            toolStripSeparator1 = new ToolStripSeparator();
-            quickReportToolStripMenuItem = new ToolStripMenuItem();
             toolStripDropDownButton3 = new ToolStripDropDownButton();
             refreshToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator4 = new ToolStripSeparator();
@@ -58,7 +59,7 @@ namespace Liber.Forms.Accounts
             // _listView
             // 
             _listView.AllowColumnReorder = true;
-            _listView.Columns.AddRange(new ColumnHeader[] { nameColumn, numberColumn, typeColumn, balanceColumn });
+            _listView.Columns.AddRange(new ColumnHeader[] { nameColumn, numberColumn, typeColumn, cashFlowColumn, balanceColumn });
             _listView.ContextMenuStrip = _contextMenu;
             resources.ApplyResources(_listView, "_listView");
             _listView.FullRowSelect = true;
@@ -85,6 +86,10 @@ namespace Liber.Forms.Accounts
             // 
             resources.ApplyResources(typeColumn, "typeColumn");
             // 
+            // cashFlowColumn
+            // 
+            resources.ApplyResources(cashFlowColumn, "cashFlowColumn");
+            // 
             // balanceColumn
             // 
             resources.ApplyResources(balanceColumn, "balanceColumn");
@@ -95,6 +100,17 @@ namespace Liber.Forms.Accounts
             _contextMenu.Items.AddRange(new ToolStripItem[] { quickReportToolStripMenuItem1, toolStripSeparator3, newAccountToolStripMenuItem, editAccountToolStripMenuItem, renameAccountToolStripMenuItem, removeAccountToolStripMenuItem, toolStripSeparator2, transactionToolStripMenuItem1, reconcileToolStripMenuItem1, transactionsToolStripMenuItem1 });
             _contextMenu.Name = "contextMenuStrip1";
             resources.ApplyResources(_contextMenu, "_contextMenu");
+            // 
+            // quickReportToolStripMenuItem1
+            // 
+            quickReportToolStripMenuItem1.Name = "quickReportToolStripMenuItem1";
+            resources.ApplyResources(quickReportToolStripMenuItem1, "quickReportToolStripMenuItem1");
+            quickReportToolStripMenuItem1.Click += OnListViewItemActivate;
+            // 
+            // toolStripSeparator3
+            // 
+            toolStripSeparator3.Name = "toolStripSeparator3";
+            resources.ApplyResources(toolStripSeparator3, "toolStripSeparator3");
             // 
             // newAccountToolStripMenuItem
             // 
@@ -142,17 +158,6 @@ namespace Liber.Forms.Accounts
             resources.ApplyResources(transactionsToolStripMenuItem1, "transactionsToolStripMenuItem1");
             transactionsToolStripMenuItem1.Click += OnTransactionsToolStripMenuItemClick;
             // 
-            // toolStripSeparator3
-            // 
-            toolStripSeparator3.Name = "toolStripSeparator3";
-            resources.ApplyResources(toolStripSeparator3, "toolStripSeparator3");
-            // 
-            // quickReportToolStripMenuItem1
-            // 
-            quickReportToolStripMenuItem1.Name = "quickReportToolStripMenuItem1";
-            resources.ApplyResources(quickReportToolStripMenuItem1, "quickReportToolStripMenuItem1");
-            quickReportToolStripMenuItem1.Click += OnListViewItemActivate;
-            // 
             // _statusStrip
             // 
             _statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -198,6 +203,17 @@ namespace Liber.Forms.Accounts
             resources.ApplyResources(toolStripDropDownButton2, "toolStripDropDownButton2");
             toolStripDropDownButton2.Name = "toolStripDropDownButton2";
             // 
+            // quickReportToolStripMenuItem
+            // 
+            quickReportToolStripMenuItem.Name = "quickReportToolStripMenuItem";
+            resources.ApplyResources(quickReportToolStripMenuItem, "quickReportToolStripMenuItem");
+            quickReportToolStripMenuItem.Click += OnListViewItemActivate;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            resources.ApplyResources(toolStripSeparator1, "toolStripSeparator1");
+            // 
             // transactionToolStripMenuItem
             // 
             transactionToolStripMenuItem.Name = "transactionToolStripMenuItem";
@@ -214,17 +230,6 @@ namespace Liber.Forms.Accounts
             transactionsToolStripMenuItem.Name = "transactionsToolStripMenuItem";
             resources.ApplyResources(transactionsToolStripMenuItem, "transactionsToolStripMenuItem");
             transactionsToolStripMenuItem.Click += OnTransactionsToolStripMenuItemClick;
-            // 
-            // toolStripSeparator1
-            // 
-            toolStripSeparator1.Name = "toolStripSeparator1";
-            resources.ApplyResources(toolStripSeparator1, "toolStripSeparator1");
-            // 
-            // quickReportToolStripMenuItem
-            // 
-            quickReportToolStripMenuItem.Name = "quickReportToolStripMenuItem";
-            resources.ApplyResources(quickReportToolStripMenuItem, "quickReportToolStripMenuItem");
-            quickReportToolStripMenuItem.Click += OnListViewItemActivate;
             // 
             // toolStripDropDownButton3
             // 
@@ -300,5 +305,6 @@ namespace Liber.Forms.Accounts
         private ToolStripMenuItem quickReportToolStripMenuItem1;
         private ToolStripSeparator toolStripSeparator4;
         private ToolStripMenuItem inactiveToolStripMenuItem;
+        private ColumnHeader cashFlowColumn;
     }
 }

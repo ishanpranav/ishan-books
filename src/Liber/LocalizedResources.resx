@@ -231,9 +231,6 @@
   <data name="_d_Accounts" xml:space="preserve">
     <value>Determines the accounts included in the report. The 'Transactions' and 'Accounts' fields are mutually exclusive.</value>
   </data>
-  <data name="_d_Adjustment" xml:space="preserve">
-    <value>(Adjustment)</value>
-  </data>
   <data name="_d_Annually" xml:space="preserve">
     <value>Annually</value>
   </data>
@@ -245,6 +242,9 @@
   </data>
   <data name="_d_Biweekly" xml:space="preserve">
     <value>Biweekly</value>
+  </data>
+  <data name="_d_Cash" xml:space="preserve">
+    <value>Cash/Cash Equivalent</value>
   </data>
   <data name="_d_Check" xml:space="preserve">
     <value>Specifies the check to use as a data source.</value>
@@ -281,6 +281,9 @@
   </data>
   <data name="_d_Font" xml:space="preserve">
     <value>Specifies the font and font style to use for the report.</value>
+  </data>
+  <data name="_d_GainLoss" xml:space="preserve">
+    <value>Gain/Loss</value>
   </data>
   <data name="_d_Income" xml:space="preserve">
     <value>Income</value>
@@ -320,6 +323,9 @@
   </data>
   <data name="_d_OtherCurrentLiability" xml:space="preserve">
     <value>Other Current Liability</value>
+  </data>
+  <data name="_d_OtherEquity" xml:space="preserve">
+    <value>Other Comprehensive Income</value>
   </data>
   <data name="_d_OtherIncomeExpense" xml:space="preserve">
     <value>Other Income/Expense</value>

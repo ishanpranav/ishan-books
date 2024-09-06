@@ -40,7 +40,7 @@ Licensed under the MIT License.
                         </th>
                     </tr>
                 </thead>
-                <xsl:variable name="operating" select="sum(company/account[type = 'OtherCurrentAsset' or type = 'OtherCurrentLiability' or type = 'CreditCard']/previous) - sum(company/account[type = 'OtherCurrentAsset' or type = 'OtherCurrentLiability' or type = 'CreditCard']/balance) - $netIncome + sum(company/account[type = 'OtherIncomeExpense']/balance)"/>
+                <xsl:variable name="operating" select="-$netIncome + sum(company/account[cash-flow = 'Operating']/previous) - sum(company/account[cash-flow = 'Operating']/balance) + sum(company/account[cash-flow = 'GainLoss']/balance)"/>
                 <xsl:variable name="investing" select="sum(company/account[(type = 'FixedAsset' or type = 'OtherAsset')]/previous) - sum(company/account[type = 'FixedAsset' or type = 'OtherAsset' or type = 'OtherIncomeExpense' or other-equity = 'true']/balance)"/>
                 <xsl:variable name="financing" select="sum(company/account[(type = 'LongTermLiability')]/previous) - sum(company/account[(type = 'LongTermLiability')]/balance)"/>
                 <tbody>
@@ -49,7 +49,7 @@ Licensed under the MIT License.
                             <xsl:value-of select="concat(liber:gets('Bank'), ', ', liber:fdates(started))"/>
                         </th>
                         <th class="right">
-                            <xsl:value-of select="liber:fm(sum(company/account[type = 'Bank']/previous))"/>
+                            <xsl:value-of select="liber:fm(sum(company/account[cash-flow = 'Cash']/previous))"/>
                         </th>
                     </tr>
                     <xsl:choose>
@@ -72,7 +72,7 @@ Licensed under the MIT License.
                                     <xsl:value-of select="liber:fgets('adjustments{0}{1}', liber:pngets('net-income', -$netIncome), liber:pngets('operating', $operating))" />
                                 </td>
                             </tr>
-                            <xsl:for-each select="company/account[(type = 'OtherCurrentAsset' or type = 'OtherCurrentLiability' or type = 'CreditCard') and (previous - balance != 0)]">
+                            <xsl:for-each select="company/account[cash-flow = 'Operating' and (previous - balance != 0)]">
                                 <tr>
                                     <td class="in-4 left account">
                                         <xsl:value-of select="name"/>
@@ -82,7 +82,7 @@ Licensed under the MIT License.
                                     </td>
                                 </tr>
                             </xsl:for-each>
-                            <xsl:for-each select="company/account[(type = 'OtherIncomeExpense') and balance != 0]">
+                            <xsl:for-each select="company/account[type = 'GainLoss' and balance != 0]">
                                 <tr>
                                     <td class="in-4 left account">
                                         <xsl:value-of select="name"/>
@@ -109,7 +109,7 @@ Licensed under the MIT License.
                                     <xsl:value-of select="liber:gets('investing')"/>
                                 </th>
                             </tr>
-                            <xsl:for-each select="company/account[(type = 'FixedAsset' or type = 'OtherAsset') and (previous - balance != 0)]">
+                            <xsl:for-each select="company/account[cash-flow = 'Investing' and (previous - balance != 0)]">
                                 <tr>
                                     <td class="in-3 left account">
                                         <xsl:value-of select="name"/>
@@ -119,7 +119,7 @@ Licensed under the MIT License.
                                     </td>
                                 </tr>
                             </xsl:for-each>
-                            <xsl:for-each select="company/account[(type = 'OtherIncomeExpense' or other-equity = 'true') and balance != 0]">
+                            <xsl:for-each select="company/account[cash-flow = 'GainLoss' and balance != 0]">
                                 <tr>
                                     <td class="in-3 left account">
                                         <xsl:value-of select="name"/>
@@ -146,7 +146,7 @@ Licensed under the MIT License.
                                     <xsl:value-of select="liber:gets('financing')"/>
                                 </th>
                             </tr>
-                            <xsl:for-each select="company/account[(type = 'LongTermLiability') and (previous - balance != 0)]">
+                            <xsl:for-each select="company/account[cash-flow = 'Financing' and (previous - balance != 0)]">
                                 <tr>
                                     <td class="in-3 left account">
                                         <xsl:value-of select="name"/>
@@ -171,7 +171,7 @@ Licensed under the MIT License.
                             <xsl:value-of select="concat(liber:gets('Bank'), ', ', liber:fdates(posted))"/>
                         </th>
                         <th class="total right">
-                            <xsl:value-of select="liber:fm(sum(company/account[type = 'Bank']/balance))"/>
+                            <xsl:value-of select="liber:fm(sum(company/account[cash-flow = 'Cash']/balance))"/>
                         </th>
                     </tr>
                 </tbody>

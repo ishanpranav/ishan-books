@@ -171,24 +171,22 @@ public static class AccountTypeExtensions
     {
         switch (value)
         {
-            case AccountType.Bank:
+            case AccountType.Bank: return CashFlow.Cash;
+
             case AccountType.OtherCurrentAsset:
             case AccountType.CreditCard:
             case AccountType.OtherCurrentLiability:
-            case AccountType.Income:
-            case AccountType.Expense:
-            case AccountType.Cost:
-            case AccountType.IncomeTaxExpense:
                 return CashFlow.Operating;
                 
             case AccountType.FixedAsset:
             case AccountType.OtherAsset:
-            case AccountType.OtherIncomeExpense:
                 return CashFlow.Investing;
 
             case AccountType.LongTermLiability:
             case AccountType.Equity:
                 return CashFlow.Financing;
+
+            case AccountType.OtherIncomeExpense: return CashFlow.GainLoss;
 
             default: return CashFlow.None;
         }

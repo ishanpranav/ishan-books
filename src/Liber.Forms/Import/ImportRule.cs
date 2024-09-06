@@ -45,7 +45,7 @@ internal sealed class ImportRule
                     account.Type = Type;
                 }
 
-                if (CashFlow != CashFlow.None)
+                if (CashFlow != CashFlow.None && (Strict || account.CashFlow == CashFlow.None))
                 {
                     account.CashFlow = CashFlow;
                 }

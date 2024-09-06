@@ -56,6 +56,11 @@ internal abstract partial class AccountForm : Form
     {
         get
         {
+            if (cashFlowComboBox.SelectedItem == null)
+            {
+                return CashFlow.None;
+            }
+
             return (CashFlow)cashFlowComboBox.SelectedItem;
         }
         set
