@@ -21,6 +21,9 @@
           "es/Liber.Forms.resources.dll": {
             "locale": "es"
           },
+          "en-GB/Liber.Forms.resources.dll": {
+            "locale": "en-GB"
+          },
           "en/Liber.Forms.resources.dll": {
             "locale": "en"
           },

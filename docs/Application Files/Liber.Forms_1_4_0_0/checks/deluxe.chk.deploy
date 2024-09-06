@@ -1,12 +1,12 @@
-﻿# liberty.chk
+﻿# deluxe.chk
 # Copyright (c) GnuCash contributors
 # Licensed under the GNU General Public License v2.0.
 
-#[2023-07-26] Modified: Added license header
+#[2024-07-26] Modified: Added license header
 
 [Top]
-Guid = 378e5740-a2d3-4678-be20-37d14d97b458
-Title = Liberty(tm) Personal Checks US-Letter
+Guid = 54a0fef9-0b7e-462b-8af3-a5f4f328f7bc
+Title = Deluxe(tm) Personal Checks US-Letter
 Rotation = -90.0
 Translation = 4;492
 Show_Grid = false
@@ -14,16 +14,16 @@ Show_Boxes = false
 
 [Check Items]
 Type_1 = PAYEE
-Coords_1 = 118.0;74.0
+Coords_1 = 126.0;85.0
 
 Type_2 = AMOUNT_WORDS
-Coords_2 = 90.0;96.0
+Coords_2 = 90.0;107.0
 
 Type_3 = AMOUNT_NUMBER
-Coords_3 = 415.0;74.0
+Coords_3 = 395.0;85.0
 
 Type_4 = DATE
-Coords_4 = 323.0;43.0
+Coords_4 = 343.0;54.0
 
 Type_5 = NOTES
-Coords_5 = 90.0;155.0
+Coords_5 = 100.0;159.0
