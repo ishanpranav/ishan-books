@@ -41,8 +41,8 @@ Licensed under the MIT License.
                     </tr>
                 </thead>
                 <xsl:variable name="operating" select="-$netIncome + sum(company/account[cash-flow = 'Operating']/previous) - sum(company/account[cash-flow = 'Operating']/balance) + sum(company/account[cash-flow = 'GainLoss']/balance)"/>
-                <xsl:variable name="investing" select="sum(company/account[(type = 'FixedAsset' or type = 'OtherAsset')]/previous) - sum(company/account[type = 'FixedAsset' or type = 'OtherAsset' or type = 'OtherIncomeExpense' or other-equity = 'true']/balance)"/>
-                <xsl:variable name="financing" select="sum(company/account[(type = 'LongTermLiability')]/previous) - sum(company/account[(type = 'LongTermLiability')]/balance)"/>
+                <xsl:variable name="investing" select="sum(company/account[(cash-flow = 'Investing')]/previous) - sum(company/account[cash-flow = 'Investing']/balance)"/>
+                <xsl:variable name="financing" select="sum(company/account[(cash-flow = 'Financing')]/previous) - sum(company/account[(cash-flow = 'Financing')]/balance)"/>
                 <tbody>
                     <tr>
                         <th class="left">

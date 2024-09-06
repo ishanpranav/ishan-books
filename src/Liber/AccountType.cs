@@ -183,11 +183,8 @@ public static class AccountTypeExtensions
                 return CashFlow.Investing;
 
             case AccountType.LongTermLiability:
-            case AccountType.Equity:
                 return CashFlow.Financing;
-
-            case AccountType.OtherIncomeExpense: return CashFlow.GainLoss;
-
+               
             default: return CashFlow.None;
         }
     }
