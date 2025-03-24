@@ -226,14 +226,7 @@ internal sealed partial class AccountsForm : Form
 
     private void OnListViewAfterLabelEdit(object sender, LabelEditEventArgs e)
     {
-        object? tag = _listView.Items[e.Item].Tag;
-
-        if (tag == null)
-        {
-            return;
-        }
-
-        Guid id = (Guid)tag;
+        Guid id = (Guid)_listView.Items[e.Item].Tag!;
 
         if (!_company.Accounts.TryGetValue(id, out Account? value))
         {

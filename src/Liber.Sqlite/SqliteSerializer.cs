@@ -95,7 +95,7 @@ public static class SqliteSerializer
         return new SqliteConnection(connectionStringBuilder.ConnectionString);
     }
 
-    public static async Task SerializeAsync(string path, Company value)
+    public static async Task SerializeAsync(string path, Company value, IProgress progress)
     {
         await using SqliteConnection connection = CreateConnection(path, value.Password);
 
@@ -139,6 +139,8 @@ public static class SqliteSerializer
 
                     await command.ExecuteNonQueryAsync();
                 }
+
+                progress.WriteAccount();
             }
 
             foreach (Transaction transaction in value.Transactions)
@@ -170,10 +172,28 @@ public static class SqliteSerializer
                         await command.ExecuteNonQueryAsync();
                     }
                 }
+
+                progress.WriteTransaction();
             }
 
             await dbTransaction.CommitAsync();
         }
+    }
+
+    public static async Task<bool> CheckPasswordAsync(string path, string password)
+    {
+        try
+        {
+            await using SqliteConnection connection = CreateConnection(path, password);
+
+            await connection.OpenAsync();
+        }
+        catch (SqliteException)
+        {
+            return false;
+        }
+
+        return true;
     }
 
     public static async Task<Company> DeserializeAsync(string path, string password)

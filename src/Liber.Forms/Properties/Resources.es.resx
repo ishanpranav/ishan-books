@@ -144,7 +144,4 @@
   <data name="Number" xml:space="preserve">
     <value>Número</value>
   </data>
-  <data name="WarningText" xml:space="preserve">
-    <value>Usted está a punto de cerrar el archivo de la empresa sin guardar los cambios.</value>
-  </data>
 </root>
