@@ -51,7 +51,7 @@ internal sealed class AccountComboBox : ComboBox
     {
         get
         {
-            return ((IAccountView)base.SelectedItem).Id;
+            return ((IAccountView)base.SelectedItem!).Id;
         }
         set
         {

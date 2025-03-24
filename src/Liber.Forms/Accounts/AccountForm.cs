@@ -32,7 +32,7 @@ internal abstract partial class AccountForm : Form
     {
         get
         {
-            return (AccountType)typeComboBox.SelectedItem;
+            return (AccountType)typeComboBox.SelectedItem!;
         }
         set
         {

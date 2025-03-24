@@ -56,7 +56,7 @@ internal class ListViewEx : ListView
             return false;
         }
 
-        value = (T)SelectedItems[0].Tag;
+        value = (T)SelectedItems[0].Tag!;
 
         return true;
     }

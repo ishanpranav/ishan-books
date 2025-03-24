@@ -12,6 +12,7 @@
     <UseWPF>true</UseWPF>
     <AssemblyVersion>1.2.0.0</AssemblyVersion>
     <FileVersion>1.2.0.0</FileVersion>
+    <GenerateResourceWarnOnBinaryFormatterUse>false</GenerateResourceWarnOnBinaryFormatterUse>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -135,8 +136,8 @@
 
 	<ItemGroup>
 	  <PackageReference Include="ini-parser-netstandard" Version="2.5.2" />
-	  <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1905-prerelease" />
-	  <PackageReference Include="WindowsAPICodePack" Version="7.0.4" />
+	  <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3124.44" />
+	  <PackageReference Include="WindowsAPICodePack" Version="8.0.6" />
 	</ItemGroup>
 
 	<ItemGroup>

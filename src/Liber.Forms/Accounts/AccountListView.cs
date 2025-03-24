@@ -66,7 +66,7 @@ internal sealed class AccountListView : ListViewEx
             return Guid.Empty;
         }
 
-        return ((KeyValuePair<Guid, Account>)SelectedItems[0].Tag).Key;
+        return ((KeyValuePair<Guid, Account>)SelectedItems[0].Tag!).Key;
     }
 
     public IReadOnlySet<Account> GetCheckedAccounts()

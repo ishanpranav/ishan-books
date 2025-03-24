@@ -46,7 +46,7 @@ internal sealed partial class CheckDialog : Form
             return;
         }
 
-        Value = new CheckView(Value.Company, (Line)_listView.SelectedItems[0].Tag);
+        Value = new CheckView(Value.Company, (Line)_listView.SelectedItems[0].Tag!);
         DialogResult = DialogResult.OK;
 
         Close();

@@ -16,6 +16,7 @@ using Liber.Forms.Lines;
 using Liber.Forms.Properties;
 using Liber.Forms.Reports;
 using Liber.Forms.Reports.Xsl;
+using Liber.Forms.Saving;
 using Liber.Forms.Transactions;
 using Liber.Forms.Writers;
 using Liber.Sqlite;
@@ -94,13 +95,9 @@ internal sealed partial class MainForm : Form
         }
     }
 
-    private void OnFormClosing(object sender, FormClosingEventArgs e)
+    private async void OnFormClosing(object sender, FormClosingEventArgs e)
     {
-        e.Cancel = MessageBox.Show(
-            Resources.WarningText,
-            Resources.CancelCaption,
-            MessageBoxButtons.OKCancel,
-            MessageBoxIcon.Warning) == DialogResult.Cancel;
+        e.Cancel = await TryCancelAsync();
     }
 
     private void OnDragOver(object sender, DragEventArgs e)
@@ -220,19 +217,19 @@ internal sealed partial class MainForm : Form
                 return true;
         }
 
-        await SaveAsync();
-
-        return false;
+        return !await SaveAsync();
     }
 
-    private Task SaveAsAsync()
+    private async Task<bool> SaveAsAsync()
     {
         if (!TryGetSavePath(FilterIndex.Liber, out string? path))
         {
-            return Task.CompletedTask;
+            return false;
         }
 
-        return ExportAsync(path);
+        await ExportAsync(path);
+
+        return true;
     }
 
     private bool TryGetSavePath(FilterIndex filterIndex, [MaybeNullWhen(false)] out string result)
@@ -303,10 +300,17 @@ internal sealed partial class MainForm : Form
     {
         using PasswordForm form = new PasswordForm();
 
-        if (form.ShowDialog() == DialogResult.OK)
+        if (form.ShowDialog() != DialogResult.OK)
         {
-            (await SqliteSerializer.DeserializeAsync(path, form.Password)).CopyTo(_company);
+            return;
         }
+
+        if (!await SqliteSerializer.CheckPasswordAsync(path, form.Password))
+        {
+            MessageBox.Show("bad password");
+        }
+
+        (await SqliteSerializer.DeserializeAsync(path, form.Password)).CopyTo(_company);
     }
 
     private async Task ImportAsync(string path)
@@ -369,9 +373,9 @@ internal sealed partial class MainForm : Form
         _path = path;
     }
 
-    private async Task ExportSqliteCompanyAsync(string path)
+    private async Task ExportSqliteCompanyAsync(string path, IProgress progress)
     {
-        await SqliteSerializer.SerializeAsync(path, _company);
+        await SqliteSerializer.SerializeAsync(path, _company, progress);
 
         _path = path;
     }
@@ -398,6 +402,11 @@ internal sealed partial class MainForm : Form
 
     private async Task ExportAsync(string path)
     {
+        SavingForm form = new SavingForm();
+        SavingProgress progress = new SavingProgress(form, _company);
+
+        form.Show();
+
         await AbortRetryIgnoreAsync(async () =>
         {
             string extension = Path.GetExtension(path);
@@ -411,7 +420,7 @@ internal sealed partial class MainForm : Form
                 case ".DB3":
                 case ".S3DB":
                 case ".SL3":
-                    await ExportSqliteCompanyAsync(path);
+                    await ExportSqliteCompanyAsync(path, progress);
                     break;
 
                 case ".JSON":
@@ -430,16 +439,20 @@ internal sealed partial class MainForm : Form
 
             _recentPathManager.Add(path);
         });
+
+        form.Close();
     }
 
-    private Task SaveAsync()
+    private async Task<bool> SaveAsync()
     {
         if (_path == null)
         {
-            return SaveAsAsync();
+            return await SaveAsAsync();
         }
 
-        return ExportAsync(_path);
+        await ExportAsync(_path);
+
+        return true;
     }
 
     private async void OnSaveToolStripMenuItemClick(object sender, EventArgs e)
