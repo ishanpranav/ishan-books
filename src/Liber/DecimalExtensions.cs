@@ -12,4 +12,21 @@ public static class DecimalExtensions
     {
         return value.ToString(Format);
     }
+
+    public static string ToLocalizedString(this decimal value, decimal multiple)
+    {
+        if (multiple == 0)
+        {
+            return ToLocalizedString(value);
+        }
+
+        value = Math.Round(value / multiple, MidpointRounding.ToEven);
+
+        if (multiple < 1)
+        {
+            value *= multiple;
+        }
+
+        return value.ToString(" #,##0.## ;(#,##0.##);   -   ");
+    }
 }

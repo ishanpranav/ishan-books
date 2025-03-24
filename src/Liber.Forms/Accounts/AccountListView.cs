@@ -75,7 +75,7 @@ internal sealed class AccountListView : ListViewEx
 
         foreach (ListViewItem item in CheckedItems)
         {
-            accounts.Add(((KeyValuePair<Guid, Account>)item.Tag).Value);
+            accounts.Add(((KeyValuePair<Guid, Account>)item.Tag!).Value);
         }
 
         return accounts;
