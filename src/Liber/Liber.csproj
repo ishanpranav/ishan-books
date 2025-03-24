@@ -5,7 +5,12 @@
 		<Nullable>enable</Nullable>
 		<RootNamespace>Liber</RootNamespace>
 		<NeutralLanguage>en-US</NeutralLanguage>
+		<ApplicationIcon>favicon.ico</ApplicationIcon>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <Content Include="favicon.ico" />
+	</ItemGroup>
 
 	<ItemGroup>
 	  <PackageReference Include="CsvHelper" Version="33.0.1" />

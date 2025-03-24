@@ -117,6 +117,12 @@ public class XslReport : IXmlSerializable
     [LocalizedDisplayName(nameof(Accounts))]
     public AccountsView Accounts { get; set; }
 
+    [DefaultValue(typeof(decimal), "0.01")]
+    [LocalizedCategory(nameof(Multiple))]
+    [LocalizedDescription(nameof(Multiple))]
+    [LocalizedDisplayName(nameof(Multiple))]
+    public decimal Multiple { get; set; } = 0.01m;
+
     /// <summary>
     /// Formats a date value as a long date string.
     /// </summary>
@@ -140,7 +146,7 @@ public class XslReport : IXmlSerializable
             return Redaction;
         }
 
-        return value.ToLocalizedString();
+        return value.ToLocalizedString(Multiple);
     }
 
     public string fm(string type, decimal balance)
@@ -153,7 +159,7 @@ public class XslReport : IXmlSerializable
         return Enum
             .Parse<AccountType>(type)
             .ToBalance(balance)
-            .ToLocalizedString();
+            .ToLocalizedString(Multiple);
     }
 
     public string ftspanl(DateTime started, DateTime posted)

@@ -44,7 +44,7 @@ internal abstract partial class AccountForm : Form
     {
         get
         {
-            return (TaxType)taxTypeComboBox.SelectedItem;
+            return (TaxType)taxTypeComboBox.SelectedItem!;
         }
         set
         {

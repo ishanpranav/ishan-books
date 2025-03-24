@@ -147,6 +147,9 @@
   <data name="Memo" xml:space="preserve">
     <value>Notes</value>
   </data>
+  <data name="Multiple" xml:space="preserve">
+    <value>Rounding Multiple</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
@@ -200,6 +203,9 @@
   </data>
   <data name="_c_Font" xml:space="preserve">
     <value>Design</value>
+  </data>
+  <data name="_c_Multiple" xml:space="preserve">
+    <value>Rounding</value>
   </data>
   <data name="_c_PageSettings" xml:space="preserve">
     <value>Design</value>
@@ -302,6 +308,9 @@
   </data>
   <data name="_d_Monthly" xml:space="preserve">
     <value>Monthly</value>
+  </data>
+  <data name="_d_Multiple" xml:space="preserve">
+    <value>The rounding multiple specifies the rounding behavior. For example, if the rounding multiple is 0.01, then amounts are rounded to the nearest cent. If the multiple is 1000, then values are displayed in thousands. Banker's rounding (midpoint rounding to even) is used.</value>
   </data>
   <data name="_d_None" xml:space="preserve">
     <value>(None)</value>

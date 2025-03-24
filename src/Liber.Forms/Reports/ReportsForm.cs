@@ -87,7 +87,7 @@ internal sealed partial class ReportsForm : Form
     {
         foreach (ListViewItem item in _listView.Items)
         {
-            View = (IReportView)item.Tag;
+            View = (IReportView)item.Tag!;
 
             if (View.Properties is GdiCheckReport checkReport)
             {
@@ -102,14 +102,14 @@ internal sealed partial class ReportsForm : Form
 
     public void InitializeReport(string key)
     {
-        View = (IReportView)_listView.Items[key].Tag;
+        View = (IReportView)_listView.Items[key]!.Tag!;
 
         InitializeReport();
     }
 
     private void OnListViewItemActivate(object sender, EventArgs e)
     {
-        View = (IReportView)_listView.SelectedItems[0].Tag;
+        View = (IReportView)_listView.SelectedItems[0].Tag!;
 
         if (View.Properties is GdiCheckReport checkReport && checkReport.Check.Value == null)
         {
