@@ -34,7 +34,7 @@
 	  <None Remove="scripts\time-series.js" />
 	  <None Remove="styles\account-summary.xslt" />
 	  <None Remove="styles\annual-report.xslt" />
-	  <None Remove="styles\balance-sheet.xslt" />
+	  <None Remove="styles\base\comparative-balance-sheet.xslt" />
 	  <None Remove="styles\base\comprehensive-income-statement.xslt" />
 	  <None Remove="styles\base\general-ledger.xslt" />
 	  <None Remove="styles\base\income-statement.xslt" />
@@ -95,16 +95,25 @@
 	  <Content Include="styles\annual-report.xslt">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
+	  <Content Include="styles\base\comparative-balance-sheet.xslt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
 	  <Content Include="styles\base\comprehensive-income-statement.xslt">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="styles\base\income-statement.xslt">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
+	  <Content Include="styles\base\cash-flow-statement.xslt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
 	  <Content Include="styles\cash-flow-statement.xslt">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="styles\comparative-balance-sheet.xslt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="styles\base\equity-statement.xslt">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="styles\equity-statement.xslt">
@@ -126,6 +135,9 @@
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="styles\comprehensive-income-statement.xslt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="styles\base\balance-sheet.xslt">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="styles\balance-sheet.xslt">

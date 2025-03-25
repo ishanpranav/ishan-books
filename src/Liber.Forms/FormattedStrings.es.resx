@@ -138,6 +138,9 @@
   <data name="aging-summary" xml:space="preserve">
     <value>Resumen de antigüedad de saldos</value>
   </data>
+  <data name="annual-report" xml:space="preserve">
+    <value>Informe anual</value>
+  </data>
   <data name="assets" xml:space="preserve">
     <value>Activos</value>
   </data>

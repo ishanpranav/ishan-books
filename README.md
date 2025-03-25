@@ -31,6 +31,7 @@ __Reporting__
 - [X] Equity statement
 - [X] General journal
 - [X] General ledger
+- [X] Annual report
 
 __Accounts receivable__
 - [X] Generate invoice

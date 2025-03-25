@@ -11,42 +11,22 @@ Licensed under the MIT License.
     xmlns:html="http://www.w3.org/1999/xhtml"
     xmlns:liber="urn:liber"
     exclude-result-prefixes="msxsl">
-    <xsl:include href="balance-sheet.xslt"/>
+    <xsl:include href="base/comparative-balance-sheet.xslt"/>
     <xsl:output method="html" indent="yes"/>
     <xsl:template match="/report">
-        <xsl:call-template name="financial-statement">
-            <xsl:with-param name="title" select="title"/>
-            <xsl:with-param name="table">
-                <thead>
-                    <tr>
-                        <th colspan="3" class="subtitle">
-                            <xsl:value-of select="company/name"/>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th colspan="3" class="title">
-                            <xsl:value-of select="title"/>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th colspan="3" class="bar dateline">
-                            <xsl:value-of select="liber:fdatel(posted)"/>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th></th>
-                        <th class="heading">
-                            <xsl:value-of select="liber:fdates(posted)"/>
-                        </th>
-                        <th class="heading">
-                            <xsl:value-of select="liber:fdates(started)"/>
-                        </th>
-                    </tr>
-                </thead>
-                <xsl:call-template name="balance-sheet">
-                    <xsl:with-param name="comparative" select="1"/>
+        <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+            <head>
+                <meta charset="utf-8"/>
+                <title>
+                    <xsl:value-of select="title"/>
+                </title>
+                <link rel="stylesheet" type="text/css" href="https://liber.example/styles/financial-statement.css"/>
+            </head>
+            <body>
+                <xsl:call-template name="comparative-balance-sheet">
+                    <xsl:with-param name="title" select="title"/>
                 </xsl:call-template>
-            </xsl:with-param>
-        </xsl:call-template>
+            </body>
+        </html>
     </xsl:template>
 </xsl:stylesheet>
