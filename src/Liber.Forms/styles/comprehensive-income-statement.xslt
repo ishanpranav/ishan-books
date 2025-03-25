@@ -11,64 +11,22 @@ Licensed under the MIT License.
     xmlns:html="http://www.w3.org/1999/xhtml"
     xmlns:liber="urn:liber"
     exclude-result-prefixes="msxsl">
-    <xsl:include href="base/financial-statement.xslt"/>
+    <xsl:include href="base/comprehensive-income-statement.xslt"/>
     <xsl:output method="html" indent="yes"/>
     <xsl:template match="/report">
-        <xsl:call-template name="financial-statement">
-            <xsl:with-param name="title" select="title"/>
-            <xsl:with-param name="table">
-                <thead>
-                    <tr>
-                        <th colspan="2" class="subtitle">
-                            <xsl:value-of select="company/name"/>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th colspan="2" class="title">
-                            <xsl:value-of select="title"/>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th colspan="2" class="bar dateline">
-                            <xsl:value-of select="liber:ftspanl(started, posted)"/>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th></th>
-                        <th class="heading">
-                            <xsl:value-of select="liber:ftspans(started, posted)"/>
-                        </th>
-                    </tr>
-                </thead>
-                <xsl:variable name="otherComprehensiveIncome" select="sum(company/account[other-equity = 'true']/balance) - sum(company/account[other-equity = 'true']/previous)"/>
-                <tbody>
-                    <tr>
-                        <th class="in-1 left">
-                            <xsl:value-of select="liber:pngets('net-income', -$netIncome)"/>
-                        </th>
-                        <th class="right">
-                            <xsl:value-of select="liber:fm(-$netIncome)"/>
-                        </th>
-                    </tr>
-
-                    <tr>
-                        <th class="in-1 left">
-                            <xsl:value-of select="liber:pngets('other-comprehensive-income', -$otherComprehensiveIncome)"/>
-                        </th>
-                        <th class="right">
-                            <xsl:value-of select="liber:fm(-$otherComprehensiveIncome)"/>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th class="left">
-                            <xsl:value-of select="liber:pngets('comprehensive-income', -($netIncome + $otherComprehensiveIncome))"/>
-                        </th>
-                        <td class="total right">
-                            <xsl:value-of select="liber:fm(-($netIncome + $otherComprehensiveIncome))"/>
-                        </td>
-                    </tr>
-                </tbody>
-            </xsl:with-param>
-        </xsl:call-template>
+        <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+            <head>
+                <meta charset="utf-8"/>
+                <title>
+                    <xsl:value-of select="title"/>
+                </title>
+                <link rel="stylesheet" type="text/css" href="https://liber.example/styles/financial-statement.css"/>
+            </head>
+            <body>
+                <xsl:call-template name="comprehensive-income-statement">
+                    <xsl:with-param name="title" select="title"/>
+                </xsl:call-template>
+            </body>
+        </html>
     </xsl:template>
 </xsl:stylesheet>

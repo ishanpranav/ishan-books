@@ -5,6 +5,7 @@ Licensed under the MIT License.
 */
 
 table {
+    break-after: page;
     font-family: "Segoe UI", Arial;
     font-size: 10pt;
     margin-left: auto;

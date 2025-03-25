@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!--
-income-statement.xslt
+annual-report.xslt
 Copyright (c) 2023-2024 Ishan Pranav. All rights reserved.
 Licensed under the MIT License.
 -->
@@ -11,8 +11,8 @@ Licensed under the MIT License.
     xmlns:html="http://www.w3.org/1999/xhtml"
     xmlns:liber="urn:liber"
     exclude-result-prefixes="msxsl">
-    <xsl:include href="base/income-statement.xslt"/>
-    <xsl:output method="html" indent="yes"/>
+    <xsl:import href="base/income-statement.xslt"/>
+    <xsl:import href="base/comprehensive-income-statement.xslt"/>
     <xsl:template match="/report">
         <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
             <head>
@@ -24,9 +24,13 @@ Licensed under the MIT License.
             </head>
             <body>
                 <xsl:call-template name="income-statement">
-                    <xsl:with-param name="title" select="title"/>
+                    <xsl:with-param name="title">Income Statement</xsl:with-param>
+                </xsl:call-template>
+                <xsl:call-template name="comprehensive-income-statement">
+                    <xsl:with-param name="title">Comprehensive Income Statement</xsl:with-param>
                 </xsl:call-template>
             </body>
         </html>
     </xsl:template>
+    <xsl:output method="html" indent="yes"/>
 </xsl:stylesheet>
