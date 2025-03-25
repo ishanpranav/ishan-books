@@ -1,5 +1,5 @@
 ﻿// analysis.js
-// Copyright(c) 2023-2024 Ishan Pranav. All rights reserved.
+// Copyright(c) 2023-2025 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
 const report = window.chrome.webview.hostObjects.report;
