@@ -13,7 +13,7 @@ Licensed under the MIT License.
     exclude-result-prefixes="msxsl">
     <xsl:include href="base/financial-statement.xslt"/>
     <xsl:output method="html" indent="yes"/>
-    <xsl:template name="balance-sheet">
+    <xsl:template name="balance-sheet" match="/report" mode="balance-sheet">
         <xsl:param name="comparative" select="false"/>
         <xsl:variable name="bank" select="sum(company/account[type = 'Bank']/balance)"/>
         <xsl:variable name="bank2" select="sum(company/account[type = 'Bank']/previous)"/>

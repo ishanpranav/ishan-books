@@ -20,13 +20,31 @@ public static class DecimalExtensions
             return ToLocalizedString(value);
         }
 
-        value = Math.Round(value / multiple, MidpointRounding.ToEven);
+        decimal rounded = Math.Round(value / multiple, MidpointRounding.ToEven);
 
-        if (multiple < 1)
+        if (multiple % 10 != 0)
         {
-            value *= multiple;
+            rounded *= multiple;
+
+            if (multiple < 1)
+            {
+                return rounded.ToString(Format);
+            }
         }
 
-        return value.ToString(" #,##0.## ;(#,##0.##);   -   ");
+        if (rounded == 0)
+        {
+            if (value > 0)
+            {
+                return " 0 ";
+            }
+
+            if (value < 0)
+            {
+                return "(0)";
+            }
+        }
+
+        return rounded.ToString(" #,##0 ;(#,##0);   -   ");
     }
 }

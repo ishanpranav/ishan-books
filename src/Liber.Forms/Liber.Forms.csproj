@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
@@ -12,6 +12,7 @@
     <AssemblyVersion>1.2.0.0</AssemblyVersion>
     <FileVersion>1.2.0.0</FileVersion>
     <GenerateResourceWarnOnBinaryFormatterUse>false</GenerateResourceWarnOnBinaryFormatterUse>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -32,8 +33,11 @@
 	  <None Remove="scripts\chart.js" />
 	  <None Remove="scripts\time-series.js" />
 	  <None Remove="styles\account-summary.xslt" />
+	  <None Remove="styles\annual-report.xslt" />
 	  <None Remove="styles\balance-sheet.xslt" />
+	  <None Remove="styles\base\comprehensive-income-statement.xslt" />
 	  <None Remove="styles\base\general-ledger.xslt" />
+	  <None Remove="styles\base\income-statement.xslt" />
 	  <None Remove="styles\cash-flow-statement.xslt" />
 	  <None Remove="styles\comparative-balance-sheet.xslt" />
 	  <None Remove="styles\comprehensive-income-statement.xslt" />
@@ -72,6 +76,7 @@
 	  <Content Include="data\reports.json">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
+	  <Content Include="favicon.ico" />
 	  <Content Include="pages\analysis.html">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
@@ -85,6 +90,15 @@
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="scripts\time-series.js">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="styles\annual-report.xslt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="styles\base\comprehensive-income-statement.xslt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="styles\base\income-statement.xslt">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="styles\cash-flow-statement.xslt">
@@ -136,6 +150,7 @@
 	<ItemGroup>
 	  <PackageReference Include="ini-parser-netstandard" Version="2.5.2" />
 	  <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3124.44" />
+	  <PackageReference Include="PDFsharp" Version="6.1.1" />
 	  <PackageReference Include="WindowsAPICodePack" Version="8.0.6" />
 	</ItemGroup>
 
@@ -217,10 +232,6 @@
 
 	<ItemGroup>
 	  <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Reports\Pdf\" />
 	</ItemGroup>
 
 </Project>

@@ -8,6 +8,7 @@ public partial class SavingForm : Form
     public SavingForm()
     {
         InitializeComponent();
+        SystemFeatures.Initialize(this);
 
         Text = Resources.CancelCaption;
     }
