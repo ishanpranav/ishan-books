@@ -43,7 +43,7 @@ dotnet_style_namespace_match_folder = true:suggestion
 
 # C# files
 [*.cs]
-file_header_template = {fileName}\nCopyright (c) 2023-2024 Ishan Pranav. All rights reserved.\nLicensed under the MIT License.
+file_header_template = {fileName}\nCopyright (c) 2023-2025 Ishan Pranav. All rights reserved.\nLicensed under the MIT License.
 csharp_style_namespace_declarations = file_scoped:suggestion
 # New line preferences
 csharp_new_line_before_open_brace = all
