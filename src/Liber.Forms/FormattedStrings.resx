@@ -142,6 +142,9 @@
   <data name="aging-summary" xml:space="preserve">
     <value>Aging Summary</value>
   </data>
+  <data name="annual-report" xml:space="preserve">
+    <value>Annual Report</value>
+  </data>
   <data name="assets" xml:space="preserve">
     <value>Assets</value>
   </data>

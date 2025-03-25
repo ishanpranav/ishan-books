@@ -13,11 +13,21 @@ Licensed under the MIT License.
     <xsl:output method="html" indent="yes"/>
     <xsl:variable name="netIncome" select="sum(report/company/account[type = 'Income' or type = 'Cost' or type = 'Expense' or type = 'OtherIncomeExpense' or type ='IncomeTaxExpense']/balance)"/>
     <xsl:template name="financial-statement">
-        <xsl:param name="title"/>
         <xsl:param name="table"/>
-        <table>
-            <xsl:copy-of select="$table"/>
-        </table>
+        <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+            <head>
+                <meta charset="utf-8"/>
+                <title>
+                    <xsl:value-of select="title"/>
+                </title>
+                <link rel="stylesheet" type="text/css" href="https://liber.example/styles/financial-statement.css"/>
+            </head>
+            <body>
+                <table>
+                    <xsl:copy-of select="$table"/>
+                </table>
+            </body>
+        </html>
     </xsl:template>
     <xsl:template match="company">
         <xsl:param name="type"/>

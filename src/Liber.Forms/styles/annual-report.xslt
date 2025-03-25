@@ -13,6 +13,9 @@ Licensed under the MIT License.
     exclude-result-prefixes="msxsl">
     <xsl:import href="base/income-statement.xslt"/>
     <xsl:import href="base/comprehensive-income-statement.xslt"/>
+    <xsl:import href="base/comparative-balance-sheet.xslt"/>
+    <xsl:import href="base/cash-flow-statement.xslt"/>
+    <xsl:import href="base/equity-statement.xslt"/>
     <xsl:template match="/report">
         <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
             <head>
@@ -24,10 +27,19 @@ Licensed under the MIT License.
             </head>
             <body>
                 <xsl:call-template name="income-statement">
-                    <xsl:with-param name="title">Income Statement</xsl:with-param>
+                    <xsl:with-param name="title" select="liber:gets('income-statement')"/>
                 </xsl:call-template>
                 <xsl:call-template name="comprehensive-income-statement">
-                    <xsl:with-param name="title">Comprehensive Income Statement</xsl:with-param>
+                    <xsl:with-param name="title" select="liber:gets('comprehensive-income-statement')"/>
+                </xsl:call-template>
+                <xsl:call-template name="comparative-balance-sheet">
+                    <xsl:with-param name="title" select="liber:gets('comparative-balance-sheet')"/>
+                </xsl:call-template>
+                <xsl:call-template name="cash-flow-statement">
+                    <xsl:with-param name="title" select="liber:gets('cash-flow-statement')"/>
+                </xsl:call-template>
+                <xsl:call-template name="equity-statement">
+                    <xsl:with-param name="title" select="liber:gets('equity-statement')"/>
                 </xsl:call-template>
             </body>
         </html>
