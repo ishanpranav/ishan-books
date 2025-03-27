@@ -40,7 +40,7 @@ Licensed under the MIT License.
                 </tr>
             </thead>
             <xsl:variable name="operating" select="-$netIncome + sum(company/account[cash-flow = 'Operating']/previous) - sum(company/account[cash-flow = 'Operating']/balance) + sum(company/account[cash-flow = 'GainLoss']/balance)"/>
-            <xsl:variable name="investing" select="sum(company/account[(cash-flow = 'Investing')]/previous) - sum(company/account[cash-flow = 'Investing']/balance)"/>
+            <xsl:variable name="investing" select="sum(company/account[(cash-flow = 'Investing')]/previous) - sum(company/account[cash-flow = 'Investing']/balance) - sum(company/account[cash-flow = 'GainLoss']/balance)"/>
             <xsl:variable name="financing" select="sum(company/account[(cash-flow = 'Financing')]/previous) - sum(company/account[(cash-flow = 'Financing')]/balance)"/>
             <tbody>
                 <tr>
@@ -81,7 +81,7 @@ Licensed under the MIT License.
                                 </td>
                             </tr>
                         </xsl:for-each>
-                        <xsl:for-each select="company/account[type = 'GainLoss' and balance != 0]">
+                        <xsl:for-each select="company/account[cash-flow = 'GainLoss' and balance != 0]">
                             <tr>
                                 <td class="in-4 left account">
                                     <xsl:value-of select="name"/>
