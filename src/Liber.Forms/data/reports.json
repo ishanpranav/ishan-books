@@ -4,5 +4,6 @@
     "comparative-balance-sheet": "CurrentPosted",
     "equity-statement": "CurrentPosted",
     "cash-flow-statement": "CashBasis",
-    "account-summary": "CurrentStarted"
+    "account-summary": "CurrentStarted",
+    "annual-report": "CurrentPosted"
 }
