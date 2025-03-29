@@ -2,7 +2,7 @@ Third-Party Notices
 ===================
 IshanBooks by Ishan Pranav
 
-Copyright (c) 2023-2024 Ishan Pranav
+Copyright (c) 2023-2025 Ishan Pranav
 
 This software uses third-party libraries or other resources that may be
 distributed under licenses different than the software.

@@ -13,6 +13,7 @@
     <FileVersion>1.2.0.0</FileVersion>
     <GenerateResourceWarnOnBinaryFormatterUse>false</GenerateResourceWarnOnBinaryFormatterUse>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <StartupObject>Liber.Forms.Program</StartupObject>
 	</PropertyGroup>
 
 	<ItemGroup>
