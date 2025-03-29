@@ -1,0 +1,91 @@
+﻿/*
+financial-statement.css
+Copyright (c) 2023-2025 Ishan Pranav. All rights reserved.
+Licensed under the MIT License.
+*/
+
+table {
+    break-after: page;
+    font-family: "Segoe UI", Arial;
+    font-size: 10pt;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+th {
+    font-weight: bold;
+}
+
+th, td {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.account {
+    font-weight: bold;
+}
+
+.bar {
+    border-bottom: 3px solid;
+    padding-bottom: 1px;
+}
+
+.title {
+    font-size: 14pt;
+}
+
+.subtitle {
+    font-size: 11pt;
+}
+
+.dateline {
+    font-size: 11pt;
+}
+
+.heading {
+    border-bottom: 1px solid;
+    font-weight: bold;
+}
+
+.total {
+    border-top: 1px solid;
+    border-bottom: 3px double;
+    font-weight: bold;
+    padding-top: 6pt;
+    padding-bottom: 2pt;
+}
+
+.subtotal {
+    border-top: 1px solid;
+    padding-top: 3pt;
+    padding-bottom: 1pt;
+}
+
+.left {
+    text-align: left;
+}
+
+.right {
+    text-align: right;
+    white-space: pre;
+}
+
+.in-1 {
+    padding-left: 2ch;
+}
+
+.in-2 {
+    padding-left: 4ch;
+}
+
+.in-3 {
+    padding-left: 6ch;
+}
+
+.in-4 {
+    padding-left: 8ch;
+}
+
+.in-5 {
+    padding-left: 10ch;
+}
