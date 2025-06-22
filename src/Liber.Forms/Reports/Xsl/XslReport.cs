@@ -243,8 +243,6 @@ public class XslReport : IXmlSerializable
 
         if (value == Company.Accounts[Company.EquityAccountId])
         {
-            writer.WriteElementString("equity", XmlConvert.ToString(true));
-
             if (Type.HasFlag(ReportTypes.CurrentPosted))
             {
                 balance = Company.GetEquity(Posted, Filter);
@@ -259,8 +257,6 @@ public class XslReport : IXmlSerializable
         }
         else if (value == Company.Accounts[Company.OtherEquityAccountId])
         {
-            writer.WriteElementString("other-equity", XmlConvert.ToString(true));
-
             balance = value.GetBalance(Posted, Filter);
             previous = value.GetBalance(Started, Filter);
         }
@@ -273,6 +269,9 @@ public class XslReport : IXmlSerializable
             balance = value.GetBalance(Posted, Filter);
             previous = value.GetBalance(Started, Filter);
         }
+
+        writer.WriteElementString("equity", XmlConvert.ToString(value == Company.Accounts[Company.EquityAccountId]));
+        writer.WriteElementString("other-equity", XmlConvert.ToString(value == Company.Accounts[Company.OtherEquityAccountId]));
 
         if (balance < 0)
         {
@@ -308,6 +307,7 @@ public class XslReport : IXmlSerializable
         }
 
         writer.WriteElementString("name", value.Name);
+        writer.WriteElementString("other-equity", XmlConvert.ToString(value.Lines.Any(x => x.AccountId == Company.OtherEquityAccountId)));
 
         IOrderedEnumerable<Line> lines = value.OrderedLines.ThenBy(x => Company.Accounts[x.AccountId].Number);
 
@@ -326,6 +326,7 @@ public class XslReport : IXmlSerializable
         writer.WriteElementString("debit", XmlConvert.ToString(value.Debit));
         writer.WriteElementString("credit", XmlConvert.ToString(value.Credit));
         writer.WriteElementString("description", value.Description);
+        writer.WriteElementString("other-equity", XmlConvert.ToString(value.AccountId == Company.OtherEquityAccountId));
         writer.WriteEndElement();
     }
 
