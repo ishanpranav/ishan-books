@@ -13,8 +13,16 @@ Licensed under the MIT License.
     exclude-result-prefixes="msxsl">
     <xsl:include href="financial-statement.xslt"/>
     <xsl:output method="html" indent="yes"/>
+    <xsl:key name="lines-by-account" match="line[ancestor::transaction[other-equity = 'true']]" use="account"/>
+    <xsl:variable name="complexTransactions" select="count(//transaction[other-equity = 'true' and count(line) &gt; 2])"/>
     <xsl:template name="comprehensive-income-statement">
         <xsl:param name="title"/>
+        <xsl:if test="$complexTransactions &gt; 0">
+            <dialog id="warningDialog" open="open">
+                Warning! The general journal contains <xsl:value-of select="$complexTransactions"/> complex adjustments. For transactions that impact other comprehensive income or loss, please ensure that there is exactly one debit account and exactly one credit account.
+                <button id="closeButton" onclick="document.getElementById('warningDialog').close()">Close</button>
+            </dialog>
+        </xsl:if>
         <table>
             <thead>
                 <tr>
@@ -49,7 +57,18 @@ Licensed under the MIT License.
                         <xsl:value-of select="liber:fm(-$netIncome)"/>
                     </th>
                 </tr>
-
+                <xsl:for-each select="//line[other-equity = 'false' and ancestor::transaction[other-equity = 'true'] and generate-id() = generate-id(key('lines-by-account', account)[1])]">
+                    <xsl:sort select="account" data-type="text" order="ascending"/>
+                    <tr>
+                        <td class="in-2 left account">
+                            <xsl:value-of select="account"/>
+                        </td>
+                        <td class="right">
+                            <xsl:variable name="lines-for-account" select="key('lines-by-account', account)"/>
+                            <xsl:value-of select="liber:fm(sum($lines-for-account/debit) - sum($lines-for-account/credit))"/>
+                        </td>
+                    </tr>
+                </xsl:for-each>
                 <tr>
                     <th class="in-1 left">
                         <xsl:value-of select="liber:pngets('other-comprehensive-income', -$otherComprehensiveIncome)"/>
