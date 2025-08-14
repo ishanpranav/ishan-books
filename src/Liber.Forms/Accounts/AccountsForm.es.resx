@@ -65,6 +65,9 @@
   <data name="balanceColumn.Text" xml:space="preserve">
     <value>Saldo</value>
   </data>
+  <data name="cashFlowColumn.Text" xml:space="preserve">
+    <value>Flujo de efectivo</value>
+  </data>
   <data name="editAccountToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>262, 22</value>
   </data>

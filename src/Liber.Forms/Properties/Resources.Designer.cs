@@ -116,6 +116,15 @@ namespace Liber.Forms.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The password you entered is incorrect. Please try again..
+        /// </summary>
+        internal static string IncorrectPasswordError {
+            get {
+                return ResourceManager.GetString("IncorrectPasswordError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please select a valid account..
         /// </summary>
         internal static string InvalidAccountError {
