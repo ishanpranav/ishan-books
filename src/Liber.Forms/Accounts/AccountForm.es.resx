@@ -146,6 +146,9 @@
   <data name="cancelButton.Text" xml:space="preserve">
     <value>&amp;Cancelar</value>
   </data>
+  <data name="cashFlowComboBox.HelpString" xml:space="preserve">
+    <value>Especifica la información de flujo de efectivo para la cuenta.</value>
+  </data>
   <data name="cashFlowComboBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>144, 219</value>
   </data>
@@ -202,6 +205,9 @@
   </data>
   <data name="label6.Text" xml:space="preserve">
     <value>N&amp;otas</value>
+  </data>
+  <data name="label7.Text" xml:space="preserve">
+    <value>Co&amp;lor</value>
   </data>
   <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 222</value>

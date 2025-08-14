@@ -17,11 +17,13 @@ using Liber.Forms.Properties;
 using Liber.Forms.Reports;
 using Liber.Forms.Reports.Xsl;
 using Liber.Forms.Saving;
+using Liber.Forms.Taxes;
 using Liber.Forms.Transactions;
 using Liber.Forms.Writers;
 using Liber.Sqlite;
 using Liber.Writers;
 using MessagePack;
+using Microsoft.Data.Sqlite;
 using Microsoft.WindowsAPICodePack.Taskbar;
 
 namespace Liber.Forms;
@@ -298,19 +300,51 @@ internal sealed partial class MainForm : Form
 
     private async Task ImportSqliteCompanyAsync(string path)
     {
-        using PasswordForm form = new PasswordForm();
-
-        if (form.ShowDialog() != DialogResult.OK)
+        if (await SqliteSerializer.CheckPasswordAsync(path, string.Empty))
         {
-            return;
+            try
+            {
+                (await SqliteSerializer.DeserializeAsync(path, string.Empty)).CopyTo(_company);
+
+                return;
+            }
+            catch (SqliteException) { }
         }
 
-        if (!await SqliteSerializer.CheckPasswordAsync(path, form.Password))
-        {
-            MessageBox.Show("bad password");
-        }
+        DialogResult result;
+        string password;
 
-        (await SqliteSerializer.DeserializeAsync(path, form.Password)).CopyTo(_company);
+        do
+        {
+            using PasswordForm form = new PasswordForm();
+
+            if (form.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+
+            password = form.Password;
+
+            if (await SqliteSerializer.CheckPasswordAsync(path, password))
+            {
+                break;
+            }
+
+            result = MessageBox.Show(
+                Resources.IncorrectPasswordError,
+                Resources.ExceptionCaption,
+                MessageBoxButtons.AbortRetryIgnore,
+                MessageBoxIcon.Warning,
+                MessageBoxDefaultButton.Button2);
+
+            if (result == DialogResult.Abort)
+            {
+                return;
+            }
+        }
+        while (result == DialogResult.Retry);
+
+        (await SqliteSerializer.DeserializeAsync(path, password)).CopyTo(_company);
     }
 
     private async Task ImportAsync(string path)
@@ -560,6 +594,41 @@ internal sealed partial class MainForm : Form
     private void OnReportsToolStripMenuItemClick(object sender, EventArgs e)
     {
         _factory.Register(Guid.NewGuid(), new ReportsForm(_engine));
+    }
+
+    private void OnTaxesToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        DialogResult result;
+
+        do
+        {
+            using PasswordForm form = new PasswordForm();
+
+            if (form.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+
+            if (form.Password == "12004")
+            {
+                break;
+            }
+
+            result = MessageBox.Show(
+                Resources.IncorrectPasswordError,
+                Resources.ExceptionCaption,
+                MessageBoxButtons.AbortRetryIgnore,
+                MessageBoxIcon.Warning,
+                MessageBoxDefaultButton.Button2);
+
+            if (result == DialogResult.Abort)
+            {
+                return;
+            }
+        }
+        while (result == DialogResult.Retry);
+
+        _factory.Register(Guid.NewGuid(), new TaxesForm());
     }
 
     private void OnTransactionToolStripMenuItemClick(object sender, EventArgs e)

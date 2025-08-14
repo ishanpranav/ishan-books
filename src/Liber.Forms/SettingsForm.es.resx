@@ -86,4 +86,10 @@
   <data name="label2.Text" xml:space="preserve">
     <value>La aplicación debe reiniciarse para que los cambios de idioma y región surtan efecto.</value>
   </data>
+  <data name="resetButton.HelpString" xml:space="preserve">
+    <value>Restaura la configuración predeterminada y borra todas las preferencias del usuario.</value>
+  </data>
+  <data name="resetButton.Text" xml:space="preserve">
+    <value>&amp;Restablecer</value>
+  </data>
 </root>

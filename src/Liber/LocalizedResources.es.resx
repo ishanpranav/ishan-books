@@ -120,6 +120,9 @@
   <data name="Accounts" xml:space="preserve">
     <value>Cuentas</value>
   </data>
+  <data name="CashFlow" xml:space="preserve">
+    <value>Flujo de efectivo</value>
+  </data>
   <data name="Check" xml:space="preserve">
     <value>Cheque</value>
   </data>
@@ -250,6 +253,9 @@
   <data name="_d_Cash" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
+  <data name="_d_Cash" xml:space="preserve">
+    <value>Efectivo/Equivalentes al efectivo</value>
+  </data>
   <data name="_d_Check" xml:space="preserve">
     <value>Especifica el cheque para usar como fuente de datos.</value>
   </data>
@@ -277,11 +283,17 @@
   <data name="_d_Filter" xml:space="preserve">
     <value>Especifica la expresión regular utilizada para filtrar las transacciones. Solo se incluyen en el informe las transacciones con memorandos que coincidan con la expresión regular dada.</value>
   </data>
+  <data name="_d_Financing" xml:space="preserve">
+    <value>Financiación</value>
+  </data>
   <data name="_d_FixedAsset" xml:space="preserve">
     <value>Activo fijo</value>
   </data>
   <data name="_d_Font" xml:space="preserve">
     <value>Especifica la fuente y el estilo de fuente a utilizar para el documento.</value>
+  </data>
+  <data name="_d_GainLoss" xml:space="preserve">
+    <value>Ganancia/Pérdida</value>
   </data>
   <data name="_d_Income" xml:space="preserve">
     <value>Ingreso</value>
@@ -291,6 +303,9 @@
   </data>
   <data name="_d_Individual" xml:space="preserve">
     <value>Individuo</value>
+  </data>
+  <data name="_d_Investing" xml:space="preserve">
+    <value>Inversión</value>
   </data>
   <data name="_d_LongTermLiability" xml:space="preserve">
     <value>Pasivo a largo plazo</value>
@@ -307,6 +322,9 @@
   <data name="_d_Operating" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
+  <data name="_d_Operating" xml:space="preserve">
+    <value>Operación</value>
+  </data>
   <data name="_d_Other" xml:space="preserve">
     <value>Otro</value>
   </data>
@@ -321,6 +339,9 @@
   </data>
   <data name="_d_OtherCurrentLiability" xml:space="preserve">
     <value>Otro pasivo corriente</value>
+  </data>
+  <data name="_d_OtherEquity" xml:space="preserve">
+    <value>Otro resultado integral</value>
   </data>
   <data name="_d_OtherIncomeExpense" xml:space="preserve">
     <value>Otro ingreso/gasto</value>

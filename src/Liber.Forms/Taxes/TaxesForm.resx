@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,34 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Account" xml:space="preserve">
-    <value>cuenta</value>
-  </data>
-  <data name="CancelCaption" xml:space="preserve">
-    <value>Guardar cambios</value>
-  </data>
-  <data name="CompaniesJumpListCustomCategory" xml:space="preserve">
-    <value>Empresas</value>
-  </data>
-  <data name="ExceptionCaption" xml:space="preserve">
-    <value>Error</value>
-  </data>
-  <data name="ImbalanceError" xml:space="preserve">
-    <value>La transacción no está balanceada. Por favor, asegúrate de que la suma de la columna de débito sea igual a la suma de la columna de crédito.</value>
-  </data>
-  <data name="IncorrectPasswordError" xml:space="preserve">
-    <value>La contraseña que ingresaste es incorrecta. Por favor, inténtalo de nuevo</value>
-  </data>
-  <data name="InvalidAccountError" xml:space="preserve">
-    <value>Por favor, selecciona una cuenta válida.</value>
-  </data>
-  <data name="Name" xml:space="preserve">
-    <value>Nombre</value>
-  </data>
-  <data name="NoAccount" xml:space="preserve">
-    <value>Ninguna cuenta</value>
-  </data>
-  <data name="Number" xml:space="preserve">
-    <value>Número</value>
-  </data>
 </root>

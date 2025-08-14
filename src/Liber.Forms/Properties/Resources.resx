@@ -136,6 +136,9 @@
   <data name="ImbalanceError" xml:space="preserve">
     <value>The transaction does not balance. Please ensure that total amount entered in the debit column is equal to the total amount entered in the credit column.</value>
   </data>
+  <data name="IncorrectPasswordError" xml:space="preserve">
+    <value>The password you entered is incorrect. Please try again.</value>
+  </data>
   <data name="InvalidAccountError" xml:space="preserve">
     <value>Please select a valid account.</value>
   </data>
