@@ -187,6 +187,16 @@ public static class SqliteSerializer
             await using SqliteConnection connection = CreateConnection(path, password);
 
             await connection.OpenAsync();
+
+            await using (SqliteCommand command = connection.CreateCommand())
+            {
+                command.CommandText = Queries.SelectCompany;
+
+                await using (SqliteDataReader reader = await command.ExecuteReaderAsync(CommandBehavior.SingleRow))
+                {
+                    await reader.ReadAsync();
+                }
+            }
         }
         catch (SqliteException)
         {

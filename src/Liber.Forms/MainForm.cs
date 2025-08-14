@@ -302,13 +302,7 @@ internal sealed partial class MainForm : Form
     {
         if (await SqliteSerializer.CheckPasswordAsync(path, string.Empty))
         {
-            try
-            {
-                (await SqliteSerializer.DeserializeAsync(path, string.Empty)).CopyTo(_company);
-
-                return;
-            }
-            catch (SqliteException) { }
+            return;
         }
 
         DialogResult result;
