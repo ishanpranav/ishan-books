@@ -75,8 +75,10 @@ partial class TaxesForm
         toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
         helpToolStripButton = new System.Windows.Forms.ToolStripButton();
         componentTabControl = new System.Windows.Forms.TabControl();
+        statementTabPage = new System.Windows.Forms.TabPage();
         menuStrip1.SuspendLayout();
         toolStrip1.SuspendLayout();
+        componentTabControl.SuspendLayout();
         SuspendLayout();
         // 
         // menuStrip1
@@ -303,11 +305,18 @@ partial class TaxesForm
         // componentTabControl
         // 
         resources.ApplyResources(componentTabControl, "componentTabControl");
+        componentTabControl.Controls.Add(statementTabPage);
         componentTabControl.Multiline = true;
         componentTabControl.Name = "componentTabControl";
         componentTabControl.SelectedIndex = 0;
         componentTabControl.Selected += OnComponentTabControlSelected;
         componentTabControl.Deselected += OnComponentTabControlDeselected;
+        // 
+        // statementTabPage
+        // 
+        resources.ApplyResources(statementTabPage, "statementTabPage");
+        statementTabPage.Name = "statementTabPage";
+        statementTabPage.UseVisualStyleBackColor = true;
         // 
         // TaxesForm
         // 
@@ -321,6 +330,7 @@ partial class TaxesForm
         menuStrip1.PerformLayout();
         toolStrip1.ResumeLayout(false);
         toolStrip1.PerformLayout();
+        componentTabControl.ResumeLayout(false);
         ResumeLayout(false);
         PerformLayout();
     }
@@ -369,4 +379,5 @@ partial class TaxesForm
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
     private System.Windows.Forms.ToolStripButton helpToolStripButton;
     private System.Windows.Forms.TabControl componentTabControl;
+    private System.Windows.Forms.TabPage statementTabPage;
 }

@@ -3,20 +3,25 @@
 // Licensed under the MIT License.
 
 using System.Collections.Generic;
+using Liber.TaxNodes;
 
-namespace Liber.Forms.Taxes;
+namespace Liber;
 
-internal sealed class TaxComponent
+public class TaxComponent
 {
-    public TaxComponent(string name, string description)
+    public TaxComponent(
+        string name,
+        string description,
+        IReadOnlyCollection<TaxNode> lines)
     {
         Name = name;
         Description = description;
+        Lines = lines;
     }
 
     public string Name { get; }
     public string Description { get; }
-    public IReadOnlyCollection<TaxNode> Lines { get; } = new List<TaxNode>();
+    public IReadOnlyCollection<TaxNode> Lines { get; } 
     public string FullName
     {
         get
