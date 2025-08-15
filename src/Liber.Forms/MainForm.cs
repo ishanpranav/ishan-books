@@ -23,7 +23,6 @@ using Liber.Forms.Writers;
 using Liber.Sqlite;
 using Liber.Writers;
 using MessagePack;
-using Microsoft.Data.Sqlite;
 using Microsoft.WindowsAPICodePack.Taskbar;
 
 namespace Liber.Forms;
@@ -173,8 +172,12 @@ internal sealed partial class MainForm : Form
         recentPathsToolStripMenuItem.Visible = true;
         recentPathsToolStripSeparator.Visible = true;
 
-        list.AddCustomCategories(companiesCategory);
-        list.Refresh();
+        try
+        {
+            list.AddCustomCategories(companiesCategory);
+            list.Refresh();
+        }
+        catch (UnauthorizedAccessException) { }
     }
 
     private async void OnNewToolStripMenuItemClick(object sender, EventArgs e)
@@ -302,6 +305,8 @@ internal sealed partial class MainForm : Form
     {
         if (await SqliteSerializer.CheckPasswordAsync(path, string.Empty))
         {
+            (await SqliteSerializer.DeserializeAsync(path, string.Empty)).CopyTo(_company);
+
             return;
         }
 
@@ -622,7 +627,7 @@ internal sealed partial class MainForm : Form
         }
         while (result == DialogResult.Retry);
 
-        _factory.Register(Guid.NewGuid(), new TaxesForm());
+        _factory.Register(Guid.NewGuid(), new TaxesForm(_company));
     }
 
     private void OnTransactionToolStripMenuItemClick(object sender, EventArgs e)

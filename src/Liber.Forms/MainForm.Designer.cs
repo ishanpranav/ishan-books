@@ -88,7 +88,6 @@ partial class MainForm
         // 
         // _menuStrip
         // 
-        _menuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
         _menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { fileToolStripMenuItem, editToolStripMenuItem1, viewToolStripMenuItem, reportsToolStripMenuItem1, helpToolStripMenuItem });
         resources.ApplyResources(_menuStrip, "_menuStrip");
         _menuStrip.Name = "_menuStrip";
@@ -318,7 +317,6 @@ partial class MainForm
         // 
         // _toolStrip
         // 
-        _toolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
         _toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripButton, openToolStripButton, saveToolStripButton, toolStripSeparator6, helpToolStripButton });
         resources.ApplyResources(_toolStrip, "_toolStrip");
         _toolStrip.Name = "_toolStrip";

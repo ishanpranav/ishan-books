@@ -3,51 +3,46 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Liber.TaxNodes;
 
+[JsonDerivedType(typeof(AccountTaxNode), "account")]
+[JsonDerivedType(typeof(NotImplementedTaxNode), "not-implemented")]
+[JsonDerivedType(typeof(SumTaxNode), "sum")]
 public abstract class TaxNode
 {
-    protected TaxNode(string name, string description)
+    private decimal? _value;
+
+    public string? Name { get; set; }
+    public string? Description { get; set; }
+
+    public event EventHandler<DecimalEventArgs>? Evaluated;
+
+    public decimal Evaluate(DateTime started, DateTime posted)
     {
-        Name = name;
-        Description = description;
-    }
-
-    public string Name { get; }
-    public string Description { get; }
-    public decimal? Value { get; private set; }
-    public event EventHandler? Evaluated;
-
-    public IReadOnlyCollection<TaxNode> Dependencies { get; } = new List<TaxNode>();
-
-    public void Evaluate()
-    {
-        if (Value != null)
+        if (_value is decimal result)
         {
-            return;
+            return result;
         }
 
-        foreach (TaxNode dependency in Dependencies)
-        {
-            dependency.Evaluate();
-        }
+        result = EvaluateCore(started, posted);
+        _value = result;
 
-        Value = EvaluateCore();
+        OnEvaluated(new DecimalEventArgs(result));
 
-        OnEvaluated(EventArgs.Empty);
+        return result;
     }
 
-    protected abstract decimal EvaluateCore();
+    protected abstract decimal EvaluateCore(DateTime started, DateTime posted);
 
-    protected virtual void OnEvaluated(EventArgs e)
+    protected virtual void OnEvaluated(DecimalEventArgs e)
     {
         Evaluated?.Invoke(sender: this, e);
     }
 
     public void Clear()
     {
-        Value = null;
+        _value = null;
     }
 }

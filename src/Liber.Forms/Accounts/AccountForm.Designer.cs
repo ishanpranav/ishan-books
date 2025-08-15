@@ -170,7 +170,6 @@
             // taxTypeComboBox
             // 
             resources.ApplyResources(taxTypeComboBox, "taxTypeComboBox");
-            taxTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             taxTypeComboBox.FormattingEnabled = true;
             _helpProvider.SetHelpString(taxTypeComboBox, resources.GetString("taxTypeComboBox.HelpString"));
             taxTypeComboBox.Name = "taxTypeComboBox";
