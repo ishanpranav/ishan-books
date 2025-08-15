@@ -21,12 +21,94 @@
             "description": "U.S. Individual Income Tax Return",
             "lines": [
                 {
+                    "$id": "2023-f1040-1a",
                     "$type": "sum",
                     "name": "1a",
                     "description": "Total amount from Form(s) W-2, box 1",
                     "addends": [
                         { "$ref": "2023-fw2-1" }
                     ]
+                },
+                {
+                    "$id": "2023-f1040-1b",
+                    "$type": "not-implemented",
+                    "name": "1b",
+                    "description": "Household employee wages not reported on Form(s) W-2"
+                },
+                {
+                    "$id": "2023-f1040-1c",
+                    "$type": "not-implemented",
+                    "name": "1c",
+                    "description": "Tip income not reported on line 1a"
+                },
+                {
+                    "$id": "2023-f1040-1d",
+                    "$type": "not-implemented",
+                    "name": "1d",
+                    "description": "Medicaid waiver payments not reported on Form(s) W-2"
+                },
+                {
+                    "$id": "2023-f1040-1e",
+                    "$type": "not-implemented",
+                    "name": "1e",
+                    "description": "Taxable dependent care benefits from Form 2441, line 26"
+                },
+                {
+                    "$id": "2023-f1040-1f",
+                    "$type": "not-implemented",
+                    "name": "1f",
+                    "description": "Employer-provided adoption benefits from Form 8839, line 29"
+                },
+                {
+                    "$id": "2023-f1040-1g",
+                    "$type": "not-implemented",
+                    "name": "1g",
+                    "description": "Wages from Form 8919, line 6"
+                },
+                {
+                    "$id": "2023-f1040-1h",
+                    "$type": "not-implemented",
+                    "name": "1h",
+                    "description": "Other earned income"
+                },
+                {
+                    "$id": "2023-f1040-1i",
+                    "$type": "not-implemented",
+                    "name": "1i",
+                    "description": "Nontaxable combat pay election"
+                },
+                {
+                    "$id": "2023-f1040-1z",
+                    "$type": "sum",
+                    "name": "1z",
+                    "description": "Add lines 1a through 1h",
+                    "addends": [
+                        { "$ref": "2023-f1040-1a" },
+                        { "$ref": "2023-f1040-1b" },
+                        { "$ref": "2023-f1040-1c" },
+                        { "$ref": "2023-f1040-1d" },
+                        { "$ref": "2023-f1040-1e" },
+                        { "$ref": "2023-f1040-1f" },
+                        { "$ref": "2023-f1040-1g" },
+                        { "$ref": "2023-f1040-1h" },
+                        { "$ref": "2023-f1040-1i" }
+                    ]
+                },
+                {
+                    "$id": "2023-f1040-2a",
+                    "$type": "account",
+                    "type": "income",
+                    "taxType": "f1040-2a",
+                    "name": "2a",
+                    "description": "Tax-exempt interest"
+                },
+                {
+                    "$id": "2023-f1040-2b",
+                    "$type": "account",
+                    "type": "income",
+                    "taxType": "f1040-2b",
+                    "name": "2b",
+                    "description": "Taxable interest"
                 }
             ]
         }
