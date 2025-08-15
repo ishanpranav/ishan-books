@@ -24,31 +24,40 @@ internal sealed class ImportRule
     [TypeConverter(typeof(LocalizedEnumConverter))]
     public CashFlow CashFlow { get; set; }
 
+    [LocalizedDisplayName(nameof(TaxType))]
+    public string? TaxType { get; set; }
+
     [LocalizedDisplayName(nameof(Strict))]
     [TypeConverter(typeof(LocalizedEnumConverter))]
     public bool Strict { get; set; }
 
     public void Apply(IEnumerable<Account> accounts)
     {
-        if (Type == AccountType.None && CashFlow == CashFlow.None)
+        if (Type == AccountType.None && CashFlow == CashFlow.None && TaxType == null)
         {
             return;
         }
 
         foreach (Account account in accounts)
         {
-            if (Filter.IsMatch(account.Name))
+            if (!Filter.IsMatch(account.Name))
             {
-                if (Type != AccountType.None &&
-                    (Strict || account.Type.IsUncategorized()))
-                {
-                    account.Type = Type;
-                }
+                continue;
+            }
 
-                if (CashFlow != CashFlow.None && (Strict || account.CashFlow == CashFlow.None))
-                {
-                    account.CashFlow = CashFlow;
-                }
+            if (Type != AccountType.None && (Strict || account.Type.IsUncategorized()))
+            {
+                account.Type = Type;
+            }
+
+            if (CashFlow != CashFlow.None && (Strict || account.CashFlow == CashFlow.None))
+            {
+                account.CashFlow = CashFlow;
+            }
+
+            if (TaxType != null && (Strict || account.TaxType == null || account.TaxType == "T" || account.TaxType == "F"))
+            {
+                account.TaxType = TaxType;
             }
         }
     }

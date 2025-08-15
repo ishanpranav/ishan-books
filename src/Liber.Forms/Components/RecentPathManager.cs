@@ -98,9 +98,18 @@ internal sealed class RecentPathManager : Component
 
     private void Load()
     {
-        Dictionary<DateTime, string>? paths = JsonSerializer.Deserialize<Dictionary<DateTime, string>>(Settings.Default.RecentPaths, FormattedStrings.JsonOptions);
+        Dictionary<DateTime, string>? paths;
 
-        if (paths == null)
+        try
+        {
+            paths = JsonSerializer.Deserialize<Dictionary<DateTime, string>>(Settings.Default.RecentPaths, FormattedStrings.JsonOptions);
+
+            if (paths == null)
+            {
+                return;
+            }
+        }
+        catch (JsonException)
         {
             return;
         }

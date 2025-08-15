@@ -19,11 +19,8 @@ namespace Liber.Forms.Reports.Xsl;
 /// Represents an XSL template for generating formatted financial reports.
 /// </summary>
 [XmlRoot("report")]
-public class XslReport : IXmlSerializable
+public class XslReport : IntervalView, IXmlSerializable
 {
-    private DateTime _started = new DateTime(DateTime.Today.Year, 1, 1);
-    private DateTime _posted = DateTime.Today;
-
     /// <summary>
     /// Initializes a new instance of the <see cref="XslReport"/> class.
     /// </summary>
@@ -62,46 +59,6 @@ public class XslReport : IXmlSerializable
     [LocalizedDescription(nameof(Redaction))]
     [LocalizedDisplayName(nameof(Redaction))]
     public string? Redaction { get; set; }
-
-    [LocalizedCategory(nameof(Started))]
-    [LocalizedDescription(nameof(Started))]
-    [LocalizedDisplayName(nameof(Started))]
-    public DateTime Started
-    {
-        get
-        {
-            return _started;
-        }
-        set
-        {
-            if (value > _posted)
-            {
-                _posted = value;
-            }
-
-            _started = value;
-        }
-    }
-
-    [LocalizedCategory(nameof(Posted))]
-    [LocalizedDescription(nameof(Posted))]
-    [LocalizedDisplayName(nameof(Posted))]
-    public DateTime Posted
-    {
-        get
-        {
-            return _posted;
-        }
-        set
-        {
-            if (value < _started)
-            {
-                _started = value;
-            }
-
-            _posted = value;
-        }
-    }
 
     [LocalizedCategory(nameof(Filter))]
     [LocalizedDescription(nameof(Filter))]

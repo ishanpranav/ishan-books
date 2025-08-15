@@ -1,0 +1,34 @@
+{
+    "forms": [
+        {
+            "$id": "2023-fw2",
+            "name": "2023 Form W-2",
+            "description": "Wage and Tax Statement",
+            "lines": [
+                {
+                    "$id": "2023-fw2-1",
+                    "$type": "account",
+                    "type": "income",
+                    "taxType": "fw2-1",
+                    "name": "1",
+                    "description": "Wages, tips, other compensation"
+                }
+            ]
+        },
+        {
+            "$id": "2023-f1040",
+            "name": "2023 Form 1040",
+            "description": "U.S. Individual Income Tax Return",
+            "lines": [
+                {
+                    "$type": "sum",
+                    "name": "1a",
+                    "description": "Total amount from Form(s) W-2, box 1",
+                    "addends": [
+                        { "$ref": "2023-fw2-1" }
+                    ]
+                }
+            ]
+        }
+    ]
+}

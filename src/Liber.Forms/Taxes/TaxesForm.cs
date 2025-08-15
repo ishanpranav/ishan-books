@@ -3,33 +3,49 @@
 // Licensed under the MIT License.
 
 using System;
+using System.IO;
 using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Windows.Forms;
+using Liber.Forms.Accounts;
 using Liber.TaxNodes;
 
 namespace Liber.Forms.Taxes;
 
-public partial class TaxesForm : Form
+internal partial class TaxesForm : Form
 {
-    private TaxNode[] _lines = new TaxNode[]
-    {
-        new NotImplementedTaxNode("1a", "Total amount from Form(s) W-2, box 1")
-    };
-    private TaxComponent _f1040;
-    private TaxComponent[] _forms;
-
-    public TaxesForm()
+    private Tax? _tax;
+    private Company _company;
+    
+    public TaxesForm(Company company)
     {
         InitializeComponent();
         SystemFeatures.Initialize(this);
 
-        _f1040 = new TaxComponent("2023 Form 1040", "U.S. Individual Income Tax Return", _lines.Take(1).ToList());
-        _forms = new TaxComponent[]
-        {
-            _f1040
-        };
+        _company = company;
+    }
 
-        foreach (TaxComponent form in _forms)
+    private async void OnLoad(object sender, EventArgs e)
+    {
+        using (FileStream input = File.OpenRead(Path.Combine("data", Path.ChangeExtension("tax", "json"))))
+        {
+            _tax = await JsonSerializer.DeserializeAsync<Tax>(input, new JsonSerializerOptions(FormattedStrings.JsonOptions)
+            {
+                ReferenceHandler = ReferenceHandler.Preserve
+            });
+        }
+
+        if (_tax == null)
+        {
+            _tax = new Tax();
+        }
+
+        TaxView view = new TaxView(_tax);
+
+        _propertyGrid.SelectedObject = view;
+
+        foreach (TaxComponent form in _tax.Forms)
         {
             TabPage page = new TabPage(form.Name)
             {
@@ -67,32 +83,47 @@ public partial class TaxesForm : Form
             {
                 HeaderText = "Action"
             });
+            grid.CellContentClick += OnDataGridViewCellContentClick;
 
             page.Controls.Add(grid);
-            componentTabControl.TabPages.Add(page);
+            _tabControl.TabPages.Add(page);
 
             foreach (TaxNode line in form.Lines)
             {
-                grid.Rows.Add(line.Name, line.Description);
+                int index = grid.Rows.Add(line.Name, line.Description, null, GetEditString(line));
+
+                line.Evaluated += (sender, e) =>
+                {
+                    grid.Rows[index].Cells[2].Value = e.Value;
+                };
+
+                grid.Rows[index].Tag = line;
+
+                if (line is AccountTaxNode accountLine && accountLine.TaxType != null)
+                {
+                    accountLine.Accounts = _company.Accounts.Values
+                        .Where(x => x.TaxType == accountLine.TaxType)
+                        .ToHashSet();
+                }
             }
 
             grid.AutoResizeColumns();
             grid.Refresh();
         }
 
-        TabPage swap = componentTabControl.TabPages[0];
+        TabPage swap = _tabControl.TabPages[0];
 
-        componentTabControl.TabPages.RemoveAt(0);
-        componentTabControl.TabPages.Add(swap);
-        SelectTab(componentTabControl.TabPages[0]);
+        _tabControl.TabPages.RemoveAt(0);
+        _tabControl.TabPages.Add(swap);
+        SelectTab(_tabControl.TabPages[0]);
+        Evaluate();
     }
 
     private void Evaluate()
     {
-        foreach (TaxNode line in _lines)
-        {
-            line.Evaluate();
-        }
+        TaxView view = (TaxView)_propertyGrid.SelectedObject;
+
+        _tax?.Evaluate(view.Started, view.Posted);
     }
 
     private static void SelectTab(TabPage page)
@@ -103,7 +134,17 @@ public partial class TaxesForm : Form
         }
     }
 
-    private void OnComponentTabControlSelected(object sender, TabControlEventArgs e)
+    private static string GetEditString(TaxNode line)
+    {
+        if (line is AccountTaxNode)
+        {
+            return "Edit";
+        }
+
+        return "Override";
+    }
+
+    private void OnTabControlSelected(object sender, TabControlEventArgs e)
     {
         if (e.TabPage == null)
         {
@@ -113,7 +154,7 @@ public partial class TaxesForm : Form
         SelectTab(e.TabPage);
     }
 
-    private void OnComponentTabControlDeselected(object sender, TabControlEventArgs e)
+    private void OnTabControlDeselected(object sender, TabControlEventArgs e)
     {
         if (e.TabPage == null || e.TabPage.Tag is not TaxComponent form)
         {
@@ -121,5 +162,33 @@ public partial class TaxesForm : Form
         }
 
         e.TabPage.Text = form.Name;
+    }
+
+    private void OnPropertyGridPropertyValueChanged(object sender, PropertyValueChangedEventArgs e)
+    {
+        Evaluate();
+    }
+
+    private void OnDataGridViewCellContentClick(object? sender, DataGridViewCellEventArgs e)
+    {
+        if (e.RowIndex < 0 || e.ColumnIndex != 3)
+        {
+            return;
+        }
+
+        DataGridView grid = (DataGridView)sender!;
+        TaxNode line = (TaxNode)grid.Rows[e.RowIndex].Tag!;
+
+        if (line is AccountTaxNode accountLine)
+        {
+            using AccountsDialog form = new AccountsDialog(new AccountsView(_company, accountLine.Accounts));
+
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                accountLine.Accounts = form.Value.Values;
+
+                Evaluate();
+            }
+        }
     }
 }

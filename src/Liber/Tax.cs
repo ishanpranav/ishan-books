@@ -2,42 +2,46 @@
 // Copyright (c) 2023-2025 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using Liber.TaxNodes;
 
 namespace Liber;
 
 public class Tax
 {
-    internal readonly List<TaxComponent> components = new List<TaxComponent>();
-    internal readonly List<TaxNode> nodes = new List<TaxNode>();
+    private readonly HashSet<TaxNode> _lines = new HashSet<TaxNode>();
 
-    public IReadOnlyCollection<TaxComponent> Components
+    public IReadOnlyCollection<TaxComponent> Forms { get; set; } = new List<TaxComponent>();
+
+    [JsonIgnore]
+    public IReadOnlyCollection<TaxNode> Lines
     {
         get
         {
-            return components;
+            return _lines;
         }
     }
 
-    public IReadOnlyCollection<TaxNode> Nodes
+    public void Evaluate(DateTime started, DateTime posted)
     {
-        get
+        foreach (TaxComponent component in Forms)
         {
-            return nodes;
-        }
-    }
-
-    public void Evaluate()
-    {
-        foreach (TaxNode node in nodes)
-        {
-            node.Clear();
+            foreach (TaxNode node in component.Lines)
+            {
+                _lines.Add(node);
+            }
         }
 
-        foreach (TaxNode node in nodes)
+        foreach (TaxNode line in _lines)
         {
-            node.Evaluate();
+            line.Clear();
+        }
+
+        foreach (TaxNode line in _lines)
+        {
+            line.Evaluate(started, posted);
         }
     }
 }

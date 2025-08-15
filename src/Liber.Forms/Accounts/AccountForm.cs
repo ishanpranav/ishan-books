@@ -21,7 +21,6 @@ internal abstract partial class AccountForm : Form
         Company = company;
         DialogResult = DialogResult.Cancel;
         typeComboBox.DataSource = AccountTypeExtensions.GetSortedValues();
-        taxTypeComboBox.DataSource = Enum.GetValues<TaxType>();
         cashFlowComboBox.DataSource = Enum.GetValues<CashFlow>();
         numberNumericUpDown.Maximum = decimal.MaxValue;
     }
@@ -40,15 +39,15 @@ internal abstract partial class AccountForm : Form
         }
     }
 
-    protected TaxType TaxType
+    protected string? TaxType
     {
         get
         {
-            return (TaxType)taxTypeComboBox.SelectedItem!;
+            return taxTypeComboBox.Text;
         }
         set
         {
-            taxTypeComboBox.SelectedItem = value;
+            taxTypeComboBox.Text = value;
         }
     }
 

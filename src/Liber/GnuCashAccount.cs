@@ -28,22 +28,5 @@ public class GnuCashAccount
     [Optional]
     public string Namespace { get; set; } = "CURRENCY";
 
-    [BooleanFalseValues("F")]
-    [BooleanTrueValues("T")]
-    [Index(10)]
-    [Name("Tax Info")]
-    [Optional]
-    public bool TaxRelated
-    {
-        get
-        {
-            return Value.TaxType != TaxType.None;
-        }
-        set
-        {
-            Value.TaxType = value ? TaxType.Other : TaxType.None;
-        }
-    }
-
     public Account Value { get; set; } = new Account();
 }

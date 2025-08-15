@@ -74,16 +74,21 @@ partial class TaxesForm
         pasteToolStripButton = new System.Windows.Forms.ToolStripButton();
         toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
         helpToolStripButton = new System.Windows.Forms.ToolStripButton();
-        componentTabControl = new System.Windows.Forms.TabControl();
+        _tabControl = new System.Windows.Forms.TabControl();
         statementTabPage = new System.Windows.Forms.TabPage();
+        splitContainer1 = new System.Windows.Forms.SplitContainer();
+        _propertyGrid = new System.Windows.Forms.PropertyGrid();
         menuStrip1.SuspendLayout();
         toolStrip1.SuspendLayout();
-        componentTabControl.SuspendLayout();
+        _tabControl.SuspendLayout();
+        ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
+        splitContainer1.Panel1.SuspendLayout();
+        splitContainer1.Panel2.SuspendLayout();
+        splitContainer1.SuspendLayout();
         SuspendLayout();
         // 
         // menuStrip1
         // 
-        menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
         menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { fileToolStripMenuItem, editToolStripMenuItem, toolsToolStripMenuItem, helpToolStripMenuItem });
         resources.ApplyResources(menuStrip1, "menuStrip1");
         menuStrip1.Name = "menuStrip1";
@@ -239,7 +244,6 @@ partial class TaxesForm
         // 
         // toolStrip1
         // 
-        toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
         toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripButton, openToolStripButton, saveToolStripButton, printToolStripButton, toolStripSeparator6, cutToolStripButton, copyToolStripButton, pasteToolStripButton, toolStripSeparator7, helpToolStripButton });
         resources.ApplyResources(toolStrip1, "toolStrip1");
         toolStrip1.Name = "toolStrip1";
@@ -302,15 +306,15 @@ partial class TaxesForm
         resources.ApplyResources(helpToolStripButton, "helpToolStripButton");
         helpToolStripButton.Name = "helpToolStripButton";
         // 
-        // componentTabControl
+        // _tabControl
         // 
-        resources.ApplyResources(componentTabControl, "componentTabControl");
-        componentTabControl.Controls.Add(statementTabPage);
-        componentTabControl.Multiline = true;
-        componentTabControl.Name = "componentTabControl";
-        componentTabControl.SelectedIndex = 0;
-        componentTabControl.Selected += OnComponentTabControlSelected;
-        componentTabControl.Deselected += OnComponentTabControlDeselected;
+        resources.ApplyResources(_tabControl, "_tabControl");
+        _tabControl.Controls.Add(statementTabPage);
+        _tabControl.Multiline = true;
+        _tabControl.Name = "_tabControl";
+        _tabControl.SelectedIndex = 0;
+        _tabControl.Selected += OnTabControlSelected;
+        _tabControl.Deselected += OnTabControlDeselected;
         // 
         // statementTabPage
         // 
@@ -318,25 +322,48 @@ partial class TaxesForm
         statementTabPage.Name = "statementTabPage";
         statementTabPage.UseVisualStyleBackColor = true;
         // 
+        // splitContainer1
+        // 
+        resources.ApplyResources(splitContainer1, "splitContainer1");
+        splitContainer1.Name = "splitContainer1";
+        // 
+        // splitContainer1.Panel1
+        // 
+        splitContainer1.Panel1.Controls.Add(_propertyGrid);
+        // 
+        // splitContainer1.Panel2
+        // 
+        splitContainer1.Panel2.Controls.Add(_tabControl);
+        // 
+        // _propertyGrid
+        // 
+        resources.ApplyResources(_propertyGrid, "_propertyGrid");
+        _propertyGrid.Name = "_propertyGrid";
+        _propertyGrid.PropertyValueChanged += OnPropertyGridPropertyValueChanged;
+        // 
         // TaxesForm
         // 
         resources.ApplyResources(this, "$this");
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        Controls.Add(componentTabControl);
+        Controls.Add(splitContainer1);
         Controls.Add(toolStrip1);
         Controls.Add(menuStrip1);
         Name = "TaxesForm";
+        Load += OnLoad;
         menuStrip1.ResumeLayout(false);
         menuStrip1.PerformLayout();
         toolStrip1.ResumeLayout(false);
         toolStrip1.PerformLayout();
-        componentTabControl.ResumeLayout(false);
+        _tabControl.ResumeLayout(false);
+        splitContainer1.Panel1.ResumeLayout(false);
+        splitContainer1.Panel2.ResumeLayout(false);
+        ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
+        splitContainer1.ResumeLayout(false);
         ResumeLayout(false);
         PerformLayout();
     }
 
     #endregion
-    private System.Windows.Forms.TabPage tabPage1;
     private System.Windows.Forms.MenuStrip menuStrip1;
     private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
@@ -378,6 +405,8 @@ partial class TaxesForm
     private System.Windows.Forms.ToolStripButton pasteToolStripButton;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
     private System.Windows.Forms.ToolStripButton helpToolStripButton;
-    private System.Windows.Forms.TabControl componentTabControl;
+    private System.Windows.Forms.TabControl _tabControl;
     private System.Windows.Forms.TabPage statementTabPage;
+    private System.Windows.Forms.SplitContainer splitContainer1;
+    private System.Windows.Forms.PropertyGrid _propertyGrid;
 }
