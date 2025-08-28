@@ -123,6 +123,9 @@
   <data name="_d_Accounts" xml:space="preserve">
     <value>Determina las cuentas incluidas en el informe. Los elementos de datos 'Transacciones' y 'Cuentas' son mutuamente excluyentes.</value>
   </data>
+  <data name="_d_NonprofitCorporation" xml:space="preserve">
+    <value />
+  </data>
   <data name="_d_Redaction" xml:space="preserve">
     <value>Especifica los caracteres utilizados para redactar números. Si no se especifica redacción, el informe no se redactará.</value>
   </data>

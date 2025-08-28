@@ -249,10 +249,6 @@
   <data name="_d_Biweekly" xml:space="preserve">
     <value>Quincenalmente</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="_d_Cash" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="_d_Cash" xml:space="preserve">
     <value>Efectivo/Equivalentes al efectivo</value>
   </data>
@@ -319,8 +315,8 @@
   <data name="_d_None" xml:space="preserve">
     <value>(Sin categoría)</value>
   </data>
-  <data name="_d_Operating" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="_d_NonprofitCorporation" xml:space="preserve">
+    <value>Corporación sin fines de lucro</value>
   </data>
   <data name="_d_Operating" xml:space="preserve">
     <value>Operación</value>

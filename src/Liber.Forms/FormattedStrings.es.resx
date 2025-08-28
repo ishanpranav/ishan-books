@@ -405,6 +405,9 @@
   <data name="_p_None" xml:space="preserve">
     <value>patrimonio</value>
   </data>
+  <data name="_p_NonprofitCorporation" xml:space="preserve">
+    <value>activos netos</value>
+  </data>
   <data name="_p_operating" xml:space="preserve">
     <value>Flujo de efectivo neto proporcionado por actividades de operación</value>
   </data>
