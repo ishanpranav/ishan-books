@@ -123,4 +123,7 @@
   <data name="_p_gross-profit" xml:space="preserve">
     <value>Beneficio bruto</value>
   </data>
+  <data name="_p_NonprofitCorporation" xml:space="preserve">
+    <value />
+  </data>
 </root>

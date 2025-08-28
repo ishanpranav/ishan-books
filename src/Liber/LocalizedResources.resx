@@ -315,6 +315,9 @@
   <data name="_d_None" xml:space="preserve">
     <value>(None)</value>
   </data>
+  <data name="_d_NonprofitCorporation" xml:space="preserve">
+    <value>Nonprofit Corporation</value>
+  </data>
   <data name="_d_Operating" xml:space="preserve">
     <value>Operating</value>
   </data>

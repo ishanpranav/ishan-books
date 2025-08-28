@@ -417,6 +417,9 @@
   <data name="_p_None" xml:space="preserve">
     <value>equity</value>
   </data>
+  <data name="_p_NonprofitCorporation" xml:space="preserve">
+    <value>net assets</value>
+  </data>
   <data name="_p_operating" xml:space="preserve">
     <value>Net cash provided by operating activities</value>
   </data>

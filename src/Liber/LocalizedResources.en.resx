@@ -129,4 +129,7 @@
   <data name="_d_Color" xml:space="preserve">
     <value>Specifies the text colour.</value>
   </data>
+  <data name="_d_NonprofitCorporation" xml:space="preserve">
+    <value />
+  </data>
 </root>
