@@ -438,28 +438,13 @@ public sealed class Company
 
     public decimal GetEquity(DateTime posted, Regex filter)
     {
-        decimal result = 0;
+        decimal result = _accounts[EquityAccountId].GetBalance(posted, filter);
 
         foreach (Account account in _accounts.Values)
         {
             if (account.Type.IsTemporary())
             {
                 result += account.GetBalance(posted, filter);
-            }
-        }
-
-        return result;
-    }
-
-    public decimal GetEquity(DateTime started, DateTime posted, Regex filter)
-    {
-        decimal result = 0;
-
-        foreach (Account account in _accounts.Values)
-        {
-            if (account.Type.IsTemporary())
-            {
-                result += account.GetBalance(started, posted, filter);
             }
         }
 
