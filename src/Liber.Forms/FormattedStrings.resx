@@ -130,6 +130,9 @@
   <data name="account-summary" xml:space="preserve">
     <value>Account Summary</value>
   </data>
+  <data name="average-daily-balance" xml:space="preserve">
+    <value>Average Daily Balance</value>
+  </data>
   <data name="AccountCount{0}" xml:space="preserve">
     <value>({0:n0} accounts)</value>
   </data>
