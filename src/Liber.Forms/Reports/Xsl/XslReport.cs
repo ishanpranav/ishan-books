@@ -200,6 +200,7 @@ public class XslReport : IntervalView, IXmlSerializable
 
         decimal balance = 0;
         decimal previous = 0;
+        decimal averageDailyBalance = 0;
         decimal debit;
         decimal credit;
 
@@ -230,6 +231,7 @@ public class XslReport : IntervalView, IXmlSerializable
         {
             balance = value.GetBalance(Posted, Filter);
             previous = value.GetBalance(Started, Filter);
+            averageDailyBalance = value.GetAverageDailyBalance(Started, Posted, Filter);
         }
 
         writer.WriteElementString("equity", XmlConvert.ToString(value == Company.Accounts[Company.EquityAccountId]));
@@ -247,6 +249,7 @@ public class XslReport : IntervalView, IXmlSerializable
         }
 
         writer.WriteElementString("balance", XmlConvert.ToString(balance));
+        writer.WriteElementString("average-daily-balance", XmlConvert.ToString(averageDailyBalance));
         writer.WriteElementString("previous", XmlConvert.ToString(previous));
         writer.WriteElementString("debit", XmlConvert.ToString(debit));
         writer.WriteElementString("credit", XmlConvert.ToString(credit));

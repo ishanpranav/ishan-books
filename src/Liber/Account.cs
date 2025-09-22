@@ -288,6 +288,35 @@ public class Account
         return result;
     }
 
+    public decimal GetAverageDailyBalance(DateTime started, DateTime posted, Regex filter)
+    {
+        decimal weightedSum = 0;
+        decimal balance = GetBalance(started, filter);
+        decimal totalDays = 0;
+        decimal days;
+        DateTime previous = started;
+
+        foreach (Line line in lines)
+        {
+            Transaction transaction = line.Transaction!;
+
+            if (transaction.Posted >= started && transaction.Posted <= posted && filter.IsMatch(transaction.Memo ?? string.Empty))
+            {
+                days = (decimal)Math.Round((transaction.Posted - previous).TotalDays);
+                weightedSum += balance * days;
+                balance += line.Balance;
+                totalDays += days;
+                previous = transaction.Posted;
+            }
+        }
+
+        days = (decimal)Math.Round((posted - previous).TotalDays) + 1;
+        weightedSum += balance * days;
+        totalDays += days;
+
+        return weightedSum / totalDays;
+    }
+
     /// <inheritdoc/>
     public override string ToString()
     {
