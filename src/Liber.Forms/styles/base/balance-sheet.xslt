@@ -37,11 +37,15 @@ Licensed under the MIT License.
                     <xsl:value-of select="liber:gets('assets')"/>
                 </th>
             </tr>
-            <tr>
-                <th class="in-1 left">
-                    <xsl:value-of select="liber:gets('current-assets')"/>
-                </th>
-            </tr>
+            <xsl:choose>
+                <xsl:when test="($bank + $otherCurrentAsset != 0) or ($comparative = 1 and $bank2 + $otherCurrentAsset2 != 0)">
+                    <tr>
+                        <th class="in-1 left">
+                            <xsl:value-of select="liber:gets('current-assets')"/>
+                        </th>
+                    </tr>
+                </xsl:when>
+            </xsl:choose>
             <xsl:apply-templates select="company">
                 <xsl:with-param name="type" select="'Bank'"/>
                 <xsl:with-param name="balance" select="$bank"/>
@@ -71,11 +75,15 @@ Licensed under the MIT License.
                     </xsl:when>
                 </xsl:choose>
             </tr>
-            <tr>
-                <th class="in-1 left">
-                    <xsl:value-of select="liber:gets('non-current-assets')"/>
-                </th>
-            </tr>
+            <xsl:choose>
+                <xsl:when test="($fixedAsset + $otherAsset != 0) or ($comparative = 1 and $fixedAsset2 + $otherAsset2 != 0)">
+                    <tr>
+                        <th class="in-1 left">
+                            <xsl:value-of select="liber:gets('non-current-assets')"/>
+                        </th>
+                    </tr>
+                </xsl:when>
+            </xsl:choose>
             <xsl:apply-templates select="company">
                 <xsl:with-param name="type" select="'FixedAsset'"/>
                 <xsl:with-param name="balance" select="$fixedAsset"/>
@@ -131,6 +139,15 @@ Licensed under the MIT License.
                     <xsl:value-of select="liber:gets('liabilities')"/>
                 </th>
             </tr>
+            <xsl:choose>
+                <xsl:when test="($creditCard + $otherCurrentLiability != 0) or ($comparative = 1 and $creditCard2 + $otherCurrentLiability2 != 0)">
+                    <tr>
+                        <th class="in-1 left">
+                            <xsl:value-of select="liber:gets('current-liabilities')"/>
+                        </th>
+                    </tr>
+                </xsl:when>
+            </xsl:choose>
             <tr>
                 <th class="in-2 left">
                     <xsl:value-of select="liber:gets('current-liabilities')"/>

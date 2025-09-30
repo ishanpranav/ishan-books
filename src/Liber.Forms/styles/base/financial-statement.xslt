@@ -62,22 +62,22 @@ Licensed under the MIT License.
                         </xsl:choose>
                     </tr>
                 </xsl:for-each>
+                <tr>
+                    <th class="in-{$indent} left">
+                        <xsl:value-of select="$subtitle"/>
+                    </th>
+                    <td class="subtotal right">
+                        <xsl:value-of select="liber:fm($balance)"/>
+                    </td>
+                    <xsl:choose>
+                        <xsl:when test="$comparative = 1">
+                            <td class="subtotal right">
+                                <xsl:value-of select="liber:fm($previous)"/>
+                            </td>
+                        </xsl:when>
+                    </xsl:choose>
+                </tr>
             </xsl:when>
         </xsl:choose>
-        <tr>
-            <th class="in-{$indent} left">
-                <xsl:value-of select="$subtitle"/>
-            </th>
-            <td class="subtotal right">
-                <xsl:value-of select="liber:fm($balance)"/>
-            </td>
-            <xsl:choose>
-                <xsl:when test="$comparative = 1">
-                    <td class="subtotal right">
-                        <xsl:value-of select="liber:fm($previous)"/>
-                    </td>
-                </xsl:when>
-            </xsl:choose>
-        </tr>
     </xsl:template>
 </xsl:stylesheet>
