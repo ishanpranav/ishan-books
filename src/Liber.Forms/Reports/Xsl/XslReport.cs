@@ -135,12 +135,12 @@ public class XslReport : IntervalView, IXmlSerializable
     {
         posted = posted.Date.AddDays(1);
 
-        if (posted == started.AddYears(1).Date)
+        if (posted == started.Date.AddYears(1))
         {
             return started.Year.ToString();
         }
 
-        if (posted == started.AddMonths(1).Date)
+        if (posted == started.Date.AddMonths(1))
         {
             DateTime month = new DateTime(started.Year, started.Month, 1);
 
