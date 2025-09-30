@@ -133,19 +133,21 @@ public class XslReport : IntervalView, IXmlSerializable
     /// <returns>A human-readable string representing the time span between the start and end dates.</returns>
     public string ftspans(DateTime started, DateTime posted)
     {
-        if (posted.Date == started.AddYears(1).AddDays(-1).Date)
+        posted = posted.Date.AddDays(1);
+
+        if (posted == started.AddYears(1).Date)
         {
             return posted.Year.ToString();
         }
 
-        if (posted.Date == started.AddMonths(1).AddDays(-1).Date)
+        if (posted == started.AddMonths(1).Date)
         {
             DateTime month = new DateTime(posted.Year, posted.Month, 1);
 
             return month.ToString("MMMM yyyy");
         }
 
-        return (posted - started).Humanize(precision: 2, countEmptyUnits: true, maxUnit: TimeUnit.Year);
+        return (posted - started.Date).Humanize(precision: 2, countEmptyUnits: true, maxUnit: TimeUnit.Year);
     }
 
     public string fgets(string key, object value)
