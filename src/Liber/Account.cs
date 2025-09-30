@@ -300,7 +300,7 @@ public class Account
         {
             Transaction transaction = line.Transaction!;
 
-            if (transaction.Posted >= started && transaction.Posted <= posted && filter.IsMatch(transaction.Memo ?? string.Empty))
+            if (transaction.Posted > started && transaction.Posted <= posted && filter.IsMatch(transaction.Memo ?? string.Empty))
             {
                 days = (decimal)Math.Round((transaction.Posted - previous).TotalDays);
                 weightedSum += balance * days;
