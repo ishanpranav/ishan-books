@@ -137,12 +137,12 @@ public class XslReport : IntervalView, IXmlSerializable
 
         if (posted == started.AddYears(1).Date)
         {
-            return posted.Year.ToString();
+            return started.Year.ToString();
         }
 
         if (posted == started.AddMonths(1).Date)
         {
-            DateTime month = new DateTime(posted.Year, posted.Month, 1);
+            DateTime month = new DateTime(started.Year, started.Month, 1);
 
             return month.ToString("MMMM yyyy");
         }
