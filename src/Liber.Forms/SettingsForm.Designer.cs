@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             acceptButton = new System.Windows.Forms.Button();
             cancelButton = new System.Windows.Forms.Button();
@@ -38,9 +39,18 @@
             resetButton = new System.Windows.Forms.Button();
             importRulesDataGridView = new System.Windows.Forms.DataGridView();
             groupBox2 = new System.Windows.Forms.GroupBox();
+            _tabControl = new System.Windows.Forms.TabControl();
+            editorTabPage = new System.Windows.Forms.TabPage();
+            jsonTabPage = new System.Windows.Forms.TabPage();
+            _textBox = new System.Windows.Forms.TextBox();
+            _errorProvider = new System.Windows.Forms.ErrorProvider(components);
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)importRulesDataGridView).BeginInit();
             groupBox2.SuspendLayout();
+            _tabControl.SuspendLayout();
+            editorTabPage.SuspendLayout();
+            jsonTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)_errorProvider).BeginInit();
             SuspendLayout();
             // 
             // acceptButton
@@ -101,14 +111,48 @@
             importRulesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             resources.ApplyResources(importRulesDataGridView, "importRulesDataGridView");
             importRulesDataGridView.Name = "importRulesDataGridView";
-            importRulesDataGridView.RowTemplate.Height = 25;
             // 
             // groupBox2
             // 
             resources.ApplyResources(groupBox2, "groupBox2");
-            groupBox2.Controls.Add(importRulesDataGridView);
+            groupBox2.Controls.Add(_tabControl);
             groupBox2.Name = "groupBox2";
             groupBox2.TabStop = false;
+            // 
+            // _tabControl
+            // 
+            _tabControl.Controls.Add(editorTabPage);
+            _tabControl.Controls.Add(jsonTabPage);
+            resources.ApplyResources(_tabControl, "_tabControl");
+            _tabControl.Name = "_tabControl";
+            _tabControl.SelectedIndex = 0;
+            _tabControl.SelectedIndexChanged += OnTabControlSelectedIndexChanged;
+            _tabControl.Selecting += OnTabControlSelecting;
+            // 
+            // editorTabPage
+            // 
+            editorTabPage.Controls.Add(importRulesDataGridView);
+            resources.ApplyResources(editorTabPage, "editorTabPage");
+            editorTabPage.Name = "editorTabPage";
+            editorTabPage.UseVisualStyleBackColor = true;
+            // 
+            // jsonTabPage
+            // 
+            jsonTabPage.Controls.Add(_textBox);
+            resources.ApplyResources(jsonTabPage, "jsonTabPage");
+            jsonTabPage.Name = "jsonTabPage";
+            jsonTabPage.UseVisualStyleBackColor = true;
+            // 
+            // _textBox
+            // 
+            _textBox.AcceptsReturn = true;
+            _textBox.AcceptsTab = true;
+            resources.ApplyResources(_textBox, "_textBox");
+            _textBox.Name = "_textBox";
+            // 
+            // _errorProvider
+            // 
+            _errorProvider.ContainerControl = this;
             // 
             // SettingsForm
             // 
@@ -127,6 +171,11 @@
             groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)importRulesDataGridView).EndInit();
             groupBox2.ResumeLayout(false);
+            _tabControl.ResumeLayout(false);
+            editorTabPage.ResumeLayout(false);
+            jsonTabPage.ResumeLayout(false);
+            jsonTabPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)_errorProvider).EndInit();
             ResumeLayout(false);
         }
 
@@ -141,5 +190,10 @@
         private System.Windows.Forms.DataGridView importRulesDataGridView;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button resetButton;
+        private System.Windows.Forms.TabControl _tabControl;
+        private System.Windows.Forms.TabPage editorTabPage;
+        private System.Windows.Forms.TabPage jsonTabPage;
+        private System.Windows.Forms.TextBox _textBox;
+        private System.Windows.Forms.ErrorProvider _errorProvider;
     }
 }

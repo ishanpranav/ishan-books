@@ -17,7 +17,7 @@ namespace Liber.Forms;
 internal sealed partial class SettingsForm : Form
 {
     private readonly BindingList<ImportRule> _rules = new BindingList<ImportRule>();
-    private static IEnumerable<CultureInfo>? s_availableCultures;
+    private static List<CultureInfo>? s_availableCultures;
 
     public SettingsForm()
     {
@@ -34,7 +34,7 @@ internal sealed partial class SettingsForm : Form
         DialogResult = DialogResult.Cancel;
     }
 
-    private static IEnumerable<CultureInfo> GetAvailableCultures()
+    private static List<CultureInfo> GetAvailableCultures()
     {
         List<CultureInfo> result = new List<CultureInfo>();
         ResourceManager resourceManager = new ResourceManager(typeof(Resources));
@@ -114,7 +114,6 @@ internal sealed partial class SettingsForm : Form
     private void OnResetButtonClick(object sender, EventArgs e)
     {
         Settings.Default.Reset();
-        
         InitializeSettings();
     }
 
@@ -125,6 +124,78 @@ internal sealed partial class SettingsForm : Form
         if (culture != null)
         {
             e.Value = culture.DisplayName;
+        }
+    }
+
+    private void OnTabControlSelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (_tabControl.SelectedTab == jsonTabPage)
+        {
+            _textBox.Text = JsonSerializer.Serialize(_rules, FormattedStrings.JsonOptions);
+
+            return;
+        }
+
+        ImportRule[]? rules;
+
+        try
+        {
+            rules = JsonSerializer.Deserialize<ImportRule[]>(_textBox.Text, FormattedStrings.JsonOptions);
+        }
+        catch (JsonException)
+        {
+            return;
+        }
+
+        if (rules == null)
+        {
+            return;
+        }
+
+        _errorProvider.SetError(_tabControl, null);
+        _rules.Clear();
+
+        foreach (ImportRule rule in rules)
+        {
+            _rules.Add(rule);
+        }
+    }
+
+    private void OnTabControlSelecting(object sender, TabControlCancelEventArgs e)
+    {
+        if (_tabControl.SelectedTab == jsonTabPage)
+        {
+            return;
+        }
+
+        if (!string.IsNullOrEmpty(_errorProvider.GetError(editorTabPage)))
+        {
+            Settings.Default.Reset();
+            InitializeSettings();
+
+            return;
+        }
+
+        try
+        {
+            ImportRule[]? rules = JsonSerializer.Deserialize<ImportRule[]>(_textBox.Text, FormattedStrings.JsonOptions);
+
+            if (rules == null)
+            {
+                _errorProvider.SetError(editorTabPage, "Bad JSON");
+
+                e.Cancel = true;
+            }
+            else
+            {
+                _errorProvider.SetError(editorTabPage, null);
+            }
+        }
+        catch (JsonException)
+        {
+            _errorProvider.SetError(editorTabPage, "Bad JSON");
+
+            e.Cancel = true;
         }
     }
 }
