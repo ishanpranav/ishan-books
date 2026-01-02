@@ -15,16 +15,16 @@ public class IntervalView
     {
         get
         {
-            return _started;
+            return _started.Date;
         }
         set
         {
-            if (value > _posted)
+            if (value.Date > _posted)
             {
-                _posted = value;
+                _posted = value.Date;
             }
 
-            _started = value;
+            _started = value.Date;
         }
     }
 
@@ -35,16 +35,16 @@ public class IntervalView
     {
         get
         {
-            return _posted;
+            return _posted.Date;
         }
         set
         {
             if (value < _started)
             {
-                _started = value;
+                _started = value.Date;
             }
 
-            _posted = value;
+            _posted = value.Date;
         }
     }
 }

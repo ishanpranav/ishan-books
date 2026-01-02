@@ -133,19 +133,21 @@ public class XslReport : IntervalView, IXmlSerializable
     /// <returns>A human-readable string representing the time span between the start and end dates.</returns>
     public string ftspans(DateTime started, DateTime posted)
     {
-        if (posted == started.AddYears(1).AddDays(-1))
+        posted = posted.Date.AddDays(1);
+
+        if (posted == started.Date.AddYears(1))
         {
-            return posted.Year.ToString();
+            return started.Year.ToString();
         }
 
-        if (posted == started.AddMonths(1).AddDays(-1))
+        if (posted == started.Date.AddMonths(1))
         {
-            DateTime month = new DateTime(posted.Year, posted.Month, 1);
+            DateTime month = new DateTime(started.Year, started.Month, 1);
 
             return month.ToString("MMMM yyyy");
         }
 
-        return (posted - started).Humanize(precision: 2, countEmptyUnits: true, maxUnit: TimeUnit.Year);
+        return (posted - started.Date).Humanize(precision: 2, countEmptyUnits: true, maxUnit: TimeUnit.Year);
     }
 
     public string fgets(string key, object value)
@@ -200,6 +202,7 @@ public class XslReport : IntervalView, IXmlSerializable
 
         decimal balance = 0;
         decimal previous = 0;
+        decimal averageDailyBalance = 0;
         decimal debit;
         decimal credit;
 
@@ -230,6 +233,7 @@ public class XslReport : IntervalView, IXmlSerializable
         {
             balance = value.GetBalance(Posted, Filter);
             previous = value.GetBalance(Started, Filter);
+            averageDailyBalance = value.GetAverageDailyBalance(Started, Posted, Filter);
         }
 
         writer.WriteElementString("equity", XmlConvert.ToString(value == Company.Accounts[Company.EquityAccountId]));
@@ -247,6 +251,7 @@ public class XslReport : IntervalView, IXmlSerializable
         }
 
         writer.WriteElementString("balance", XmlConvert.ToString(balance));
+        writer.WriteElementString("average-daily-balance", XmlConvert.ToString(averageDailyBalance));
         writer.WriteElementString("previous", XmlConvert.ToString(previous));
         writer.WriteElementString("debit", XmlConvert.ToString(debit));
         writer.WriteElementString("credit", XmlConvert.ToString(credit));
