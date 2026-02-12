@@ -290,7 +290,19 @@ public class XslReport : IntervalView, IXmlSerializable
     {
         writer.WriteStartElement("line");
         writer.WriteElementString("account", Company.Accounts[value.AccountId].Name);
-        writer.WriteElementString("debit", XmlConvert.ToString(value.Debit));
+
+        Line? sibling = value.Sibling;
+
+        if (sibling != null)
+        {
+            writer.WriteElementString("sibling", Company.Accounts[sibling.AccountId].Name);
+        }
+        else
+        {
+            writer.WriteElementString("sibling", "Various");
+        }
+
+            writer.WriteElementString("debit", XmlConvert.ToString(value.Debit));
         writer.WriteElementString("credit", XmlConvert.ToString(value.Credit));
         writer.WriteElementString("description", value.Description);
         writer.WriteElementString("other-equity", XmlConvert.ToString(value.AccountId == Company.OtherEquityAccountId));

@@ -62,10 +62,10 @@ Licensed under the MIT License.
                 <tbody>
                     <xsl:for-each select="company/transaction">
                         <tr>
-                            <td class="left">
+                            <td class="subtotal left">
                                 <xsl:value-of select="liber:fdates(posted)"/>
                             </td>
-                            <td class="left" colspan="2">
+                            <td class="subtotal left" colspan="2">
                                 <xsl:value-of select="name"/>
                             </td>
                             <td class="subtotal" colspan="2"></td>
@@ -77,7 +77,7 @@ Licensed under the MIT License.
                                     <xsl:value-of select="description"/>
                                 </td>
                                 <td class="left in-2">
-                                    <xsl:value-of select="account"/>
+                                    <xsl:value-of select="sibling"/>
                                 </td>
                                 <td class="right">
                                     <xsl:value-of select="liber:fm(debit)"/>
@@ -91,15 +91,9 @@ Licensed under the MIT License.
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th class="left" colspan="3">
-                            <xsl:value-of select="liber:gets('total')"/>
-                        </th>
-                        <td class="total right">
-                            <xsl:value-of select="liber:fm(sum(company/transaction/line[account = //account/name]/debit))"/>
-                        </td>
-                        <td class="total right">
-                            <xsl:value-of select="liber:fm(sum(company/transaction/line[account = //account/name]/credit))"/>
-                        </td>
+                        <th class="total left" colspan="3"></th>
+                        <td class="total right"></td>
+                        <td class="total right"></td>
                     </tr>
                 </tfoot>
             </xsl:with-param>
