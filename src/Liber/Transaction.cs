@@ -103,7 +103,14 @@ public class Transaction :
 
     public Line? GetDoubleEntry(Line value)
     {
-        return Lines.SingleOrDefault(x => x.Balance == -value.Balance);
+        IEnumerable<Line> lines = Lines.Where(x => x.Balance == -value.Balance);
+
+        if (lines.Skip(1).Any())
+        {
+            return null;
+        }
+
+        return lines.SingleOrDefault();
     }
 
     int IComparable.CompareTo(object? obj)

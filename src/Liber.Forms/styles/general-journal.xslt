@@ -65,13 +65,13 @@ Licensed under the MIT License.
                 <tbody>
                     <xsl:for-each select="company/transaction">
                         <tr>
-                            <td class="left">
+                            <td class="left subtotal">
                                 <xsl:value-of select="liber:fdates(posted)"/>
                             </td>
-                            <td class="right">
+                            <td class="right subtotal">
                                 <xsl:value-of select="number"/>
                             </td>
-                            <td class="left" colspan="2">
+                            <td class="left subtotal" colspan="2">
                                 <xsl:value-of select="name"/>
                             </td>
                             <td class="subtotal" colspan="2"></td>
