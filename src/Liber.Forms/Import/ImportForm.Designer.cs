@@ -56,7 +56,7 @@
             _dataGridView.AllowUserToDeleteRows = false;
             _dataGridView.AllowUserToOrderColumns = true;
             resources.ApplyResources(_dataGridView, "_dataGridView");
-            _dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            _dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             _dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             _dataGridView.Name = "_dataGridView";
             _dataGridView.RowTemplate.Height = 29;

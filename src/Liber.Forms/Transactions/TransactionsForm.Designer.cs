@@ -34,7 +34,7 @@ partial class TransactionsForm
         // 
         // _dataGridView
         // 
-        _dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+        _dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
         _dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
         _dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { postedColumn, numberColumn, accountColumn, nameColumn, debitColumn, creditColumn, balanceColumn, transactionColumn });
         resources.ApplyResources(_dataGridView, "_dataGridView");

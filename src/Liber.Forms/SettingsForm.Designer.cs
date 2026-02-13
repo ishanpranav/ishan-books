@@ -107,7 +107,7 @@
             // importRulesDataGridView
             // 
             importRulesDataGridView.AllowUserToOrderColumns = true;
-            importRulesDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            importRulesDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             importRulesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             resources.ApplyResources(importRulesDataGridView, "importRulesDataGridView");
             importRulesDataGridView.Name = "importRulesDataGridView";
