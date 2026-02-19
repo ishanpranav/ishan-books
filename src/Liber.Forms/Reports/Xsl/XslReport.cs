@@ -1,5 +1,5 @@
 ﻿// XslReport.cs
-// Copyright (c) 2023-2025 Ishan Pranav. All rights reserved.
+// Copyright (c) 2023-2026 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
 using System;
@@ -59,6 +59,12 @@ public class XslReport : IntervalView, IXmlSerializable
     [LocalizedDescription(nameof(Redaction))]
     [LocalizedDisplayName(nameof(Redaction))]
     public string? Redaction { get; set; }
+
+    [DefaultValue(true)]
+    [LocalizedCategory(nameof(Redaction))]
+    [LocalizedDescription(nameof(Detail))]
+    [LocalizedDisplayName(nameof(Detail))]
+    public bool Detail { get; set; } = true;
 
     [LocalizedCategory(nameof(Filter))]
     [LocalizedDescription(nameof(Filter))]
@@ -238,7 +244,7 @@ public class XslReport : IntervalView, IXmlSerializable
 
         writer.WriteElementString("equity", XmlConvert.ToString(value == Company.Accounts[Company.EquityAccountId]));
         writer.WriteElementString("other-equity", XmlConvert.ToString(value == Company.Accounts[Company.OtherEquityAccountId]));
-
+        
         if (balance < 0)
         {
             debit = 0;
@@ -317,6 +323,7 @@ public class XslReport : IntervalView, IXmlSerializable
         writer.WriteStartElement("company");
         writer.WriteElementString("name", Company.DisplayName);
         writer.WriteElementString("type", Company.Type.ToString());
+        writer.WriteElementString("detail", XmlConvert.ToString(Detail));
 
         foreach (Account account in Accounts.Values)
         {

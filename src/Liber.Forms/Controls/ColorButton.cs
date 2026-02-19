@@ -1,9 +1,8 @@
 ﻿// ColorButton.cs
-// Copyright (c) 2023-2025 Ishan Pranav. All rights reserved.
+// Copyright (c) 2023-2026 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
 using System.Text.Json;
-using Liber;
 using Liber.Forms;
 using Liber.Forms.Properties;
 
