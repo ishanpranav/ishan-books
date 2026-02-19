@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!--
 general-journal.xslt
-Copyright (c) 2023-2025 Ishan Pranav. All rights reserved.
+Copyright (c) 2023-2026 Ishan Pranav. All rights reserved.
 Licensed under the MIT License.
 -->
 <xsl:stylesheet

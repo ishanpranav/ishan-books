@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!--
 balance-sheet.xslt
-Copyright (c) 2023-2025 Ishan Pranav. All rights reserved.
+Copyright (c) 2023-2026 Ishan Pranav. All rights reserved.
 Licensed under the MIT License.
 -->
 <xsl:stylesheet
@@ -142,17 +142,12 @@ Licensed under the MIT License.
             <xsl:choose>
                 <xsl:when test="($creditCard + $otherCurrentLiability != 0) or ($comparative = 1 and $creditCard2 + $otherCurrentLiability2 != 0)">
                     <tr>
-                        <th class="in-1 left">
+                        <th class="in-2 left">
                             <xsl:value-of select="liber:gets('current-liabilities')"/>
                         </th>
                     </tr>
                 </xsl:when>
             </xsl:choose>
-            <tr>
-                <th class="in-2 left">
-                    <xsl:value-of select="liber:gets('current-liabilities')"/>
-                </th>
-            </tr>
             <xsl:apply-templates select="company">
                 <xsl:with-param name="type" select="'CreditCard'"/>
                 <xsl:with-param name="balance" select="-$creditCard"/>

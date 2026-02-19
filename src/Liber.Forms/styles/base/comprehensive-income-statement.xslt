@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!--
 comprehensive-income-statement.xslt
-Copyright (c) 2023-2025 Ishan Pranav. All rights reserved.
+Copyright (c) 2023-2026 Ishan Pranav. All rights reserved.
 Licensed under the MIT License.
 -->
 <xsl:stylesheet
@@ -57,18 +57,20 @@ Licensed under the MIT License.
                         <xsl:value-of select="liber:fm(-$netIncome)"/>
                     </th>
                 </tr>
-                <xsl:for-each select="//line[other-equity = 'false' and ancestor::transaction[other-equity = 'true'] and generate-id() = generate-id(key('lines-by-account', account)[1])]">
-                    <xsl:sort select="account" data-type="text" order="ascending"/>
-                    <tr>
-                        <td class="in-2 left account">
-                            <xsl:value-of select="account"/>
-                        </td>
-                        <td class="right">
-                            <xsl:variable name="lines-for-account" select="key('lines-by-account', account)"/>
-                            <xsl:value-of select="liber:fm(sum($lines-for-account/debit) - sum($lines-for-account/credit))"/>
-                        </td>
-                    </tr>
-                </xsl:for-each>
+                <xsl:if test="detail = 'true'">
+                    <xsl:for-each select="//line[other-equity = 'false' and ancestor::transaction[other-equity = 'true'] and generate-id() = generate-id(key('lines-by-account', account)[1])]">
+                        <xsl:sort select="account" data-type="text" order="ascending"/>
+                        <tr>
+                            <td class="in-2 left account">
+                                <xsl:value-of select="account"/>
+                            </td>
+                            <td class="right">
+                                <xsl:variable name="lines-for-account" select="key('lines-by-account', account)"/>
+                                <xsl:value-of select="liber:fm(sum($lines-for-account/debit) - sum($lines-for-account/credit))"/>
+                            </td>
+                        </tr>
+                    </xsl:for-each>
+                </xsl:if>
                 <tr>
                     <th class="in-1 left">
                         <xsl:value-of select="liber:pngets('other-comprehensive-income', -$otherComprehensiveIncome)"/>

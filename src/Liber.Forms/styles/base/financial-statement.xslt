@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!--
 financial-statement.xslt
-Copyright (c) 2023-2025 Ishan Pranav. All rights reserved.
+Copyright (c) 2023-2026 Ishan Pranav. All rights reserved.
 Licensed under the MIT License.
 -->
 <xsl:stylesheet
@@ -39,32 +39,41 @@ Licensed under the MIT License.
         <xsl:param name="comparative" select="0"/>
         <xsl:choose>
             <xsl:when test="$balance != 0 or $previous != 0">
+                <xsl:if test="detail = 'true'">
+                    <tr>
+                        <th class="in-{$indent} left">
+                            <xsl:value-of select="$title"/>
+                        </th>
+                        <th></th>
+                    </tr>
+                    <xsl:for-each select="//account[type = $type and (balance != 0 or ($comparative = 1 and previous != 0))]">
+                        <tr>
+                            <td class="in-{$indent + 2} left account">
+                                <xsl:value-of select="name"/>
+                            </td>
+                            <td class="right">
+                                <xsl:value-of select="liber:fm($type, balance)"/>
+                            </td>
+                            <xsl:choose>
+                                <xsl:when test="$comparative = 1">
+                                    <td class="right">
+                                        <xsl:value-of select="liber:fm($type, previous)"/>
+                                    </td>
+                                </xsl:when>
+                            </xsl:choose>
+                        </tr>
+                    </xsl:for-each>
+                </xsl:if>
                 <tr>
                     <th class="in-{$indent} left">
-                        <xsl:value-of select="$title"/>
-                    </th>
-                    <th></th>
-                </tr>
-                <xsl:for-each select="//account[type = $type and (balance != 0 or ($comparative = 1 and previous != 0))]">
-                    <tr>
-                        <td class="in-{$indent + 2} left account">
-                            <xsl:value-of select="name"/>
-                        </td>
-                        <td class="right">
-                            <xsl:value-of select="liber:fm($type, balance)"/>
-                        </td>
                         <xsl:choose>
-                            <xsl:when test="$comparative = 1">
-                                <td class="right">
-                                    <xsl:value-of select="liber:fm($type, previous)"/>
-                                </td>
+                            <xsl:when test="detail = 'false'">
+                                <xsl:value-of select="$title"/>
+                            </xsl:when>
+                            <xsl:when test="detail = 'true'">
+                                <xsl:value-of select="$subtitle"/>
                             </xsl:when>
                         </xsl:choose>
-                    </tr>
-                </xsl:for-each>
-                <tr>
-                    <th class="in-{$indent} left">
-                        <xsl:value-of select="$subtitle"/>
                     </th>
                     <td class="subtotal right">
                         <xsl:value-of select="liber:fm($balance)"/>

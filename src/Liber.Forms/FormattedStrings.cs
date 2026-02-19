@@ -1,5 +1,5 @@
 ﻿// FormattedStrings.cs
-// Copyright (c) 2023-2025 Ishan Pranav. All rights reserved.
+// Copyright (c) 2023-2026 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
 using System;
@@ -9,10 +9,9 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Windows.Forms;
 using Humanizer;
-using Liber.Forms;
 using Liber.Forms.Properties;
 
-namespace Liber;
+namespace Liber.Forms;
 
 internal static class FormattedStrings
 {

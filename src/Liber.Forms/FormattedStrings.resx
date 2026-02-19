@@ -453,4 +453,16 @@
   <data name="_p_retained-earnings" xml:space="preserve">
     <value>Retained earnings</value>
   </data>
+  <data name="less-gain" xml:space="preserve">
+    <value>Less: net capital gain</value>
+  </data>
+  <data name="plus-gain" xml:space="preserve">
+    <value>Plus: net capital gain</value>
+  </data>
+  <data name="_n_investing-activities" xml:space="preserve">
+    <value>Net (purchases)</value>
+  </data>
+  <data name="_p_investing-activities" xml:space="preserve">
+    <value>Net disposals</value>
+  </data>
 </root>
