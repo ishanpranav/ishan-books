@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using Liber.Forms.Accounts;
 
@@ -35,7 +36,7 @@ internal sealed partial class TransactionsForm : Form
         balanceColumn.DefaultCellStyle.Format = DecimalExtensions.Format;
         transactionColumn.ValueType = typeof(Transaction);
         _dataGridView.AlternatingRowsDefaultCellStyle.BackColor = _company.Color;
-        _dataGridView.AlternatingRowsDefaultCellStyle.ForeColor = Colors.GetForeColor(_company.Color);
+        _dataGridView.AlternatingRowsDefaultCellStyle.ForeColor = _company.Color.GetForeColor();
         Text = _account.Name;
 
         accountColumn.Items.Add(NullAccountView.Value);

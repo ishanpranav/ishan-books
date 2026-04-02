@@ -168,6 +168,7 @@
             Name = "SettingsForm";
             _helpProvider.SetShowHelp(this, (bool)resources.GetObject("$this.ShowHelp"));
             ShowIcon = false;
+            WindowState = System.Windows.Forms.FormWindowState.Maximized;
             groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)importRulesDataGridView).EndInit();
             groupBox2.ResumeLayout(false);

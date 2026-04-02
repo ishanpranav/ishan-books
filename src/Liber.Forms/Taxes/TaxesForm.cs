@@ -109,6 +109,7 @@ internal partial class TaxesForm : Form
 
             grid.AutoResizeColumns();
             grid.Refresh();
+            Design.ApplyStyles(grid);
         }
 
         TabPage swap = _tabControl.TabPages[0];
