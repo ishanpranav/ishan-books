@@ -4,6 +4,7 @@
 
 using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 using Humanizer;
 
@@ -24,7 +25,7 @@ internal abstract partial class CompanyForm : Form
         DialogResult = DialogResult.Cancel;
         nameTextBox.Text = company.Name;
         _colorButton.BackColor = company.Color;
-        _colorButton.ForeColor = Colors.GetForeColor(company.Color);
+        _colorButton.ForeColor = company.Color.GetForeColor();
         typeComboBox.DataSource = Enum.GetValues<CompanyType>();
         typeComboBox.SelectedItem = company.Type;
         equityAccountComboBox.Initialize(company, x => company.Accounts[x].Type == AccountType.Equity);

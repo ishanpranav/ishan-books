@@ -17,6 +17,11 @@ internal sealed class ListViewItemComparer : Comparer<ListViewItem>
 
     public override int Compare(ListViewItem? x, ListViewItem? y)
     {
+        if (_listView.SortColumn == -1)
+        {
+            return 0;
+        }
+
         object? xTag = x?.SubItems[_listView.SortColumn].Tag;
         object? yTag = y?.SubItems[_listView.SortColumn].Tag;
         int comparison;

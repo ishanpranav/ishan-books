@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
 using System.Windows.Forms;
 using Liber.Forms.Accounts;
 using Liber.Forms.Properties;
@@ -34,7 +35,7 @@ internal sealed partial class TransactionForm : Form
         creditColumn.ValueType = typeof(decimal);
         creditColumn.DefaultCellStyle.Format = DecimalExtensions.Format;
         _dataGridView.AlternatingRowsDefaultCellStyle.BackColor = _company.Color;
-        _dataGridView.AlternatingRowsDefaultCellStyle.ForeColor = Colors.GetForeColor(_company.Color);
+        _dataGridView.AlternatingRowsDefaultCellStyle.ForeColor = _company.Color.GetForeColor();
 
         foreach (KeyValuePair<Guid, Account> account in _company.Accounts)
         {

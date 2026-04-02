@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using Liber.Forms.Properties;
 using Microsoft.Win32;
@@ -171,11 +172,15 @@ internal static class SystemFeatures
             }
         }
         catch { }
+
+        Design.Initialize();
     }
 
     public static void Initialize(Form value)
     {
         value.Icon = Resources.Icon;
         value.ShowIcon = true;
+
+        Design.ApplyStyles(value);
     }
 }

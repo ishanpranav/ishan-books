@@ -3,6 +3,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Drawing;
 
 namespace Liber.Forms.Accounts;
 
@@ -19,7 +20,6 @@ internal sealed class EditAccountForm : AccountForm
         descriptionTextBox.Text = account.Description;
         memoTextBox.Text = account.Memo;
         _colorButton.BackColor = account.Color;
-        _colorButton.ForeColor = Colors.GetForeColor(account.Color);
         Type = account.Type;
         TaxType = account.TaxType;
         inactiveCheckBox.Checked = account.Inactive;

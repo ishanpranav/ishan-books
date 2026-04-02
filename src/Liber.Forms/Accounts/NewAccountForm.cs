@@ -3,6 +3,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Drawing;
 
 namespace Liber.Forms.Accounts;
 
@@ -12,7 +13,7 @@ internal sealed class NewAccountForm : AccountForm
     {
         numberNumericUpDown.Value = company.NextAccountNumber;
         _colorButton.BackColor = company.Color;
-        _colorButton.ForeColor = Colors.GetForeColor(company.Color);
+        _colorButton.ForeColor = company.Color.GetForeColor();
 
         parentComboBox.Items.Add(NullAccountView.Value);
         parentComboBox.Initialize(company, validator: null);

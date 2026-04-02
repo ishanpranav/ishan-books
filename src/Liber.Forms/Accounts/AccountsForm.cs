@@ -24,6 +24,7 @@ internal sealed partial class AccountsForm : Form
     {
         InitializeComponent();
         SystemFeatures.Initialize(this);
+        Design.ApplyStyles(_contextMenu);
 
         _company = company;
         company.AccountAdded += OnCompanyAccountAdded;
@@ -60,8 +61,7 @@ internal sealed partial class AccountsForm : Form
 
         ListViewItem item = _listView.Items.Add(new ListViewItem()
         {
-            Tag = id,
-            Selected = true
+            Tag = id
         });
 
         AddSubItems(item, value);
