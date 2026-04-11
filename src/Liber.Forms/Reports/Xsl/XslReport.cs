@@ -12,6 +12,7 @@ using System.Xml.Serialization;
 using Humanizer;
 using Humanizer.Localisation;
 using Liber.Forms.Accounts;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace Liber.Forms.Reports.Xsl;
 
@@ -60,12 +61,6 @@ public class XslReport : IntervalView, IXmlSerializable
     [LocalizedDisplayName(nameof(Redaction))]
     public string? Redaction { get; set; }
 
-    [DefaultValue(true)]
-    [LocalizedCategory(nameof(Redaction))]
-    [LocalizedDescription(nameof(Detail))]
-    [LocalizedDisplayName(nameof(Detail))]
-    public bool Detail { get; set; } = true;
-
     [LocalizedCategory(nameof(Filter))]
     [LocalizedDescription(nameof(Filter))]
     [LocalizedDisplayName(nameof(Filter))]
@@ -74,6 +69,13 @@ public class XslReport : IntervalView, IXmlSerializable
 
     [Browsable(false)]
     public ReportTypes Type { get; set; }
+
+    [DefaultValue(ReportLevel.ByAccount)]
+    [LocalizedCategory(nameof(Level))]
+    [LocalizedDescription(nameof(Level))]
+    [LocalizedDisplayName(nameof(Level))]
+    [TypeConverter(typeof(LocalizedEnumConverter))]
+    public ReportLevel Level { get; set; } = ReportLevel.ByAccount;
 
     [LocalizedCategory(nameof(Accounts))]
     [LocalizedDescription(nameof(Accounts))]
@@ -200,17 +202,15 @@ public class XslReport : IntervalView, IXmlSerializable
         throw new NotImplementedException();
     }
 
-    private void WriteAccountXml(XmlWriter writer, Account value)
+    /// <summary>
+    /// Computes the balance, prior-period balance, and average daily balance for a single account,
+    /// applying the equity and temporary-account special cases.
+    /// </summary>
+    private (decimal Balance, decimal Previous, decimal AverageDailyBalance) ComputeBalances(Account value)
     {
-        writer.WriteStartElement("account");
-        writer.WriteElementString("name", value.Name);
-        writer.WriteElementString("type", value.Type.ToString());
-
         decimal balance = 0;
         decimal previous = 0;
         decimal averageDailyBalance = 0;
-        decimal debit;
-        decimal credit;
 
         if (value == Company.Accounts[Company.EquityAccountId])
         {
@@ -242,9 +242,47 @@ public class XslReport : IntervalView, IXmlSerializable
             averageDailyBalance = value.GetAverageDailyBalance(Started, Posted, Filter);
         }
 
+        return (balance, previous, averageDailyBalance);
+    }
+
+    /// <summary>
+    /// Recursively sums <see cref="ComputeBalances"/> for <paramref name="value"/> and every
+    /// descendant that is present in <see cref="Accounts"/>, so that a parent account absorbs
+    /// the full contribution of its subtree when <see cref="Flatten"/> is <see langword="true"/>.
+    /// </summary>
+    private (decimal Balance, decimal Previous, decimal AverageDailyBalance) ComputeSubtreeBalances(Account value)
+    {
+        var (balance, previous, averageDailyBalance) = ComputeBalances(value);
+
+        foreach (Account child in value.Children)
+        {
+            if (!Accounts.Values.Contains(child))
+            {
+                continue;
+            }
+
+            (decimal childBalance, decimal childPrevious, decimal childAdb) = ComputeSubtreeBalances(child);
+
+            balance += childBalance;
+            previous += childPrevious;
+            averageDailyBalance += childAdb;
+        }
+
+        return (balance, previous, averageDailyBalance);
+    }
+
+    private void WriteAccountXml(XmlWriter writer, Account value, decimal balance, decimal previous, decimal averageDailyBalance)
+    {
+        writer.WriteStartElement("account");
+        writer.WriteElementString("name", value.Name);
+        writer.WriteElementString("type", value.Type.ToString());
+
+        decimal debit;
+        decimal credit;
+
         writer.WriteElementString("equity", XmlConvert.ToString(value == Company.Accounts[Company.EquityAccountId]));
         writer.WriteElementString("other-equity", XmlConvert.ToString(value == Company.Accounts[Company.OtherEquityAccountId]));
-        
+
         if (balance < 0)
         {
             debit = 0;
@@ -263,6 +301,13 @@ public class XslReport : IntervalView, IXmlSerializable
         writer.WriteElementString("credit", XmlConvert.ToString(credit));
         writer.WriteElementString("cash-flow", value.CashFlow.ToString());
         writer.WriteEndElement();
+    }
+
+    private void WriteAccountXml(XmlWriter writer, Account value)
+    {
+        (decimal balance, decimal previous, decimal averageDailyBalance) = ComputeBalances(value);
+
+        WriteAccountXml(writer, value, balance, previous, averageDailyBalance);
     }
 
     private void WriteTransactionXml(XmlWriter writer, Transaction value)
@@ -308,7 +353,7 @@ public class XslReport : IntervalView, IXmlSerializable
             writer.WriteElementString("sibling", "Various");
         }
 
-            writer.WriteElementString("debit", XmlConvert.ToString(value.Debit));
+        writer.WriteElementString("debit", XmlConvert.ToString(value.Debit));
         writer.WriteElementString("credit", XmlConvert.ToString(value.Credit));
         writer.WriteElementString("description", value.Description);
         writer.WriteElementString("other-equity", XmlConvert.ToString(value.AccountId == Company.OtherEquityAccountId));
@@ -323,11 +368,23 @@ public class XslReport : IntervalView, IXmlSerializable
         writer.WriteStartElement("company");
         writer.WriteElementString("name", Company.DisplayName);
         writer.WriteElementString("type", Company.Type.ToString());
-        writer.WriteElementString("detail", XmlConvert.ToString(Detail));
+        writer.WriteElementString("detail", XmlConvert.ToString(Level != ReportLevel.ByType));
 
-        foreach (Account account in Accounts.Values)
+        if (Level == ReportLevel.ByAccount)
         {
-            WriteAccountXml(writer, account);
+            foreach (Account account in Accounts.Values.Where(a => a.ParentId == Guid.Empty))
+            {
+                var (balance, previous, averageDailyBalance) = ComputeSubtreeBalances(account);
+
+                WriteAccountXml(writer, account, balance, previous, averageDailyBalance);
+            }
+        }
+        else
+        {
+            foreach (Account account in Accounts.Values)
+            {
+                WriteAccountXml(writer, account);
+            }
         }
 
         foreach (Transaction transaction in Company

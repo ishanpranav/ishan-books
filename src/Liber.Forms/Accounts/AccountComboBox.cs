@@ -82,7 +82,7 @@ internal sealed class AccountComboBox : ComboBox
 
         Items.Remove(e.Id);
 
-        if (!_company!.Accounts[e.Id].Hidden)
+        if (!_company!.Accounts[e.Id].ReadOnly)
         {
             Items.Add(e.Id);
         }

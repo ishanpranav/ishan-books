@@ -210,8 +210,11 @@
   <data name="_c_Font" xml:space="preserve">
     <value>Design</value>
   </data>
+  <data name="_c_Level" xml:space="preserve">
+    <value>Data Source</value>
+  </data>
   <data name="_c_Multiple" xml:space="preserve">
-    <value>Rounding</value>
+    <value>Data Source</value>
   </data>
   <data name="_c_PageSettings" xml:space="preserve">
     <value>Design</value>
@@ -223,7 +226,7 @@
     <value>Date Range</value>
   </data>
   <data name="_c_Redaction" xml:space="preserve">
-    <value>Design</value>
+    <value>Data Source</value>
   </data>
   <data name="_c_Started" xml:space="preserve">
     <value>Date Range</value>
@@ -255,6 +258,9 @@
   <data name="_d_Biweekly" xml:space="preserve">
     <value>Biweekly</value>
   </data>
+  <data name="_d_ByType" xml:space="preserve">
+    <value>Account Type</value>
+  </data>
   <data name="_d_Cash" xml:space="preserve">
     <value>Cash/Cash Equivalent</value>
   </data>
@@ -275,6 +281,9 @@
   </data>
   <data name="_d_Daily" xml:space="preserve">
     <value>Daily</value>
+  </data>
+  <data name="_d_ByAccount" xml:space="preserve">
+    <value>Account</value>
   </data>
   <data name="_d_Equity" xml:space="preserve">
     <value>Equity</value>
@@ -308,6 +317,9 @@
   </data>
   <data name="_d_Investing" xml:space="preserve">
     <value>Investing</value>
+  </data>
+  <data name="_d_Detailed" xml:space="preserve">
+    <value>Subaccount</value>
   </data>
   <data name="_d_LongTermLiability" xml:space="preserve">
     <value>Long-Term Liability</value>

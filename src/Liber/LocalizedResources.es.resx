@@ -210,8 +210,11 @@
   <data name="_c_Font" xml:space="preserve">
     <value>Diseño</value>
   </data>
+  <data name="_c_Level" xml:space="preserve">
+    <value>Fuente de datos</value>
+  </data>
   <data name="_c_Multiple" xml:space="preserve">
-    <value>Redondeo</value>
+    <value>Fuente de datos</value>
   </data>
   <data name="_c_PageSettings" xml:space="preserve">
     <value>Diseño</value>
@@ -223,7 +226,7 @@
     <value>Rango de fechas</value>
   </data>
   <data name="_c_Redaction" xml:space="preserve">
-    <value>Diseño</value>
+    <value>Fuente de datos</value>
   </data>
   <data name="_c_Started" xml:space="preserve">
     <value>Rango de fechas</value>
