@@ -18,7 +18,7 @@ public class AccountsView
     {
         Company = company;
         Values = company.Accounts.Values
-            .Where(x => !x.Hidden)
+            .Where(x => !x.Inactive)
             .ToHashSet();
     }
 

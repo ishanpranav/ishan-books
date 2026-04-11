@@ -235,7 +235,7 @@ public class Account
     [Browsable(false)]
     [IgnoreMember]
     [JsonIgnore]
-    public bool Hidden
+    public bool ReadOnly
     {
         get
         {
