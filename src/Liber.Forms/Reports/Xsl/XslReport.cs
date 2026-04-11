@@ -252,7 +252,7 @@ public class XslReport : IntervalView, IXmlSerializable
     /// </summary>
     private (decimal Balance, decimal Previous, decimal AverageDailyBalance) ComputeSubtreeBalances(Account value)
     {
-        var (balance, previous, averageDailyBalance) = ComputeBalances(value);
+        (decimal balance, decimal previous, decimal averageDailyBalance) = ComputeBalances(value);
 
         foreach (Account child in value.Children)
         {
@@ -374,7 +374,7 @@ public class XslReport : IntervalView, IXmlSerializable
         {
             foreach (Account account in Accounts.Values.Where(a => a.ParentId == Guid.Empty))
             {
-                var (balance, previous, averageDailyBalance) = ComputeSubtreeBalances(account);
+                (decimal balance, decimal previous, decimal averageDailyBalance) = ComputeSubtreeBalances(account);
 
                 WriteAccountXml(writer, account, balance, previous, averageDailyBalance);
             }
