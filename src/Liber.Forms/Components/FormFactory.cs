@@ -21,6 +21,7 @@ internal sealed class FormFactory : Component
     }
 
     [Browsable(false)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public Form? Parent { get; set; }
 
     public void Register(Guid key, Form value)

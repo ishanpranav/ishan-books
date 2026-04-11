@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Liber.Forms.Accounts;
 using Liber.Forms.Properties;
+using System.ComponentModel;
 
 namespace Liber.Forms.Transactions;
 
@@ -46,6 +47,7 @@ internal sealed partial class TransactionForm : Form
         CreateNew();
     }
 
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     public bool ShowApplyButton
     {
         get
@@ -78,7 +80,7 @@ internal sealed partial class TransactionForm : Form
 
         foreach (Line line in transaction.OrderedLines)
         {
-            _dataGridView.Rows.Add(line.AccountId, line.Debit, line.Credit, line.Description);
+            _dataGridView.Rows.Add(line.AccountId, line.Debit, line.Credit, line.Description ?? string.Empty);
         }
 
         _dataGridView.AutoResizeColumns();
@@ -113,7 +115,7 @@ internal sealed partial class TransactionForm : Form
 
         foreach (DataGridViewRow row in _dataGridView.Rows)
         {
-            row.ErrorText = null;
+            row.ErrorText = string.Empty;
 
             if (row.IsNewRow)
             {
@@ -127,9 +129,9 @@ internal sealed partial class TransactionForm : Form
                 return false;
             }
 
-            Guid accountId = (Guid)row.Cells[accountColumn.Index].Value;
-            decimal debit = ToDecimal(row.Cells[debitColumn.Index].Value);
-            decimal credit = ToDecimal(row.Cells[creditColumn.Index].Value);
+            Guid accountId = (Guid)row.Cells[accountColumn.Index].Value!;
+            decimal debit = ToDecimal(row.Cells[debitColumn.Index].Value!);
+            decimal credit = ToDecimal(row.Cells[creditColumn.Index].Value!);
 
             transaction.Lines.Add(new Line()
             {

@@ -1,6 +1,8 @@
-﻿// EditCompanyForm.cs
+﻿using System.ComponentModel;
+// EditCompanyForm.cs
 // Copyright (c) 2023-2026 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
+
 
 namespace Liber.Forms.Companies;
 
@@ -12,6 +14,7 @@ internal sealed class EditCompanyForm : CompanyForm
         passwordTextBox.Enabled = false;
     }
 
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     public bool IsPasswordEnabled
     {
         get

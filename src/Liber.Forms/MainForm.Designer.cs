@@ -273,7 +273,6 @@ partial class MainForm
         // 
         taxesToolStripMenuItem.Name = "taxesToolStripMenuItem";
         resources.ApplyResources(taxesToolStripMenuItem, "taxesToolStripMenuItem");
-        taxesToolStripMenuItem.Click += OnTaxesToolStripMenuItemClick;
         // 
         // toolStripSeparator10
         // 
