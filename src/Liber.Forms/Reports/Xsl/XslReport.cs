@@ -249,16 +249,16 @@ public class XslReport : IntervalView, IXmlSerializable
         };
     }
 
-    private void ComputeSubtreeBalances(Account value, Dictionary<AccountType, BalanceInfo> typeBalances)
+    private void ComputeSubtreeBalances(Account value, Dictionary<ParentKey, BalanceInfo> keyedBalances)
     {
         BalanceInfo balances = ComputeBalances(value);
         IEnumerable<Account> visibleChildren = value.Children.Where(Accounts.Values.Contains);
 
         if (!visibleChildren.Any())
         {
-            AccountType type = value.Type;
+            ParentKey key = new ParentKey(value.Type, value.CashFlow);
 
-            if (typeBalances.TryGetValue(type, out BalanceInfo? existing))
+            if (keyedBalances.TryGetValue(key, out BalanceInfo? existing))
             {
                 existing.Balance += balances.Balance;
                 existing.Previous += balances.Previous;
@@ -266,21 +266,21 @@ public class XslReport : IntervalView, IXmlSerializable
             }
             else
             {
-                typeBalances[type] = balances;
+                keyedBalances[key] = balances;
             }
         }
 
         foreach (Account child in visibleChildren)
         {
-            ComputeSubtreeBalances(child, typeBalances);
+            ComputeSubtreeBalances(child, keyedBalances);
         }
     }
 
-    private void WriteAccountXml(XmlWriter writer, Account value, AccountType type, BalanceInfo balances)
+    private void WriteAccountXml(XmlWriter writer, Account value, ParentKey key, BalanceInfo balances)
     {
         writer.WriteStartElement("account");
         writer.WriteElementString("name", value.Name);
-        writer.WriteElementString("type", type.ToString());
+        writer.WriteElementString("type", key.Type.ToString());
 
         decimal debit;
         decimal credit;
@@ -304,7 +304,7 @@ public class XslReport : IntervalView, IXmlSerializable
         writer.WriteElementString("previous", XmlConvert.ToString(balances.Previous));
         writer.WriteElementString("debit", XmlConvert.ToString(debit));
         writer.WriteElementString("credit", XmlConvert.ToString(credit));
-        writer.WriteElementString("cash-flow", value.CashFlow.ToString());
+        writer.WriteElementString("cash-flow", key.CashFlow.ToString());
         writer.WriteEndElement();
     }
 
@@ -372,11 +372,11 @@ public class XslReport : IntervalView, IXmlSerializable
         {
             foreach (Account account in Accounts.Values.Where(a => a.ParentId == Guid.Empty))
             {
-                Dictionary<AccountType, BalanceInfo> typeBalances = new Dictionary<AccountType, BalanceInfo>();
+                Dictionary<ParentKey, BalanceInfo> keyedBalances = new Dictionary<ParentKey, BalanceInfo>();
 
-                ComputeSubtreeBalances(account, typeBalances);
+                ComputeSubtreeBalances(account, keyedBalances);
 
-                foreach (KeyValuePair<AccountType, BalanceInfo> entry in typeBalances)
+                foreach (KeyValuePair<ParentKey, BalanceInfo> entry in keyedBalances)
                 {
                     WriteAccountXml(writer, account, entry.Key, entry.Value);
                 }
@@ -386,7 +386,7 @@ public class XslReport : IntervalView, IXmlSerializable
         {
             foreach (Account account in Accounts.Values)
             {
-                WriteAccountXml(writer, account, account.Type, ComputeBalances(account));
+                WriteAccountXml(writer, account, new ParentKey(account.Type, account.CashFlow), ComputeBalances(account));
             }
         }
 
