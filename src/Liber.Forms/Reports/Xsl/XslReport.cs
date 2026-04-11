@@ -3,6 +3,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -248,32 +249,38 @@ public class XslReport : IntervalView, IXmlSerializable
         };
     }
 
-    private BalanceInfo ComputeSubtreeBalances(Account value)
+    private void ComputeSubtreeBalances(Account value, Dictionary<AccountType, BalanceInfo> typeBalances)
     {
-        BalanceInfo result = ComputeBalances(value);
+        BalanceInfo balances = ComputeBalances(value);
+        IEnumerable<Account> visibleChildren = value.Children.Where(Accounts.Values.Contains);
 
-        foreach (Account child in value.Children)
+        if (!visibleChildren.Any())
         {
-            if (!Accounts.Values.Contains(child))
+            AccountType type = value.Type;
+
+            if (typeBalances.TryGetValue(type, out BalanceInfo? existing))
             {
-                continue;
+                existing.Balance += balances.Balance;
+                existing.Previous += balances.Previous;
+                existing.AverageDailyBalance += balances.AverageDailyBalance;
             }
-
-            BalanceInfo childResult = ComputeSubtreeBalances(child);
-
-            result.Balance += childResult.Balance;
-            result.Previous += childResult.Previous;
-            result.AverageDailyBalance += childResult.AverageDailyBalance;
+            else
+            {
+                typeBalances[type] = balances;
+            }
         }
 
-        return result;
+        foreach (Account child in visibleChildren)
+        {
+            ComputeSubtreeBalances(child, typeBalances);
+        }
     }
 
-    private void WriteAccountXml(XmlWriter writer, Account value, BalanceInfo balances)
+    private void WriteAccountXml(XmlWriter writer, Account value, AccountType type, BalanceInfo balances)
     {
         writer.WriteStartElement("account");
         writer.WriteElementString("name", value.Name);
-        writer.WriteElementString("type", value.Type.ToString());
+        writer.WriteElementString("type", type.ToString());
 
         decimal debit;
         decimal credit;
@@ -365,14 +372,21 @@ public class XslReport : IntervalView, IXmlSerializable
         {
             foreach (Account account in Accounts.Values.Where(a => a.ParentId == Guid.Empty))
             {
-                WriteAccountXml(writer, account, ComputeSubtreeBalances(account));
+                Dictionary<AccountType, BalanceInfo> typeBalances = new Dictionary<AccountType, BalanceInfo>();
+
+                ComputeSubtreeBalances(account, typeBalances);
+
+                foreach (KeyValuePair<AccountType, BalanceInfo> entry in typeBalances)
+                {
+                    WriteAccountXml(writer, account, entry.Key, entry.Value);
+                }
             }
         }
         else
         {
             foreach (Account account in Accounts.Values)
             {
-                WriteAccountXml(writer, account, ComputeBalances(account));
+                WriteAccountXml(writer, account, account.Type, ComputeBalances(account));
             }
         }
 
