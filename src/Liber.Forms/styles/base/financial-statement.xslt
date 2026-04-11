@@ -11,6 +11,7 @@ Licensed under the MIT License.
     xmlns:liber="urn:liber"
     exclude-result-prefixes="msxsl">
     <xsl:output method="html" indent="yes"/>
+    <xsl:key name="accounts-by-type-and-name" match="account" use="concat(type, '|', name)"/>
     <xsl:variable name="netIncome" select="sum(report/company/account[type = 'Income' or type = 'Cost' or type = 'Expense' or type = 'OtherIncomeExpense' or type ='IncomeTaxExpense']/balance)"/>
     <xsl:template name="financial-statement">
         <xsl:param name="table"/>
@@ -46,22 +47,29 @@ Licensed under the MIT License.
                         </th>
                         <th></th>
                     </tr>
-                    <xsl:for-each select="//account[type = $type and (balance != 0 or ($comparative = 1 and previous != 0))]">
-                        <tr>
-                            <td class="in-{$indent + 2} left account">
-                                <xsl:value-of select="name"/>
-                            </td>
-                            <td class="right">
-                                <xsl:value-of select="liber:fm($type, balance)"/>
-                            </td>
-                            <xsl:choose>
-                                <xsl:when test="$comparative = 1">
+                    <xsl:for-each select="//account[
+                        type = $type
+                        and generate-id() = generate-id(key('accounts-by-type-and-name', concat(type, '|', name))[1])
+                    ]">
+                        <xsl:variable name="group"         select="key('accounts-by-type-and-name', concat(type, '|', name))"/>
+                        <xsl:variable name="groupBalance"  select="sum($group/balance)"/>
+                        <xsl:variable name="groupPrevious" select="sum($group/previous)"/>
+
+                        <xsl:if test="$groupBalance != 0 or ($comparative = 1 and $groupPrevious != 0)">
+                            <tr>
+                                <td class="in-{$indent + 2} left account">
+                                    <xsl:value-of select="name"/>
+                                </td>
+                                <td class="right">
+                                    <xsl:value-of select="liber:fm($type, $groupBalance)"/>
+                                </td>
+                                <xsl:if test="$comparative = 1">
                                     <td class="right">
-                                        <xsl:value-of select="liber:fm($type, previous)"/>
+                                        <xsl:value-of select="liber:fm($type, $groupPrevious)"/>
                                     </td>
-                                </xsl:when>
-                            </xsl:choose>
-                        </tr>
+                                </xsl:if>
+                            </tr>
+                        </xsl:if>
                     </xsl:for-each>
                 </xsl:if>
                 <tr>
@@ -78,13 +86,11 @@ Licensed under the MIT License.
                     <td class="subtotal right">
                         <xsl:value-of select="liber:fm($balance)"/>
                     </td>
-                    <xsl:choose>
-                        <xsl:when test="$comparative = 1">
-                            <td class="subtotal right">
-                                <xsl:value-of select="liber:fm($previous)"/>
-                            </td>
-                        </xsl:when>
-                    </xsl:choose>
+                    <xsl:if test="$comparative = 1">
+                        <td class="subtotal right">
+                            <xsl:value-of select="liber:fm($previous)"/>
+                        </td>
+                    </xsl:if>
                 </tr>
             </xsl:when>
         </xsl:choose>
