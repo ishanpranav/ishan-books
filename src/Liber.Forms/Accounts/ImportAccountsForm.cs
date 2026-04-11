@@ -16,6 +16,7 @@ internal sealed class ImportAccountsForm : ImportForm
 {
     private readonly FormFactory _factory;
     private readonly IReadOnlyCollection<GnuCashAccount> _accounts;
+    private readonly ImportContext _context;
 
     public ImportAccountsForm(Company company, FormFactory factory, IReadOnlyCollection<GnuCashAccount> accounts) : base(company)
     {
@@ -27,11 +28,17 @@ internal sealed class ImportAccountsForm : ImportForm
             .ToList();
         ImportRule[]? rules = JsonSerializer.Deserialize<ImportRule[]>(Settings.Default.ImportRules, FormattedStrings.JsonOptions);
 
+        _context = new ImportContext(values)
+        {
+            EquityAccount = company.Accounts[company.EquityAccountId],
+            OtherEquityAccount = company.Accounts[company.OtherEquityAccountId]
+        };
+
         if (rules != null)
         {
             foreach (ImportRule rule in rules)
             {
-                rule.Apply(values);
+                rule.Apply(_context);
             }
         }
 
@@ -84,7 +91,19 @@ internal sealed class ImportAccountsForm : ImportForm
 
         foreach (GnuCashAccount account in _accounts)
         {
-            account.Id = Company.AddAccount(account.Value, Guid.Empty);
+            Guid id = Company.AddAccount(account.Value, Guid.Empty);
+
+            if (_context.EquityAccount == account.Value)
+            {
+                Company.EquityAccountId = id;
+            }
+
+            if (_context.OtherEquityAccount == account.Value)
+            {
+                Company.OtherEquityAccountId = id;
+            }
+
+            account.Id = id;
         }
 
         foreach (GnuCashAccount account in _accounts)

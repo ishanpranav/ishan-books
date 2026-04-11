@@ -85,7 +85,15 @@ internal sealed partial class TransactionsForm : Form
 
             balance += line.Balance;
 
-            int row = _dataGridView.Rows.Add(transaction.Posted, transaction.Number, accountId, transaction.Name, line.Debit, line.Credit, balance, transaction);
+            int row = _dataGridView.Rows.Add(
+                transaction.Posted,
+                transaction.Number,
+                accountId,
+                transaction.Name ?? string.Empty,
+                line.Debit,
+                line.Credit,
+                balance,
+                transaction);
 
             for (int column = 0; column < _dataGridView.Columns.Count; column++)
             {
@@ -134,7 +142,7 @@ internal sealed partial class TransactionsForm : Form
 
         DataGridViewCell cell = _dataGridView[transactionColumn.Index, e.RowIndex];
 
-        form.InitializeTransaction((Transaction)cell.Value);
+        form.InitializeTransaction((Transaction)cell.Value!);
 
         if (form.ShowDialog() == DialogResult.OK && form.Value != null)
         {
@@ -148,7 +156,7 @@ internal sealed partial class TransactionsForm : Form
 
     private void OnDataGridViewEditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
     {
-        if (e.Control is not TextBox textBox)
+        if (e.Control is not TextBox textBox || _dataGridView.CurrentCell == null)
         {
             return;
         }
@@ -188,7 +196,7 @@ internal sealed partial class TransactionsForm : Form
 
     private void OnDataGridViewUserDeletedRow(object sender, DataGridViewRowEventArgs e)
     {
-        _company.RemoveTransaction((Transaction)e.Row.Cells[transactionColumn.Index].Value);
+        _company.RemoveTransaction((Transaction)e.Row.Cells[transactionColumn.Index].Value!);
     }
 
     protected override void Dispose(bool disposing)

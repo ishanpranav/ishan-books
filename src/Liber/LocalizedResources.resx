@@ -138,6 +138,9 @@
   <data name="Description" xml:space="preserve">
     <value>Description</value>
   </data>
+  <data name="Equity" xml:space="preserve">
+    <value>Retained Earnings</value>
+  </data>
   <data name="Filter" xml:space="preserve">
     <value>Filter</value>
   </data>
@@ -155,6 +158,9 @@
   </data>
   <data name="Number" xml:space="preserve">
     <value>Number</value>
+  </data>
+  <data name="OtherEquity" xml:space="preserve">
+    <value>Accumulated Other Comprehensive Income</value>
   </data>
   <data name="PageSettings" xml:space="preserve">
     <value>Page Setup</value>

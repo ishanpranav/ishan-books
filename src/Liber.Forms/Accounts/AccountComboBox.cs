@@ -47,6 +47,7 @@ internal sealed class AccountComboBox : ComboBox
         }
     }
 
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public new Guid SelectedItem
     {
         get

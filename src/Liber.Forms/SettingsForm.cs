@@ -83,6 +83,7 @@ internal sealed partial class SettingsForm : Form
             }
         }
 
+        _textBox.Text = JsonSerializer.Serialize(_rules, FormattedStrings.JsonOptions);
         importRulesDataGridView.DataSource = _rules;
 
         importRulesDataGridView.AutoResizeColumns();

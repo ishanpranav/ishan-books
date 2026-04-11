@@ -138,6 +138,9 @@
   <data name="Description" xml:space="preserve">
     <value>Descripción</value>
   </data>
+  <data name="Equity" xml:space="preserve">
+    <value>Utilidades retenidas</value>
+  </data>
   <data name="Filter" xml:space="preserve">
     <value>Filtro</value>
   </data>
@@ -155,6 +158,9 @@
   </data>
   <data name="Number" xml:space="preserve">
     <value>Número</value>
+  </data>
+  <data name="OtherEquity" xml:space="preserve">
+    <value>Otro resultado integral</value>
   </data>
   <data name="PageSettings" xml:space="preserve">
     <value>Configuración de página</value>

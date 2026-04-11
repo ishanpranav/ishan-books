@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFramework>net8.0-windows7.0</TargetFramework>
+		<TargetFramework>net10.0-windows7.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<UseWindowsForms>true</UseWindowsForms>
 		<NeutralLanguage>en-US</NeutralLanguage>
@@ -168,10 +168,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="ini-parser-netstandard" Version="2.5.2" />
-	  <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3124.44" />
-	  <PackageReference Include="PDFsharp" Version="6.1.1" />
-	  <PackageReference Include="WindowsAPICodePack" Version="8.0.6" />
+	  <PackageReference Include="ini-parser-netstandard" Version="2.5.3" />
+	  <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3595.46" />
+	  <PackageReference Include="PDFsharp" Version="6.2.2" />
+	  <PackageReference Include="WindowsAPICodePack" Version="8.0.12" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -17,7 +17,6 @@ using Liber.Forms.Properties;
 using Liber.Forms.Reports;
 using Liber.Forms.Reports.Xsl;
 using Liber.Forms.Saving;
-using Liber.Forms.Taxes;
 using Liber.Forms.Transactions;
 using Liber.Forms.Writers;
 using Liber.Sqlite;
@@ -42,6 +41,7 @@ internal sealed partial class MainForm : Form
         InitializeComponent();
         SystemFeatures.Initialize(this);
 
+        BackColor = Colors.Dark;
         Text = SystemFeatures.ApplicationName;
         aboutToolStripMenuItem.Text = FormattedStrings.AboutText;
         _company.AccountRemoved += (sender, e) => _factory.Kill(e.Id);
@@ -593,41 +593,6 @@ internal sealed partial class MainForm : Form
     private void OnReportsToolStripMenuItemClick(object sender, EventArgs e)
     {
         _factory.Register(Guid.NewGuid(), new ReportsForm(_engine));
-    }
-
-    private void OnTaxesToolStripMenuItemClick(object sender, EventArgs e)
-    {
-        DialogResult result;
-
-        do
-        {
-            using PasswordForm form = new PasswordForm();
-
-            if (form.ShowDialog() != DialogResult.OK)
-            {
-                return;
-            }
-
-            if (form.Password == "12004")
-            {
-                break;
-            }
-
-            result = MessageBox.Show(
-                Resources.IncorrectPasswordError,
-                Resources.ExceptionCaption,
-                MessageBoxButtons.AbortRetryIgnore,
-                MessageBoxIcon.Warning,
-                MessageBoxDefaultButton.Button2);
-
-            if (result == DialogResult.Abort)
-            {
-                return;
-            }
-        }
-        while (result == DialogResult.Retry);
-
-        _factory.Register(Guid.NewGuid(), new TaxesForm(_company));
     }
 
     private void OnTransactionToolStripMenuItemClick(object sender, EventArgs e)

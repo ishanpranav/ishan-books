@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -69,6 +70,13 @@ internal sealed partial class ReportsForm : Form
                 "liber.example",
                 Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)!,
                 CoreWebView2HostResourceAccessKind.DenyCors);
+
+            if (!_recentPathManager.Empty)
+            {
+                _webView.CoreWebView2.Profile.DefaultDownloadFolderPath = Path.GetDirectoryName(_recentPathManager.Paths.First());
+            }
+
+            _webView.CoreWebView2.Profile.PreferredColorScheme = CoreWebView2PreferredColorScheme.Light;
         }
         catch (COMException) { }
 

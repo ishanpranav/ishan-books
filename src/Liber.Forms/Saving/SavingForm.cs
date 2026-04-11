@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
 using Liber.Forms.Properties;
+using System.ComponentModel;
 
 namespace Liber.Forms.Saving;
 
@@ -13,6 +14,7 @@ public partial class SavingForm : Form
         Text = Resources.CancelCaption;
     }
 
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     public int Progress
     {
         get
@@ -25,6 +27,7 @@ public partial class SavingForm : Form
         }
     }
 
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     public int MaxProgress
     {
         get

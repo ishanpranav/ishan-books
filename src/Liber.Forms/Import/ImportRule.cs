@@ -2,6 +2,7 @@
 // Copyright (c) 2023-2026 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text.Json.Serialization;
@@ -27,18 +28,23 @@ internal sealed class ImportRule
     [LocalizedDisplayName(nameof(TaxType))]
     public string? TaxType { get; set; }
 
+    [LocalizedDisplayName(nameof(Equity))]
+    public bool Equity { get; set; }
+
+    [LocalizedDisplayName(nameof(OtherEquity))]
+    public bool OtherEquity { get; set; }
+
     [LocalizedDisplayName(nameof(Strict))]
-    [TypeConverter(typeof(LocalizedEnumConverter))]
     public bool Strict { get; set; }
 
-    public void Apply(IEnumerable<Account> accounts)
+    public void Apply(ImportContext context)
     {
-        if (Type == AccountType.None && CashFlow == CashFlow.None && TaxType == null)
+        if (Type == AccountType.None && CashFlow == CashFlow.None && TaxType == null && !Equity && !OtherEquity)
         {
             return;
         }
 
-        foreach (Account account in accounts)
+        foreach (Account account in context.Accounts)
         {
             if (!Filter.IsMatch(account.Name))
             {
@@ -58,6 +64,16 @@ internal sealed class ImportRule
             if (TaxType != null && (Strict || account.TaxType == null || account.TaxType == "T" || account.TaxType == "F"))
             {
                 account.TaxType = TaxType;
+            }
+
+            if (Equity && (Strict || context.EquityAccount == null))
+            {
+                context.EquityAccount = account;
+            }
+
+            if (OtherEquity && (Strict || context.OtherEquityAccount == null))
+            {
+                context.OtherEquityAccount = account;
             }
         }
     }
