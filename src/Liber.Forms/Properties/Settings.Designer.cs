@@ -12,7 +12,7 @@ namespace Liber.Forms.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.14.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "18.4.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -80,12 +80,12 @@ namespace Liber.Forms.Properties {
     ""strict"": true
   },
   {
-    ""filter"": ""^[46]9"",
+    ""filter"": ""^[46][89]"",
     ""type"": ""otherIncomeExpense"",
     ""strict"": true
   },
   {
-    ""filter"": ""^1[689]"",
+    ""filter"": ""^1[5689]"",
     ""type"": ""otherAsset""
   },
   {
@@ -98,7 +98,9 @@ namespace Liber.Forms.Properties {
   },
   {
     ""filter"": ""Accumulated Other Comprehensive"",
-    ""cashFlow"": ""otherEquity""
+    ""cashFlow"": ""otherEquity"",
+    ""otherEquity"": true,
+    ""strict"": true
   },
   {
     ""filter"": ""Capital Gain"",
@@ -118,7 +120,7 @@ namespace Liber.Forms.Properties {
     ""strict"": true
   },
   {
-    ""filter"": ""Deferred*Tax"",
+    ""filter"": ""Deferred\\s\u002B.\u002B\\s\u002BTax\\s\u002B\\.[Asset|Liability]"",
     ""cashFlow"": ""operating"",
     ""strict"": true
   },
@@ -126,6 +128,16 @@ namespace Liber.Forms.Properties {
     ""filter"": ""US Treasury Bill"",
     ""cashFlow"": ""investing"",
     ""strict"": true
+  },
+  {
+    ""filter"": ""Retained Earning|Accumulated Deficit"",
+    ""type"": ""equity"",
+    ""equity"": true,
+    ""strict"": true
+  },
+  {
+    ""filter"": ""Charles Schwab Individual [Short Term|Long Term]"",
+    ""cashFlow"": ""investing""
   }
 ]")]
         public string ImportRules {
