@@ -22,12 +22,12 @@
     "strict": true
   },
   {
-    "filter": "^[46]9",
+    "filter": "^[46][89]",
     "type": "otherIncomeExpense",
     "strict": true
   },
   {
-    "filter": "^1[689]",
+    "filter": "^1[5689]",
     "type": "otherAsset"
   },
   {
@@ -40,7 +40,9 @@
   },
   {
     "filter": "Accumulated Other Comprehensive",
-    "cashFlow": "otherEquity"
+    "cashFlow": "otherEquity",
+    "otherEquity": true,
+    "strict": true
   },
   {
     "filter": "Capital Gain",
@@ -60,7 +62,7 @@
     "strict": true
   },
   {
-    "filter": "Deferred*Tax",
+    "filter": "Deferred\\s\u002B.\u002B\\s\u002BTax\\s\u002B\\.[Asset|Liability]",
     "cashFlow": "operating",
     "strict": true
   },
@@ -68,6 +70,16 @@
     "filter": "US Treasury Bill",
     "cashFlow": "investing",
     "strict": true
+  },
+  {
+    "filter": "Retained Earning|Accumulated Deficit",
+    "type": "equity",
+    "equity": true,
+    "strict": true
+  },
+  {
+    "filter": "Charles Schwab Individual [Short Term|Long Term]",
+    "cashFlow": "investing"
   }
 ]</Value>
     </Setting>
