@@ -103,15 +103,8 @@ namespace Liber.Forms.Properties {
     ""strict"": true
   },
   {
-    ""filter"": ""Capital Gain"",
+    ""filter"": ""Capital (Gain|Loss)"",
     ""type"": ""otherIncomeExpense"",
-    ""cashFlow"": ""gainLoss"",
-    ""strict"": true
-  },
-  {
-    ""filter"": ""Capital Loss"",
-    ""type"": ""otherIncomeExpense"",
-    ""cashFlow"": ""gainLoss"",
     ""strict"": true
   },
   {
@@ -120,7 +113,7 @@ namespace Liber.Forms.Properties {
     ""strict"": true
   },
   {
-    ""filter"": ""Deferred\\s\u002B.\u002B\\s\u002BTax\\s\u002B\\.[Asset|Liability]"",
+    ""filter"": ""Deferred.*Tax.*(Asset|Liability)"",
     ""cashFlow"": ""operating"",
     ""strict"": true
   },
@@ -130,14 +123,24 @@ namespace Liber.Forms.Properties {
     ""strict"": true
   },
   {
-    ""filter"": ""Retained Earning|Accumulated Deficit"",
+    ""filter"": ""(Retained Earning|Accumulated Deficit)"",
     ""type"": ""equity"",
     ""equity"": true,
     ""strict"": true
   },
   {
-    ""filter"": ""Charles Schwab Individual [Short Term|Long Term]"",
-    ""cashFlow"": ""investing""
+    ""filter"": ""Charles Schwab Individual (Short[-\\s]Term|Long[-\\s]Term)$"",
+    ""cashFlow"": ""investing"",
+    ""strict"": true
+  },
+  {
+    ""filter"": ""^(?!.*Unrealized).*Capital*.(Gain|Loss)"",
+    ""cashFlow"": ""gainLoss"",
+    ""strict"": true
+  },
+  {
+    ""filter"": ""Unrealized.*(Income|Expense|Gain|Loss)"",
+    ""cashFlow"": ""nonCash""
   }
 ]")]
         public string ImportRules {
