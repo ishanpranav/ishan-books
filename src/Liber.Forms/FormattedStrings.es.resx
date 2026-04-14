@@ -132,9 +132,6 @@
   <data name="accumulated-other-comprehensive-income" xml:space="preserve">
     <value>Acumulado de otros resultados o pérdidas integrales</value>
   </data>
-  <data name="adjustments{0}{1}" xml:space="preserve">
-    <value>Ajustes para conciliar el {0} con el {1}</value>
-  </data>
   <data name="aging-summary" xml:space="preserve">
     <value>Resumen de antigüedad de saldos</value>
   </data>
@@ -303,54 +300,6 @@
   <data name="trial-balance" xml:space="preserve">
     <value>Balance de Prueba</value>
   </data>
-  <data name="_n_accumulated-other-comprehensive-income" xml:space="preserve">
-    <value>Acumuladas de otras pérdidas integrales</value>
-  </data>
-  <data name="_n_comprehensive-income" xml:space="preserve">
-    <value>Pérdida integral</value>
-  </data>
-  <data name="_n_Corporation" xml:space="preserve">
-    <value>déficit de los accionistas</value>
-  </data>
-  <data name="_n_CreditCard" xml:space="preserve">
-    <value>Pagos totales con tarjeta de crédito</value>
-  </data>
-  <data name="_n_customer-report" xml:space="preserve">
-    <value>Nota de crédito</value>
-  </data>
-  <data name="_n_financing" xml:space="preserve">
-    <value>Flujo de efectivo neto utilizado en actividades de financiamiento</value>
-  </data>
-  <data name="_n_gross-profit" xml:space="preserve">
-    <value>Pérdida bruta</value>
-  </data>
-  <data name="_n_Individual" xml:space="preserve">
-    <value>déficit del dueño</value>
-  </data>
-  <data name="_n_investing" xml:space="preserve">
-    <value>Flujo de efectivo neto utilizado en actividades de inversión</value>
-  </data>
-  <data name="_n_net-income" xml:space="preserve">
-    <value>Pérdida neta</value>
-  </data>
-  <data name="_n_None" xml:space="preserve">
-    <value>déficit</value>
-  </data>
-  <data name="_n_operating" xml:space="preserve">
-    <value>Flujo de efectivo neto utilizado en actividades de operación</value>
-  </data>
-  <data name="_n_ordinary-income" xml:space="preserve">
-    <value>Pérdida neta ordinaria</value>
-  </data>
-  <data name="_n_other-comprehensive-income" xml:space="preserve">
-    <value>Otra pérdida integral total</value>
-  </data>
-  <data name="_n_Partnership" xml:space="preserve">
-    <value>déficit de los socios</value>
-  </data>
-  <data name="_n_retained-earnings" xml:space="preserve">
-    <value>Déficit acumulado</value>
-  </data>
   <data name="_p_accumulated-other-comprehensive-income" xml:space="preserve">
     <value>Acumulados de otros resultados integrales</value>
   </data>
@@ -399,7 +348,7 @@
   <data name="_p_LongTermLiability" xml:space="preserve">
     <value>Pasivos a largo plazo totales</value>
   </data>
-  <data name="_p_net-income" xml:space="preserve">
+  <data name="net-income" xml:space="preserve">
     <value>Ingreso neto</value>
   </data>
   <data name="_p_None" xml:space="preserve">

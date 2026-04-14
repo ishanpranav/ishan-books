@@ -94,7 +94,7 @@ Licensed under the MIT License.
                 </xsl:apply-templates>
                 <tr>
                     <th class="left">
-                        <xsl:value-of select="liber:pngets('net-income', -$netIncome)"/>
+                        <xsl:value-of select="liber:gets('net-income')"/>
                     </th>
                     <td class="total right">
                         <xsl:value-of select="liber:fm(-$netIncome)"/>
