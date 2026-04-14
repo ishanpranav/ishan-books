@@ -21,5 +21,8 @@ public enum CompanyType : byte
     Corporation = 3,
 
     [LocalizedDescription(nameof(NonprofitCorporation))]
-    NonprofitCorporation = 4
+    NonprofitCorporation = 4,
+
+    [LocalizedDescription(nameof(SoleProprietor))]
+    SoleProprietor = 5
 }

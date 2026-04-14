@@ -384,4 +384,7 @@
   <data name="_d_Weekly" xml:space="preserve">
     <value>Weekly</value>
   </data>
+  <data name="_d_SoleProprietor" xml:space="preserve">
+    <value>Sole Proprietor</value>
+  </data>
 </root>
