@@ -283,7 +283,7 @@
     <value>Other current liabilities</value>
   </data>
   <data name="OtherIncomeExpense" xml:space="preserve">
-    <value>Other income and expenses</value>
+    <value>Other income and (expenses)</value>
   </data>
   <data name="retained-earnings" xml:space="preserve">
     <value>Retained earnings or accumulated deficit</value>
@@ -373,7 +373,7 @@
     <value>net assets or (liabilities)</value>
   </data>
   <data name="_p_operating" xml:space="preserve">
-    <value>Net cash provided by operating activities</value>
+    <value>Net cash provided by or (used in) operating activities</value>
   </data>
   <data name="_p_ordinary-income" xml:space="preserve">
     <value>Net ordinary income or (loss)</value>
@@ -430,6 +430,6 @@
     <value>Net disposals or (acquisitions)</value>
   </data>
   <data name="_p_realized-gain-loss" xml:space="preserve">
-    <value>Net realized gains or (losses)</value>
+    <value>Total adjustment for realized gains</value>
   </data>
 </root>

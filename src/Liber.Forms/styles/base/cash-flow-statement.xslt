@@ -204,16 +204,6 @@ Licensed under the MIT License.
                                         </td>
                                     </tr>
                                 </xsl:for-each>
-                                <xsl:for-each select="company/account[cash-flow = 'GainLoss' and balance != 0]">
-                                    <tr>
-                                        <td class="in-3 left account">
-                                            <xsl:value-of select="name"/>
-                                        </td>
-                                        <td class="right">
-                                            <xsl:value-of select="liber:fm(-balance)"/>
-                                        </td>
-                                    </tr>
-                                </xsl:for-each>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:if test="$investingActivities != 0">
@@ -226,18 +216,18 @@ Licensed under the MIT License.
                                         </td>
                                     </tr>
                                 </xsl:if>
-                                <xsl:if test="$netGainLoss != 0">
-                                    <tr>
-                                        <td class="in-3 left">
-                                            <xsl:value-of select="liber:gets('plus-gain')"/>
-                                        </td>
-                                        <td class="right">
-                                            <xsl:value-of select="liber:fm(-$netGainLoss)"/>
-                                        </td>
-                                    </tr>
-                                </xsl:if>
                             </xsl:otherwise>
                         </xsl:choose>
+                        <xsl:if test="$netGainLoss != 0">
+                            <tr>
+                                <td class="in-3 left">
+                                    <xsl:value-of select="liber:gets('plus-gain')"/>
+                                </td>
+                                <td class="right">
+                                    <xsl:value-of select="liber:fm(-$netGainLoss)"/>
+                                </td>
+                            </tr>
+                        </xsl:if>
                     </xsl:when>
                 </xsl:choose>
                 <tr>
