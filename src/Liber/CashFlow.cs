@@ -27,5 +27,8 @@ public enum CashFlow
     OtherEquity,
 
     [LocalizedDescription(nameof(GainLoss))]
-    GainLoss
+    GainLoss,
+
+    [LocalizedDescription(nameof(NonCash))]
+    NonCash
 }
