@@ -58,7 +58,7 @@ Licensed under the MIT License.
                         </tr>
                         <tr>
                             <td class="in-2 left">
-                                <xsl:value-of select="liber:pngets('net-income', -$netIncome)"/>
+                                <xsl:value-of select="liber:gets('net-income')"/>
                             </td>
                             <td class="right">
                                 <xsl:value-of select="liber:fm(-$netIncome)"/>
@@ -66,7 +66,6 @@ Licensed under the MIT License.
                         </tr>
                         <xsl:choose>
                             <xsl:when test="company/detail = 'true'">
-                                <!--  Changes in working capital  -->
                                 <xsl:if test="$workingCapital != 0">
                                     <tr>
                                         <td class="in-2 left">
@@ -92,11 +91,10 @@ Licensed under the MIT License.
                                         </td>
                                     </tr>
                                 </xsl:if>
-                                <!--  Unrealized gains/losses (NonCash)  -->
                                 <xsl:if test="$nonCash != 0">
                                     <tr>
                                         <td class="in-2 left">
-                                            <xsl:value-of select="liber:gets('unrealized-gain-loss')"/>
+                                            <xsl:value-of select="liber:gets('non-cash')"/>
                                         </td>
                                     </tr>
                                     <xsl:for-each select="company/account[cash-flow = 'NonCash' and (balance - previous != 0)]">
@@ -111,7 +109,7 @@ Licensed under the MIT License.
                                     </xsl:for-each>
                                     <tr>
                                         <td class="in-2 left">
-                                            <xsl:value-of select="liber:pngets('unrealized-gain-loss', $nonCash)"/>
+                                            <xsl:value-of select="liber:pngets('non-cash', $nonCash)"/>
                                         </td>
                                         <td class="subtotal right">
                                             <xsl:value-of select="liber:fm($nonCash)"/>
@@ -121,7 +119,7 @@ Licensed under the MIT License.
                                 <xsl:if test="$netGainLoss != 0">
                                     <tr>
                                         <td class="in-2 left">
-                                            <xsl:value-of select="liber:gets('realized-gain-loss')"/>
+                                            <xsl:value-of select="liber:gets('less-gain')"/>
                                         </td>
                                     </tr>
                                     <xsl:for-each select="company/account[cash-flow = 'GainLoss' and balance != 0]">
@@ -158,7 +156,7 @@ Licensed under the MIT License.
                                 <xsl:if test="$nonCash != 0">
                                     <tr>
                                         <td class="in-2 left">
-                                            <xsl:value-of select="liber:pngets('unrealized-gain-loss', $nonCash)"/>
+                                            <xsl:value-of select="liber:pngets('non-cash', $nonCash)"/>
                                         </td>
                                         <td class="right">
                                             <xsl:value-of select="liber:fm($nonCash)"/>

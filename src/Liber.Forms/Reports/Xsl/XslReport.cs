@@ -174,15 +174,15 @@ public class XslReport : IntervalView, IXmlSerializable
 
     public string pngets(string key, decimal value)
     {
-        if (value < 0)
-        {
-            string? result = FormattedStrings.ResourceManager.GetString("_n_" + key);
+        //if (value < 0)
+        //{
+        //    string? result = FormattedStrings.ResourceManager.GetString("_n_" + key);
 
-            if (result != null)
-            {
-                return result;
-            }
-        }
+        //    if (result != null)
+        //    {
+        //        return result;
+        //    }
+        //}
 
         return gets("_p_" + key);
     }
