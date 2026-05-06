@@ -8,6 +8,21 @@ Licensed under the MIT License.
     <xsl:output method="html" indent="yes"/>
     <xsl:template name="cash-flow-statement">
         <xsl:param name="title"/>
+        <xsl:variable name="workingCapital" select="sum(company/account[cash-flow = 'Operating']/previous) - sum(company/account[cash-flow = 'Operating']/balance)"/>
+        <xsl:variable name="nonCash" select="sum(company/account[cash-flow = 'NonCash']/balance) - sum(company/account[cash-flow = 'NonCash']/previous)"/>
+        <xsl:variable name="netGainLoss" select="sum(company/account[cash-flow = 'GainLoss']/balance)"/>
+        <xsl:variable name="operating" select="-$netIncome + $workingCapital + $nonCash + $netGainLoss"/>
+        <xsl:variable name="investing" select="sum(company/account[(cash-flow = 'Investing')]/previous) - sum(company/account[cash-flow = 'Investing']/balance) - $netGainLoss"/>
+        <xsl:variable name="financing" select="sum(company/account[(cash-flow = 'Financing')]/previous) - sum(company/account[(cash-flow = 'Financing')]/balance)"/>
+        <xsl:variable name="investingActivities" select="sum(company/account[cash-flow = 'Investing']/previous) - sum(company/account[cash-flow = 'Investing']/balance)"/>
+        <xsl:variable name="netCashFlow" select="$operating + $investing + $financing"/>
+        <xsl:variable name="cashPrevious" select="sum(company/account[cash-flow = 'Cash']/previous)"/>
+        <xsl:variable name="cashBalance" select="sum(company/account[cash-flow = 'Cash']/balance)"/>
+        <xsl:if test="($cashBalance - $cashPrevious - $netCashFlow) &gt;= 0.01 or ($cashBalance - $cashPrevious - $netCashFlow) &lt;= -0.01">
+            <div class="warning">
+                Warning! The sum of the beginning cash balance of <xsl:value-of select="liber:fm($cashPrevious)"/>, together with the net cash flow of <xsl:value-of select="liber:fm($netCashFlow)"/>, is <xsl:value-of select="liber:fm($cashPrevious + $netCashFlow)"/>, which does not reconcile with the ending cash balance of <xsl:value-of select="liber:fm($cashBalance)"/>. The excess cash of <xsl:value-of select="liber:fm($cashBalance - $cashPrevious - $netCashFlow)"/> may be the result of misclassified accounts. Please ensure that all accounts are classified with the correct cash flow type.
+            </div>
+        </xsl:if>
         <table>
             <thead>
                 <tr>
@@ -32,14 +47,6 @@ Licensed under the MIT License.
                     </th>
                 </tr>
             </thead>
-            <xsl:variable name="workingCapital" select="sum(company/account[cash-flow = 'Operating']/previous) - sum(company/account[cash-flow = 'Operating']/balance)"/>
-            <xsl:variable name="nonCash" select="sum(company/account[cash-flow = 'NonCash']/balance) - sum(company/account[cash-flow = 'NonCash']/previous)"/>
-            <xsl:variable name="netGainLoss" select="sum(company/account[cash-flow = 'GainLoss']/balance)"/>
-            <xsl:variable name="operating" select="-$netIncome + $workingCapital + $nonCash + $netGainLoss"/>
-            <xsl:variable name="investing" select="sum(company/account[(cash-flow = 'Investing')]/previous) - sum(company/account[cash-flow = 'Investing']/balance) - $netGainLoss"/>
-            <xsl:variable name="financing" select="sum(company/account[(cash-flow = 'Financing')]/previous) - sum(company/account[(cash-flow = 'Financing')]/balance)"/>
-            <xsl:variable name="investingActivities" select="sum(company/account[cash-flow = 'Investing']/previous) - sum(company/account[cash-flow = 'Investing']/balance)"/>
-            <xsl:variable name="netCashFlow" select="$operating + $investing + $financing"/>
             <tbody>
                 <xsl:choose>
                     <xsl:when test="$operating != 0">
@@ -178,7 +185,7 @@ Licensed under the MIT License.
                     <td class="in-4 left">
                         <xsl:value-of select="liber:pngets('operating', $operating)"/>
                     </td>
-                    <td class="subtotal right">
+                    <td class="total right">
                         <xsl:value-of select="liber:fm($operating)"/>
                     </td>
                 </tr>
@@ -229,7 +236,7 @@ Licensed under the MIT License.
                     <td class="in-4 left">
                         <xsl:value-of select="liber:pngets('investing', $investing)"/>
                     </td>
-                    <td class="subtotal right">
+                    <td class="total right">
                         <xsl:value-of select="liber:fm($investing)"/>
                     </td>
                 </tr>
@@ -254,7 +261,7 @@ Licensed under the MIT License.
                     <td class="in-4 left">
                         <xsl:value-of select="liber:pngets('financing', $financing)"/>
                     </td>
-                    <td class="subtotal right">
+                    <td class="total right">
                         <xsl:value-of select="liber:fm($financing)"/>
                     </td>
                 </tr>
@@ -271,7 +278,7 @@ Licensed under the MIT License.
                         <xsl:value-of select="concat(liber:gets('Bank'), ', ', liber:fdates(started))"/>
                     </td>
                     <td class="right">
-                        <xsl:value-of select="liber:fm(sum(company/account[cash-flow = 'Cash']/previous))"/>
+                        <xsl:value-of select="liber:fm($cashPrevious)"/>
                     </td>
                 </tr>
                 <tr>
@@ -279,7 +286,7 @@ Licensed under the MIT License.
                         <xsl:value-of select="concat(liber:gets('Bank'), ', ', liber:fdates(posted))"/>
                     </td>
                     <td class="grand-total right">
-                        <xsl:value-of select="liber:fm(sum(company/account[cash-flow = 'Cash']/balance))"/>
+                        <xsl:value-of select="liber:fm($cashBalance)"/>
                     </td>
                 </tr>
             </tbody>

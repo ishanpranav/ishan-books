@@ -415,7 +415,7 @@
     <value>Net change in cash and cash equivalents</value>
   </data>
   <data name="_p_working-capital" xml:space="preserve">
-    <value>Total change in operating assets and liabilities</value>
+    <value>Total adjustment for operating assets and liabilities</value>
   </data>
   <data name="_p_net-income" xml:space="preserve">
     <value>Net income or (loss)</value>

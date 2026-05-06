@@ -4,12 +4,15 @@ Copyright (c) 2023-2026 Ishan Pranav. All rights reserved.
 Licensed under the MIT License.
 */
 
+body {
+    font-family: "Segoe UI", Arial;
+    font-size: 10pt;
+}
+
 table {
     border-collapse: collapse;
     border-spacing: 0;
     break-after: page;
-    font-family: "Segoe UI", Arial;
-    font-size: 10pt;
     margin-left: auto;
     margin-right: auto;
 }
@@ -98,6 +101,16 @@ th, td {
 
 .in-5 {
     padding-left: 15ch;
+}
+
+.warning {
+    color: red;
+    left: 0;
+    margin: 20px;
+    position: sticky;
+    text-align: center;
+    top: 0;
+    width: 100%;
 }
 
 tbody tr:nth-child(odd) {

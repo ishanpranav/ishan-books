@@ -73,16 +73,18 @@ Licensed under the MIT License.
                     </xsl:for-each>
                 </xsl:if>
                 <tr>
-                    <td class="in-{$totalIndent + 2} left">
-                        <xsl:choose>
-                            <xsl:when test="detail = 'false'">
+                    <xsl:choose>
+                        <xsl:when test="detail = 'false'">
+                            <td class="in-{$indent} left">
                                 <xsl:value-of select="$title"/>
-                            </xsl:when>
-                            <xsl:when test="detail = 'true'">
+                            </td>
+                        </xsl:when>
+                        <xsl:when test="detail = 'true'">
+                            <td class="in-{$totalIndent + 2} left">
                                 <xsl:value-of select="$subtitle"/>
-                            </xsl:when>
-                        </xsl:choose>
-                    </td>
+                            </td>
+                        </xsl:when>
+                    </xsl:choose>
                     <td class="subtotal right">
                         <xsl:value-of select="liber:fm($balance)"/>
                     </td>

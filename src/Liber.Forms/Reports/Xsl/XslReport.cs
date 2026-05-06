@@ -208,7 +208,7 @@ public class XslReport : IntervalView, IXmlSerializable
         {
             BalanceInfo result = new BalanceInfo()
             {
-                Previous = Company.GetEquity(Started, Filter)
+                Previous = Company.GetEquity(Started.AddDays(-1), Filter)
             };
 
             if (Type.HasFlag(ReportTypes.CurrentPosted))
@@ -244,7 +244,7 @@ public class XslReport : IntervalView, IXmlSerializable
         return new BalanceInfo()
         {
             Balance = value.GetBalance(Posted, Filter),
-            Previous = value.GetBalance(Started, Filter),
+            Previous = value.GetBalance(Started.AddDays(-1), Filter),
             AverageDailyBalance = value.GetAverageDailyBalance(Started, Posted, Filter)
         };
     }

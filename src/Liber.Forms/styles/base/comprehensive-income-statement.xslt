@@ -18,10 +18,9 @@ Licensed under the MIT License.
     <xsl:template name="comprehensive-income-statement">
         <xsl:param name="title"/>
         <xsl:if test="$complexTransactions &gt; 0">
-            <dialog id="warningDialog" open="open">
+            <div class="warning">
                 Warning! The general journal contains <xsl:value-of select="$complexTransactions"/> complex adjustments. For transactions that impact other comprehensive income or loss, please ensure that there is exactly one debit account and exactly one credit account.
-                <button id="closeButton" onclick="document.getElementById('warningDialog').close()">Close</button>
-            </dialog>
+            </div>
         </xsl:if>
         <table>
             <thead>
