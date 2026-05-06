@@ -252,9 +252,6 @@
   <data name="operating" xml:space="preserve">
     <value>Actividades de operación</value>
   </data>
-  <data name="ordinary-income" xml:space="preserve">
-    <value>Ingresos y gastos ordinarios</value>
-  </data>
   <data name="OtherAsset" xml:space="preserve">
     <value>Otros activos</value>
   </data>
@@ -359,9 +356,6 @@
   </data>
   <data name="_p_operating" xml:space="preserve">
     <value>Flujo de efectivo neto proporcionado por actividades de operación</value>
-  </data>
-  <data name="_p_ordinary-income" xml:space="preserve">
-    <value>Ingreso neto ordinaro</value>
   </data>
   <data name="_p_other-comprehensive-income" xml:space="preserve">
     <value>Otro resultado integral total</value>

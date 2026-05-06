@@ -35,17 +35,18 @@ Licensed under the MIT License.
         <xsl:param name="balance"/>
         <xsl:param name="previous" select="0"/>
         <xsl:param name="indent"/>
+        <xsl:param name="totalIndent" select="$indent" />
         <xsl:param name="title" select="liber:gets($type)"/>
         <xsl:param name="subtitle" select="liber:pngets($type, $balance)"/>
         <xsl:param name="comparative" select="0"/>
+        <xsl:param name="cols" select="2"/>
         <xsl:choose>
             <xsl:when test="$balance != 0 or $previous != 0">
                 <xsl:if test="detail = 'true'">
                     <tr>
-                        <th class="in-{$indent} left">
-                            <xsl:value-of select="$title"/>
-                        </th>
-                        <th></th>
+                        <td class="in-{$indent} left" colspan="{$cols}">
+                            <xsl:value-of select="concat($title, ':')"/>
+                        </td>
                     </tr>
                     <xsl:for-each select="//account[
                         type = $type
@@ -54,10 +55,9 @@ Licensed under the MIT License.
                         <xsl:variable name="group"         select="key('accounts-by-type-and-name', concat(type, '|', name))"/>
                         <xsl:variable name="groupBalance"  select="sum($group/balance)"/>
                         <xsl:variable name="groupPrevious" select="sum($group/previous)"/>
-
                         <xsl:if test="$groupBalance != 0 or ($comparative = 1 and $groupPrevious != 0)">
                             <tr>
-                                <td class="in-{$indent + 2} left account">
+                                <td class="in-{$indent + 1} left account">
                                     <xsl:value-of select="name"/>
                                 </td>
                                 <td class="right">
@@ -73,7 +73,7 @@ Licensed under the MIT License.
                     </xsl:for-each>
                 </xsl:if>
                 <tr>
-                    <th class="in-{$indent} left">
+                    <td class="in-{$totalIndent + 2} left">
                         <xsl:choose>
                             <xsl:when test="detail = 'false'">
                                 <xsl:value-of select="$title"/>
@@ -82,7 +82,7 @@ Licensed under the MIT License.
                                 <xsl:value-of select="$subtitle"/>
                             </xsl:when>
                         </xsl:choose>
-                    </th>
+                    </td>
                     <td class="subtotal right">
                         <xsl:value-of select="liber:fm($balance)"/>
                     </td>
