@@ -3,7 +3,7 @@
     "balance-sheet": "CurrentPosted",
     "comparative-balance-sheet": "CurrentPosted",
     "equity-statement": "CurrentPosted",
-    "cash-flow-statement": "CashBasis",
+    "cash-flow-statement": "CurrentPosted",
     "account-summary": "CurrentStarted",
     "annual-report": "CurrentPosted",
     "average-daily-balance": "CurrentStarted"
