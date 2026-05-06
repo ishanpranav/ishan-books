@@ -50,18 +50,18 @@ Licensed under the MIT License.
             <xsl:variable name="otherComprehensiveIncome" select="sum(company/account[other-equity = 'true']/balance) - sum(company/account[other-equity = 'true']/previous)"/>
             <tbody>
                 <tr>
-                    <th class="in-1 left">
+                    <td class="left">
                         <xsl:value-of select="liber:gets('net-income')"/>
-                    </th>
-                    <th class="right">
+                    </td>
+                    <td class="right">
                         <xsl:value-of select="liber:fm(-$netIncome)"/>
-                    </th>
+                    </td>
                 </tr>
                 <xsl:if test="detail = 'true'">
                     <xsl:for-each select="//line[other-equity = 'false' and ancestor::transaction[other-equity = 'true'] and generate-id() = generate-id(key('lines-by-account', account)[1])]">
                         <xsl:sort select="account" data-type="text" order="ascending"/>
                         <tr>
-                            <td class="in-2 left account">
+                            <td class="in-1 left account">
                                 <xsl:value-of select="account"/>
                             </td>
                             <td class="right">
@@ -72,18 +72,18 @@ Licensed under the MIT License.
                     </xsl:for-each>
                 </xsl:if>
                 <tr>
-                    <th class="in-1 left">
+                    <td class="left">
                         <xsl:value-of select="liber:pngets('other-comprehensive-income', -$otherComprehensiveIncome)"/>
-                    </th>
-                    <th class="right">
+                    </td>
+                    <td class="right">
                         <xsl:value-of select="liber:fm(-$otherComprehensiveIncome)"/>
-                    </th>
+                    </td>
                 </tr>
                 <tr>
-                    <th class="left">
+                    <td class="left">
                         <xsl:value-of select="liber:pngets('comprehensive-income', -($netIncome + $otherComprehensiveIncome))"/>
-                    </th>
-                    <td class="total right">
+                    </td>
+                    <td class="grand-total right">
                         <xsl:value-of select="liber:fm(-($netIncome + $otherComprehensiveIncome))"/>
                     </td>
                 </tr>

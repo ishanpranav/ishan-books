@@ -41,40 +41,37 @@ Licensed under the MIT License.
             <xsl:variable name="investingActivities" select="sum(company/account[cash-flow = 'Investing']/previous) - sum(company/account[cash-flow = 'Investing']/balance)"/>
             <xsl:variable name="netCashFlow" select="$operating + $investing + $financing"/>
             <tbody>
-                <tr>
-                    <th class="left">
-                        <xsl:value-of select="concat(liber:gets('Bank'), ', ', liber:fdates(started))"/>
-                    </th>
-                    <th class="right">
-                        <xsl:value-of select="liber:fm(sum(company/account[cash-flow = 'Cash']/previous))"/>
-                    </th>
-                </tr>
                 <xsl:choose>
                     <xsl:when test="$operating != 0">
                         <tr>
-                            <th class="in-1 left">
+                            <th class="left" colspan="2">
                                 <xsl:value-of select="liber:gets('operating')"/>
                             </th>
                         </tr>
                         <tr>
-                            <td class="in-2 left">
+                            <td class="left">
                                 <xsl:value-of select="liber:gets('net-income')"/>
                             </td>
                             <td class="right">
                                 <xsl:value-of select="liber:fm(-$netIncome)"/>
                             </td>
                         </tr>
+                        <tr>
+                            <td class="left" colspan="2">
+                                <xsl:value-of select="liber:gets('net-income-adjustments')"/>
+                            </td>
+                        </tr>
                         <xsl:choose>
                             <xsl:when test="company/detail = 'true'">
                                 <xsl:if test="$workingCapital != 0">
                                     <tr>
-                                        <td class="in-2 left">
+                                        <td class="in-1 left">
                                             <xsl:value-of select="liber:gets('working-capital')"/>
                                         </td>
                                     </tr>
                                     <xsl:for-each select="company/account[cash-flow = 'Operating' and (previous - balance != 0)]">
                                         <tr>
-                                            <td class="in-4 left account">
+                                            <td class="in-2 left account">
                                                 <xsl:value-of select="name"/>
                                             </td>
                                             <td class="right">
@@ -83,7 +80,7 @@ Licensed under the MIT License.
                                         </tr>
                                     </xsl:for-each>
                                     <tr>
-                                        <td class="in-2 left">
+                                        <td class="in-3 left">
                                             <xsl:value-of select="liber:pngets('working-capital', $workingCapital)"/>
                                         </td>
                                         <td class="subtotal right">
@@ -93,13 +90,13 @@ Licensed under the MIT License.
                                 </xsl:if>
                                 <xsl:if test="$nonCash != 0">
                                     <tr>
-                                        <td class="in-2 left">
+                                        <td class="in-1 left" colspan="2">
                                             <xsl:value-of select="liber:gets('non-cash')"/>
                                         </td>
                                     </tr>
                                     <xsl:for-each select="company/account[cash-flow = 'NonCash' and (balance - previous != 0)]">
                                         <tr>
-                                            <td class="in-4 left account">
+                                            <td class="in-2 left account">
                                                 <xsl:value-of select="name"/>
                                             </td>
                                             <td class="right">
@@ -108,7 +105,7 @@ Licensed under the MIT License.
                                         </tr>
                                     </xsl:for-each>
                                     <tr>
-                                        <td class="in-2 left">
+                                        <td class="in-3 left">
                                             <xsl:value-of select="liber:pngets('non-cash', $nonCash)"/>
                                         </td>
                                         <td class="subtotal right">
@@ -118,13 +115,13 @@ Licensed under the MIT License.
                                 </xsl:if>
                                 <xsl:if test="$netGainLoss != 0">
                                     <tr>
-                                        <td class="in-2 left">
+                                        <td class="in-1 left" colspan="2">
                                             <xsl:value-of select="liber:gets('less-gain')"/>
                                         </td>
                                     </tr>
                                     <xsl:for-each select="company/account[cash-flow = 'GainLoss' and balance != 0]">
                                         <tr>
-                                            <td class="in-4 left account">
+                                            <td class="in-2 left account">
                                                 <xsl:value-of select="name"/>
                                             </td>
                                             <td class="right">
@@ -133,7 +130,7 @@ Licensed under the MIT License.
                                         </tr>
                                     </xsl:for-each>
                                     <tr>
-                                        <td class="in-2 left">
+                                        <td class="in-3 left">
                                             <xsl:value-of select="liber:pngets('realized-gain-loss', $netGainLoss)"/>
                                         </td>
                                         <td class="subtotal right">
@@ -145,7 +142,7 @@ Licensed under the MIT License.
                             <xsl:otherwise>
                                 <xsl:if test="$workingCapital != 0">
                                     <tr>
-                                        <td class="in-2 left">
+                                        <td class="in-1 left">
                                             <xsl:value-of select="liber:pngets('working-capital', $workingCapital)"/>
                                         </td>
                                         <td class="right">
@@ -155,7 +152,7 @@ Licensed under the MIT License.
                                 </xsl:if>
                                 <xsl:if test="$nonCash != 0">
                                     <tr>
-                                        <td class="in-2 left">
+                                        <td class="in-1 left">
                                             <xsl:value-of select="liber:pngets('non-cash', $nonCash)"/>
                                         </td>
                                         <td class="right">
@@ -165,7 +162,7 @@ Licensed under the MIT License.
                                 </xsl:if>
                                 <xsl:if test="$netGainLoss != 0">
                                     <tr>
-                                        <td class="in-2 left">
+                                        <td class="in-1 left">
                                             <xsl:value-of select="liber:gets('less-gain')"/>
                                         </td>
                                         <td class="right">
@@ -178,77 +175,24 @@ Licensed under the MIT License.
                     </xsl:when>
                 </xsl:choose>
                 <tr>
-                    <th class="in-1 left">
+                    <td class="in-4 left">
                         <xsl:value-of select="liber:pngets('operating', $operating)"/>
-                    </th>
-                    <th class="subtotal right">
+                    </td>
+                    <td class="subtotal right">
                         <xsl:value-of select="liber:fm($operating)"/>
-                    </th>
+                    </td>
                 </tr>
-                <xsl:choose>
-                    <xsl:when test="$investing != 0">
-                        <tr>
-                            <th class="in-1 left">
-                                <xsl:value-of select="liber:gets('investing')"/>
-                            </th>
-                        </tr>
-                        <xsl:choose>
-                            <xsl:when test="company/detail = 'true'">
-                                <xsl:for-each select="company/account[cash-flow = 'Investing' and (previous - balance != 0)]">
-                                    <tr>
-                                        <td class="in-3 left account">
-                                            <xsl:value-of select="name"/>
-                                        </td>
-                                        <td class="right">
-                                            <xsl:value-of select="liber:fm(previous - balance)"/>
-                                        </td>
-                                    </tr>
-                                </xsl:for-each>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <xsl:if test="$investingActivities != 0">
-                                    <tr>
-                                        <td class="in-3 left">
-                                            <xsl:value-of select="liber:pngets('investing-activities', $investingActivities)"/>
-                                        </td>
-                                        <td class="right">
-                                            <xsl:value-of select="liber:fm($investingActivities)"/>
-                                        </td>
-                                    </tr>
-                                </xsl:if>
-                            </xsl:otherwise>
-                        </xsl:choose>
-                        <xsl:if test="$netGainLoss != 0">
-                            <tr>
-                                <td class="in-3 left">
-                                    <xsl:value-of select="liber:gets('plus-gain')"/>
-                                </td>
-                                <td class="right">
-                                    <xsl:value-of select="liber:fm(-$netGainLoss)"/>
-                                </td>
-                            </tr>
-                        </xsl:if>
-                    </xsl:when>
-                </xsl:choose>
                 <tr>
-                    <th class="in-1 left">
-                        <xsl:value-of select="liber:pngets('investing', $investing)"/>
-                    </th>
-                    <th class="subtotal right">
-                        <xsl:value-of select="liber:fm($investing)"/>
+                    <th class="left" colspan="2">
+                        <xsl:value-of select="liber:gets('investing')"/>
                     </th>
                 </tr>
-                <xsl:choose>
-                    <xsl:when test="$financing != 0">
-                        <tr>
-                            <th class="in-1 left">
-                                <xsl:value-of select="liber:gets('financing')"/>
-                            </th>
-                        </tr>
-                        <xsl:if test="company/detail = 'true'">
-                            <xsl:for-each select="company/account[cash-flow = 'Financing' and (previous - balance != 0)]">
+                <xsl:if test="$investing != 0">
+                    <xsl:choose>
+                        <xsl:when test="company/detail = 'true'">
+                            <xsl:for-each select="company/account[cash-flow = 'Investing' and (previous - balance != 0)]">
                                 <tr>
-                                    <td class="in-3 left account">
+                                    <td class="left account">
                                         <xsl:value-of select="name"/>
                                     </td>
                                     <td class="right">
@@ -256,32 +200,87 @@ Licensed under the MIT License.
                                     </td>
                                 </tr>
                             </xsl:for-each>
-                        </xsl:if>
-                    </xsl:when>
-                </xsl:choose>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:if test="$investingActivities != 0">
+                                <tr>
+                                    <td class="left">
+                                        <xsl:value-of select="liber:pngets('investing-activities', $investingActivities)"/>
+                                    </td>
+                                    <td class="right">
+                                        <xsl:value-of select="liber:fm($investingActivities)"/>
+                                    </td>
+                                </tr>
+                            </xsl:if>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                    <xsl:if test="$netGainLoss != 0">
+                        <tr>
+                            <td class="left">
+                                <xsl:value-of select="liber:gets('plus-gain')"/>
+                            </td>
+                            <td class="right">
+                                <xsl:value-of select="liber:fm(-$netGainLoss)"/>
+                            </td>
+                        </tr>
+                    </xsl:if>
+                </xsl:if>
                 <tr>
-                    <th class="in-1 left">
+                    <td class="in-4 left">
+                        <xsl:value-of select="liber:pngets('investing', $investing)"/>
+                    </td>
+                    <td class="subtotal right">
+                        <xsl:value-of select="liber:fm($investing)"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="left" colspan="2">
+                        <xsl:value-of select="liber:gets('financing')"/>
+                    </th>
+                </tr>
+                <xsl:if test="$financing != 0 and company/detail = 'true'">
+                    <xsl:for-each select="company/account[cash-flow = 'Financing' and (previous - balance != 0)]">
+                        <tr>
+                            <td class="in-1 left account">
+                                <xsl:value-of select="name"/>
+                            </td>
+                            <td class="right">
+                                <xsl:value-of select="liber:fm(previous - balance)"/>
+                            </td>
+                        </tr>
+                    </xsl:for-each>
+                </xsl:if>
+                <tr>
+                    <td class="in-4 left">
                         <xsl:value-of select="liber:pngets('financing', $financing)"/>
-                    </th>
-                    <th class="subtotal right">
+                    </td>
+                    <td class="subtotal right">
                         <xsl:value-of select="liber:fm($financing)"/>
-                    </th>
+                    </td>
                 </tr>
                 <tr>
-                    <th class="in-1 left">
+                    <td class="left">
                         <xsl:value-of select="liber:pngets('net-cash-flow', $netCashFlow)"/>
-                    </th>
-                    <th class="subtotal right">
+                    </td>
+                    <td class="subtotal right">
                         <xsl:value-of select="liber:fm($netCashFlow)"/>
-                    </th>
+                    </td>
                 </tr>
                 <tr>
-                    <th class="left">
+                    <td class="left">
+                        <xsl:value-of select="concat(liber:gets('Bank'), ', ', liber:fdates(started))"/>
+                    </td>
+                    <td class="right">
+                        <xsl:value-of select="liber:fm(sum(company/account[cash-flow = 'Cash']/previous))"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="left">
                         <xsl:value-of select="concat(liber:gets('Bank'), ', ', liber:fdates(posted))"/>
-                    </th>
-                    <th class="total right">
+                    </td>
+                    <td class="grand-total right">
                         <xsl:value-of select="liber:fm(sum(company/account[cash-flow = 'Cash']/balance))"/>
-                    </th>
+                    </td>
                 </tr>
             </tbody>
         </table>

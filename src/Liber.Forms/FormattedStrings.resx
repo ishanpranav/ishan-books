@@ -267,9 +267,6 @@
   <data name="operating" xml:space="preserve">
     <value>Operating activities</value>
   </data>
-  <data name="ordinary-income" xml:space="preserve">
-    <value>Ordinary revenue and expenses</value>
-  </data>
   <data name="OtherAsset" xml:space="preserve">
     <value>Other assets</value>
   </data>
@@ -375,8 +372,11 @@
   <data name="_p_operating" xml:space="preserve">
     <value>Net cash provided by or (used in) operating activities</value>
   </data>
-  <data name="_p_ordinary-income" xml:space="preserve">
-    <value>Net ordinary income or (loss)</value>
+  <data name="_p_operating-income" xml:space="preserve">
+    <value>Operating income or (loss)</value>
+  </data>
+  <data name="_p_pretax-income" xml:space="preserve">
+    <value>Income or (loss) before income taxes</value>
   </data>
   <data name="_p_other-comprehensive-income" xml:space="preserve">
     <value>Total other comprehensive income or (loss)</value>
@@ -431,5 +431,8 @@
   </data>
   <data name="_p_realized-gain-loss" xml:space="preserve">
     <value>Total adjustment for realized gains</value>
+  </data>
+  <data name="net-income-adjustments" xml:space="preserve">
+    <value>Adjustments to reconcile net income to net cash from operating activities:</value>
   </data>
 </root>
