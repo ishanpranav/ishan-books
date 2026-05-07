@@ -20,8 +20,8 @@ Licensed under the MIT License.
         <xsl:variable name="cashBalance" select="sum(company/account[cash-flow = 'Cash']/balance)"/>
         <xsl:if test="($cashBalance - $cashPrevious - $netCashFlow) &gt;= 0.01 or ($cashBalance - $cashPrevious - $netCashFlow) &lt;= -0.01">
             <div class="warning">
-                Warning! The sum of the beginning cash balance of <xsl:value-of select="liber:fm($cashPrevious)"/>, together with the net cash flow of <xsl:value-of select="liber:fm($netCashFlow)"/>, is <xsl:value-of select="liber:fm($cashPrevious + $netCashFlow)"/>, which does not reconcile with the ending cash balance of <xsl:value-of select="liber:fm($cashBalance)"/>. The excess cash of <xsl:value-of select="liber:fm($cashBalance - $cashPrevious - $netCashFlow)"/> may be the result of misclassified accounts. Please ensure that all accounts are classified with the correct cash flow type.
-            </div>
+                Warning! The sum of the beginning cash balance of <xsl:value-of select="liber:fm($cashPrevious)"/>, together with the net cash flow of <xsl:value-of select="liber:fm($netCashFlow)"/>, is <xsl:value-of select="liber:fm($cashPrevious + $netCashFlow)"/>, which does not reconcile with the ending cash balance of <xsl:value-of select="liber:fm($cashBalance)"/>. The excess cash of <xsl:value-of select="liber:fm($cashBalance - $cashPrevious - $netCashFlow)"/>, over the actual net cash flow of <xsl:value-of select="liber:fm($cashBalance - $cashPrevious)"/>, may be the result of misclassified accounts. Please ensure that all accounts are classified with the correct cash flow type.
+        </div>
         </xsl:if>
         <table>
             <thead>
@@ -138,7 +138,7 @@ Licensed under the MIT License.
                                     </xsl:for-each>
                                     <tr>
                                         <td class="in-3 left">
-                                            <xsl:value-of select="liber:pngets('realized-gain-loss', $netGainLoss)"/>
+                                            <xsl:value-of select="liber:pngets('recognized-gain-loss', $netGainLoss)"/>
                                         </td>
                                         <td class="subtotal right">
                                             <xsl:value-of select="liber:fm($netGainLoss)"/>

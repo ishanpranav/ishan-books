@@ -45,13 +45,9 @@
     "strict": true
   },
   {
-    "filter": "Capital (Gain|Loss)",
+    "filter": "(Capital|Unrealized) (Gain|Loss|Appreciation)",
     "type": "otherIncomeExpense",
-    "strict": true
-  },
-  {
-    "filter": "Adjustment",
-    "cashFlow": "otherEquity",
+    "cashFlow": "gainLoss",
     "strict": true
   },
   {
@@ -71,18 +67,9 @@
     "strict": true
   },
   {
-    "filter": "Charles Schwab Individual (Short[-\\s]Term|Long[-\\s]Term)$",
+    "filter": "Charles Schwab Individual (Short[-\\s]Term|Long[-\\s]Term)",
     "cashFlow": "investing",
     "strict": true
-  },
-  {
-    "filter": "^(?!.*Unrealized).*Capital*.(Gain|Loss)",
-    "cashFlow": "gainLoss",
-    "strict": true
-  },
-  {
-    "filter": "Unrealized.*(Income|Expense|Gain|Loss)",
-    "cashFlow": "nonCash"
   }
 ]</Value>
     </Setting>
