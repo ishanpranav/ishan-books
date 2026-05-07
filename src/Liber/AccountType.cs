@@ -97,7 +97,7 @@ public enum AccountType : short
     Expense = 6000,
 
     /// <summary>
-    /// Specifies an other income or expense account. This account is used for realized capital gains and losses and extraordinary income and expenses.
+    /// Specifies an other income or expense account. This account is used for capital gains and losses and extraordinary income and expenses.
     /// </summary>
     [LocalizedDescription(nameof(OtherIncomeExpense))]
     [Name("EXEXP", "EXINC")]

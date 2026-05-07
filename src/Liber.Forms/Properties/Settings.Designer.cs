@@ -12,7 +12,7 @@ namespace Liber.Forms.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "18.4.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "18.5.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -103,13 +103,9 @@ namespace Liber.Forms.Properties {
     ""strict"": true
   },
   {
-    ""filter"": ""Capital (Gain|Loss)"",
+    ""filter"": ""(Capital|Unrealized) (Gain|Loss|Appreciation)"",
     ""type"": ""otherIncomeExpense"",
-    ""strict"": true
-  },
-  {
-    ""filter"": ""Adjustment"",
-    ""cashFlow"": ""otherEquity"",
+    ""cashFlow"": ""gainLoss"",
     ""strict"": true
   },
   {
@@ -129,18 +125,9 @@ namespace Liber.Forms.Properties {
     ""strict"": true
   },
   {
-    ""filter"": ""Charles Schwab Individual (Short[-\\s]Term|Long[-\\s]Term)$"",
+    ""filter"": ""Charles Schwab Individual (Short[-\\s]Term|Long[-\\s]Term)"",
     ""cashFlow"": ""investing"",
     ""strict"": true
-  },
-  {
-    ""filter"": ""^(?!.*Unrealized).*Capital*.(Gain|Loss)"",
-    ""cashFlow"": ""gainLoss"",
-    ""strict"": true
-  },
-  {
-    ""filter"": ""Unrealized.*(Income|Expense|Gain|Loss)"",
-    ""cashFlow"": ""nonCash""
   }
 ]")]
         public string ImportRules {

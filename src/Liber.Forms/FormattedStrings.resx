@@ -400,10 +400,10 @@
     <value>Retained earnings or (accumulated deficit)</value>
   </data>
   <data name="less-gain" xml:space="preserve">
-    <value>Less: net realized capital gain</value>
+    <value>Less: net capital gain</value>
   </data>
   <data name="plus-gain" xml:space="preserve">
-    <value>Plus: net realized capital gain</value>
+    <value>Plus: net capital gain</value>
   </data>
   <data name="working-capital" xml:space="preserve">
     <value>Changes in operating assets and liabilities</value>
@@ -429,8 +429,8 @@
   <data name="_p_investing-activities" xml:space="preserve">
     <value>Net disposals or (acquisitions)</value>
   </data>
-  <data name="_p_realized-gain-loss" xml:space="preserve">
-    <value>Total adjustment for realized gains</value>
+  <data name="_p_recognized-gain-loss" xml:space="preserve">
+    <value>Total adjustment for capital gains</value>
   </data>
   <data name="net-income-adjustments" xml:space="preserve">
     <value>Adjustments to reconcile net income to net cash from operating activities:</value>
