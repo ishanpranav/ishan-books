@@ -435,4 +435,10 @@
   <data name="net-income-adjustments" xml:space="preserve">
     <value>Adjustments to reconcile net income to net cash from operating activities:</value>
   </data>
+  <data name="MultipleWords2{0}" xml:space="preserve">
+    <value>(to the nearest {0})</value>
+  </data>
+  <data name="MultipleWords1{0}" xml:space="preserve">
+    <value>(in {0})</value>
+  </data>
 </root>

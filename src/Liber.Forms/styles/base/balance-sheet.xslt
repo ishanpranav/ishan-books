@@ -215,11 +215,18 @@ Licensed under the MIT License.
                     </th>
                 </tr>
                 <tr>
-                    <th colspan="2" class="bar dateline">
+                    <th colspan="2" class="dateline">
                         <xsl:value-of select="liber:fdatel(posted)"/>
                     </th>
                 </tr>
-                <tr>
+                <xsl:if test="company/multiple != ''">
+                    <tr>
+                        <th colspan="2" class="dateline">
+                            <xsl:value-of select="company/multiple"/>
+                        </th>
+                    </tr>
+                </xsl:if>
+                <tr class="overline">
                     <th></th>
                     <th class="heading">
                         <xsl:value-of select="liber:fdates(posted)"/>

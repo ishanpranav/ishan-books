@@ -31,9 +31,9 @@ th, td {
     /*font-weight: bold;*/
 }
 
-.bar {
-    border-bottom: 3px solid;
-    padding-bottom: 1px;
+.overline {
+    border-top: 3px solid;
+    padding-top: 1px;
 }
 
 .title {
