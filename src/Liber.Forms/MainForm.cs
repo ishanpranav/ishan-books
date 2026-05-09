@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
@@ -574,10 +575,17 @@ internal sealed partial class MainForm : Form
                     }
                 }
 
-                if (TryGetSavePath(FilterIndex.Pdf, out string? outputPath))
+                if (!TryGetSavePath(FilterIndex.Pdf, out string? outputPath))
                 {
-                    document.Save(outputPath);
+                    return;
                 }
+
+                document.Save(outputPath);
+                Process.Start(new ProcessStartInfo()
+                {
+                    FileName = outputPath,
+                    UseShellExecute = true
+                });
             }
         });
     }
