@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!--
-annual-report.xslt
+quarterly-report.xslt
 Copyright (c) 2023-2026 Ishan Pranav. All rights reserved.
 Licensed under the MIT License.
 -->
@@ -16,7 +16,6 @@ Licensed under the MIT License.
     <xsl:import href="base/comparative-balance-sheet.xslt"/>
     <xsl:import href="base/cash-flow-statement.xslt"/>
     <xsl:import href="base/equity-statement.xslt"/>
-    <xsl:import href="base/tax-reconciliation.xslt"/>
     <xsl:template match="/report">
         <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
             <head>
@@ -41,9 +40,6 @@ Licensed under the MIT License.
                 </xsl:call-template>
                 <xsl:call-template name="equity-statement">
                     <xsl:with-param name="title" select="liber:gettitle('equity-statement', company/type)"/>
-                </xsl:call-template>
-                <xsl:call-template name="tax-reconciliation">
-                    <xsl:with-param name="title" select="liber:gettitle('tax-reconciliation', company/type)"/>
                 </xsl:call-template>
             </body>
         </html>
