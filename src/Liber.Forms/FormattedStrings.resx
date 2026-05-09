@@ -213,9 +213,6 @@
   <data name="name" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="non-current-assets" xml:space="preserve">
-    <value>Non-current assets</value>
-  </data>
   <data name="NotSupportedText" xml:space="preserve">
     <value>Files without an extension are not compatible with the operation you selected. Please specify a file name extension such as "*.izbk" before saving.</value>
   </data>
@@ -266,9 +263,6 @@
   </data>
   <data name="total-liabilities-equity{0}" xml:space="preserve">
     <value>Total liabilities and {0}</value>
-  </data>
-  <data name="total-non-current-assets" xml:space="preserve">
-    <value>Total non-current assets</value>
   </data>
   <data name="_p_accumulated-other-comprehensive-income" xml:space="preserve">
     <value>Accumulated other comprehensive income or (loss)</value>
@@ -531,7 +525,7 @@
   <data name="_r_3_comparative-balance-sheet" xml:space="preserve">
     <value>Statement of Assets and Liabilities</value>
   </data>
-  <data name="r_3_balance-sheet" xml:space="preserve">
+  <data name="_r_3_balance-sheet" xml:space="preserve">
     <value>Statement of Assets and Liabilities</value>
   </data>
   <data name="_r_Individual_equity-statement" xml:space="preserve">
@@ -554,5 +548,53 @@
   </data>
   <data name="TaxTypeFalse" xml:space="preserve">
     <value> - </value>
+  </data>
+  <data name="tax-current" xml:space="preserve">
+    <value>Current</value>
+  </data>
+  <data name="tax-deferred" xml:space="preserve">
+    <value>Noncurrent</value>
+  </data>
+  <data name="tax-total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="tax-income-statement" xml:space="preserve">
+    <value>Reconciliation of income and (expenses) to current-year tax return</value>
+  </data>
+  <data name="tax-reconciliation" xml:space="preserve">
+    <value>Effective tax rates</value>
+  </data>
+  <data name="effective-tax-rate" xml:space="preserve">
+    <value>Effective tax rate</value>
+  </data>
+  <data name="_r_1_annual-report" xml:space="preserve">
+    <value>Quarterly Report</value>
+  </data>
+  <data name="_r_1_quarterly-report" xml:space="preserve">
+    <value>Quarterly Report</value>
+  </data>
+  <data name="_r_quarterly-report" xml:space="preserve">
+    <value>Quarterly Report</value>
+  </data>
+  <data name="_r_tax-reconciliation" xml:space="preserve">
+    <value>Tax Reconciliation</value>
+  </data>
+  <data name="_r_Individual_tax-reconciliation" xml:space="preserve">
+    <value>Income Tax Reconciliation</value>
+  </data>
+  <data name="_r_Corporation_tax-reconciliation" xml:space="preserve">
+    <value>Income Tax Reconciliation</value>
+  </data>
+  <data name="tax-adjustment-income-tax-expense" xml:space="preserve">
+    <value>Other noncurrent income taxes</value>
+  </data>
+  <data name="tax-adjustment-income" xml:space="preserve">
+    <value>Tax-exempt and other noncurrent income</value>
+  </data>
+  <data name="tax-adjustment-expense" xml:space="preserve">
+    <value>Nondeductible and other noncurrent expenses</value>
+  </data>
+  <data name="tax-adjustment" xml:space="preserve">
+    <value>Other adjustments to income and expenses</value>
   </data>
 </root>

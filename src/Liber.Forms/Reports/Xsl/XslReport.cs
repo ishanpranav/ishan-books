@@ -150,6 +150,12 @@ public class XslReport : IntervalView, IStandardValuesProvider, IXmlSerializable
     }
 
     [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "<Pending>")]
+    public string fp(double percentage)
+    {
+        return percentage.ToString(" #,##0.00%;(#,##0.00%);   -  ");
+    }
+
+    [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "<Pending>")]
     public string ftspanl(DateTime started, DateTime posted)
     {
         return started.ToShortDateString() + " \u2013 " + posted.ToShortDateString();

@@ -201,9 +201,6 @@
   <data name="name" xml:space="preserve">
     <value>Nombre</value>
   </data>
-  <data name="non-current-assets" xml:space="preserve">
-    <value>Activos no corrientes</value>
-  </data>
   <data name="NotSupportedText" xml:space="preserve">
     <value>Los archivos sin extensión no son compatibles con la operación que usted ha seleccionado. Por favor, especifique una extensión de nombre de archivo como '*.izbk' antes de guardar.</value>
   </data>
@@ -254,9 +251,6 @@
   </data>
   <data name="total-liabilities-equity{0}" xml:space="preserve">
     <value>Pasivos y {0} totales</value>
-  </data>
-  <data name="total-non-current-assets" xml:space="preserve">
-    <value>Activos no corrientes totales</value>
   </data>
   <data name="_p_accumulated-other-comprehensive-income" xml:space="preserve">
     <value>Acumulados de otros resultados integrales</value>
