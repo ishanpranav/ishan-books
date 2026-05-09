@@ -272,7 +272,7 @@ internal sealed partial class MainForm : Form
         await ImportAsync(path);
     }
 
-    public bool TryGetOpenPath(FilterIndex filterIndex, [MaybeNullWhen(false)] out string? result)
+    public bool TryGetOpenPath(FilterIndex filterIndex, [NotNullWhen(true)] out string? result)
     {
         _openFileDialog.FilterIndex = (int)filterIndex;
 
