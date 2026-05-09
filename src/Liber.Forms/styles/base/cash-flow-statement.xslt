@@ -6,6 +6,7 @@ Licensed under the MIT License.
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:msxsl="urn:schemas-microsoft-com:xslt" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:liber="urn:liber" version="1.0" exclude-result-prefixes="msxsl">
     <xsl:include href="financial-statement.xslt"/>
     <xsl:output method="html" indent="yes"/>
+    <xsl:key name="accounts-by-cashflow-and-name" match="account" use="concat(cash-flow, '|', name)"/>
     <xsl:template name="cash-flow-statement">
         <xsl:param name="title"/>
         <xsl:variable name="workingCapital" select="sum(company/account[cash-flow = 'Operating']/previous) - sum(company/account[cash-flow = 'Operating']/balance)"/>
@@ -81,15 +82,23 @@ Licensed under the MIT License.
                                     <xsl:value-of select="liber:gets('working-capital')"/>
                                 </td>
                             </tr>
-                            <xsl:for-each select="company/account[cash-flow = 'Operating' and (previous - balance != 0)]">
-                                <tr>
-                                    <td class="in-2 left account">
-                                        <xsl:value-of select="name"/>
-                                    </td>
-                                    <td class="right">
-                                        <xsl:value-of select="liber:fm(previous - balance)"/>
-                                    </td>
-                                </tr>
+                            <xsl:for-each select="company/account[
+                                cash-flow = 'Operating'
+                                and (previous - balance != 0)
+                                and generate-id() = generate-id(key('accounts-by-cashflow-and-name', concat(cash-flow, '|', name))[1])
+                            ]">
+                                <xsl:variable name="group" select="key('accounts-by-cashflow-and-name', concat(cash-flow, '|', name))"/>
+                                <xsl:variable name="groupAmount" select="sum($group/previous) - sum($group/balance)"/>
+                                <xsl:if test="$groupAmount != 0">
+                                    <tr>
+                                        <td class="in-2 left account">
+                                            <xsl:value-of select="name"/>
+                                        </td>
+                                        <td class="right">
+                                            <xsl:value-of select="liber:fm($groupAmount)"/>
+                                        </td>
+                                    </tr>
+                                </xsl:if>
                             </xsl:for-each>
                             <tr>
                                 <td class="in-3 left">
@@ -106,15 +115,23 @@ Licensed under the MIT License.
                                     <xsl:value-of select="liber:gets('non-cash')"/>
                                 </td>
                             </tr>
-                            <xsl:for-each select="company/account[cash-flow = 'NonCash' and (balance - previous != 0)]">
-                                <tr>
-                                    <td class="in-2 left account">
-                                        <xsl:value-of select="name"/>
-                                    </td>
-                                    <td class="right">
-                                        <xsl:value-of select="liber:fm(balance - previous)"/>
-                                    </td>
-                                </tr>
+                            <xsl:for-each select="company/account[
+                                cash-flow = 'NonCash'
+                                and (balance - previous != 0)
+                                and generate-id() = generate-id(key('accounts-by-cashflow-and-name', concat(cash-flow, '|', name))[1])
+                            ]">
+                                <xsl:variable name="group" select="key('accounts-by-cashflow-and-name', concat(cash-flow, '|', name))"/>
+                                <xsl:variable name="groupAmount" select="sum($group/balance) - sum($group/previous)"/>
+                                <xsl:if test="$groupAmount != 0">
+                                    <tr>
+                                        <td class="in-2 left account">
+                                            <xsl:value-of select="name"/>
+                                        </td>
+                                        <td class="right">
+                                            <xsl:value-of select="liber:fm($groupAmount)"/>
+                                        </td>
+                                    </tr>
+                                </xsl:if>
                             </xsl:for-each>
                             <tr>
                                 <td class="in-3 left">
@@ -131,15 +148,23 @@ Licensed under the MIT License.
                                     <xsl:value-of select="liber:gets('less-gain')"/>
                                 </td>
                             </tr>
-                            <xsl:for-each select="company/account[cash-flow = 'GainLoss' and balance != 0]">
-                                <tr>
-                                    <td class="in-2 left account">
-                                        <xsl:value-of select="name"/>
-                                    </td>
-                                    <td class="right">
-                                        <xsl:value-of select="liber:fm(balance)"/>
-                                    </td>
-                                </tr>
+                            <xsl:for-each select="company/account[
+                                cash-flow = 'GainLoss'
+                                and balance != 0
+                                and generate-id() = generate-id(key('accounts-by-cashflow-and-name', concat(cash-flow, '|', name))[1])
+                            ]">
+                                <xsl:variable name="group" select="key('accounts-by-cashflow-and-name', concat(cash-flow, '|', name))"/>
+                                <xsl:variable name="groupAmount" select="sum($group/balance)"/>
+                                <xsl:if test="$groupAmount != 0">
+                                    <tr>
+                                        <td class="in-2 left account">
+                                            <xsl:value-of select="name"/>
+                                        </td>
+                                        <td class="right">
+                                            <xsl:value-of select="liber:fm($groupAmount)"/>
+                                        </td>
+                                    </tr>
+                                </xsl:if>
                             </xsl:for-each>
                             <tr>
                                 <td class="in-3 left">
@@ -200,15 +225,23 @@ Licensed under the MIT License.
                 <xsl:if test="$investing != 0">
                     <xsl:choose>
                         <xsl:when test="company/detail = 'true'">
-                            <xsl:for-each select="company/account[cash-flow = 'Investing' and (previous - balance != 0)]">
-                                <tr>
-                                    <td class="left account">
-                                        <xsl:value-of select="name"/>
-                                    </td>
-                                    <td class="right">
-                                        <xsl:value-of select="liber:fm(previous - balance)"/>
-                                    </td>
-                                </tr>
+                            <xsl:for-each select="company/account[
+                                cash-flow = 'Investing'
+                                and (previous - balance != 0)
+                                and generate-id() = generate-id(key('accounts-by-cashflow-and-name', concat(cash-flow, '|', name))[1])
+                            ]">
+                                <xsl:variable name="group" select="key('accounts-by-cashflow-and-name', concat(cash-flow, '|', name))"/>
+                                <xsl:variable name="groupAmount" select="sum($group/previous) - sum($group/balance)"/>
+                                <xsl:if test="$groupAmount != 0">
+                                    <tr>
+                                        <td class="left account">
+                                            <xsl:value-of select="name"/>
+                                        </td>
+                                        <td class="right">
+                                            <xsl:value-of select="liber:fm($groupAmount)"/>
+                                        </td>
+                                    </tr>
+                                </xsl:if>
                             </xsl:for-each>
                         </xsl:when>
                         <xsl:otherwise>
@@ -249,15 +282,23 @@ Licensed under the MIT License.
                     </th>
                 </tr>
                 <xsl:if test="$financing != 0 and company/detail = 'true'">
-                    <xsl:for-each select="company/account[cash-flow = 'Financing' and (previous - balance != 0)]">
-                        <tr>
-                            <td class="in-1 left account">
-                                <xsl:value-of select="name"/>
-                            </td>
-                            <td class="right">
-                                <xsl:value-of select="liber:fm(previous - balance)"/>
-                            </td>
-                        </tr>
+                    <xsl:for-each select="company/account[
+                        cash-flow = 'Financing'
+                        and (previous - balance != 0)
+                        and generate-id() = generate-id(key('accounts-by-cashflow-and-name', concat(cash-flow, '|', name))[1])
+                    ]">
+                        <xsl:variable name="group" select="key('accounts-by-cashflow-and-name', concat(cash-flow, '|', name))"/>
+                        <xsl:variable name="groupAmount" select="sum($group/previous) - sum($group/balance)"/>
+                        <xsl:if test="$groupAmount != 0">
+                            <tr>
+                                <td class="in-1 left account">
+                                    <xsl:value-of select="name"/>
+                                </td>
+                                <td class="right">
+                                    <xsl:value-of select="liber:fm($groupAmount)"/>
+                                </td>
+                            </tr>
+                        </xsl:if>
                     </xsl:for-each>
                 </xsl:if>
                 <tr>
