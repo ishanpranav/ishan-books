@@ -29,11 +29,18 @@ Licensed under the MIT License.
                         </th>
                     </tr>
                     <tr>
-                        <th colspan="6" class="bar dateline">
+                        <th colspan="6" class="dateline">
                             <xsl:value-of select="liber:ftspanl(started, posted)"/>
                         </th>
                     </tr>
-                    <tr>
+                    <xsl:if test="company/multiple != ''">
+                        <tr>
+                            <th colspan="6" class="dateline">
+                                <xsl:value-of select="company/multiple"/>
+                            </th>
+                        </tr>
+                    </xsl:if>
+                    <tr class="overline">
                         <th class="left">
                             <xsl:value-of select="liber:gets('date')"/>
                         </th>

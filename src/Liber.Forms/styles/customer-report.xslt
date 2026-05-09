@@ -33,11 +33,18 @@ Licensed under the MIT License.
                         </th>
                     </tr>
                     <tr>
-                        <th colspan="4" class="subtitle left bar">
+                        <th colspan="4" class="subtitle left">
                             <xsl:value-of select="title"/>
                         </th>
                     </tr>
-                    <tr>
+                    <xsl:if test="company/multiple != ''">
+                        <tr>
+                            <th colspan="6" class="dateline">
+                                <xsl:value-of select="company/multiple"/>
+                            </th>
+                        </tr>
+                    </xsl:if>
+                    <tr class="overline">
                         <th class="left">
                             <xsl:value-of select="liber:gets('date')"/>
                         </th>

@@ -66,10 +66,40 @@ internal static class FormattedStrings
 
     public static string GetCheckWords(decimal amount)
     {
-        int integral = (int)amount;
-        int fractional = (int)((amount - integral) * 100);
+        decimal integral = decimal.Floor(amount);
+        decimal fractional = decimal.Round((amount - integral), 0) * 100;
 
-        return string.Format(GetString("CheckWords{0}{1}"), integral.ToWords(), fractional);
+        if (integral > int.MaxValue)
+        {
+            return string.Format(GetString("CheckWords{0}{1}"), integral, fractional);
+        }
+
+        return string.Format(GetString("CheckWords{0}{1}"), ((int)integral).ToWords(), fractional);
+    }
+
+    public static string GetMultipleWords(decimal multiple)
+    {
+        switch (multiple)
+        {
+            case 0:
+            case 1:
+            case 0.01m:
+                return string.Empty;
+        }
+
+        if (multiple > int.MaxValue || !multiple.IsPow10() || multiple < 1)
+        {
+            return string.Format(GetString("MultipleWords2{0}"), multiple);
+        }
+
+        int integral = (int)multiple;
+        string words = integral
+            .ToWords()
+            .Replace(1.ToWords(), string.Empty)
+            .Trim()
+            .Pluralize();
+
+        return string.Format(GetString("MultipleWords1{0}"), words);
     }
 
     public static void ShowNotSupportedMessage(string extension)

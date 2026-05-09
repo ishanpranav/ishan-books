@@ -367,6 +367,7 @@ public class XslReport : IntervalView, IXmlSerializable
         writer.WriteElementString("name", Company.DisplayName);
         writer.WriteElementString("type", Company.Type.ToString());
         writer.WriteElementString("detail", XmlConvert.ToString(Level != ReportLevel.ByType));
+        writer.WriteElementString("multiple", FormattedStrings.GetMultipleWords(Multiple));
 
         if (Level == ReportLevel.ByAccount)
         {

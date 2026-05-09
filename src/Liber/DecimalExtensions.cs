@@ -15,14 +15,14 @@ public static class DecimalExtensions
 
     public static string ToLocalizedString(this decimal value, decimal multiple)
     {
-        if (multiple == 0)
+        if (multiple <= 0)
         {
             return ToLocalizedString(value);
         }
 
-        decimal rounded = Math.Round(value / multiple, MidpointRounding.ToEven);
+        decimal rounded = decimal.Round(value / multiple, MidpointRounding.ToEven);
 
-        if (multiple % 10 != 0)
+        if (!multiple.IsPow10() || multiple < 1)
         {
             rounded *= multiple;
 
@@ -46,5 +46,25 @@ public static class DecimalExtensions
         }
 
         return rounded.ToString(" #,##0 ;(#,##0);   -   ");
+    }
+
+    public static bool IsPow10(this decimal value)
+    {
+        if (value <= 0)
+        {
+            return false;
+        }
+
+        for (; value <= 1; value *= 10) ;
+
+        for (; value >= 10; value /= 10)
+        {
+            if (value % 10 != 0)
+            {
+                return false;
+            }
+        }
+
+        return value == 1;
     }
 }
