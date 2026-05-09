@@ -301,6 +301,8 @@ internal sealed partial class MainForm : Form
 
         result = _openFileDialog.FileNames;
 
+        Array.Sort(result);
+
         return true;
     }
 
