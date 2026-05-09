@@ -26,7 +26,7 @@ internal sealed class ImportRule
     public CashFlow CashFlow { get; set; }
 
     [LocalizedDisplayName(nameof(TaxType))]
-    public string? TaxType { get; set; }
+    public bool TaxType { get; set; }
 
     [LocalizedDisplayName(nameof(Equity))]
     public bool Equity { get; set; }
@@ -39,7 +39,7 @@ internal sealed class ImportRule
 
     public void Apply(ImportContext context)
     {
-        if (Type == AccountType.None && CashFlow == CashFlow.None && TaxType == null && !Equity && !OtherEquity)
+        if (Type == AccountType.None && CashFlow == CashFlow.None && !Equity && !OtherEquity)
         {
             return;
         }
@@ -61,7 +61,7 @@ internal sealed class ImportRule
                 account.CashFlow = CashFlow;
             }
 
-            if (TaxType != null && (Strict || account.TaxType == null || account.TaxType == "T" || account.TaxType == "F"))
+            if (Strict)
             {
                 account.TaxType = TaxType;
             }

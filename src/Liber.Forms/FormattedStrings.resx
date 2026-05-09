@@ -549,4 +549,10 @@
   <data name="_r_Individual_cash-flow-statement" xml:space="preserve">
     <value>Statement of Cash Flows</value>
   </data>
+  <data name="TaxTypeTrue" xml:space="preserve">
+    <value>Tax-related</value>
+  </data>
+  <data name="TaxTypeFalse" xml:space="preserve">
+    <value> - </value>
+  </data>
 </root>

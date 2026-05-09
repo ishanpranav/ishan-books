@@ -35,7 +35,6 @@
             label1 = new System.Windows.Forms.Label();
             nameTextBox = new System.Windows.Forms.TextBox();
             numberNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            typeComboBox = new System.Windows.Forms.ComboBox();
             descriptionTextBox = new System.Windows.Forms.TextBox();
             label2 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
@@ -45,14 +44,14 @@
             label5 = new System.Windows.Forms.Label();
             label6 = new System.Windows.Forms.Label();
             label7 = new System.Windows.Forms.Label();
-            taxTypeComboBox = new System.Windows.Forms.ComboBox();
-            label8 = new System.Windows.Forms.Label();
             memoTextBox = new System.Windows.Forms.TextBox();
             _colorButton = new System.Windows.Forms.ColorButton();
             _helpProvider = new System.Windows.Forms.HelpProvider();
             inactiveCheckBox = new System.Windows.Forms.CheckBox();
             cashFlowComboBox = new System.Windows.Forms.ComboBox();
             label9 = new System.Windows.Forms.Label();
+            typeComboBox = new System.Windows.Forms.ComboBox();
+            taxTypeCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)numberNumericUpDown).BeginInit();
             SuspendLayout();
             // 
@@ -95,17 +94,6 @@
             numberNumericUpDown.Name = "numberNumericUpDown";
             _helpProvider.SetShowHelp(numberNumericUpDown, (bool)resources.GetObject("numberNumericUpDown.ShowHelp"));
             numberNumericUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
-            // 
-            // typeComboBox
-            // 
-            resources.ApplyResources(typeComboBox, "typeComboBox");
-            typeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            typeComboBox.FormattingEnabled = true;
-            _helpProvider.SetHelpString(typeComboBox, resources.GetString("typeComboBox.HelpString"));
-            typeComboBox.Name = "typeComboBox";
-            _helpProvider.SetShowHelp(typeComboBox, (bool)resources.GetObject("typeComboBox.ShowHelp"));
-            typeComboBox.SelectedIndexChanged += OnTypeComboBoxSelectedIndexChanged;
-            typeComboBox.Format += OnComboBoxFormat;
             // 
             // descriptionTextBox
             // 
@@ -167,21 +155,6 @@
             label7.Name = "label7";
             _helpProvider.SetShowHelp(label7, (bool)resources.GetObject("label7.ShowHelp"));
             // 
-            // taxTypeComboBox
-            // 
-            resources.ApplyResources(taxTypeComboBox, "taxTypeComboBox");
-            taxTypeComboBox.FormattingEnabled = true;
-            _helpProvider.SetHelpString(taxTypeComboBox, resources.GetString("taxTypeComboBox.HelpString"));
-            taxTypeComboBox.Name = "taxTypeComboBox";
-            _helpProvider.SetShowHelp(taxTypeComboBox, (bool)resources.GetObject("taxTypeComboBox.ShowHelp"));
-            taxTypeComboBox.Format += OnComboBoxFormat;
-            // 
-            // label8
-            // 
-            resources.ApplyResources(label8, "label8");
-            label8.Name = "label8";
-            _helpProvider.SetShowHelp(label8, (bool)resources.GetObject("label8.ShowHelp"));
-            // 
             // memoTextBox
             // 
             resources.ApplyResources(memoTextBox, "memoTextBox");
@@ -221,17 +194,35 @@
             label9.Name = "label9";
             _helpProvider.SetShowHelp(label9, (bool)resources.GetObject("label9.ShowHelp"));
             // 
+            // typeComboBox
+            // 
+            resources.ApplyResources(typeComboBox, "typeComboBox");
+            typeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            typeComboBox.FormattingEnabled = true;
+            _helpProvider.SetHelpString(typeComboBox, resources.GetString("typeComboBox.HelpString"));
+            typeComboBox.Name = "typeComboBox";
+            _helpProvider.SetShowHelp(typeComboBox, (bool)resources.GetObject("typeComboBox.ShowHelp"));
+            typeComboBox.SelectedIndexChanged += OnTypeComboBoxSelectedIndexChanged;
+            typeComboBox.Format += OnComboBoxFormat;
+            // 
+            // taxTypeCheckBox
+            // 
+            resources.ApplyResources(taxTypeCheckBox, "taxTypeCheckBox");
+            _helpProvider.SetHelpString(taxTypeCheckBox, resources.GetString("taxTypeCheckBox.HelpString"));
+            taxTypeCheckBox.Name = "taxTypeCheckBox";
+            _helpProvider.SetShowHelp(taxTypeCheckBox, (bool)resources.GetObject("taxTypeCheckBox.ShowHelp"));
+            taxTypeCheckBox.UseVisualStyleBackColor = true;
+            // 
             // AccountForm
             // 
             AcceptButton = acceptButton;
             resources.ApplyResources(this, "$this");
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             CancelButton = cancelButton;
+            Controls.Add(taxTypeCheckBox);
             Controls.Add(cashFlowComboBox);
             Controls.Add(label9);
             Controls.Add(inactiveCheckBox);
-            Controls.Add(taxTypeComboBox);
-            Controls.Add(label8);
             Controls.Add(_colorButton);
             Controls.Add(label7);
             Controls.Add(memoTextBox);
@@ -274,14 +265,13 @@
         protected System.Windows.Forms.CheckBox placeholderCheckBox;
         protected System.Windows.Forms.TextBox memoTextBox;
         protected System.Windows.Forms.TextBox descriptionTextBox;
-        private System.Windows.Forms.ComboBox typeComboBox;
         protected System.Windows.Forms.ColorButton _colorButton;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox taxTypeComboBox;
-        private System.Windows.Forms.Label label8;
         protected AccountComboBox parentComboBox;
         protected System.Windows.Forms.CheckBox inactiveCheckBox;
         private System.Windows.Forms.ComboBox cashFlowComboBox;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox typeComboBox;
+        protected System.Windows.Forms.CheckBox taxTypeCheckBox;
     }
 }

@@ -144,7 +144,7 @@ public class Account
     [Key(8)]
     [LocalizedDisplayName(nameof(TaxType))]
     [Name("Tax Info")]
-    public string? TaxType { get; set; }
+    public bool TaxType { get; set; }
 
     [Ignore]
     [Key(10)]

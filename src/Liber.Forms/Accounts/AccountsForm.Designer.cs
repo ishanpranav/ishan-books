@@ -25,6 +25,7 @@ namespace Liber.Forms.Accounts
             typeColumn = new ColumnHeader();
             cashFlowColumn = new ColumnHeader();
             balanceColumn = new ColumnHeader();
+            taxType = new ColumnHeader();
             _contextMenu = new ContextMenuStrip(components);
             quickReportToolStripMenuItem1 = new ToolStripMenuItem();
             toolStripSeparator3 = new ToolStripSeparator();
@@ -59,7 +60,7 @@ namespace Liber.Forms.Accounts
             // _listView
             // 
             _listView.AllowColumnReorder = true;
-            _listView.Columns.AddRange(new ColumnHeader[] { nameColumn, numberColumn, typeColumn, cashFlowColumn, balanceColumn });
+            _listView.Columns.AddRange(new ColumnHeader[] { nameColumn, numberColumn, typeColumn, cashFlowColumn, taxType, balanceColumn });
             _listView.ContextMenuStrip = _contextMenu;
             resources.ApplyResources(_listView, "_listView");
             _listView.FullRowSelect = true;
@@ -68,7 +69,6 @@ namespace Liber.Forms.Accounts
             _listView.Name = "_listView";
             _listView.SortColumn = 0;
             _listView.Sorting = SortOrder.Ascending;
-            _listView.SortOrder = SortOrder.None;
             _listView.UseCompatibleStateImageBehavior = false;
             _listView.View = View.Details;
             _listView.AfterLabelEdit += OnListViewAfterLabelEdit;
@@ -93,6 +93,10 @@ namespace Liber.Forms.Accounts
             // balanceColumn
             // 
             resources.ApplyResources(balanceColumn, "balanceColumn");
+            // 
+            // taxType
+            // 
+            resources.ApplyResources(taxType, "taxType");
             // 
             // _contextMenu
             // 
@@ -306,5 +310,6 @@ namespace Liber.Forms.Accounts
         private ToolStripSeparator toolStripSeparator4;
         private ToolStripMenuItem inactiveToolStripMenuItem;
         private ColumnHeader cashFlowColumn;
+        private ColumnHeader taxType;
     }
 }

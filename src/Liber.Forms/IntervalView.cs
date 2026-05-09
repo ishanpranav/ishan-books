@@ -5,7 +5,7 @@ namespace Liber.Forms;
 
 public class IntervalView
 {
-    private DateTime _started = new DateTime(DateTime.Today.Year, 1, 1);
+    private DateTime _started = new DateTime(DateTime.Today.Year, month: 1, day: 1);
     private DateTime _posted = DateTime.Today;
 
     [LocalizedCategory(nameof(Started))]

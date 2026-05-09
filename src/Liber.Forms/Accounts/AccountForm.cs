@@ -39,15 +39,15 @@ internal abstract partial class AccountForm : Form
         }
     }
 
-    protected string? TaxType
+    protected bool TaxType
     {
         get
         {
-            return taxTypeComboBox.Text;
+            return taxTypeCheckBox.Checked;
         }
         set
         {
-            taxTypeComboBox.Text = value;
+            taxTypeCheckBox.Checked = value;
         }
     }
 

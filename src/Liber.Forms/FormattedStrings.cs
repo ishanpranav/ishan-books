@@ -145,6 +145,11 @@ internal static class FormattedStrings
         return string.Format(GetString("MultipleWords1{0}"), words);
     }
 
+    public static string GetTaxTypeText(bool taxType)
+    {
+        return GetString(string.Format("TaxType{0}", taxType));
+    }
+
     public static void ShowNotSupportedMessage(string extension)
     {
         string text;

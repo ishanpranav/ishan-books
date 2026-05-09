@@ -130,6 +130,7 @@ internal sealed partial class AccountsForm : Form
         item.SubItems.Add(value.Number.ToString()).Tag = value.Number;
         item.SubItems.Add(value.Type.Humanize());
         item.SubItems.Add(value.CashFlow.Humanize());
+        item.SubItems.Add(FormattedStrings.GetTaxTypeText(value.TaxType));
         item.SubItems.Add(balance.ToLocalizedString()).Tag = balance;
 
         if (value.Placeholder)

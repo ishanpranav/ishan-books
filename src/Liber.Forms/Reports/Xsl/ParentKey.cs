@@ -8,18 +8,23 @@ namespace Liber.Forms.Reports.Xsl;
 
 internal sealed class ParentKey : IEquatable<ParentKey>
 {
-    public ParentKey(AccountType type, CashFlow cashFlow)
+    public ParentKey(Account value)
     {
-        Type = type;
-        CashFlow = cashFlow;
+        Type = value.Type;
+        CashFlow = value.CashFlow;
+        TaxType = value.TaxType;
     }
 
     public AccountType Type { get; }
     public CashFlow CashFlow { get; }
+    public bool TaxType { get; }
 
     public bool Equals(ParentKey? other)
     {
-        return other != null && other.Type == Type && other.CashFlow == CashFlow;
+        return other != null &&
+               other.Type == Type &&
+               other.CashFlow == CashFlow &&
+               other.TaxType == TaxType;
     }
 
     public override bool Equals(object? obj)
@@ -29,6 +34,6 @@ internal sealed class ParentKey : IEquatable<ParentKey>
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(Type, CashFlow);
+        return HashCode.Combine(Type, CashFlow, TaxType);
     }
 }

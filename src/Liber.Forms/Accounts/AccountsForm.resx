@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!--
-    Microsoft ResX Schema 
+    Microsoft ResX Schema
 
     Version 2.0
 
@@ -48,7 +48,7 @@
     value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-    
+
     mimetype: application/x-microsoft.net.object.soap.base64
     value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
@@ -133,8 +133,20 @@
   <data name="typeColumn.Text" xml:space="preserve">
     <value>Type</value>
   </data>
+  <data name="cashFlowColumn.DisplayIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
   <data name="cashFlowColumn.Text" xml:space="preserve">
     <value>Cash Flow</value>
+  </data>
+  <data name="taxType.DisplayIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="taxType.Text" xml:space="preserve">
+    <value>Tax</value>
+  </data>
+  <data name="balanceColumn.DisplayIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
   <data name="balanceColumn.Text" xml:space="preserve">
     <value>Balance</value>
@@ -144,61 +156,61 @@
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="quickReportToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>268, 24</value>
+    <value>225, 22</value>
   </data>
   <data name="quickReportToolStripMenuItem1.Text" xml:space="preserve">
     <value>Open</value>
   </data>
   <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>265, 6</value>
+    <value>222, 6</value>
   </data>
   <data name="newAccountToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>268, 24</value>
+    <value>225, 22</value>
   </data>
   <data name="newAccountToolStripMenuItem.Text" xml:space="preserve">
     <value>New</value>
   </data>
   <data name="editAccountToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>268, 24</value>
+    <value>225, 22</value>
   </data>
   <data name="editAccountToolStripMenuItem.Text" xml:space="preserve">
     <value>Edit Account</value>
   </data>
   <data name="renameAccountToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>268, 24</value>
+    <value>225, 22</value>
   </data>
   <data name="renameAccountToolStripMenuItem.Text" xml:space="preserve">
     <value>Rename Account</value>
   </data>
   <data name="removeAccountToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>268, 24</value>
+    <value>225, 22</value>
   </data>
   <data name="removeAccountToolStripMenuItem.Text" xml:space="preserve">
     <value>Delete Account</value>
   </data>
   <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>265, 6</value>
+    <value>222, 6</value>
   </data>
   <data name="transactionToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>268, 24</value>
+    <value>225, 22</value>
   </data>
   <data name="transactionToolStripMenuItem1.Text" xml:space="preserve">
     <value>Make General Journal Entries</value>
   </data>
   <data name="reconcileToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>268, 24</value>
+    <value>225, 22</value>
   </data>
   <data name="reconcileToolStripMenuItem1.Text" xml:space="preserve">
     <value>Reconcile</value>
   </data>
   <data name="transactionsToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>268, 24</value>
+    <value>225, 22</value>
   </data>
   <data name="transactionsToolStripMenuItem1.Text" xml:space="preserve">
     <value>Use Register</value>
   </data>
   <data name="_contextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>269, 208</value>
+    <value>226, 192</value>
   </data>
   <data name="&gt;&gt;_contextMenu.Name" xml:space="preserve">
     <value>_contextMenu</value>
@@ -213,8 +225,12 @@
   <data name="_listView.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="_listView.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
   <data name="_listView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>914, 574</value>
+    <value>800, 428</value>
   </data>
   <data name="_listView.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -238,13 +254,13 @@
     <value>Ctrl+N</value>
   </data>
   <data name="newToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>228, 26</value>
+    <value>184, 22</value>
   </data>
   <data name="newToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;New</value>
   </data>
   <data name="editToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>228, 26</value>
+    <value>184, 22</value>
   </data>
   <data name="editToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Edit Account</value>
@@ -253,7 +269,7 @@
     <value>F2</value>
   </data>
   <data name="renameToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>228, 26</value>
+    <value>184, 22</value>
   </data>
   <data name="renameToolStripMenuItem.Text" xml:space="preserve">
     <value>Rena&amp;me Account</value>
@@ -262,7 +278,7 @@
     <value>Del</value>
   </data>
   <data name="removeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>228, 26</value>
+    <value>184, 22</value>
   </data>
   <data name="removeToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Delete Account</value>
@@ -270,46 +286,46 @@
   <data name="toolStripDropDownButton1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAEKSURBVEhL3ZG9DsFQHMXvczDZvIOtXsHObuhqkViI3Quw
-        6CYmNoMYJJ0NBiFFIoIytOuf0+TeXP3yde+iyS+3OcP53Z4y3/dJJ4HAsiwyTVMp6BQCBIZhKAWdEcHV
-        vSlBmeB82NFy1KLluEWOPRC5MoHdMWhazwi4RJlALgf4EuT6BI+5kCsTrGddUY658E+QvyXYHq9UnRyC
-        U87f4aUApcXhnrI9Jzg/laQKFntXlHM+lSQK5psL5fvbp/JvJLGCQqmSWM5JkiCT84igXGtSrruKLQ0T
-        luAdmZxHBG37FFuWBC/j5XKOmX8WAH7rcI6ZMffPgjQwN2bXJgDo/COBTpjneQ2dML0PY3cISreGe8HM
-        qgAAAABJRU5ErkJggg==
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEESURBVEhL3ZKvDoJQFId5Dk0238GGr2DXbqBa3Cw6uy+g
+        RZozaTM4gxvZQHA6kc05/2CAetzP7bIrF0Hk3iLbx91O+L5xLloQBKQSDS/TNMkwDKnAGQYw0HVdKnAK
+        Ae/+kIK0wPV0JHvWI3veo4M1kR+wBjot24UQFpEW4OUAX6I2MJMc2K2GoRzrwp18HXDOHjUXp9cZFaeR
+        GoC0OnWpODq8zqyRxMDGvYdyRtbIx8B6f6Py2HmT/xKJDVRqjY/ytAhm/FwI1FtdKg23gjCOaITdFz8X
+        An3rIoiSYDL+Z2BzrDl3gMmiPwPAmrHu3IEksG6sXVkAwPlHAZVovu93VKKpfp4ISreGcqlKAwAAAABJ
+        RU5ErkJggg==
 </value>
   </data>
   <data name="toolStripDropDownButton1.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="toolStripDropDownButton1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 24</value>
+    <value>65, 20</value>
   </data>
   <data name="toolStripDropDownButton1.Text" xml:space="preserve">
     <value>&amp;Account</value>
   </data>
   <data name="quickReportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>282, 26</value>
+    <value>225, 22</value>
   </data>
   <data name="quickReportToolStripMenuItem.Text" xml:space="preserve">
     <value>Open</value>
   </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>279, 6</value>
+    <value>222, 6</value>
   </data>
   <data name="transactionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>282, 26</value>
+    <value>225, 22</value>
   </data>
   <data name="transactionToolStripMenuItem.Text" xml:space="preserve">
     <value>Make General &amp;Journal Entries</value>
   </data>
   <data name="reconcileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>282, 26</value>
+    <value>225, 22</value>
   </data>
   <data name="reconcileToolStripMenuItem.Text" xml:space="preserve">
     <value>Reconci&amp;le</value>
   </data>
   <data name="transactionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>282, 26</value>
+    <value>225, 22</value>
   </data>
   <data name="transactionsToolStripMenuItem.Text" xml:space="preserve">
     <value>Use &amp;Register</value>
@@ -317,19 +333,19 @@
   <data name="toolStripDropDownButton2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAEKSURBVEhL3ZG9DsFQHMXvczDZvIOtXsHObuhqkViI3Quw
-        6CYmNoMYJJ0NBiFFIoIytOuf0+TeXP3yde+iyS+3OcP53Z4y3/dJJ4HAsiwyTVMp6BQCBIZhKAWdEcHV
-        vSlBmeB82NFy1KLluEWOPRC5MoHdMWhazwi4RJlALgf4EuT6BI+5kCsTrGddUY658E+QvyXYHq9UnRyC
-        U87f4aUApcXhnrI9Jzg/laQKFntXlHM+lSQK5psL5fvbp/JvJLGCQqmSWM5JkiCT84igXGtSrruKLQ0T
-        luAdmZxHBG37FFuWBC/j5XKOmX8WAH7rcI6ZMffPgjQwN2bXJgDo/COBTpjneQ2dML0PY3cISreGe8HM
-        qgAAAABJRU5ErkJggg==
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEESURBVEhL3ZKvDoJQFId5Dk0238GGr2DXbqBa3Cw6uy+g
+        RZozaTM4gxvZQHA6kc05/2CAetzP7bIrF0Hk3iLbx91O+L5xLloQBKQSDS/TNMkwDKnAGQYw0HVdKnAK
+        Ae/+kIK0wPV0JHvWI3veo4M1kR+wBjot24UQFpEW4OUAX6I2MJMc2K2GoRzrwp18HXDOHjUXp9cZFaeR
+        GoC0OnWpODq8zqyRxMDGvYdyRtbIx8B6f6Py2HmT/xKJDVRqjY/ytAhm/FwI1FtdKg23gjCOaITdFz8X
+        An3rIoiSYDL+Z2BzrDl3gMmiPwPAmrHu3IEksG6sXVkAwPlHAZVovu93VKKpfp4ISreGcqlKAwAAAABJ
+        RU5ErkJggg==
 </value>
   </data>
   <data name="toolStripDropDownButton2.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="toolStripDropDownButton2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 24</value>
+    <value>68, 20</value>
   </data>
   <data name="toolStripDropDownButton2.Text" xml:space="preserve">
     <value>Ac&amp;tivities</value>
@@ -338,16 +354,16 @@
     <value>F5</value>
   </data>
   <data name="refreshToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 26</value>
+    <value>147, 22</value>
   </data>
   <data name="refreshToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Refresh</value>
   </data>
   <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 6</value>
+    <value>144, 6</value>
   </data>
   <data name="inactiveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 26</value>
+    <value>147, 22</value>
   </data>
   <data name="inactiveToolStripMenuItem.Text" xml:space="preserve">
     <value>Show &amp;Inactive</value>
@@ -355,30 +371,29 @@
   <data name="toolStripDropDownButton3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAACRSURBVDhPY/j27dt/SjDYACcnJ7IwigEf3n8kCZNswPNb
-        J/+f6DYF0yA+yQac6Db5f6hWCmwIiE+mC0wIu2DS2Vf/F1x6DefjwlgNyNr34r/0wkdgTMgQDAOQNRNj
-        CIoBOg0rMTTDMLIhIHbriZeYBmDTiIxBGkEYxge5liQDsGGQqykyAISpZwAlmIEywMAAAAc1/Jwvt6sN
-        AAAAAElFTkSuQmCC
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACNSURBVDhPY/j27dt/SjADiHByciILoxjw4f1HkjDJBjy/
+        dfL/iW5TME2WASe6Tf4fqpUCG0KWARAXmBB2waSzr/4vuPQawwB0jNWArH0v/ksvfATGhAzBMABZMzGG
+        oBig07ASQzM2Q0Ds1hMvMQ1A14SOQRpBGMYHuZYkA7BhkKspMgCEqWcAJZiBUgAABzX8nOIkzeMAAAAA
+        SUVORK5CYII=
 </value>
   </data>
   <data name="toolStripDropDownButton3.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="toolStripDropDownButton3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 24</value>
+    <value>45, 20</value>
   </data>
   <data name="toolStripDropDownButton3.Text" xml:space="preserve">
     <value>&amp;View</value>
   </data>
   <data name="_statusStrip.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 574</value>
+    <value>0, 428</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="_statusStrip.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 0, 11, 0</value>
+    <value>1, 0, 10, 0</value>
   </data>
   <data name="_statusStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>914, 26</value>
+    <value>800, 22</value>
   </data>
   <data name="_statusStrip.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -399,13 +414,10 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>8, 20</value>
+    <value>7, 15</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>914, 600</value>
-  </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 4, 3, 4</value>
+    <value>800, 450</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Chart of Accounts</value>
@@ -438,6 +450,12 @@
     <value>balanceColumn</value>
   </data>
   <data name="&gt;&gt;balanceColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taxType.Name" xml:space="preserve">
+    <value>taxType</value>
+  </data>
+  <data name="&gt;&gt;taxType.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;quickReportToolStripMenuItem1.Name" xml:space="preserve">

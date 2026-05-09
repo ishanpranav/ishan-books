@@ -226,6 +226,7 @@ public class XslReport : IntervalView, IStandardValuesProvider, IXmlSerializable
     }
 
     [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "<Pending>")]
+    [SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "<Pending>")]
     public string pngets(string key, decimal value)
     {
         //if (value < 0)
@@ -325,7 +326,7 @@ public class XslReport : IntervalView, IStandardValuesProvider, IXmlSerializable
 
         if (!visibleChildren.Any())
         {
-            ParentKey key = new ParentKey(value.Type, value.CashFlow);
+            ParentKey key = new ParentKey(value);
 
             if (keyedBalances.TryGetValue(key, out BalanceInfo? existing))
             {
@@ -374,6 +375,7 @@ public class XslReport : IntervalView, IStandardValuesProvider, IXmlSerializable
         writer.WriteElementString("debit", XmlConvert.ToString(debit));
         writer.WriteElementString("credit", XmlConvert.ToString(credit));
         writer.WriteElementString("cash-flow", key.CashFlow.ToString());
+        writer.WriteElementString("tax-type", key.TaxType.ToString());
         writer.WriteEndElement();
     }
 
@@ -456,7 +458,7 @@ public class XslReport : IntervalView, IStandardValuesProvider, IXmlSerializable
         {
             foreach (Account account in Accounts.Values)
             {
-                WriteAccountXml(writer, account, new ParentKey(account.Type, account.CashFlow), ComputeBalances(account));
+                WriteAccountXml(writer, account, new ParentKey(account), ComputeBalances(account));
             }
         }
 
