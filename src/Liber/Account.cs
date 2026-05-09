@@ -141,6 +141,8 @@ public class Account
     /// Gets or sets the tax category associated with the account.
     /// </summary>
     /// <value>The tax category associated with the account.</value>
+    [BooleanFalseValues("F")]
+    [BooleanTrueValues("T")]
     [Key(8)]
     [LocalizedDisplayName(nameof(TaxType))]
     [Name("Tax Info")]

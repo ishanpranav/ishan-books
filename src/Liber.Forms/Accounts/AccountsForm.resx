@@ -143,7 +143,7 @@
     <value>5</value>
   </data>
   <data name="taxType.Text" xml:space="preserve">
-    <value>Tax</value>
+    <value>Tax-related</value>
   </data>
   <data name="balanceColumn.DisplayIndex" type="System.Int32, mscorlib">
     <value>3</value>

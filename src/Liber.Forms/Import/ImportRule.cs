@@ -2,8 +2,6 @@
 // Copyright (c) 2023-2026 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
@@ -61,7 +59,7 @@ internal sealed class ImportRule
                 account.CashFlow = CashFlow;
             }
 
-            if (Strict)
+            if (!account.TaxType)
             {
                 account.TaxType = TaxType;
             }
