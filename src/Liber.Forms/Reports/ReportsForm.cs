@@ -29,7 +29,7 @@ internal sealed partial class ReportsForm : Form
 
         foreach (KeyValuePair<string, IReportView> view in engine.Views)
         {
-            ListViewItem item = _listView.Items.Add(view.Key, view.Value.Title, imageIndex: 0);
+            ListViewItem item = _listView.Items.Add(view.Key, view.Value.GenericTitle, imageIndex: 0);
 
             item.ImageIndex = _imageList.Images.Count - 1;
             item.Tag = view.Value;

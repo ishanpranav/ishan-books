@@ -19,6 +19,14 @@ internal sealed class HtmlReportView : IReportView
         _report = new HtmlReport(Path.GetFileNameWithoutExtension(path), company);
     }
 
+    public string GenericTitle
+    {
+        get
+        {
+            return _report.Title;
+        }
+    }
+
     public string Title
     {
         get
@@ -35,10 +43,8 @@ internal sealed class HtmlReportView : IReportView
         }
     }
 
-    public void InitializeReport()
-    {
-
-    }
+    public void InitializeReport() { }
+    public void RefreshReport() { }
 
     public void Navigate(CoreWebView2 coreWebView2)
     {

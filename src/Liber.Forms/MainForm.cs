@@ -32,8 +32,8 @@ internal sealed partial class MainForm : Form
         .WithSecurity(MessagePackSecurity.UntrustedData);
 
     private readonly Company _company = new Company();
-    private readonly ReportEngine _engine;
 
+    private ReportEngine? _engine;
     private string? _path;
 
     public MainForm()
@@ -49,36 +49,6 @@ internal sealed partial class MainForm : Form
         exportAccountsToolStripMenuItem.Tag = new Writer(FilterIndex.Csv, new GnuCashAccountWriter());
         exportTransactionsToolStripMenuItem.Tag = new Writer(FilterIndex.Csv, new GnuCashTransactionWriter());
         exportAccountsIifToolStripMenuItem.Tag = new Writer(FilterIndex.Iif, new IifAccountWriter());
-        _engine = new ReportEngine(_company);
-
-        if (_engine.Views.Count == 0)
-        {
-            reportsToolStripMenuItem1.Visible = false;
-        }
-
-        foreach (KeyValuePair<string, IReportView> view in _engine.Views)
-        {
-            if (view.Value is not XslReportView)
-            {
-                continue;
-            }
-
-            ToolStripItem item = reportsToolStripMenuItem1.DropDownItems.Add(view.Value.Title);
-
-            item.Click += (sender, e) =>
-            {
-                Guid key = Guid.NewGuid();
-                ReportsForm form = new ReportsForm(_engine);
-
-                form.Load += (sender, e) =>
-                {
-                    form.InitializeReport(view.Key);
-                };
-
-                _factory.Kill(key);
-                _factory.Register(key, form);
-            };
-        }
     }
 
     public MainForm(string path) : this()
@@ -89,43 +59,12 @@ internal sealed partial class MainForm : Form
     private async void OnLoad(object sender, EventArgs e)
     {
         InitializeRecentPaths();
+        InitializeReportEngine();
 
         if (!_recentPathManager.Empty)
         {
             await ImportAsync(_recentPathManager.Paths.First());
         }
-    }
-
-    private async void OnFormClosing(object sender, FormClosingEventArgs e)
-    {
-        e.Cancel = await TryCancelAsync();
-    }
-
-    private void OnDragOver(object sender, DragEventArgs e)
-    {
-        if (e.Data is not null && e.Data.GetDataPresent(DataFormats.FileDrop))
-        {
-            e.Effect = DragDropEffects.Copy;
-        }
-        else
-        {
-            e.Effect = DragDropEffects.None;
-        }
-    }
-
-    private async void OnDragDrop(object sender, DragEventArgs e)
-    {
-        if (e.Data == null || e.Data.GetData(DataFormats.FileDrop) is not string[] paths || paths.Length == 0)
-        {
-            return;
-        }
-
-        if (await TryCancelAsync())
-        {
-            return;
-        }
-
-        await ImportAsync(paths[0]);
     }
 
     private void InitializeRecentPaths()
@@ -178,6 +117,72 @@ internal sealed partial class MainForm : Form
             list.Refresh();
         }
         catch (UnauthorizedAccessException) { }
+    }
+
+    private void InitializeReportEngine()
+    {
+        _engine = new ReportEngine(_company);
+
+        if (_engine.Views.Count == 0)
+        {
+            reportsToolStripMenuItem1.Visible = false;
+        }
+
+        foreach (KeyValuePair<string, IReportView> view in _engine.Views)
+        {
+            if (view.Value is not XslReportView)
+            {
+                continue;
+            }
+
+            ToolStripItem item = reportsToolStripMenuItem1.DropDownItems.Add(view.Value.GenericTitle);
+
+            item.Click += (sender, e) =>
+            {
+                Guid key = Guid.NewGuid();
+                ReportsForm form = new ReportsForm(_engine);
+
+                form.Load += (sender, e) =>
+                {
+                    form.InitializeReport(view.Key);
+                };
+
+                _factory.Kill(key);
+                _factory.Register(key, form);
+            };
+        }
+    }
+
+    private async void OnFormClosing(object sender, FormClosingEventArgs e)
+    {
+        e.Cancel = await TryCancelAsync();
+    }
+
+    private void OnDragOver(object sender, DragEventArgs e)
+    {
+        if (e.Data is not null && e.Data.GetDataPresent(DataFormats.FileDrop))
+        {
+            e.Effect = DragDropEffects.Copy;
+        }
+        else
+        {
+            e.Effect = DragDropEffects.None;
+        }
+    }
+
+    private async void OnDragDrop(object sender, DragEventArgs e)
+    {
+        if (e.Data == null || e.Data.GetData(DataFormats.FileDrop) is not string[] paths || paths.Length == 0)
+        {
+            return;
+        }
+
+        if (await TryCancelAsync())
+        {
+            return;
+        }
+
+        await ImportAsync(paths[0]);
     }
 
     private async void OnNewToolStripMenuItemClick(object sender, EventArgs e)
@@ -370,6 +375,11 @@ internal sealed partial class MainForm : Form
             _recentPathManager.Add(path);
 
             _path = path;
+
+            foreach (IReportView view in _engine!.Views.Values)
+            {
+                view.RefreshReport();
+            }
         });
     }
 
@@ -578,7 +588,7 @@ internal sealed partial class MainForm : Form
         if (checkForm.ShowDialog() == DialogResult.OK)
         {
             Guid key = Guid.NewGuid();
-            ReportsForm form = new ReportsForm(_engine);
+            ReportsForm form = new ReportsForm(_engine!);
 
             form.Load += (sender, e) =>
             {
@@ -592,7 +602,7 @@ internal sealed partial class MainForm : Form
 
     private void OnReportsToolStripMenuItemClick(object sender, EventArgs e)
     {
-        _factory.Register(Guid.NewGuid(), new ReportsForm(_engine));
+        _factory.Register(Guid.NewGuid(), new ReportsForm(_engine!));
     }
 
     private void OnTransactionToolStripMenuItemClick(object sender, EventArgs e)

@@ -4,7 +4,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml;
@@ -20,13 +22,14 @@ namespace Liber.Forms.Reports.Xsl;
 /// Represents an XSL template for generating formatted financial reports.
 /// </summary>
 [XmlRoot("report")]
-public class XslReport : IntervalView, IXmlSerializable
+public class XslReport : IntervalView, IStandardValuesProvider, IXmlSerializable
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="XslReport"/> class.
     /// </summary>
     public XslReport()
     {
+        Name = string.Empty;
         Title = string.Empty;
         Company = new Company();
         Accounts = new AccountsView(Company);
@@ -35,13 +38,15 @@ public class XslReport : IntervalView, IXmlSerializable
     /// <summary>
     /// Initializes a new instance of the <see cref="XslReport"/> class with the specified title and company.
     /// </summary>
-    /// <param name="title">The title of the report.</param>
+    /// <param name="name">The name of the report.</param>
     /// <param name="company">The <see cref="Company"/> associated with the report.</param>
-    public XslReport(string title, Company company)
+    public XslReport(string name, Company company)
     {
-        Title = title;
+        Name = name;
         Company = company;
         Accounts = new AccountsView(company);
+
+        Refresh();
     }
 
     /// <summary>
@@ -51,9 +56,22 @@ public class XslReport : IntervalView, IXmlSerializable
     [Browsable(false)]
     public Company Company { get; set; }
 
+    [Browsable(false)]
+    public string Name { get; set; }
+
+    [Browsable(false)]
+    public string GenericTitle
+    {
+        get
+        {
+            return GetTitle(Name, CompanyType.None);
+        }
+    }
+
     [LocalizedCategory(nameof(Title))]
     [LocalizedDescription(nameof(Title))]
     [LocalizedDisplayName(nameof(Title))]
+    [TypeConverter(typeof(StandardValuesStringConverter))]
     public string Title { get; set; }
 
     [LocalizedCategory(nameof(Redaction))]
@@ -94,16 +112,19 @@ public class XslReport : IntervalView, IXmlSerializable
     /// <remarks>This method corresponds to the <c>liber:fdatel</c> XSL function.</remarks>
     /// <param name="value">The date value to format.</param>
     /// <returns>The formatted long date string.</returns>
+    [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "<Pending>")]
     public string fdatel(DateTime value)
     {
         return value.ToLongDateString();
     }
 
+    [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "<Pending>")]
     public string fdates(DateTime value)
     {
         return value.ToShortDateString();
     }
 
+    [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "<Pending>")]
     public string fm(decimal value)
     {
         if (!string.IsNullOrEmpty(Redaction))
@@ -114,6 +135,7 @@ public class XslReport : IntervalView, IXmlSerializable
         return value.ToLocalizedString(Multiple);
     }
 
+    [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "<Pending>")]
     public string fm(string type, decimal balance)
     {
         if (!string.IsNullOrEmpty(Redaction))
@@ -127,9 +149,37 @@ public class XslReport : IntervalView, IXmlSerializable
             .ToLocalizedString(Multiple);
     }
 
+    [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "<Pending>")]
     public string ftspanl(DateTime started, DateTime posted)
     {
         return started.ToShortDateString() + " \u2013 " + posted.ToShortDateString();
+    }
+
+    [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "<Pending>")]
+    public string gettitle(string name, string type)
+    {
+        return GetTitle(name, Enum.Parse<CompanyType>(type));
+    }
+
+    private static string GetTitle(string name)
+    {
+        if (!FormattedStrings.TryGetString("_r_" + name, out string? result))
+        {
+            return name;
+        }
+
+        return result;
+    }
+
+    private static string GetTitle(string name, CompanyType type)
+    {
+        if (type == CompanyType.None ||
+            !FormattedStrings.TryGetString(string.Format("_r_{0}_{1}", type, name), out string? result))
+        {
+            return GetTitle(name);
+        }
+
+        return result;
     }
 
     /// <summary>
@@ -139,6 +189,7 @@ public class XslReport : IntervalView, IXmlSerializable
     /// <param name="started">The start date of the accounting period.</param>
     /// <param name="posted">The end date of the accounting period.</param>
     /// <returns>A human-readable string representing the time span between the start and end dates.</returns>
+    [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "<Pending>")]
     public string ftspans(DateTime started, DateTime posted)
     {
         posted = posted.Date.AddDays(1);
@@ -158,6 +209,7 @@ public class XslReport : IntervalView, IXmlSerializable
         return (posted - started.Date).Humanize(precision: 2, countEmptyUnits: true, maxUnit: TimeUnit.Year);
     }
 
+    [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "<Pending>")]
     public string fgets(string key, object value)
     {
         return string
@@ -165,6 +217,7 @@ public class XslReport : IntervalView, IXmlSerializable
             .Transform(To.SentenceCase);
     }
 
+    [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "<Pending>")]
     public string fgets(string key, object first, object second)
     {
         return string
@@ -172,6 +225,7 @@ public class XslReport : IntervalView, IXmlSerializable
             .Transform(To.SentenceCase);
     }
 
+    [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "<Pending>")]
     public string pngets(string key, decimal value)
     {
         //if (value < 0)
@@ -187,9 +241,24 @@ public class XslReport : IntervalView, IXmlSerializable
         return gets("_p_" + key);
     }
 
+    [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "<Pending>")]
     public string gets(string key)
     {
         return FormattedStrings.GetString(key);
+    }
+
+    [MemberNotNull(nameof(Title))]
+    public void Refresh()
+    {
+        Title = GetTitle(Name, Company.Type);
+    }
+
+    public TypeConverter.StandardValuesCollection GetStandardValues()
+    {
+        SortedSet<string> results = new SortedSet<string>(FormattedStrings
+            .GetStringsBySuffix("_" + Name));
+
+        return new TypeConverter.StandardValuesCollection(results);
     }
 
     public XmlSchema? GetSchema()

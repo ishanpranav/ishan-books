@@ -23,8 +23,16 @@ internal sealed class XslReportView : IReportView
 
     public XslReportView(Company company, string path)
     {
-        _report = new XslReport(FormattedStrings.GetString(Path.GetFileNameWithoutExtension(path)), company);
+        _report = new XslReport(Path.GetFileNameWithoutExtension(path), company);
         _path = path;
+    }
+
+    public string GenericTitle
+    {
+        get
+        {
+            return _report.GenericTitle;
+        }
     }
 
     public string Title
@@ -57,6 +65,11 @@ internal sealed class XslReportView : IReportView
         }
 
         _xhtml = XmlReportSerializer.Serialize(style, _report);
+    }
+
+    public void RefreshReport()
+    {
+        _report.Refresh();
     }
 
     public void Navigate(CoreWebView2 coreWebView2)

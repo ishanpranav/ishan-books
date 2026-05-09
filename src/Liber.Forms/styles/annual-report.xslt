@@ -19,7 +19,7 @@ Licensed under the MIT License.
     <xsl:template match="/report">
         <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
             <head>
-                <meta charset="utf-8"/>
+                <meta charset="utf-8"/>i
                 <title>
                     <xsl:value-of select="title"/>
                 </title>
@@ -27,19 +27,19 @@ Licensed under the MIT License.
             </head>
             <body>
                 <xsl:call-template name="income-statement">
-                    <xsl:with-param name="title" select="liber:gets('income-statement')"/>
+                    <xsl:with-param name="title" select="liber:gettitle('income-statement', company/type)"/>
                 </xsl:call-template>
                 <xsl:call-template name="comprehensive-income-statement">
-                    <xsl:with-param name="title" select="liber:gets('comprehensive-income-statement')"/>
+                    <xsl:with-param name="title" select="liber:gettitle('comprehensive-income-statement', company/type)"/>
                 </xsl:call-template>
                 <xsl:call-template name="comparative-balance-sheet">
-                    <xsl:with-param name="title" select="liber:gets('comparative-balance-sheet')"/>
+                    <xsl:with-param name="title" select="liber:gettitle('comparative-balance-sheet', company/type)"/>
                 </xsl:call-template>
                 <xsl:call-template name="cash-flow-statement">
-                    <xsl:with-param name="title" select="liber:gets('cash-flow-statement')"/>
+                    <xsl:with-param name="title" select="liber:gettitle('cash-flow-statement', company/type)"/>
                 </xsl:call-template>
                 <xsl:call-template name="equity-statement">
-                    <xsl:with-param name="title" select="liber:gets('equity-statement')"/>
+                    <xsl:with-param name="title" select="liber:gettitle('equity-statement', company/type)"/>
                 </xsl:call-template>
             </body>
         </html>
