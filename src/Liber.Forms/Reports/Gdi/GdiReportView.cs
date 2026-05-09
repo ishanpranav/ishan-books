@@ -14,6 +14,14 @@ internal sealed class GdiReportView : IReportView
 
     private readonly GdiReport _report;
 
+    public string GenericTitle
+    {
+        get
+        {
+            return _report.Title;
+        }
+    }
+
     public string Title
     {
         get
@@ -65,6 +73,8 @@ internal sealed class GdiReportView : IReportView
 
         document.Print();
     }
+
+    public void RefreshReport() { }
 
     public void Navigate(CoreWebView2 coreWebView2)
     {

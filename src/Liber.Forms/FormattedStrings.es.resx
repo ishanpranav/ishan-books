@@ -123,20 +123,11 @@
   <data name="account" xml:space="preserve">
     <value>Cuenta</value>
   </data>
-  <data name="account-summary" xml:space="preserve">
-    <value>Resumen de Cuentas</value>
-  </data>
   <data name="AccountCount{0}" xml:space="preserve">
     <value>({0:n0} cuentas)</value>
   </data>
   <data name="accumulated-other-comprehensive-income" xml:space="preserve">
     <value>Acumulado de otros resultados o pérdidas integrales</value>
-  </data>
-  <data name="aging-summary" xml:space="preserve">
-    <value>Resumen de antigüedad de saldos</value>
-  </data>
-  <data name="annual-report" xml:space="preserve">
-    <value>Informe anual</value>
   </data>
   <data name="assets" xml:space="preserve">
     <value>Activos</value>
@@ -144,26 +135,14 @@
   <data name="balance" xml:space="preserve">
     <value>Saldo</value>
   </data>
-  <data name="balance-sheet" xml:space="preserve">
-    <value>Balance General</value>
-  </data>
   <data name="Bank" xml:space="preserve">
     <value>Efectivo y equivalentes al efectivo</value>
   </data>
   <data name="CancelText{0}" xml:space="preserve">
     <value>¿Desea usted guardar los cambios en {0}?</value>
   </data>
-  <data name="cash-flow-statement" xml:space="preserve">
-    <value>Estado de Flujo de Efectivo</value>
-  </data>
   <data name="CheckWords{0}{1}" xml:space="preserve">
     <value>{0} y {1}/XX</value>
-  </data>
-  <data name="comparative-balance-sheet" xml:space="preserve">
-    <value>Balance General Comparativo</value>
-  </data>
-  <data name="comprehensive-income-statement" xml:space="preserve">
-    <value>Estado de Resultados Integrales</value>
   </data>
   <data name="Cost" xml:space="preserve">
     <value>Costos de ventas</value>
@@ -183,9 +162,6 @@
   <data name="current-liabilities" xml:space="preserve">
     <value>Pasivos corrientes</value>
   </data>
-  <data name="customer-report" xml:space="preserve">
-    <value>Reporte del Cliente</value>
-  </data>
   <data name="date" xml:space="preserve">
     <value>Fecha</value>
   </data>
@@ -194,9 +170,6 @@
   </data>
   <data name="description" xml:space="preserve">
     <value>Descripción</value>
-  </data>
-  <data name="equity-statement" xml:space="preserve">
-    <value>Estado del Patrimonio</value>
   </data>
   <data name="Expense" xml:space="preserve">
     <value>Gastos</value>
@@ -207,17 +180,8 @@
   <data name="FixedAsset" xml:space="preserve">
     <value>Activos fijos</value>
   </data>
-  <data name="general-journal" xml:space="preserve">
-    <value>Diario General</value>
-  </data>
-  <data name="general-ledger" xml:space="preserve">
-    <value>Libro Mayor</value>
-  </data>
   <data name="Income" xml:space="preserve">
     <value>Ingresos</value>
-  </data>
-  <data name="income-statement" xml:space="preserve">
-    <value>Estado de Resultados</value>
   </data>
   <data name="IncomeTaxExpense" xml:space="preserve">
     <value>Impuestos sobre la renta</value>
@@ -293,9 +257,6 @@
   </data>
   <data name="total-non-current-assets" xml:space="preserve">
     <value>Activos no corrientes totales</value>
-  </data>
-  <data name="trial-balance" xml:space="preserve">
-    <value>Balance de Prueba</value>
   </data>
   <data name="_p_accumulated-other-comprehensive-income" xml:space="preserve">
     <value>Acumulados de otros resultados integrales</value>
@@ -377,5 +338,44 @@
   </data>
   <data name="_p_retained-earnings" xml:space="preserve">
     <value>Utilidades retenidas</value>
+  </data>
+  <data name="_r_aging-summary" xml:space="preserve">
+    <value>Resumen de antigüedad de saldos</value>
+  </data>
+  <data name="_r_annual-report" xml:space="preserve">
+    <value>Informe anual</value>
+  </data>
+  <data name="_r_balance-sheet" xml:space="preserve">
+    <value>Balance General</value>
+  </data>
+  <data name="_r_cash-flow-statement" xml:space="preserve">
+    <value>Estado de Flujo de Efectivo</value>
+  </data>
+  <data name="_r_comparative-balance-sheet" xml:space="preserve">
+    <value>Balance General Comparativo</value>
+  </data>
+  <data name="_r_comprehensive-income-statement" xml:space="preserve">
+    <value>Estado de Resultados Integrales</value>
+  </data>
+  <data name="_r_customer-report" xml:space="preserve">
+    <value>Reporte del Cliente</value>
+  </data>
+  <data name="_r_equity-statement" xml:space="preserve">
+    <value>Estado del Patrimonio</value>
+  </data>
+  <data name="_r_general-journal" xml:space="preserve">
+    <value>Diario General</value>
+  </data>
+  <data name="_r_general-ledger" xml:space="preserve">
+    <value>Libro Mayor</value>
+  </data>
+  <data name="_r_income-statement" xml:space="preserve">
+    <value>Estado de Resultados</value>
+  </data>
+  <data name="_r_trial-balance" xml:space="preserve">
+    <value>Balance de Prueba</value>
+  </data>
+  <data name="_r_account-summary" xml:space="preserve">
+    <value>Resumen de Cuentas</value>
   </data>
 </root>

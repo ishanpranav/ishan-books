@@ -127,23 +127,11 @@
   <data name="account" xml:space="preserve">
     <value>Account</value>
   </data>
-  <data name="account-summary" xml:space="preserve">
-    <value>Account Summary</value>
-  </data>
-  <data name="average-daily-balance" xml:space="preserve">
-    <value>Average Daily Balance</value>
-  </data>
   <data name="AccountCount{0}" xml:space="preserve">
     <value>({0:n0} accounts)</value>
   </data>
   <data name="accumulated-other-comprehensive-income" xml:space="preserve">
     <value>Accumulated other comprehensive income or loss</value>
-  </data>
-  <data name="aging-summary" xml:space="preserve">
-    <value>Aging Summary</value>
-  </data>
-  <data name="annual-report" xml:space="preserve">
-    <value>Annual Report</value>
   </data>
   <data name="assets" xml:space="preserve">
     <value>Assets</value>
@@ -151,26 +139,14 @@
   <data name="balance" xml:space="preserve">
     <value>Balance</value>
   </data>
-  <data name="balance-sheet" xml:space="preserve">
-    <value>Balance Sheet</value>
-  </data>
   <data name="Bank" xml:space="preserve">
     <value>Cash and cash equivalents</value>
   </data>
   <data name="CancelText{0}" xml:space="preserve">
     <value>Do you want to save changes to {0}?</value>
   </data>
-  <data name="cash-flow-statement" xml:space="preserve">
-    <value>Cash Flow Statement</value>
-  </data>
   <data name="CheckWords{0}{1}" xml:space="preserve">
     <value>{0} and {1}/XX</value>
-  </data>
-  <data name="comparative-balance-sheet" xml:space="preserve">
-    <value>Comparative Balance Sheet</value>
-  </data>
-  <data name="comprehensive-income-statement" xml:space="preserve">
-    <value>Comprehensive Income Statement</value>
   </data>
   <data name="Cost" xml:space="preserve">
     <value>Costs of revenue</value>
@@ -190,9 +166,6 @@
   <data name="current-liabilities" xml:space="preserve">
     <value>Current liabilities</value>
   </data>
-  <data name="customer-report" xml:space="preserve">
-    <value>Customer Report</value>
-  </data>
   <data name="date" xml:space="preserve">
     <value>Date</value>
   </data>
@@ -210,9 +183,6 @@
   <data name="description" xml:space="preserve">
     <value>Description</value>
   </data>
-  <data name="equity-statement" xml:space="preserve">
-    <value>Equity Statement</value>
-  </data>
   <data name="Expense" xml:space="preserve">
     <value>Expenses</value>
   </data>
@@ -222,17 +192,8 @@
   <data name="FixedAsset" xml:space="preserve">
     <value>Fixed assets</value>
   </data>
-  <data name="general-journal" xml:space="preserve">
-    <value>General Journal</value>
-  </data>
-  <data name="general-ledger" xml:space="preserve">
-    <value>General Ledger</value>
-  </data>
   <data name="Income" xml:space="preserve">
     <value>Revenues</value>
-  </data>
-  <data name="income-statement" xml:space="preserve">
-    <value>Income Statement</value>
   </data>
   <data name="IncomeTaxExpense" xml:space="preserve">
     <value>Income tax expenses</value>
@@ -308,9 +269,6 @@
   </data>
   <data name="total-non-current-assets" xml:space="preserve">
     <value>Total non-current assets</value>
-  </data>
-  <data name="trial-balance" xml:space="preserve">
-    <value>Trial Balance</value>
   </data>
   <data name="_p_accumulated-other-comprehensive-income" xml:space="preserve">
     <value>Accumulated other comprehensive income or (loss)</value>
@@ -394,7 +352,7 @@
     <value>Total other income and (expense)</value>
   </data>
   <data name="_p_Partnership" xml:space="preserve">
-    <value>partners' equity or (deficit)</value>
+    <value>partners' capital or (deficit)</value>
   </data>
   <data name="_p_retained-earnings" xml:space="preserve">
     <value>Retained earnings or (accumulated deficit)</value>
@@ -440,5 +398,155 @@
   </data>
   <data name="MultipleWords1{0}" xml:space="preserve">
     <value>(in {0})</value>
+  </data>
+  <data name="_r_average-daily-balance" xml:space="preserve">
+    <value>Average Daily Balance</value>
+  </data>
+  <data name="_r_aging-summary" xml:space="preserve">
+    <value>Aging Summary</value>
+  </data>
+  <data name="_r_annual-report" xml:space="preserve">
+    <value>Annual Report</value>
+  </data>
+  <data name="_r_balance-sheet" xml:space="preserve">
+    <value>Balance Sheet</value>
+  </data>
+  <data name="_r_cash-flow-statement" xml:space="preserve">
+    <value>Cash Flow Statement</value>
+  </data>
+  <data name="_r_comparative-balance-sheet" xml:space="preserve">
+    <value>Comparative Balance Sheet</value>
+  </data>
+  <data name="_r_comprehensive-income-statement" xml:space="preserve">
+    <value>Comprehensive Income Statement</value>
+  </data>
+  <data name="_r_customer-report" xml:space="preserve">
+    <value>Customer Report</value>
+  </data>
+  <data name="_r_equity-statement" xml:space="preserve">
+    <value>Equity Statement</value>
+  </data>
+  <data name="_r_general-journal" xml:space="preserve">
+    <value>General Journal</value>
+  </data>
+  <data name="_r_general-ledger" xml:space="preserve">
+    <value>General Ledger</value>
+  </data>
+  <data name="_r_income-statement" xml:space="preserve">
+    <value>Income Statement</value>
+  </data>
+  <data name="_r_trial-balance" xml:space="preserve">
+    <value>Trial Balance</value>
+  </data>
+  <data name="_r_account-summary" xml:space="preserve">
+    <value>Account Summary</value>
+  </data>
+  <data name="_r_Corporation_income-statement" xml:space="preserve">
+    <value>Statement of Income</value>
+  </data>
+  <data name="_r_Corporation_comprehensive-income-statement" xml:space="preserve">
+    <value>Statement of Comprehensive Income</value>
+  </data>
+  <data name="_r_Corporation_comparative-balance-sheet" xml:space="preserve">
+    <value>Balance Sheet</value>
+  </data>
+  <data name="_r_Corporation_balance-sheet" xml:space="preserve">
+    <value>Simple Balance Sheet</value>
+  </data>
+  <data name="_r_Corporation_cash-flow-statement" xml:space="preserve">
+    <value>Statement of Cash Flows</value>
+  </data>
+  <data name="_r_Corporation_equity-statement" xml:space="preserve">
+    <value>Statement of Shareholders' Equity</value>
+  </data>
+  <data name="_r_1_income-statement" xml:space="preserve">
+    <value>Profit &amp; Loss Statement</value>
+  </data>
+  <data name="_r_2_income-statement" xml:space="preserve">
+    <value>Statement of Operations</value>
+  </data>
+  <data name="_r_1_equity-statement" xml:space="preserve">
+    <value>Statement of Changes in Shareholders' Equity</value>
+  </data>
+  <data name="_r_2_equity-statement" xml:space="preserve">
+    <value>Statement of Changes in Members' Equity</value>
+  </data>
+  <data name="_r_Partnership_equity-statement" xml:space="preserve">
+    <value>Statement of Partners' Capital</value>
+  </data>
+  <data name="_r_3_equity-statement" xml:space="preserve">
+    <value>Statement of Changes in Partners' Capital</value>
+  </data>
+  <data name="_r_4_equity-statement" xml:space="preserve">
+    <value>Statement of Changes in Equity</value>
+  </data>
+  <data name="_r_5_equity-statement" xml:space="preserve">
+    <value>Statement of Equity</value>
+  </data>
+  <data name="_r_3_income-statement" xml:space="preserve">
+    <value>Statement of Profit or Loss</value>
+  </data>
+  <data name="_r_1_comprehensive-income-statement" xml:space="preserve">
+    <value>Statement of Profit or Loss or Other Comprehensive Income</value>
+  </data>
+  <data name="_r_NonprofitCorporation_balance-sheet" xml:space="preserve">
+    <value>Statement of Financial Position (Current Year)</value>
+  </data>
+  <data name="_r_NonprofitCorporation_comparative-balance-sheet" xml:space="preserve">
+    <value>Statement of Financial Position</value>
+  </data>
+  <data name="_r_2_balance-sheet" xml:space="preserve">
+    <value>Statement of Financial Condition</value>
+  </data>
+  <data name="_r_NonprofitCorporation_equity-statement" xml:space="preserve">
+    <value>Statement of Net Assets</value>
+  </data>
+  <data name="_r_NonprofitCorporation_income-statement" xml:space="preserve">
+    <value>Statement of Activities</value>
+  </data>
+  <data name="_r_6_equity-statement" xml:space="preserve">
+    <value>Statement of Changes in Net Assets</value>
+  </data>
+  <data name="_r_Individual_income-statement" xml:space="preserve">
+    <value>Statement of Income and Expenses</value>
+  </data>
+  <data name="_r_4_income-statement" xml:space="preserve">
+    <value>Statement of Financial Performance</value>
+  </data>
+  <data name="_r_5_income-statement" xml:space="preserve">
+    <value>Statement of Revenue and Expenses</value>
+  </data>
+  <data name="_r_6_income-statement" xml:space="preserve">
+    <value>Operating Statement</value>
+  </data>
+  <data name="_r_7_income-statement" xml:space="preserve">
+    <value>Earnings Statement</value>
+  </data>
+  <data name="_r_2_comprehensive-income-statement" xml:space="preserve">
+    <value>Statement of Total Recognized Gains and Losses</value>
+  </data>
+  <data name="_r_3_comprehensive-income-statement" xml:space="preserve">
+    <value>Statement of Recognized Income and Expense</value>
+  </data>
+  <data name="_r_3_comparative-balance-sheet" xml:space="preserve">
+    <value>Statement of Assets and Liabilities</value>
+  </data>
+  <data name="r_3_balance-sheet" xml:space="preserve">
+    <value>Statement of Assets and Liabilities</value>
+  </data>
+  <data name="_r_Individual_equity-statement" xml:space="preserve">
+    <value>Statement of Changes in Net Worth</value>
+  </data>
+  <data name="_r_7_equity-statement" xml:space="preserve">
+    <value>Statement of Net Worth</value>
+  </data>
+  <data name="_r_Individual_comprehensive-income-statement" xml:space="preserve">
+    <value>Statement of Comprehensive Income</value>
+  </data>
+  <data name="_r_Individual_comparative-balance-sheet" xml:space="preserve">
+    <value>Statement of Financial Condition</value>
+  </data>
+  <data name="_r_Individual_cash-flow-statement" xml:space="preserve">
+    <value>Statement of Cash Flows</value>
   </data>
 </root>

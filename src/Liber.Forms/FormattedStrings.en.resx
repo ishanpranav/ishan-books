@@ -117,10 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="aging-summary" xml:space="preserve">
-    <value>Ageing Summary</value>
-  </data>
   <data name="_p_NonprofitCorporation" xml:space="preserve">
     <value />
+  </data>
+  <data name="_r_aging-summary" xml:space="preserve">
+    <value>Ageing Summary</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="_r_2_equity-statement" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="_r_2_comprehensive-income-statement" xml:space="preserve">
+    <value>Statement of Total Recognised Gains and Losses</value>
+  </data>
+  <data name="_r_3_comprehensive-income-statement" xml:space="preserve">
+    <value>Statement of Recognised Income and Expense</value>
   </data>
 </root>

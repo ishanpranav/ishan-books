@@ -3,6 +3,10 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
@@ -57,6 +61,45 @@ internal static class FormattedStrings
         }
 
         return ResourceManager.GetString(key) ?? key;
+    }
+
+    public static bool TryGetString(string key, [NotNullWhen(true)] out string? value)
+    {
+        value = ResourceManager.GetString(key);
+
+        return value != null;
+    }
+
+    public static IEnumerable<string> GetStringsBySuffix(string suffix)
+    {
+        ResourceSet? resources = ResourceManager.GetResourceSet(
+            CultureInfo.CurrentUICulture,
+            createIfNotExists: true,
+            tryParents: true);
+
+        if (resources == null)
+        {
+            yield break;
+        }
+
+        foreach (DictionaryEntry entry in resources)
+        {
+            string? key = entry.Key.ToString();
+
+            if (key == null || !key.EndsWith(suffix) || entry.Value == null)
+            {
+                continue;
+            }
+
+            string? value = entry.Value.ToString();
+
+            if (value == null)
+            {
+                continue;
+            }
+
+            yield return value;
+        }
     }
 
     public static string GetCancelText(this Company company)
