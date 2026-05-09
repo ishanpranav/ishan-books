@@ -63,7 +63,7 @@ internal static class FormattedStrings
         return ResourceManager.GetString(key) ?? key;
     }
 
-    public static bool TryGetString(string key, [NotNullWhen(true)] out string? value)
+    public static bool TryGetString(string key, [MaybeNullWhen(false)] out string value)
     {
         value = ResourceManager.GetString(key);
 

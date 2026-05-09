@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Windows.Controls.Primitives;
 using System.Windows.Forms;
 using Liber.Forms.Accounts;
 using Liber.Forms.Companies;
@@ -23,6 +24,8 @@ using Liber.Sqlite;
 using Liber.Writers;
 using MessagePack;
 using Microsoft.WindowsAPICodePack.Taskbar;
+using PdfSharp.Pdf;
+using PdfSharp.Pdf.IO;
 
 namespace Liber.Forms;
 
@@ -269,7 +272,7 @@ internal sealed partial class MainForm : Form
         await ImportAsync(path);
     }
 
-    public bool TryGetOpenPath(FilterIndex filterIndex, [MaybeNullWhen(false)] out string result)
+    public bool TryGetOpenPath(FilterIndex filterIndex, [MaybeNullWhen(false)] out string? result)
     {
         _openFileDialog.FilterIndex = (int)filterIndex;
 
@@ -281,6 +284,23 @@ internal sealed partial class MainForm : Form
         }
 
         result = _openFileDialog.FileName;
+
+        return true;
+    }
+
+    public bool TryGetOpenPaths(FilterIndex filterIndex, [MaybeNullWhen(false)] out string[] result)
+    {
+        _openFileDialog.FilterIndex = (int)filterIndex;
+        _openFileDialog.Multiselect = true;
+
+        if (_openFileDialog.ShowDialog() != DialogResult.OK)
+        {
+            result = null;
+
+            return false;
+        }
+
+        result = _openFileDialog.FileNames;
 
         return true;
     }
@@ -528,6 +548,37 @@ internal sealed partial class MainForm : Form
     private void OnSettingsToolStripMenuItemClick(object sender, EventArgs e)
     {
         _factory.AutoRegister(() => new SettingsForm());
+    }
+
+    private async void OnCombinePdfDocumentsToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        if (!TryGetOpenPaths(FilterIndex.Pdf, out string[]? inputPaths))
+        {
+            return;
+        }
+
+        await AbortRetryIgnoreAsync(async () =>
+        {
+            using (PdfDocument document = new PdfDocument())
+            {
+                foreach (string inputPath in inputPaths)
+                {
+                    PdfDocument inputPdfDocument = PdfReader.Open(inputPath, PdfDocumentOpenMode.Import);
+
+                    document.Version = Math.Max(document.Version, inputPdfDocument.Version);
+
+                    foreach (PdfPage page in inputPdfDocument.Pages)
+                    {
+                        document.AddPage(page);
+                    }
+                }
+
+                if (TryGetSavePath(FilterIndex.Pdf, out string? outputPath))
+                {
+                    document.Save(outputPath);
+                }
+            }
+        });
     }
 
     private async void OnImportAccountsToolStripMenuItemClick(object sender, EventArgs e)

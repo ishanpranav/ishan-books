@@ -15,6 +15,7 @@ internal enum FilterIndex
     Json = 5,
     Sqlite = 6,
     Csv = 7,
-    Iif = 8,
-    Xml = 9
+    Pdf = 8,
+    Iif = 9,
+    Xml = 10
 }
