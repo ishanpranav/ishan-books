@@ -375,7 +375,7 @@ public class XslReport : IntervalView, IStandardValuesProvider, IXmlSerializable
         writer.WriteElementString("debit", XmlConvert.ToString(debit));
         writer.WriteElementString("credit", XmlConvert.ToString(credit));
         writer.WriteElementString("cash-flow", key.CashFlow.ToString());
-        writer.WriteElementString("tax-type", key.TaxType.ToString());
+        writer.WriteElementString("tax-type", XmlConvert.ToString(key.TaxType));
         writer.WriteEndElement();
     }
 
