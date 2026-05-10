@@ -11,6 +11,7 @@ internal interface IReportView
     string GenericTitle { get; }
     string Title { get; }
     object Properties { get; }
+    int SortOrder { get; }
 
     void InitializeReport();
     void RefreshReport();

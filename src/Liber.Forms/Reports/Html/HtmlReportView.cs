@@ -43,6 +43,14 @@ internal sealed class HtmlReportView : IReportView
         }
     }
 
+    public int SortOrder
+    {
+        get
+        {
+            return 2;
+        }
+    }
+
     public void InitializeReport() { }
     public void RefreshReport() { }
 

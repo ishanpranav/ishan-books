@@ -27,7 +27,9 @@ internal sealed partial class ReportsForm : Form
         InitializeComponent();
         SystemFeatures.Initialize(this);
 
-        foreach (KeyValuePair<string, IReportView> view in engine.Views)
+        foreach (KeyValuePair<string, IReportView> view in engine.Views
+            .OrderBy(x => x.Value.SortOrder)
+            .ThenBy(x => x.Value.GenericTitle))
         {
             ListViewItem item = _listView.Items.Add(view.Key, view.Value.GenericTitle, imageIndex: 0);
 

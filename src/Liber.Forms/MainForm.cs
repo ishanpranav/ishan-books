@@ -131,6 +131,9 @@ internal sealed partial class MainForm : Form
             reportsToolStripMenuItem1.Visible = false;
         }
 
+        Dictionary<string, ToolStripMenuItem> groups = new Dictionary<string, ToolStripMenuItem>();
+        Dictionary<string, List<(string Name, string GenericTitle)>> pending = new Dictionary<string, List<(string, string)>>();
+
         foreach (KeyValuePair<string, IReportView> view in _engine.Views)
         {
             if (view.Value is not XslReportView)
@@ -138,24 +141,75 @@ internal sealed partial class MainForm : Form
                 continue;
             }
 
-            ToolStripItem item = reportsToolStripMenuItem1.DropDownItems.Add(view.Value.GenericTitle);
+            string genericTitle = view.Value.GenericTitle;
+            string baseTitle;
+            int open = genericTitle.IndexOf('(');
+            int close = genericTitle.LastIndexOf(')');
 
-            item.Click += (sender, e) =>
+            if (open >= 0 && close > open)
             {
-                Guid key = Guid.NewGuid();
-                ReportsForm form = new ReportsForm(_engine);
+                baseTitle = genericTitle.Substring(0, open).TrimEnd();
+            }
+            else
+            {
+                baseTitle = genericTitle;
+            }
 
-                form.Load += (sender, e) =>
+            if (!pending.TryGetValue(baseTitle, out List<(string, string)>? items))
+            {
+                items = new List<(string, string)>();
+                pending[baseTitle] = items;
+            }
+
+            items.Add((view.Key, genericTitle));
+        }
+
+        foreach (KeyValuePair<string, List<(string Name, string GenericTitle)>> group in pending)
+        {
+            if (group.Value.Count == 1)
+            {
+                ToolStripMenuItem item = new ToolStripMenuItem(group.Value[0].GenericTitle)
                 {
-                    form.InitializeReport(view.Key);
+                    Tag = group.Value[0].Name
                 };
 
-                _factory.Kill(key);
-                _factory.Register(key, form);
-            };
+                item.Click += OnReportToolStripMenuItemClick;
+                reportsToolStripMenuItem1.DropDownItems.Add(item);
+            }
+            else
+            {
+                ToolStripMenuItem parent = new ToolStripMenuItem(group.Key);
+
+                reportsToolStripMenuItem1.DropDownItems.Add(parent);
+
+                foreach ((string key, string fullTitle) in group.Value.OrderBy(x => x.GenericTitle))
+                {
+                    ToolStripMenuItem child = new ToolStripMenuItem(fullTitle)
+                    {
+                        Tag = key
+                    };
+
+                    child.Click += OnReportToolStripMenuItemClick;
+                    parent.DropDownItems.Add(child);
+                }
+            }
         }
     }
 
+    private void OnReportToolStripMenuItemClick(object? sender, EventArgs e)
+    {
+        string name = ((ToolStripMenuItem)sender!).Tag!.ToString()!;
+        Guid key = Guid.NewGuid();
+        ReportsForm form = new ReportsForm(_engine!);
+
+        form.Load += (sender, e) =>
+        {
+            form.InitializeReport(name);
+        };
+
+        _factory.Kill(key);
+        _factory.Register(key, form);
+    }
     private async void OnFormClosing(object sender, FormClosingEventArgs e)
     {
         e.Cancel = await TryCancelAsync();

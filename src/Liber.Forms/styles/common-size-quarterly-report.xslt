@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+common-size-quarterly-report.xslt
+Copyright (c) 2023-2026 Ishan Pranav. All rights reserved.
+Licensed under the MIT License.
+-->
+<xsl:stylesheet
+    version="1.0"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:msxsl="urn:schemas-microsoft-com:xslt"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:liber="urn:liber"
+    exclude-result-prefixes="msxsl">
+    <xsl:import href="base/income-statement.xslt"/>
+    <xsl:import href="base/comprehensive-income-statement.xslt"/>
+    <xsl:import href="base/comparative-balance-sheet.xslt"/>
+    <xsl:import href="base/cash-flow-statement.xslt"/>
+    <xsl:import href="base/equity-statement.xslt"/>
+    <xsl:import href="base/tax-reconciliation.xslt"/>
+    <xsl:template match="/report">
+        <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+            <head>
+                <meta charset="utf-8"/>i
+                <title>
+                    <xsl:value-of select="title"/>
+                </title>
+                <link rel="stylesheet" type="text/css" href="https://liber.example/styles/financial-statement.css"/>
+            </head>
+            <body>
+                <xsl:call-template name="income-statement">
+                    <xsl:with-param name="title" select="liber:gettitle('income-statement', company/type)"/>
+                    <xsl:with-param name="commonSize" select="1"/>
+                    <xsl:with-param name="absoluteSize" select="0"/>
+                </xsl:call-template>
+                <xsl:call-template name="comparative-balance-sheet">
+                    <xsl:with-param name="title" select="liber:gettitle('comparative-balance-sheet', company/type)"/>
+                    <xsl:with-param name="commonSize" select="1"/>
+                    <xsl:with-param name="absoluteSize" select="0"/>
+                </xsl:call-template>
+            </body>
+        </html>
+    </xsl:template>
+    <xsl:output method="html" indent="yes"/>
+</xsl:stylesheet>

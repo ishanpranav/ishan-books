@@ -38,6 +38,14 @@ internal sealed class GdiReportView : IReportView
         }
     }
 
+    public int SortOrder
+    {
+        get
+        {
+            return 3;
+        }
+    }
+
     public GdiReportView(GdiReport report)
     {
         _report = report;
