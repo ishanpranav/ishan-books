@@ -409,7 +409,7 @@
     <value>Cash Flow Statement</value>
   </data>
   <data name="_r_comparative-balance-sheet" xml:space="preserve">
-    <value>Comparative Balance Sheet</value>
+    <value>Balance Sheet (Comparative)</value>
   </data>
   <data name="_r_comprehensive-income-statement" xml:space="preserve">
     <value>Comprehensive Income Statement</value>
@@ -596,5 +596,32 @@
   </data>
   <data name="tax-adjustment" xml:space="preserve">
     <value>Other adjustments to income and expenses</value>
+  </data>
+  <data name="_r_common-size-balance-sheet" xml:space="preserve">
+    <value>Balance Sheet (Common Size)</value>
+  </data>
+  <data name="_r_1_common-size-balance-sheet" xml:space="preserve">
+    <value>Common-Size Balance Sheet</value>
+  </data>
+  <data name="_r_common-size-income-statement" xml:space="preserve">
+    <value>Income Statement (Common Size)</value>
+  </data>
+  <data name="_r_1_common-size-income-statement" xml:space="preserve">
+    <value>Common-Size Income Statement</value>
+  </data>
+  <data name="_r_1_common-size-quarterly-report" xml:space="preserve">
+    <value>Common-Size Quarterly Report</value>
+  </data>
+  <data name="_r_common-size-quarterly-report" xml:space="preserve">
+    <value>Quarterly Report (Common Size)</value>
+  </data>
+  <data name="_r_1_comparative-balance-sheet" xml:space="preserve">
+    <value>Comparative Balance Sheet</value>
+  </data>
+  <data name="_r_common-size-comparative-balance-sheet" xml:space="preserve">
+    <value>Balance Sheet (Common Size, Comparative)</value>
+  </data>
+  <data name="_r_1_common-size-comparative-balance-sheet" xml:space="preserve">
+    <value>Common-Size Comparative Balance Sheet</value>
   </data>
 </root>

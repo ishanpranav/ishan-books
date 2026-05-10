@@ -51,6 +51,14 @@ internal sealed class XslReportView : IReportView
         }
     }
 
+    public int SortOrder
+    {
+        get
+        {
+            return 1;
+        }
+    }
+
     public void InitializeReport()
     {
         if (s_reports != null && s_reports.TryGetValue(Path.GetFileNameWithoutExtension(_path), out ReportTypes value))

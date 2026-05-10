@@ -94,6 +94,18 @@
 	  <Content Include="scripts\time-series.js">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
+	  <Content Include="styles\common-size-quarterly-report.xslt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="styles\common-size-comparative-balance-sheet.xslt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="styles\common-size-income-statement.xslt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="styles\common-size-balance-sheet.xslt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
 	  <Content Include="styles\quarterly-report.xslt">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>

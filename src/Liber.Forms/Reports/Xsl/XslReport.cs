@@ -138,21 +138,44 @@ public class XslReport : IntervalView, IStandardValuesProvider, IXmlSerializable
     [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "<Pending>")]
     public string fm(string type, decimal balance)
     {
-        if (!string.IsNullOrEmpty(Redaction))
-        {
-            return Redaction;
-        }
-
-        return Enum
+        return fm(Enum
             .Parse<AccountType>(type)
-            .ToBalance(balance)
-            .ToLocalizedString(Multiple);
+            .ToBalance(balance));
     }
 
     [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "<Pending>")]
     public string fp(double percentage)
     {
-        return percentage.ToString(" #,##0.00%;(#,##0.00%);   -  ");
+        if (!string.IsNullOrEmpty(Redaction))
+        {
+            return Redaction;
+        }
+
+        double rounded = double.Round(percentage, digits: 3, MidpointRounding.ToEven);
+
+        if (rounded == 0)
+        {
+            return rounded.ToString(" #,##0.0%;(#,##0.0%)");
+        }
+
+        return rounded.ToString(" #,##0.0%;(#,##0.0%);   -  ");
+    }
+
+    public string fp(string type, decimal balance, decimal denominator)
+    {
+        if (denominator == 0)
+        {
+            if (!string.IsNullOrEmpty(Redaction))
+            {
+                return Redaction;
+            }
+
+            return "   -  ";
+        }
+
+        return fp((double)(Enum
+            .Parse<AccountType>(type)
+            .ToBalance(balance) / denominator));
     }
 
     [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "<Pending>")]
@@ -263,7 +286,7 @@ public class XslReport : IntervalView, IStandardValuesProvider, IXmlSerializable
     public TypeConverter.StandardValuesCollection GetStandardValues()
     {
         SortedSet<string> results = new SortedSet<string>(FormattedStrings
-            .GetStringsBySuffix("_" + Name));
+            .GetStringsBySuffix(Name));
 
         return new TypeConverter.StandardValuesCollection(results);
     }

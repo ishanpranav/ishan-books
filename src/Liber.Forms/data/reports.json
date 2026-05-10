@@ -1,7 +1,9 @@
 ﻿{
     "trial-balance": "CurrentStarted",
     "balance-sheet": "CurrentPosted",
+    "common-size-balance-sheet": "CurrentPosted",
     "comparative-balance-sheet": "CurrentPosted",
+    "common-size-comparative-balance-sheet": "CurrentPosted",
     "equity-statement": "CurrentPosted",
     "cash-flow-statement": "CurrentPosted",
     "account-summary": "CurrentStarted",
