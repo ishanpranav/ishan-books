@@ -27,6 +27,19 @@ Licensed under the MIT License.
                 <link rel="stylesheet" type="text/css" href="https://liber.example/styles/financial-statement.css"/>
             </head>
             <body>
+                <div class="cover">
+                    <div class="cover-content">
+                        <p>
+                            <xsl:value-of select="company/name"/>
+                        </p>
+                        <p>
+                            <xsl:value-of select="title"/>
+                        </p>
+                        <p>
+                            <xsl:value-of select="liber:ftspanl(started, posted)"/>
+                        </p>
+                    </div>
+                </div>
                 <xsl:call-template name="income-statement">
                     <xsl:with-param name="title" select="liber:gettitle('income-statement', company/type)"/>
                 </xsl:call-template>
