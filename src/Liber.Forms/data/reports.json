@@ -1,12 +1,13 @@
 ﻿{
-    "trial-balance": "CurrentStarted",
-    "balance-sheet": "CurrentPosted",
-    "common-size-balance-sheet": "CurrentPosted",
-    "comparative-balance-sheet": "CurrentPosted",
-    "common-size-comparative-balance-sheet": "CurrentPosted",
-    "equity-statement": "CurrentPosted",
-    "cash-flow-statement": "CurrentPosted",
     "account-summary": "CurrentStarted",
     "annual-report": "CurrentPosted",
-    "average-daily-balance": "CurrentStarted"
+    "average-daily-balance": "CurrentStarted",
+    "balance-sheet": "CurrentPosted",
+    "cash-flow-statement": "CurrentPosted",
+    "common-size-balance-sheet": "CurrentPosted",
+    "common-size-comparative-balance-sheet": "CurrentPosted",
+    "comparative-balance-sheet": "CurrentPosted",
+    "equity-statement": "CurrentPosted",
+    "quarterly-report": "CurrentPosted",
+    "trial-balance": "CurrentStarted"
 }
