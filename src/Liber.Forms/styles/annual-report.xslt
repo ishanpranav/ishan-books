@@ -20,13 +20,26 @@ Licensed under the MIT License.
     <xsl:template match="/report">
         <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
             <head>
-                <meta charset="utf-8"/>i
+                <meta charset="utf-8"/>
                 <title>
                     <xsl:value-of select="title"/>
                 </title>
                 <link rel="stylesheet" type="text/css" href="https://liber.example/styles/financial-statement.css"/>
             </head>
             <body>
+                <div class="cover">
+                    <div class="cover-content">
+                        <p>
+                            <xsl:value-of select="company/name"/>
+                        </p>
+                        <p>
+                            <xsl:value-of select="title"/>
+                        </p>
+                        <p>
+                            <xsl:value-of select="liber:ftspanl(started, posted)"/>
+                        </p>
+                    </div>
+                </div>
                 <xsl:call-template name="income-statement">
                     <xsl:with-param name="title" select="liber:gettitle('income-statement', company/type)"/>
                 </xsl:call-template>
