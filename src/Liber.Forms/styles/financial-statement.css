@@ -4,6 +4,12 @@ Copyright (c) 2023-2026 Ishan Pranav. All rights reserved.
 Licensed under the MIT License.
 */
 
+@media {
+    .cover {
+        height: 100vh;
+    }
+}
+
 body {
     font-family: "Segoe UI", Arial;
     font-size: 10pt;
@@ -25,6 +31,28 @@ th, td {
     box-sizing: border-box;
     padding-left: 10px;
     padding-right: 10px;
+}
+
+thead {
+    display: table-header-group;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #ccedff;
+}
+
+    tbody tr:nth-child(odd) td,
+    tbody tr:nth-child(odd) th {
+        border-right: 1ch solid #ccedff;
+    }
+
+tbody tr:nth-child(odd) {
+    background-color: #ccedff;
+}
+
+tbody tr:nth-child(even) td,
+tbody tr:nth-child(even) th {
+    border-right: 1ch solid transparent;
 }
 
 .account {
@@ -81,7 +109,24 @@ th, td {
     white-space: pre;
 }
 
-.in-0 {}
+.cover {
+    align-items: center;
+    break-after: avoid;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    text-align: center;
+}
+
+.cover-content {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    gap: 16px;
+}
+
+.in-0 {
+}
 
 .in-1 {
     padding-left: 3ch;
@@ -111,22 +156,4 @@ th, td {
     text-align: center;
     top: 0;
     width: 100%;
-}
-
-tbody tr:nth-child(odd) {
-    background-color: #ccedff;
-}
-
-    tbody tr:nth-child(odd) td,
-    tbody tr:nth-child(odd) th {
-        border-right: 1ch solid #ccedff;
-    }
-
-tbody tr:nth-child(odd) {
-    background-color: #ccedff;
-}
-
-tbody tr:nth-child(even) td,
-tbody tr:nth-child(even) th {
-    border-right: 1ch solid transparent;
 }

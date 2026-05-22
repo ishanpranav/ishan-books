@@ -80,7 +80,7 @@ namespace Liber.Forms.Properties {
     ""strict"": true
   },
   {
-    ""filter"": ""^[46][89]"",
+    ""filter"": ""^6"",
     ""type"": ""otherIncomeExpense"",
     ""strict"": true
   },

@@ -608,40 +608,61 @@ internal sealed partial class MainForm : Form
 
     private async void OnCombinePdfDocumentsToolStripMenuItemClick(object sender, EventArgs e)
     {
-        if (!TryGetOpenPaths(FilterIndex.Pdf, out string[]? inputPaths))
+        if (!TryGetOpenPaths(FilterIndex.Pdf, out string[]? inputPaths) ||
+            !TryGetSavePath(FilterIndex.Pdf, out string? outputPath))
         {
             return;
         }
 
+        SavingForm form = new SavingForm();
+
+        form.Show();
+
         await AbortRetryIgnoreAsync(async () =>
         {
-            using (PdfDocument document = new PdfDocument())
+            using PdfDocument document = new PdfDocument();
+
+            PdfOutlineCollection outline = document.Outlines;
+            int i = 0;
+
+            foreach (string inputPath in inputPaths)
             {
-                foreach (string inputPath in inputPaths)
+                using PdfDocument inputPdfDocument = PdfReader.Open(inputPath, PdfDocumentOpenMode.Import);
+
+                form.MaxProgress += inputPdfDocument.PageCount;
+                document.Version = Math.Max(document.Version, inputPdfDocument.Version);
+
+                int j = i;
+
+                foreach (PdfPage page in inputPdfDocument.Pages)
                 {
-                    PdfDocument inputPdfDocument = PdfReader.Open(inputPath, PdfDocumentOpenMode.Import);
+                    document.AddPage(page);
 
-                    document.Version = Math.Max(document.Version, inputPdfDocument.Version);
-
-                    foreach (PdfPage page in inputPdfDocument.Pages)
-                    {
-                        document.AddPage(page);
-                    }
+                    i++;
+                    form.Progress++;
                 }
 
-                if (!TryGetSavePath(FilterIndex.Pdf, out string? outputPath))
+                string chapterTitle = Path.GetFileNameWithoutExtension(inputPath);
+                const string delimiter = " - ";
+                int index = chapterTitle.IndexOf(delimiter);
+
+                if (index >= 0)
                 {
-                    return;
+                    chapterTitle = chapterTitle.Substring(index + delimiter.Length);  
                 }
 
-                document.Save(outputPath);
-                Process.Start(new ProcessStartInfo()
-                {
-                    FileName = outputPath,
-                    UseShellExecute = true
-                });
+                outline.Add(chapterTitle, document.Pages[j], opened: true);
             }
+
+            document.Save(outputPath);
+            Process.Start(new ProcessStartInfo()
+            {
+                FileName = outputPath,
+                UseShellExecute = true
+            });
         });
+
+        form.Close();
     }
 
     private async void OnImportAccountsToolStripMenuItemClick(object sender, EventArgs e)
