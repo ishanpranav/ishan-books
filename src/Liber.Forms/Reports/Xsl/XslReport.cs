@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
@@ -233,6 +234,15 @@ public class XslReport : IntervalView, IStandardValuesProvider, IXmlSerializable
             DateTime month = new DateTime(started.Year, started.Month, 1);
 
             return month.ToString("MMMM yyyy");
+        }
+
+        if (started.Day == 1 && posted.Day == 1)
+        {
+            int months = ((posted.Year - started.Year) * 12) + posted.Month - started.Month;
+
+            return TimeSpan
+                .FromDays(months * 32)
+                .Humanize(precision: 2, countEmptyUnits: true, maxUnit: TimeUnit.Year);
         }
 
         return (posted - started.Date).Humanize(precision: 2, countEmptyUnits: true, maxUnit: TimeUnit.Year);
