@@ -12,7 +12,7 @@ namespace Liber.Forms.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "18.5.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "18.6.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -125,7 +125,13 @@ namespace Liber.Forms.Properties {
     ""strict"": true
   },
   {
-    ""filter"": ""Charles Schwab Individual (Short[-\\s]Term|Long[-\\s]Term)"",
+    ""filter"": ""Charles Schwab Individual Short[-\\s]Term"",
+    ""cashFlow"": ""investing"",
+    ""strict"": true
+  },
+  {
+    ""filter"": ""Charles Schwab Individual Long[-\\s]Term"",
+    ""type"": ""otherAsset"",
     ""cashFlow"": ""investing"",
     ""strict"": true
   }
