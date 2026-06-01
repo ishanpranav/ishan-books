@@ -222,7 +222,14 @@ public class XslReport : IntervalView, IStandardValuesProvider, IXmlSerializable
     [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "<Pending>")]
     public string ftspans(DateTime started, DateTime posted)
     {
+        DateTime effectiveEnd = posted;
+
         posted = posted.Date.AddDays(1);
+
+        if (effectiveEnd.Day != 1)
+        {
+            effectiveEnd = posted;
+        }
 
         if (posted == started.Date.AddYears(1))
         {
@@ -236,9 +243,9 @@ public class XslReport : IntervalView, IStandardValuesProvider, IXmlSerializable
             return month.ToString("MMMM yyyy");
         }
 
-        if (started.Day == 1 && posted.Day == 1)
+        if (started.Day == 1 && effectiveEnd.Day == 1)
         {
-            int months = ((posted.Year - started.Year) * 12) + posted.Month - started.Month;
+            int months = ((effectiveEnd.Year - started.Year) * 12) + effectiveEnd.Month - started.Month;
 
             return TimeSpan
                 .FromDays(months * 32)
