@@ -156,10 +156,18 @@ public class XslReport : IntervalView, IStandardValuesProvider, IXmlSerializable
 
         if (rounded == 0)
         {
-            return rounded.ToString(" #,##0.0%;(#,##0.0%)");
+            if (percentage > 0)
+            {
+                return " 0.0% ";
+            }
+
+            if (percentage < 0)
+            {
+                return "(0.0%)";
+            }
         }
 
-        return rounded.ToString(" #,##0.0%;(#,##0.0%);   -  ");
+        return rounded.ToString(" #,##0.0% ;(#,##0.0%);   -  ");
     }
 
     public string fp(string type, decimal balance, decimal denominator)

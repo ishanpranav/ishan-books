@@ -6,6 +6,7 @@
     "cash-flow-statement": "CurrentPosted",
     "common-size-balance-sheet": "CurrentPosted",
     "common-size-comparative-balance-sheet": "CurrentPosted",
+    "common-size-quarterly-report": "CurrentPosted",
     "comparative-balance-sheet": "CurrentPosted",
     "equity-statement": "CurrentPosted",
     "quarterly-report": "CurrentPosted",
