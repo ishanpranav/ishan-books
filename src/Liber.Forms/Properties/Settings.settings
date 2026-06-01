@@ -67,7 +67,13 @@
     "strict": true
   },
   {
-    "filter": "Charles Schwab Individual (Short[-\\s]Term|Long[-\\s]Term)",
+    "filter": "Charles Schwab Individual Short[-\\s]Term",
+    "cashFlow": "investing",
+    "strict": true
+  },
+  {
+    "filter": "Charles Schwab Individual Long[-\\s]Term",
+    "type": "otherAsset",
     "cashFlow": "investing",
     "strict": true
   }

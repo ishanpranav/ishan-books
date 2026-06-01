@@ -78,7 +78,9 @@
 	  <Content Include="data\reports.json">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
-	  <Content Include="favicon.ico" />
+	  <Content Include="favicon.ico">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
 	  <Content Include="pages\analysis.html">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
