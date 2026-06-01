@@ -52,20 +52,20 @@ Licensed under the MIT License.
                 </xsl:if>
                 <tr class="overline">
                     <th/>
-                    <xsl:if test="$absoluteSize = 1">
+                    <xsl:if test="$absoluteSize = 1 or $commonSize = 1">
                         <th class="heading">
                             <xsl:value-of select="liber:fdates(posted)"/>
                         </th>
                     </xsl:if>
-                    <xsl:if test="$commonSize = 1">
+                    <xsl:if test="$absoluteSize = 1 and $commonSize = 1">
                         <th class="heading">%</th>
                     </xsl:if>
-                    <xsl:if test="$absoluteSize = 1">
+                    <xsl:if test="$absoluteSize = 1 or $commonSize = 1">
                         <th class="heading">
                             <xsl:value-of select="liber:fdates(started)"/>
                         </th>
                     </xsl:if>
-                    <xsl:if test="$commonSize = 1">
+                    <xsl:if test="$absoluteSize = 1 and $commonSize = 1">
                         <th class="heading">%</th>
                     </xsl:if>
                 </tr>
