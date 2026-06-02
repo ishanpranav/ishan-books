@@ -41,7 +41,18 @@ partial class AccountsDialog
         nameColumn = new System.Windows.Forms.ColumnHeader();
         numberColumn = new System.Windows.Forms.ColumnHeader();
         _accountListView = new AccountListView();
+        _comboBox = new System.Windows.Forms.ComboBox();
         SuspendLayout();
+        //
+        // _comboBox
+        //
+        resources.ApplyResources(_comboBox, "_comboBox");
+        _comboBox.Name = "_comboBox";
+        _comboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+        _comboBox.FormattingEnabled = true;
+        _comboBox.DropDownWidth = 250;
+        _comboBox.Format += OnComboBoxFormat;
+        _comboBox.SelectedIndexChanged += OnComboBoxSelectedIndexChanged;
         // 
         // acceptButton
         // 
@@ -105,6 +116,7 @@ partial class AccountsDialog
         resources.ApplyResources(this, "$this");
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         CancelButton = cancelButton;
+        Controls.Add(_comboBox);
         Controls.Add(_accountListView);
         Controls.Add(toggleAllButton);
         Controls.Add(deselectAllButton);
@@ -124,4 +136,5 @@ partial class AccountsDialog
     private System.Windows.Forms.ColumnHeader nameColumn;
     private System.Windows.Forms.ColumnHeader numberColumn;
     private AccountListView _accountListView;
+    private System.Windows.Forms.ComboBox _comboBox;
 }

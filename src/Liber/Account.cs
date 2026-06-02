@@ -83,7 +83,7 @@ public class Account
     [Name("Type")]
     [Optional]
     [CsvHelper.Configuration.Attributes.TypeConverter(typeof(GnuCashAccountTypeConverter))]
-    [System.ComponentModel.TypeConverter(typeof(LocalizedEnumConverter))]
+    [System.ComponentModel.TypeConverter(typeof(LocalizedEnumConverter<AccountType>))]
     public AccountType Type { get; set; }
 
     /// <summary>
@@ -150,7 +150,7 @@ public class Account
     [Ignore]
     [Key(10)]
     [LocalizedDisplayName(nameof(CashFlow))]
-    [System.ComponentModel.TypeConverter(typeof(LocalizedEnumConverter))]
+    [System.ComponentModel.TypeConverter(typeof(LocalizedEnumConverter<CashFlow>))]
     public CashFlow CashFlow { get; set; }
 
     [BooleanFalseValues("F")]

@@ -11,18 +11,13 @@ namespace System.ComponentModel;
 /// <summary>
 /// Provides a type converter to convert localized enumeration values to and from strings.
 /// </summary>
-public class LocalizedEnumConverter : EnumConverter
+public class LocalizedEnumConverter<TEnum> : EnumConverter where TEnum : struct, Enum
 {
-    private readonly Type _type;
-
     /// <summary>
     /// Initializes a new instance of the <see cref="LocalizedEnumConverter"/> class.
     /// </summary>
     /// <param name="type">The type of the enumeration to convert.</param>
-    public LocalizedEnumConverter(Type type) : base(type)
-    {
-        _type = type;
-    }
+    public LocalizedEnumConverter() : base(typeof(TEnum)) { }
 
     /// <inheritdoc/>
     public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
@@ -35,22 +30,22 @@ public class LocalizedEnumConverter : EnumConverter
     {
         if (value is not string text)
         {
-            return Activator.CreateInstance(_type);
+            return Activator.CreateInstance<TEnum>();
         }
 
-        object? result = text.DehumanizeTo(_type, OnNoMatch.ReturnsNull);
+        TEnum? result = text.DehumanizeTo<TEnum>(OnNoMatch.ReturnsNull);
 
         if (result != null)
         {
             return result;
         }
 
-        if (Enum.TryParse(_type, text, ignoreCase: true, out result))
+        if (Enum.TryParse(text, ignoreCase: true, out TEnum parsed))
         {
-            return result;
+            return parsed;
         }
 
-        return Activator.CreateInstance(_type);
+        return Activator.CreateInstance<TEnum>();
     }
 
     /// <inheritdoc/>
@@ -62,7 +57,7 @@ public class LocalizedEnumConverter : EnumConverter
     /// <inheritdoc/>
     public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
     {
-        if (value is not Enum enumValue)
+        if (value is not TEnum enumValue)
         {
             return null;
         }

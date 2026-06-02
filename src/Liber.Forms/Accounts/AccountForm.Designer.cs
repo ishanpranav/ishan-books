@@ -186,7 +186,7 @@
             _helpProvider.SetHelpString(cashFlowComboBox, resources.GetString("cashFlowComboBox.HelpString"));
             cashFlowComboBox.Name = "cashFlowComboBox";
             _helpProvider.SetShowHelp(cashFlowComboBox, (bool)resources.GetObject("cashFlowComboBox.ShowHelp"));
-            cashFlowComboBox.Format += OnComboBoxFormat;
+            cashFlowComboBox.Format += OnCashFlowComboBoxFormat;
             // 
             // label9
             // 
@@ -203,7 +203,7 @@
             typeComboBox.Name = "typeComboBox";
             _helpProvider.SetShowHelp(typeComboBox, (bool)resources.GetObject("typeComboBox.ShowHelp"));
             typeComboBox.SelectedIndexChanged += OnTypeComboBoxSelectedIndexChanged;
-            typeComboBox.Format += OnComboBoxFormat;
+            typeComboBox.Format += OnTypeComboBoxFormat;
             // 
             // taxTypeCheckBox
             // 

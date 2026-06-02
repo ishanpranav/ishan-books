@@ -84,9 +84,14 @@ internal abstract partial class AccountForm : Form
         account.CashFlow = CashFlow;
     }
 
-    private void OnComboBoxFormat(object sender, ListControlConvertEventArgs e)
+    private void OnTypeComboBoxFormat(object sender, ListControlConvertEventArgs e)
     {
-        e.Value = ((Enum)e.ListItem!).Humanize();
+        e.Value = ((AccountType)e.ListItem!).Humanize();
+    }
+
+    private void OnCashFlowComboBoxFormat(object sender, ListControlConvertEventArgs e)
+    {
+        e.Value = ((CashFlow)e.ListItem!).Humanize();
     }
 
     private void OnTypeComboBoxSelectedIndexChanged(object sender, EventArgs e)

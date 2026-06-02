@@ -4,6 +4,7 @@
 
 using System;
 using System.ComponentModel;
+using System.Linq;
 using CsvHelper.Configuration.Attributes;
 
 namespace Liber;
@@ -120,9 +121,14 @@ public static class AccountTypeExtensions
     {
         AccountType[] types = Enum.GetValues<AccountType>();
 
-        Array.Sort(types, (x, y) => Math.Abs((short)x) - Math.Abs((short)y));
+        Array.Sort(types, (x, y) => x.ToInt32() - y.ToInt32());
 
         return types;
+    }
+
+    public static int ToInt32(this AccountType value)
+    {
+        return int.Abs((short)value);
     }
 
     public static bool IsAsset(this AccountType value)

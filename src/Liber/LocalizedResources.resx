@@ -390,4 +390,28 @@
   <data name="_d_NonCash" xml:space="preserve">
     <value>Non-Cash Items</value>
   </data>
+  <data name="_d_All" xml:space="preserve">
+    <value>(All)</value>
+  </data>
+  <data name="_d_Permanent" xml:space="preserve">
+    <value>Balance sheet accounts</value>
+  </data>
+  <data name="_d_Temporary" xml:space="preserve">
+    <value>Income statement accounts</value>
+  </data>
+  <data name="_d_Liabilities" xml:space="preserve">
+    <value>All liabilities</value>
+  </data>
+  <data name="_d_CurrentAssets" xml:space="preserve">
+    <value>All current assets</value>
+  </data>
+  <data name="_d_Assets" xml:space="preserve">
+    <value>All assets</value>
+  </data>
+  <data name="_d_CurrentLiabilities" xml:space="preserve">
+    <value>All current liabilities</value>
+  </data>
+  <data name="_d_NonCurrentAssets" xml:space="preserve">
+    <value>All non-current assets</value>
+  </data>
 </root>

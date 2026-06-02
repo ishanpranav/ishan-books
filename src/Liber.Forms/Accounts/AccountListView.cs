@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Humanizer;
-using Liber.Forms.Properties;
 
 namespace Liber.Forms.Accounts;
 
@@ -17,9 +16,14 @@ internal sealed class AccountListView : ListViewEx
         View = View.Details;
         FullRowSelect = true;
 
-        ColumnHeader nameColumn = Columns.Add(Resources.Name);
+        if (DesignMode)
+        {
+            return;
+        }
 
-        Columns.Add(Resources.Number);
+        ColumnHeader nameColumn = Columns.Add(Properties.Resources.Name);
+
+        Columns.Add(Properties.Resources.Number);
 
         nameColumn.DisplayIndex = 1;
 
@@ -83,7 +87,7 @@ internal sealed class AccountListView : ListViewEx
 
     public void AddNullAccount()
     {
-        ListViewItem nullAccount = Items.Add(Resources.NoAccount);
+        ListViewItem nullAccount = Items.Add(Properties.Resources.NoAccount);
 
         nullAccount.Tag = KeyValuePair.Create(Guid.Empty, default(Account));
         nullAccount.Selected = true;

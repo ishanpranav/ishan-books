@@ -7,7 +7,6 @@ using System.ComponentModel;
 using System.Drawing.Design;
 using System.Linq;
 using Humanizer;
-using Liber.Forms.Properties;
 
 namespace Liber.Forms.Accounts;
 
@@ -33,6 +32,6 @@ public class AccountsView
 
     public override string ToString()
     {
-        return Resources.Account.ToQuantity(Values.Count, "n0");
+        return Properties.Resources.Account.ToQuantity(Values.Count, "n0");
     }
 }

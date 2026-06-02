@@ -105,5 +105,17 @@ namespace Liber.Forms.Properties {
                 this["ImportRules"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int LastAccountGroup {
+            get {
+                return ((int)(this["LastAccountGroup"]));
+            }
+            set {
+                this["LastAccountGroup"] = value;
+            }
+        }
     }
 }
