@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Linq;
 using System.Text.Json.Serialization;
@@ -449,6 +450,176 @@ public sealed class Company
         }
 
         return result;
+    }
+
+    private BalanceInfo ComputeBalances(Account account, ReportTypes type, DateTime started, DateTime posted, Regex filter)
+    {
+        if (account == _accounts[EquityAccountId])
+        {
+            BalanceInfo result = new BalanceInfo()
+            {
+                Previous = GetEquity(started.AddDays(-1), filter)
+            };
+
+            if (type == ReportTypes.None || type.HasFlag(ReportTypes.CurrentPosted))
+            {
+                result.Balance = GetEquity(posted, filter);
+            }
+
+            if (type.HasFlag(ReportTypes.CurrentStarted))
+            {
+                result.Balance = GetEquity(started.AddDays(-1), filter);
+            }
+
+            return result;
+        }
+
+        if (account == _accounts[OtherEquityAccountId])
+        {
+            return new BalanceInfo()
+            {
+                Balance = account.GetBalance(posted, filter),
+                Previous = account.GetBalance(started, filter)
+            };
+        }
+
+        if (account.Type.IsTemporary())
+        {
+            return new BalanceInfo()
+            {
+                Balance = account.GetBalance(started, posted, filter)
+            };
+        }
+
+        return new BalanceInfo()
+        {
+            Balance = account.GetBalance(posted, filter),
+            Previous = account.GetBalance(started.AddDays(-1), filter),
+            AverageDailyBalance = account.GetAverageDailyBalance(started, posted, filter)
+        };
+    }
+
+    private void ComputeSubtreeBalances(
+        Account account,
+        IReadOnlySet<Account> visibleAccounts,
+        ReportTypes type,
+        DateTime started,
+        DateTime posted,
+        Regex filter,
+        Dictionary<ParentKey, BalanceInfo> results)
+    {
+        BalanceInfo balances = ComputeBalances(account, type, started, posted, filter);
+        IEnumerable<Account> visibleChildren = account.children.Where(visibleAccounts.Contains);
+
+        if (!visibleChildren.Any())
+        {
+            ParentKey key = new ParentKey(account);
+
+            if (results.TryGetValue(key, out BalanceInfo? existing))
+            {
+                existing.Balance += balances.Balance;
+                existing.Previous += balances.Previous;
+                existing.AverageDailyBalance += balances.AverageDailyBalance;
+            }
+            else
+            {
+                results[key] = balances;
+            }
+        }
+
+        foreach (Account child in visibleChildren)
+        {
+            ComputeSubtreeBalances(child, visibleAccounts, type, started, posted, filter, results);
+        }
+    }
+
+    public IEnumerable<(Account Account, BalanceInfo Balances)> GetBalances(
+        IReadOnlySet<Account> visibleAccounts,
+        ReportTypes type,
+        DateTime started,
+        DateTime posted,
+        Regex filter)
+    {
+        foreach (Account account in visibleAccounts)
+        {
+            yield return (account, ComputeBalances(account, type, started, posted, filter));
+        }
+    }
+
+    public IEnumerable<(Account Parent, ParentKey Key, BalanceInfo Balances)> GetBalancesByKey(
+        IReadOnlySet<Account> visibleAccounts,
+        ReportTypes type,
+        DateTime started,
+        DateTime posted,
+        Regex filter)
+    {
+        foreach (Account root in visibleAccounts.Where(x => x.ParentId == Guid.Empty || !visibleAccounts.Contains(_accounts[x.ParentId])))
+        {
+            Dictionary<ParentKey, BalanceInfo> results = new Dictionary<ParentKey, BalanceInfo>();
+
+            ComputeSubtreeBalances(root, visibleAccounts, type, started, posted, filter, results);
+
+            foreach (KeyValuePair<ParentKey, BalanceInfo> entry in results)
+            {
+                yield return (root, entry.Key, entry.Value);
+            }
+        }
+    }
+
+    public IEnumerable<(AccountType Type, BalanceInfo Balances)> GetBalancesByType(
+        IReadOnlySet<Account> visibleAccounts,
+        ReportTypes type,
+        DateTime started,
+        DateTime posted,
+        Regex filter)
+    {
+        foreach (IGrouping<AccountType, (Account, ParentKey, BalanceInfo)> group in GetBalancesByKey(
+                visibleAccounts,
+                type,
+                started,
+                posted,
+                filter)
+            .GroupBy(x => x.Key.Type))
+        {
+            BalanceInfo result = new BalanceInfo();
+
+            foreach ((Account _, ParentKey _, BalanceInfo balance) in group)
+            {
+                result.Balance += balance.Balance;
+                result.Previous = balance.Previous;
+                result.AverageDailyBalance += balance.AverageDailyBalance;
+            }
+
+            yield return (group.Key, result);
+        }
+    }
+
+    public IEnumerable<(Account Parent, AccountType Type, BalanceInfo Balances)> GetBalancesByParentAndType(
+        IReadOnlySet<Account> visibleAccounts,
+        ReportTypes type,
+        DateTime started,
+        DateTime posted,
+        Regex filter)
+    {
+        foreach (IGrouping<(Account Account, AccountType Type), (Account, ParentKey, BalanceInfo)> group in GetBalancesByKey(
+                visibleAccounts,
+                type,
+                started,
+                posted,
+                filter)
+            .GroupBy(x => (x.Parent, x.Key.Type)))
+        {
+            BalanceInfo result = new BalanceInfo();
+
+            foreach ((Account _, ParentKey _, BalanceInfo balance) in group)
+            {
+                result.Balance += balance.Balance;
+                result.Previous = balance.Previous;
+                result.AverageDailyBalance += balance.AverageDailyBalance;
+            }
+
+            yield return (group.Key.Account, group.Key.Type, result);
+        }
     }
 
     /// <summary>

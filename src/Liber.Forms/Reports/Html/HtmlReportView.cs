@@ -52,7 +52,11 @@ internal sealed class HtmlReportView : IReportView
     }
 
     public void InitializeReport() { }
-    public void RefreshReport() { }
+
+    public void RefreshReport()
+    {
+        _report.Refresh();
+    }
 
     public void Navigate(CoreWebView2 coreWebView2)
     {

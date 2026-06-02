@@ -66,12 +66,11 @@ partial class MainForm
         checkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
         reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-        taxesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-        toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
         otherWindowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         newAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         transactionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         reportsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+        otherReportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         _toolStrip = new System.Windows.Forms.ToolStrip();
@@ -84,6 +83,7 @@ partial class MainForm
         _saveFileDialog = new System.Windows.Forms.SaveFileDialog();
         _recentPathManager = new RecentPathManager(components);
         _factory = new FormFactory(components);
+        toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
         _menuStrip.SuspendLayout();
         _toolStrip.SuspendLayout();
         SuspendLayout();
@@ -244,7 +244,7 @@ partial class MainForm
         // 
         // viewToolStripMenuItem
         // 
-        viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { accountsToolStripMenuItem, transactionToolStripMenuItem, toolStripSeparator2, checkToolStripMenuItem, toolStripSeparator4, reportsToolStripMenuItem, taxesToolStripMenuItem, toolStripSeparator10, otherWindowsToolStripMenuItem });
+        viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { accountsToolStripMenuItem, transactionToolStripMenuItem, toolStripSeparator2, checkToolStripMenuItem, toolStripSeparator4, reportsToolStripMenuItem, toolStripSeparator9, otherWindowsToolStripMenuItem });
         viewToolStripMenuItem.Name = "viewToolStripMenuItem";
         resources.ApplyResources(viewToolStripMenuItem, "viewToolStripMenuItem");
         // 
@@ -282,16 +282,6 @@ partial class MainForm
         resources.ApplyResources(reportsToolStripMenuItem, "reportsToolStripMenuItem");
         reportsToolStripMenuItem.Click += OnReportsToolStripMenuItemClick;
         // 
-        // taxesToolStripMenuItem
-        // 
-        taxesToolStripMenuItem.Name = "taxesToolStripMenuItem";
-        resources.ApplyResources(taxesToolStripMenuItem, "taxesToolStripMenuItem");
-        // 
-        // toolStripSeparator10
-        // 
-        toolStripSeparator10.Name = "toolStripSeparator10";
-        resources.ApplyResources(toolStripSeparator10, "toolStripSeparator10");
-        // 
         // otherWindowsToolStripMenuItem
         // 
         otherWindowsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { newAccountToolStripMenuItem, transactionsToolStripMenuItem });
@@ -312,8 +302,14 @@ partial class MainForm
         // 
         // reportsToolStripMenuItem1
         // 
+        reportsToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { otherReportsToolStripMenuItem });
         reportsToolStripMenuItem1.Name = "reportsToolStripMenuItem1";
         resources.ApplyResources(reportsToolStripMenuItem1, "reportsToolStripMenuItem1");
+        // 
+        // otherReportsToolStripMenuItem
+        // 
+        otherReportsToolStripMenuItem.Name = "otherReportsToolStripMenuItem";
+        resources.ApplyResources(otherReportsToolStripMenuItem, "otherReportsToolStripMenuItem");
         // 
         // helpToolStripMenuItem
         // 
@@ -384,6 +380,11 @@ partial class MainForm
         // 
         _recentPathManager.Updated += OnRecentPathManagerUpdated;
         // 
+        // toolStripSeparator9
+        // 
+        toolStripSeparator9.Name = "toolStripSeparator9";
+        resources.ApplyResources(toolStripSeparator9, "toolStripSeparator9");
+        // 
         // MainForm
         // 
         AllowDrop = true;
@@ -443,8 +444,6 @@ partial class MainForm
     private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem exportAccountsToolStripMenuItem;
-    private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
-    private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
     private System.Windows.Forms.ToolStripMenuItem transactionToolStripMenuItem;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     private System.Windows.Forms.ToolStripMenuItem importTransactionsToolStripMenuItem;
@@ -457,7 +456,9 @@ partial class MainForm
     private System.Windows.Forms.ToolStripMenuItem exportAccountsIifToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem transactionsToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem1;
-    private System.Windows.Forms.ToolStripMenuItem taxesToolStripMenuItem;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
     private System.Windows.Forms.ToolStripMenuItem combinePdfDocumentsToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem otherReportsToolStripMenuItem;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
 }

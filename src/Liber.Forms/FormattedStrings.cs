@@ -165,4 +165,25 @@ internal static class FormattedStrings
 
         MessageBox.Show(Resources.ExceptionCaption, text, MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
+
+    public static string GetTitle(string name)
+    {
+        if (!TryGetString("_r_" + name, out string? result))
+        {
+            return name;
+        }
+
+        return result;
+    }
+
+    public static string GetTitle(string name, CompanyType type)
+    {
+        if (type == CompanyType.None ||
+            !TryGetString(string.Format("_r_{0}_{1}", type, name), out string? result))
+        {
+            return GetTitle(name);
+        }
+
+        return result;
+    }
 }

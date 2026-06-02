@@ -3,6 +3,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -16,6 +17,7 @@ using Liber.Forms.Companies;
 using Liber.Forms.Lines;
 using Liber.Forms.Properties;
 using Liber.Forms.Reports;
+using Liber.Forms.Reports.Gdi;
 using Liber.Forms.Reports.Xsl;
 using Liber.Forms.Saving;
 using Liber.Forms.Transactions;
@@ -132,15 +134,10 @@ internal sealed partial class MainForm : Form
         }
 
         Dictionary<string, ToolStripMenuItem> groups = new Dictionary<string, ToolStripMenuItem>();
-        Dictionary<string, List<(string Name, string GenericTitle)>> pending = new Dictionary<string, List<(string, string)>>();
+        Dictionary<(int SortOrder, string Key), List<(string Name, string GenericTitle)>> pending = new Dictionary<(int, string), List<(string, string)>>();
 
         foreach (KeyValuePair<string, IReportView> view in _engine.Views)
         {
-            if (view.Value is not XslReportView)
-            {
-                continue;
-            }
-
             string genericTitle = view.Value.GenericTitle;
             string baseTitle;
             int open = genericTitle.IndexOf('(');
@@ -155,32 +152,46 @@ internal sealed partial class MainForm : Form
                 baseTitle = genericTitle;
             }
 
-            if (!pending.TryGetValue(baseTitle, out List<(string, string)>? items))
+            int type = view.Value.SortOrder;
+
+            if (!pending.TryGetValue((type, baseTitle), out List<(string, string)>? items))
             {
                 items = new List<(string, string)>();
-                pending[baseTitle] = items;
+                pending[(type, baseTitle)] = items;
             }
 
             items.Add((view.Key, genericTitle));
         }
 
-        foreach (KeyValuePair<string, List<(string Name, string GenericTitle)>> group in pending)
+        List<IGrouping<int, KeyValuePair<(int, string), List<(string, string)>>>> typeGroups = pending
+            .GroupBy(x => x.Key.SortOrder)
+            .OrderBy(x => x.Key)
+            .ToList();
+
+        for (int i = 0; i < typeGroups.Count; i++)
         {
-            if (group.Value.Count == 1)
+            ToolStripMenuItem grandparent = i == 0
+                ? reportsToolStripMenuItem1
+                : otherReportsToolStripMenuItem;
+
+            foreach (KeyValuePair<(int, string Key), List<(string Name, string GenericTitle)>> group in typeGroups[i])
             {
-                ToolStripMenuItem item = new ToolStripMenuItem(group.Value[0].GenericTitle)
+                if (group.Value.Count == 1)
                 {
-                    Tag = group.Value[0].Name
-                };
+                    ToolStripMenuItem item = new ToolStripMenuItem(group.Value[0].GenericTitle)
+                    {
+                        Tag = group.Value[0].Name
+                    };
 
-                item.Click += OnReportToolStripMenuItemClick;
-                reportsToolStripMenuItem1.DropDownItems.Add(item);
-            }
-            else
-            {
-                ToolStripMenuItem parent = new ToolStripMenuItem(group.Key);
+                    item.Click += OnReportToolStripMenuItemClick;
+                    grandparent.DropDownItems.Add(item);
 
-                reportsToolStripMenuItem1.DropDownItems.Add(parent);
+                    continue;
+                }
+
+                ToolStripMenuItem parent = new ToolStripMenuItem(group.Key.Key);
+
+                grandparent.DropDownItems.Add(parent);
 
                 foreach ((string key, string fullTitle) in group.Value.OrderBy(x => x.GenericTitle))
                 {
@@ -193,7 +204,15 @@ internal sealed partial class MainForm : Form
                     parent.DropDownItems.Add(child);
                 }
             }
+
+            if (i < typeGroups.Count - 1)
+            {
+                grandparent.DropDownItems.Add(new ToolStripSeparator());
+            }
         }
+
+        reportsToolStripMenuItem1.DropDownItems.Add(reportsToolStripMenuItem1.DropDownItems[0]);
+        reportsToolStripMenuItem1.DropDownItems.RemoveAt(index: 0);
     }
 
     private void OnReportToolStripMenuItemClick(object? sender, EventArgs e)
@@ -648,7 +667,7 @@ internal sealed partial class MainForm : Form
 
                 if (index >= 0)
                 {
-                    chapterTitle = chapterTitle.Substring(index + delimiter.Length);  
+                    chapterTitle = chapterTitle.Substring(index + delimiter.Length);
                 }
 
                 outline.Add(chapterTitle, document.Pages[j], opened: true);
