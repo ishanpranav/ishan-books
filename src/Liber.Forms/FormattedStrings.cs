@@ -13,7 +13,6 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Windows.Forms;
 using Humanizer;
-using Liber.Forms.Properties;
 
 namespace Liber.Forms;
 
@@ -163,7 +162,7 @@ internal static class FormattedStrings
             text = string.Format(GetString("NotSupportedText{0}"), extension.Substring(1).ToUpper());
         }
 
-        MessageBox.Show(Resources.ExceptionCaption, text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        MessageBox.Show(Properties.Resources.ExceptionCaption, text, MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
 
     public static string GetTitle(string name)

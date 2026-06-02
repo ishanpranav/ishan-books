@@ -32,7 +32,7 @@ public abstract class IntervalView : IStandardValuesProvider
     [LocalizedCategory(nameof(Level))]
     [LocalizedDescription(nameof(Level))]
     [LocalizedDisplayName(nameof(Level))]
-    [TypeConverter(typeof(LocalizedEnumConverter))]
+    [TypeConverter(typeof(LocalizedEnumConverter<ReportLevel>))]
     public ReportLevel Level { get; set; } = ReportLevel.ByAccount;
 
     [LocalizedCategory(nameof(Accounts))]

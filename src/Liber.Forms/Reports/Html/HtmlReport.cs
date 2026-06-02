@@ -236,8 +236,12 @@ public class HtmlReport : IntervalView
     {
         List<ChartJSChartDatasetTree> nodes = new List<ChartJSChartDatasetTree>();
         HashSet<AccountType> types = new HashSet<AccountType>();
+        IEnumerable<(string Name, AccountType Type, Color Color, BalanceInfo Balances)> accounts =
+            GetBalances(partition: true);
 
-        foreach ((string name, AccountType type, Color color, BalanceInfo balances) in GetBalances(partition: true))
+        accounts = accounts.OrderBy(x => x.Type.ToInt32());
+
+        foreach ((string name, AccountType type, Color color, BalanceInfo balances) in accounts)
         {
             string parent = FormattedStrings.GetString(type.ToString());
 

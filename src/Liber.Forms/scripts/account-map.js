@@ -38,8 +38,8 @@ async function main() {
     config.options.plugins.title.text = await report.title;
 
     const tree = JSON.parse(await report.getAccountMap);
-    const colorMap = Object.fromEntries(tree.map(d => [d.name, d.backgroundColor]));
-    const labelMap = Object.fromEntries(tree.map(d => [d.name, d.displayName]));
+    const backColorMap = Object.fromEntries(tree.map(d => [d.name, d.backgroundColor]));
+    const foreColorMap = Object.fromEntries(tree.map(d => [d.name, d.color]));
     const key = 'Balance';
 
     for (const node of tree) {
@@ -55,11 +55,23 @@ async function main() {
             backgroundColor: (ctx) => {
                 const label = ctx.raw?.g ?? ctx.raw?._data?.name;
 
-                return colorMap[label] ?? '#f8f9fa';
+                return backColorMap[label] ?? '#f8f9fa';
             },
             tree: tree,
             key: key,
-            groups: ['parent', 'name']
+            groups: ['parent', 'name'],
+            labels: {
+                display: true,
+                overflow: 'hidden',
+                color: (ctx) => {
+                    const label = ctx.raw?.g ?? ctx.raw?._data?.name;
+
+                    return foreColorMap[label] ?? '#ffffff';
+                },
+                formatter: (ctx) => {
+                    return ctx.raw?.g ?? ctx.raw?._data?.name;
+                }
+            }
         }]
     };
 }

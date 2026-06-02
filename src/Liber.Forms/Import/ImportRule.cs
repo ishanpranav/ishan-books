@@ -17,11 +17,11 @@ internal sealed class ImportRule
     public Regex Filter { get; set; } = Filters.Any();
 
     [LocalizedDisplayName(nameof(Type))]
-    [TypeConverter(typeof(LocalizedEnumConverter))]
+    [TypeConverter(typeof(LocalizedEnumConverter<AccountType>))]
     public AccountType Type { get; set; }
 
     [LocalizedDisplayName(nameof(CashFlow))]
-    [TypeConverter(typeof(LocalizedEnumConverter))]
+    [TypeConverter(typeof(LocalizedEnumConverter<CashFlow>))]
     public CashFlow CashFlow { get; set; }
 
     [LocalizedDisplayName(nameof(TaxType))]

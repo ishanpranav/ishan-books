@@ -6,7 +6,7 @@ using System.ComponentModel;
 
 namespace Liber.Forms.Reports.Html;
 
-[TypeConverter(typeof(LocalizedEnumConverter))]
+[TypeConverter(typeof(LocalizedEnumConverter<Periodicity>))]
 public enum Periodicity
 {
     [LocalizedDescription(nameof(Daily))]
