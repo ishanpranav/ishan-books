@@ -10,6 +10,7 @@ using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Liber.Forms.Reports.Html;
 
@@ -17,7 +18,12 @@ namespace Liber.Forms.Reports.Html;
 [ComVisible(true)]
 public class HtmlReport : IntervalView
 {
-    public HtmlReport(string name, Company company) : base(name, company) { }
+    private static readonly JsonSerializerOptions s_options = new JsonSerializerOptions(FormattedStrings.JsonOptions);
+
+    public HtmlReport(string name, Company company) : base(name, company)
+    {
+        s_options.DefaultIgnoreCondition = JsonIgnoreCondition.Never;
+    }
 
     [LocalizedCategory(nameof(Periodicity))]
     [LocalizedDescription(nameof(Periodicity))]
@@ -89,11 +95,18 @@ public class HtmlReport : IntervalView
         }
     }
 
-    private IEnumerable<(string, AccountType, Color, BalanceInfo)> GetBalances()
+    private IEnumerable<(string, AccountType, Color, BalanceInfo)> GetBalances(bool partition = false)
     {
         switch (Level)
         {
             case ReportLevel.ByAccount:
+                if (partition)
+                {
+                    return Company
+                        .GetBalancesByTypeAndParent(Accounts.Values, ReportTypes.None, Started, Posted, Filter)
+                        .Select(x => (x.Parent.Name, x.Type, Company.GetColorOrDefault(x.Parent), x.Balances));
+                }
+
                 return Company
                     .GetBalancesByParent(Accounts.Values, ReportTypes.None, Started, Posted, Filter)
                     .Select(x => (x.Parent.Name, x.Parent.Type, Company.GetColorOrDefault(x.Parent), x.Balances));
@@ -148,16 +161,51 @@ public class HtmlReport : IntervalView
             }
         }
 
-        return JsonSerializer.Serialize(new ChartJSChartData(labels, datasets), FormattedStrings.JsonOptions);
+        return JsonSerializer.Serialize(new ChartJSChartData(labels, datasets), s_options);
     }
 
-    public string GetAnalysis()
+    // https://github.com/ishanpranav/codebook/blob/master/lib/hashes/djb2_hash.c
+    private static ulong Djb2(string value, int offset, int length)
+    {
+        ulong result = 5381;
+
+        for (int i = offset; i < offset + length; i++)
+        {
+            result = ((result << 5) + result) + value[i];
+        }
+
+        return result;
+    }
+
+    private Color GetColorOrDefault(string name, Color color, ref bool hasColor)
+    {
+        if (color == Company.Color)
+        {
+            ulong hash = Djb2(name, offset: 0, name.Length) >> 16;
+            bool tint = (hash & 0x1) == 0;
+
+            hash >>= 1;
+
+            double factor = 0.25 + (hash % 100) / 100d * 0.5;
+
+            Color backgroundColor = tint
+                ? Colors.Primary.Tint(factor)
+                : Colors.Primary.Shade(factor);
+
+            return backgroundColor;
+        }
+
+        hasColor = true;
+
+        return color;
+    }
+
+    public string GetPieChart()
     {
         List<string> labels = new List<string>();
         List<double> data = new List<double>();
         List<Color> backgroundColors = new List<Color>();
         bool hasColor = false;
-        bool tint = true;
 
         foreach ((string name, AccountType type, Color color, BalanceInfo balances) in GetBalances())
         {
@@ -168,26 +216,7 @@ public class HtmlReport : IntervalView
 
             labels.Add(name);
             data.Add((double)type.ToBalance(balances.Balance));
-
-            if (color == Company.Color)
-            {
-                if (tint)
-                {
-                    backgroundColors.Add(Colors.Primary.Tint(Random.Shared.NextDouble()));
-                }
-                else
-                {
-                    backgroundColors.Add(Colors.Primary.Shade(Random.Shared.NextDouble()));
-                }
-
-                tint = !tint;
-            }
-            else
-            {
-                hasColor = true;
-
-                backgroundColors.Add(color);
-            }
+            backgroundColors.Add(GetColorOrDefault(name, color, ref hasColor));
         }
 
         ChartJSChartDataset dataset = new ChartJSChartDataset(data);
@@ -200,6 +229,33 @@ public class HtmlReport : IntervalView
         return JsonSerializer.Serialize(new ChartJSChartData(labels, new ChartJSChartDataset[]
         {
             dataset
-        }), FormattedStrings.JsonOptions);
+        }), s_options);
+    }
+
+    public string GetAccountMap()
+    {
+        List<ChartJSChartDatasetTree> nodes = new List<ChartJSChartDatasetTree>();
+        HashSet<AccountType> types = new HashSet<AccountType>();
+
+        foreach ((string name, AccountType type, Color color, BalanceInfo balances) in GetBalances(partition: true))
+        {
+            string parent = FormattedStrings.GetString(type.ToString());
+
+            if (types.Add(type))
+            {
+                nodes.Add(new ChartJSChartDatasetTree(parent));
+            }
+
+            bool hasColor = false;
+
+            nodes.Add(new ChartJSChartDatasetTree(name)
+            {
+                Parent = parent,
+                Value = (double)type.ToBalance(balances.Balance),
+                BackgroundColor = GetColorOrDefault(name, color, ref hasColor)
+            });
+        }
+
+        return JsonSerializer.Serialize(nodes, s_options);
     }
 }

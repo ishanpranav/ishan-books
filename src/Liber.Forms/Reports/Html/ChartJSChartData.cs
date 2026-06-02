@@ -8,12 +8,12 @@ namespace Liber.Forms.Reports.Html;
 
 internal sealed class ChartJSChartData
 {
+    public IReadOnlyList<string> Labels { get; }
+    public IReadOnlyList<ChartJSChartDataset> Datasets { get; }
+
     public ChartJSChartData(IReadOnlyList<string> labels, IReadOnlyList<ChartJSChartDataset> datasets)
     {
         Labels = labels;
         Datasets = datasets;
     }
-
-    public IReadOnlyList<string> Labels { get; }
-    public IReadOnlyList<ChartJSChartDataset> Datasets { get; }
 }
