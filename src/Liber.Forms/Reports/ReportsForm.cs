@@ -36,10 +36,8 @@ internal sealed partial class ReportsForm : Form
             item.ImageIndex = _imageList.Images.Count - 1;
             item.Tag = view.Value;
 
-            if (view.Value is XslReportView)
+            if (view.Value.Properties is IntervalView report)
             {
-                XslReport report = (XslReport)view.Value.Properties;
-
                 report.Accounts = new AccountsView(report.Accounts.Company);
             }
         }

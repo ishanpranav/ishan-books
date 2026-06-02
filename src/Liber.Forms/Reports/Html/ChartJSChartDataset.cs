@@ -10,11 +10,6 @@ namespace Liber.Forms.Reports.Html;
 
 internal sealed class ChartJSChartDataset
 {
-    public ChartJSChartDataset(IReadOnlyList<double> data)
-    {
-        Data = data;
-    }
-
     public string? Label { get; set; }
     public int BorderWidth { get; set; }
     public double LineTension { get; set; }
@@ -23,4 +18,9 @@ internal sealed class ChartJSChartDataset
     [JsonConverter(typeof(ChartJSColorCollectionConverter))]
     [JsonPropertyName("backgroundColor")]
     public IEnumerable<Color>? BackgroundColors { get; set; }
+
+    public ChartJSChartDataset(IReadOnlyList<double> data)
+    {
+        Data = data;
+    }
 }

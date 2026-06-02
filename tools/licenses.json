@@ -17,232 +17,241 @@
       "url": "https://raw.githubusercontent.com/Gnucash/gnucash/stable/LICENSE"
     }
   },
-  "dependencies": [
-    {
-      "title": ".NET Runtime",
-      "formats": [ "c#", "c++", "c" ],
-      "source": "https://github.com/dotnet/runtime",
-      "author": ".NET Foundation and contributors",
-      "copyright": ".NET Foundation and Contributors",
-      "license": "mit_dotnet",
-      "notices": "https://github.com/dotnet/runtime/blob/main/THIRD-PARTY-NOTICES.TXT",
-      "index": "Microsoft Corporation"
-    },
-    {
-      "title": "TypeConverter to JsonConverter Adapter",
-      "formats": [ "c#" ],
-      "source": "https://github.com/dotnet/runtime/issues/1761",
-      "author": ".NET Foundation and contributors",
-      "copyright": ".NET Foundation and Contributors",
-      "license": "mit_dotnet",
-      "notices": "https://github.com/dotnet/runtime/blob/main/THIRD-PARTY-NOTICES.TXT",
-      "resource": "https://github.com/dotnet/runtime/issues/1761",
-      "index": "Microsoft Corporation"
-    },
-    {
-      "title": "DocFX",
-      "formats": [ "c#", "html" ],
-      "source": "https://github.com/dotnet/docfx",
-      "author": ".NET Foundation and contributors",
-      "copyright": ".NET Foundation and Contributors",
-      "license": "mit_dotnet",
-      "index": "Microsoft Corporation"
-    },
-    {
-      "title": "MessagePack for C#",
-      "formats": [ "c#" ],
-      "source": "https://github.com/neuecc/MessagePack-CSharp",
-      "author": "Yoshifumi Kawai",
-      "copyright": "2017 Yoshifumi Kawai and contributors",
-      "license": "mit_kawai",
-      "notices": "https://github.com/neuecc/MessagePack-CSharp/blob/master/LICENSE",
-      "index": "Kawai, Yoshifumi"
-    },
-    {
-      "title": "lz4net",
-      "formats": [ "c#" ],
-      "source": "https://github.com/MiloszKrajewski/lz4net",
-      "author": "Milosz Krajewski",
-      "copyright": "2013-2017, Milosz Krajewski",
-      "license": "bsd-2-clause_krajewski",
-      "index": "Krajewski, Milosz"
-    },
-    {
-      "title": "CsvHelper",
-      "formats": [ "c#", "css" ],
-      "source": "https://github.com/JoshClose/CsvHelper",
-      "author": "Josh Close",
-      "license": "csvhelper",
-      "index": "Close, Josh"
-    },
-    {
-      "title": "Microsoft Edge WebView2",
-      "formats": [ "c++" ],
-      "source": "https://developer.microsoft.com/en-us/microsoft-edge/webview2",
-      "author": "Microsoft Corporation",
-      "license": "bsd-3-clause-microsoft",
-      "index": "Microsoft Corporation"
-    },
-    {
-      "title": "SQLitePCL.raw",
-      "formats": [ "c#" ],
-      "source": "https://github.com/ericsink/SQLitePCL.raw",
-      "author": "Erik Sink",
-      "license": "apache-2.0_sink",
-      "notices": "https://raw.githubusercontent.com/ericsink/SQLitePCL.raw/master/NOTICE.TXT",
-      "index": "Sink, Eric"
-    },
-    {
-      "title": "SQLCipher",
-      "formats": [ "c", "tcl" ],
-      "source": "https://github.com/sqlcipher/sqlcipher",
-      "author": "Zetetic, LLC",
-      "license": "bsd-3-clause-zetetic",
-      "index": "Zetetic"
-    },
-    {
-      "title": "SQLite",
-      "formats": [ "c" ],
-      "source": "https://sqlite.org",
-      "author": "SQLite contributors",
-      "index": "SQLite"
-    },
-    {
-      "title": "Microsoft.Data.Sqlite",
-      "formats": [ "c#" ],
-      "source": "https://github.com/dotnet/efcore",
-      "author": ".NET Foundation and contributors",
-      "license": "mit_dotnet",
-      "index": "Microsoft Corporation"
-    },
-    {
-      "title": "Humanizer",
-      "formats": [ "c#" ],
-      "source": "https://github.com/Humanizr/Humanizer",
-      "author": ".NET Foundation and contributors",
-      "copyright": ".NET Foundation and Contributors",
-      "license": "mit_dotnet",
-      "index": "Microsoft Corporation"
-    },
-    {
-      "title": "Inflector",
-      "formats": [ "c#" ],
-      "source": "https://github.com/srkirkland/Inflector",
-      "author": "Scott Kirkland",
-      "copyright": "2013 Scott Kirkland",
-      "license": "mit_kirkland",
-      "index": "Kirkland, Scott"
-    },
-    {
-      "title": "ByteSize",
-      "formats": [ "c#" ],
-      "source": "https://github.com/omar/ByteSize",
-      "author": "Omar Khudeira",
-      "copyright": "2013-2022 Omar Khudeira (http://omar.io)",
-      "license": "mit_khudeira",
-      "index": "Khudeira, Omar"
-    },
-    {
-      "title": "ini-parser",
-      "formats": [ "c#" ],
-      "source": "https://github.com/rickyah/ini-parser",
-      "author": "Ricardo Amores Hernández",
-      "copyright": "2008 Ricardo Amores Hernández",
-      "license": "mit_hernandez",
-      "index": "Hernández, Ricardo Amores"
-    },
-    {
-      "title": "Deluxe&trade; Personal Checks US-Letter",
-      "formats": [ "ini" ],
-      "source": "https://github.com/Gnucash/gnucash",
-      "author": "GnuCash contributors",
-      "license": "gpl-gnucash",
-      "resource": "https://github.com/Gnucash/gnucash/blob/stable/data/checks/deluxe.chk",
-      "index": "GnuCash"
-    },
-    {
-      "title": "Liberty&trade; Personal Checks US-Letter",
-      "formats": [ "ini" ],
-      "source": "https://github.com/Gnucash/gnucash",
-      "author": "GnuCash contributors",
-      "license": "gpl-gnucash",
-      "resource": "https://github.com/Gnucash/gnucash/blob/stable/data/checks/liberty.chk",
-      "index": "GnuCash"
-    },
-    {
-      "title": "Quicken&trade;/QuickBooks&trade; US-Letter",
-      "formats": [ "ini" ],
-      "source": "https://github.com/Gnucash/gnucash",
-      "author": "GnuCash contributors",
-      "license": "gpl-gnucash",
-      "resource": "https://github.com/Gnucash/gnucash/blob/stable/data/checks/quicken.chk",
-      "index": "GnuCash"
-    },
-    {
-      "title": "Quicken&trade;/QuickBooks&trade; 3-Part US-Letter",
-      "formats": [ "ini" ],
-      "source": "https://github.com/Gnucash/gnucash",
-      "author": "GnuCash contributors",
-      "license": "gpl-gnucash",
-      "resource": "https://github.com/Gnucash/gnucash/blob/stable/data/checks/quicken_3part.chk",
-      "index": "GnuCash"
-    },
-    {
-      "title": "Quicken&trade; Check-21",
-      "formats": [ "ini" ],
-      "source": "https://github.com/Gnucash/gnucash",
-      "author": "GnuCash contributors",
-      "license": "gpl-gnucash",
-      "resource": "https://github.com/Gnucash/gnucash/blob/stable/data/checks/quicken_check_21.chk",
-      "index": "GnuCash"
-    },
-    {
-      "title": "Quicken&trade; Wallet Checks with Side Stub",
-      "formats": [ "ini" ],
-      "source": "https://github.com/Gnucash/gnucash",
-      "author": "GnuCash contributors",
-      "license": "gpl-gnucash",
-      "resource": "https://github.com/Gnucash/gnucash/blob/stable/data/checks/quicken_wallet.chk",
-      "index": "GnuCash"
-    },
-    {
-      "title": "Voucher Check 3-Part US-Letter",
-      "formats": [ "ini" ],
-      "source": "https://github.com/Gnucash/gnucash",
-      "author": "GnuCash contributors",
-      "license": "gpl-gnucash",
-      "resource": "https://github.com/Gnucash/gnucash/blob/stable/data/checks/voucher.chk",
-      "index": "GnuCash"
-    },
-    {
-      "title": "CPA 006 Cheque in Middle ASAP Cheques",
-      "formats": [ "ini" ],
-      "source": "https://github.com/dougransom/CPA-006-Asap-Cheques",
-      "author": "Doug Ransom",
-      "license": "mit_ransom",
-      "copyright": "2017 Doug Ransom",
-      "resource": "https://github.com/dougransom/CPA-006-Asap-Cheques/blob/master/CPA%20006%20Middle%20ASAP.chk",
-      "index": "Ransom"
-    },
-    {
-      "title": "Microsoft Windows API Codepack",
-      "formats": [ "c#", "c++", "visual basic" ],
-      "source": "https://github.com/Wagnerp/Windows-API-CodePack-NET",
-      "author": "Microsoft Corporation",
-      "license": "mit_windowsapicodepack",
-      "copyright": "2009 - 2010 Microsoft Corporation, then modifications by Jacob Slusser 2014, Peter William Wagner 2017 - 2023",
-      "index": "Microsoft Corporation"
-    },
-    {
-      "title": "Chart.js",
-      "formats": [ "javascript", "typescript" ],
-      "source": "https://github.com/chartjs/Chart.js",
-      "author": "Chart.js contributors",
-      "license": "mit_chartjs",
-      "copyright": "2014-2022 Chart.js Contributors",
-      "index": "Chart.js"
-    }
-  ],
+    "dependencies": [
+        {
+            "title": ".NET Runtime",
+            "formats": [ "c#", "c++", "c" ],
+            "source": "https://github.com/dotnet/runtime",
+            "author": ".NET Foundation and contributors",
+            "copyright": ".NET Foundation and Contributors",
+            "license": "mit_dotnet",
+            "notices": "https://github.com/dotnet/runtime/blob/main/THIRD-PARTY-NOTICES.TXT",
+            "index": "Microsoft Corporation"
+        },
+        {
+            "title": "TypeConverter to JsonConverter Adapter",
+            "formats": [ "c#" ],
+            "source": "https://github.com/dotnet/runtime/issues/1761",
+            "author": ".NET Foundation and contributors",
+            "copyright": ".NET Foundation and Contributors",
+            "license": "mit_dotnet",
+            "notices": "https://github.com/dotnet/runtime/blob/main/THIRD-PARTY-NOTICES.TXT",
+            "resource": "https://github.com/dotnet/runtime/issues/1761",
+            "index": "Microsoft Corporation"
+        },
+        {
+            "title": "DocFX",
+            "formats": [ "c#", "html" ],
+            "source": "https://github.com/dotnet/docfx",
+            "author": ".NET Foundation and contributors",
+            "copyright": ".NET Foundation and Contributors",
+            "license": "mit_dotnet",
+            "index": "Microsoft Corporation"
+        },
+        {
+            "title": "MessagePack for C#",
+            "formats": [ "c#" ],
+            "source": "https://github.com/neuecc/MessagePack-CSharp",
+            "author": "Yoshifumi Kawai",
+            "copyright": "2017 Yoshifumi Kawai and contributors",
+            "license": "mit_kawai",
+            "notices": "https://github.com/neuecc/MessagePack-CSharp/blob/master/LICENSE",
+            "index": "Kawai, Yoshifumi"
+        },
+        {
+            "title": "lz4net",
+            "formats": [ "c#" ],
+            "source": "https://github.com/MiloszKrajewski/lz4net",
+            "author": "Milosz Krajewski",
+            "copyright": "2013-2017, Milosz Krajewski",
+            "license": "bsd-2-clause_krajewski",
+            "index": "Krajewski, Milosz"
+        },
+        {
+            "title": "CsvHelper",
+            "formats": [ "c#", "css" ],
+            "source": "https://github.com/JoshClose/CsvHelper",
+            "author": "Josh Close",
+            "license": "csvhelper",
+            "index": "Close, Josh"
+        },
+        {
+            "title": "Microsoft Edge WebView2",
+            "formats": [ "c++" ],
+            "source": "https://developer.microsoft.com/en-us/microsoft-edge/webview2",
+            "author": "Microsoft Corporation",
+            "license": "bsd-3-clause-microsoft",
+            "index": "Microsoft Corporation"
+        },
+        {
+            "title": "SQLitePCL.raw",
+            "formats": [ "c#" ],
+            "source": "https://github.com/ericsink/SQLitePCL.raw",
+            "author": "Erik Sink",
+            "license": "apache-2.0_sink",
+            "notices": "https://raw.githubusercontent.com/ericsink/SQLitePCL.raw/master/NOTICE.TXT",
+            "index": "Sink, Eric"
+        },
+        {
+            "title": "SQLCipher",
+            "formats": [ "c", "tcl" ],
+            "source": "https://github.com/sqlcipher/sqlcipher",
+            "author": "Zetetic, LLC",
+            "license": "bsd-3-clause-zetetic",
+            "index": "Zetetic"
+        },
+        {
+            "title": "SQLite",
+            "formats": [ "c" ],
+            "source": "https://sqlite.org",
+            "author": "SQLite contributors",
+            "index": "SQLite"
+        },
+        {
+            "title": "Microsoft.Data.Sqlite",
+            "formats": [ "c#" ],
+            "source": "https://github.com/dotnet/efcore",
+            "author": ".NET Foundation and contributors",
+            "license": "mit_dotnet",
+            "index": "Microsoft Corporation"
+        },
+        {
+            "title": "Humanizer",
+            "formats": [ "c#" ],
+            "source": "https://github.com/Humanizr/Humanizer",
+            "author": ".NET Foundation and contributors",
+            "copyright": ".NET Foundation and Contributors",
+            "license": "mit_dotnet",
+            "index": "Microsoft Corporation"
+        },
+        {
+            "title": "Inflector",
+            "formats": [ "c#" ],
+            "source": "https://github.com/srkirkland/Inflector",
+            "author": "Scott Kirkland",
+            "copyright": "2013 Scott Kirkland",
+            "license": "mit_kirkland",
+            "index": "Kirkland, Scott"
+        },
+        {
+            "title": "ByteSize",
+            "formats": [ "c#" ],
+            "source": "https://github.com/omar/ByteSize",
+            "author": "Omar Khudeira",
+            "copyright": "2013-2022 Omar Khudeira (http://omar.io)",
+            "license": "mit_khudeira",
+            "index": "Khudeira, Omar"
+        },
+        {
+            "title": "ini-parser",
+            "formats": [ "c#" ],
+            "source": "https://github.com/rickyah/ini-parser",
+            "author": "Ricardo Amores Hernández",
+            "copyright": "2008 Ricardo Amores Hernández",
+            "license": "mit_hernandez",
+            "index": "Hernández, Ricardo Amores"
+        },
+        {
+            "title": "Deluxe&trade; Personal Checks US-Letter",
+            "formats": [ "ini" ],
+            "source": "https://github.com/Gnucash/gnucash",
+            "author": "GnuCash contributors",
+            "license": "gpl-gnucash",
+            "resource": "https://github.com/Gnucash/gnucash/blob/stable/data/checks/deluxe.chk",
+            "index": "GnuCash"
+        },
+        {
+            "title": "Liberty&trade; Personal Checks US-Letter",
+            "formats": [ "ini" ],
+            "source": "https://github.com/Gnucash/gnucash",
+            "author": "GnuCash contributors",
+            "license": "gpl-gnucash",
+            "resource": "https://github.com/Gnucash/gnucash/blob/stable/data/checks/liberty.chk",
+            "index": "GnuCash"
+        },
+        {
+            "title": "Quicken&trade;/QuickBooks&trade; US-Letter",
+            "formats": [ "ini" ],
+            "source": "https://github.com/Gnucash/gnucash",
+            "author": "GnuCash contributors",
+            "license": "gpl-gnucash",
+            "resource": "https://github.com/Gnucash/gnucash/blob/stable/data/checks/quicken.chk",
+            "index": "GnuCash"
+        },
+        {
+            "title": "Quicken&trade;/QuickBooks&trade; 3-Part US-Letter",
+            "formats": [ "ini" ],
+            "source": "https://github.com/Gnucash/gnucash",
+            "author": "GnuCash contributors",
+            "license": "gpl-gnucash",
+            "resource": "https://github.com/Gnucash/gnucash/blob/stable/data/checks/quicken_3part.chk",
+            "index": "GnuCash"
+        },
+        {
+            "title": "Quicken&trade; Check-21",
+            "formats": [ "ini" ],
+            "source": "https://github.com/Gnucash/gnucash",
+            "author": "GnuCash contributors",
+            "license": "gpl-gnucash",
+            "resource": "https://github.com/Gnucash/gnucash/blob/stable/data/checks/quicken_check_21.chk",
+            "index": "GnuCash"
+        },
+        {
+            "title": "Quicken&trade; Wallet Checks with Side Stub",
+            "formats": [ "ini" ],
+            "source": "https://github.com/Gnucash/gnucash",
+            "author": "GnuCash contributors",
+            "license": "gpl-gnucash",
+            "resource": "https://github.com/Gnucash/gnucash/blob/stable/data/checks/quicken_wallet.chk",
+            "index": "GnuCash"
+        },
+        {
+            "title": "Voucher Check 3-Part US-Letter",
+            "formats": [ "ini" ],
+            "source": "https://github.com/Gnucash/gnucash",
+            "author": "GnuCash contributors",
+            "license": "gpl-gnucash",
+            "resource": "https://github.com/Gnucash/gnucash/blob/stable/data/checks/voucher.chk",
+            "index": "GnuCash"
+        },
+        {
+            "title": "CPA 006 Cheque in Middle ASAP Cheques",
+            "formats": [ "ini" ],
+            "source": "https://github.com/dougransom/CPA-006-Asap-Cheques",
+            "author": "Doug Ransom",
+            "license": "mit_ransom",
+            "copyright": "2017 Doug Ransom",
+            "resource": "https://github.com/dougransom/CPA-006-Asap-Cheques/blob/master/CPA%20006%20Middle%20ASAP.chk",
+            "index": "Ransom"
+        },
+        {
+            "title": "Microsoft Windows API Codepack",
+            "formats": [ "c#", "c++", "visual basic" ],
+            "source": "https://github.com/Wagnerp/Windows-API-CodePack-NET",
+            "author": "Microsoft Corporation",
+            "license": "mit_windowsapicodepack",
+            "copyright": "2009 - 2010 Microsoft Corporation, then modifications by Jacob Slusser 2014, Peter William Wagner 2017 - 2023",
+            "index": "Microsoft Corporation"
+        },
+        {
+            "title": "Chart.js",
+            "formats": [ "javascript", "typescript" ],
+            "source": "https://github.com/chartjs/Chart.js",
+            "author": "Chart.js contributors",
+            "license": "mit_chartjs",
+            "copyright": "2014-2022 Chart.js Contributors",
+            "index": "Chart.js"
+        },
+        {
+            "title": "chartjs-chart-treemap",
+            "formats": [ "javascript", "typescript" ],
+            "source": "https://github.com/kurkle/chartjs-chart-treemap",
+            "author": "Jukka Kurkela",
+            "license": "mit_kurkela",
+            "copyright": "2019-2021 Jukka Kurkela",
+            "index": "Kurkela"
+        }
+    ],
   "references": [
     {
       "title": "Luma",

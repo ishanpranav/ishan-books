@@ -546,6 +546,11 @@ public sealed class Company
         }
     }
 
+    private IEnumerable<Account> GetVisibleRoots(IReadOnlySet<Account> visibleAccounts)
+    {
+        return visibleAccounts.Where(x => x.ParentId == Guid.Empty || !visibleAccounts.Contains(_accounts[x.ParentId]));
+    }
+
     public IEnumerable<(Account Parent, ParentKey Key, BalanceInfo Balances)> GetBalancesByKey(
         IReadOnlySet<Account> visibleAccounts,
         ReportTypes type,
@@ -553,7 +558,7 @@ public sealed class Company
         DateTime posted,
         Regex filter)
     {
-        foreach (Account root in visibleAccounts.Where(x => x.ParentId == Guid.Empty || !visibleAccounts.Contains(_accounts[x.ParentId])))
+        foreach (Account root in GetVisibleRoots(visibleAccounts))
         {
             Dictionary<ParentKey, BalanceInfo> results = new Dictionary<ParentKey, BalanceInfo>();
 
@@ -618,7 +623,121 @@ public sealed class Company
                 result.AverageDailyBalance += balance.AverageDailyBalance;
             }
 
-            yield return (group.Key,  result);
+            yield return (group.Key, result);
+        }
+    }
+
+    public IEnumerable<(AccountType Type, Account Parent, BalanceInfo Balances)> GetBalancesByTypeAndParent(
+        IReadOnlySet<Account> visibleAccounts,
+        ReportTypes type,
+        DateTime started,
+        DateTime posted,
+        Regex filter)
+    {
+        foreach (IGrouping<(AccountType Type, Account Parent), (Account, ParentKey, BalanceInfo)> group in GetBalancesByKey(
+                visibleAccounts,
+                type,
+                started,
+                posted,
+                filter)
+            .GroupBy(x => (x.Key.Type, x.Parent)))
+        {
+            BalanceInfo result = new BalanceInfo();
+
+            foreach ((Account _, ParentKey _, BalanceInfo balance) in group)
+            {
+                result.Balance += balance.Balance;
+                result.Previous = balance.Previous;
+                result.AverageDailyBalance += balance.AverageDailyBalance;
+            }
+
+            yield return (group.Key.Type, group.Key.Parent, result);
+        }
+    }
+
+    public IEnumerable<(AccountType Type, Account Account, int Depth, BalanceInfo Balances)> GetBalancesByTree(
+        IReadOnlySet<Account> visibleAccounts,
+        ReportTypes type,
+        DateTime started,
+        DateTime posted,
+        Regex filter)
+    {
+        foreach (IGrouping<AccountType, Account> typeGroup in GetVisibleRoots(visibleAccounts).GroupBy(x => x.Type))
+        {
+            foreach (Account root in typeGroup)
+            {
+                foreach ((AccountType, Account, int, BalanceInfo) entry in EnumerateSubtree(
+                    root,
+                    typeGroup.Key,
+                    depth: 0,
+                    visibleAccounts,
+                    type,
+                    started,
+                    posted,
+                    filter))
+                {
+                    yield return entry;
+                }
+            }
+        }
+    }
+
+    private IEnumerable<(AccountType Type, Account Account, int Depth, BalanceInfo Balances)> EnumerateSubtree(
+        Account root,
+        AccountType currentType,
+        int depth,
+        IReadOnlySet<Account> visibleAccounts,
+        ReportTypes type,
+        DateTime started,
+        DateTime posted,
+        Regex filter)
+    {
+        List<Account> sameTypeChildren = new List<Account>();
+        List<Account> crossTypeChildren = new List<Account>();
+
+        foreach (Account child in root.children)
+        {
+            if (!visibleAccounts.Contains(child))
+            {
+                continue;
+            }
+
+            if (child.Type == root.Type)
+            {
+                sameTypeChildren.Add(child);
+            }
+            else
+            {
+                crossTypeChildren.Add(child);
+            }
+        }
+
+        if (root.Type == currentType || sameTypeChildren.Count > 0)
+        {
+            yield return (currentType, root, depth, ComputeBalances(root, type, started, posted, filter));
+
+            foreach (Account child in sameTypeChildren)
+            {
+                foreach ((AccountType, Account, int, BalanceInfo) entry in
+                    EnumerateSubtree(child, currentType, depth + 1, visibleAccounts, type, started, posted, filter))
+                {
+                    yield return entry;
+                }
+            }
+        }
+
+        foreach (IGrouping<AccountType, Account> crossGroup in crossTypeChildren.GroupBy(x => x.Type))
+        {
+            yield return (crossGroup.Key, root, Depth: 0, ComputeBalances(root, type, started, posted, filter));
+
+            foreach (Account child in crossGroup)
+            {
+                foreach ((AccountType, Account, int, BalanceInfo) entry in
+                        EnumerateSubtree(child, currentType, depth + 1, visibleAccounts, type, started, posted, filter))
+                {
+                    yield return entry;
+                }
+            }
         }
     }
 

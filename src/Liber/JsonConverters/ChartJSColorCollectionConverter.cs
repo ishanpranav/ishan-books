@@ -1,4 +1,4 @@
-﻿// ChartJSColorConverter.cs
+﻿// ChartJSColorCollectionConverter.cs
 // Copyright (c) 2023-2026 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
@@ -8,10 +8,12 @@ using System.Drawing;
 namespace System.Text.Json.Serialization;
 
 /// <summary>
-/// Converts a <see cref="Color"/> to and from its ChartJS-compatible JSON representation.
+/// Converts a collection of <see cref="Color"/> objects to its ChartJS-compatible JSON representation.
 /// </summary>
 public sealed class ChartJSColorCollectionConverter : JsonConverter<IEnumerable<Color>>
 {
+    private static readonly ChartJSColorConverter s_itemConverter = new ChartJSColorConverter();
+
     /// <summary>
     /// Initializes a new instance of the <see cref="JsonColorConverter"/> class.
     /// </summary>
@@ -28,9 +30,9 @@ public sealed class ChartJSColorCollectionConverter : JsonConverter<IEnumerable<
     {
         writer.WriteStartArray();
 
-        foreach (Color color in value)
+        foreach (Color item in value)
         {
-            writer.WriteStringValue($"rgba({color.R},{color.G},{color.B},{color.A / 255d})");
+            s_itemConverter.Write(writer, item, options);
         }
 
         writer.WriteEndArray();
