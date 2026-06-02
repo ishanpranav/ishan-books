@@ -5,9 +5,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Text.Json;
 
 namespace Liber.Forms.Reports.Html;
@@ -88,24 +90,24 @@ public class HtmlReport : IntervalView
         }
     }
 
-    private IEnumerable<(string, AccountType, BalanceInfo)> GetBalances()
+    private IEnumerable<(string, AccountType, Color, BalanceInfo)> GetBalances()
     {
         switch (Level)
         {
             case ReportLevel.ByAccount:
                 return Company
                     .GetBalancesByParentAndType(Accounts.Values, ReportTypes.None, Started, Posted, Filter)
-                    .Select(x => (x.Parent.Name, x.Type, x.Balances));
+                    .Select(x => (x.Parent.Name, x.Type, Company.GetColorOrDefault(x.Parent), x.Balances));
 
             case ReportLevel.ByType:
                 return Company
                     .GetBalancesByType(Accounts.Values, ReportTypes.None, Started, Posted, Filter)
-                    .Select(x => (FormattedStrings.GetString(x.Type.ToString()), x.Type, x.Balances));
+                    .Select(x => (FormattedStrings.GetString(x.Type.ToString()), x.Type, Company.Color, x.Balances));
         }
 
         return Company
             .GetBalances(Accounts.Values, ReportTypes.None, Started, Posted, Filter)
-            .Select(x => (x.Account.Name, x.Account.Type, x.Balances));
+            .Select(x => (x.Account.Name, x.Account.Type, Company.GetColorOrDefault(x.Account), x.Balances));
     }
 
     public string GetTimeSeries()
@@ -118,7 +120,7 @@ public class HtmlReport : IntervalView
             labels.Add(started.ToShortDateString() + " \u2013 " + posted.ToShortDateString());
         }
 
-        foreach ((string name, AccountType type, BalanceInfo balances) in GetBalances())
+        foreach ((string name, AccountType type, Color color, BalanceInfo balances) in GetBalances())
         {
             int label = 0;
             bool nonZero = false;
@@ -154,16 +156,51 @@ public class HtmlReport : IntervalView
     {
         List<string> labels = new List<string>();
         List<double> data = new List<double>();
+        List<Color> backgroundColors = new List<Color>();
+        bool hasColor = false;
+        bool tint = true;
 
-        foreach ((string name, AccountType type, BalanceInfo balances) in GetBalances())
+        foreach ((string name, AccountType type, Color color, BalanceInfo balances) in GetBalances())
         {
-            if (balances.Balance != 0)
+            if (balances.Balance == 0)
             {
-                labels.Add(name);
-                data.Add((double)type.ToBalance(balances.Balance));
+                continue;
+            }
+
+            labels.Add(name);
+            data.Add((double)type.ToBalance(balances.Balance));
+
+            if (color == Company.Color)
+            {
+                if (tint)
+                {
+                    backgroundColors.Add(Colors.Primary.Tint(Random.Shared.NextDouble()));
+                }
+                else
+                {
+                    backgroundColors.Add(Colors.Primary.Shade(Random.Shared.NextDouble()));
+                }
+
+                tint = !tint;
+            }
+            else
+            {
+                hasColor = true;
+
+                backgroundColors.Add(color);
             }
         }
 
-        return JsonSerializer.Serialize(new ChartJSChartData(labels, new ChartJSChartDataset[] { new ChartJSChartDataset(data) }), FormattedStrings.JsonOptions);
+        ChartJSChartDataset dataset = new ChartJSChartDataset(data);
+
+        if (hasColor)
+        {
+            dataset.BackgroundColors = backgroundColors;
+        }
+
+        return JsonSerializer.Serialize(new ChartJSChartData(labels, new ChartJSChartDataset[]
+        {
+            dataset
+        }), FormattedStrings.JsonOptions);
     }
 }

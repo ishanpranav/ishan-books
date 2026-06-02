@@ -3,6 +3,8 @@
 // Licensed under the MIT License.
 
 using System.Drawing;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Liber.Forms;
 

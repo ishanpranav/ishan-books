@@ -19,7 +19,7 @@ internal sealed class EditAccountForm : AccountForm
         placeholderCheckBox.Checked = account.Placeholder;
         descriptionTextBox.Text = account.Description;
         memoTextBox.Text = account.Memo;
-        _colorButton.BackColor = account.Color;
+        _colorButton.BackColor = company.GetColorOrDefault(account);
         Type = account.Type;
         TaxType = account.TaxType;
         inactiveCheckBox.Checked = account.Inactive;
