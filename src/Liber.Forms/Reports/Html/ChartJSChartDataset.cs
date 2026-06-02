@@ -3,6 +3,8 @@
 // Licensed under the MIT License.
 
 using System.Collections.Generic;
+using System.Drawing;
+using System.Text.Json.Serialization;
 
 namespace Liber.Forms.Reports.Html;
 
@@ -17,4 +19,8 @@ internal sealed class ChartJSChartDataset
     public int BorderWidth { get; set; }
     public double LineTension { get; set; }
     public IReadOnlyList<double> Data { get; }
+
+    [JsonConverter(typeof(ChartJSColorCollectionConverter))]
+    [JsonPropertyName("backgroundColor")]
+    public IEnumerable<Color>? BackgroundColors { get; set; }
 }

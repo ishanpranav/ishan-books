@@ -20,6 +20,7 @@ internal sealed class ColorButton : Button
         set
         {
             base.BackColor = value;
+            ForeColor = value.GetForeColor();
 
             Liber.Forms.Design.PostSetButtonBackColor(this, value);
         }
@@ -37,6 +38,7 @@ internal sealed class ColorButton : Button
         if (colorDialog.ShowDialog() == DialogResult.OK)
         {
             BackColor = colorDialog.Color;
+
             Settings.Default.CustomColors = JsonSerializer.Serialize(colorDialog.CustomColors);
 
             Settings.Default.Save();

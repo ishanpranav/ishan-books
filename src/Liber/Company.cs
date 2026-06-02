@@ -622,6 +622,23 @@ public sealed class Company
         }
     }
 
+    public Color GetColorOrDefault(Account account)
+    {
+        Color result = account.Color;
+
+        if (result == Color)
+        {
+            result = _accounts[account.ParentId].Color;
+        }
+
+        if (result == Color.Empty)
+        {
+            result = Color;
+        }
+
+        return result;
+    }
+
     /// <summary>
     /// Copies the data from the current <see cref="Company"/> instance to another <see cref="Company"/> instance.
     /// </summary>
