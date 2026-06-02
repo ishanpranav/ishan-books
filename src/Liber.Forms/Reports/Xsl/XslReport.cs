@@ -3,19 +3,14 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text.RegularExpressions;
-using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 using Humanizer;
 using Humanizer.Localisation;
-using Liber.Forms.Accounts;
 
 namespace Liber.Forms.Reports.Xsl;
 
@@ -23,83 +18,36 @@ namespace Liber.Forms.Reports.Xsl;
 /// Represents an XSL template for generating formatted financial reports.
 /// </summary>
 [XmlRoot("report")]
-public class XslReport : IntervalView, IStandardValuesProvider, IXmlSerializable
+public class XslReport : IntervalView, IXmlSerializable
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="XslReport"/> class.
     /// </summary>
-    public XslReport()
-    {
-        Name = string.Empty;
-        Title = string.Empty;
-        Company = new Company();
-        Accounts = new AccountsView(Company);
-    }
+    public XslReport() : base(string.Empty, new Company()) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="XslReport"/> class with the specified title and company.
     /// </summary>
     /// <param name="name">The name of the report.</param>
     /// <param name="company">The <see cref="Company"/> associated with the report.</param>
-    public XslReport(string name, Company company)
-    {
-        Name = name;
-        Company = company;
-        Accounts = new AccountsView(company);
-
-        Refresh();
-    }
-
-    /// <summary>
-    /// Gets or sets the <see cref="Company"/> associated with the report.
-    /// </summary>
-    /// <value>The company associated with the report.</value>
-    [Browsable(false)]
-    public Company Company { get; set; }
-
-    [Browsable(false)]
-    public string Name { get; set; }
+    public XslReport(string name, Company company) : base(name, company) { }
 
     [Browsable(false)]
     public string GenericTitle
     {
         get
         {
-            return GetTitle(Name, CompanyType.None);
+            return FormattedStrings.GetTitle(Name, CompanyType.None);
         }
     }
-
-    [LocalizedCategory(nameof(Title))]
-    [LocalizedDescription(nameof(Title))]
-    [LocalizedDisplayName(nameof(Title))]
-    [TypeConverter(typeof(StandardValuesStringConverter))]
-    public string Title { get; set; }
 
     [LocalizedCategory(nameof(Redaction))]
     [LocalizedDescription(nameof(Redaction))]
     [LocalizedDisplayName(nameof(Redaction))]
     public string? Redaction { get; set; }
 
-    [LocalizedCategory(nameof(Filter))]
-    [LocalizedDescription(nameof(Filter))]
-    [LocalizedDisplayName(nameof(Filter))]
-    [TypeConverter(typeof(RegexConverter))]
-    public Regex Filter { get; set; } = Filters.Any();
-
     [Browsable(false)]
-    public ReportTypes Type { get; set; }
-
-    [DefaultValue(ReportLevel.ByAccount)]
-    [LocalizedCategory(nameof(Level))]
-    [LocalizedDescription(nameof(Level))]
-    [LocalizedDisplayName(nameof(Level))]
-    [TypeConverter(typeof(LocalizedEnumConverter))]
-    public ReportLevel Level { get; set; } = ReportLevel.ByAccount;
-
-    [LocalizedCategory(nameof(Accounts))]
-    [LocalizedDescription(nameof(Accounts))]
-    [LocalizedDisplayName(nameof(Accounts))]
-    public AccountsView Accounts { get; set; }
+    public ReportTypes Type { get; set; } = ReportTypes.CurrentPosted;
 
     [DefaultValue(typeof(decimal), "0.01")]
     [LocalizedCategory(nameof(Multiple))]
@@ -196,28 +144,7 @@ public class XslReport : IntervalView, IStandardValuesProvider, IXmlSerializable
     [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "<Pending>")]
     public string gettitle(string name, string type)
     {
-        return GetTitle(name, Enum.Parse<CompanyType>(type));
-    }
-
-    private static string GetTitle(string name)
-    {
-        if (!FormattedStrings.TryGetString("_r_" + name, out string? result))
-        {
-            return name;
-        }
-
-        return result;
-    }
-
-    private static string GetTitle(string name, CompanyType type)
-    {
-        if (type == CompanyType.None ||
-            !FormattedStrings.TryGetString(string.Format("_r_{0}_{1}", type, name), out string? result))
-        {
-            return GetTitle(name);
-        }
-
-        return result;
+        return FormattedStrings.GetTitle(name, Enum.Parse<CompanyType>(type));
     }
 
     /// <summary>
@@ -302,20 +229,6 @@ public class XslReport : IntervalView, IStandardValuesProvider, IXmlSerializable
         return FormattedStrings.GetString(key);
     }
 
-    [MemberNotNull(nameof(Title))]
-    public void Refresh()
-    {
-        Title = GetTitle(Name, Company.Type);
-    }
-
-    public TypeConverter.StandardValuesCollection GetStandardValues()
-    {
-        SortedSet<string> results = new SortedSet<string>(FormattedStrings
-            .GetStringsBySuffix(Name));
-
-        return new TypeConverter.StandardValuesCollection(results);
-    }
-
     public XmlSchema? GetSchema()
     {
         return null;
@@ -324,80 +237,6 @@ public class XslReport : IntervalView, IStandardValuesProvider, IXmlSerializable
     void IXmlSerializable.ReadXml(XmlReader reader)
     {
         throw new NotImplementedException();
-    }
-
-    private BalanceInfo ComputeBalances(Account value)
-    {
-        if (value == Company.Accounts[Company.EquityAccountId])
-        {
-            BalanceInfo result = new BalanceInfo()
-            {
-                Previous = Company.GetEquity(Started.AddDays(-1), Filter)
-            };
-
-            if (Type.HasFlag(ReportTypes.CurrentPosted))
-            {
-                result.Balance = Company.GetEquity(Posted, Filter);
-            }
-
-            if (Type.HasFlag(ReportTypes.CurrentStarted))
-            {
-                result.Balance = Company.GetEquity(Started.AddDays(-1), Filter);
-            }
-
-            return result;
-        }
-
-        if (value == Company.Accounts[Company.OtherEquityAccountId])
-        {
-            return new BalanceInfo()
-            {
-                Balance = value.GetBalance(Posted, Filter),
-                Previous = value.GetBalance(Started, Filter)
-            };
-        }
-
-        if (value.Type.IsTemporary())
-        {
-            return new BalanceInfo()
-            {
-                Balance = value.GetBalance(Started, Posted, Filter)
-            };
-        }
-
-        return new BalanceInfo()
-        {
-            Balance = value.GetBalance(Posted, Filter),
-            Previous = value.GetBalance(Started.AddDays(-1), Filter),
-            AverageDailyBalance = value.GetAverageDailyBalance(Started, Posted, Filter)
-        };
-    }
-
-    private void ComputeSubtreeBalances(Account value, Dictionary<ParentKey, BalanceInfo> keyedBalances)
-    {
-        BalanceInfo balances = ComputeBalances(value);
-        IEnumerable<Account> visibleChildren = value.Children.Where(Accounts.Values.Contains);
-
-        if (!visibleChildren.Any())
-        {
-            ParentKey key = new ParentKey(value);
-
-            if (keyedBalances.TryGetValue(key, out BalanceInfo? existing))
-            {
-                existing.Balance += balances.Balance;
-                existing.Previous += balances.Previous;
-                existing.AverageDailyBalance += balances.AverageDailyBalance;
-            }
-            else
-            {
-                keyedBalances[key] = balances;
-            }
-        }
-
-        foreach (Account child in visibleChildren)
-        {
-            ComputeSubtreeBalances(child, keyedBalances);
-        }
     }
 
     private void WriteAccountXml(XmlWriter writer, Account value, ParentKey key, BalanceInfo balances)
@@ -496,23 +335,21 @@ public class XslReport : IntervalView, IStandardValuesProvider, IXmlSerializable
 
         if (Level == ReportLevel.ByAccount)
         {
-            foreach (Account account in Accounts.Values.Where(a => a.ParentId == Guid.Empty))
+            foreach ((Account account, ParentKey key, BalanceInfo balances) in Company.GetBalancesByKey(
+                Accounts.Values,
+                Type,
+                Started,
+                Posted,
+                Filter))
             {
-                Dictionary<ParentKey, BalanceInfo> keyedBalances = new Dictionary<ParentKey, BalanceInfo>();
-
-                ComputeSubtreeBalances(account, keyedBalances);
-
-                foreach (KeyValuePair<ParentKey, BalanceInfo> entry in keyedBalances)
-                {
-                    WriteAccountXml(writer, account, entry.Key, entry.Value);
-                }
+                WriteAccountXml(writer, account, key, balances);
             }
         }
         else
         {
-            foreach (Account account in Accounts.Values)
+            foreach ((Account account, BalanceInfo balances) in Company.GetBalances(Accounts.Values, Type, Started, Posted, Filter))
             {
-                WriteAccountXml(writer, account, new ParentKey(account), ComputeBalances(account));
+                WriteAccountXml(writer, account, new ParentKey(account), balances);
             }
         }
 

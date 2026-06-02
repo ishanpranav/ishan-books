@@ -4,7 +4,7 @@
 
 using System.ComponentModel;
 
-namespace Liber.Forms.Reports.Xsl;
+namespace Liber.Forms.Reports;
 
 public enum ReportLevel
 {

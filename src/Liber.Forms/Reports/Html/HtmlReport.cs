@@ -6,85 +6,17 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text.Json;
-using System.Text.RegularExpressions;
-using Liber.Forms.Accounts;
 
 namespace Liber.Forms.Reports.Html;
 
 [ClassInterface(ClassInterfaceType.AutoDual)]
 [ComVisible(true)]
-public class HtmlReport
+public class HtmlReport : IntervalView
 {
-    private DateTime _started = new DateTime(DateTime.Today.Year, 1, 1);
-    private DateTime _posted = DateTime.Today;
-
-    public HtmlReport(string title, Company company)
-    {
-        Title = title;
-        Company = company;
-        Accounts = new AccountsView(company);
-    }
-
-    [Browsable(false)]
-    public Company Company { get; set; }
-
-    [LocalizedCategory(nameof(Title))]
-    [LocalizedDescription(nameof(Title))]
-    [LocalizedDisplayName(nameof(Title))]
-    public string Title { get; set; } = string.Empty;
-
-    [LocalizedCategory(nameof(Accounts))]
-    [LocalizedDescription(nameof(Accounts))]
-    [LocalizedDisplayName(nameof(Accounts))]
-    public AccountsView Accounts { get; set; }
-
-    [LocalizedCategory(nameof(Started))]
-    [LocalizedDescription(nameof(Started))]
-    [LocalizedDisplayName(nameof(Started))]
-    public DateTime Started
-    {
-        get
-        {
-            return _started;
-        }
-        set
-        {
-            if (value > _posted)
-            {
-                _posted = value;
-            }
-
-            _started = value;
-        }
-    }
-
-    [LocalizedCategory(nameof(Posted))]
-    [LocalizedDescription(nameof(Posted))]
-    [LocalizedDisplayName(nameof(Posted))]
-    public DateTime Posted
-    {
-        get
-        {
-            return _posted;
-        }
-        set
-        {
-            if (value < _started)
-            {
-                _started = value;
-            }
-
-            _posted = value;
-        }
-    }
-
-    [LocalizedCategory(nameof(Filter))]
-    [LocalizedDescription(nameof(Filter))]
-    [LocalizedDisplayName(nameof(Filter))]
-    [TypeConverter(typeof(RegexConverter))]
-    public Regex Filter { get; set; } = Filters.Any();
+    public HtmlReport(string name, Company company) : base(name, company) { }
 
     [LocalizedCategory(nameof(Periodicity))]
     [LocalizedDescription(nameof(Periodicity))]
@@ -156,6 +88,26 @@ public class HtmlReport
         }
     }
 
+    private IEnumerable<(string, AccountType, BalanceInfo)> GetBalances()
+    {
+        switch (Level)
+        {
+            case ReportLevel.ByAccount:
+                return Company
+                    .GetBalancesByParentAndType(Accounts.Values, ReportTypes.None, Started, Posted, Filter)
+                    .Select(x => (x.Parent.Name, x.Type, x.Balances));
+
+            case ReportLevel.ByType:
+                return Company
+                    .GetBalancesByType(Accounts.Values, ReportTypes.None, Started, Posted, Filter)
+                    .Select(x => (FormattedStrings.GetString(x.Type.ToString()), x.Type, x.Balances));
+        }
+
+        return Company
+            .GetBalances(Accounts.Values, ReportTypes.None, Started, Posted, Filter)
+            .Select(x => (x.Account.Name, x.Account.Type, x.Balances));
+    }
+
     public string GetTimeSeries()
     {
         List<string> labels = new List<string>();
@@ -210,23 +162,12 @@ public class HtmlReport
         List<string> labels = new List<string>();
         List<double> data = new List<double>();
 
-        foreach (Account account in Accounts.Values)
+        foreach ((string name, AccountType type, BalanceInfo balances) in GetBalances())
         {
-            decimal balance;
-
-            if (account.Type.IsTemporary())
+            if (balances.Balance != 0)
             {
-                balance = account.GetBalance(Started, Posted, Filter);
-            }
-            else
-            {
-                balance = account.GetBalance(Posted, Filter);
-            }
-
-            if (balance != 0)
-            {
-                labels.Add(account.Name);
-                data.Add((double)account.Type.ToBalance(balance));
+                labels.Add(name);
+                data.Add((double)type.ToBalance(balances.Balance));
             }
         }
 

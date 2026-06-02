@@ -4,9 +4,9 @@
 
 using System;
 
-namespace Liber.Forms.Reports.Xsl;
+namespace Liber;
 
-internal sealed class ParentKey : IEquatable<ParentKey>
+public class ParentKey : IEquatable<ParentKey>
 {
     public ParentKey(Account value)
     {
