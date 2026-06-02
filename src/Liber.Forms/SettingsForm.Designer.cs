@@ -37,7 +37,7 @@
             groupBox1 = new System.Windows.Forms.GroupBox();
             _helpProvider = new System.Windows.Forms.HelpProvider();
             resetButton = new System.Windows.Forms.Button();
-            importRulesDataGridView = new System.Windows.Forms.DataGridView();
+            importRulesDataGridView = new System.Windows.Forms.DataGridViewEx();
             groupBox2 = new System.Windows.Forms.GroupBox();
             _tabControl = new System.Windows.Forms.TabControl();
             editorTabPage = new System.Windows.Forms.TabPage();
@@ -188,7 +188,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.HelpProvider _helpProvider;
-        private System.Windows.Forms.DataGridView importRulesDataGridView;
+        private System.Windows.Forms.DataGridViewEx importRulesDataGridView;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button resetButton;
         private System.Windows.Forms.TabControl _tabControl;

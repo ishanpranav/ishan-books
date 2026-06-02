@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ImportForm));
             cancelButton = new System.Windows.Forms.Button();
             acceptButton = new System.Windows.Forms.Button();
-            _dataGridView = new System.Windows.Forms.DataGridView();
+            _dataGridView = new System.Windows.Forms.DataGridViewEx();
             label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)_dataGridView).BeginInit();
             SuspendLayout();
@@ -88,7 +88,7 @@
         #endregion
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button acceptButton;
-        protected System.Windows.Forms.DataGridView _dataGridView;
+        protected System.Windows.Forms.DataGridViewEx _dataGridView;
         private System.Windows.Forms.Label label1;
     }
 }

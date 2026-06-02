@@ -4,7 +4,6 @@
 
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Drawing;
 
 namespace System.Windows.Forms;
 
@@ -50,17 +49,6 @@ internal class ListViewEx : ListView
     {
         e.DrawDefault = true;
         base.OnDrawColumnHeader(e);
-    }
-
-    private static TextFormatFlags HorizontalAlignmentToTextFormatFlags(HorizontalAlignment value)
-    {
-        switch (value)
-        {
-            case HorizontalAlignment.Right: return TextFormatFlags.Right;
-            case HorizontalAlignment.Center: return TextFormatFlags.HorizontalCenter;
-        }
-
-        return TextFormatFlags.Left;
     }
 
     protected override void OnGotFocus(EventArgs e)

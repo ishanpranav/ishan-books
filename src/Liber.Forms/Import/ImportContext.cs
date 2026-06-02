@@ -3,6 +3,7 @@
 // Licensed under the MIT License.
 
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace Liber.Forms.Import;
 
@@ -16,4 +17,5 @@ internal sealed class ImportContext
     public IReadOnlyCollection<Account> Accounts { get; }
     public Account? EquityAccount { get; set; }
     public Account? OtherEquityAccount { get; set; }
+    public Color Color { get; set; }
 }

@@ -3,6 +3,7 @@
 // Licensed under the MIT License.
 
 using System.ComponentModel;
+using System.Drawing;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 
@@ -26,6 +27,9 @@ internal sealed class ImportRule
     [LocalizedDisplayName(nameof(TaxType))]
     public bool TaxType { get; set; }
 
+    [LocalizedDisplayName(nameof(Color))]
+    public Color Color { get; set; }
+
     [LocalizedDisplayName(nameof(Equity))]
     public bool Equity { get; set; }
 
@@ -37,7 +41,10 @@ internal sealed class ImportRule
 
     public void Apply(ImportContext context)
     {
-        if (Type == AccountType.None && CashFlow == CashFlow.None && !Equity && !OtherEquity)
+        if (Type == AccountType.None &&
+            CashFlow == CashFlow.None &&
+            (Color == Color.Empty || Color == context.Color) &&
+            !Equity && !OtherEquity)
         {
             return;
         }
@@ -57,6 +64,12 @@ internal sealed class ImportRule
             if (CashFlow != CashFlow.None && (Strict || account.CashFlow == CashFlow.None))
             {
                 account.CashFlow = CashFlow;
+            }
+
+            if (Color != Color.Empty && Color != context.Color &&
+                (Strict || account.Color == Color.Empty || account.Color == context.Color))
+            {
+                account.Color = Color;
             }
 
             if (!account.TaxType)

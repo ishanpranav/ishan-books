@@ -24,8 +24,8 @@ namespace Liber.Forms.Accounts
             numberColumn = new ColumnHeader();
             typeColumn = new ColumnHeader();
             cashFlowColumn = new ColumnHeader();
-            balanceColumn = new ColumnHeader();
             taxType = new ColumnHeader();
+            balanceColumn = new ColumnHeader();
             _contextMenu = new ContextMenuStrip(components);
             quickReportToolStripMenuItem1 = new ToolStripMenuItem();
             toolStripSeparator3 = new ToolStripSeparator();
@@ -53,6 +53,7 @@ namespace Liber.Forms.Accounts
             refreshToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator4 = new ToolStripSeparator();
             inactiveToolStripMenuItem = new ToolStripMenuItem();
+            _imageList = new ImageList(components);
             _contextMenu.SuspendLayout();
             _statusStrip.SuspendLayout();
             SuspendLayout();
@@ -67,6 +68,7 @@ namespace Liber.Forms.Accounts
             _listView.LabelEdit = true;
             _listView.MultiSelect = false;
             _listView.Name = "_listView";
+            _listView.SmallImageList = _imageList;
             _listView.SortColumn = 0;
             _listView.Sorting = SortOrder.Ascending;
             _listView.UseCompatibleStateImageBehavior = false;
@@ -90,13 +92,13 @@ namespace Liber.Forms.Accounts
             // 
             resources.ApplyResources(cashFlowColumn, "cashFlowColumn");
             // 
-            // balanceColumn
-            // 
-            resources.ApplyResources(balanceColumn, "balanceColumn");
-            // 
             // taxType
             // 
             resources.ApplyResources(taxType, "taxType");
+            // 
+            // balanceColumn
+            // 
+            resources.ApplyResources(balanceColumn, "balanceColumn");
             // 
             // _contextMenu
             // 
@@ -260,6 +262,12 @@ namespace Liber.Forms.Accounts
             resources.ApplyResources(inactiveToolStripMenuItem, "inactiveToolStripMenuItem");
             inactiveToolStripMenuItem.CheckedChanged += OnInactiveToolStripMenuItemCheckedChanged;
             // 
+            // _imageList
+            // 
+            _imageList.ColorDepth = ColorDepth.Depth32Bit;
+            resources.ApplyResources(_imageList, "_imageList");
+            _imageList.TransparentColor = System.Drawing.Color.Transparent;
+            // 
             // AccountsForm
             // 
             resources.ApplyResources(this, "$this");
@@ -311,5 +319,6 @@ namespace Liber.Forms.Accounts
         private ToolStripMenuItem inactiveToolStripMenuItem;
         private ColumnHeader cashFlowColumn;
         private ColumnHeader taxType;
+        private ImageList _imageList;
     }
 }

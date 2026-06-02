@@ -20,7 +20,7 @@ partial class TransactionsForm
     private void InitializeComponent()
     {
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TransactionsForm));
-        _dataGridView = new System.Windows.Forms.DataGridView();
+        _dataGridView = new System.Windows.Forms.DataGridViewEx();
         postedColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
         numberColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
         accountColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
@@ -111,7 +111,7 @@ partial class TransactionsForm
 
     #endregion
 
-    private System.Windows.Forms.DataGridView _dataGridView;
+    private System.Windows.Forms.DataGridViewEx _dataGridView;
     private System.Windows.Forms.DataGridViewTextBoxColumn postedColumn;
     private System.Windows.Forms.DataGridViewTextBoxColumn numberColumn;
     private System.Windows.Forms.DataGridViewComboBoxColumn accountColumn;

@@ -3,9 +3,7 @@
 // Licensed under the MIT License.
 
 using System.Drawing;
-using System.Text.Json;
-using Liber.Forms;
-using Liber.Forms.Properties;
+using Liber.Forms.Controls;
 
 namespace System.Windows.Forms;
 
@@ -28,21 +26,11 @@ internal sealed class ColorButton : Button
 
     protected override void OnClick(EventArgs e)
     {
-        using ColorDialog colorDialog = new ColorDialog()
-        {
-            SolidColorOnly = true
-        };
+        Color backColor = BackColor;
 
-        colorDialog.CustomColors = JsonSerializer.Deserialize<int[]>(Settings.Default.CustomColors, FormattedStrings.JsonOptions);
+        ColorDialogManager.ShowDialog(ref backColor);
 
-        if (colorDialog.ShowDialog() == DialogResult.OK)
-        {
-            BackColor = colorDialog.Color;
-
-            Settings.Default.CustomColors = JsonSerializer.Serialize(colorDialog.CustomColors);
-
-            Settings.Default.Save();
-        }
+        BackColor = backColor;
 
         base.OnClick(e);
     }
