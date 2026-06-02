@@ -118,7 +118,7 @@ public class HtmlReport : IntervalView
             labels.Add(started.ToShortDateString() + " \u2013 " + posted.ToShortDateString());
         }
 
-        foreach (Account account in Accounts.Values)
+        foreach ((string name, AccountType type, BalanceInfo balances) in GetBalances())
         {
             int label = 0;
             bool nonZero = false;
@@ -126,14 +126,7 @@ public class HtmlReport : IntervalView
 
             foreach ((DateTime started, DateTime posted) in EnumerateRanges())
             {
-                if (account.Type.IsTemporary())
-                {
-                    data[label] = (double)account.Type.ToBalance(account.GetBalance(started, posted, Filter));
-                }
-                else
-                {
-                    data[label] = (double)account.Type.ToBalance(account.GetBalance(posted, Filter));
-                }
+                data[label] = (double)type.ToBalance(balances.Balance);
 
                 if (data[label] != 0)
                 {
@@ -147,7 +140,7 @@ public class HtmlReport : IntervalView
             {
                 datasets.Add(new ChartJSChartDataset(data)
                 {
-                    Label = account.Name,
+                    Label = name,
                     BorderWidth = 1,
                     LineTension = 0.25
                 });
