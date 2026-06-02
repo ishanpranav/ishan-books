@@ -73,69 +73,30 @@ namespace Liber.Forms.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"[
-  {
-    ""filter"": ""^7"",
-    ""type"": ""incomeTaxExpense"",
-    ""strict"": true
-  },
-  {
-    ""filter"": ""^6"",
-    ""type"": ""otherIncomeExpense"",
-    ""strict"": true
-  },
-  {
-    ""filter"": ""^1[5689]"",
-    ""type"": ""otherAsset""
-  },
-  {
-    ""filter"": ""^17"",
-    ""type"": ""fixedAsset""
-  },
-  {
-    ""filter"": ""^2[5-9]"",
-    ""type"": ""longTermLiability""
-  },
-  {
-    ""filter"": ""Accumulated Other Comprehensive"",
-    ""cashFlow"": ""otherEquity"",
-    ""otherEquity"": true,
-    ""strict"": true
-  },
-  {
-    ""filter"": ""(Capital|Unrealized) (Gain|Loss|Appreciation)"",
-    ""type"": ""otherIncomeExpense"",
-    ""cashFlow"": ""gainLoss"",
-    ""strict"": true
-  },
-  {
-    ""filter"": ""Deferred.*Tax.*(Asset|Liability)"",
-    ""cashFlow"": ""operating"",
-    ""strict"": true
-  },
-  {
-    ""filter"": ""US Treasury Bill"",
-    ""cashFlow"": ""investing"",
-    ""strict"": true
-  },
-  {
-    ""filter"": ""(Retained Earning|Accumulated Deficit)"",
-    ""type"": ""equity"",
-    ""equity"": true,
-    ""strict"": true
-  },
-  {
-    ""filter"": ""Charles Schwab Individual Short[-\\s]Term"",
-    ""cashFlow"": ""investing"",
-    ""strict"": true
-  },
-  {
-    ""filter"": ""Charles Schwab Individual Long[-\\s]Term"",
-    ""type"": ""otherAsset"",
-    ""cashFlow"": ""investing"",
-    ""strict"": true
-  }
-]")]
+        [global::System.Configuration.DefaultSettingValueAttribute("[\r\n  {\r\n    \"filter\": \"^7\",\r\n    \"type\": \"incomeTaxExpense\",\r\n    \"strict\": true\r" +
+            "\n  },\r\n  {\r\n    \"filter\": \"^6\",\r\n    \"type\": \"otherIncomeExpense\",\r\n    \"strict\"" +
+            ": true\r\n  },\r\n  {\r\n    \"filter\": \"^1[5689]\",\r\n    \"type\": \"otherAsset\"\r\n  },\r\n  " +
+            "{\r\n    \"filter\": \"^17\",\r\n    \"type\": \"fixedAsset\"\r\n  },\r\n  {\r\n    \"filter\": \"^2[" +
+            "5-9]\",\r\n    \"type\": \"longTermLiability\"\r\n  },\r\n  {\r\n    \"filter\": \"Accumulated O" +
+            "ther Comprehensive\",\r\n    \"cashFlow\": \"otherEquity\",\r\n    \"otherEquity\": true,\r\n" +
+            "    \"strict\": true\r\n  },\r\n  {\r\n    \"filter\": \"(Capital|Unrealized) (Gain|Loss|Ap" +
+            "preciation)\",\r\n    \"type\": \"otherIncomeExpense\",\r\n    \"cashFlow\": \"gainLoss\",\r\n " +
+            "   \"strict\": true\r\n  },\r\n  {\r\n    \"filter\": \"Deferred.*Tax.*(Asset|Liability)\",\r" +
+            "\n    \"cashFlow\": \"operating\",\r\n    \"strict\": true\r\n  },\r\n  {\r\n    \"filter\": \"US " +
+            "Treasury Bill\",\r\n    \"cashFlow\": \"investing\",\r\n    \"strict\": true\r\n  },\r\n  {\r\n  " +
+            "  \"filter\": \"(Retained Earning|Accumulated Deficit)\",\r\n    \"type\": \"equity\",\r\n  " +
+            "  \"equity\": true,\r\n    \"strict\": true\r\n  },\r\n  {\r\n    \"filter\": \"Charles Schwab " +
+            "Individual Short[-\\\\s]Term\",\r\n    \"cashFlow\": \"investing\",\r\n    \"strict\": true\r\n" +
+            "  },\r\n  {\r\n    \"filter\": \"Charles Schwab Individual Long[-\\\\s]Term\",\r\n    \"type\"" +
+            ": \"otherAsset\",\r\n    \"cashFlow\": \"investing\",\r\n    \"strict\": true\r\n  },\r\n  {\r\n  " +
+            "  \"filter\": \"Chase Bank\",\r\n    \"color\": -16752968\r\n  },\r\n  {\r\n    \"filter\": \"Ven" +
+            "mo\",\r\n    \"color\": -16741121\r\n  },\r\n  {\r\n    \"filter\": \"US Bank\",\r\n    \"color\": " +
+            "-3200458\r\n  },\r\n  {\r\n    \"filter\": \"Fidelity Investments\",\r\n    \"color\": -133999" +
+            "99\r\n  },\r\n  {\r\n    \"filter\": \"Charles Schwab\",\r\n    \"color\": -16736805\r\n  },\r\n  " +
+            "{\r\n    \"filter\": \"Wealthfront\",\r\n    \"color\": -12042053\r\n  },\r\n  {\r\n    \"filter\"" +
+            ": \"Goldman Sachs\",\r\n    \"color\": -9201210\r\n  },\r\n  {\r\n    \"filter\": \"PNC Financi" +
+            "al Services\",\r\n    \"color\": -688091\r\n  },\r\n  {\r\n    \"filter\": \"Citibank\",\r\n    \"" +
+            "color\": -14328861\r\n  }\r\n]")]
         public string ImportRules {
             get {
                 return ((string)(this["ImportRules"]));

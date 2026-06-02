@@ -9,7 +9,6 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Text.Json;
 
 namespace Liber.Forms.Reports.Html;
@@ -96,8 +95,8 @@ public class HtmlReport : IntervalView
         {
             case ReportLevel.ByAccount:
                 return Company
-                    .GetBalancesByParentAndType(Accounts.Values, ReportTypes.None, Started, Posted, Filter)
-                    .Select(x => (x.Parent.Name, x.Type, Company.GetColorOrDefault(x.Parent), x.Balances));
+                    .GetBalancesByParent(Accounts.Values, ReportTypes.None, Started, Posted, Filter)
+                    .Select(x => (x.Parent.Name, x.Parent.Type, Company.GetColorOrDefault(x.Parent), x.Balances));
 
             case ReportLevel.ByType:
                 return Company

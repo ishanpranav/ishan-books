@@ -5,12 +5,23 @@
 const report = window.chrome.webview.hostObjects.report;
 const chart = document.getElementById('chart');
 
+Chart.defaults.font.family = 'Segoe UI';
+Chart.defaults.font.size = 11;
+Chart.defaults.font.weight = 'normal';
+
 const config = {
-    type: 'pie',
+    type: 'doughnut',
     options: {
+        responsive: true,
+        maintainAspectRatio: false,
         plugins: {
+            cutout: '60%',
             title: {
-                display: true
+                display: true,
+                font: {
+                    size: 20,
+                    weight: 'bold'
+                }
             }
         }
     }

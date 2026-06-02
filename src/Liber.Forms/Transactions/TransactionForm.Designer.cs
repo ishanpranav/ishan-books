@@ -30,7 +30,7 @@
             cancelButton = new System.Windows.Forms.Button();
             applyButton = new System.Windows.Forms.Button();
             acceptButton = new System.Windows.Forms.Button();
-            _dataGridView = new System.Windows.Forms.DataGridView();
+            _dataGridView = new System.Windows.Forms.DataGridViewEx();
             previousButton = new System.Windows.Forms.Button();
             nextButton = new System.Windows.Forms.Button();
             label3 = new System.Windows.Forms.Label();
@@ -263,7 +263,7 @@
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button applyButton;
         private System.Windows.Forms.Button acceptButton;
-        private System.Windows.Forms.DataGridView _dataGridView;
+        private System.Windows.Forms.DataGridViewEx _dataGridView;
         private System.Windows.Forms.Button previousButton;
         private System.Windows.Forms.Button nextButton;
         private System.Windows.Forms.Label label3;

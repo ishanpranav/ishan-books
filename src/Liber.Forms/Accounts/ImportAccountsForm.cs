@@ -31,7 +31,8 @@ internal sealed class ImportAccountsForm : ImportForm
         _context = new ImportContext(values)
         {
             EquityAccount = company.Accounts[company.EquityAccountId],
-            OtherEquityAccount = company.Accounts[company.OtherEquityAccountId]
+            OtherEquityAccount = company.Accounts[company.OtherEquityAccountId],
+            Color = company.Color
         };
 
         if (rules != null)

@@ -624,4 +624,13 @@
   <data name="_r_1_common-size-comparative-balance-sheet" xml:space="preserve">
     <value>Common-Size Comparative Balance Sheet</value>
   </data>
+  <data name="_r_analysis" xml:space="preserve">
+    <value>Pie Chart</value>
+  </data>
+  <data name="_r_1_analysis" xml:space="preserve">
+    <value>Asset Allocation</value>
+  </data>
+  <data name="_r_time-series" xml:space="preserve">
+    <value>Time Series</value>
+  </data>
 </root>

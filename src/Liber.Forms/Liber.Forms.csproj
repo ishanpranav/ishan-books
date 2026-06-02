@@ -41,6 +41,7 @@
 	  <None Remove="styles\base\income-statement.xslt" />
 	  <None Remove="styles\base\tax-reconciliation.xslt" />
 	  <None Remove="styles\cash-flow-statement.xslt" />
+	  <None Remove="styles\chart.css" />
 	  <None Remove="styles\comparative-balance-sheet.xslt" />
 	  <None Remove="styles\comprehensive-income-statement.xslt" />
 	  <None Remove="styles\customer-report.xslt" />
@@ -94,6 +95,9 @@
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="scripts\time-series.js">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="styles\chart.css">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="styles\common-size-quarterly-report.xslt">

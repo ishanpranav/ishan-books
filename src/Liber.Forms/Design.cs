@@ -36,16 +36,6 @@ internal static class Design
         //    button.FlatAppearance.BorderSize = 1;
         //}
 
-        if (control is DataGridView dataGridView)
-        {
-            dataGridView.AlternatingRowsDefaultCellStyle.BackColor = Color.Black.Tint(0.05);
-            dataGridView.AlternatingRowsDefaultCellStyle.SelectionBackColor = Colors.Primary.Tint(0.15);
-            dataGridView.AlternatingRowsDefaultCellStyle.SelectionForeColor = Colors.Black;
-            dataGridView.BackgroundColor = Colors.Light;
-            dataGridView.DefaultCellStyle.SelectionBackColor = Colors.Primary.Tint(0.15);
-            dataGridView.DefaultCellStyle.SelectionForeColor = Colors.Black;
-        }
-
         if (control is PropertyGrid propertyGrid)
         {
             propertyGrid.SelectedItemWithFocusBackColor = Colors.Primary.Tint(0.15);

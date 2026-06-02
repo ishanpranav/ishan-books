@@ -594,20 +594,20 @@ public sealed class Company
         }
     }
 
-    public IEnumerable<(Account Parent, AccountType Type, BalanceInfo Balances)> GetBalancesByParentAndType(
+    public IEnumerable<(Account Parent, BalanceInfo Balances)> GetBalancesByParent(
         IReadOnlySet<Account> visibleAccounts,
         ReportTypes type,
         DateTime started,
         DateTime posted,
         Regex filter)
     {
-        foreach (IGrouping<(Account Account, AccountType Type), (Account, ParentKey, BalanceInfo)> group in GetBalancesByKey(
+        foreach (IGrouping<Account, (Account, ParentKey, BalanceInfo)> group in GetBalancesByKey(
                 visibleAccounts,
                 type,
                 started,
                 posted,
                 filter)
-            .GroupBy(x => (x.Parent, x.Key.Type)))
+            .GroupBy(x => x.Parent))
         {
             BalanceInfo result = new BalanceInfo();
 
@@ -618,7 +618,7 @@ public sealed class Company
                 result.AverageDailyBalance += balance.AverageDailyBalance;
             }
 
-            yield return (group.Key.Account, group.Key.Type, result);
+            yield return (group.Key,  result);
         }
     }
 
@@ -626,14 +626,19 @@ public sealed class Company
     {
         Color result = account.Color;
 
-        if (result == Color)
-        {
-            result = _accounts[account.ParentId].Color;
-        }
-
         if (result == Color.Empty)
         {
             result = Color;
+        }
+
+        if (result == Color && account.ParentId != Guid.Empty)
+        {
+            result = _accounts[account.ParentId].Color;
+
+            if (result == Color.Empty)
+            {
+                result = Color;
+            }
         }
 
         return result;

@@ -19,6 +19,7 @@ internal sealed partial class AccountsForm : Form
     private readonly Company _company;
     private readonly FormFactory _factory;
     private readonly Dictionary<Guid, ListViewItem> _items = new Dictionary<Guid, ListViewItem>();
+    private readonly Dictionary<Color, int> _imageIndices = new Dictionary<Color, int>();
 
     public AccountsForm(Company company, FormFactory factory)
     {
@@ -127,6 +128,18 @@ internal sealed partial class AccountsForm : Form
 
         balance = value.Type.ToBalance(balance);
 
+        Color color = _company.GetColorOrDefault(value);
+
+        if (!_imageIndices.TryGetValue(color, out int imageIndex))
+        {
+            imageIndex = _imageList.Images.Count;
+            _imageIndices[color] = imageIndex;
+
+            _imageList.Images.Add(CreateColorImage(color));
+        }
+
+        item.ImageIndex = imageIndex;
+
         item.SubItems.Add(value.Number.ToString()).Tag = value.Number;
         item.SubItems.Add(value.Type.Humanize());
         item.SubItems.Add(value.CashFlow.Humanize());
@@ -135,12 +148,25 @@ internal sealed partial class AccountsForm : Form
 
         if (value.Placeholder)
         {
-            item.ForeColor = SystemColors.GrayText;
+            item.ForeColor = Colors.Gray;
         }
-        else
-        {
-            item.ForeColor = SystemColors.ControlText;
-        }
+    }
+
+    private static Bitmap CreateColorImage(Color color)
+    {
+        Bitmap result = new Bitmap(16, 16);
+
+        using Graphics graphics = Graphics.FromImage(result);
+
+        graphics.Clear(Color.Transparent);
+
+        using SolidBrush solidBrush = new SolidBrush(color);
+        using Pen pen = new Pen(Colors.Gray);
+
+        graphics.FillRectangle(solidBrush, x: 3, y: 3, width: 10, height: 10);
+        graphics.DrawRectangle(pen, x: 3, y: 3, width: 9, height: 9);
+
+        return result;
     }
 
     private void OnCompanyAccountAdded(object? sender, GuidEventArgs e)
