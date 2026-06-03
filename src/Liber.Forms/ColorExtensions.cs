@@ -31,7 +31,15 @@ internal static class ColorExtensions
         double g = source.G * weight + other.G * (1 - weight);
         double b = source.B * weight + other.B * (1 - weight);
 
-        return Color.FromArgb((int)r, (int)g, (int)b);
+        return Color.FromArgb(
+            (int)double.Round(r),
+            (int)double.Round(g),
+            (int)double.Round(b));
+    }
+
+    public static Color Interpolate(this Color source, Color other, double value)
+    {
+        return source.Mix(other, 1 - value);
     }
 
     public static Color Tint(this Color source, double weight)

@@ -4,7 +4,6 @@
 
 using System;
 using System.ComponentModel;
-using System.Linq;
 using CsvHelper.Configuration.Attributes;
 
 namespace Liber;
@@ -131,6 +130,11 @@ public static class AccountTypeExtensions
         return int.Abs((short)value);
     }
 
+    public static bool IsDebit(this AccountType value, decimal debit)
+    {
+        return short.Sign((short)value) == decimal.Sign(debit);
+    }
+
     public static bool IsAsset(this AccountType value)
     {
         switch (value)
@@ -141,18 +145,17 @@ public static class AccountTypeExtensions
             case AccountType.FixedAsset:
             case AccountType.OtherAsset:
                 return true;
-
-            default:
-                return false;
         }
+
+        return false;
     }
 
     public static bool IsTemporary(this AccountType value)
     {
         switch (value)
         {
-            case AccountType.Expense:
             case AccountType.Income:
+            case AccountType.Expense:
             case AccountType.Cost:
             case AccountType.OtherIncomeExpense:
             case AccountType.IncomeTaxExpense:
@@ -170,7 +173,7 @@ public static class AccountTypeExtensions
 
     public static decimal ToBalance(this AccountType value, decimal debit)
     {
-        return Math.Sign((short)value) * debit;
+        return short.Sign((short)value) * debit;
     }
 
     public static CashFlow ToCashFlow(this AccountType value)

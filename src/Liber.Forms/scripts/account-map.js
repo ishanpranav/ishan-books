@@ -37,7 +37,7 @@ const config = {
 async function main() {
     config.options.plugins.title.text = await report.title;
 
-    const tree = JSON.parse(await report.getAccountMap);
+    const tree = JSON.parse(await window.report.getReport(report));
     const backColorMap = Object.fromEntries(tree.map(d => [d.name, d.backgroundColor]));
     const foreColorMap = Object.fromEntries(tree.map(d => [d.name, d.color]));
     const key = 'Balance';

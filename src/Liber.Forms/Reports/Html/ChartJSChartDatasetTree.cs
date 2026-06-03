@@ -14,6 +14,9 @@ internal sealed class ChartJSChartDatasetTree
     public double Value { get; set; }
 
     [JsonConverter(typeof(ChartJSColorConverter))]
+    public Color? Color { get; set; }
+
+    [JsonConverter(typeof(ChartJSColorConverter))]
     public Color? BackgroundColor { get; set; }
 
     public ChartJSChartDatasetTree(string name)

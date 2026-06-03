@@ -83,6 +83,9 @@
 	  <Content Include="favicon.ico">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
+	  <Content Include="pages\heat-account-map.html">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
 	  <Content Include="pages\account-map.html">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>

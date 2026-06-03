@@ -487,7 +487,8 @@ public sealed class Company
         {
             return new BalanceInfo()
             {
-                Balance = account.GetBalance(started, posted, filter)
+                Balance = account.GetBalance(started, posted, filter),
+                Previous = account.GetBalance(started - (posted - started), started, filter)
             };
         }
 

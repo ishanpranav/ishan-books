@@ -177,7 +177,34 @@ public class HtmlReport : IntervalView
         return result;
     }
 
-    private Color GetColorOrDefault(string name, Color color, ref bool hasColor)
+    private static Color GetBaseColor(AccountType type, decimal balance)
+    {
+        balance = type.ToBalance(balance);
+
+        if (type == AccountType.Equity)
+        {
+            return Colors.DarkAmethyst;
+        }
+
+        if (type.IsTemporary())
+        {
+            if (type.IsDebit(balance))
+            {
+                return Colors.HoneyBronze;
+            }
+
+            return Colors.JungleTeal;
+        }
+
+        if (type.IsDebit(balance))
+        {
+            return Colors.BlueBell;
+        }
+
+        return Colors.TigerFlame;
+    }
+
+    private Color GetColorOrDefault(string name, AccountType type, Color color, decimal balance, ref bool hasColor)
     {
         if (color == Company.Color)
         {
@@ -186,11 +213,12 @@ public class HtmlReport : IntervalView
 
             hash >>= 1;
 
-            double factor = 0.25 + (hash % 100) / 100d * 0.5;
+            double factor = 0.35 + (hash % 100) / 100d * 0.5;
 
+            Color baseColor = GetBaseColor(type, balance);
             Color backgroundColor = tint
-                ? Colors.Primary.Tint(factor)
-                : Colors.Primary.Shade(factor);
+                ? baseColor.Tint(factor)
+                : baseColor.Shade(factor);
 
             return backgroundColor;
         }
@@ -215,8 +243,8 @@ public class HtmlReport : IntervalView
             }
 
             labels.Add(name);
-            data.Add((double)type.ToBalance(balances.Balance));
-            backgroundColors.Add(GetColorOrDefault(name, color, ref hasColor));
+            data.Add(double.Round(double.Abs((double)balances.Balance), 2));
+            backgroundColors.Add(GetColorOrDefault(name, type, color, balances.Balance, ref hasColor));
         }
 
         ChartJSChartDataset dataset = new ChartJSChartDataset(data);
@@ -236,7 +264,7 @@ public class HtmlReport : IntervalView
     {
         List<ChartJSChartDatasetTree> nodes = new List<ChartJSChartDatasetTree>();
         HashSet<AccountType> types = new HashSet<AccountType>();
-        IEnumerable<(string Name, AccountType Type, Color Color, BalanceInfo Balances)> accounts =
+        IEnumerable<(string, AccountType Type, Color, BalanceInfo)> accounts =
             GetBalances(partition: true);
 
         accounts = accounts.OrderBy(x => x.Type.ToInt32());
@@ -251,13 +279,116 @@ public class HtmlReport : IntervalView
             }
 
             bool hasColor = false;
+            Color backgroundColor = GetColorOrDefault(name, type, color, balances.Balance, ref hasColor);
 
             nodes.Add(new ChartJSChartDatasetTree(name)
             {
                 Parent = parent,
-                Value = (double)type.ToBalance(balances.Balance),
-                BackgroundColor = GetColorOrDefault(name, color, ref hasColor)
+                Value = double.Round(double.Abs((double)balances.Balance), 2),
+                Color = backgroundColor.GetForeColor(),
+                BackgroundColor = backgroundColor
             });
+        }
+
+        return JsonSerializer.Serialize(nodes, s_options);
+    }
+
+    private static Color GetHeatColor(double value, double min, double max, AccountType type)
+    {
+        if (value == 0)
+        {
+            return Colors.Light;
+        }
+
+        bool isTemporary = type.IsTemporary();
+        bool isDebit = type.IsDebit(double.IsPositiveInfinity(value)
+            ? decimal.MaxValue
+            : (decimal)value);
+        double t;
+
+        if ((isTemporary && isDebit) || (!isTemporary && !isDebit))
+        {
+            if (double.IsPositiveInfinity(value))
+            {
+                return Colors.Danger;
+            }
+
+            double range = min;
+
+            if (range == 0)
+            {
+                return Colors.Danger;
+            }
+
+            t = double.Clamp(value / range, min: 0, max: 1);
+
+            return Colors.Danger.Mix(Colors.Light, 1 - t);
+        }
+
+        if (double.IsPositiveInfinity(value))
+        {
+            return Colors.Danger;
+        }
+
+        if (max == 0)
+        {
+            return Colors.Success;
+        }
+
+        t = double.Clamp(value / max, min: 0, max: 1);
+
+        return Colors.Success.Mix(Colors.Light, 1 - t);
+    }
+
+    public string GetHeatAccountMap()
+    {
+        List<ChartJSChartDatasetTree> nodes = new List<ChartJSChartDatasetTree>();
+        HashSet<AccountType> types = new HashSet<AccountType>();
+        IEnumerable<(string, AccountType Type, Color, BalanceInfo)> accounts =
+            GetBalances(partition: true);
+
+        accounts = accounts.OrderBy(x => x.Type.ToInt32());
+
+        double min = 0;
+        double max = 0;
+        List<(double Value, AccountType Type)> values = new List<(double, AccountType)>();
+
+        foreach ((string name, AccountType type, Color _, BalanceInfo balances) in accounts)
+        {
+            double value = balances.Previous == 0
+                ? double.PositiveInfinity
+                : double.Round((double)type.ToBalance((balances.Balance / balances.Previous) - 1) * 100, digits: 2);
+
+            if (value < min)
+            {
+                min = value;
+            }
+
+            if (value > max)
+            {
+                max = value;
+            }
+
+            nodes.Add(new ChartJSChartDatasetTree(name)
+            {
+                Parent = FormattedStrings.GetString(type.ToString()),
+                Value = (double)type.ToBalance(balances.Balance)
+            });
+            values.Add((value, type));
+            types.Add(type);
+        }
+
+        for (int i = 0; i < nodes.Count; i++)
+        {
+            Color backgroundColor = GetHeatColor(values[i].Value, min, max, values[i].Type);
+
+            nodes[i].Color = backgroundColor.GetForeColor();
+            nodes[i].BackgroundColor = backgroundColor;
+        }
+
+        foreach (AccountType type in types)
+        {
+            nodes.Add(new ChartJSChartDatasetTree(FormattedStrings.GetString(type.ToString())));
         }
 
         return JsonSerializer.Serialize(nodes, s_options);
