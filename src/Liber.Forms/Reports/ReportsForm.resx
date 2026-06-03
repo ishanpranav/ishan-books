@@ -127,7 +127,7 @@
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="splitContainer1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="splitContainer2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -136,7 +136,7 @@
     <value>0, 0</value>
   </data>
   <data name="splitContainer2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="splitContainer2.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
     <value>Horizontal</value>
@@ -154,10 +154,10 @@
     <value>0, 0</value>
   </data>
   <data name="_listView.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="_listView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 268</value>
+    <value>119, 160</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="_listView.TabIndex" type="System.Int32, mscorlib">
@@ -194,10 +194,10 @@
     <value>0, 0</value>
   </data>
   <data name="_propertyGrid.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="_propertyGrid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 281</value>
+    <value>119, 169</value>
   </data>
   <data name="_propertyGrid.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -227,13 +227,13 @@
     <value>1</value>
   </data>
   <data name="splitContainer2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 554</value>
+    <value>119, 332</value>
   </data>
   <data name="splitContainer2.SplitterDistance" type="System.Int32, mscorlib">
-    <value>268</value>
+    <value>160</value>
   </data>
   <data name="splitContainer2.SplitterWidth" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>3</value>
   </data>
   <data name="splitContainer2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -269,10 +269,10 @@
     <value>0, 0</value>
   </data>
   <data name="_webView.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="_webView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>642, 554</value>
+    <value>450, 332</value>
   </data>
   <data name="_webView.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -302,13 +302,10 @@
     <value>1</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>819, 554</value>
+    <value>573, 332</value>
   </data>
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
-    <value>171</value>
-  </data>
-  <data name="splitContainer1.SplitterWidth" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>119</value>
   </data>
   <data name="splitContainer1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -335,13 +332,13 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>10, 25</value>
+    <value>7, 15</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>819, 554</value>
+    <value>573, 332</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 4, 4, 4</value>
+    <value>3, 2, 3, 2</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Report Center</value>

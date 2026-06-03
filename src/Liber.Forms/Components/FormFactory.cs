@@ -13,16 +13,20 @@ internal sealed class FormFactory : Component
 {
     private readonly Dictionary<Guid, Form> _forms = new Dictionary<Guid, Form>();
 
+    [Browsable(false)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    public Form? Parent { get; private set; }
+
+    [Browsable(false)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    public Form? Embedded { get; private set; }
+
     public FormFactory() { }
 
     public FormFactory(IContainer container)
     {
         container.Add(this);
     }
-
-    [Browsable(false)]
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    public Form? Parent { get; set; }
 
     public void Register(Guid key, Form value)
     {
@@ -31,6 +35,52 @@ internal sealed class FormFactory : Component
         value.FormClosed += (_, _) => _forms.Remove(key);
 
         value.Show();
+    }
+
+    public void RegisterEmbedded(Guid key, Form parent, Form value)
+    {
+        if (Parent != null)
+        {
+            Parent.Resize -= OnParentResize;
+        }
+
+        if (Embedded != null)
+        {
+            Embedded.Close();
+        }
+
+        Embedded = value;
+        Parent = parent;
+
+        _forms.Add(key, value);
+
+        value.FormClosed += (_, _) =>
+        {
+            _forms.Remove(key);
+
+            Parent = null;
+            Embedded = null;
+        };
+        value.FormBorderStyle = FormBorderStyle.None;
+        value.ControlBox = false;
+        value.MdiParent = parent;
+        value.Text = string.Empty;
+        value.WindowState = FormWindowState.Minimized;
+        parent.Resize += OnParentResize;
+
+        value.Show();
+        parent.BeginInvoke(() =>
+        {
+            value.WindowState = FormWindowState.Maximized;
+        });
+    }
+
+    private void OnParentResize(object? sender, EventArgs e)
+    {
+        if (Embedded != null)
+        {
+            Embedded.WindowState = FormWindowState.Maximized;
+        }
     }
 
     public void Kill(Guid key)

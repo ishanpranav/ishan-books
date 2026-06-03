@@ -371,7 +371,7 @@
     <value>&amp;View</value>
   </data>
   <data name="otherReportsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>147, 22</value>
   </data>
   <data name="otherReportsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Other Reports</value>
@@ -546,6 +546,9 @@
   </metadata>
   <metadata name="_factory.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 60</value>
+  </metadata>
+  <metadata name="_timer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>113, 60</value>
   </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -760,6 +763,12 @@
   <data name="&gt;&gt;reportsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;toolStripSeparator9.Name" xml:space="preserve">
+    <value>toolStripSeparator9</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;otherWindowsToolStripMenuItem.Name" xml:space="preserve">
     <value>otherWindowsToolStripMenuItem</value>
   </data>
@@ -856,11 +865,11 @@
   <data name="&gt;&gt;_factory.Type" xml:space="preserve">
     <value>Liber.Forms.Components.FormFactory, Liber.Forms, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator9.Name" xml:space="preserve">
-    <value>toolStripSeparator9</value>
+  <data name="&gt;&gt;_timer.Name" xml:space="preserve">
+    <value>_timer</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;_timer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainForm</value>

@@ -66,6 +66,7 @@ partial class MainForm
         checkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
         reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
         otherWindowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         newAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         transactionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -83,7 +84,7 @@ partial class MainForm
         _saveFileDialog = new System.Windows.Forms.SaveFileDialog();
         _recentPathManager = new RecentPathManager(components);
         _factory = new FormFactory(components);
-        toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+        _timer = new System.Windows.Forms.Timer(components);
         _menuStrip.SuspendLayout();
         _toolStrip.SuspendLayout();
         SuspendLayout();
@@ -282,6 +283,11 @@ partial class MainForm
         resources.ApplyResources(reportsToolStripMenuItem, "reportsToolStripMenuItem");
         reportsToolStripMenuItem.Click += OnReportsToolStripMenuItemClick;
         // 
+        // toolStripSeparator9
+        // 
+        toolStripSeparator9.Name = "toolStripSeparator9";
+        resources.ApplyResources(toolStripSeparator9, "toolStripSeparator9");
+        // 
         // otherWindowsToolStripMenuItem
         // 
         otherWindowsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { newAccountToolStripMenuItem, transactionsToolStripMenuItem });
@@ -380,10 +386,10 @@ partial class MainForm
         // 
         _recentPathManager.Updated += OnRecentPathManagerUpdated;
         // 
-        // toolStripSeparator9
+        // _timer
         // 
-        toolStripSeparator9.Name = "toolStripSeparator9";
-        resources.ApplyResources(toolStripSeparator9, "toolStripSeparator9");
+        _timer.Interval = 30000;
+        _timer.Tick += OnTimerTick;
         // 
         // MainForm
         // 
@@ -392,6 +398,7 @@ partial class MainForm
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         Controls.Add(_toolStrip);
         Controls.Add(_menuStrip);
+        IsMdiContainer = true;
         MainMenuStrip = _menuStrip;
         Name = "MainForm";
         WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -461,4 +468,5 @@ partial class MainForm
     private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem otherReportsToolStripMenuItem;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+    private System.Windows.Forms.Timer _timer;
 }
