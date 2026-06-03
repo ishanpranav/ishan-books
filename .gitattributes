@@ -75,3 +75,5 @@
 *.deploy binary
 docs/*.css linguist-detectable
 src/Liber.Forms/scripts/chart.js linguist-vendored
+src/Liber.Forms/scripts/chartjs-chart-treemap.js linguist-vendored
+src/Liber.Forms/scripts/chartjs-chart-sankey.js linguist-vendored

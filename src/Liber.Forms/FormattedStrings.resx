@@ -645,4 +645,10 @@
   <data name="_r_2_heat-account-map" xml:space="preserve">
     <value>Account Map</value>
   </data>
+  <data name="_r_sankey-diagram" xml:space="preserve">
+    <value>Sankey Diagram</value>
+  </data>
+  <data name="_r_1_sankey-diagram" xml:space="preserve">
+    <value>Income and Expense Report</value>
+  </data>
 </root>

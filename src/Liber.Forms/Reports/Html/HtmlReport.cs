@@ -177,9 +177,9 @@ public class HtmlReport : IntervalView
         return result;
     }
 
-    private static Color GetBaseColor(AccountType type, decimal balance)
+    private static Color GetBaseColor(AccountType type, decimal debit)
     {
-        balance = type.ToBalance(balance);
+        decimal balance = type.ToBalance(debit);
 
         if (type == AccountType.Equity)
         {
@@ -204,7 +204,7 @@ public class HtmlReport : IntervalView
         return Colors.TigerFlame;
     }
 
-    private Color GetColorOrDefault(string name, AccountType type, Color color, decimal balance, ref bool hasColor)
+    private Color GetColorOrDefault(string name, AccountType type, Color color, decimal debit)
     {
         if (color == Company.Color)
         {
@@ -215,15 +215,13 @@ public class HtmlReport : IntervalView
 
             double factor = 0.35 + (hash % 100) / 100d * 0.5;
 
-            Color baseColor = GetBaseColor(type, balance);
+            Color baseColor = GetBaseColor(type, debit);
             Color backgroundColor = tint
                 ? baseColor.Tint(factor)
                 : baseColor.Shade(factor);
 
             return backgroundColor;
         }
-
-        hasColor = true;
 
         return color;
     }
@@ -233,7 +231,6 @@ public class HtmlReport : IntervalView
         List<string> labels = new List<string>();
         List<double> data = new List<double>();
         List<Color> backgroundColors = new List<Color>();
-        bool hasColor = false;
 
         foreach ((string name, AccountType type, Color color, BalanceInfo balances) in GetBalances())
         {
@@ -244,15 +241,13 @@ public class HtmlReport : IntervalView
 
             labels.Add(name);
             data.Add(double.Round(double.Abs((double)balances.Balance), 2));
-            backgroundColors.Add(GetColorOrDefault(name, type, color, balances.Balance, ref hasColor));
+            backgroundColors.Add(GetColorOrDefault(name, type, color, balances.Balance));
         }
 
-        ChartJSChartDataset dataset = new ChartJSChartDataset(data);
-
-        if (hasColor)
+        ChartJSChartDataset dataset = new ChartJSChartDataset(data)
         {
-            dataset.BackgroundColors = backgroundColors;
-        }
+            BackgroundColors = backgroundColors
+        };
 
         return JsonSerializer.Serialize(new ChartJSChartData(labels, new ChartJSChartDataset[]
         {
@@ -278,8 +273,7 @@ public class HtmlReport : IntervalView
                 nodes.Add(new ChartJSChartDatasetTree(parent));
             }
 
-            bool hasColor = false;
-            Color backgroundColor = GetColorOrDefault(name, type, color, balances.Balance, ref hasColor);
+            Color backgroundColor = GetColorOrDefault(name, type, color, balances.Balance);
 
             nodes.Add(new ChartJSChartDatasetTree(name)
             {
@@ -392,5 +386,159 @@ public class HtmlReport : IntervalView
         }
 
         return JsonSerializer.Serialize(nodes, s_options);
+    }
+
+    public string GetSankeyDiagram()
+    {
+        List<ChartJSChartDatasetSankeyData> data = new List<ChartJSChartDatasetSankeyData>();
+        List<(string, AccountType, Color, BalanceInfo)> balances = GetBalances(partition: true).ToList();
+        decimal grossProfit = 0;
+        decimal operatingIncome = 0;
+        decimal pretaxIncome = 0;
+        decimal netIncome = 0;
+
+        foreach ((string Name, AccountType Type, Color Color, BalanceInfo Balances) in balances)
+        {
+            decimal flow = Type.ToBalance(Balances.Balance);
+
+            switch (Type)
+            {
+                case AccountType.Income:
+                    grossProfit += flow;
+                    break;
+                case AccountType.Cost:
+                    grossProfit -= flow;
+                    break;
+                case AccountType.Expense:
+                    operatingIncome -= flow;
+                    break;
+                case AccountType.OtherIncomeExpense:
+                    pretaxIncome += flow;
+                    break;
+                case AccountType.IncomeTaxExpense:
+                    netIncome -= flow;
+                    break;
+            }
+        }
+
+        operatingIncome += grossProfit;
+        pretaxIncome += operatingIncome;
+        netIncome += pretaxIncome;
+
+        foreach ((string Name, AccountType Type, Color Color, BalanceInfo Balances) in balances)
+        {
+            if (!Type.IsTemporary())
+            {
+                continue;
+            }
+
+            double flow = (double)Type.ToBalance(Balances.Balance);
+
+            if (flow == 0)
+            {
+                continue;
+            }
+
+            string typeString = FormattedStrings.GetString(Type.ToString());
+            Color accountColor = GetColorOrDefault(Name, Type, Color, Balances.Balance);
+            Color typeColor = GetBaseColor(Type, Type.IsDebit(1) ? 1 : -1);
+
+            switch (Type)
+            {
+                case AccountType.Income:
+                    data.Add(new ChartJSChartDatasetSankeyData(Name, typeString, flow)
+                    {
+                        FromColor = accountColor,
+                        ToColor = typeColor
+                    });
+                    data.Add(new ChartJSChartDatasetSankeyData(typeString, FormattedStrings.GrossProfit, flow)
+                    {
+                        FromColor = typeColor,
+                        ToColor = Colors.Primary
+                    });
+                    break;
+
+                case AccountType.Cost:
+                    data.Add(new ChartJSChartDatasetSankeyData(FormattedStrings.GrossProfit, typeString, flow)
+                    {
+                        FromColor = Colors.Primary,
+                        ToColor = typeColor
+                    });
+                    data.Add(new ChartJSChartDatasetSankeyData(typeString, Name, flow)
+                    {
+                        FromColor = typeColor,
+                        ToColor = accountColor
+                    });
+                    break;
+
+                case AccountType.Expense:
+                    data.Add(new ChartJSChartDatasetSankeyData(FormattedStrings.OperatingIncome, typeString, flow)
+                    {
+                        FromColor = Colors.Primary,
+                        ToColor = typeColor
+                    });
+                    data.Add(new ChartJSChartDatasetSankeyData(typeString, Name, flow)
+                    {
+                        FromColor = typeColor,
+                        ToColor = accountColor
+                    });
+                    break;
+
+                case AccountType.OtherIncomeExpense:
+                    data.Add(new ChartJSChartDatasetSankeyData(Name, typeString, flow)
+                    {
+                        FromColor = accountColor,
+                        ToColor = typeColor
+                    });
+                    data.Add(new ChartJSChartDatasetSankeyData(typeString, FormattedStrings.PretaxIncome, flow)
+                    {
+                        FromColor = typeColor,
+                        ToColor = Colors.Primary
+                    });
+                    break;
+
+                case AccountType.IncomeTaxExpense:
+                    data.Add(new ChartJSChartDatasetSankeyData(FormattedStrings.PretaxIncome, typeString, flow)
+                    {
+                        FromColor = Colors.Primary,
+                        ToColor = typeColor
+                    });
+                    data.Add(new ChartJSChartDatasetSankeyData(typeString, Name, flow)
+                    {
+                        FromColor = typeColor,
+                        ToColor = accountColor
+                    });
+                    break;
+            }
+        }
+
+        if (grossProfit > 0)
+        {
+            data.Add(new ChartJSChartDatasetSankeyData(FormattedStrings.GrossProfit, FormattedStrings.OperatingIncome, (double)grossProfit)
+            {
+                FromColor = Colors.Primary,
+                ToColor = Colors.Primary
+            });
+        }
+
+        if (operatingIncome > 0)
+        {
+            data.Add(new ChartJSChartDatasetSankeyData(FormattedStrings.OperatingIncome, FormattedStrings.PretaxIncome, (double)operatingIncome)
+            {
+                FromColor = Colors.Primary,
+                ToColor = Colors.Primary
+            });
+        }
+
+        if (pretaxIncome > 0)
+        {
+            data.Add(new ChartJSChartDatasetSankeyData(FormattedStrings.PretaxIncome, FormattedStrings.NetIncome, (double)pretaxIncome)
+            {
+                FromColor = Colors.Primary,
+                ToColor = Colors.Primary
+            });
+        }
+
+        return JsonSerializer.Serialize(data, s_options);
     }
 }

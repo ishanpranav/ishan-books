@@ -27,12 +27,15 @@
 	  <None Remove="checks\voucher.chk" />
 	  <None Remove="data\reports.json" />
 	  <None Remove="pages\account-map.html" />
+	  <None Remove="pages\sankey-diagram.html" />
 	  <None Remove="pages\time-series.html" />
 	  <None Remove="Properties\Resources.en.restext" />
 	  <None Remove="Properties\Resources.es-ES.restext" />
 	  <None Remove="scripts\account-map.js" />
 	  <None Remove="scripts\chart.js" />
+	  <None Remove="scripts\chartjs-chart-sankey.js" />
 	  <None Remove="scripts\chartjs-chart-treemap.js" />
+	  <None Remove="scripts\sankey-diagram.js" />
 	  <None Remove="scripts\time-series.js" />
 	  <None Remove="styles\account-summary.xslt" />
 	  <None Remove="styles\annual-report.xslt" />
@@ -92,10 +95,16 @@
 	  <Content Include="pages\pie-chart.html">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
+	  <Content Include="pages\sankey-diagram.html">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
 	  <Content Include="pages\time-series.html">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="scripts\account-map.js">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="scripts\chartjs-chart-sankey.js">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="scripts\chartjs-chart-treemap.js">
@@ -105,6 +114,9 @@
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="scripts\chart.js">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="scripts\sankey-diagram.js">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="scripts\time-series.js">
