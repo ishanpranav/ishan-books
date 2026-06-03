@@ -250,6 +250,15 @@
             "license": "mit_kurkela",
             "copyright": "2019-2021 Jukka Kurkela",
             "index": "Kurkela"
+        },
+        {
+            "title": "chartjs-chart-sankey",
+            "formats": [ "javascript", "typescript" ],
+            "source": "https://github.com/kurkle/chartjs-chart-sankey",
+            "author": "Jukka Kurkela",
+            "license": "mit_kurkela",
+            "copyright": "2019-2026 Jukka Kurkela",
+            "index": "Kurkela"
         }
     ],
   "references": [

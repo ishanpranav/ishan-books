@@ -42,6 +42,39 @@ internal static class FormattedStrings
         }
     }
 
+    public static string GrossProfit
+    {
+        get
+        {
+            return GetString("_p_gross-profit");
+        }
+    }
+
+    public static string OperatingIncome
+    {
+        get
+        {
+            return GetString("_p_operating-income");
+        }
+    }
+
+    public static string PretaxIncome
+    {
+        get
+        {
+            return GetString("_p_pretax-income");
+        }
+    }
+
+    public static string NetIncome
+    {
+        get
+        {
+            return GetString("_p_net-income");
+        }
+    }
+
+
     public static Uri AboutUrl
     {
         get
