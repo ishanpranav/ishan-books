@@ -36,6 +36,11 @@ internal static class Design
         //    button.FlatAppearance.BorderSize = 1;
         //}
 
+        if (control is MdiClient mdiClient)
+        {
+            mdiClient.BackColor = Colors.Dark;
+        }
+
         if (control is PropertyGrid propertyGrid)
         {
             propertyGrid.SelectedItemWithFocusBackColor = Colors.Primary.Tint(0.15);

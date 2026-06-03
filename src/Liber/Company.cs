@@ -4,7 +4,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Linq;
 using System.Text.Json.Serialization;
@@ -24,6 +23,103 @@ public sealed class Company
     private readonly Dictionary<Guid, Account> _accounts;
     private readonly SortedSet<Transaction> _transactions;
     private readonly SortedSet<string> _names = new SortedSet<string>();
+
+    private string? _name;
+
+    [Key(0)]
+    public IReadOnlyDictionary<Guid, Account> Accounts
+    {
+        get
+        {
+            return _accounts;
+        }
+    }
+
+    [IgnoreMember]
+    [JsonIgnore]
+    public IEnumerable<KeyValuePair<Guid, Account>> OrderedAccounts
+    {
+        get
+        {
+            return _accounts
+                .OrderBy(x => x.Value.Number)
+                .ThenBy(x => x.Value.Name)
+                .ThenBy(x => x.Value.Type)
+                .ThenByDescending(x => x.Value.Balance);
+        }
+    }
+
+    [Key(1)]
+    public IReadOnlyCollection<Transaction> Transactions
+    {
+        get
+        {
+            return _transactions;
+        }
+    }
+
+    [Key(2)]
+    public decimal NextAccountNumber { get; private set; } = 1;
+
+    [Key(3)]
+    public decimal NextTransactionNumber { get; private set; } = 1;
+
+    [Key(4)]
+    public string? Name
+    {
+        get
+        {
+            return _name;
+        }
+        set
+        {
+            _name = value;
+
+            NameChanged?.Invoke(sender: this, EventArgs.Empty);
+        }
+    }
+
+    [IgnoreMember]
+    [JsonIgnore]
+    public string DisplayName
+    {
+        get
+        {
+            return Name ?? Resources.DefaultCompanyName;
+        }
+    }
+
+    [Key(5)]
+    public CompanyType Type { get; set; }
+
+    [Key(6)]
+    [MessagePackFormatter(typeof(MessagePackColorFormatter))]
+    public Color Color { get; set; } = Color.FromArgb(red: 224, green: 220, blue: 228);
+
+    [Key(7)]
+    public Guid EquityAccountId { get; set; }
+
+    [Key(8)]
+    public Guid OtherEquityAccountId { get; set; }
+
+    [IgnoreMember]
+    [JsonIgnore]
+    public string? Password { get; set; }
+
+    [IgnoreMember]
+    [JsonIgnore]
+    public Transaction? LastTransaction
+    {
+        get
+        {
+            return _transactions.Max;
+        }
+    }
+
+    public event EventHandler<GuidEventArgs>? AccountAdded;
+    public event EventHandler<GuidEventArgs>? AccountUpdated;
+    public event EventHandler<GuidEventArgs>? AccountRemoved;
+    public event EventHandler? NameChanged;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Company"/> class.
@@ -83,88 +179,6 @@ public sealed class Company
             }
         }
     }
-
-    [Key(0)]
-    public IReadOnlyDictionary<Guid, Account> Accounts
-    {
-        get
-        {
-            return _accounts;
-        }
-    }
-
-    [IgnoreMember]
-    [JsonIgnore]
-    public IEnumerable<KeyValuePair<Guid, Account>> OrderedAccounts
-    {
-        get
-        {
-            return _accounts
-                .OrderBy(x => x.Value.Number)
-                .ThenBy(x => x.Value.Name)
-                .ThenBy(x => x.Value.Type)
-                .ThenByDescending(x => x.Value.Balance);
-        }
-    }
-
-    [Key(1)]
-    public IReadOnlyCollection<Transaction> Transactions
-    {
-        get
-        {
-            return _transactions;
-        }
-    }
-
-    [Key(2)]
-    public decimal NextAccountNumber { get; private set; } = 1;
-
-    [Key(3)]
-    public decimal NextTransactionNumber { get; private set; } = 1;
-
-    [Key(4)]
-    public string? Name { get; set; }
-
-    [IgnoreMember]
-    [JsonIgnore]
-    public string DisplayName
-    {
-        get
-        {
-            return Name ?? Resources.DefaultCompanyName;
-        }
-    }
-
-    [Key(5)]
-    public CompanyType Type { get; set; }
-
-    [Key(6)]
-    [MessagePackFormatter(typeof(MessagePackColorFormatter))]
-    public Color Color { get; set; } = Color.FromArgb(221, 237, 224);
-
-    [Key(7)]
-    public Guid EquityAccountId { get; set; }
-
-    [Key(8)]
-    public Guid OtherEquityAccountId { get; set; }
-
-    [IgnoreMember]
-    [JsonIgnore]
-    public string? Password { get; set; }
-
-    [IgnoreMember]
-    [JsonIgnore]
-    public Transaction? LastTransaction
-    {
-        get
-        {
-            return _transactions.Max;
-        }
-    }
-
-    public event EventHandler<GuidEventArgs>? AccountAdded;
-    public event EventHandler<GuidEventArgs>? AccountUpdated;
-    public event EventHandler<GuidEventArgs>? AccountRemoved;
 
     public string[] GetNames()
     {

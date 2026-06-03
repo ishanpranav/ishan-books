@@ -31,6 +31,4 @@ internal static class Colors
     public static readonly Color Primary = DarkAmethyst;
     public static readonly Color Success = JungleTeal;
     public static readonly Color Danger = FlagRed;
-    public static readonly Color ButtonHoverBackground = Primary.Shade(0.2);
-    public static readonly Color ButtonActiveBackground = Primary.Shade(0.15);
 }

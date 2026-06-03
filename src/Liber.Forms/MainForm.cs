@@ -3,7 +3,6 @@
 // Licensed under the MIT License.
 
 using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -17,8 +16,6 @@ using Liber.Forms.Companies;
 using Liber.Forms.Lines;
 using Liber.Forms.Properties;
 using Liber.Forms.Reports;
-using Liber.Forms.Reports.Gdi;
-using Liber.Forms.Reports.Xsl;
 using Liber.Forms.Saving;
 using Liber.Forms.Transactions;
 using Liber.Forms.Writers;
@@ -39,6 +36,8 @@ internal sealed partial class MainForm : Form
     private readonly Company _company = new Company();
 
     private ReportEngine? _engine;
+    private IntervalView? _favoriteReport;
+    private bool _isFavoriteTemporary;
     private string? _path;
 
     public MainForm()
@@ -46,7 +45,6 @@ internal sealed partial class MainForm : Form
         InitializeComponent();
         SystemFeatures.Initialize(this);
 
-        BackColor = Colors.Dark;
         Text = SystemFeatures.ApplicationName;
         aboutToolStripMenuItem.Text = FormattedStrings.AboutText;
         _company.AccountRemoved += (sender, e) => _factory.Kill(e.Id);
@@ -70,6 +68,63 @@ internal sealed partial class MainForm : Form
         {
             await ImportAsync(_recentPathManager.Paths.First());
         }
+
+        ReportsForm form = new ReportsForm(_engine);
+
+        form.Load += (_, _) =>
+        {
+            if (_engine.Views.TryGetValue("account-map", out IReportView? view) &&
+                view.Properties is IntervalView report)
+            {
+                report.Title = _company.DisplayName;
+                _company.NameChanged += (_, _) =>
+                {
+                    report.Title = _company.DisplayName;
+                };
+                _favoriteReport = report;
+
+                RefreshFavoriteReport();
+                _timer.Start();
+            }
+        };
+        form.Edited += OnReportsFormEdited;
+        form.FormClosed += OnReportsFormEdited;
+
+        _factory.RegisterEmbedded(Guid.NewGuid(), parent: this, form);
+    }
+
+    private void OnReportsFormEdited(object? sender, EventArgs e)
+    {
+        _timer.Stop();
+
+        _favoriteReport = null;
+    }
+
+    private void OnTimerTick(object sender, EventArgs e)
+    {
+        RefreshFavoriteReport();
+    }
+
+    private void RefreshFavoriteReport()
+    {
+        if (_favoriteReport == null || _factory.Embedded is not ReportsForm form)
+        {
+            if (_timer.Enabled)
+            {
+                _timer.Stop();
+            }
+
+            return;
+        }
+
+        _favoriteReport.Accounts = new AccountsView(
+            _company,
+            _company.Accounts.Values
+                .Where(x => _isFavoriteTemporary ? !x.Type.IsTemporary() : x.Type.IsTemporary())
+                .ToHashSet());
+        _isFavoriteTemporary = !_isFavoriteTemporary;
+
+        form.InitializeReport("account-map");
     }
 
     private void InitializeRecentPaths()
@@ -124,6 +179,7 @@ internal sealed partial class MainForm : Form
         catch (UnauthorizedAccessException) { }
     }
 
+    [MemberNotNull(nameof(_engine))]
     private void InitializeReportEngine()
     {
         _engine = new ReportEngine(_company);
@@ -229,6 +285,7 @@ internal sealed partial class MainForm : Form
         _factory.Kill(key);
         _factory.Register(key, form);
     }
+
     private async void OnFormClosing(object sender, FormClosingEventArgs e)
     {
         e.Cancel = await TryCancelAsync();

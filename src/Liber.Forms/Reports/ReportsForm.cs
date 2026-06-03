@@ -13,7 +13,6 @@ using System.Windows.Forms;
 using Liber.Forms.Accounts;
 using Liber.Forms.Lines;
 using Liber.Forms.Reports.Gdi;
-using Liber.Forms.Reports.Xsl;
 using Microsoft.Web.WebView2.Core;
 
 namespace Liber.Forms.Reports;
@@ -21,6 +20,25 @@ namespace Liber.Forms.Reports;
 internal sealed partial class ReportsForm : Form
 {
     private IReportView? _view;
+
+    private IReportView? View
+    {
+        get
+        {
+            return _view;
+        }
+        set
+        {
+            _view = value;
+
+            if (value != null)
+            {
+                _propertyGrid.SelectedObject = value.Properties;
+            }
+        }
+    }
+
+    public event EventHandler? Edited;
 
     public ReportsForm(ReportEngine engine)
     {
@@ -39,23 +57,6 @@ internal sealed partial class ReportsForm : Form
             if (view.Value.Properties is IntervalView report)
             {
                 report.Accounts = new AccountsView(report.Accounts.Company);
-            }
-        }
-    }
-
-    private IReportView? View
-    {
-        get
-        {
-            return _view;
-        }
-        set
-        {
-            _view = value;
-
-            if (value != null)
-            {
-                _propertyGrid.SelectedObject = value.Properties;
             }
         }
     }
@@ -129,11 +130,13 @@ internal sealed partial class ReportsForm : Form
             }
         }
 
+        Edited?.Invoke(sender: this, EventArgs.Empty);
         InitializeReport();
     }
 
-    private void OnPropertyGridPropertyValueChanged(object s, PropertyValueChangedEventArgs e)
+    private void OnPropertyGridPropertyValueChanged(object sender, PropertyValueChangedEventArgs e)
     {
+        Edited?.Invoke(sender: this, EventArgs.Empty);
         InitializeReport();
     }
 
@@ -156,11 +159,10 @@ internal sealed partial class ReportsForm : Form
             return;
         }
 
-        try
+        if (_webView.CoreWebView2 != null)
         {
             View.Navigate(_webView.CoreWebView2);
         }
-        catch { }
     }
 
     protected override void Dispose(bool disposing)

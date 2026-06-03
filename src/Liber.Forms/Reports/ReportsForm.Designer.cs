@@ -81,6 +81,7 @@
             // 
             // _propertyGrid
             // 
+            _propertyGrid.BackColor = System.Drawing.SystemColors.Control;
             resources.ApplyResources(_propertyGrid, "_propertyGrid");
             _propertyGrid.Name = "_propertyGrid";
             _propertyGrid.PropertyValueChanged += OnPropertyGridPropertyValueChanged;

@@ -148,7 +148,7 @@ internal sealed class DesignProfessionalColorTable : ProfessionalColorTable
     {
         get
         {
-            return Colors.ButtonActiveBackground;
+            return Colors.Primary.Shade(0.15);
         }
     }
 
@@ -156,7 +156,7 @@ internal sealed class DesignProfessionalColorTable : ProfessionalColorTable
     {
         get
         {
-            return Colors.ButtonActiveBackground;
+            return Colors.Primary.Shade(0.15);
         }
     }
 
@@ -164,7 +164,7 @@ internal sealed class DesignProfessionalColorTable : ProfessionalColorTable
     {
         get
         {
-            return Colors.ButtonActiveBackground;
+            return Colors.Primary.Shade(0.15);
         }
     }
 
