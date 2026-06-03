@@ -12,33 +12,25 @@ internal static class Colors
     public static readonly Color Black = Color.Black;
     public static readonly Color Gray = ColorTranslator.FromHtml("#6c757d");
     public static readonly Color DarkGray = ColorTranslator.FromHtml("#343a40");
-    public static readonly Color Primary = ColorTranslator.FromHtml("#32174d");
     public static readonly Color Light = ColorTranslator.FromHtml("#f8f9fa");
     public static readonly Color Dark = ColorTranslator.FromHtml("#212529");
+    public static readonly Color Taupe = ColorTranslator.FromHtml("#8f8073");
+    public static readonly Color BrownRed = ColorTranslator.FromHtml("#a22522");
+    public static readonly Color IntenseCherry = ColorTranslator.FromHtml("#c33149");
+    public static readonly Color FlagRed = ColorTranslator.FromHtml("#c1292e");
+    public static readonly Color TigerFlame = ColorTranslator.FromHtml("#f05d23");
+    public static readonly Color ToastedAlmond = ColorTranslator.FromHtml("#ea8c55");
+    public static readonly Color AmberGlow = ColorTranslator.FromHtml("#ff9f1c");
+    public static readonly Color HoneyBronze = ColorTranslator.FromHtml("#f6ae2d");
+    public static readonly Color JungleTeal = ColorTranslator.FromHtml("#5b9279");
+    public static readonly Color DarkFrozenWater = ColorTranslator.FromHtml("#c7ede4");
+    public static readonly Color LightFrozenWater = ColorTranslator.FromHtml("#d5fff3");
+    public static readonly Color BlueBell = ColorTranslator.FromHtml("#20a4f3");
+    public static readonly Color DarkAmethyst = ColorTranslator.FromHtml("#32174d");
+    public static readonly Color SlateGray = ColorTranslator.FromHtml("#7d8491");
+    public static readonly Color Primary = DarkAmethyst;
+    public static readonly Color Success = JungleTeal;
+    public static readonly Color Danger = FlagRed;
     public static readonly Color ButtonHoverBackground = Primary.Shade(0.2);
     public static readonly Color ButtonActiveBackground = Primary.Shade(0.15);
-
-    public static Color FromHsv(double h, double s, double v)
-    {
-        int hi = (int)double.Floor(h / 60) % 6;
-        double f = h / 60 - double.Floor(h / 60);
-
-        v *= 255;
-
-        int value = (int)v;
-        int p = (int)(v * (1 - s));
-        int q = (int)(v * (1 - f * s));
-        int t = (int)(v * (1 - (1 - f) * s));
-
-        switch (hi)
-        {
-            case 0: return Color.FromArgb(value, t, p);
-            case 1: return Color.FromArgb(q, value, p);
-            case 2: return Color.FromArgb(p, value, t);
-            case 3: return Color.FromArgb(p, q, value);
-            case 4: return Color.FromArgb(t, p, value);
-        }
-
-        return Color.FromArgb(255, value, p, q);
-    }
 }

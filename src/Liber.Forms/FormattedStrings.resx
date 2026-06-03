@@ -636,4 +636,13 @@
   <data name="_r_account-map" xml:space="preserve">
     <value>Account Map</value>
   </data>
+  <data name="_r_heat-account-map" xml:space="preserve">
+    <value>Account Map (Heat Map)</value>
+  </data>
+  <data name="_r_1_heat-account-map" xml:space="preserve">
+    <value>Heat Map</value>
+  </data>
+  <data name="_r_2_heat-account-map" xml:space="preserve">
+    <value>Account Map</value>
+  </data>
 </root>

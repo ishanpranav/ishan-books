@@ -31,15 +31,9 @@ internal sealed partial class AccountsDialog : Form
             .Where(x => !IsPowerOfTwo((int)x))
             .OrderByDescending(x => x)
             .ToList();
-
-        try
-        {
-            _comboBox.SelectedItem = lastAccountGroup;
-        }
-        catch
-        {
-            _comboBox.SelectedItem = AccountGroups.All;
-        }
+        _comboBox.SelectedItem = lastAccountGroup != AccountGroups.None && Enum.IsDefined(lastAccountGroup)
+            ? lastAccountGroup
+            : AccountGroups.All;
     }
 
     private static bool IsPowerOfTwo(int value)
@@ -75,7 +69,7 @@ internal sealed partial class AccountsDialog : Form
             }
 
             yield return item;
-       }
+        }
     }
 
     private void OnSelectAllButtonClick(object sender, EventArgs e)
