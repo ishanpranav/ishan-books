@@ -90,6 +90,62 @@ internal static class FormattedStrings
         }
     }
 
+    public static string WorkingCapital
+    {
+        get
+        {
+            return GetString("_p_working-capital");
+        }
+    }
+
+    public static string NonCash
+    {
+        get
+        {
+            return GetString("_p_non-cash");
+        }
+    }
+
+    public static string RecognizedGainLoss
+    {
+        get
+        {
+            return GetString("_p_recognized-gain-loss");
+        }
+    }
+
+    public static string Operating
+    {
+        get
+        {
+            return GetString("_p_operating");
+        }
+    }
+
+    public static string Financing
+    {
+        get
+        {
+            return GetString("_p_financing");
+        }
+    }
+
+    public static string Investing
+    {
+        get
+        {
+            return GetString("_p_investing");
+        }
+    }
+
+    public static string NetCashFlow
+    {
+        get
+        {
+            return GetString("_p_net-cash-flow");
+        }
+    }
+
     public static Uri AboutUrl
     {
         get
