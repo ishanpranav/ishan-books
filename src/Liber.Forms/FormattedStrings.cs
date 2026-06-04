@@ -74,14 +74,6 @@ internal static class FormattedStrings
         }
     }
 
-    public static string OtherComprehensiveIncome
-    {
-        get
-        {
-            return GetString("_p_other-comprehensive-income");
-        }
-    }
-
     public static string ComprehensiveIncome
     {
         get
@@ -106,15 +98,31 @@ internal static class FormattedStrings
         }
     }
 
-    public static string RecognizedGainLoss
+    public static string PlusGain
     {
         get
         {
-            return GetString("_p_recognized-gain-loss");
+            return GetString("plus-gain");
+        }
+    }
+
+    public static string LessGain
+    {
+        get
+        {
+            return GetString("less-gain");
         }
     }
 
     public static string Operating
+    {
+        get
+        {
+            return GetString("operating");
+        }
+    }
+
+    public static string NetOperating
     {
         get
         {
@@ -126,11 +134,27 @@ internal static class FormattedStrings
     {
         get
         {
+            return GetString("financing");
+        }
+    }
+
+    public static string NetFinancing
+    {
+        get
+        {
             return GetString("_p_financing");
         }
     }
 
     public static string Investing
+    {
+        get
+        {
+            return GetString("investing");
+        }
+    }
+
+    public static string NetInvesting
     {
         get
         {
@@ -213,7 +237,7 @@ internal static class FormattedStrings
     public static string GetCheckWords(decimal amount)
     {
         decimal integral = decimal.Floor(amount);
-        decimal fractional = decimal.Round((amount - integral), 0) * 100;
+        decimal fractional = decimal.Round((amount - integral) * 100, 0);
 
         if (integral > int.MaxValue)
         {
