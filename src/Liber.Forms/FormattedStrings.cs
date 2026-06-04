@@ -74,6 +74,21 @@ internal static class FormattedStrings
         }
     }
 
+    public static string OtherComprehensiveIncome
+    {
+        get
+        {
+            return GetString("_p_other-comprehensive-income");
+        }
+    }
+
+    public static string ComprehensiveIncome
+    {
+        get
+        {
+            return GetString("_p_comprehensive-income");
+        }
+    }
 
     public static Uri AboutUrl
     {
