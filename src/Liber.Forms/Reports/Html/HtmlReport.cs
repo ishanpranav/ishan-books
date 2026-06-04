@@ -483,8 +483,13 @@ public class HtmlReport : IntervalView
         decimal totalExpense = 0;
         decimal totalOtherIncomeExpense = 0;
         decimal totalIncomeTaxExpense = 0;
+        decimal totalWorkingCapital = 0;
+        decimal totalNonCash = 0;
+        decimal totalGainLoss = 0;
+        decimal totalInvesting = 0;
+        decimal totalFinancing = 0;
 
-        foreach ((string, AccountType Type, CashFlow, Color, BalanceInfo Balances) entry in balances)
+        foreach ((string, AccountType Type, CashFlow CashFlow, Color, BalanceInfo Balances) entry in balances)
         {
             decimal flow = entry.Type.ToBalance(entry.Balances.Balance);
 
@@ -515,61 +520,106 @@ public class HtmlReport : IntervalView
                     totalIncomeTaxExpense += flow;
                     break;
             }
+
+            decimal cashFlow = entry.Balances.Previous - entry.Balances.Balance;
+
+            switch (entry.CashFlow)
+            {
+                case CashFlow.Operating:
+                    totalWorkingCapital += cashFlow;
+                    break;
+
+                case CashFlow.NonCash:
+                    totalNonCash += entry.Balances.Balance;
+                    break;
+
+                case CashFlow.GainLoss:
+                    totalGainLoss += entry.Balances.Balance;
+                    break;
+
+                case CashFlow.Investing:
+                    totalInvesting += cashFlow;
+                    break;
+
+                case CashFlow.Financing:
+                    totalFinancing += cashFlow;
+                    break;
+            }
         }
 
         operatingIncome += grossProfit;
         pretaxIncome += operatingIncome;
         netIncome += pretaxIncome;
 
-        Account otherEquityAccount = Company.Accounts[Company.OtherEquityAccountId];
-        (string Name, AccountType Type, CashFlow cashFlow, Color Color, BalanceInfo Balances)? otherEquityEntry = null;
+        // GainLoss is subtracted from operating and added to investing
+        decimal operatingCashFlow = netIncome + totalWorkingCapital + totalNonCash - totalGainLoss;
 
-        foreach ((string Name, AccountType Type, CashFlow, Color Color, BalanceInfo Balances) entry in balances)
+        Account otherEquityAccount = Company.Accounts[Company.OtherEquityAccountId];
+        (string Name, AccountType Type, CashFlow CashFlow, Color Color, BalanceInfo Balances)? otherEquityEntry = null;
+
+        foreach ((string Name, AccountType Type, CashFlow CashFlow, Color Color, BalanceInfo Balances) entry in balances)
         {
             if (entry.Name == otherEquityAccount.Name)
             {
                 otherEquityEntry = entry;
             }
 
-            if (!entry.Type.IsTemporary())
+            // Income statement individual account links
+            if (entry.Type.IsTemporary())
             {
-                continue;
+                decimal value = entry.Type.ToBalance(entry.Balances.Balance);
+
+                if (value != 0)
+                {
+                    string typeString = FormattedStrings.GetString(entry.Type.ToString());
+                    Color accountColor = GetColorOrDefault(entry.Name, entry.Type, entry.Color, entry.Balances.Balance);
+                    bool isDebit = entry.Type.IsDebit(1);
+                    Color typeColor = GetBaseColor(entry.Type, isDebit ? 1 : -1);
+
+                    if (isDebit)
+                        AddSankeyLink(data, typeString, entry.Name, value, typeColor, accountColor);
+                    else
+                        AddSankeyLink(data, entry.Name, typeString, value, accountColor, typeColor);
+                }
             }
 
-            decimal value = entry.Type.ToBalance(entry.Balances.Balance);
-
-            if (value == 0)
+            // Cash flow individual account links (only when not ByType)
+            if (Level != ReportLevel.ByType)
             {
-                continue;
-            }
+                decimal cashFlow = entry.Balances.Previous - entry.Balances.Balance;
 
-            string typeString = FormattedStrings.GetString(entry.Type.ToString());
-            Color accountColor = GetColorOrDefault(entry.Name, entry.Type, entry.Color, entry.Balances.Balance);
-            bool isDebit = entry.Type.IsDebit(1);
-            Color typeColor = GetBaseColor(entry.Type, isDebit ? 1 : -1);
-            string from;
-            string to;
-            Color fromColor;
-            Color toColor;
+                if (cashFlow != 0)
+                {
+                    Color accountColor = GetColorOrDefault(entry.Name, entry.Type, entry.Color, entry.Balances.Balance);
 
-            if (isDebit)
-            {
-                from = typeString;
-                to = entry.Name;
-                fromColor = typeColor;
-                toColor = accountColor;
-            }
-            else
-            {
-                from = entry.Name;
-                to = typeString;
-                fromColor = accountColor;
-                toColor = typeColor;
-            }
+                    switch (entry.CashFlow)
+                    {
+                        case CashFlow.Operating:
+                            AddSankeyLink(data, entry.Name, FormattedStrings.WorkingCapital, cashFlow, accountColor, Colors.Primary);
+                            break;
 
-            AddSankeyLink(data, from, to, value, fromColor, toColor);
+                        case CashFlow.NonCash:
+                            AddSankeyLink(data, entry.Name, FormattedStrings.NonCash, cashFlow, accountColor, Colors.Primary);
+                            break;
+
+                        case CashFlow.GainLoss:
+                            // Never itemize the subtraction from operating — only itemize the add-back to investing
+                            AddSankeyLink(data, entry.Name, FormattedStrings.Investing, cashFlow, accountColor, Colors.Primary);
+                            break;
+
+                        case CashFlow.Investing:
+                            AddSankeyLink(data, entry.Name, FormattedStrings.Investing, cashFlow, accountColor, Colors.Primary);
+                            break;
+
+                        case CashFlow.Financing:
+                            AddSankeyLink(data, entry.Name, FormattedStrings.Financing, cashFlow, accountColor, Colors.Primary);
+                            break;
+                    }
+                }
+            }
         }
 
+        // Income statement type → virtual node links
         Color incomeColor = GetBaseColor(AccountType.Income, AccountType.Income.IsDebit(1) ? 1 : -1);
         Color costColor = GetBaseColor(AccountType.Cost, AccountType.Cost.IsDebit(1) ? 1 : -1);
         Color expenseColor = GetBaseColor(AccountType.Expense, AccountType.Expense.IsDebit(1) ? 1 : -1);
@@ -625,17 +675,37 @@ public class HtmlReport : IntervalView
             AddSankeyLink(data, FormattedStrings.PretaxIncome, FormattedStrings.NetIncome, pretaxIncome, Colors.Primary, Colors.Primary);
         }
 
+        // NetIncome → ComprehensiveIncome
         AddSankeyLink(data, FormattedStrings.NetIncome, FormattedStrings.ComprehensiveIncome, netIncome, Colors.Primary, Colors.Primary);
+
+        // OCI
+        decimal ociValue = 0;
 
         if (otherEquityEntry is (string name, AccountType type, CashFlow _, Color color, BalanceInfo balance))
         {
-            decimal value = type.ToBalance(balance.Balance - balance.Previous);
-
+            ociValue = balance.Balance - balance.Previous;
             color = GetColorOrDefault(name, type, color, balance.Balance);
 
-            AddSankeyLink(data, name, FormattedStrings.OtherComprehensiveIncome, value, color, Colors.Primary);
-            AddSankeyLink(data, FormattedStrings.OtherComprehensiveIncome, FormattedStrings.ComprehensiveIncome, value, Colors.Primary, Colors.Primary);
+            AddSankeyLink(data, name, FormattedStrings.OtherComprehensiveIncome, ociValue, color, Colors.Primary);
+            AddSankeyLink(data, FormattedStrings.OtherComprehensiveIncome, FormattedStrings.ComprehensiveIncome, ociValue, Colors.Primary, Colors.Primary);
         }
+
+        // ComprehensiveIncome splits: OCI drains off, remainder flows to Operating
+        AddSankeyLink(data, FormattedStrings.ComprehensiveIncome, FormattedStrings.OtherComprehensiveIncome, ociValue, Colors.Primary, Colors.Primary);
+        AddSankeyLink(data, FormattedStrings.ComprehensiveIncome, FormattedStrings.Operating, netIncome, Colors.Primary, Colors.Primary);
+
+        // Operating adjustments
+        AddSankeyLink(data, FormattedStrings.WorkingCapital, FormattedStrings.Operating, totalWorkingCapital, Colors.Primary, Colors.Primary);
+        AddSankeyLink(data, FormattedStrings.NonCash, FormattedStrings.Operating, totalNonCash, Colors.Primary, Colors.Primary);
+
+        // GainLoss: subtract from Operating (aggregate only, never itemized), add back to Investing
+        AddSankeyLink(data, FormattedStrings.Operating, FormattedStrings.RecognizedGainLoss, totalGainLoss, Colors.Primary, Colors.Primary);
+        AddSankeyLink(data, FormattedStrings.RecognizedGainLoss, FormattedStrings.Investing, totalGainLoss, Colors.Primary, Colors.Primary);
+
+        // All three activities → NetCashFlow
+        AddSankeyLink(data, FormattedStrings.Operating, FormattedStrings.NetCashFlow, operatingCashFlow, Colors.Primary, Colors.Primary);
+        AddSankeyLink(data, FormattedStrings.Investing, FormattedStrings.NetCashFlow, totalInvesting + totalGainLoss, Colors.Primary, Colors.Primary);
+        AddSankeyLink(data, FormattedStrings.Financing, FormattedStrings.NetCashFlow, totalFinancing, Colors.Primary, Colors.Primary);
 
         return JsonSerializer.Serialize(data, s_options);
     }

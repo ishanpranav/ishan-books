@@ -10,7 +10,7 @@ Licensed under the MIT License.
     <xsl:template name="cash-flow-statement">
         <xsl:param name="title"/>
         <xsl:variable name="workingCapital" select="sum(company/account[cash-flow = 'Operating']/previous) - sum(company/account[cash-flow = 'Operating']/balance)"/>
-        <xsl:variable name="nonCash" select="sum(company/account[cash-flow = 'NonCash']/balance) - sum(company/account[cash-flow = 'NonCash']/previous)"/>
+        <xsl:variable name="nonCash" select="sum(company/account[cash-flow = 'NonCash']/balance)"/>
         <xsl:variable name="netGainLoss" select="sum(company/account[cash-flow = 'GainLoss']/balance)"/>
         <xsl:variable name="operating" select="-$netIncome + $workingCapital + $nonCash + $netGainLoss"/>
         <xsl:variable name="investing" select="sum(company/account[(cash-flow = 'Investing')]/previous) - sum(company/account[cash-flow = 'Investing']/balance) - $netGainLoss"/>
