@@ -95,18 +95,68 @@ public class HtmlReport : IntervalView
         }
     }
 
-    private IEnumerable<(string, AccountType, Color, BalanceInfo)> GetBalances(bool partition = false)
+    private IEnumerable<(string, AccountType, Color, BalanceInfo)> GetBalancesByTypeAndParent()
+    {
+        if (Level == ReportLevel.ByAccount)
+        {
+            return Company
+                .GetBalancesByTypeAndParent(Accounts.Values, ReportTypes.None, Started, Posted, Filter)
+                .Select(x => (x.Parent.Name, x.Type, Company.GetColorOrDefault(x.Parent), x.Balances));
+        }
+
+        return GetBalances();
+    }
+
+    private IEnumerable<(string, AccountType, CashFlow, Color, BalanceInfo)> GetBalancesByTypeAndCashFlow()
+    {
+        IEnumerable<(Account Account, ParentKey Key, BalanceInfo Balances)> keyedBalances = Company
+                .GetBalancesByKey(Accounts.Values, ReportTypes.None, Started, Posted, Filter);
+
+        switch (Level)
+        {
+            case ReportLevel.ByAccount:
+                return keyedBalances
+                    .GroupBy(x => (x.Account.Name, x.Key.Type, x.Key.CashFlow))
+                    .Select(x =>
+                    {
+                        BalanceInfo balances = new BalanceInfo();
+
+                        foreach ((Account _, ParentKey _, BalanceInfo otherBalances) in x)
+                        {
+                            balances.Balance += otherBalances.Balance;
+                            balances.Previous += otherBalances.Previous;
+                            balances.AverageDailyBalance += otherBalances.AverageDailyBalance;
+                        }
+
+                        return (x.Key.Name, x.Key.Type, x.Key.CashFlow, Company.Color, balances);
+                    });
+
+            case ReportLevel.ByType:
+                return keyedBalances
+                    .GroupBy(x => (x.Key.Type, x.Key.CashFlow))
+                    .Select(x =>
+                    {
+                        BalanceInfo balances = new BalanceInfo();
+
+                        foreach ((Account _, ParentKey _, BalanceInfo otherBalances) in x)
+                        {
+                            balances.Balance += otherBalances.Balance;
+                            balances.Previous += otherBalances.Previous;
+                            balances.AverageDailyBalance += otherBalances.AverageDailyBalance;
+                        }
+
+                        return (FormattedStrings.GetString(x.Key.Type.ToString()), x.Key.Type, x.Key.CashFlow, Company.Color, balances);
+                    });
+        }
+
+        return keyedBalances.Select(x => (x.Account.Name, x.Key.Type, x.Key.CashFlow, Company.GetColorOrDefault(x.Account), x.Balances));
+    }
+
+    private IEnumerable<(string Name, AccountType Type, Color Color, BalanceInfo Balances)> GetBalances()
     {
         switch (Level)
         {
             case ReportLevel.ByAccount:
-                if (partition)
-                {
-                    return Company
-                        .GetBalancesByTypeAndParent(Accounts.Values, ReportTypes.None, Started, Posted, Filter)
-                        .Select(x => (x.Parent.Name, x.Type, Company.GetColorOrDefault(x.Parent), x.Balances));
-                }
-
                 return Company
                     .GetBalancesByParent(Accounts.Values, ReportTypes.None, Started, Posted, Filter)
                     .Select(x => (x.Parent.Name, x.Parent.Type, Company.GetColorOrDefault(x.Parent), x.Balances));
@@ -259,8 +309,7 @@ public class HtmlReport : IntervalView
     {
         List<ChartJSChartDatasetTree> nodes = new List<ChartJSChartDatasetTree>();
         HashSet<AccountType> types = new HashSet<AccountType>();
-        IEnumerable<(string, AccountType Type, Color, BalanceInfo)> accounts =
-            GetBalances(partition: true);
+        IEnumerable<(string, AccountType Type, Color, BalanceInfo)> accounts = GetBalancesByTypeAndParent();
 
         accounts = accounts.OrderBy(x => x.Type.ToInt32());
 
@@ -338,8 +387,7 @@ public class HtmlReport : IntervalView
     {
         List<ChartJSChartDatasetTree> nodes = new List<ChartJSChartDatasetTree>();
         HashSet<AccountType> types = new HashSet<AccountType>();
-        IEnumerable<(string, AccountType Type, Color, BalanceInfo)> accounts =
-            GetBalances(partition: true);
+        IEnumerable<(string, AccountType Type, Color, BalanceInfo)> accounts = GetBalancesByTypeAndParent();
 
         accounts = accounts.OrderBy(x => x.Type.ToInt32());
 
@@ -388,35 +436,83 @@ public class HtmlReport : IntervalView
         return JsonSerializer.Serialize(nodes, s_options);
     }
 
+    private void AddSankeyLink(
+        List<ChartJSChartDatasetSankeyData> data,
+        string positiveFrom,
+        string positiveTo,
+        decimal value,
+        Color fromColor,
+        Color toColor)
+    {
+        if (value == 0)
+        {
+            return;
+        }
+
+        if (value < 0)
+        {
+            string swapString = positiveFrom;
+
+            positiveFrom = positiveTo;
+            positiveTo = swapString;
+
+            Color swapColor = fromColor;
+
+            fromColor = toColor;
+            toColor = swapColor;
+            value = -value;
+        }
+
+        data.Add(new ChartJSChartDatasetSankeyData(positiveFrom, positiveTo, (double)value)
+        {
+            FromColor = fromColor,
+            ToColor = toColor
+        });
+    }
+
     public string GetSankeyDiagram()
     {
         List<ChartJSChartDatasetSankeyData> data = new List<ChartJSChartDatasetSankeyData>();
-        List<(string, AccountType, Color, BalanceInfo)> balances = GetBalances(partition: true).ToList();
+        List<(string, AccountType, CashFlow, Color, BalanceInfo)> balances = GetBalancesByTypeAndCashFlow().ToList();
         decimal grossProfit = 0;
         decimal operatingIncome = 0;
         decimal pretaxIncome = 0;
         decimal netIncome = 0;
+        decimal totalIncome = 0;
+        decimal totalCost = 0;
+        decimal totalExpense = 0;
+        decimal totalOtherIncomeExpense = 0;
+        decimal totalIncomeTaxExpense = 0;
 
-        foreach ((string Name, AccountType Type, Color Color, BalanceInfo Balances) in balances)
+        foreach ((string, AccountType Type, CashFlow, Color, BalanceInfo Balances) entry in balances)
         {
-            decimal flow = Type.ToBalance(Balances.Balance);
+            decimal flow = entry.Type.ToBalance(entry.Balances.Balance);
 
-            switch (Type)
+            switch (entry.Type)
             {
                 case AccountType.Income:
                     grossProfit += flow;
+                    totalIncome += flow;
                     break;
+
                 case AccountType.Cost:
                     grossProfit -= flow;
+                    totalCost += flow;
                     break;
+
                 case AccountType.Expense:
                     operatingIncome -= flow;
+                    totalExpense += flow;
                     break;
+
                 case AccountType.OtherIncomeExpense:
                     pretaxIncome += flow;
+                    totalOtherIncomeExpense += flow;
                     break;
+
                 case AccountType.IncomeTaxExpense:
                     netIncome -= flow;
+                    totalIncomeTaxExpense += flow;
                     break;
             }
         }
@@ -425,118 +521,120 @@ public class HtmlReport : IntervalView
         pretaxIncome += operatingIncome;
         netIncome += pretaxIncome;
 
-        foreach ((string Name, AccountType Type, Color Color, BalanceInfo Balances) in balances)
+        Account otherEquityAccount = Company.Accounts[Company.OtherEquityAccountId];
+        (string Name, AccountType Type, CashFlow cashFlow, Color Color, BalanceInfo Balances)? otherEquityEntry = null;
+
+        foreach ((string Name, AccountType Type, CashFlow, Color Color, BalanceInfo Balances) entry in balances)
         {
-            if (!Type.IsTemporary())
+            if (entry.Name == otherEquityAccount.Name)
+            {
+                otherEquityEntry = entry;
+            }
+
+            if (!entry.Type.IsTemporary())
             {
                 continue;
             }
 
-            double flow = (double)Type.ToBalance(Balances.Balance);
+            decimal value = entry.Type.ToBalance(entry.Balances.Balance);
 
-            if (flow == 0)
+            if (value == 0)
             {
                 continue;
             }
 
-            string typeString = FormattedStrings.GetString(Type.ToString());
-            Color accountColor = GetColorOrDefault(Name, Type, Color, Balances.Balance);
-            Color typeColor = GetBaseColor(Type, Type.IsDebit(1) ? 1 : -1);
+            string typeString = FormattedStrings.GetString(entry.Type.ToString());
+            Color accountColor = GetColorOrDefault(entry.Name, entry.Type, entry.Color, entry.Balances.Balance);
+            bool isDebit = entry.Type.IsDebit(1);
+            Color typeColor = GetBaseColor(entry.Type, isDebit ? 1 : -1);
+            string from;
+            string to;
+            Color fromColor;
+            Color toColor;
 
-            switch (Type)
+            if (isDebit)
             {
-                case AccountType.Income:
-                    data.Add(new ChartJSChartDatasetSankeyData(Name, typeString, flow)
-                    {
-                        FromColor = accountColor,
-                        ToColor = typeColor
-                    });
-                    data.Add(new ChartJSChartDatasetSankeyData(typeString, FormattedStrings.GrossProfit, flow)
-                    {
-                        FromColor = typeColor,
-                        ToColor = Colors.Primary
-                    });
-                    break;
-
-                case AccountType.Cost:
-                    data.Add(new ChartJSChartDatasetSankeyData(FormattedStrings.GrossProfit, typeString, flow)
-                    {
-                        FromColor = Colors.Primary,
-                        ToColor = typeColor
-                    });
-                    data.Add(new ChartJSChartDatasetSankeyData(typeString, Name, flow)
-                    {
-                        FromColor = typeColor,
-                        ToColor = accountColor
-                    });
-                    break;
-
-                case AccountType.Expense:
-                    data.Add(new ChartJSChartDatasetSankeyData(FormattedStrings.OperatingIncome, typeString, flow)
-                    {
-                        FromColor = Colors.Primary,
-                        ToColor = typeColor
-                    });
-                    data.Add(new ChartJSChartDatasetSankeyData(typeString, Name, flow)
-                    {
-                        FromColor = typeColor,
-                        ToColor = accountColor
-                    });
-                    break;
-
-                case AccountType.OtherIncomeExpense:
-                    data.Add(new ChartJSChartDatasetSankeyData(Name, typeString, flow)
-                    {
-                        FromColor = accountColor,
-                        ToColor = typeColor
-                    });
-                    data.Add(new ChartJSChartDatasetSankeyData(typeString, FormattedStrings.PretaxIncome, flow)
-                    {
-                        FromColor = typeColor,
-                        ToColor = Colors.Primary
-                    });
-                    break;
-
-                case AccountType.IncomeTaxExpense:
-                    data.Add(new ChartJSChartDatasetSankeyData(FormattedStrings.PretaxIncome, typeString, flow)
-                    {
-                        FromColor = Colors.Primary,
-                        ToColor = typeColor
-                    });
-                    data.Add(new ChartJSChartDatasetSankeyData(typeString, Name, flow)
-                    {
-                        FromColor = typeColor,
-                        ToColor = accountColor
-                    });
-                    break;
+                from = typeString;
+                to = entry.Name;
+                fromColor = typeColor;
+                toColor = accountColor;
             }
+            else
+            {
+                from = entry.Name;
+                to = typeString;
+                fromColor = accountColor;
+                toColor = typeColor;
+            }
+
+            AddSankeyLink(data, from, to, value, fromColor, toColor);
         }
 
-        if (grossProfit > 0)
+        Color incomeColor = GetBaseColor(AccountType.Income, AccountType.Income.IsDebit(1) ? 1 : -1);
+        Color costColor = GetBaseColor(AccountType.Cost, AccountType.Cost.IsDebit(1) ? 1 : -1);
+        Color expenseColor = GetBaseColor(AccountType.Expense, AccountType.Expense.IsDebit(1) ? 1 : -1);
+        Color otherIncomeExpenseColor = GetBaseColor(AccountType.OtherIncomeExpense, AccountType.OtherIncomeExpense.IsDebit(1) ? 1 : -1);
+        Color incomeTaxColor = GetBaseColor(AccountType.IncomeTaxExpense, AccountType.IncomeTaxExpense.IsDebit(1) ? 1 : -1);
+        string incomeString = FormattedStrings.GetString(AccountType.Income.ToString());
+        string costString = FormattedStrings.GetString(AccountType.Cost.ToString());
+        string expenseString = FormattedStrings.GetString(AccountType.Expense.ToString());
+        string otherIncomeExpenseString = FormattedStrings.GetString(AccountType.OtherIncomeExpense.ToString());
+        string incomeTaxExpenseString = FormattedStrings.GetString(AccountType.IncomeTaxExpense.ToString());
+
+        AddSankeyLink(data, incomeString, FormattedStrings.GrossProfit, totalIncome, incomeColor, Colors.Primary);
+
+        if (totalCost >= 0)
         {
-            data.Add(new ChartJSChartDatasetSankeyData(FormattedStrings.GrossProfit, FormattedStrings.OperatingIncome, (double)grossProfit)
-            {
-                FromColor = Colors.Primary,
-                ToColor = Colors.Primary
-            });
+            AddSankeyLink(data, FormattedStrings.GrossProfit, costString, totalCost, Colors.Primary, costColor);
+            AddSankeyLink(data, FormattedStrings.GrossProfit, FormattedStrings.OperatingIncome, grossProfit, Colors.Primary, Colors.Primary);
+        }
+        else
+        {
+            AddSankeyLink(data, costString, FormattedStrings.OperatingIncome, -totalCost, costColor, Colors.Primary);
+            AddSankeyLink(data, FormattedStrings.GrossProfit, FormattedStrings.OperatingIncome, totalIncome, Colors.Primary, Colors.Primary);
         }
 
-        if (operatingIncome > 0)
+        if (totalExpense >= 0)
         {
-            data.Add(new ChartJSChartDatasetSankeyData(FormattedStrings.OperatingIncome, FormattedStrings.PretaxIncome, (double)operatingIncome)
-            {
-                FromColor = Colors.Primary,
-                ToColor = Colors.Primary
-            });
+            AddSankeyLink(data, FormattedStrings.OperatingIncome, expenseString, totalExpense, Colors.Primary, expenseColor);
+            AddSankeyLink(data, FormattedStrings.OperatingIncome, FormattedStrings.PretaxIncome, operatingIncome, Colors.Primary, Colors.Primary);
+        }
+        else
+        {
+            AddSankeyLink(data, expenseString, FormattedStrings.PretaxIncome, -totalExpense, expenseColor, Colors.Primary);
+            AddSankeyLink(data, FormattedStrings.OperatingIncome, FormattedStrings.PretaxIncome, grossProfit, Colors.Primary, Colors.Primary);
         }
 
-        if (pretaxIncome > 0)
+        if (totalOtherIncomeExpense >= 0)
         {
-            data.Add(new ChartJSChartDatasetSankeyData(FormattedStrings.PretaxIncome, FormattedStrings.NetIncome, (double)pretaxIncome)
-            {
-                FromColor = Colors.Primary,
-                ToColor = Colors.Primary
-            });
+            AddSankeyLink(data, otherIncomeExpenseString, FormattedStrings.PretaxIncome, totalOtherIncomeExpense, otherIncomeExpenseColor, Colors.Primary);
+        }
+        else
+        {
+            AddSankeyLink(data, FormattedStrings.OperatingIncome, otherIncomeExpenseString, -totalOtherIncomeExpense, Colors.Primary, otherIncomeExpenseColor);
+        }
+
+        if (totalIncomeTaxExpense >= 0)
+        {
+            AddSankeyLink(data, FormattedStrings.PretaxIncome, incomeTaxExpenseString, totalIncomeTaxExpense, Colors.Primary, incomeTaxColor);
+            AddSankeyLink(data, FormattedStrings.PretaxIncome, FormattedStrings.NetIncome, netIncome, Colors.Primary, Colors.Primary);
+        }
+        else
+        {
+            AddSankeyLink(data, incomeTaxExpenseString, FormattedStrings.NetIncome, -totalIncomeTaxExpense, incomeTaxColor, Colors.Primary);
+            AddSankeyLink(data, FormattedStrings.PretaxIncome, FormattedStrings.NetIncome, pretaxIncome, Colors.Primary, Colors.Primary);
+        }
+
+        AddSankeyLink(data, FormattedStrings.NetIncome, FormattedStrings.ComprehensiveIncome, netIncome, Colors.Primary, Colors.Primary);
+
+        if (otherEquityEntry is (string name, AccountType type, CashFlow _, Color color, BalanceInfo balance))
+        {
+            decimal value = type.ToBalance(balance.Balance - balance.Previous);
+
+            color = GetColorOrDefault(name, type, color, balance.Balance);
+
+            AddSankeyLink(data, name, FormattedStrings.OtherComprehensiveIncome, value, color, Colors.Primary);
+            AddSankeyLink(data, FormattedStrings.OtherComprehensiveIncome, FormattedStrings.ComprehensiveIncome, value, Colors.Primary, Colors.Primary);
         }
 
         return JsonSerializer.Serialize(data, s_options);
