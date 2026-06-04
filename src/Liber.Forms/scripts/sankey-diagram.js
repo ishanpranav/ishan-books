@@ -36,16 +36,6 @@ const config = {
 
 async function main() {
     config.options.plugins.title.text = await report.title;
-
-    // const colors = {
-    //     a: 'red',
-    //     b: 'green',
-    //     c: 'blue',
-    //     d: 'gray'
-    // };
-
-    const getColor = (key) => colors[key];
-
     config.data = {
         datasets: [{
             data: JSON.parse(await report.getSankeyDiagram),

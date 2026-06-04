@@ -146,7 +146,7 @@
     <value>Do you want to save changes to {0}?</value>
   </data>
   <data name="CheckWords{0}{1}" xml:space="preserve">
-    <value>{0} and {1}/XX</value>
+    <value>{0} and {1}/100</value>
   </data>
   <data name="Cost" xml:space="preserve">
     <value>Costs of revenue</value>

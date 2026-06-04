@@ -128,7 +128,7 @@ public class HtmlReport : IntervalView
                             balances.AverageDailyBalance += otherBalances.AverageDailyBalance;
                         }
 
-                        return (x.Key.Name, x.Key.Type, x.Key.CashFlow, Company.Color, balances);
+                        return (x.Key.Name, x.Key.Type, x.Key.CashFlow, Company.GetColorOrDefault(x.First().Account), balances);
                     });
 
             case ReportLevel.ByType:
@@ -436,7 +436,7 @@ public class HtmlReport : IntervalView
         return JsonSerializer.Serialize(nodes, s_options);
     }
 
-    private void AddSankeyLink(
+    private static void AddSankeyLink(
         List<ChartJSChartDatasetSankeyData> data,
         string positiveFrom,
         string positiveTo,
@@ -473,7 +473,7 @@ public class HtmlReport : IntervalView
     public string GetSankeyDiagram()
     {
         List<ChartJSChartDatasetSankeyData> data = new List<ChartJSChartDatasetSankeyData>();
-        List<(string, AccountType, CashFlow, Color, BalanceInfo)> balances = GetBalancesByTypeAndCashFlow().ToList();
+        List<(string Name, AccountType, CashFlow CashFlow, Color, BalanceInfo)> balances = GetBalancesByTypeAndCashFlow().ToList();
         decimal grossProfit = 0;
         decimal operatingIncome = 0;
         decimal pretaxIncome = 0;
@@ -530,11 +530,11 @@ public class HtmlReport : IntervalView
                     break;
 
                 case CashFlow.NonCash:
-                    totalNonCash += entry.Balances.Balance;
+                    totalNonCash += flow;
                     break;
 
                 case CashFlow.GainLoss:
-                    totalGainLoss += entry.Balances.Balance;
+                    totalGainLoss += flow;
                     break;
 
                 case CashFlow.Investing:
@@ -550,9 +550,9 @@ public class HtmlReport : IntervalView
         operatingIncome += grossProfit;
         pretaxIncome += operatingIncome;
         netIncome += pretaxIncome;
+        totalInvesting += totalGainLoss;
 
-        // GainLoss is subtracted from operating and added to investing
-        decimal operatingCashFlow = netIncome + totalWorkingCapital + totalNonCash - totalGainLoss;
+        decimal totalOperating = netIncome + totalWorkingCapital + totalNonCash - totalGainLoss;
 
         Account otherEquityAccount = Company.Accounts[Company.OtherEquityAccountId];
         (string Name, AccountType Type, CashFlow CashFlow, Color Color, BalanceInfo Balances)? otherEquityEntry = null;
@@ -564,7 +564,6 @@ public class HtmlReport : IntervalView
                 otherEquityEntry = entry;
             }
 
-            // Income statement individual account links
             if (entry.Type.IsTemporary())
             {
                 decimal value = entry.Type.ToBalance(entry.Balances.Balance);
@@ -577,49 +576,75 @@ public class HtmlReport : IntervalView
                     Color typeColor = GetBaseColor(entry.Type, isDebit ? 1 : -1);
 
                     if (isDebit)
-                        AddSankeyLink(data, typeString, entry.Name, value, typeColor, accountColor);
-                    else
-                        AddSankeyLink(data, entry.Name, typeString, value, accountColor, typeColor);
-                }
-            }
-
-            // Cash flow individual account links (only when not ByType)
-            if (Level != ReportLevel.ByType)
-            {
-                decimal cashFlow = entry.Balances.Previous - entry.Balances.Balance;
-
-                if (cashFlow != 0)
-                {
-                    Color accountColor = GetColorOrDefault(entry.Name, entry.Type, entry.Color, entry.Balances.Balance);
-
-                    switch (entry.CashFlow)
                     {
-                        case CashFlow.Operating:
-                            AddSankeyLink(data, entry.Name, FormattedStrings.WorkingCapital, cashFlow, accountColor, Colors.Primary);
-                            break;
-
-                        case CashFlow.NonCash:
-                            AddSankeyLink(data, entry.Name, FormattedStrings.NonCash, cashFlow, accountColor, Colors.Primary);
-                            break;
-
-                        case CashFlow.GainLoss:
-                            // Never itemize the subtraction from operating — only itemize the add-back to investing
-                            AddSankeyLink(data, entry.Name, FormattedStrings.Investing, cashFlow, accountColor, Colors.Primary);
-                            break;
-
-                        case CashFlow.Investing:
-                            AddSankeyLink(data, entry.Name, FormattedStrings.Investing, cashFlow, accountColor, Colors.Primary);
-                            break;
-
-                        case CashFlow.Financing:
-                            AddSankeyLink(data, entry.Name, FormattedStrings.Financing, cashFlow, accountColor, Colors.Primary);
-                            break;
+                        AddSankeyLink(data, typeString, entry.Name, value, typeColor, accountColor);
+                    }
+                    else
+                    {
+                        AddSankeyLink(data, entry.Name, typeString, value, accountColor, typeColor);
                     }
                 }
             }
         }
 
-        // Income statement type → virtual node links
+        if (Level != ReportLevel.ByType)
+        {
+            foreach (IGrouping<(string Name, CashFlow CashFlow), (string, AccountType, CashFlow, Color, BalanceInfo)> group in balances
+                .GroupBy(x => (x.Name, x.CashFlow)))
+            {
+                decimal cashFlow = 0;
+                decimal totalBalance = 0;
+                decimal maxAbs = 0;
+                (string, AccountType Type, CashFlow, Color Color, BalanceInfo Balances) max = group.First();
+
+                foreach ((string, AccountType Type, CashFlow, Color Color, BalanceInfo Balances) entry in group)
+                {
+                    totalBalance += entry.Balances.Balance;
+                    cashFlow += entry.Balances.Previous;
+
+                    decimal abs = decimal.Abs(max.Balances.Balance);
+
+                    if (abs > maxAbs)
+                    {
+                        maxAbs = abs;
+                        max = entry;
+                    }
+                }
+
+                cashFlow -= totalBalance;
+
+                if (cashFlow == 0)
+                {
+                    continue;
+                }
+
+                Color accountColor = GetColorOrDefault(group.Key.Name, max.Type, max.Color, max.Balances.Balance);
+
+                switch (group.Key.CashFlow)
+                {
+                    case CashFlow.Cash:
+                        AddSankeyLink(data, FormattedStrings.NetCashFlow, group.Key.Name + "*", -cashFlow, Colors.JungleTeal, accountColor);
+                        break;
+
+                    case CashFlow.Operating:
+                        AddSankeyLink(data, group.Key.Name, FormattedStrings.WorkingCapital, cashFlow, accountColor, Colors.Primary);
+                        break;
+
+                    case CashFlow.NonCash:
+                        AddSankeyLink(data, group.Key.Name, FormattedStrings.NonCash, cashFlow, accountColor, Colors.Primary);
+                        break;
+
+                    case CashFlow.Investing:
+                        AddSankeyLink(data, group.Key.Name, FormattedStrings.Investing, cashFlow, accountColor, Colors.JungleTeal);
+                        break;
+
+                    case CashFlow.Financing:
+                        AddSankeyLink(data, group.Key.Name, FormattedStrings.Financing, cashFlow, accountColor, Colors.TigerFlame);
+                        break;
+                }
+            }
+        }
+
         Color incomeColor = GetBaseColor(AccountType.Income, AccountType.Income.IsDebit(1) ? 1 : -1);
         Color costColor = GetBaseColor(AccountType.Cost, AccountType.Cost.IsDebit(1) ? 1 : -1);
         Color expenseColor = GetBaseColor(AccountType.Expense, AccountType.Expense.IsDebit(1) ? 1 : -1);
@@ -631,81 +656,72 @@ public class HtmlReport : IntervalView
         string otherIncomeExpenseString = FormattedStrings.GetString(AccountType.OtherIncomeExpense.ToString());
         string incomeTaxExpenseString = FormattedStrings.GetString(AccountType.IncomeTaxExpense.ToString());
 
-        AddSankeyLink(data, incomeString, FormattedStrings.GrossProfit, totalIncome, incomeColor, Colors.Primary);
+        AddSankeyLink(data, incomeString, FormattedStrings.GrossProfit, totalIncome, incomeColor, Colors.JungleTeal);
 
         if (totalCost >= 0)
         {
-            AddSankeyLink(data, FormattedStrings.GrossProfit, costString, totalCost, Colors.Primary, costColor);
-            AddSankeyLink(data, FormattedStrings.GrossProfit, FormattedStrings.OperatingIncome, grossProfit, Colors.Primary, Colors.Primary);
+            AddSankeyLink(data, FormattedStrings.GrossProfit, costString, totalCost, Colors.JungleTeal, costColor);
+            AddSankeyLink(data, FormattedStrings.GrossProfit, FormattedStrings.OperatingIncome, grossProfit, Colors.JungleTeal, Colors.JungleTeal);
         }
         else
         {
-            AddSankeyLink(data, costString, FormattedStrings.OperatingIncome, -totalCost, costColor, Colors.Primary);
-            AddSankeyLink(data, FormattedStrings.GrossProfit, FormattedStrings.OperatingIncome, totalIncome, Colors.Primary, Colors.Primary);
+            AddSankeyLink(data, costString, FormattedStrings.OperatingIncome, -totalCost, costColor, Colors.JungleTeal);
+            AddSankeyLink(data, FormattedStrings.GrossProfit, FormattedStrings.OperatingIncome, totalIncome, Colors.JungleTeal, Colors.JungleTeal);
         }
 
         if (totalExpense >= 0)
         {
-            AddSankeyLink(data, FormattedStrings.OperatingIncome, expenseString, totalExpense, Colors.Primary, expenseColor);
-            AddSankeyLink(data, FormattedStrings.OperatingIncome, FormattedStrings.PretaxIncome, operatingIncome, Colors.Primary, Colors.Primary);
+            AddSankeyLink(data, FormattedStrings.OperatingIncome, expenseString, totalExpense, Colors.JungleTeal, expenseColor);
+            AddSankeyLink(data, FormattedStrings.OperatingIncome, FormattedStrings.PretaxIncome, operatingIncome, Colors.JungleTeal, Colors.JungleTeal);
         }
         else
         {
-            AddSankeyLink(data, expenseString, FormattedStrings.PretaxIncome, -totalExpense, expenseColor, Colors.Primary);
-            AddSankeyLink(data, FormattedStrings.OperatingIncome, FormattedStrings.PretaxIncome, grossProfit, Colors.Primary, Colors.Primary);
+            AddSankeyLink(data, expenseString, FormattedStrings.PretaxIncome, -totalExpense, expenseColor, Colors.JungleTeal);
+            AddSankeyLink(data, FormattedStrings.OperatingIncome, FormattedStrings.PretaxIncome, grossProfit, Colors.JungleTeal, Colors.JungleTeal);
         }
 
-        if (totalOtherIncomeExpense >= 0)
-        {
-            AddSankeyLink(data, otherIncomeExpenseString, FormattedStrings.PretaxIncome, totalOtherIncomeExpense, otherIncomeExpenseColor, Colors.Primary);
-        }
-        else
-        {
-            AddSankeyLink(data, FormattedStrings.OperatingIncome, otherIncomeExpenseString, -totalOtherIncomeExpense, Colors.Primary, otherIncomeExpenseColor);
-        }
+        AddSankeyLink(data, otherIncomeExpenseString, FormattedStrings.PretaxIncome, totalOtherIncomeExpense, otherIncomeExpenseColor, Colors.JungleTeal);
 
         if (totalIncomeTaxExpense >= 0)
         {
-            AddSankeyLink(data, FormattedStrings.PretaxIncome, incomeTaxExpenseString, totalIncomeTaxExpense, Colors.Primary, incomeTaxColor);
-            AddSankeyLink(data, FormattedStrings.PretaxIncome, FormattedStrings.NetIncome, netIncome, Colors.Primary, Colors.Primary);
+            AddSankeyLink(data, FormattedStrings.PretaxIncome, incomeTaxExpenseString, totalIncomeTaxExpense, Colors.JungleTeal, incomeTaxColor);
+            AddSankeyLink(data, FormattedStrings.PretaxIncome, FormattedStrings.NetIncome, netIncome, Colors.JungleTeal, Colors.JungleTeal);
         }
         else
         {
-            AddSankeyLink(data, incomeTaxExpenseString, FormattedStrings.NetIncome, -totalIncomeTaxExpense, incomeTaxColor, Colors.Primary);
-            AddSankeyLink(data, FormattedStrings.PretaxIncome, FormattedStrings.NetIncome, pretaxIncome, Colors.Primary, Colors.Primary);
+            AddSankeyLink(data, incomeTaxExpenseString, FormattedStrings.NetIncome, -totalIncomeTaxExpense, incomeTaxColor, Colors.JungleTeal);
+            AddSankeyLink(data, FormattedStrings.PretaxIncome, FormattedStrings.NetIncome, pretaxIncome, Colors.JungleTeal, Colors.JungleTeal);
         }
 
-        // NetIncome → ComprehensiveIncome
-        AddSankeyLink(data, FormattedStrings.NetIncome, FormattedStrings.ComprehensiveIncome, netIncome, Colors.Primary, Colors.Primary);
+        AddSankeyLink(data, FormattedStrings.NetIncome, FormattedStrings.ComprehensiveIncome, netIncome, Colors.JungleTeal, Colors.JungleTeal);
 
-        // OCI
-        decimal ociValue = 0;
+        decimal otherComprehensiveIncome = 0;
 
         if (otherEquityEntry is (string name, AccountType type, CashFlow _, Color color, BalanceInfo balance))
         {
-            ociValue = balance.Balance - balance.Previous;
-            color = GetColorOrDefault(name, type, color, balance.Balance);
+            otherComprehensiveIncome = balance.Balance - balance.Previous;
+            color = color == Company.Color
+                ? GetBaseColor(type, balance.Balance)
+                : color;
 
-            AddSankeyLink(data, name, FormattedStrings.OtherComprehensiveIncome, ociValue, color, Colors.Primary);
-            AddSankeyLink(data, FormattedStrings.OtherComprehensiveIncome, FormattedStrings.ComprehensiveIncome, ociValue, Colors.Primary, Colors.Primary);
+            AddSankeyLink(data, name, FormattedStrings.ComprehensiveIncome, otherComprehensiveIncome, color, Colors.JungleTeal);
         }
 
-        // ComprehensiveIncome splits: OCI drains off, remainder flows to Operating
-        AddSankeyLink(data, FormattedStrings.ComprehensiveIncome, FormattedStrings.OtherComprehensiveIncome, ociValue, Colors.Primary, Colors.Primary);
-        AddSankeyLink(data, FormattedStrings.ComprehensiveIncome, FormattedStrings.Operating, netIncome, Colors.Primary, Colors.Primary);
+        decimal netOperating = totalOperating;
+        decimal netInvesting = netOperating + totalInvesting;
+        decimal netFinancing = netInvesting + totalFinancing;
 
-        // Operating adjustments
-        AddSankeyLink(data, FormattedStrings.WorkingCapital, FormattedStrings.Operating, totalWorkingCapital, Colors.Primary, Colors.Primary);
-        AddSankeyLink(data, FormattedStrings.NonCash, FormattedStrings.Operating, totalNonCash, Colors.Primary, Colors.Primary);
-
-        // GainLoss: subtract from Operating (aggregate only, never itemized), add back to Investing
-        AddSankeyLink(data, FormattedStrings.Operating, FormattedStrings.RecognizedGainLoss, totalGainLoss, Colors.Primary, Colors.Primary);
-        AddSankeyLink(data, FormattedStrings.RecognizedGainLoss, FormattedStrings.Investing, totalGainLoss, Colors.Primary, Colors.Primary);
-
-        // All three activities → NetCashFlow
-        AddSankeyLink(data, FormattedStrings.Operating, FormattedStrings.NetCashFlow, operatingCashFlow, Colors.Primary, Colors.Primary);
-        AddSankeyLink(data, FormattedStrings.Investing, FormattedStrings.NetCashFlow, totalInvesting + totalGainLoss, Colors.Primary, Colors.Primary);
-        AddSankeyLink(data, FormattedStrings.Financing, FormattedStrings.NetCashFlow, totalFinancing, Colors.Primary, Colors.Primary);
+        AddSankeyLink(data, FormattedStrings.ComprehensiveIncome, FormattedStrings.Operating, netIncome, Colors.JungleTeal, Colors.JungleTeal);
+        AddSankeyLink(data, FormattedStrings.WorkingCapital, FormattedStrings.Operating, totalWorkingCapital, Colors.Primary, Colors.JungleTeal);
+        AddSankeyLink(data, FormattedStrings.NonCash, FormattedStrings.Operating, totalNonCash, Colors.Primary, Colors.JungleTeal);
+        AddSankeyLink(data, FormattedStrings.Operating, FormattedStrings.LessGain, totalGainLoss, Colors.JungleTeal, Colors.Dark);
+        AddSankeyLink(data, FormattedStrings.PlusGain, FormattedStrings.Investing, totalGainLoss, Colors.Dark, Colors.JungleTeal);
+        AddSankeyLink(data, FormattedStrings.Operating, FormattedStrings.NetOperating, netOperating, Colors.JungleTeal, Colors.JungleTeal);
+        AddSankeyLink(data, FormattedStrings.NetOperating, FormattedStrings.Investing, netOperating, Colors.JungleTeal, Colors.JungleTeal);
+        AddSankeyLink(data, FormattedStrings.Investing, FormattedStrings.NetInvesting, netInvesting, Colors.JungleTeal, Colors.JungleTeal);
+        AddSankeyLink(data, FormattedStrings.NetInvesting, FormattedStrings.Financing, netInvesting, Colors.JungleTeal, Colors.JungleTeal);
+        AddSankeyLink(data, FormattedStrings.Financing, FormattedStrings.NetFinancing, netFinancing, Colors.JungleTeal, Colors.JungleTeal);
+        AddSankeyLink(data, FormattedStrings.NetFinancing, FormattedStrings.NetCashFlow, netFinancing, Colors.JungleTeal, Colors.JungleTeal);
 
         return JsonSerializer.Serialize(data, s_options);
     }

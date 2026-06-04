@@ -142,7 +142,7 @@
     <value>¿Desea usted guardar los cambios en {0}?</value>
   </data>
   <data name="CheckWords{0}{1}" xml:space="preserve">
-    <value>{0} y {1}/XX</value>
+    <value>{0} y {1}/100</value>
   </data>
   <data name="Cost" xml:space="preserve">
     <value>Costos de ventas</value>
