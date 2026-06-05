@@ -15,7 +15,7 @@ using MessagePack.Formatters;
 namespace Liber;
 
 /// <summary>
-/// Represents an individual sole proprietorship, partnership, or stock corporation, or other entity.
+/// Represents an individual, sole proprietorship, partnership, corporation, or other entity.
 /// </summary>
 [MessagePackObject]
 public sealed class Company
@@ -41,11 +41,7 @@ public sealed class Company
     {
         get
         {
-            return _accounts
-                .OrderBy(x => x.Value.Number)
-                .ThenBy(x => x.Value.Name)
-                .ThenBy(x => x.Value.Type)
-                .ThenByDescending(x => x.Value.Balance);
+            return _accounts.OrderBy(x => x.Value);
         }
     }
 

@@ -159,16 +159,19 @@ public class HtmlReport : IntervalView
             case ReportLevel.ByAccount:
                 return Company
                     .GetBalancesByParent(Accounts.Values, ReportTypes.None, Started, Posted, Filter)
+                    .OrderBy(x => x.Parent)
                     .Select(x => (x.Parent.Name, x.Parent.Type, Company.GetColorOrDefault(x.Parent), x.Balances));
 
             case ReportLevel.ByType:
                 return Company
                     .GetBalancesByType(Accounts.Values, ReportTypes.None, Started, Posted, Filter)
+                    .OrderBy(x => x.Type)   
                     .Select(x => (FormattedStrings.GetString(x.Type.ToString()), x.Type, Company.Color, x.Balances));
         }
 
         return Company
             .GetBalances(Accounts.Values, ReportTypes.None, Started, Posted, Filter)
+            .OrderBy(x => x.Account)
             .Select(x => (x.Account.Name, x.Account.Type, Company.GetColorOrDefault(x.Account), x.Balances));
     }
 

@@ -20,7 +20,7 @@ namespace Liber;
 /// Represents a financial account.
 /// </summary>
 [MessagePackObject]
-public class Account
+public class Account : IComparable<Account>, IComparable
 {
     internal readonly HashSet<Account> children = new HashSet<Account>();
     internal readonly HashSet<Line> lines = new HashSet<Line>();
@@ -322,5 +322,72 @@ public class Account
     public override string ToString()
     {
         return Name;
+    }
+
+    int IComparable.CompareTo(object? obj)
+    {
+        if (obj == null)
+        {
+            return 1;
+        }
+
+        if (obj is not Account account)
+        {
+            throw new ArgumentException(message: null, nameof(obj));
+        }
+
+        return CompareTo(account);
+    }
+
+    public int CompareTo(Account? other)
+    {
+        if (other is null)
+        {
+            return 1;
+        }
+
+        int result = Number.CompareTo(other.Number);
+
+        if (result != 0)
+        {
+            return result;
+        }
+
+        result = Name.CompareTo(other.Name);
+
+        if (result != 0)
+        {
+            return result;
+        }
+
+        result = Type.CompareTo(other.Type);
+
+        if (result != 0)
+        {
+            return result;
+        }
+
+        result = CashFlow.CompareTo(other.CashFlow);
+
+        if (result != 0)
+        {
+            return result;
+        }
+
+        result = TaxType.CompareTo(other.TaxType);
+
+        if (result != 0)
+        {
+            return result;
+        }
+
+        result = other.Balance.CompareTo(Balance);
+
+        if (result != 0)
+        {
+            return result;
+        }
+
+        return ParentId.CompareTo(other.ParentId);
     }
 }

@@ -334,19 +334,18 @@ public class XslReport : IntervalView, IXmlSerializable
 
         if (Level == ReportLevel.ByAccount)
         {
-            foreach ((Account account, ParentKey key, BalanceInfo balances) in Company.GetBalancesByKey(
-                Accounts.Values,
-                Type,
-                Started,
-                Posted,
-                Filter))
+            foreach ((Account account, ParentKey key, BalanceInfo balances) in Company
+                .GetBalancesByKey(Accounts.Values, Type, Started, Posted, Filter)
+                .OrderBy(x => x.Parent))
             {
                 WriteAccountXml(writer, account, key, balances);
             }
         }
         else
         {
-            foreach ((Account account, BalanceInfo balances) in Company.GetBalances(Accounts.Values, Type, Started, Posted, Filter))
+            foreach ((Account account, BalanceInfo balances) in Company
+                .GetBalances(Accounts.Values, Type, Started, Posted, Filter)
+                .OrderBy(x => x.Account))
             {
                 WriteAccountXml(writer, account, new ParentKey(account), balances);
             }
