@@ -132,7 +132,7 @@ public static class AccountTypeExtensions
 
     public static bool IsDebit(this AccountType value, decimal debit)
     {
-        return short.Sign((short)value) == decimal.Sign(debit);
+        return debit == 0 || short.Sign((short)value) == decimal.Sign(debit);
     }
 
     public static bool IsAsset(this AccountType value)

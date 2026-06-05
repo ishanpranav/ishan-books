@@ -182,16 +182,22 @@ public class HtmlReport : IntervalView
             labels.Add(started.ToShortDateString() + " \u2013 " + posted.ToShortDateString());
         }
 
-        foreach ((string name, AccountType type, Color color, BalanceInfo balances) in GetBalances())
+        foreach (Account account in Accounts.Values)
         {
             int label = 0;
             bool nonZero = false;
             double[] data = new double[labels.Count];
+            Color[] colors = new Color[labels.Count];
 
             foreach ((DateTime started, DateTime posted) in EnumerateRanges())
             {
-                data[label] = (double)type.ToBalance(balances.Balance);
+                decimal debit = account.Type.IsTemporary()
+                    ? account.GetBalance(started, posted, Filter)
+                    : account.GetBalance(posted, Filter);
 
+                data[label] = (double)account.Type.ToBalance(debit);
+                colors[label] = GetColorOrDefault(account.Name, account.Type, Company.GetColorOrDefault(account), debit);
+                
                 if (data[label] != 0)
                 {
                     nonZero = true;
@@ -204,9 +210,11 @@ public class HtmlReport : IntervalView
             {
                 datasets.Add(new ChartJSChartDataset(data)
                 {
-                    Label = name,
+                    Label = account.Name,
                     BorderWidth = 1,
-                    LineTension = 0.25
+                    LineTension = 0.25,
+                    BackgroundColors = colors,
+                    BorderColors = colors
                 });
             }
         }

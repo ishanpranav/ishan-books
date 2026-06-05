@@ -69,30 +69,23 @@ public static class GnuCashSqliteSerializer
             {
                 while (await reader.ReadAsync())
                 {
-                    try
+                    Guid id = reader.GetGuid(0);
+                    Guid parentId = reader.GetGuid(1);
+                    Account account = new Account(parentId == emptyParentId ? Guid.Empty : parentId)
                     {
-                        Guid id = reader.GetGuid(0);
-                        Guid parentId = reader.GetGuid(1);
-                        Account account = new Account(parentId == emptyParentId ? Guid.Empty : parentId)
-                        {
-                            Number = reader.GetDecimal(2),
-                            Name = reader.GetString(3),
-                            Type = GnuCashAccountTypeConverter.Parse(await SqliteUtilities.GetStringAsync(reader, 4)),
-                            Placeholder = reader.GetBoolean(5),
-                            Description = await SqliteUtilities.GetStringAsync(reader, 6),
-                            Memo = await SqliteUtilities.GetStringAsync(reader, 7),
-                            Color = await SqliteUtilities.GetColorAsync(reader, 8),
-                            TaxType = !await reader.IsDBNullAsync(9) && reader.GetBoolean(9),
-                            Inactive = reader.GetBoolean(10)
-                        };
+                        Number = reader.GetDecimal(2),
+                        Name = reader.GetString(3),
+                        Type = GnuCashAccountTypeConverter.Parse(await SqliteUtilities.GetStringAsync(reader, 4)),
+                        Placeholder = reader.GetBoolean(5),
+                        Description = await SqliteUtilities.GetStringAsync(reader, 6),
+                        Memo = await SqliteUtilities.GetStringAsync(reader, 7),
+                        Color = await SqliteUtilities.GetColorAsync(reader, 8),
+                        TaxType = !await reader.IsDBNullAsync(9) && reader.GetBoolean(9),
+                        Inactive = reader.GetBoolean(10)
+                    };
 
-                        accounts.Add(id, account);
-                        accountIds.Add(account, id);
-                    }
-                    catch (Exception ex)
-                    {
-                        throw;
-                    }
+                    accounts.Add(id, account);
+                    accountIds.Add(account, id);
                 }
             }
         }

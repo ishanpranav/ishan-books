@@ -13,7 +13,6 @@ const config = {
     type: 'line',
     options: {
         responsive: true,
-        maintainAspectRatio: false,
         plugins: {
             title: {
                 display: true,

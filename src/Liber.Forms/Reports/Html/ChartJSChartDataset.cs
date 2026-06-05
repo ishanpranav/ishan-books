@@ -19,6 +19,10 @@ internal sealed class ChartJSChartDataset
     [JsonPropertyName("backgroundColor")]
     public IEnumerable<Color>? BackgroundColors { get; set; }
 
+    [JsonConverter(typeof(ChartJSColorCollectionConverter))]
+    [JsonPropertyName("borderColor")]
+    public IEnumerable<Color>? BorderColors { get; set; }
+
     public ChartJSChartDataset(IReadOnlyList<double> data)
     {
         Data = data;

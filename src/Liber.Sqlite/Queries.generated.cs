@@ -12,7 +12,7 @@ internal static class Queries
 
     public const string GnuCashSelectCompany = " SELECT (SELECT slot.string_val FROM slots slot WHERE slot.\"name\" = 'options/Business/Company Name' LIMIT 1) \"Name\", (SELECT slot.string_val FROM slots slot WHERE slot.\"name\" = 'tax_US/type' LIMIT 1) \"Type\", (SELECT account.\"guid\" FROM accounts account WHERE account.account_type = 'ROOT' LIMIT 1) \"EmptyParentId\"; ";
 
-    public const string GnuCashSelectLines = " SELECT tx_guid \"TransactionId\", account_guid \"AccountId\", (value_num / value_denom) \"Balance\", memo \"Description\" FROM splits; ";
+    public const string GnuCashSelectLines = " SELECT tx_guid \"TransactionId\", account_guid \"AccountId\", (CAST(value_num AS REAL) / value_denom) \"Balance\", memo \"Description\" FROM splits; ";
 
     public const string GnuCashSelectTransactions = " SELECT \"transaction\".\"guid\" \"Id\", \"transaction\".post_date \"Posted\", COALESCE(NULLIF(\"transaction\".num, ''), 0) \"Number\", \"transaction\".\"description\" \"Name\", MIN(CASE WHEN slot.\"name\" = 'notes' THEN slot.string_val END) \"Memo\" FROM transactions \"transaction\" LEFT JOIN slots slot ON \"transaction\".\"guid\" = slot.obj_guid GROUP BY \"transaction\".\"guid\"; ";
 
