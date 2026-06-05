@@ -97,6 +97,48 @@ public static class GnuCashSqliteSerializer
             }
         }
 
+        await using (SqliteCommand command = connection.CreateCommand())
+        {
+            command.CommandText = Queries.GnuCashSelectTransactions;
+
+            await using (SqliteDataReader reader = await command.ExecuteReaderAsync())
+            {
+                while (await reader.ReadAsync())
+                {
+                    Guid id = reader.GetGuid(0);
+
+                    transactions.Add(id, new Transaction()
+                    {
+                        Id = id,
+                        Posted = reader.GetDateTime(1),
+                        Number = reader.GetDecimal(2),
+                        Name = await SqliteUtilities.GetStringAsync(reader, 3),
+                        Memo = await SqliteUtilities.GetStringAsync(reader, 4)
+                    });
+                }
+            }
+        }
+
+        await using (SqliteCommand command = connection.CreateCommand())
+        {
+            command.CommandText = Queries.GnuCashSelectLines;
+
+            await using (SqliteDataReader reader = await command.ExecuteReaderAsync())
+            {
+                while (await reader.ReadAsync())
+                {
+                    Guid id = reader.GetGuid(0);
+
+                    transactions[id].Lines.Add(new Line()
+                    {
+                        AccountId = reader.GetGuid(1),
+                        Balance = reader.GetDecimal(2),
+                        Description = await SqliteUtilities.GetStringAsync(reader, 3)
+                    });
+                }
+            }
+        }
+
         Company result = new Company(accounts, transactions.Values, nextAccountNumber: 1, nextTransactionNumber: 1)
         {
             Name = name,
@@ -126,68 +168,6 @@ public static class GnuCashSqliteSerializer
         {
             result.OtherEquityAccountId = accountIds[context.OtherEquityAccount];
         }
-
-        //await using (SqliteCommand command = connection.CreateCommand())
-        //{
-        //    command.CommandText = Queries.SelectTransactions;
-
-        //    await using (SqliteDataReader reader = await command.ExecuteReaderAsync())
-        //    {
-        //        while (await reader.ReadAsync())
-        //        {
-        //            Guid id = reader.GetGuid(0);
-
-        //            transactions.Add(id, new Transaction()
-        //            {
-        //                Id = id,
-        //                Posted = reader.GetDateTime(1),
-        //                Number = reader.GetDecimal(2),
-        //                Name = await GetStringAsync(reader, 3),
-        //                Memo = await GetStringAsync(reader, 4)
-        //            });
-        //        }
-        //    }
-        //}
-
-        //await using (SqliteCommand command = connection.CreateCommand())
-        //{
-        //    command.CommandText = Queries.SelectLines;
-
-        //    await using (SqliteDataReader reader = await command.ExecuteReaderAsync())
-        //    {
-        //        while (await reader.ReadAsync())
-        //        {
-        //            Guid id = reader.GetGuid(0);
-
-        //            transactions[id].Lines.Add(new Line()
-        //            {
-        //                AccountId = reader.GetGuid(1),
-        //                Balance = reader.GetDecimal(2),
-        //                Description = await GetStringAsync(reader, 3)
-        //            });
-        //        }
-        //    }
-        //}
-
-        //await using (SqliteCommand command = connection.CreateCommand())
-        //{
-        //    command.CommandText = Queries.SelectCompany;
-
-        //    await using (SqliteDataReader reader = await command.ExecuteReaderAsync(CommandBehavior.SingleRow))
-        //    {
-        //        await reader.ReadAsync();
-
-        //        return new Company(accounts, transactions.Values, reader.GetDecimal(1), reader.GetDecimal(2))
-        //        {
-        //            Name = await GetStringAsync(reader, 0),
-        //            Type = await reader.GetFieldValueAsync<CompanyType>(3),
-        //            Color = await GetColorAsync(reader, 4),
-        //            EquityAccountId = reader.GetGuid(5),
-        //            OtherEquityAccountId = reader.GetGuid(6),
-        //            Password = password
-        //        };
-        //    }
-        //}
 
         return result;
     }
