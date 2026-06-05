@@ -103,7 +103,7 @@ public static class GnuCashSqliteSerializer
                     transactions.Add(id, new Transaction()
                     {
                         Id = id,
-                        Posted = reader.GetDateTime(1),
+                        Posted = reader.GetDateTime(1).Date,
                         Number = reader.GetDecimal(2),
                         Name = await SqliteUtilities.GetStringAsync(reader, 3),
                         Memo = await SqliteUtilities.GetStringAsync(reader, 4)
