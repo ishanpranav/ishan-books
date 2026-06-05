@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using Liber.Forms.Components;
-using Liber.Forms.Import;
 using Liber.Forms.Properties;
 
 namespace Liber.Forms.Accounts;
@@ -35,36 +34,7 @@ internal sealed class ImportAccountsForm : ImportForm
             Color = company.Color
         };
 
-        if (rules != null)
-        {
-            foreach (ImportRule rule in rules)
-            {
-                rule.Apply(_context);
-            }
-        }
-
-        foreach (Account account in values)
-        {
-            switch (account.Type)
-            {
-                case AccountTypeExtensions.Debit:
-                    account.Type = AccountType.OtherCurrentAsset;
-                    break;
-
-                case AccountTypeExtensions.Credit:
-                    account.Type = AccountType.OtherCurrentLiability;
-                    break;
-            }
-        }
-
-        foreach (Account value in values)
-        {
-            if (value.CashFlow == CashFlow.None)
-            {
-                value.CashFlow = value.Type.ToCashFlow();
-            }
-        }
-
+        _context.Apply(rules ?? Enumerable.Empty<ImportRule>());
         SetDataSource(values);
     }
 

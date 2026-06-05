@@ -128,16 +128,9 @@ public sealed class Company
     {
         _accounts = new Dictionary<Guid, Account>();
         _transactions = new SortedSet<Transaction>();
-        EquityAccountId = AddAccount(new Account()
-        {
-            Name = Resources.DefaultEquityAccountName,
-            Type = AccountType.Equity
-        }, Guid.Empty);
-        OtherEquityAccountId = AddAccount(new Account()
-        {
-            Name = Resources.DefaultOtherEquityAccountName,
-            Type = AccountType.Equity
-        }, Guid.Empty);
+
+        ResetEquityAccount();
+        ResetOtherEquityAccount();
     }
 
     /// <summary>
@@ -178,6 +171,24 @@ public sealed class Company
                 line.Transaction = transaction;
             }
         }
+    }
+
+    public void ResetEquityAccount()
+    {
+        EquityAccountId = AddAccount(new Account()
+        {
+            Name = Resources.DefaultEquityAccountName,
+            Type = AccountType.Equity
+        }, Guid.Empty);
+    }
+
+    public void ResetOtherEquityAccount()
+    {
+        OtherEquityAccountId = AddAccount(new Account()
+        {
+            Name = Resources.DefaultOtherEquityAccountName,
+            Type = AccountType.Equity
+        }, Guid.Empty);
     }
 
     public string[] GetNames()

@@ -16,6 +16,7 @@ internal enum FilterIndex
     Sqlite = 6,
     Csv = 7,
     Pdf = 8,
+    GnuCashSqlite = 11,
     Iif = 9,
     Xml = 10
 }

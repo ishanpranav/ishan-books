@@ -503,6 +503,13 @@ internal sealed partial class MainForm : Form
         (await SqliteSerializer.DeserializeAsync(path, password)).CopyTo(_company);
     }
 
+    private async Task ImportGnuCashSqliteCompanyAsync(string path)
+    {
+        ImportRule[]? rules = JsonSerializer.Deserialize<ImportRule[]>(Settings.Default.ImportRules, FormattedStrings.JsonOptions);
+
+        (await GnuCashSqliteSerializer.DeserializeAsync(path, rules ?? Enumerable.Empty<ImportRule>())).CopyTo(_company);
+    }
+
     private async Task ImportAsync(string path)
     {
         await AbortRetryIgnoreAsync(async () =>
@@ -516,6 +523,10 @@ internal sealed partial class MainForm : Form
                 case ".MPK":
                 case ".MSGPACK":
                     await ImportMessagePackCompanyAsync(path);
+                    break;
+
+                case ".GNUCASH":
+                    await ImportGnuCashSqliteCompanyAsync(path);
                     break;
 
                 default:

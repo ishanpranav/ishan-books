@@ -3,7 +3,6 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Drawing;
 
 namespace Liber.Forms.Accounts;
 

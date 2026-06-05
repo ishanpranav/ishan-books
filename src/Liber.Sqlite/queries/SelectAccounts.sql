@@ -4,7 +4,7 @@
 
 SELECT 
     "Id",
-    COALESCE("ParentId", "00000000-0000-0000-0000-000000000000"),
+    COALESCE("ParentId", '00000000-0000-0000-0000-000000000000'),
     COALESCE("Number", 0),
     "Name",
     "Type",

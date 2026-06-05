@@ -29,7 +29,9 @@ internal sealed partial class CheckDialog : Form
             item.Tag = line;
 
             item.SubItems.Add(transaction.Posted.ToShortDateString()).Tag = transaction.Posted;
-            item.SubItems.Add(transaction.Number.ToString()).Tag = transaction.Number;
+            item.SubItems.Add(transaction.Number == 0
+                ? string.Empty
+                : transaction.Number.ToString()).Tag = transaction.Number;
             item.SubItems.Add(line.Credit.ToLocalizedString()).Tag = line.Credit;
         }
 

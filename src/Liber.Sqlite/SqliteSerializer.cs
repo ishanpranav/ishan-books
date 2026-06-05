@@ -20,26 +20,6 @@ public static class SqliteSerializer
         Batteries.Init();
     }
 
-    private static async Task<string?> GetStringAsync(DbDataReader reader, int ordinal)
-    {
-        if (await reader.IsDBNullAsync(ordinal))
-        {
-            return null;
-        }
-
-        return reader.GetString(ordinal);
-    }
-
-    private static async Task<Color> GetColorAsync(DbDataReader reader, int ordinal)
-    {
-        if (await reader.IsDBNullAsync(ordinal))
-        {
-            return Color.Empty;
-        }
-
-        return Color.FromArgb(reader.GetInt32(ordinal));
-    }
-
     private static object ValueOf(string? value)
     {
         if (value == null)
@@ -80,24 +60,9 @@ public static class SqliteSerializer
         return value;
     }
 
-    private static SqliteConnection CreateConnection(string path, string? password)
-    {
-        SqliteConnectionStringBuilder connectionStringBuilder = new SqliteConnectionStringBuilder()
-        {
-            DataSource = path
-        };
-
-        if (password != null)
-        {
-            connectionStringBuilder.Password = password;
-        }
-
-        return new SqliteConnection(connectionStringBuilder.ConnectionString);
-    }
-
     public static async Task SerializeAsync(string path, Company value, IProgress progress)
     {
-        await using SqliteConnection connection = CreateConnection(path, value.Password);
+        await using SqliteConnection connection = SqliteUtilities.CreateConnection(path, value.Password);
 
         await connection.OpenAsync();
 
@@ -184,7 +149,7 @@ public static class SqliteSerializer
     {
         try
         {
-            await using SqliteConnection connection = CreateConnection(path, password);
+            await using SqliteConnection connection = SqliteUtilities.CreateConnection(path, password);
 
             await connection.OpenAsync();
 
@@ -208,7 +173,7 @@ public static class SqliteSerializer
 
     public static async Task<Company> DeserializeAsync(string path, string password)
     {
-        await using SqliteConnection connection = CreateConnection(path, password);
+        await using SqliteConnection connection = SqliteUtilities.CreateConnection(path, password);
 
         await connection.OpenAsync();
 
@@ -229,9 +194,9 @@ public static class SqliteSerializer
                         Name = reader.GetString(3),
                         Type = await reader.GetFieldValueAsync<AccountType>(4),
                         Placeholder = reader.GetBoolean(5),
-                        Description = await GetStringAsync(reader, 6),
-                        Memo = await GetStringAsync(reader, 7),
-                        Color = await GetColorAsync(reader, 8),
+                        Description = await SqliteUtilities.GetStringAsync(reader, 6),
+                        Memo = await SqliteUtilities.GetStringAsync(reader, 7),
+                        Color = await SqliteUtilities.GetColorAsync(reader, 8),
                         TaxType = !await reader.IsDBNullAsync(9) && reader.GetBoolean(9),
                         Inactive = reader.GetBoolean(10),
                         CashFlow = await reader.GetFieldValueAsync<CashFlow>(11)
@@ -255,8 +220,8 @@ public static class SqliteSerializer
                         Id = id,
                         Posted = reader.GetDateTime(1),
                         Number = reader.GetDecimal(2),
-                        Name = await GetStringAsync(reader, 3),
-                        Memo = await GetStringAsync(reader, 4)
+                        Name = await SqliteUtilities.GetStringAsync(reader, 3),
+                        Memo = await SqliteUtilities.GetStringAsync(reader, 4)
                     });
                 }
             }
@@ -276,7 +241,7 @@ public static class SqliteSerializer
                     {
                         AccountId = reader.GetGuid(1),
                         Balance = reader.GetDecimal(2),
-                        Description = await GetStringAsync(reader, 3)
+                        Description = await SqliteUtilities.GetStringAsync(reader, 3)
                     });
                 }
             }
@@ -292,9 +257,9 @@ public static class SqliteSerializer
 
                 return new Company(accounts, transactions.Values, reader.GetDecimal(1), reader.GetDecimal(2))
                 {
-                    Name = await GetStringAsync(reader, 0),
+                    Name = await SqliteUtilities.GetStringAsync(reader, 0),
                     Type = await reader.GetFieldValueAsync<CompanyType>(3),
-                    Color = await GetColorAsync(reader, 4),
+                    Color = await SqliteUtilities.GetColorAsync(reader, 4),
                     EquityAccountId = reader.GetGuid(5),
                     OtherEquityAccountId = reader.GetGuid(6),
                     Password = password

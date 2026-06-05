@@ -48,12 +48,16 @@ internal abstract partial class ImportForm : Form
 
     private void OnAcceptButtonClick(object sender, EventArgs e)
     {
+        DialogResult = DialogResult.OK;
+
         CommitChanges();
         Close();
     }
 
     private void OnCancelButtonClick(object sender, EventArgs e)
     {
+        DialogResult = DialogResult.Cancel;
+
         Close();
     }
 }
