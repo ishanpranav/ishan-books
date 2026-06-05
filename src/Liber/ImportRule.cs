@@ -7,9 +7,9 @@ using System.Drawing;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 
-namespace Liber.Forms.Import;
+namespace Liber;
 
-internal sealed class ImportRule
+public class ImportRule
 {
     [JsonConverter(typeof(JsonRegexConverter))]
     [LocalizedDisplayName(nameof(Filter))]

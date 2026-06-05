@@ -7,9 +7,9 @@ using Liber;
 
 namespace CsvHelper.TypeConversion;
 
-internal sealed class GnuCashAccountTypeConverter : DefaultTypeConverter
+public class GnuCashAccountTypeConverter : DefaultTypeConverter
 {
-    public override object? ConvertFromString(string? text, IReaderRow row, MemberMapData memberMapData)
+    public static AccountType Parse(string? text)
     {
         switch (text)
         {
@@ -18,7 +18,7 @@ internal sealed class GnuCashAccountTypeConverter : DefaultTypeConverter
                 return AccountType.Bank;
 
             case "ASSET": return AccountTypeExtensions.Debit;
-            case "LIABILITY":  return AccountTypeExtensions.Credit;
+            case "LIABILITY": return AccountTypeExtensions.Credit;
             case "CREDIT": return AccountType.CreditCard;
             case "EQUITY": return AccountType.Equity;
             case "INCOME": return AccountType.Income;
@@ -26,6 +26,11 @@ internal sealed class GnuCashAccountTypeConverter : DefaultTypeConverter
 
             default: return AccountType.None;
         }
+    }
+
+    public override object? ConvertFromString(string? text, IReaderRow row, MemberMapData memberMapData)
+    {
+        return Parse(text);
     }
 
     public override string? ConvertToString(object? value, IWriterRow row, MemberMapData memberMapData)

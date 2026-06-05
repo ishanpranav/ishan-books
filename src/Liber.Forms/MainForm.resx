@@ -533,7 +533,7 @@
     <value>276, 17</value>
   </metadata>
   <data name="_openFileDialog.Filter" xml:space="preserve">
-    <value>All Files (*.*)|*.*|All Supported Files (*.izbk;*.mpk;*.msgpack;*.json;*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3)|*.izbk;*.mpk;*.msgpack;*.json;*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3|IshanBooks Company File (*.izbk)|*.izbk|MessagePack (*.mpk;*.msgpack)|*.mpk;*.msgpack|JavaScript Object Notation (*.json)|*.json|SQLite3 Database File (*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3)|*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3|Comma-delimited (*.csv)|*.csv|PDF Document (*.pdf)|*.pdf</value>
+    <value>All Files (*.*)|*.*|All Supported Files (*.izbk;*.mpk;*.msgpack;*.json;*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3;*.gnucash)|*.izbk;*.mpk;*.msgpack;*.json;*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3;*.gnucash|IshanBooks Company File (*.izbk)|*.izbk|MessagePack (*.mpk;*.msgpack)|*.mpk;*.msgpack|JavaScript Object Notation (*.json)|*.json|SQLite3 Database File (*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3)|*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3|Comma-delimited (*.csv)|*.csv|PDF Document (*.pdf)|*.pdf|GnuCash Financial Data (*.gnucash)|*.gnucash</value>
   </data>
   <metadata name="_saveFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>441, 17</value>

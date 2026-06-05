@@ -1,51 +1,36 @@
 ﻿<#@ template debug="false" hostspecific="true" language="C#" #>
 <#@ assembly name="System.Core" #>
-<#@ assembly name="System.CodeDom" #>
 <#@ import namespace="System.IO" #>
-<#@ import namespace="System.CodeDom" #>
-<#@ import namespace="System.CodeDom.Compiler" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Text.RegularExpressions" #>
-<#@ import namespace="Microsoft.CSharp" #>
-<#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
 <#@ output extension=".generated.cs" #>
 // Queries.generated.cs
 // Copyright (c) 2023-2026 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
-<#
-CodeDomProvider provider = new CSharpCodeProvider();
-#>
 namespace Liber.Sqlite;
 
 internal static class Queries
 {<# foreach (string path in Directory.EnumerateFiles(Path.Combine(Path.GetDirectoryName(Host.TemplateFile), "queries"), "*.sql"))
     {
-    
-    StringWriter writer = new StringWriter();
     StringBuilder builder = new StringBuilder();
     StreamReader reader = File.OpenText(path);
-    string? line;
+    string line;
 
     while ((line = reader.ReadLine()) != null)
     {
         if (!line.Trim().StartsWith("--"))
         {
-            builder.Append(line.Trim());
+            builder.Append(line).Append(' ');
         }
     }
 
     reader.Close();
 
-    line = Regex.Replace(builder.ToString(), @"\s+", " ");
-    
-    provider.GenerateCodeFromExpression(new CodePrimitiveExpression(line), writer, null);
-
+    string sql = Regex.Replace(builder.ToString(), @"\s+", " ");
+    string escaped = sql.Replace("\\", "\\\\").Replace("\"", "\\\"");
     #>
 
-    public const string <#= Path.GetFileNameWithoutExtension(path) #> = <#= writer #>;
-<#
-    writer.Close();
-    }
-    #>}
-<# provider.Dispose(); #>
+    public const string <#= Path.GetFileNameWithoutExtension(path) #> = "<#= escaped #>";
+<#  } #>
+}
