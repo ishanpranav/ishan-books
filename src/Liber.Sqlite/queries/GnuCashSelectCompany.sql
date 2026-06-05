@@ -14,5 +14,4 @@ SELECT
     (SELECT account."guid"
      FROM accounts account
      WHERE account.account_type = 'ROOT'
-     LIMIT 1) "EmptyParentId"
-;
+     LIMIT 1) "EmptyParentId";

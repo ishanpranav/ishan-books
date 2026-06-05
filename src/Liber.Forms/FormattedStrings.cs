@@ -290,7 +290,7 @@ internal static class FormattedStrings
             text = string.Format(GetString("NotSupportedText{0}"), extension.Substring(1).ToUpper());
         }
 
-        MessageBox.Show(Properties.Resources.ExceptionCaption, text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        MessageBox.Show(text, Properties.Resources.ExceptionCaption, MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
 
     public static string GetTitle(string name)

@@ -514,6 +514,8 @@ internal sealed partial class MainForm : Form
     {
         await AbortRetryIgnoreAsync(async () =>
         {
+            bool canSave = true;
+
             switch (Path.GetExtension(path).ToUpperInvariant())
             {
                 case ".JSON":
@@ -527,6 +529,8 @@ internal sealed partial class MainForm : Form
 
                 case ".GNUCASH":
                     await ImportGnuCashSqliteCompanyAsync(path);
+
+                    canSave = false;
                     break;
 
                 default:
@@ -537,7 +541,7 @@ internal sealed partial class MainForm : Form
             CloseChildren();
             _recentPathManager.Add(path);
 
-            _path = path;
+            _path = canSave ? path : null;
 
             foreach (IReportView view in _engine!.Views.Values)
             {
