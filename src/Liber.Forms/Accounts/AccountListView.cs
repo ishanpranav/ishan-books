@@ -37,7 +37,7 @@ internal sealed class AccountListView : ListViewEx
     {
         BeginUpdate();
 
-        foreach (KeyValuePair<Guid, Account> account in company.Accounts)
+        foreach (KeyValuePair<Guid, Account> account in company.OrderedAccounts)
         {
             if (account.Value.Inactive)
             {

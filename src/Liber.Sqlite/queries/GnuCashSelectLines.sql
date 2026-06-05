@@ -5,6 +5,6 @@
 SELECT 
     tx_guid "TransactionId",
     account_guid "AccountId",
-    (value_num / value_denom) "Balance",
+    (CAST(value_num AS REAL) / value_denom) "Balance",
     memo "Description"
 FROM splits;

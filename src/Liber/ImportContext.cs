@@ -21,12 +21,9 @@ public class ImportContext
 
     public void Apply(IEnumerable<ImportRule> rules)
     {
-        if (rules != null)
+        foreach (ImportRule rule in rules)
         {
-            foreach (ImportRule rule in rules)
-            {
-                rule.Apply(context: this);
-            }
+            rule.Apply(context: this);
         }
 
         foreach (Account account in Accounts)
