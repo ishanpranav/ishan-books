@@ -247,7 +247,7 @@
             "formats": [ "javascript", "typescript" ],
             "source": "https://github.com/kurkle/chartjs-chart-treemap",
             "author": "Jukka Kurkela",
-            "license": "mit_kurkela",
+            "license": "mit_charjscharttreemap",
             "copyright": "2019-2021 Jukka Kurkela",
             "index": "Kurkela"
         },
@@ -256,9 +256,18 @@
             "formats": [ "javascript", "typescript" ],
             "source": "https://github.com/kurkle/chartjs-chart-sankey",
             "author": "Jukka Kurkela",
-            "license": "mit_kurkela",
+            "license": "mit_chartjschartsankey",
             "copyright": "2019-2026 Jukka Kurkela",
             "index": "Kurkela"
+        },
+        {
+            "title": "PdfSharp",
+            "formats": [ "c#" ],
+            "source": "https://github.com/empira/PDFsharp",
+            "author": "empira Software GmbH",
+            "license": "mit_pdfsharp",
+            "copyright": "Copyright (c) 2001-2026 empira Software GmbH, Troisdorf (Cologne Area), Germany",
+            "index": "empira Software GmbH"
         }
     ],
   "references": [

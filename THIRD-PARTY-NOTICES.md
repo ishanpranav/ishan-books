@@ -2,7 +2,7 @@ Third-Party Notices
 ===================
 IshanBooks by Ishan Pranav
 
-Copyright (c) 2023-2025 Ishan Pranav
+Copyright (c) 2023-2026 Ishan Pranav
 
 This software uses third-party libraries or other resources that may be
 distributed under licenses different than the software.
@@ -24,6 +24,11 @@ the application.
 - Author: Josh Close
 - Source: [JoshClose/CsvHelper](https://github.com/JoshClose/CsvHelper)
 - License: [Microsoft Public License and Apache license 2.0](#csvhelper)
+
+### PdfSharp&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
+- Author: empira Software GmbH
+- Source: [empira/PDFsharp](https://github.com/empira/PDFsharp)
+- License: [MIT](#mit_pdfsharp)
 
 ### Voucher Check 3-Part US-Letter&emsp;<sub><sup>*ini*&ensp;</sup></sub>
 - Author: GnuCash contributors
@@ -101,6 +106,16 @@ For more information about this software, please see its [third-party notices](h
 - Source: [MiloszKrajewski/lz4net](https://github.com/MiloszKrajewski/lz4net)
 - License: [BSD 2-clause "Simplified" license](#bsd-2-clause_krajewski)
 
+### chartjs-chart-sankey&emsp;<sub><sup>*javascript*&ensp;*typescript*&ensp;</sup></sub>
+- Author: Jukka Kurkela
+- Source: [kurkle/chartjs-chart-sankey](https://github.com/kurkle/chartjs-chart-sankey)
+- License: [MIT](#mit_chartjschartsankey)
+
+### chartjs-chart-treemap&emsp;<sub><sup>*javascript*&ensp;*typescript*&ensp;</sup></sub>
+- Author: Jukka Kurkela
+- Source: [kurkle/chartjs-chart-treemap](https://github.com/kurkle/chartjs-chart-treemap)
+- License: [MIT](#mit_charjscharttreemap)
+
 ### Humanizer&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
 - Author: .NET Foundation and contributors
 - Source: [Humanizr/Humanizer](https://github.com/Humanizr/Humanizer)
@@ -121,6 +136,11 @@ For more information about this software, please see its [third-party notices](h
 - Source: [dotnet/docfx](https://github.com/dotnet/docfx)
 - License: [MIT](#mit_dotnet)
 
+### Microsoft Windows API Codepack&emsp;<sub><sup>*c\#*&ensp;*c++*&ensp;*visual basic*&ensp;</sup></sub>
+- Author: Microsoft Corporation
+- Source: [Wagnerp/Windows-API-CodePack-NET](https://github.com/Wagnerp/Windows-API-CodePack-NET)
+- License: [MIT](#mit_windowsapicodepack)
+
 ### TypeConverter to JsonConverter Adapter&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
 - Author: .NET Foundation and contributors
 - Source: [dotnet/runtime/issues/1761](https://github.com/dotnet/runtime/issues/1761)
@@ -129,11 +149,6 @@ For more information about this software, please see its [third-party notices](h
 See [here](https://github.com/dotnet/runtime/issues/1761) for the resource included from the repository.
 
 For more information about this software, please see its [third-party notices](https://github.com/dotnet/runtime/blob/main/THIRD-PARTY-NOTICES.TXT).
-
-### Microsoft Windows API Codepack&emsp;<sub><sup>*c\#*&ensp;*c++*&ensp;*visual basic*&ensp;</sup></sub>
-- Author: Microsoft Corporation
-- Source: [Wagnerp/Windows-API-CodePack-NET](https://github.com/Wagnerp/Windows-API-CodePack-NET)
-- License: [MIT](#mit_windowsapicodepack)
 
 ### .NET Runtime&emsp;<sub><sup>*c\#*&ensp;*c++*&ensp;*c*&ensp;</sup></sub>
 - Author: .NET Foundation and contributors
@@ -1102,12 +1117,66 @@ Public License instead of this License.
 ```
 ________________________________________________________________________________
 
+### <a id='mit_charjscharttreemap'>MIT</a>
+
+```
+The MIT License (MIT)
+
+Copyright 2019-2021 Jukka Kurkela
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the “Software”), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+```
+________________________________________________________________________________
+
 ### <a id='mit_chartjs'>MIT</a>
 
 ```
 The MIT License (MIT)
 
 Copyright 2014-2022 Chart.js Contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the “Software”), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+```
+________________________________________________________________________________
+
+### <a id='mit_chartjschartsankey'>MIT</a>
+
+```
+The MIT License (MIT)
+
+Copyright 2019-2026 Jukka Kurkela
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the “Software”), to deal
@@ -1243,6 +1312,33 @@ ________________________________________________________________________________
 The MIT License (MIT)
 
 Copyright 2013 Scott Kirkland
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the “Software”), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+```
+________________________________________________________________________________
+
+### <a id='mit_pdfsharp'>MIT</a>
+
+```
+The MIT License (MIT)
+
+Copyright Copyright (c) 2001-2026 empira Software GmbH, Troisdorf (Cologne Area), Germany
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the “Software”), to deal
