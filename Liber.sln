@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.5.33627.172
+# Visual Studio Version 18
+VisualStudioVersion = 18.6.11822.322 stable
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1267075A-EF6A-4D97-A38E-72C3EC0C6F35}"
 	ProjectSection(SolutionItems) = preProject
@@ -17,6 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		tools\New-ThirdPartyNotices.ps1 = tools\New-ThirdPartyNotices.ps1
 		tools\publish-page.xslt = tools\publish-page.xslt
 		README.md = README.md
+		THIRD-PARTY-NOTICES.md = THIRD-PARTY-NOTICES.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Liber.Forms", "src\Liber.Forms\Liber.Forms.csproj", "{1E98AFB1-24AB-46FF-9588-1C34368A7589}"
@@ -104,9 +105,9 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		RESX_TaskErrorCategory = Message
-		RESX_ConfirmAddLanguageFile = True
-		RESX_SortFileContentOnSave = True
 		SolutionGuid = {9170A1F4-FAEF-448C-A8BC-A2D0D54864C8}
+		RESX_SortFileContentOnSave = True
+		RESX_ConfirmAddLanguageFile = True
+		RESX_TaskErrorCategory = Message
 	EndGlobalSection
 EndGlobal
