@@ -31,9 +31,15 @@ __Reporting__
 - [X] Equity statement
 - [X] General journal
 - [X] General ledger
-- [X] Annual report
+- [X] Annual and quarterly reports
+- [X] Income tax return reconciliation
 
-__Accounts receivable__
+__Visualizations__
+- [X] Asset allocation
+- [X] Income statement and cash flow Sankey diagrams
+- [X] Time series
+
+__Accounts receivable and accounts payable__
 - [X] Generate invoice
 - [X] Generate credit note
 
@@ -45,6 +51,7 @@ __First-class data formats__
 
 __Import-friendly formats__
 - [X] Comma-delimited (*.csv)
+- [X] GnuCash Financial Data (*.gnucash)
 
 __Export-friendly formats__
 - [X] Comma-delimited (*.csv)
