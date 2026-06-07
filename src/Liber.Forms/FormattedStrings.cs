@@ -200,7 +200,7 @@ internal static class FormattedStrings
     public static IEnumerable<string> GetStringsBySuffix(string suffix)
     {
         ResourceSet? resources = ResourceManager.GetResourceSet(
-            CultureInfo.CurrentUICulture,
+            CultureInfo.InvariantCulture,
             createIfNotExists: true,
             tryParents: true);
 
@@ -218,7 +218,7 @@ internal static class FormattedStrings
                 continue;
             }
 
-            string? value = entry.Value.ToString();
+            string? value = ResourceManager.GetString(key, CultureInfo.CurrentUICulture);
 
             if (value == null)
             {

@@ -226,7 +226,7 @@
     <value>Otros pasivos corrientes</value>
   </data>
   <data name="OtherIncomeExpense" xml:space="preserve">
-    <value>Otros ingresos y gastos</value>
+    <value>Otros ingresos y (gastos)</value>
   </data>
   <data name="retained-earnings" xml:space="preserve">
     <value>Utilidades retenidas o déficit acumulado</value>
@@ -277,13 +277,13 @@
     <value>Gasto total</value>
   </data>
   <data name="_p_financing" xml:space="preserve">
-    <value>Flujo de efectivo neto proporcionado por actividades de financiamiento</value>
+    <value>Efectivo neto proveniente de (utilizado en) actividades de financiamiento</value>
   </data>
   <data name="_p_FixedAsset" xml:space="preserve">
     <value>Activos fijos totales</value>
   </data>
   <data name="_p_gross-profit" xml:space="preserve">
-    <value>Utilidad bruta</value>
+    <value>Utilidad bruta o (pérdida)</value>
   </data>
   <data name="_p_Income" xml:space="preserve">
     <value>Ingresos totales</value>
@@ -295,13 +295,10 @@
     <value>patrimonio del dueño</value>
   </data>
   <data name="_p_investing" xml:space="preserve">
-    <value>Flujo de efectivo neto proporcionado por actividades de inversión</value>
+    <value>Efectivo neto proveniente de (utilizado en) actividades de inversión</value>
   </data>
   <data name="_p_LongTermLiability" xml:space="preserve">
     <value>Pasivos a largo plazo totales</value>
-  </data>
-  <data name="net-income" xml:space="preserve">
-    <value>Ingreso neto</value>
   </data>
   <data name="_p_None" xml:space="preserve">
     <value>patrimonio</value>
@@ -311,6 +308,12 @@
   </data>
   <data name="_p_operating" xml:space="preserve">
     <value>Flujo de efectivo neto proporcionado por actividades de operación</value>
+  </data>
+  <data name="_p_operating-income" xml:space="preserve">
+    <value>Utilidad operativa o (pérdida)</value>
+  </data>
+  <data name="_p_pretax-income" xml:space="preserve">
+    <value>Utilidad o (pérdida) antes de impuestos sobre la renta</value>
   </data>
   <data name="_p_other-comprehensive-income" xml:space="preserve">
     <value>Otro resultado integral total</value>
@@ -333,6 +336,51 @@
   <data name="_p_retained-earnings" xml:space="preserve">
     <value>Utilidades retenidas</value>
   </data>
+  <data name="less-gain" xml:space="preserve">
+    <value>Menos: ganancia de capital neta</value>
+  </data>
+  <data name="plus-gain" xml:space="preserve">
+    <value>Más: ganancia de capital neta</value>
+  </data>
+  <data name="working-capital" xml:space="preserve">
+    <value>Variaciones en los activos y pasivos operativos</value>
+  </data>
+  <data name="_p_SoleProprietor" xml:space="preserve">
+    <value>Patrimonio del propietario o (déficit)</value>
+  </data>
+  <data name="_p_net-cash-flow" xml:space="preserve">
+    <value>Variación neta de efectivo y equivalentes de efectivo</value>
+  </data>
+  <data name="_p_working-capital" xml:space="preserve">
+    <value>Ajuste total por activos y pasivos operativos</value>
+  </data>
+  <data name="_p_net-income" xml:space="preserve">
+    <value>Resultado neto o (pérdida)</value>
+  </data>
+  <data name="non-cash" xml:space="preserve">
+    <value>Menos: partidas sin efecto en el efectivo</value>
+  </data>
+  <data name="_p_non-cash" xml:space="preserve">
+    <value>Ajuste total por partidas sin efecto en el efectivo</value>
+  </data>
+  <data name="_p_investing-activities" xml:space="preserve">
+    <value>Disposiciones netas o (adquisiciones)</value>
+  </data>
+  <data name="_p_recognized-gain-loss" xml:space="preserve">
+    <value>Ajuste total por ganancias de capital</value>
+  </data>
+  <data name="net-income-adjustments" xml:space="preserve">
+    <value>Ajustes para conciliar el resultado neto con el efectivo neto de las actividades operativas</value>
+  </data>
+  <data name="MultipleWords2{0}" xml:space="preserve">
+    <value>(al {0} más cercano)</value>
+  </data>
+  <data name="MultipleWords1{0}" xml:space="preserve">
+    <value>(en {0})</value>
+  </data>
+  <data name="_r_average-daily-balance" xml:space="preserve">
+    <value>Saldo diario promedio</value>
+  </data>
   <data name="_r_aging-summary" xml:space="preserve">
     <value>Resumen de antigüedad de saldos</value>
   </data>
@@ -340,36 +388,139 @@
     <value>Informe anual</value>
   </data>
   <data name="_r_balance-sheet" xml:space="preserve">
-    <value>Balance General</value>
+    <value>Estado de situación financiera</value>
   </data>
   <data name="_r_cash-flow-statement" xml:space="preserve">
-    <value>Estado de Flujo de Efectivo</value>
+    <value>Estado de flujos de efectivo</value>
   </data>
   <data name="_r_comparative-balance-sheet" xml:space="preserve">
-    <value>Balance General Comparativo</value>
+    <value>Estado de situación financiera (comparativo)</value>
   </data>
   <data name="_r_comprehensive-income-statement" xml:space="preserve">
-    <value>Estado de Resultados Integrales</value>
+    <value>Estado de resultados integrales</value>
   </data>
   <data name="_r_customer-report" xml:space="preserve">
-    <value>Reporte del Cliente</value>
+    <value>Reporte del cliente</value>
   </data>
   <data name="_r_equity-statement" xml:space="preserve">
-    <value>Estado del Patrimonio</value>
+    <value>Estado del patrimonio</value>
   </data>
   <data name="_r_general-journal" xml:space="preserve">
-    <value>Diario General</value>
+    <value>Diario general</value>
   </data>
   <data name="_r_general-ledger" xml:space="preserve">
-    <value>Libro Mayor</value>
+    <value>Libro mayor</value>
   </data>
   <data name="_r_income-statement" xml:space="preserve">
-    <value>Estado de Resultados</value>
+    <value>Estado de resultados</value>
   </data>
   <data name="_r_trial-balance" xml:space="preserve">
-    <value>Balance de Prueba</value>
+    <value>Balance de prueba</value>
   </data>
   <data name="_r_account-summary" xml:space="preserve">
-    <value>Resumen de Cuentas</value>
+    <value>Resumen de cuentas</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="_r_Corporation_balance-sheet" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="_r_1_income-statement" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="_r_2_balance-sheet" xml:space="preserve">
+    <value>Balance general</value>
+  </data>
+  <data name="_r_Individual_cash-flow-statement" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="TaxTypeTrue" xml:space="preserve">
+    <value>Sí</value>
+  </data>
+  <data name="TaxTypeFalse" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="tax-current" xml:space="preserve">
+    <value>Corriente</value>
+  </data>
+  <data name="tax-deferred" xml:space="preserve">
+    <value>No corriente</value>
+  </data>
+  <data name="tax-total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="tax-income-statement" xml:space="preserve">
+    <value>Conciliación de los ingresos y (gastos) con la declaración de impuestos del ejercicio actual</value>
+  </data>
+  <data name="tax-reconciliation" xml:space="preserve">
+    <value>Tasas impositivas efectivas</value>
+  </data>
+  <data name="effective-tax-rate" xml:space="preserve">
+    <value>Tasa impositiva efectiva</value>
+  </data>
+  <data name="_r_1_annual-report" xml:space="preserve">
+    <value>Informe trimestral</value>
+  </data>
+  <data name="_r_quarterly-report" xml:space="preserve">
+    <value>Informe trimestral</value>
+  </data>
+  <data name="_r_tax-reconciliation" xml:space="preserve">
+    <value>Conciliación de impuestos</value>
+  </data>
+  <data name="tax-adjustment-income-tax-expense" xml:space="preserve">
+    <value>Otros impuestos sobre la renta clasificados como no corrientes</value>
+  </data>
+  <data name="tax-adjustment-income" xml:space="preserve">
+    <value>Ingresos exentos de impuestos y otros ingresos no corrientes</value>
+  </data>
+  <data name="tax-adjustment-expense" xml:space="preserve">
+    <value>Gastos no deducibles y otros gastos no corrientes</value>
+  </data>
+  <data name="tax-adjustment" xml:space="preserve">
+    <value>Otros ajustes a los ingresos y gastos</value>
+  </data>
+  <data name="_r_common-size-balance-sheet" xml:space="preserve">
+    <value>Estado de situación financiera (de análisis vertical)</value>
+  </data>
+  <data name="_r_1_common-size-balance-sheet" xml:space="preserve">
+    <value>Estado de situación financiera de análisis vertical</value>
+  </data>
+  <data name="_r_common-size-income-statement" xml:space="preserve">
+    <value>Estado de resultados (de análisis vertical)</value>
+  </data>
+  <data name="_r_1_common-size-income-statement" xml:space="preserve">
+    <value>Estado de resultados de análisis vertical</value>
+  </data>
+  <data name="_r_1_common-size-quarterly-report" xml:space="preserve">
+    <value>Informe trimestral de análisis vertical</value>
+  </data>
+  <data name="_r_common-size-quarterly-report" xml:space="preserve">
+    <value>Informe trimestral (de análisis vertical)</value>
+  </data>
+  <data name="_r_1_comparative-balance-sheet" xml:space="preserve">
+    <value>Estado de situación financiera comparativo</value>
+  </data>
+  <data name="_r_common-size-comparative-balance-sheet" xml:space="preserve">
+    <value>Estado de situación financiera (comparativo de análisis vertical)</value>
+  </data>
+  <data name="_r_1_common-size-comparative-balance-sheet" xml:space="preserve">
+    <value>Estado de situación financiera comparativo de análisis vertical</value>
+  </data>
+  <data name="_r_pie-chart" xml:space="preserve">
+    <value>Gráfico de anillo</value>
+  </data>
+  <data name="_r_time-series" xml:space="preserve">
+    <value>Serie temporal</value>
+  </data>
+  <data name="_r_account-map" xml:space="preserve">
+    <value>Mapa de cuentas</value>
+  </data>
+  <data name="_r_heat-account-map" xml:space="preserve">
+    <value>Mapa de cuentas (mapa de calor)</value>
+  </data>
+  <data name="_r_1_heat-account-map" xml:space="preserve">
+    <value>Mapa de calor</value>
+  </data>
+  <data name="_r_sankey-diagram" xml:space="preserve">
+    <value>Diagrama de flujos de Sankey</value>
   </data>
 </root>

@@ -169,14 +169,6 @@
   <data name="date" xml:space="preserve">
     <value>Date</value>
   </data>
-  <data name="days{0}" xml:space="preserve">
-    <value>&gt; {0}</value>
-    <comment>@Invariant</comment>
-  </data>
-  <data name="days{0}{1}" xml:space="preserve">
-    <value>{0} – {1}</value>
-    <comment>@Invariant</comment>
-  </data>
   <data name="debit" xml:space="preserve">
     <value>Debit</value>
   </data>
@@ -311,9 +303,6 @@
   </data>
   <data name="_p_LongTermLiability" xml:space="preserve">
     <value>Total long-term liabilities</value>
-  </data>
-  <data name="net-income" xml:space="preserve">
-    <value>Net income or (loss)</value>
   </data>
   <data name="_p_None" xml:space="preserve">
     <value>equity or (deficit)</value>
@@ -548,6 +537,7 @@
   </data>
   <data name="TaxTypeFalse" xml:space="preserve">
     <value> - </value>
+    <comment>@Invariant</comment>
   </data>
   <data name="tax-current" xml:space="preserve">
     <value>Current</value>
@@ -586,7 +576,7 @@
     <value>Income Tax Reconciliation</value>
   </data>
   <data name="tax-adjustment-income-tax-expense" xml:space="preserve">
-    <value>Other noncurrent income taxes</value>
+    <value>Noncurrent income taxes (other)</value>
   </data>
   <data name="tax-adjustment-income" xml:space="preserve">
     <value>Tax-exempt and other noncurrent income</value>
@@ -625,7 +615,7 @@
     <value>Common-Size Comparative Balance Sheet</value>
   </data>
   <data name="_r_pie-chart" xml:space="preserve">
-    <value>Pie Chart</value>
+    <value>Donut Chart</value>
   </data>
   <data name="_r_1_pie-chart" xml:space="preserve">
     <value>Asset Allocation</value>

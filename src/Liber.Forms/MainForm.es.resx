@@ -1,5 +1,64 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
+  <!--
+    Microsoft ResX Schema
+
+    Version 2.0
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
+    associated with the data types.
+
+    Example:
+
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+
+    There are any number of "resheader" rows that contain simple
+    name/value pairs.
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
+    mimetype set.
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
+    extensible. For a given mimetype the value must be set accordingly:
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
+    read any of the formats listed below.
+
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
@@ -59,138 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="accountsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>237, 22</value>
-  </data>
-  <data name="accountsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Pl&amp;an de cuentaas</value>
-  </data>
-  <data name="checkToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>237, 22</value>
-  </data>
-  <data name="checkToolStripMenuItem.Text" xml:space="preserve">
-    <value>Hacer cheques</value>
-  </data>
-  <data name="editToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
-  </data>
-  <data name="editToolStripMenuItem.Text" xml:space="preserve">
-    <value>Configu&amp;ración</value>
-  </data>
-  <data name="editToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 20</value>
-  </data>
-  <data name="editToolStripMenuItem1.Text" xml:space="preserve">
-    <value>&amp;Editar</value>
-  </data>
-  <data name="exitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
-  </data>
-  <data name="exitToolStripMenuItem.Text" xml:space="preserve">
-    <value>Salir</value>
-  </data>
-  <data name="exportAccountsIifToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 22</value>
-  </data>
-  <data name="exportAccountsIifToolStripMenuItem.Text" xml:space="preserve">
-    <value>Plan de cuentas (*.iif)</value>
-  </data>
-  <data name="exportAccountsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 22</value>
-  </data>
-  <data name="exportAccountsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Plan de cuentas (*.csv)</value>
-  </data>
-  <data name="exportCompanyXmlToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 22</value>
-  </data>
-  <data name="exportCompanyXmlToolStripMenuItem.Text" xml:space="preserve">
-    <value>Empresa (*.xml)</value>
-  </data>
-  <data name="exportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
-  </data>
-  <data name="exportToolStripMenuItem.Text" xml:space="preserve">
-    <value>Exportar</value>
-  </data>
-  <data name="exportTransactionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 22</value>
-  </data>
-  <data name="exportTransactionsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Diario general (*.csv)</value>
-  </data>
-  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 20</value>
-  </data>
-  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
-    <value>Archivo</value>
-  </data>
-  <data name="helpToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAH6SURBVEhLpZVBSsNAFIZ7Dy+gN3DpERTcu3DjxgPoCVyJ
-        ILi2IOqmCzeCCFVBRHBjNyoURWvVlmhp0ybFSB37jTPpJJnEYH/4IUz+97/Me28mhSx4njc75Lbruo++
-        7wuTrPEOjZLnR7/fn9GmVacrdm5aYu3qXSyfNcXqhSOfD6pt0eh4YTJiVHg2hgEb2njhuCEmirVMkhQt
-        McQqGzvYMsKtyofVLIvEEIuHsouC7Aj4onjwdOlVFO+6Yr864mLZSeiIxQMvZfsL6scL25eX7nsiDbet
-        TzG1V4/o9U4iPaFJ1NEUwvmjprJKR7nuJ+LwwlOaM2ZppaEUGr1gIMu0ft0WD51ArQpRc4NEnC6VHGGa
-        wrjFRdBMYBqlrZvEUzacrTDTNtE4CfCUZWIrHBybaOnUEecvvuRmpS0bmqdEEE+8ZQJOp00UZ733pWxH
-        sDUZRhLYGhznymVLWY4QDL7lGbHpIwnSSmTSrDvGTFSaOQwT0AguM5vIZJ7GmgybzCjZDtm4DMeUw8BW
-        5g7frELN+ETZNJqRgwbYyslTxyrWzFuiyd3n6FUB9GWXNa55E9BPvBI/oOFi6nUN85RIlwYvZRsFTUGQ
-        9+BpUhb95bKxWSA7QnryV+MhX537l6lB/WgSQQTrn77Jf//0TTBmbFknM8ka79AouQWFwg/P++hfzxc7
-        1AAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="helpToolStripButton.Text" xml:space="preserve">
-    <value>Ayuda</value>
-  </data>
-  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 20</value>
-  </data>
-  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
-    <value>Ayuda</value>
-  </data>
-  <data name="importAccountsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 22</value>
-  </data>
-  <data name="importAccountsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Plan de cuentas (*.csv)</value>
-  </data>
-  <data name="importToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
-  </data>
-  <data name="importToolStripMenuItem.Text" xml:space="preserve">
-    <value>I&amp;mportar</value>
-  </data>
-  <data name="importTransactionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 22</value>
-  </data>
-  <data name="importTransactionsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Diario general (*.csv)</value>
-  </data>
-  <data name="newAccountToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 22</value>
-  </data>
-  <data name="newAccountToolStripMenuItem.Text" xml:space="preserve">
-    <value>Nueva cuenta</value>
-  </data>
-  <data name="newToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACcSURBVEhL7dUxDoQgEIVhzkbNYWzptuEShMKOs9Ds7k1W
-        C2g1oxhtRnirnUzyR2MYvlJxnJTShBZj7PN6eWghhDA556ry3mMIHaZFKWV1xph65AgMv5HNWrucUUph
-        CAp83l8MQQF6h5B/AIpBunztPihAzy2t9fKNysArX7sPCnBdBrg2uAFsDSjWgGIPA650CiA/fa5T4K5W
-        QIgZ15ziURxSP0UAAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="newToolStripButton.Text" xml:space="preserve">
-    <value>&amp;Nuevo</value>
-  </data>
   <data name="newToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABiSURBVDhP7czBCoAwCIBhn80nifnq1cVDddHjQtogtjbb
-        NRJ+BuI+yCMi0UtVp3Rejx0gYjMiiszcRjKwb0eV7UOgPuIBy7z2EQ+w947Yffp6jQeUDQFlP/B94G2P
-        wGgAACcYuZjJw4fhNwAAAABJRU5ErkJggg==
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABeSURBVDhPY2CAgm/fvv0nhL9//54AU48BQAqcnJxw4uTk
+        5P+vX7/GbQjMgA/vP2JgkHhSUjJ+QwgZ8PTJM/yGEDIARCMbAlJPkgHomCQD0PGoAcPfAGIxVgNIxSB9
+        ABi5mMkevBR1AAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="newToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
@@ -199,33 +132,16 @@
   <data name="newToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Nuevo</value>
   </data>
-  <data name="openToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHYSURBVEhLrZS9SgNBFIXzBOIj+AKCLyD4CIKtgr2NtqbR
-        Uqu1jFgoWGihiIVEixAM+FMYLMRAkEQFI5qQxJifcpxvnLtsdpOwyebCYZOde8+5c8/MxgZFs9mcaTQa
-        rzztq/EFpO12u66heI5VRMjvch9qYulAJS6fjEir1Zq3KdGi0+ks0/lxJq9iC3sGVkSxZtPChyU8052n
-        BXQMIcSRRHSBQ5Eg915WyYdiFxad1OgiQsy8Z+PnLtEgkEtNKE9I/KzUjZkUT6+dqPjhfRdWdjMuObuR
-        pjQevWO1o3X07qYs/b/A9mm2V7EB4oh610vZI1Up3KpaKdeFn++i1NVdEV7IjJm3TTDoRf5bLamXi/W+
-        eLveMXl6fBuuAGOARAwU9NsZ3X89JwMopraMiM1zXAE6h0guFZ0LmV90EN5vEq5A1w4ARIgA/6jCoq8A
-        28Mgjh/j4i54C8PCK2A/kmkj4F0AzUY1cELCAIPh4TeHAa6eApjI/ygo59P9BaSTKGAK2of9gABe+JOH
-        BRcRLn3Z5gICLPoLhgUeYLJ7ikSAbRWuNgMFw4DLBqcez2pAYJzm1mq1SRGoy1jGaq6EFnB46f+ujAIm
-        QPfGXAm2wrXGFBajwjXXRCz2B+wY75ZaX12VAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="openToolStripButton.Text" xml:space="preserve">
-    <value>Abrir</value>
-  </data>
   <data name="openToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFUSURBVDhPlZK9SgNBFIXnCcQnkLyA4CPkHayFdBY22mqj
-        paVlxCKCoBaClUQLESNRC4OE4EKQrAbcYBKy62Z/ynHOzUwcMzuyDhzYGc795tw7y2ZXFEVLSZI8p2la
-        kkf5lywO1vZr/MH54LkhwlgQKsZxvC4AfHHjjM+tHOaDiKIKiqDqk0s6rbUJoCDCsy3t5kJh+bJFZrZ8
-        YGhh9ZjgSIeUUgVZPgHot2HfGwbTNu4aTf75UuW+50wVhSMAKwRwugO6aevokYohfQbDzj1/vdj8pffb
-        PfJREpUAEPSOvXoFBdSFBIDgmxIgTr3lEkRPYZMOwDwYDtzrXToATPVp06B9QwB8o4YAipjVr02dqx0T
-        gOHMGm3qNc8nL6EAX33XMP2l8cj7mQEOvMaJYbKpWy/zMAzf6BVE9ADF6CnLnCXMCn8mAUSMEiCYwX/k
-        +/48Y4x9AwxhsnXBwZZBAAAAAElFTkSuQmCC
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFRSURBVDhPjZOxSgNBEIbvCcQnkLyA4CP4DtaCnYWNttpo
+        aWkZsYggqIVgJdFCxEjUwiAheBAkpwEvmITced7sliv/mD03e1mThR9292a+/Wd2z/OskabpghDiWUq5
+        Yn+bOIbJ8dp+RT34H2pqiJSyIKVcJKJ1IYSa3zhTM8uH00GIqIQkqPwUsE4rTQZoCBFt23nZQGLxssHB
+        3tJBTnOrxwyHO7gcqjACME/DutOPszLuanX1+VJWUehnSpMBgCUG+O0en7R19MjJdg/6rXv1erE5ovfb
+        PY5jJ9oBIKgda30LGmgKDgDBnB3ATrURMMR04ZIJQD88bATXu7wBmFnrOPWaNwzAnF2YxHH1utS62skD
+        0Bw70KVO/fz3JjTgqxvkgv7T9yD86wE2wtpJLsildrWokiR50w8pRjJqsgNdQq/wMhmAnwUQ+7omKYqi
+        WeT/AAxhsnVSJ9X+AAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="openToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
@@ -234,11 +150,94 @@
   <data name="openToolStripMenuItem.Text" xml:space="preserve">
     <value>Abrir</value>
   </data>
-  <data name="otherWindowsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>237, 22</value>
+  <data name="importAccountsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 22</value>
   </data>
-  <data name="otherWindowsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Otros ventanas</value>
+  <data name="importAccountsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Plan de cuentas (*.csv)</value>
+  </data>
+  <data name="importTransactionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 22</value>
+  </data>
+  <data name="importTransactionsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Diario general (*.csv)</value>
+  </data>
+  <data name="importToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 22</value>
+  </data>
+  <data name="importToolStripMenuItem.Text" xml:space="preserve">
+    <value>I&amp;mportar</value>
+  </data>
+  <data name="toolStripSeparator.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 6</value>
+  </data>
+  <data name="saveToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABiSURBVDhPY/j69WvDt2/f/pODQXoZQIyYCfv+MwTPIQmD
+        9ID0gg1AlyQWYxjw4f1HovBwNoBUPEgNQPcvOqafAeh8dHFkAz4g5wV0hQQN+PLliwGyIegKCRoAAjBD
+        QAKkYgCA+uxAPyL32QAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="saveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 22</value>
+  </data>
+  <data name="saveToolStripMenuItem.Text" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="saveAsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 22</value>
+  </data>
+  <data name="saveAsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Guardar como</value>
+  </data>
+  <data name="exportCompanyXmlToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 22</value>
+  </data>
+  <data name="exportCompanyXmlToolStripMenuItem.Text" xml:space="preserve">
+    <value>Empresa (*.xml)</value>
+  </data>
+  <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>190, 6</value>
+  </data>
+  <data name="exportAccountsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 22</value>
+  </data>
+  <data name="exportAccountsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Plan de cuentas (*.csv)</value>
+  </data>
+  <data name="exportTransactionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 22</value>
+  </data>
+  <data name="exportTransactionsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Diario general (*.csv)</value>
+  </data>
+  <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>190, 6</value>
+  </data>
+  <data name="exportAccountsIifToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 22</value>
+  </data>
+  <data name="exportAccountsIifToolStripMenuItem.Text" xml:space="preserve">
+    <value>Plan de cuentas (*.iif)</value>
+  </data>
+  <data name="exportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 22</value>
+  </data>
+  <data name="exportToolStripMenuItem.Text" xml:space="preserve">
+    <value>Exportar</value>
+  </data>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 6</value>
+  </data>
+  <data name="editToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 22</value>
+  </data>
+  <data name="editToolStripMenuItem.Text" xml:space="preserve">
+    <value>Configu&amp;ración</value>
+  </data>
+  <data name="toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 6</value>
   </data>
   <data name="recentPathsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>184, 22</value>
@@ -249,80 +248,44 @@
   <data name="recentPathsToolStripSeparator.Size" type="System.Drawing.Size, System.Drawing">
     <value>181, 6</value>
   </data>
-  <data name="reportsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>237, 22</value>
-  </data>
-  <data name="reportsToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Centro de reportes contables</value>
-  </data>
-  <data name="reportsToolStripMenuItem1.Text" xml:space="preserve">
-    <value>&amp;Reportes</value>
-  </data>
-  <data name="saveAsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="exitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>184, 22</value>
   </data>
-  <data name="saveAsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Guardar como</value>
+  <data name="exitToolStripMenuItem.Text" xml:space="preserve">
+    <value>Salir</value>
   </data>
-  <data name="saveToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADbSURBVEhL7ZUxCsIwGIVzAvFA3sJVDyK9gZMHcFGcHZyc
-        xE0dFDdHJ+dYG7JGnpD4qkkDNYJgCx+0f9//PiiBCillWym11lqblKAT3cKWb08Xk812SUCXlQhb3upP
-        jOiOk4AuK3kIYPUFPwGdXkEnW5jBdFML7EYFCF5lXgvsNoJKfkPw9VOUikYQJSrwnZIqXvf/TBCaM5wB
-        JcFwfngLhJZ5znAGsOCIm95oVQqElnnOcAY4AX7MPklomecMZ4AT4GIJPhdeFrfCgWcLzxnOgOX+/BTg
-        Ykk6tLkDP0SRNRvmiVAAAAAASUVORK5CYII=
-</value>
+  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 20</value>
   </data>
-  <data name="saveToolStripButton.Text" xml:space="preserve">
-    <value>Guardar</value>
-  </data>
-  <data name="saveToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABzSURBVDhPY/j69WvDt2/f/pODQXoZQIyYCfv+MwTPIQmD
-        9ID0gg3ApoAYjGHAh/cficLD2QBS8SA1AJufkTGyWtoagM5HFwdhmAEfkPMCukJkzcjiIAw24MuXLwbI
-        hqArRNaMLA7CYANAAGYISIA0/O0/AID67ECmnhNDAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="saveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>184, 22</value>
-  </data>
-  <data name="saveToolStripMenuItem.Text" xml:space="preserve">
-    <value>Guardar</value>
+  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
+    <value>Archivo</value>
   </data>
   <data name="settingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 22</value>
+    <value>221, 22</value>
   </data>
   <data name="settingsToolStripMenuItem.Text" xml:space="preserve">
     <value>Pre&amp;ferencias</value>
   </data>
-  <data name="toolStripSeparator.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 6</value>
+  <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>218, 6</value>
   </data>
-  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 6</value>
+  <data name="combinePdfDocumentsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>221, 22</value>
   </data>
-  <data name="toolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>234, 6</value>
+  <data name="combinePdfDocumentsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Combinar documentos PDF</value>
   </data>
-  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>234, 6</value>
+  <data name="editToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 20</value>
   </data>
-  <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 6</value>
+  <data name="editToolStripMenuItem1.Text" xml:space="preserve">
+    <value>&amp;Editar</value>
   </data>
-  <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>234, 6</value>
+  <data name="accountsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>237, 22</value>
   </data>
-  <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 6</value>
-  </data>
-  <data name="toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 6</value>
-  </data>
-  <data name="transactionsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Usar registro</value>
+  <data name="accountsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Pl&amp;an de cuentaas</value>
   </data>
   <data name="transactionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>237, 22</value>
@@ -330,14 +293,133 @@
   <data name="transactionToolStripMenuItem.Text" xml:space="preserve">
     <value>Diario general</value>
   </data>
+  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>234, 6</value>
+  </data>
+  <data name="checkToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>237, 22</value>
+  </data>
+  <data name="checkToolStripMenuItem.Text" xml:space="preserve">
+    <value>Hacer cheques</value>
+  </data>
+  <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>234, 6</value>
+  </data>
+  <data name="reportsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>237, 22</value>
+  </data>
+  <data name="reportsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Centro de reportes contables</value>
+  </data>
+  <data name="toolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>234, 6</value>
+  </data>
+  <data name="newAccountToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>147, 22</value>
+  </data>
+  <data name="newAccountToolStripMenuItem.Text" xml:space="preserve">
+    <value>Nueva cuenta</value>
+  </data>
+  <data name="transactionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>147, 22</value>
+  </data>
+  <data name="transactionsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Usar registro</value>
+  </data>
+  <data name="otherWindowsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>237, 22</value>
+  </data>
+  <data name="otherWindowsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Otros ventanas</value>
+  </data>
   <data name="viewToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 20</value>
   </data>
   <data name="viewToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Ver</value>
   </data>
+  <data name="otherReportsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="otherReportsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Otros reportes</value>
+  </data>
+  <data name="reportsToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 20</value>
+  </data>
+  <data name="reportsToolStripMenuItem1.Text" xml:space="preserve">
+    <value>&amp;Reportes</value>
+  </data>
+  <data name="aboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 20</value>
+  </data>
+  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
+    <value>Ayuda</value>
+  </data>
+  <data name="newToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACaSURBVEhL7dUxDoMgFMZxz8bMYVzZunAJwtCNs7BUb2I7
+        wGrzmmKIyQM+dROSf3CA9xscGIZsxRhXtBDCM59RXHTBe79aa5tyzmEIHaaLQojmtNbtSA68lw+bMeZ3
+        RkqJISgwvWYMQQH6hpAjQAEZ9/NhgPaUUmr78X/gsZ8PA1ynAa4Ed4CtA9U6UO1mwJmKAPLocxWBq0rA
+        F9ec4lFhuQD9AAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="newToolStripButton.Text" xml:space="preserve">
+    <value>&amp;Nuevo</value>
+  </data>
+  <data name="openToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHPSURBVEhLrVQ/S8NAHO0nED+CX0DwCwh+BMFVwd1FV7vo
+        qFMcKw4KDjoo4iDVoQQL/hksDmKhSKsFK9rSxJi7G0/ekd+RXJo2afqDR0Lu7r37vXeXQmFI+b4/53ne
+        O57mWO4CKefc5ZxLPCcqQuQP9U85tXIkS9cvSoQxtmjOHauEEKvY+Wm1IQtLBwqBiMSYOX9kBYQXvu/b
+        BLIHxLlEOOdW4LNCvd2V5adWBMtWZXwRIobf88VLTTQMmIs1qTLBxK+eq8LE4tmNM1k8foxgbb+qydFN
+        qOPnsK2BtZYQYiYisHteG7RYAeIQDY93aiey17yXTqcewe9Pi9a5WgQfyGP4PYr8r9+Rb1ebifi43SP7
+        trQAbAAJBUhI6gy7/34tx9Cq7CiRYJ6lBbBzENGlws6JzBQdhvZdSQtEOiAiCtK0Ki0SBdAeAsLxg124
+        C+biNAgLBD9JWwmEBwDf68dOSBogYPDgHYcBXAMFEKJ5OrKi27CTBWgneQAXGGOHMQFkYU7OClxEcAkh
+        FmICGDQXZAUyQMj6FJEA2mrebMcWZAEuGzgZY+sxgUmG6zjONAm4ZMtEw6XCPwMfzf/KOIADOlwqtIJr
+        jVDomOaBDjeof+wY75YNFMosAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="openToolStripButton.Text" xml:space="preserve">
+    <value>Abrir</value>
+  </data>
+  <data name="saveToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADPSURBVEhLY3j//r3Aly9fDnz79u0/NTHITJDZDDDDT1x/
+        +r96yUmqYJBZMEsYYIbzxS78zxA8hyoYZBbMErAFIFvRFVGKQWZitcCmetP/ykXHycIgvQQtACn88P4j
+        WRikd9QCvHhwWEDzVEQtPGoBQUzQAvQUQgij6x9hFuASx6UGw4KudecwFODSjG4wNjXoFlwAMWIm7MNp
+        EC5xXGpQLABVzNgswaUZ3WBsalAsAAFkS0DBBZL8/OkzHIP4MIwsjksNCO84ex9hAbol1MQAP0SRNVcC
+        QFUAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="saveToolStripButton.Text" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="helpToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHYSURBVEhLrVZLSgNBEM09vIDewKVHUHDvwo0bD6AncCUB
+        wbUBUTdZuBFEiAoighuzUSEoGqMmjIZkkungSCx5jTX2VHdPxs+DB6Gn6lXXp7tTKGQgiqLpKIo2wjC8
+        U0qRSazhG2yk30gMBoMpFq0FPdq8bNPK+QstHrdo+TTQv3drHWp2oyQYfKSOE0qpIgvPHTRprFTPJILC
+        9iuzotRLASnDcL36agmNInzgCw2pq8E7x46k82T5iUrXPdqpfXO+Elh28HVmgvr5dl6+6ZMPV+03mthu
+        ODNJ9QRNQh2l+Ox+S2paqDSU5QctaGpxjJmvNCgFox8PdZlWLzp0242T9XoYW35cKj3CaArGTRrJAKaQ
+        b90kNHXDkQpmWhpkCfnWTUJTlwmp4OBIA3DhKKCTR6W5Vu3ohuYpEQhNaOsAOJ3SwMVG/z0RZriabAVw
+        NVhy6awttSkefugzIm2tAL4SmTTrDmFMlE88FQCNwGUmDSTzNNZk0mSMkuuQ/ZXJmPJBm9l7toxMyomS
+        302mDhpfFYf3XcvQZN4SjW89pK8K87LLGte8AdBP67IDsq5rME+JvNc1gx+crExcRFl4594Hh8GZoCej
+        Gg/+6Mlk+B59k79+9E38x9+WT8/76F/3zjrrAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="helpToolStripButton.Text" xml:space="preserve">
+    <value>Ayuda</value>
+  </data>
   <data name="_openFileDialog.Filter" xml:space="preserve">
-    <value>Todos los archivos (*.*)|*.*|Todos los archivos compatibles (*.izbk;*.mpk;*.msgpack;*.json;*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3)|*.izbk;*.mpk;*.msgpack;*.json;*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3|Empresa de IshanBooks (*.izbk)|*.izbk|MessagePack (*.mpk;*.msgpack)|*.mpk;*.msgpack|Notación de objetos JavaScript (JSON) (*.json)|*.json|Base de datos SQLite3 (*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3)|*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3|Delimitado por comas (*.csv)|*.csv</value>
+    <value>Todos los archivos (*.*)|*.*|Todos los archivos compatibles (*.izbk;*.mpk;*.msgpack;*.json;*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3;*.gnucash)|*.izbk;*.mpk;*.msgpack;*.json;*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3|Empresa de IshanBooks (*.izbk)|*.izbk|MessagePack (*.mpk;*.msgpack)|*.mpk;*.msgpack|Notación de objetos JavaScript (JSON) (*.json)|*.json|Base de datos SQLite3 (*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3)|*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3|Delimitado por comas (*.csv)|*.csv|Documento PDF (*.pdf)|*.pdf|Archivo de datos financieros de GnuCash (*.gnucash)|*.gnucash</value>
   </data>
   <data name="_saveFileDialog.Filter" xml:space="preserve">
     <value>Empresa de IshanBooks (*.izbk)|*.izbk|MessagePack (*.mpk;*.msgpack)|*.mpk;*.msgpack|Notación de objetos JavaScript (JSON) (*.json)|*.json|Base de datos SQLite3 (*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3)|*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3|Delimitado por comas (*.csv)|*.csv|IIF (*.iif)|*.iif|Documento XML (*.xml)|*.xml</value>

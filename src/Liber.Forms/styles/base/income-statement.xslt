@@ -161,7 +161,7 @@ Licensed under the MIT License.
                 </xsl:apply-templates>
                 <tr>
                     <td class="left">
-                        <xsl:value-of select="liber:gets('net-income')"/>
+                        <xsl:value-of select="liber:pngets('net-income', -$netIncome)"/>
                     </td>
                     <xsl:if test="$absoluteSize = 1">
                         <td class="grand-total right">

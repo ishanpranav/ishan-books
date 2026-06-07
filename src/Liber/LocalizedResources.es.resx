@@ -258,6 +258,9 @@
   <data name="_d_Biweekly" xml:space="preserve">
     <value>Quincenalmente</value>
   </data>
+  <data name="_d_ByType" xml:space="preserve">
+    <value>Agrupar por tipo</value>
+  </data>
   <data name="_d_Cash" xml:space="preserve">
     <value>Efectivo/Equivalentes al efectivo</value>
   </data>
@@ -278,6 +281,9 @@
   </data>
   <data name="_d_Daily" xml:space="preserve">
     <value>Diariamente</value>
+  </data>
+  <data name="_d_ByAccount" xml:space="preserve">
+    <value>Agrupar por cuenta</value>
   </data>
   <data name="_d_Equity" xml:space="preserve">
     <value>Patrimonio</value>
@@ -311,6 +317,9 @@
   </data>
   <data name="_d_Investing" xml:space="preserve">
     <value>Inversión</value>
+  </data>
+  <data name="_d_Detailed" xml:space="preserve">
+    <value>Detallado</value>
   </data>
   <data name="_d_LongTermLiability" xml:space="preserve">
     <value>Pasivo a largo plazo</value>
@@ -374,5 +383,41 @@
   </data>
   <data name="_d_Weekly" xml:space="preserve">
     <value>Semanalmente</value>
+  </data>
+  <data name="_d_SoleProprietor" xml:space="preserve">
+    <value>Empresario individual</value>
+  </data>
+  <data name="_d_NonCash" xml:space="preserve">
+    <value>Partidas sin efecto en el efectivo</value>
+  </data>
+  <data name="_d_All" xml:space="preserve">
+    <value>(Todos)</value>
+  </data>
+  <data name="_d_Permanent" xml:space="preserve">
+    <value>Cuentas de balance</value>
+  </data>
+  <data name="_d_Temporary" xml:space="preserve">
+    <value>Cuentas de resultados</value>
+  </data>
+  <data name="_d_Liabilities" xml:space="preserve">
+    <value>Todos los pasivos</value>
+  </data>
+  <data name="_d_CurrentAssets" xml:space="preserve">
+    <value>Todos los activos corrientes</value>
+  </data>
+  <data name="_d_Assets" xml:space="preserve">
+    <value>Todos los activos</value>
+  </data>
+  <data name="_d_CurrentLiabilities" xml:space="preserve">
+    <value>Todos los pasivos corrientes</value>
+  </data>
+  <data name="_d_NonCurrentAssets" xml:space="preserve">
+    <value>Todos los activos no corrientes</value>
+  </data>
+  <data name="_d_Level" xml:space="preserve">
+    <value>Especifica el nivel de presentación, o el nivel de detalle y agregación.</value>
+  </data>
+  <data name="Level" xml:space="preserve">
+    <value>Nivel de presentación</value>
   </data>
 </root>

@@ -118,6 +118,11 @@ internal sealed partial class ReportsForm : Form
 
     private void OnListViewItemActivate(object sender, EventArgs e)
     {
+        if (_listView.SelectedItems.Count == 0)
+        {
+            return;
+        }
+
         View = (IReportView)_listView.SelectedItems[0].Tag!;
 
         if (View.Properties is GdiCheckReport checkReport && checkReport.Check.Value == null)
