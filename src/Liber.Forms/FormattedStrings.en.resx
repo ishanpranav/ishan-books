@@ -133,4 +133,7 @@
   <data name="_r_3_comprehensive-income-statement" xml:space="preserve">
     <value>Statement of Recognised Income and Expense</value>
   </data>
+  <data name="_r_pie-chart" xml:space="preserve">
+    <value>Doughnut Chart</value>
+  </data>
 </root>

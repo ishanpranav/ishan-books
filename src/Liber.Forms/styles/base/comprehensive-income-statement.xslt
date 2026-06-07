@@ -57,7 +57,7 @@ Licensed under the MIT License.
             <tbody>
                 <tr>
                     <td class="left">
-                        <xsl:value-of select="liber:gets('net-income')"/>
+                        <xsl:value-of select="liber:pngets('net-income', -$netIncome)"/>
                     </td>
                     <td class="right">
                         <xsl:value-of select="liber:fm(-$netIncome)"/>

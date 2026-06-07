@@ -319,7 +319,7 @@
     <value>Investing</value>
   </data>
   <data name="_d_Detailed" xml:space="preserve">
-    <value>Subaccount</value>
+    <value>Detailed</value>
   </data>
   <data name="_d_LongTermLiability" xml:space="preserve">
     <value>Long-Term Liability</value>
@@ -413,5 +413,11 @@
   </data>
   <data name="_d_NonCurrentAssets" xml:space="preserve">
     <value>All non-current assets</value>
+  </data>
+  <data name="_d_Level" xml:space="preserve">
+    <value>Specifies the reporting level, or the level of detail and aggregation.</value>
+  </data>
+  <data name="Level" xml:space="preserve">
+    <value>Reporting Level</value>
   </data>
 </root>
