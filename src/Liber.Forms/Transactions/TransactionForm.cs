@@ -38,9 +38,12 @@ internal sealed partial class TransactionForm : Form
         _dataGridView.AlternatingRowsDefaultCellStyle.BackColor = _company.Color;
         _dataGridView.AlternatingRowsDefaultCellStyle.ForeColor = _company.Color.GetForeColor();
 
-        foreach (KeyValuePair<Guid, Account> account in _company.Accounts)
+        foreach (KeyValuePair<Guid, Account> account in _company.OrderedAccounts)
         {
-            InitializeAccount(account.Key, account.Value);
+            if (!account.Value.ReadOnly)
+            {
+                InitializeAccount(account.Key, account.Value);
+            }
         }
 
         _dataGridView.AutoResizeColumns();

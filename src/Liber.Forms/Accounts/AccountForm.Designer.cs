@@ -269,9 +269,9 @@
         private System.Windows.Forms.Label label7;
         protected AccountComboBox parentComboBox;
         protected System.Windows.Forms.CheckBox inactiveCheckBox;
-        private System.Windows.Forms.ComboBox cashFlowComboBox;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ComboBox typeComboBox;
         protected System.Windows.Forms.CheckBox taxTypeCheckBox;
+        protected System.Windows.Forms.ComboBox cashFlowComboBox;
+        protected System.Windows.Forms.ComboBox typeComboBox;
     }
 }
