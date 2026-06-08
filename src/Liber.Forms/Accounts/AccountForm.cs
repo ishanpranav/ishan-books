@@ -11,19 +11,7 @@ namespace Liber.Forms.Accounts;
 
 internal abstract partial class AccountForm : Form
 {
-    protected AccountForm(Company company)
-    {
-        InitializeComponent();
-        SystemFeatures.Initialize(this);
-
-        new ComponentResourceManager(GetType()).ApplyResources(this, "$this");
-
-        Company = company;
-        DialogResult = DialogResult.Cancel;
-        typeComboBox.DataSource = AccountTypeExtensions.GetSortedValues();
-        cashFlowComboBox.DataSource = Enum.GetValues<CashFlow>();
-        numberNumericUpDown.Maximum = decimal.MaxValue;
-    }
+    private AccountType _previousType = AccountType.None;
 
     public Company Company { get; }
 
@@ -35,6 +23,7 @@ internal abstract partial class AccountForm : Form
         }
         set
         {
+            _previousType = Type;
             typeComboBox.SelectedItem = value;
         }
     }
@@ -68,6 +57,20 @@ internal abstract partial class AccountForm : Form
         }
     }
 
+    protected AccountForm(Company company)
+    {
+        InitializeComponent();
+        SystemFeatures.Initialize(this);
+
+        new ComponentResourceManager(GetType()).ApplyResources(this, "$this");
+
+        Company = company;
+        DialogResult = DialogResult.Cancel;
+        typeComboBox.DataSource = AccountTypeExtensions.GetSortedValues();
+        cashFlowComboBox.DataSource = Enum.GetValues<CashFlow>();
+        numberNumericUpDown.Maximum = decimal.MaxValue;
+    }
+
     protected abstract void CommitChanges();
 
     protected void ApplyChanges(Account account)
@@ -89,17 +92,19 @@ internal abstract partial class AccountForm : Form
         e.Value = ((AccountType)e.ListItem!).Humanize();
     }
 
-    private void OnCashFlowComboBoxFormat(object sender, ListControlConvertEventArgs e)
-    {
-        e.Value = ((CashFlow)e.ListItem!).Humanize();
-    }
-
     private void OnTypeComboBoxSelectedIndexChanged(object sender, EventArgs e)
     {
-        if (CashFlow == CashFlow.None)
+        if (CashFlow == CashFlow.None || CashFlow == _previousType.ToCashFlow())
         {
             CashFlow = Type.ToCashFlow();
         }
+
+        _previousType = Type;
+    }
+
+    private void OnCashFlowComboBoxFormat(object sender, ListControlConvertEventArgs e)
+    {
+        e.Value = ((CashFlow)e.ListItem!).Humanize();
     }
 
     private void OnAcceptButtonClick(object sender, EventArgs e)

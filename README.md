@@ -14,7 +14,9 @@ You can download the software from the
 
 ## Screenshots
 
-![Screenshot of the IshanBooks application.](docs/images/capture.png "IshanBooks")
+![Screenshot of the IshanBooks application with visual income statement, chart of accounts, and general journal.](docs/images/capture-1.png "IshanBooks: visual income statement, chart of accounts, and general journal.")
+
+![Screenshot of the IshanBooks application with statement of financial condition (balance sheet), visual balance sheet, customized asset allocation chart, and new account form.](docs/images/capture-1.png "IshanBooks: statement of financial condition (balance sheet), visual balance sheet, customized asset allocation chart, and new account form.")
 
 ## Features
 
