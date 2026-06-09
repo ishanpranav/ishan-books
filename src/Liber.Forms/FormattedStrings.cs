@@ -306,7 +306,7 @@ internal static class FormattedStrings
     public static string GetTitle(string name, CompanyType type)
     {
         if (type == CompanyType.None ||
-            !TryGetString(string.Format("_r_{0}_{1}", type, name), out string? result))
+            !TryGetString($"_r_{type}_{name}", out string? result))
         {
             return GetTitle(name);
         }

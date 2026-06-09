@@ -29,16 +29,16 @@ internal sealed class EditAccountForm : AccountForm
 
         parentComboBox.SelectedItem = account.ParentId;
 
-        if (Id == company.EquityAccountId || Id == company.OtherEquityAccountId)
-        {
-            placeholderCheckBox.Checked = true;
-            placeholderCheckBox.Enabled = false;
-        }
-        else if (account.Lines.Count > 0)
-        {
-            placeholderCheckBox.Checked = false;
-            placeholderCheckBox.Enabled = false;
-        }
+        //if (Id == company.EquityAccountId || Id == company.OtherEquityAccountId)
+        //{
+        //    placeholderCheckBox.Checked = true;
+        //    placeholderCheckBox.Enabled = false;
+        //}
+        //else if (account.Lines.Count > 0)
+        //{
+        //    placeholderCheckBox.Checked = false;
+        //    placeholderCheckBox.Enabled = false;
+        //}
     }
 
     public Guid Id { get; }
