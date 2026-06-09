@@ -67,7 +67,7 @@ internal static class Program
                 Console.ForegroundColor = ConsoleColor.Gray;
 
                 Console.WriteLine(line.AsSpan(right + rightLength));
-                Console.WriteLine("\tSyntax error: {0}");
+                Console.WriteLine("\tSyntax error");
             }
             catch (MathEngineException mathEngineException)
             {
