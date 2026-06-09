@@ -36,7 +36,7 @@ public class Tokenizer : IEnumerable<Token>
             {
                 if (_brackets.TryPeek(out (char Current, int Offset) result))
                 {
-                    throw new MathEngineException(result.Current, result.Offset);
+                    throw new MathEngineException(result.Offset, length: 1);
                 }
 
                 yield return new Token(TokenType.End, value: string.Empty, _offset);
