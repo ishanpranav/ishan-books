@@ -6,13 +6,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
+using Liber.MathEngine.Exceptions;
 
 namespace Liber.MathEngine;
 
-internal sealed class Tokenizer : IEnumerable<Token>
+public class Tokenizer : IEnumerable<Token>
 {
-    private int _position;
-    private Stack<(char Current, int Position)> _brackets = new Stack<(char, int)>();
+    private int _offset;
+    private readonly Stack<(char Current, int Offset)> _brackets = new Stack<(char, int)>();
 
     public string Text { get; }
     public CultureInfo Culture { get; }
@@ -25,19 +26,24 @@ internal sealed class Tokenizer : IEnumerable<Token>
 
     public IEnumerator<Token> GetEnumerator()
     {
-        _position = 0;
+        _offset = 0;
 
         while (true)
         {
             SkipWhiteSpace();
 
-            if (_position >= Text.Length)
+            if (_offset >= Text.Length)
             {
-                yield return new Token(TokenType.End, value: string.Empty, _position);
+                if (_brackets.TryPeek(out (char Current, int Offset) result))
+                {
+                    throw new MathEngineException(result.Current, result.Offset);
+                }
+
+                yield return new Token(TokenType.End, value: string.Empty, _offset);
                 yield break;
             }
 
-            char current = Text[_position];
+            char current = Text[_offset];
 
             if (char.IsDigit(current))
             {
@@ -56,24 +62,24 @@ internal sealed class Tokenizer : IEnumerable<Token>
 
     private void SkipWhiteSpace()
     {
-        while (_position < Text.Length && char.IsWhiteSpace(Text[_position]))
+        while (_offset < Text.Length && char.IsWhiteSpace(Text[_offset]))
         {
-            _position++;
+            _offset++;
         }
     }
 
     private Token TokenizeNumber()
     {
-        int start = _position;
+        int start = _offset;
         string decimalSeparator = Culture.NumberFormat.NumberDecimalSeparator;
         string groupSeparator = Culture.NumberFormat.NumberGroupSeparator;
         bool hasDecimalSeparator = false;
 
-        while (_position < Text.Length)
+        while (_offset < Text.Length)
         {
             if (!hasDecimalSeparator && IsMatch(decimalSeparator))
             {
-                _position += decimalSeparator.Length;
+                _offset += decimalSeparator.Length;
                 hasDecimalSeparator = true;
 
                 continue;
@@ -81,20 +87,20 @@ internal sealed class Tokenizer : IEnumerable<Token>
 
             if (!hasDecimalSeparator && IsMatch(groupSeparator))
             {
-                _position += groupSeparator.Length;
+                _offset += groupSeparator.Length;
 
                 continue;
             }
 
-            if (!char.IsDigit(Text[_position]))
+            if (!char.IsDigit(Text[_offset]))
             {
                 break;
             }
 
-            _position++;
+            _offset++;
         }
 
-        return new Token(TokenType.Number, Text.Substring(start, _position - start), start);
+        return new Token(TokenType.Number, Text.Substring(start, _offset - start), start);
     }
 
     private bool IsMatch(string value)
@@ -104,52 +110,54 @@ internal sealed class Tokenizer : IEnumerable<Token>
             return false;
         }
 
-        if (_position + value.Length > Text.Length)
+        if (_offset + value.Length > Text.Length)
         {
             return false;
         }
 
-        return Text.AsSpan(_position, value.Length).SequenceEqual(value.AsSpan());
+        return Text.AsSpan(_offset, value.Length).SequenceEqual(value.AsSpan());
     }
 
     private Token TokenizeOperator()
     {
-        char current = Text[_position];
+        char current = Text[_offset];
 
         switch (current)
         {
-            case '+': return new Token(TokenType.Plus, "+", _position++);
-            case '-': return new Token(TokenType.Minus, "-", _position++);
-            case '*': return new Token(TokenType.Multiply, "*", _position++);
-            case '/': return new Token(TokenType.Divide, "/", _position++);
+            case '+': return new Token(TokenType.Plus, "+", _offset++);
+            case '-': return new Token(TokenType.Minus, "-", _offset++);
+            case '*': return new Token(TokenType.Star, "*", _offset++);
+            case '/': return new Token(TokenType.Slash, "/", _offset++);
 
             case '(':
             case '[':
             case '{':
-                _brackets.Push((current, _position));
+                _brackets.Push((current, _offset));
 
-                return new Token(TokenType.Left, current.ToString(), _position++);
+                return new Token(TokenType.Left, current.ToString(), _offset++);
 
             case ')':
             case ']':
             case '}':
                 if (_brackets.Count == 0)
                 {
-                    throw new TokenizationException(current, _position);
+                    throw new MathEngineException(_offset, length: 1);
                 }
 
-                (char expected, int expectedPosition) = _brackets.Pop();
+                (char expected, int expectedOffset) = _brackets.Pop();
 
                 if (expected == '(' && current != ')' ||
                     expected == '[' && current != ']' ||
                     expected == '{' && current != '}')
                 {
-                    throw new MismatchTokenizationException(current, _position, expected, expectedPosition);
+                    throw new MismatchException(
+                        _offset, length: 1,
+                        expectedOffset, expectedLength: 1);
                 }
 
-                return new Token(TokenType.Right, current.ToString(), _position++);
+                return new Token(TokenType.Right, current.ToString(), _offset++);
         }
 
-        throw new TokenizationException(current, _position);
+        throw new MathEngineException(_offset, length: 1);
     }
 }

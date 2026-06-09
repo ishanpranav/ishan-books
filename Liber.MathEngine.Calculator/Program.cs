@@ -2,6 +2,10 @@
 // Copyright (c) 2023-2026 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Globalization;
+using Liber.MathEngine.Exceptions;
+using Liber.MathEngine.Expressions;
+
 namespace Liber.MathEngine.Calculator;
 
 internal static class Program
@@ -10,7 +14,7 @@ internal static class Program
     {
         if (args.Length > 0)
         {
-            Console.WriteLine(Engine.Evaluate(args[0]));
+            Console.WriteLine(Parse(args[0]).Evaluate());
 
             return;
         }
@@ -32,14 +36,17 @@ internal static class Program
 
             try
             {
-                decimal result = Engine.Evaluate(line);
+                IExpression expression = Parse(line);
+                decimal result = expression.Evaluate();
 
-                Console.WriteLine("{0} = {1}", line, result);
+                Console.WriteLine("\t{0} = {1}", expression, result);
             }
-            catch (MismatchTokenizationException mismatchTokenizationException)
+            catch (MismatchException mismatchException)
             {
-                int left = mismatchTokenizationException.ExpectedPosition;
-                int right = mismatchTokenizationException.Position;
+                int left = mismatchException.ExpectedOffset;
+                int right = mismatchException.Offset;
+                int leftLength = mismatchException.ExpectedLength;
+                int rightLength = mismatchException.Length;
 
                 Console.ForegroundColor = ConsoleColor.Gray;
 
@@ -47,38 +54,70 @@ internal static class Program
 
                 Console.ForegroundColor = ConsoleColor.Green;
 
-                Console.Write(mismatchTokenizationException.Expected);
+                Console.Write(line.AsSpan(left, leftLength));
 
                 Console.ForegroundColor = ConsoleColor.Gray;
 
-                Console.Write(line.AsSpan(left + 1, right - left - 1));
+                Console.Write(line.AsSpan(left + leftLength, right - left - leftLength));
 
                 Console.ForegroundColor = ConsoleColor.Red;
 
-                Console.Write(mismatchTokenizationException.Current);
+                Console.Write(line.AsSpan(right, rightLength));
 
                 Console.ForegroundColor = ConsoleColor.Gray;
 
-                Console.WriteLine(line.AsSpan(right + 1));
-                Console.WriteLine("\tSyntax error: {0}", mismatchTokenizationException.Message);
+                Console.WriteLine(line.AsSpan(right + rightLength));
+                Console.WriteLine("\tSyntax error: {0}");
             }
-            catch (TokenizationException tokenizationException)
+            catch (MathEngineException mathEngineException)
             {
-                int position = tokenizationException.Position;
+                int offset = mathEngineException.Offset;
+                int length = mathEngineException.Length;
 
                 Console.ForegroundColor = ConsoleColor.Gray;
 
-                Console.Write(line.AsSpan(start: 0, position));
+                Console.Write(line.AsSpan(start: 0, offset));
 
                 Console.ForegroundColor = ConsoleColor.Red;
 
-                Console.Write(tokenizationException.Current);
+                Console.Write(line.AsSpan(offset, length));
 
                 Console.ForegroundColor = ConsoleColor.Gray;
 
-                Console.WriteLine(line.AsSpan(position + 1));
-                Console.WriteLine("\tSyntax error: {0}", tokenizationException.Message);
+                Console.WriteLine(line.AsSpan(offset + length));
+
+                if (mathEngineException is ParsingException parsingException)
+                {
+                    Console.WriteLine("\tSyntax error: expected {0} but read {1}",
+                        parsingException.ExpectedType,
+                        parsingException.Type);
+                }
+                else
+                {
+                    Console.WriteLine("\tSyntax error");
+                }
+            }
+            catch (DivideByZeroException divideByZeroException)
+            {
+                Console.WriteLine("\tError: {0}", divideByZeroException.Message);
             }
         }
+    }
+
+    private static IExpression Parse(string text)
+    {
+        if (text.StartsWith('='))
+        {
+            text = text.Substring(1);
+        }
+
+        CultureInfo culture = CultureInfo.CurrentCulture;
+        List<Token> tokens = new Tokenizer(text, culture).ToList();
+        Parser parser = new Parser(tokens, culture);
+        IExpression expression = parser.Parse();
+
+        Console.WriteLine("\nTokens: {0}\n", string.Join(' ', tokens), expression);
+
+        return expression;
     }
 }

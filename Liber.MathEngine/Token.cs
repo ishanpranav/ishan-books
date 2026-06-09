@@ -4,26 +4,26 @@
 
 namespace Liber.MathEngine;
 
-internal sealed class Token
+public class Token
 {
     public TokenType Type { get; }
     public string Value { get; }
-    public int Position { get; }
+    public int Offset { get; }
 
-    public Token(TokenType type, string value, int position)
+    public Token(TokenType type, string value, int offset)
     {
         Type = type;
         Value = value;
-        Position = position;
+        Offset = offset;
     }
 
     public override string ToString()
     {
         if (string.IsNullOrEmpty(Value))
         {
-            return $"({Type} @{Position})";
+            return Type.ToString();
         }
 
-        return $"({Type} '{Value}' @{Position})";
+        return $"({Type} '{Value}')";
     }
 }
