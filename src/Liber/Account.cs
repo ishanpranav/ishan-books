@@ -11,15 +11,12 @@ using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using CsvHelper.Configuration.Attributes;
 using CsvHelper.TypeConversion;
-using MessagePack;
-using MessagePack.Formatters;
 
 namespace Liber;
 
 /// <summary>
 /// Represents a financial account.
 /// </summary>
-[MessagePackObject]
 public class Account : IComparable<Account>, IComparable
 {
     internal readonly HashSet<Account> children = new HashSet<Account>();
@@ -35,7 +32,6 @@ public class Account : IComparable<Account>, IComparable
     /// </summary>
     /// <param name="parentId">The identifier of the parent account.</param>
     [JsonConstructor]
-    [SerializationConstructor]
     public Account(Guid parentId)
     {
         ParentId = parentId;
@@ -47,7 +43,6 @@ public class Account : IComparable<Account>, IComparable
     /// <value>The parent identifier.</value>
     [Browsable(false)]
     [Ignore]
-    [Key(0)]
     public Guid ParentId { get; internal set; }
 
     /// <summary>
@@ -56,7 +51,6 @@ public class Account : IComparable<Account>, IComparable
     /// <value>The account number.</value>
     [Default(0)]
     [Index(3)]
-    [Key(2)]
     [LocalizedDisplayName(nameof(Number))]
     [Name("Account Code")]
     [Optional]
@@ -67,7 +61,6 @@ public class Account : IComparable<Account>, IComparable
     /// </summary>
     /// <value>The account name.</value>
     [Index(2)]
-    [Key(1)]
     [LocalizedDisplayName(nameof(Name))]
     [Name("Account Name")]
     [Optional]
@@ -79,7 +72,6 @@ public class Account : IComparable<Account>, IComparable
     /// <value>The account type.</value>
     [Index(0)]
     [LocalizedDisplayName(nameof(Type))]
-    [Key(3)]
     [Name("Type")]
     [Optional]
     [CsvHelper.Configuration.Attributes.TypeConverter(typeof(GnuCashAccountTypeConverter))]
@@ -93,7 +85,6 @@ public class Account : IComparable<Account>, IComparable
     [BooleanFalseValues("F")]
     [BooleanTrueValues("T")]
     [Index(11)]
-    [Key(4)]
     [LocalizedDisplayName(nameof(Placeholder))]
     [Name("Placeholder")]
     [Optional]
@@ -104,7 +95,6 @@ public class Account : IComparable<Account>, IComparable
     /// </summary>
     /// <value>The description of the account.</value>
     [Index(4)]
-    [Key(5)]
     [LocalizedDisplayName(nameof(Description))]
     [Name("Description")]
     [NullValues("")]
@@ -116,7 +106,6 @@ public class Account : IComparable<Account>, IComparable
     /// </summary>
     /// <value>The memo associated with the account.</value>
     [Index(6)]
-    [Key(6)]
     [LocalizedDisplayName(nameof(Memo))]
     [Name("Notes")]
     [NullValues("")]
@@ -128,9 +117,7 @@ public class Account : IComparable<Account>, IComparable
     /// </summary>
     /// <value>The color associated with the account.</value>
     [Index(5)]
-    [Key(7)]
     [LocalizedDisplayName(nameof(Color))]
-    [MessagePackFormatter(typeof(MessagePackColorFormatter))]
     [Name("Account Color")]
     [Optional]
     [CsvHelper.Configuration.Attributes.TypeConverter(typeof(CsvHelper.TypeConversion.ColorConverter))]
@@ -142,13 +129,11 @@ public class Account : IComparable<Account>, IComparable
     /// <value>The tax category associated with the account.</value>
     [BooleanFalseValues("F")]
     [BooleanTrueValues("T")]
-    [Key(8)]
     [LocalizedDisplayName(nameof(TaxType))]
     [Name("Tax Info")]
     public bool TaxType { get; set; }
 
     [Ignore]
-    [Key(10)]
     [LocalizedDisplayName(nameof(CashFlow))]
     [System.ComponentModel.TypeConverter(typeof(LocalizedEnumConverter<CashFlow>))]
     public CashFlow CashFlow { get; set; }
@@ -156,7 +141,6 @@ public class Account : IComparable<Account>, IComparable
     [BooleanFalseValues("F")]
     [BooleanTrueValues("T")]
     [Index(9)]
-    [Key(9)]
     [LocalizedDisplayName(nameof(Inactive))]
     [Name("Hidden")]
     [Optional]
@@ -168,7 +152,6 @@ public class Account : IComparable<Account>, IComparable
     /// <value>The current balance of the account.</value>
     [Browsable(false)]
     [Ignore]
-    [IgnoreMember]
     [JsonIgnore]
     public decimal Balance
     {
@@ -190,7 +173,6 @@ public class Account : IComparable<Account>, IComparable
     /// </summary>
     /// <value>The account children.</value>
     [Browsable(false)]
-    [IgnoreMember]
     [JsonIgnore]
     public IReadOnlyCollection<Account> Children
     {
@@ -205,7 +187,6 @@ public class Account : IComparable<Account>, IComparable
     /// </summary>
     /// <value>The line items posted to the account.</value>
     [Browsable(false)]
-    [IgnoreMember]
     [JsonIgnore]
     public IReadOnlyCollection<Line> Lines
     {
@@ -220,7 +201,6 @@ public class Account : IComparable<Account>, IComparable
     /// </summary>
     /// <value>Gets the line items posted to the account, sorted in their natural order.</value>
     [Browsable(false)]
-    [IgnoreMember]
     [JsonIgnore]
     public IOrderedEnumerable<Line> OrderedLines
     {
@@ -234,7 +214,6 @@ public class Account : IComparable<Account>, IComparable
     }
 
     [Browsable(false)]
-    [IgnoreMember]
     [JsonIgnore]
     public bool ReadOnly
     {

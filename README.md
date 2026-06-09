@@ -50,22 +50,21 @@ __Accounts receivable and accounts payable__
 - [X] Generate credit note
 
 __First-class data formats__
-- [X] IshanBooks Company (*.izbk)
+- [X] IshanBooks Company (\*.izbk)
 - [X] JavaScript Object Notation (\*.json)
-- [X] MessagePack (\*.msgpack; \*.mpk)
 - [X] SQLite3 Database (\*.db; \*.sqlite)
 
 __Import-friendly formats__
-- [X] Comma-delimited (*.csv)
-- [X] GnuCash Financial Data (*.gnucash)
+- [X] Comma-delimited (\*.csv)
+- [X] GnuCash Financial Data (\*.gnucash)
 
 __Export-friendly formats__
-- [X] Comma-delimited (*.csv)
-- [X] PDF Document (*.pdf)
-- [X] XPS Document (*.xps)
-- [X] HTML Document (*.html)
-- [ ] Intuit Interchange Format (*.iif)
-- [X] XML Document (*.xml)
+- [X] Comma-delimited (\*.csv)
+- [X] PDF Document (\*.pdf)
+- [X] XPS Document (\*.xps)
+- [X] HTML Document (\*.html)
+- [ ] Intuit Interchange Format (\*.iif)
+- [X] XML Document (\*.xml)
 
 __Miscellaneous__
 - [X] Password protection

@@ -6,7 +6,7 @@ using System.Drawing;
 
 namespace System.Windows.Forms;
 
-internal class DataGridViewColorColumn : DataGridViewColumn
+public class DataGridViewColorColumn : DataGridViewColumn
 {
     public override DataGridViewCell? CellTemplate
     {

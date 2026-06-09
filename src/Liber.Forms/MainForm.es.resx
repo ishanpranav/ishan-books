@@ -419,9 +419,9 @@
     <value>Ayuda</value>
   </data>
   <data name="_openFileDialog.Filter" xml:space="preserve">
-    <value>Todos los archivos (*.*)|*.*|Todos los archivos compatibles (*.izbk;*.mpk;*.msgpack;*.json;*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3;*.gnucash)|*.izbk;*.mpk;*.msgpack;*.json;*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3|Empresa de IshanBooks (*.izbk)|*.izbk|MessagePack (*.mpk;*.msgpack)|*.mpk;*.msgpack|Notación de objetos JavaScript (JSON) (*.json)|*.json|Base de datos SQLite3 (*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3)|*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3|Delimitado por comas (*.csv)|*.csv|Documento PDF (*.pdf)|*.pdf|Archivo de datos financieros de GnuCash (*.gnucash)|*.gnucash</value>
+    <value>Todos los archivos (*.*)|*.*|Todos los archivos compatibles (*.izbk;*.json;*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3;*.gnucash)|*.izbk;*.json;*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3|Empresa de IshanBooks (*.izbk)|*.izbk|Notación de objetos JavaScript (JSON) (*.json)|*.json|Base de datos SQLite3 (*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3)|*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3|Delimitado por comas (*.csv)|*.csv|Documento PDF (*.pdf)|*.pdf|Archivo de datos financieros de GnuCash (*.gnucash)|*.gnucash</value>
   </data>
   <data name="_saveFileDialog.Filter" xml:space="preserve">
-    <value>Empresa de IshanBooks (*.izbk)|*.izbk|MessagePack (*.mpk;*.msgpack)|*.mpk;*.msgpack|Notación de objetos JavaScript (JSON) (*.json)|*.json|Base de datos SQLite3 (*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3)|*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3|Delimitado por comas (*.csv)|*.csv|IIF (*.iif)|*.iif|Documento XML (*.xml)|*.xml</value>
+    <value>Empresa de IshanBooks (*.izbk)|*.izbk|Notación de objetos JavaScript (JSON) (*.json)|*.json|Base de datos SQLite3 (*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3)|*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3|Delimitado por comas (*.csv)|*.csv|IIF (*.iif)|*.iif|Documento XML (*.xml)|*.xml</value>
   </data>
 </root>

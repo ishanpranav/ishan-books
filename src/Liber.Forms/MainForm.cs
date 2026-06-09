@@ -21,7 +21,6 @@ using Liber.Forms.Transactions;
 using Liber.Forms.Writers;
 using Liber.Sqlite;
 using Liber.Writers;
-using MessagePack;
 using Microsoft.WindowsAPICodePack.Taskbar;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
@@ -30,9 +29,6 @@ namespace Liber.Forms;
 
 internal sealed partial class MainForm : Form
 {
-    private static readonly MessagePackSerializerOptions s_messagePackOptions = MessagePackSerializerOptions.Standard
-        .WithSecurity(MessagePackSecurity.UntrustedData);
-
     private readonly Company _company = new Company();
 
     private ReportEngine? _engine;
@@ -437,13 +433,6 @@ internal sealed partial class MainForm : Form
         return true;
     }
 
-    private async Task ImportMessagePackCompanyAsync(string path)
-    {
-        await using FileStream input = File.OpenRead(path);
-
-        (await MessagePackSerializer.DeserializeAsync<Company>(input, s_messagePackOptions)).CopyTo(_company);
-    }
-
     private async Task ImportJsonCompanyAsync(string path)
     {
         await using FileStream input = File.OpenRead(path);
@@ -522,11 +511,6 @@ internal sealed partial class MainForm : Form
                     await ImportJsonCompanyAsync(path);
                     break;
 
-                case ".MPK":
-                case ".MSGPACK":
-                    await ImportMessagePackCompanyAsync(path);
-                    break;
-
                 case ".GNUCASH":
                     await ImportGnuCashSqliteCompanyAsync(path);
 
@@ -563,15 +547,6 @@ internal sealed partial class MainForm : Form
     private void OnAboutToolStripMenuItemClick(object sender, EventArgs e)
     {
         _factory.AutoRegister(() => new UrlForm(FormattedStrings.AboutUrl));
-    }
-
-    private async Task ExportMessagePackCompanyAsync(string path)
-    {
-        await using FileStream output = File.Create(path);
-
-        await MessagePackSerializer.SerializeAsync(output, _company, s_messagePackOptions);
-
-        _path = path;
     }
 
     private async Task ExportJsonCompanyAsync(string path)
@@ -635,11 +610,6 @@ internal sealed partial class MainForm : Form
 
                 case ".JSON":
                     await ExportJsonCompanyAsync(path);
-                    break;
-
-                case ".MPK":
-                case ".MSGPACK":
-                    await ExportMessagePackCompanyAsync(path);
                     break;
 
                 default:
