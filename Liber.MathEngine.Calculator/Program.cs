@@ -43,7 +43,7 @@ internal static class Program
 
                 Console.ForegroundColor = ConsoleColor.Gray;
 
-                Console.Write(line.Substring(startIndex: 0, left));
+                Console.Write(line.AsSpan(start: 0, left));
 
                 Console.ForegroundColor = ConsoleColor.Green;
 
@@ -51,7 +51,7 @@ internal static class Program
 
                 Console.ForegroundColor = ConsoleColor.Gray;
 
-                Console.Write(line.Substring(left + 1, right - left - 1));
+                Console.Write(line.AsSpan(left + 1, right - left - 1));
 
                 Console.ForegroundColor = ConsoleColor.Red;
 
@@ -59,8 +59,7 @@ internal static class Program
 
                 Console.ForegroundColor = ConsoleColor.Gray;
 
-                Console.Write(line.Substring(right + 1));
-                Console.WriteLine();
+                Console.WriteLine(line.AsSpan(right + 1));
                 Console.WriteLine("\tSyntax error: {0}", mismatchTokenizationException.Message);
             }
             catch (TokenizationException tokenizationException)
@@ -69,7 +68,7 @@ internal static class Program
 
                 Console.ForegroundColor = ConsoleColor.Gray;
 
-                Console.Write(line.Substring(startIndex: 0, position));
+                Console.Write(line.AsSpan(start: 0, position));
 
                 Console.ForegroundColor = ConsoleColor.Red;
 
@@ -77,8 +76,7 @@ internal static class Program
 
                 Console.ForegroundColor = ConsoleColor.Gray;
 
-                Console.Write(line.Substring(position + 1));
-                Console.WriteLine();
+                Console.WriteLine(line.AsSpan(position + 1));
                 Console.WriteLine("\tSyntax error: {0}", tokenizationException.Message);
             }
         }
