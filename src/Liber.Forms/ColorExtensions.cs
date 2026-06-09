@@ -37,11 +37,6 @@ internal static class ColorExtensions
             (int)double.Round(b));
     }
 
-    public static Color Interpolate(this Color source, Color other, double value)
-    {
-        return source.Mix(other, 1 - value);
-    }
-
     public static Color Tint(this Color source, double weight)
     {
         return source.Mix(Color.White, weight);

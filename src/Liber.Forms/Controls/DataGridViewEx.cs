@@ -11,6 +11,7 @@ internal class DataGridViewEx : DataGridView
 {
     public DataGridViewEx()
     {
+        AllowUserToResizeColumns = true;
         AlternatingRowsDefaultCellStyle.BackColor = Color.Black.Tint(0.05);
         AlternatingRowsDefaultCellStyle.SelectionBackColor = Colors.Primary.Tint(0.15);
         AlternatingRowsDefaultCellStyle.SelectionForeColor = Colors.Black;

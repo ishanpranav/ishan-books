@@ -9,15 +9,12 @@ using System.Linq;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using Liber.Properties;
-using MessagePack;
-using MessagePack.Formatters;
 
 namespace Liber;
 
 /// <summary>
 /// Represents an individual, sole proprietorship, partnership, corporation, or other entity.
 /// </summary>
-[MessagePackObject]
 public sealed class Company
 {
     private readonly Dictionary<Guid, Account> _accounts;
@@ -26,7 +23,6 @@ public sealed class Company
 
     private string? _name;
 
-    [Key(0)]
     public IReadOnlyDictionary<Guid, Account> Accounts
     {
         get
@@ -35,7 +31,6 @@ public sealed class Company
         }
     }
 
-    [IgnoreMember]
     [JsonIgnore]
     public IEnumerable<KeyValuePair<Guid, Account>> OrderedAccounts
     {
@@ -45,7 +40,6 @@ public sealed class Company
         }
     }
 
-    [Key(1)]
     public IReadOnlyCollection<Transaction> Transactions
     {
         get
@@ -54,13 +48,9 @@ public sealed class Company
         }
     }
 
-    [Key(2)]
     public decimal NextAccountNumber { get; private set; } = 1;
-
-    [Key(3)]
     public decimal NextTransactionNumber { get; private set; } = 1;
 
-    [Key(4)]
     public string? Name
     {
         get
@@ -75,7 +65,6 @@ public sealed class Company
         }
     }
 
-    [IgnoreMember]
     [JsonIgnore]
     public string DisplayName
     {
@@ -85,24 +74,17 @@ public sealed class Company
         }
     }
 
-    [Key(5)]
     public CompanyType Type { get; set; }
 
-    [Key(6)]
-    [MessagePackFormatter(typeof(MessagePackColorFormatter))]
     public Color Color { get; set; } = Color.FromArgb(red: 224, green: 220, blue: 228);
 
-    [Key(7)]
     public Guid EquityAccountId { get; set; }
 
-    [Key(8)]
     public Guid OtherEquityAccountId { get; set; }
 
-    [IgnoreMember]
     [JsonIgnore]
     public string? Password { get; set; }
 
-    [IgnoreMember]
     [JsonIgnore]
     public Transaction? LastTransaction
     {
@@ -137,7 +119,6 @@ public sealed class Company
     /// <param name="nextAccountNumber">The next account number to be assigned.</param>
     /// <param name="nextTransactionNumber">The next journal entry number to be assigned.</param>
     [JsonConstructor]
-    [SerializationConstructor]
     public Company(
         IReadOnlyDictionary<Guid, Account> accounts,
         IReadOnlyCollection<Transaction> transactions,
@@ -330,16 +311,19 @@ public sealed class Company
 
     private string? GetSuggestedMemo(Transaction value)
     {
+        if (value.Lines.Count == 0)
+        {
+            return null;
+        }
+
         if (value.Lines.All(x => _accounts[x.AccountId].Type.IsAsset()))
         {
             return Resources.TransferMemo;
         }
 
-        List<Line> bankLines = value.Lines
+        if (value.Lines
             .Where(x => _accounts[x.AccountId].Type == AccountType.Bank)
-            .ToList();
-
-        if (bankLines.TrueForAll(x => x.Balance > 0))
+            .All(x => x.Balance > 0))
         {
             return Resources.DepositMemo;
         }

@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows.Forms;
 using Humanizer;
 
@@ -11,15 +12,19 @@ namespace Liber.Forms.Accounts;
 
 internal sealed class AccountListView : ListViewEx
 {
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    public new ListViewItemCollection Items
+    {
+        get
+        {
+            return base.Items;
+        }
+    }
+
     public AccountListView()
     {
         View = View.Details;
         FullRowSelect = true;
-
-        if (DesignMode)
-        {
-            return;
-        }
 
         ColumnHeader nameColumn = Columns.Add(Properties.Resources.Name);
 

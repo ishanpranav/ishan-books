@@ -49,25 +49,6 @@
             "index": "Microsoft Corporation"
         },
         {
-            "title": "MessagePack for C#",
-            "formats": [ "c#" ],
-            "source": "https://github.com/neuecc/MessagePack-CSharp",
-            "author": "Yoshifumi Kawai",
-            "copyright": "2017 Yoshifumi Kawai and contributors",
-            "license": "mit_kawai",
-            "notices": "https://github.com/neuecc/MessagePack-CSharp/blob/master/LICENSE",
-            "index": "Kawai, Yoshifumi"
-        },
-        {
-            "title": "lz4net",
-            "formats": [ "c#" ],
-            "source": "https://github.com/MiloszKrajewski/lz4net",
-            "author": "Milosz Krajewski",
-            "copyright": "2013-2017, Milosz Krajewski",
-            "license": "bsd-2-clause_krajewski",
-            "index": "Krajewski, Milosz"
-        },
-        {
             "title": "CsvHelper",
             "formats": [ "c#", "css" ],
             "source": "https://github.com/JoshClose/CsvHelper",

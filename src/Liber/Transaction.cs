@@ -7,11 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
 using CsvHelper.Configuration.Attributes;
-using MessagePack;
 
 namespace Liber;
 
-[MessagePackObject]
 public class Transaction :
     IComparable,
     IComparable<Transaction>,
@@ -23,7 +21,6 @@ public class Transaction :
     }
 
     [JsonConstructor]
-    [SerializationConstructor]
     public Transaction(ICollection<Line> lines)
     {
         Lines = lines;
@@ -35,11 +32,9 @@ public class Transaction :
     }
 
     [Ignore]
-    [Key(0)]
     public ICollection<Line> Lines { get; }
 
     [Ignore]
-    [IgnoreMember]
     [JsonIgnore]
     public IOrderedEnumerable<Line> OrderedLines
     {
@@ -52,39 +47,33 @@ public class Transaction :
     }
 
     [Index(1)]
-    [Key(1)]
     [Name("Transaction ID")]
     public Guid Id { get; set; }
 
     [Format("M/d/yyyy")]
     [Index(0)]
-    [Key(2)]
     [Name("Date")]
     public DateTime Posted { get; set; }
 
     [Default(0)]
     [Index(2)]
-    [Key(3)]
     [Name("Number")]
     [Optional]
     public decimal Number { get; set; }
 
     [Index(3)]
-    [Key(4)]
     [Name("Description")]
     [NullValues("")]
     [Optional]
     public string? Name { get; set; }
 
     [Index(4)]
-    [Key(5)]
     [Name("Notes")]
     [NullValues("")]
     [Optional]
     public string? Memo { get; set; }
 
     [Ignore]
-    [IgnoreMember]
     [JsonIgnore]
     public decimal Balance
     {

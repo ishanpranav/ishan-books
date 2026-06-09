@@ -254,7 +254,7 @@
 </value>
   </data>
   <data name="_openFileDialog.Filter" xml:space="preserve">
-    <value>All Files (*.*)|*.*|All Supported Files (*.izbk;*.mpk;*.msgpack;*.json;*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3;*.gnucash)|*.izbk;*.mpk;*.msgpack;*.json;*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3;*.gnucash|IshanBooks Company File (*.izbk)|*.izbk|MessagePack (*.mpk;*.msgpack)|*.mpk;*.msgpack|JavaScript Object Notation (*.json)|*.json|SQLite3 Database File (*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3)|*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3|Comma-delimited (*.csv)|*.csv|PDF Document (*.pdf)|*.pdf|GnuCash Financial Data (*.gnucash)|*.gnucash</value>
+    <value>All Files (*.*)|*.*|All Supported Files (*.izbk;*.json;*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3;*.gnucash)|*.izbk;*.json;*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3;*.gnucash|IshanBooks Company File (*.izbk)|*.izbk|JavaScript Object Notation (*.json)|*.json|SQLite3 Database File (*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3)|*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3|Comma-delimited (*.csv)|*.csv|PDF Document (*.pdf)|*.pdf|GnuCash Financial Data (*.gnucash)|*.gnucash</value>
   </data>
   <data name="helpToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Help</value>
@@ -734,7 +734,7 @@
     <value>Magenta</value>
   </data>
   <data name="_saveFileDialog.Filter" xml:space="preserve">
-    <value>IshanBooks Company File (*.izbk)|*.izbk|MessagePack (*.mpk;*.msgpack)|*.mpk;*.msgpack|JavaScript Object Notation (*.json)|*.json|SQLite3 Database File (*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3)|*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3|Comma-delimited (*.csv)|*.csv|PDF Document (*.pdf)|*.pdf|Intuit Interchange Format (*.iif)|*.iif|XML Document (*.xml)|*.xml</value>
+    <value>IshanBooks Company File (*.izbk)|*.izbk|JavaScript Object Notation (*.json)|*.json|SQLite3 Database File (*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3)|*.db;*.sqlite;*.sqlite3;*.db3;*.s3db;*.sl3|Comma-delimited (*.csv)|*.csv|PDF Document (*.pdf)|*.pdf|Intuit Interchange Format (*.iif)|*.iif|XML Document (*.xml)|*.xml</value>
   </data>
   <data name="&gt;&gt;combinePdfDocumentsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

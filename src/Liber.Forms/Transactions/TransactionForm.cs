@@ -17,39 +17,6 @@ internal sealed partial class TransactionForm : Form
 {
     private readonly Company _company;
 
-    public TransactionForm(Company company)
-    {
-        InitializeComponent();
-        SystemFeatures.Initialize(this);
-
-        _company = company;
-        _company.AccountAdded += OnCompanyAccountAdded;
-        _company.AccountUpdated += OnCompanyAccountUpdated;
-        _company.AccountRemoved += OnCompanyAccountRemoved;
-        DialogResult = DialogResult.Cancel;
-        accountColumn.ValueMember = nameof(IAccountView.Id);
-        accountColumn.DisplayMember = nameof(IAccountView.DisplayName);
-        numberNumericUpDown.Maximum = decimal.MaxValue;
-        nameComboBox.DataSource = _company.GetNames();
-        debitColumn.ValueType = typeof(decimal);
-        debitColumn.DefaultCellStyle.Format = DecimalExtensions.Format;
-        creditColumn.ValueType = typeof(decimal);
-        creditColumn.DefaultCellStyle.Format = DecimalExtensions.Format;
-        _dataGridView.AlternatingRowsDefaultCellStyle.BackColor = _company.Color;
-        _dataGridView.AlternatingRowsDefaultCellStyle.ForeColor = _company.Color.GetForeColor();
-
-        foreach (KeyValuePair<Guid, Account> account in _company.OrderedAccounts)
-        {
-            if (!account.Value.ReadOnly)
-            {
-                InitializeAccount(account.Key, account.Value);
-            }
-        }
-
-        _dataGridView.AutoResizeColumns();
-        CreateNew();
-    }
-
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     public bool ShowApplyButton
     {
@@ -64,6 +31,45 @@ internal sealed partial class TransactionForm : Form
     }
 
     public Transaction? Value { get; private set; }
+
+    public TransactionForm(Company company)
+    {
+        InitializeComponent();
+        SystemFeatures.Initialize(this);
+
+        company.AccountAdded += OnCompanyAccountAdded;
+        company.AccountUpdated += OnCompanyAccountUpdated;
+        company.AccountRemoved += OnCompanyAccountRemoved;
+        _company = company;
+        DialogResult = DialogResult.Cancel;
+        accountColumn.ValueMember = nameof(IAccountView.Id);
+        accountColumn.DisplayMember = nameof(IAccountView.DisplayName);
+        numberNumericUpDown.Maximum = decimal.MaxValue;
+        nameComboBox.DataSource = company.GetNames();
+        debitColumn.ValueType = typeof(decimal);
+        debitColumn.DefaultCellStyle.Format = DecimalExtensions.Format;
+        creditColumn.ValueType = typeof(decimal);
+        creditColumn.DefaultCellStyle.Format = DecimalExtensions.Format;
+        _dataGridView.AlternatingRowsDefaultCellStyle.BackColor = company.Color;
+        _dataGridView.AlternatingRowsDefaultCellStyle.ForeColor = company.Color.GetForeColor();
+
+        if (company.Color == _dataGridView.DefaultCellStyle.SelectionBackColor)
+        {
+            _dataGridView.AlternatingRowsDefaultCellStyle.SelectionBackColor = _dataGridView.AlternatingRowsDefaultCellStyle.SelectionBackColor.Tint(0.15);
+            _dataGridView.DefaultCellStyle.SelectionBackColor = _dataGridView.DefaultCellStyle.SelectionBackColor.Tint(0.15);
+        }
+
+        foreach (KeyValuePair<Guid, Account> account in company.OrderedAccounts)
+        {
+            if (!account.Value.ReadOnly)
+            {
+                InitializeAccount(account.Key, account.Value);
+            }
+        }
+
+        _dataGridView.AutoResizeColumns();
+        CreateNew();
+    }
 
     private void InitializeAccount(Guid key, Account value)
     {
