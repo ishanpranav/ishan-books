@@ -22,6 +22,17 @@ internal sealed class NewAccountForm : AccountForm
     public NewAccountForm(Company company, Guid parentId) : this(company)
     {
         parentComboBox.SelectedItem = parentId;
+
+        if (parentId == Guid.Empty)
+        {
+            return;
+        }
+
+        Account parent = Company.Accounts[parentId];
+
+        typeComboBox.SelectedItem = parent.Type;
+        cashFlowComboBox.SelectedItem = parent.CashFlow;
+        taxTypeCheckBox.Checked = parent.TaxType;
     }
 
     protected override void CommitChanges()

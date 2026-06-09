@@ -17,13 +17,14 @@ internal sealed class ListViewItemComparer : Comparer<ListViewItem>
 
     public override int Compare(ListViewItem? x, ListViewItem? y)
     {
-        if (_listView.SortColumn == -1)
+        if (_listView.SortColumn == -1 || x == null || y == null ||
+            _listView.SortColumn >= x.SubItems.Count || _listView.SortColumn >= y.SubItems.Count)
         {
             return 0;
         }
 
-        object? xTag = x?.SubItems[_listView.SortColumn].Tag;
-        object? yTag = y?.SubItems[_listView.SortColumn].Tag;
+        object? xTag = x.SubItems[_listView.SortColumn].Tag;
+        object? yTag = y.SubItems[_listView.SortColumn].Tag;
         int comparison;
 
         if (xTag is DateTime xDateTime && yTag is DateTime yDateTime)
