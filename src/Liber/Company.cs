@@ -246,6 +246,15 @@ public sealed class Company
     public string? Password { get; set; }
 
     [JsonIgnore]
+    public Transaction? FirstTransaction
+    {
+        get
+        {
+            return _transactions.Min;
+        }
+    }
+
+    [JsonIgnore]
     public Transaction? LastTransaction
     {
         get

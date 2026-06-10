@@ -9,13 +9,12 @@ using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Media;
 using System.Windows.Forms;
+using System.Windows.Input;
 using Liber.Forms.Accounts;
 using Liber.Forms.AccountViews;
-using Liber.Forms.Components;
 using Liber.Forms.Properties;
 using Liber.MathEngine.Expressions;
-using MS.WindowsAPICodePack.Internal;
-using SQLitePCL;
+using PdfSharp.Charting;
 
 namespace Liber.Forms.Transactions;
 
@@ -69,18 +68,13 @@ internal sealed partial class TransactionForm : Form
         {
             if (!account.Value.ReadOnly)
             {
-                InitializeAccount(account.Key, account.Value);
+                accountColumn.Items.Add(new AccountView(account.Key, account.Value));
             }
         }
 
         accountColumn.Items.Add(NewAccountView.Value);
         _dataGridView.AutoResizeColumns();
         CreateNew();
-    }
-
-    private void InitializeAccount(Guid key, Account value)
-    {
-        accountColumn.Items.Add(new AccountView(key, value));
     }
 
     [MemberNotNull(nameof(Value))]
@@ -275,7 +269,9 @@ internal sealed partial class TransactionForm : Form
 
     private void OnCompanyAccountAdded(object? sender, GuidEventArgs e)
     {
-        InitializeAccount(e.Id, _company.Accounts[e.Id]);
+        int index = int.Max(0, accountColumn.Items.Count - 1);
+
+        accountColumn.Items.Insert(index, new AccountView(e.Id, _company.Accounts[e.Id]));
     }
 
     private void OnCompanyAccountUpdated(object? sender, GuidEventArgs e)
@@ -360,25 +356,32 @@ internal sealed partial class TransactionForm : Form
         Clear();
     }
 
-    private void OnNextButtonClick(object sender, EventArgs e)
+    private void OnFirstButtonClick(object sender, EventArgs e)
     {
-        if (Value == null)
+        Transaction? first = _company.FirstTransaction;
+
+        if (first == null)
         {
             CreateNew();
 
             return;
         }
 
-        Transaction? next = _company.GetTransactionAfter(Value);
+        InitializeTransaction(first);
+    }
 
-        if (next == null)
+    private void OnLastButtonClick(object sender, EventArgs e)
+    {
+        Transaction? last = _company.LastTransaction;
+
+        if (last == null)
         {
             CreateNew();
 
             return;
         }
 
-        InitializeTransaction(next);
+        InitializeTransaction(last);
     }
 
     private void OnPreviousButtonClick(object sender, EventArgs e)
@@ -400,6 +403,27 @@ internal sealed partial class TransactionForm : Form
         }
     }
 
+    private void OnNextButtonClick(object sender, EventArgs e)
+    {
+        if (Value == null)
+        {
+            CreateNew();
+
+            return;
+        }
+
+        Transaction? next = _company.GetTransactionAfter(Value);
+
+        if (next == null)
+        {
+            CreateNew();
+
+            return;
+        }
+
+        InitializeTransaction(next);
+    }
+
     private void OnPrintToolStripButtonClick(object sender, EventArgs e)
     {
         // TODO: Print transaction
@@ -414,6 +438,18 @@ internal sealed partial class TransactionForm : Form
 
         AccountCellEndEdit(e.ColumnIndex, e.RowIndex);
         ExpressionCellEndEdit(e.ColumnIndex, e.RowIndex);
+    }
+
+    private void OnDataGridViewDataError(object sender, DataGridViewDataErrorEventArgs e)
+    {
+        e.Cancel = true;
+
+        if (e.RowIndex == -1)
+        {
+            return;
+        }
+
+        _dataGridView.Rows[e.RowIndex].ErrorText = e.Exception?.Message ?? string.Empty;
     }
 
     private void OnDataGridViewDefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
@@ -475,6 +511,20 @@ internal sealed partial class TransactionForm : Form
 
         decimal remainder = GetRemainder() + debit - credit;
 
+        if (debit - credit == 0)
+        {
+            if (columnIndex == debitColumn.Index)
+            {
+                SetBalance(row, debit);
+            }
+            else
+            {
+                SetBalance(row, -credit);
+            }
+
+            return;
+        }
+
         if (debit == remainder && credit != 0)
         {
             SetBalance(row, -credit);
@@ -489,7 +539,7 @@ internal sealed partial class TransactionForm : Form
             return;
         }
 
-        SetBalance(_dataGridView.Rows[rowIndex], debit - credit);
+        SetBalance(row, debit - credit);
     }
 
     protected override void Dispose(bool disposing)
