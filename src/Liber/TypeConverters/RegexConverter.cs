@@ -13,7 +13,7 @@ public class RegexConverter : TypeConverter
     /// <inheritdoc/>
     public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
     {
-        return sourceType == typeof(string);
+        return sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
     }
 
     /// <inheritdoc/>
@@ -21,7 +21,7 @@ public class RegexConverter : TypeConverter
     {
         if (value is not string pattern)
         {
-            return Filters.Any();
+            return base.ConvertFrom(context, culture, value);
         }
 
         try

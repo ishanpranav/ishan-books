@@ -56,6 +56,12 @@ public static class GnuCashSqliteSerializer
                 await reader.ReadAsync();
 
                 name = await SqliteUtilities.GetStringAsync(reader, 0);
+
+                if (string.IsNullOrWhiteSpace(name))
+                {
+                    name = null;
+                }
+
                 type = await GetCompanyTypeAsync(reader, 1);
                 emptyParentId = reader.GetGuid(2);
             }
@@ -132,7 +138,7 @@ public static class GnuCashSqliteSerializer
             }
         }
 
-        Company result = new Company(accounts, transactions.Values, nextAccountNumber: 1, nextTransactionNumber: 1)
+        Company result = new Company(accounts, transactions.Values, nextAccountNumber: 1)
         {
             Name = name,
             Type = type

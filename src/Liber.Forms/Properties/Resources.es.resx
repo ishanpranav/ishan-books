@@ -141,6 +141,9 @@
   <data name="Name" xml:space="preserve">
     <value>Nombre</value>
   </data>
+  <data name="NewAccount" xml:space="preserve">
+    <value>(Nueva cuenta)</value>
+  </data>
   <data name="NoAccount" xml:space="preserve">
     <value>Ninguna cuenta</value>
   </data>

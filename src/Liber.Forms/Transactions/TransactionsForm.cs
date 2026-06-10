@@ -7,15 +7,18 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using Liber.Forms.Accounts;
+using Liber.Forms.AccountViews;
+using Liber.Forms.Components;
 
 namespace Liber.Forms.Transactions;
 
 internal sealed partial class TransactionsForm : Form
 {
     private readonly Company _company;
+    private readonly FormFactory _factory;
     private readonly Account _account;
 
-    public TransactionsForm(Company company, Guid id)
+    public TransactionsForm(Company company, FormFactory factory, Guid id)
     {
         InitializeComponent();
         SystemFeatures.Initialize(this);
@@ -24,6 +27,7 @@ internal sealed partial class TransactionsForm : Form
         company.AccountUpdated += OnCompanyAccountUpdated;
         company.AccountRemoved += OnCompanyAccountRemoved;
         _company = company;
+        _factory = factory;
         _account = company.Accounts[id];
         postedColumn.ValueType = typeof(DateTime);
         accountColumn.ValueMember = nameof(IAccountView.Id);
@@ -135,7 +139,7 @@ internal sealed partial class TransactionsForm : Form
             return;
         }
 
-        using TransactionForm form = new TransactionForm(_company)
+        using TransactionForm form = new TransactionForm(_company, _factory)
         {
             ShowApplyButton = false
         };

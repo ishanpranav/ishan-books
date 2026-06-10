@@ -4,18 +4,23 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
+using System.Media;
 using System.Windows.Forms;
 using Liber.Forms.Accounts;
+using Liber.Forms.AccountViews;
+using Liber.Forms.Components;
 using Liber.Forms.Properties;
-using System.ComponentModel;
+using Liber.MathEngine.Expressions;
 
 namespace Liber.Forms.Transactions;
 
 internal sealed partial class TransactionForm : Form
 {
     private readonly Company _company;
+    private readonly FormFactory _factory;
 
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     public bool ShowApplyButton
@@ -32,7 +37,7 @@ internal sealed partial class TransactionForm : Form
 
     public Transaction? Value { get; private set; }
 
-    public TransactionForm(Company company)
+    public TransactionForm(Company company, FormFactory factory)
     {
         InitializeComponent();
         SystemFeatures.Initialize(this);
@@ -41,14 +46,15 @@ internal sealed partial class TransactionForm : Form
         company.AccountUpdated += OnCompanyAccountUpdated;
         company.AccountRemoved += OnCompanyAccountRemoved;
         _company = company;
+        _factory = factory;
         DialogResult = DialogResult.Cancel;
         accountColumn.ValueMember = nameof(IAccountView.Id);
         accountColumn.DisplayMember = nameof(IAccountView.DisplayName);
         numberNumericUpDown.Maximum = decimal.MaxValue;
         nameComboBox.DataSource = company.GetNames();
-        debitColumn.ValueType = typeof(decimal);
+        debitColumn.ValueType = typeof(IExpression);
         debitColumn.DefaultCellStyle.Format = DecimalExtensions.Format;
-        creditColumn.ValueType = typeof(decimal);
+        creditColumn.ValueType = typeof(IExpression);
         creditColumn.DefaultCellStyle.Format = DecimalExtensions.Format;
         _dataGridView.AlternatingRowsDefaultCellStyle.BackColor = company.Color;
         _dataGridView.AlternatingRowsDefaultCellStyle.ForeColor = company.Color.GetForeColor();
@@ -67,6 +73,7 @@ internal sealed partial class TransactionForm : Form
             }
         }
 
+        accountColumn.Items.Add(NewAccountView.Value);
         _dataGridView.AutoResizeColumns();
         CreateNew();
     }
@@ -89,28 +96,82 @@ internal sealed partial class TransactionForm : Form
 
         foreach (Line line in transaction.OrderedLines)
         {
-            _dataGridView.Rows.Add(line.AccountId, line.Debit, line.Credit, line.Description ?? string.Empty);
+            _dataGridView.Rows.Add(
+                line.AccountId,
+                new DecimalExpression(line.Debit),
+                new DecimalExpression(line.Credit),
+                line.Description ?? string.Empty);
         }
 
         _dataGridView.AutoResizeColumns();
     }
 
-    private static decimal ToDecimal(object cellValue)
+    private static bool TryEvaluateExpression(DataGridViewRow row, int columnIndex, out decimal value)
     {
+        object? cellValue = row.Cells[columnIndex].Value;
+
         if (cellValue == null || cellValue is DBNull)
         {
-            return 0m;
+            value = 0;
+
+            return true;
         }
 
-        return (decimal)cellValue;
+        try
+        {
+            value = ((IExpression)cellValue).Evaluate();
+
+            return true;
+        }
+        catch (DivideByZeroException divideByZeroException)
+        {
+            row.ErrorText = divideByZeroException.Message;
+            value = 0;
+
+            return false;
+        }
+    }
+
+    private bool TryGetBalance(DataGridViewRow row, out decimal result)
+    {
+        if (!TryEvaluateExpression(row, debitColumn.Index, out decimal debit) ||
+            !TryEvaluateExpression(row, creditColumn.Index, out decimal credit))
+        {
+            result = 0;
+
+            return false;
+        }
+
+        result = debit - credit;
+
+        return true;
+    }
+
+    private void SetBalance(DataGridViewRow row, decimal value)
+    {
+        if (value >= 0)
+        {
+            row.Cells[debitColumn.Index].Value = new DecimalExpression(value);
+            row.Cells[creditColumn.Index].Value = null;
+        }
+        else
+        {
+            row.Cells[debitColumn.Index].Value = null;
+            row.Cells[creditColumn.Index].Value = new DecimalExpression(-value);
+        }
     }
 
     [MemberNotNullWhen(true, nameof(Value))]
     private bool Save()
     {
+        bool restoreNextTransactionNumber = false;
+        decimal transactionNumber = _company.NextTransactionNumber;
+
         if (Value != null)
         {
             _company.RemoveTransaction(Value);
+
+            restoreNextTransactionNumber = true;
         }
 
         Transaction transaction = new Transaction()
@@ -131,21 +192,23 @@ internal sealed partial class TransactionForm : Form
                 continue;
             }
 
-            if (row.Cells[accountColumn.Index].Value == null)
+            if (row.Cells[accountColumn.Index].Value is not Guid accountId ||
+                accountId == Guid.Empty)
             {
                 row.ErrorText = Resources.InvalidAccountError;
 
                 return false;
             }
 
-            Guid accountId = (Guid)row.Cells[accountColumn.Index].Value!;
-            decimal debit = ToDecimal(row.Cells[debitColumn.Index].Value!);
-            decimal credit = ToDecimal(row.Cells[creditColumn.Index].Value!);
+            if (!TryGetBalance(row, out decimal balance))
+            {
+                return false;
+            }
 
             transaction.Lines.Add(new Line()
             {
                 AccountId = accountId,
-                Balance = debit - credit,
+                Balance = balance,
                 Description = (string?)row.Cells[descriptionColumn.Index].Value
             });
         }
@@ -158,14 +221,26 @@ internal sealed partial class TransactionForm : Form
         }
 
         _company.AddTransaction(transaction);
+
+        if (restoreNextTransactionNumber)
+        {
+            _company.NextTransactionNumber = transactionNumber;
+        }
+
+        Settings.Default.LastPosted = postedDateTimePicker.Value;
+
+        Settings.Default.Save();
         InitializeTransaction(transaction);
+        SystemSounds.Asterisk.Play();
 
         return true;
     }
 
     private void Clear()
     {
-        postedDateTimePicker.Value = DateTime.Today;
+        DateTime lastPosted = Settings.Default.LastPosted;
+
+        postedDateTimePicker.Value = lastPosted == default ? DateTime.Today : lastPosted;
         nameComboBox.Text = string.Empty;
         nameComboBox.SelectedItem = null;
 
@@ -311,6 +386,82 @@ internal sealed partial class TransactionForm : Form
     private void OnPrintToolStripButtonClick(object sender, EventArgs e)
     {
         // TODO: Print transaction
+    }
+
+    private void OnDataGridViewCellEndEdit(object sender, DataGridViewCellEventArgs e)
+    {
+        if (e.ColumnIndex == -1 || e.RowIndex == -1)
+        {
+            return;
+        }
+
+        AccountCellEndEdit(e.ColumnIndex, e.RowIndex);
+        ExpressionCellEndEdit(e.ColumnIndex, e.RowIndex);
+    }
+
+    private void AccountCellEndEdit(int columnIndex, int rowIndex)
+    {
+        if (_dataGridView[columnIndex, rowIndex].Value is not Guid accountId ||
+            accountId != Guid.Empty)
+        {
+            return;
+        }
+
+        NewAccountForm form = new NewAccountForm(_company);
+
+        if (form.ShowDialog() == DialogResult.OK)
+        {
+            _dataGridView[columnIndex, rowIndex].Value = form.Id;
+        }
+    }
+
+    private void ExpressionCellEndEdit(int columnIndex, int rowIndex)
+    {
+        DataGridViewColumn column = _dataGridView.Columns[columnIndex];
+
+        if (column.ValueType != typeof(IExpression) ||
+            _dataGridView[columnIndex, rowIndex].Value is not IExpression expression)
+        {
+            return;
+        }
+
+        decimal value;
+
+        try
+        {
+            value = expression.Evaluate();
+
+            _dataGridView[columnIndex, rowIndex].Value = new DecimalExpression(value);
+        }
+        catch (DivideByZeroException)
+        {
+            return;
+        }
+
+        if ((column != debitColumn && column != creditColumn) ||
+            !TryGetBalance(_dataGridView.Rows[rowIndex], out decimal balance))
+        {
+            return;
+        }
+
+        SetBalance(_dataGridView.Rows[rowIndex], balance);
+    }
+
+    private void OnDataGridViewDefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
+    {
+        decimal remainder = 0;
+
+        foreach (DataGridViewRow row in _dataGridView.Rows)
+        {
+            if (row.IsNewRow || row.ErrorText != string.Empty || !TryGetBalance(row, out decimal balance))
+            {
+                continue;
+            }
+
+            remainder -= balance;
+        }
+
+        SetBalance(e.Row, remainder);
     }
 
     protected override void Dispose(bool disposing)

@@ -12,6 +12,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Liber.Forms.Accounts;
+using Liber.Forms.AccountViews;
 using Liber.Forms.Companies;
 using Liber.Forms.Lines;
 using Liber.Forms.Properties;
@@ -803,7 +804,7 @@ internal sealed partial class MainForm : Form
 
     private void OnTransactionToolStripMenuItemClick(object sender, EventArgs e)
     {
-        _factory.AutoRegister(() => new TransactionForm(_company));
+        _factory.AutoRegister(() => new TransactionForm(_company, _factory));
     }
 
     private void OnTransactionsToolStripMenuItemClick(object sender, EventArgs e)
@@ -822,7 +823,7 @@ internal sealed partial class MainForm : Form
             return;
         }
 
-        TransactionsForm transactionsForm = new TransactionsForm(_company, id);
+        TransactionsForm transactionsForm = new TransactionsForm(_company, _factory, id);
 
         _factory.Register(id, transactionsForm);
     }

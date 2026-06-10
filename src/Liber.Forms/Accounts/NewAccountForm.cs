@@ -4,11 +4,14 @@
 
 using System;
 using System.Drawing;
+using Liber.Forms.AccountViews;
 
 namespace Liber.Forms.Accounts;
 
 internal sealed class NewAccountForm : AccountForm
 {
+    public Guid Id { get; private set; }
+
     public NewAccountForm(Company company) : base(company)
     {
         numberNumericUpDown.Value = company.NextAccountNumber;
@@ -40,6 +43,7 @@ internal sealed class NewAccountForm : AccountForm
         Account account = new Account();
 
         ApplyChanges(account);
-        Company.AddAccount(account, parentComboBox.SelectedItem);
+
+        Id = Company.AddAccount(account, parentComboBox.SelectedItem);
     }
 }
