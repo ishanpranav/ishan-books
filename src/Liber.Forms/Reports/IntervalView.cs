@@ -5,7 +5,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 using Liber.Forms.Accounts;
 
@@ -13,8 +12,8 @@ namespace Liber.Forms.Reports;
 
 public abstract class IntervalView : IStandardValuesProvider
 {
-    private DateTime _started = new DateTime(DateTime.Today.Year, month: 1, day: 1);
-    private DateTime _posted = DateTime.Today;
+    private DateTime _started;
+    private DateTime _posted;
 
     [Browsable(false)]
     public string Name { get; set; }
@@ -94,9 +93,22 @@ public abstract class IntervalView : IStandardValuesProvider
     {
         Name = name;
         Company = company;
-        Accounts = new AccountsView(company);
+        Accounts = new AccountsView(Company);
+        Title = FormattedStrings.GetTitle(Name, Company.Type);
+        Started = Company.Started;
+        Posted = Company.Posted;
+        company.NameChanged += OnCompanyChanged;
+        company.TypeChanged += OnCompanyChanged;
+        company.ReportingChanged += (sender, e) =>
+        {
+            Started = Company.Started;
+            Posted = Company.Posted;
+        };
+    }
 
-        Refresh();
+    private void OnCompanyChanged(object? sender, EventArgs e)
+    {
+        Title = FormattedStrings.GetTitle(Name, Company.Type);
     }
 
     public TypeConverter.StandardValuesCollection GetStandardValues()
@@ -105,11 +117,5 @@ public abstract class IntervalView : IStandardValuesProvider
             .GetStringsBySuffix(Name));
 
         return new TypeConverter.StandardValuesCollection(results);
-    }
-
-    [MemberNotNull(nameof(Title))]
-    public void Refresh()
-    {
-        Title = FormattedStrings.GetTitle(Name, Company.Type);
     }
 }

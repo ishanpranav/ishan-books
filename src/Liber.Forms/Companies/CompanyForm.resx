@@ -190,7 +190,7 @@
     <value>Reverts the changes.</value>
   </data>
   <data name="cancelButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>343, 365</value>
+    <value>343, 389</value>
   </data>
   <data name="cancelButton.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -223,7 +223,7 @@
     <value>Accepts the changes to the company.</value>
   </data>
   <data name="acceptButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>267, 365</value>
+    <value>267, 389</value>
   </data>
   <data name="acceptButton.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -580,8 +580,41 @@
   <data name="groupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="ytdRadioButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="ytdRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="ytdRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 46</value>
+  </data>
+  <data name="ytdRadioButton.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="ytdRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 19</value>
+  </data>
+  <data name="ytdRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="ytdRadioButton.Text" xml:space="preserve">
+    <value>Fiscal year to date</value>
+  </data>
+  <data name="&gt;&gt;ytdRadioButton.Name" xml:space="preserve">
+    <value>ytdRadioButton</value>
+  </data>
+  <data name="&gt;&gt;ytdRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ytdRadioButton.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;ytdRadioButton.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="customStartedDatePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>166, 68</value>
+    <value>166, 93</value>
   </data>
   <data name="customStartedDatePicker.ShowHelp" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -602,10 +635,10 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;customStartedDatePicker.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="customPostedDatePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>283, 68</value>
+    <value>283, 93</value>
   </data>
   <data name="customPostedDatePicker.ShowHelp" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -626,13 +659,13 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;customPostedDatePicker.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="customRadioButton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="customRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 71</value>
+    <value>7, 96</value>
   </data>
   <data name="customRadioButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 19</value>
@@ -653,13 +686,13 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;customRadioButton.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="lastRadioButton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="lastRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 46</value>
+    <value>7, 71</value>
   </data>
   <data name="lastRadioButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>101, 19</value>
@@ -680,13 +713,13 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;lastRadioButton.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="currentRadioButton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="currentRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 21</value>
+    <value>7, 21</value>
   </data>
   <data name="currentRadioButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 19</value>
@@ -707,7 +740,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;currentRadioButton.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 259</value>
@@ -722,7 +755,7 @@
     <value>False</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>400, 101</value>
+    <value>400, 125</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -869,7 +902,7 @@
     <value>7, 15</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>424, 398</value>
+    <value>424, 422</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>313, 163</value>

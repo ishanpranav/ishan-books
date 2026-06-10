@@ -6,6 +6,7 @@ namespace Liber;
 
 public enum ReportingPeriod
 {
+    FiscalYearToDate,
     FiscalYear,
     PreviousFiscalYear,
     Custom

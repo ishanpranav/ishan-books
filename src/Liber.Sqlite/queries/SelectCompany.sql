@@ -9,6 +9,11 @@ SELECT
     "Type",
     "Color",
     "EquityAccount",
-    "OtherEquityAccount"
+    "OtherEquityAccount",
+    "FiscalYearStarted",
+    "FiscalYearPosted",
+    "ReportingPeriod",
+    "CustomStarted",
+    "CustomPosted"
 FROM "main"."Company"
 LIMIT 1;

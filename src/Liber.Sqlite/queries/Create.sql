@@ -18,8 +18,13 @@ CREATE TABLE "Company" (
     "NextTransactionNumber" INTEGER NOT NULL,
     "Type"                  INTEGER NOT NULL,
     "Color"                 INTEGER,
-    "EquityAccount"         TEXT,
-    "OtherEquityAccount"    TEXT,
+    "EquityAccount"         TEXT NOT NULL,
+    "OtherEquityAccount"    TEXT NOT NULL,
+    "FiscalYearStarted"     TEXT NOT NULL,
+    "FiscalYearPosted"      TEXT NOT NULL,
+    "ReportingPeriod"       INTEGER NOT NULL,
+    "CustomStarted"         TEXT,
+    "CustomPosted"          TEXT,
     PRIMARY KEY("Id" AUTOINCREMENT)
 );
 
@@ -35,7 +40,7 @@ CREATE TABLE "Account" (
 	"Color"	        INTEGER,
 	"TaxType"	    TEXT,
     "Inactive"      INTEGER NOT NULL DEFAULT 0,
-    "CashFlow"    INTEGER NOT NULL DEFAULT 0,
+    "CashFlow"      INTEGER NOT NULL DEFAULT 0,
 	PRIMARY KEY("Id"),
     FOREIGN KEY("ParentId") REFERENCES "Account"("Id")
 );
@@ -66,7 +71,12 @@ INSERT INTO "main"."Company" (
     "Type",
     "Color",
     "EquityAccount",
-    "OtherEquityAccount"
+    "OtherEquityAccount",
+    "FiscalYearStarted",
+    "FiscalYearPosted",
+    "ReportingPeriod",
+    "CustomStarted",
+    "CustomPosted"
 ) VALUES (
     @name,
     @nextAccountNumber,
@@ -74,5 +84,10 @@ INSERT INTO "main"."Company" (
     @type,
     @color,
     @equityAccount,
-    @otherEquityAccount
+    @otherEquityAccount,
+    @fiscalYearStarted,
+    @fiscalYearPosted,
+    @reportingPeriod,
+    @customStarted,
+    @customPosted
 );

@@ -82,8 +82,6 @@ internal sealed class GdiReportView : IReportView
         document.Print();
     }
 
-    public void RefreshReport() { }
-
     public void Navigate(CoreWebView2 coreWebView2)
     {
         coreWebView2.Navigate(s_path);

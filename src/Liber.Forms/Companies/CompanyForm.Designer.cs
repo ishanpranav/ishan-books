@@ -45,6 +45,7 @@ partial class CompanyForm
         label4 = new System.Windows.Forms.Label();
         label6 = new System.Windows.Forms.Label();
         groupBox1 = new System.Windows.Forms.GroupBox();
+        ytdRadioButton = new System.Windows.Forms.RadioButton();
         customStartedDatePicker = new System.Windows.Forms.DateTimePicker();
         customPostedDatePicker = new System.Windows.Forms.DateTimePicker();
         customRadioButton = new System.Windows.Forms.RadioButton();
@@ -167,6 +168,7 @@ partial class CompanyForm
         // groupBox1
         // 
         resources.ApplyResources(groupBox1, "groupBox1");
+        groupBox1.Controls.Add(ytdRadioButton);
         groupBox1.Controls.Add(customStartedDatePicker);
         groupBox1.Controls.Add(customPostedDatePicker);
         groupBox1.Controls.Add(customRadioButton);
@@ -176,12 +178,21 @@ partial class CompanyForm
         _helpProvider.SetShowHelp(groupBox1, (bool)resources.GetObject("groupBox1.ShowHelp"));
         groupBox1.TabStop = false;
         // 
+        // ytdRadioButton
+        // 
+        resources.ApplyResources(ytdRadioButton, "ytdRadioButton");
+        ytdRadioButton.Name = "ytdRadioButton";
+        _helpProvider.SetShowHelp(ytdRadioButton, (bool)resources.GetObject("ytdRadioButton.ShowHelp"));
+        ytdRadioButton.TabStop = true;
+        ytdRadioButton.UseVisualStyleBackColor = true;
+        // 
         // customStartedDatePicker
         // 
         customStartedDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
         resources.ApplyResources(customStartedDatePicker, "customStartedDatePicker");
         customStartedDatePicker.Name = "customStartedDatePicker";
         _helpProvider.SetShowHelp(customStartedDatePicker, (bool)resources.GetObject("customStartedDatePicker.ShowHelp"));
+        customStartedDatePicker.ValueChanged += OnCustomStartedDatePickerValueChanged;
         // 
         // customPostedDatePicker
         // 
@@ -228,6 +239,7 @@ partial class CompanyForm
         fiscalYearStartedDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
         fiscalYearStartedDatePicker.Name = "fiscalYearStartedDatePicker";
         _helpProvider.SetShowHelp(fiscalYearStartedDatePicker, (bool)resources.GetObject("fiscalYearStartedDatePicker.ShowHelp"));
+        fiscalYearStartedDatePicker.ValueChanged += OnFiscalYearStartedDatePickerValueChanged;
         // 
         // fiscalYearPostedDatePicker
         // 
@@ -302,4 +314,5 @@ partial class CompanyForm
     private System.Windows.Forms.DateTimePicker fiscalYearStartedDatePicker;
     private System.Windows.Forms.DateTimePicker fiscalYearPostedDatePicker;
     private System.Windows.Forms.Label label7;
+    private System.Windows.Forms.RadioButton ytdRadioButton;
 }
