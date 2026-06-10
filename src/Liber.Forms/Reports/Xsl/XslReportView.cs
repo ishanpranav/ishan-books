@@ -75,11 +75,6 @@ internal sealed class XslReportView : IReportView
         _xhtml = XmlReportSerializer.Serialize(style, _report);
     }
 
-    public void RefreshReport()
-    {
-        _report.Refresh();
-    }
-
     public void Navigate(CoreWebView2 coreWebView2)
     {
         coreWebView2.NavigateToString(_xhtml);

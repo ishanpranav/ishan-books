@@ -60,6 +60,16 @@ public static class SqliteSerializer
         return value;
     }
 
+    private static object ValueOf(DateTime? value)
+    {
+        if (value == null)
+        {
+            return DBNull.Value;
+        }
+
+        return value.Value;
+    }
+
     public static async Task SerializeAsync(string path, Company value, IProgress progress)
     {
         await using SqliteConnection connection = SqliteUtilities.CreateConnection(path, value.Password);
@@ -77,6 +87,11 @@ public static class SqliteSerializer
             command.Parameters.AddWithValue("@color", ValueOf(value.Color));
             command.Parameters.AddWithValue("@equityAccount", value.EquityAccountId);
             command.Parameters.AddWithValue("@otherEquityAccount", value.OtherEquityAccountId);
+            command.Parameters.AddWithValue("@fiscalYearStarted", value.FiscalYearStarted);
+            command.Parameters.AddWithValue("@fiscalYearPosted", value.FiscalYearPosted);
+            command.Parameters.AddWithValue("@reportingPeriod", value.ReportingPeriod);
+            command.Parameters.AddWithValue("@customStarted", ValueOf(value.CustomStarted));
+            command.Parameters.AddWithValue("@customPosted", ValueOf(value.CustomPosted));
 
             await command.ExecuteNonQueryAsync();
         }
@@ -263,6 +278,11 @@ public static class SqliteSerializer
                     Color = await SqliteUtilities.GetColorAsync(reader, 4),
                     EquityAccountId = reader.GetGuid(5),
                     OtherEquityAccountId = reader.GetGuid(6),
+                    FiscalYearStarted = reader.GetDateTime(7),
+                    FiscalYearPosted = reader.GetDateTime(8),
+                    ReportingPeriod = await reader.GetFieldValueAsync<ReportingPeriod>(9),
+                    CustomPosted = await SqliteUtilities.GetDateTimeAsync(reader, 10),
+                    CustomStarted = await SqliteUtilities.GetDateTimeAsync(reader, 11),
                     Password = password
                 };
             }

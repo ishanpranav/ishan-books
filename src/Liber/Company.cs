@@ -22,6 +22,12 @@ public sealed class Company
     private readonly SortedSet<string> _names = new SortedSet<string>();
 
     private string? _name;
+    private CompanyType _type;
+    private DateTime _fiscalYearStarted = new DateTime(DateTime.Today.Year, month: 1, day: 1);
+    private DateTime _fiscalYearPosted = new DateTime(DateTime.Today.Year, month: 12, day: 31);
+    private ReportingPeriod _reportingPeriod;
+    private DateTime? _customStarted;
+    private DateTime? _customPosted;
 
     public IReadOnlyDictionary<Guid, Account> Accounts
     {
@@ -59,9 +65,12 @@ public sealed class Company
         }
         set
         {
-            _name = value;
+            if (_name != value)
+            {
+                _name = value;
 
-            NameChanged?.Invoke(sender: this, EventArgs.Empty);
+                NameChanged?.Invoke(sender: this, EventArgs.Empty);
+            }
         }
     }
 
@@ -74,15 +83,164 @@ public sealed class Company
         }
     }
 
-    public CompanyType Type { get; set; }
+    public CompanyType Type
+    {
+        get
+        {
+            return _type;
+        }
+        set
+        {
+            if (_type != value)
+            {
+                _type = value;
+
+                TypeChanged?.Invoke(sender: this, EventArgs.Empty);
+            }
+        }
+    }
+
     public Color Color { get; set; } = Color.FromArgb(red: 224, green: 220, blue: 228);
     public Guid EquityAccountId { get; set; }
     public Guid OtherEquityAccountId { get; set; }
-    public DateTime FiscalYearStarted { get; set; } = new DateTime(DateTime.Today.Year, month: 1, day: 1);
-    public DateTime FiscalYearPosted { get; set; } = new DateTime(DateTime.Today.Year, month: 12, day: 31);
-    public ReportingPeriod ReportingPeriod { get; set; }
-    public DateTime? CustomStarted { get; set; }
-    public DateTime? CustomPosted { get; set; }
+
+    public DateTime FiscalYearStarted
+    {
+        get
+        {
+            return _fiscalYearStarted;
+        }
+        set
+        {
+            value = new DateTime(DateTime.Today.Year, value.Month, value.Day);
+
+            if (_fiscalYearStarted != value)
+            {
+                _fiscalYearStarted = value;
+
+                ReportingChanged?.Invoke(sender: this, EventArgs.Empty);
+            }
+        }
+    }
+
+    public DateTime FiscalYearPosted
+    {
+        get
+        {
+            return _fiscalYearPosted;
+        }
+        set
+        {
+            value = new DateTime(DateTime.Today.Year, value.Month, value.Day);
+
+            if (_fiscalYearPosted != value)
+            {
+                _fiscalYearPosted = value;
+
+                ReportingChanged?.Invoke(sender: this, EventArgs.Empty);
+            }
+        }
+    }
+
+    public ReportingPeriod ReportingPeriod
+    {
+        get
+        {
+            return _reportingPeriod;
+        }
+        set
+        {
+            if (_reportingPeriod != value)
+            {
+                _reportingPeriod = value;
+
+                ReportingChanged?.Invoke(sender: this, EventArgs.Empty);
+            }
+        }
+    }
+
+    public DateTime? CustomStarted
+    {
+        get
+        {
+            return _customStarted;
+        }
+        set
+        {
+            if (_customStarted != value)
+            {
+                _customStarted = value;
+
+                ReportingChanged?.Invoke(sender: this, EventArgs.Empty);
+            }
+        }
+    }
+
+    public DateTime? CustomPosted
+    {
+        get
+        {
+            return _customPosted;
+        }
+        set
+        {
+            if (_customPosted != value)
+            {
+                _customPosted = value;
+
+                ReportingChanged?.Invoke(sender: this, EventArgs.Empty);
+            }
+        }
+    }
+
+    [JsonIgnore]
+    public DateTime Started
+    {
+        get
+        {
+            if (ReportingPeriod == ReportingPeriod.Custom && CustomStarted != null)
+            {
+                return CustomStarted.Value;
+            }
+
+            DateTime current = new DateTime(DateTime.Today.Year, FiscalYearStarted.Month, FiscalYearStarted.Day);
+            DateTime result = current > DateTime.Today ? current.AddYears(-1) : current;
+
+            if (ReportingPeriod == ReportingPeriod.PreviousFiscalYear)
+            {
+                return result.AddYears(-1);
+            }
+
+            return result;
+        }
+    }
+
+    [JsonIgnore]
+    public DateTime Posted
+    {
+        get
+        {
+            if (ReportingPeriod == ReportingPeriod.Custom && CustomPosted != null)
+            {
+                return CustomPosted.Value;
+            }
+
+            if (ReportingPeriod == ReportingPeriod.FiscalYearToDate)
+            {
+                return DateTime.Today;
+            }
+
+            DateTime current = new DateTime(DateTime.Today.Year, FiscalYearPosted.Month, FiscalYearPosted.Day);
+            DateTime result = current < Started ? current.AddYears(1) : current;
+
+            if (ReportingPeriod == ReportingPeriod.PreviousFiscalYear)
+            {
+                return result.AddYears(-1);
+            }
+
+            return result;
+        }
+    }
 
     [JsonIgnore]
     public string? Password { get; set; }
@@ -100,6 +258,8 @@ public sealed class Company
     public event EventHandler<GuidEventArgs>? AccountUpdated;
     public event EventHandler<GuidEventArgs>? AccountRemoved;
     public event EventHandler? NameChanged;
+    public event EventHandler? TypeChanged;
+    public event EventHandler? ReportingChanged;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Company"/> class.
@@ -784,6 +944,11 @@ public sealed class Company
         other.OtherEquityAccountId = OtherEquityAccountId;
         other.Password = Password;
         other.Type = Type;
+        other.FiscalYearStarted = FiscalYearStarted;
+        other.FiscalYearPosted = FiscalYearPosted;
+        other.ReportingPeriod = ReportingPeriod;
+        other.CustomStarted = CustomStarted;
+        other.CustomPosted = CustomPosted;
 
         other._accounts.Clear();
         other._transactions.Clear();

@@ -2,6 +2,7 @@
 // Copyright (c) 2023-2026 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Data.Common;
 using System.Drawing;
 using System.Threading.Tasks;
@@ -44,5 +45,15 @@ internal static class SqliteUtilities
         }
 
         return Color.FromArgb(reader.GetInt32(ordinal));
+    }
+
+    public static async Task<DateTime?> GetDateTimeAsync(SqliteDataReader reader, int ordinal)
+    {
+        if (await reader.IsDBNullAsync(ordinal))
+        {
+            return null;
+        }
+
+        return reader.GetDateTime(ordinal);
     }
 }

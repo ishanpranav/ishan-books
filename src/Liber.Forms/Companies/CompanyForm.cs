@@ -40,6 +40,7 @@ internal abstract partial class CompanyForm : Form
         fiscalYearStartedDatePicker.Value = company.FiscalYearStarted;
         fiscalYearPostedDatePicker.Value = company.FiscalYearPosted;
         currentRadioButton.Checked = company.ReportingPeriod == ReportingPeriod.FiscalYear;
+        ytdRadioButton.Checked = company.ReportingPeriod == ReportingPeriod.FiscalYearToDate;
         lastRadioButton.Checked = company.ReportingPeriod == ReportingPeriod.PreviousFiscalYear;
         customRadioButton.Checked = company.ReportingPeriod == ReportingPeriod.Custom;
         customStartedDatePicker.Value = company.CustomStarted ?? company.FiscalYearStarted;
@@ -51,10 +52,26 @@ internal abstract partial class CompanyForm : Form
         e.Value = ((CompanyType)e.ListItem!).Humanize();
     }
 
+    private void OnFiscalYearStartedDatePickerValueChanged(object sender, EventArgs e)
+    {
+        if (fiscalYearStartedDatePicker.Value != Company.FiscalYearStarted)
+        {
+            fiscalYearPostedDatePicker.Value = fiscalYearStartedDatePicker.Value.AddYears(1).AddDays(-1);
+        }
+    }
+
     private void OnCustomRadioButtonCheckedChanged(object sender, EventArgs e)
     {
         customStartedDatePicker.Enabled = customRadioButton.Checked;
         customPostedDatePicker.Enabled = customRadioButton.Checked;
+    }
+
+    private void OnCustomStartedDatePickerValueChanged(object sender, EventArgs e)
+    {
+        if (customStartedDatePicker.Value != (Company.CustomStarted ?? Company.FiscalYearStarted))
+        {
+            customPostedDatePicker.Value = customStartedDatePicker.Value.AddYears(1).AddDays(-1);
+        }
     }
 
     private void OnAcceptButtonClick(object sender, EventArgs e)
@@ -68,9 +85,16 @@ internal abstract partial class CompanyForm : Form
         Company.FiscalYearStarted = fiscalYearStartedDatePicker.Value;
         Company.FiscalYearPosted = fiscalYearPostedDatePicker.Value;
 
+        DateTime? customStarted = null;
+        DateTime? customPosted = null;
+
         if (currentRadioButton.Checked)
         {
             Company.ReportingPeriod = ReportingPeriod.FiscalYear;
+        }
+        else if (ytdRadioButton.Checked)
+        {
+            Company.ReportingPeriod = ReportingPeriod.FiscalYearToDate;
         }
         else if (lastRadioButton.Checked)
         {
@@ -79,10 +103,12 @@ internal abstract partial class CompanyForm : Form
         else
         {
             Company.ReportingPeriod = ReportingPeriod.Custom;
-            Company.CustomStarted = customStartedDatePicker.Value;
-            Company.CustomPosted = customPostedDatePicker.Value;
+            customStarted = customStartedDatePicker.Value;
+            customPosted = customPostedDatePicker.Value;
         }
 
+        Company.CustomStarted = customStarted;
+        Company.CustomPosted = customPosted;
         DialogResult = DialogResult.OK;
 
         Close();

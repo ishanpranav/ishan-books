@@ -14,6 +14,5 @@ internal interface IReportView
     int SortOrder { get; }
 
     void InitializeReport();
-    void RefreshReport();
     void Navigate(CoreWebView2 coreWebView2);
 }

@@ -527,11 +527,6 @@ internal sealed partial class MainForm : Form
             _recentPathManager.Add(path);
 
             _path = canSave ? path : null;
-
-            foreach (IReportView view in _engine!.Views.Values)
-            {
-                view.RefreshReport();
-            }
         });
     }
 
