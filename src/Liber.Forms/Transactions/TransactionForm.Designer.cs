@@ -32,6 +32,10 @@
             applyButton = new System.Windows.Forms.Button();
             acceptButton = new System.Windows.Forms.Button();
             _dataGridView = new System.Windows.Forms.DataGridViewEx();
+            accountColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            debitColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            creditColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            descriptionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             previousButton = new System.Windows.Forms.Button();
             nextButton = new System.Windows.Forms.Button();
             label3 = new System.Windows.Forms.Label();
@@ -39,10 +43,6 @@
             nameComboBox = new System.Windows.Forms.ComboBox();
             memoTextBox = new System.Windows.Forms.TextBox();
             _helpProvider = new System.Windows.Forms.HelpProvider();
-            accountColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            debitColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            creditColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            descriptionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)numberNumericUpDown).BeginInit();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)_dataGridView).BeginInit();
@@ -162,6 +162,29 @@
             _dataGridView.Name = "_dataGridView";
             _dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             _helpProvider.SetShowHelp(_dataGridView, (bool)resources.GetObject("_dataGridView.ShowHelp"));
+            _dataGridView.CellEndEdit += OnDataGridViewCellEndEdit;
+            _dataGridView.DefaultValuesNeeded += OnDataGridViewDefaultValuesNeeded;
+            // 
+            // accountColumn
+            // 
+            resources.ApplyResources(accountColumn, "accountColumn");
+            accountColumn.Name = "accountColumn";
+            accountColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // debitColumn
+            // 
+            resources.ApplyResources(debitColumn, "debitColumn");
+            debitColumn.Name = "debitColumn";
+            // 
+            // creditColumn
+            // 
+            resources.ApplyResources(creditColumn, "creditColumn");
+            creditColumn.Name = "creditColumn";
+            // 
+            // descriptionColumn
+            // 
+            resources.ApplyResources(descriptionColumn, "descriptionColumn");
+            descriptionColumn.Name = "descriptionColumn";
             // 
             // previousButton
             // 
@@ -206,30 +229,9 @@
             memoTextBox.Name = "memoTextBox";
             _helpProvider.SetShowHelp(memoTextBox, (bool)resources.GetObject("memoTextBox.ShowHelp"));
             // 
-            // accountColumn
-            // 
-            resources.ApplyResources(accountColumn, "accountColumn");
-            accountColumn.Name = "accountColumn";
-            accountColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // debitColumn
-            // 
-            resources.ApplyResources(debitColumn, "debitColumn");
-            debitColumn.Name = "debitColumn";
-            // 
-            // creditColumn
-            // 
-            resources.ApplyResources(creditColumn, "creditColumn");
-            creditColumn.Name = "creditColumn";
-            // 
-            // descriptionColumn
-            // 
-            resources.ApplyResources(descriptionColumn, "descriptionColumn");
-            descriptionColumn.Name = "descriptionColumn";
-            // 
             // TransactionForm
             // 
-            AcceptButton = acceptButton;
+            AcceptButton = applyButton;
             resources.ApplyResources(this, "$this");
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             Controls.Add(memoTextBox);

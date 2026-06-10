@@ -19,18 +19,6 @@ namespace Liber.Forms.Reports.Xsl;
 [XmlRoot("report")]
 public class XslReport : IntervalView, IXmlSerializable
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="XslReport"/> class.
-    /// </summary>
-    public XslReport() : base(string.Empty, new Company()) { }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="XslReport"/> class with the specified title and company.
-    /// </summary>
-    /// <param name="name">The name of the report.</param>
-    /// <param name="company">The <see cref="Company"/> associated with the report.</param>
-    public XslReport(string name, Company company) : base(name, company) { }
-
     [Browsable(false)]
     public string GenericTitle
     {
@@ -53,6 +41,18 @@ public class XslReport : IntervalView, IXmlSerializable
     [LocalizedDescription(nameof(Multiple))]
     [LocalizedDisplayName(nameof(Multiple))]
     public decimal Multiple { get; set; } = 0.01m;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="XslReport"/> class.
+    /// </summary>
+    public XslReport() : base(string.Empty, new Company()) { }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="XslReport"/> class with the specified title and company.
+    /// </summary>
+    /// <param name="name">The name of the report.</param>
+    /// <param name="company">The <see cref="Company"/> associated with the report.</param>
+    public XslReport(string name, Company company) : base(name, company) { }
 
     /// <summary>
     /// Formats a date value as a long date string.

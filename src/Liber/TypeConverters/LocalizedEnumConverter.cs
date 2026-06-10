@@ -22,7 +22,7 @@ public class LocalizedEnumConverter<TEnum> : EnumConverter where TEnum : struct,
     /// <inheritdoc/>
     public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
     {
-        return sourceType == typeof(string);
+        return sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
     }
 
     /// <inheritdoc/>
@@ -30,7 +30,7 @@ public class LocalizedEnumConverter<TEnum> : EnumConverter where TEnum : struct,
     {
         if (value is not string text)
         {
-            return Activator.CreateInstance<TEnum>();
+            return base.ConvertFrom(context, culture, value);
         }
 
         TEnum? result = text.DehumanizeTo<TEnum>(OnNoMatch.ReturnsNull);
@@ -51,7 +51,7 @@ public class LocalizedEnumConverter<TEnum> : EnumConverter where TEnum : struct,
     /// <inheritdoc/>
     public override bool CanConvertTo(ITypeDescriptorContext? context, [NotNullWhen(true)] Type? destinationType)
     {
-        return destinationType == typeof(string);
+        return destinationType == typeof(string) || base.CanConvertTo(context, destinationType);
     }
 
     /// <inheritdoc/>
@@ -59,7 +59,7 @@ public class LocalizedEnumConverter<TEnum> : EnumConverter where TEnum : struct,
     {
         if (value is not TEnum enumValue)
         {
-            return null;
+            return base.ConvertTo(context, culture, value, destinationType);
         }
 
         return enumValue.Humanize();

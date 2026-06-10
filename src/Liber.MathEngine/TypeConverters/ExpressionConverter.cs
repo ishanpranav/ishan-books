@@ -1,36 +1,46 @@
-﻿// RegexConverter.cs
+﻿// ExpressionConverter.cs
 // Copyright (c) 2023-2026 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
 using System.Globalization;
-using System.Text.RegularExpressions;
-using Liber;
+using Liber.MathEngine;
+using Liber.MathEngine.Exceptions;
 
 namespace System.ComponentModel;
 
-public class RegexConverter : TypeConverter
+public class ExpressionConverter : TypeConverter
 {
-    /// <inheritdoc/>
     public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
     {
         return sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
     }
 
-    /// <inheritdoc/>
     public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)
     {
-        if (value is not string pattern)
+        if (value is not string text)
         {
             return base.ConvertFrom(context, culture, value);
         }
 
+        if (culture == null)
+        {
+            culture = CultureInfo.CurrentCulture;
+        }
+
+        Tokenizer tokenizer = new Tokenizer(text, culture);
+        Parser parser = new Parser(tokenizer, culture);
+
         try
         {
-            return new Regex(pattern);
+            return parser.Parse();
         }
-        catch (ArgumentException)
+        catch (MathEngineException)
         {
-            return Filters.Any();
+            return 0m;
+        }
+        catch (DivideByZeroException)
+        {
+            return 0m;
         }
     }
 }

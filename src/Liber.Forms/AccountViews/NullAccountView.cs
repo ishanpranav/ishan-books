@@ -3,9 +3,8 @@
 // Licensed under the MIT License.
 
 using System;
-using Liber.Forms.Properties;
 
-namespace Liber.Forms.Accounts;
+namespace Liber.Forms.AccountViews;
 
 internal sealed class NullAccountView : IAccountView
 {
@@ -20,8 +19,6 @@ internal sealed class NullAccountView : IAccountView
             return s_instance;
         }
     }
-
-    private NullAccountView() { }
 
     public Guid Id
     {
@@ -38,6 +35,8 @@ internal sealed class NullAccountView : IAccountView
             return string.Empty;
         }
     }
+
+    private NullAccountView() { }
 
     public bool Equals(Guid other)
     {

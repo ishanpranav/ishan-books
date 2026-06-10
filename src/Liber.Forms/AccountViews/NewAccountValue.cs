@@ -1,40 +1,31 @@
-﻿// EditableAccountView.cs
+﻿// NewAccountView.cs
 // Copyright (c) 2023-2026 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
 using System;
-using System.ComponentModel;
-using System.Drawing.Design;
 using Liber.Forms.Properties;
 
-namespace Liber.Forms.Accounts;
+namespace Liber.Forms.AccountViews;
 
-[Editor(typeof(AccountEditor), typeof(UITypeEditor))]
-public class EditableAccountView : IAccountView
+internal sealed class NewAccountView : IAccountView
 {
-    public EditableAccountView(Company company)
-    {
-        Company = company;
-    }
+    private static NewAccountView? s_instance;
 
-    public EditableAccountView(Company company, Guid id) : this(company)
-    {
-        Id = id;
-    }
-
-    public Company Company { get; }
-    public Guid Id { get; }
-
-    public Account? Value
+    public static NewAccountView Value
     {
         get
         {
-            if (Id == Guid.Empty)
-            {
-                return null;
-            }
+            s_instance ??= new NewAccountView();
 
-            return Company.Accounts[Id];
+            return s_instance;
+        }
+    }
+
+    public Guid Id
+    {
+        get
+        {
+            return Guid.Empty;
         }
     }
 
@@ -42,14 +33,11 @@ public class EditableAccountView : IAccountView
     {
         get
         {
-            if (Value == null)
-            {
-                return Resources.NoAccount;
-            }
-
-            return Value.Name;
+            return Resources.NewAccount;
         }
     }
+
+    private NewAccountView() { }
 
     public bool Equals(Guid other)
     {

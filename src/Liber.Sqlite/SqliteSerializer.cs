@@ -255,9 +255,10 @@ public static class SqliteSerializer
             {
                 await reader.ReadAsync();
 
-                return new Company(accounts, transactions.Values, reader.GetDecimal(1), reader.GetDecimal(2))
+                return new Company(accounts, transactions.Values, reader.GetDecimal(1))
                 {
                     Name = await SqliteUtilities.GetStringAsync(reader, 0),
+                    NextTransactionNumber = reader.GetDecimal(2),
                     Type = await reader.GetFieldValueAsync<CompanyType>(3),
                     Color = await SqliteUtilities.GetColorAsync(reader, 4),
                     EquityAccountId = reader.GetGuid(5),

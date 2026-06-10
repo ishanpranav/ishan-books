@@ -73,22 +73,32 @@ internal sealed partial class AccountsForm : Form
     {
         Guid key = typeof(TransactionForm).GUID;
 
-        if (_factory.TryKill(key) || _company.Accounts[id].Placeholder)
+        if (_factory.TryKill(key))
         {
             return;
         }
 
-        TransactionForm form = new TransactionForm(_company);
+        if (id != Guid.Empty && _company.Accounts[id].Placeholder)
+        {
+            id = Guid.Empty;
+        }
+
+        TransactionForm form = new TransactionForm(_company, _factory);
+        DateTime lastPosted = Settings.Default.LastPosted;
         Transaction transaction = new Transaction()
         {
-            Posted = DateTime.Today,
+            Posted = lastPosted == default ? DateTime.Today : lastPosted,
             Number = _company.NextTransactionNumber
         };
 
-        transaction.Lines.Add(new Line()
+        if (id != Guid.Empty)
         {
-            AccountId = id
-        });
+            transaction.Lines.Add(new Line()
+            {
+                AccountId = id
+            });
+        }
+
         form.InitializeTransaction(transaction);
         _factory.Register(key, form);
     }
@@ -100,7 +110,7 @@ internal sealed partial class AccountsForm : Form
             return;
         }
 
-        TransactionsForm form = new TransactionsForm(_company, id);
+        TransactionsForm form = new TransactionsForm(_company, _factory, id);
 
         _factory.Register(id, form);
     }
@@ -111,7 +121,7 @@ internal sealed partial class AccountsForm : Form
 
         decimal balance;
         DateTime posted = DateTime.Today;
-        DateTime started = new DateTime(posted.Year, 1, 1);
+        DateTime started = new DateTime(posted.Year, month: 1, day: 1);
 
         if (value == _company.Accounts[_company.EquityAccountId])
         {
@@ -240,6 +250,10 @@ internal sealed partial class AccountsForm : Form
         if (_listView.TryGetSelection(out Guid id))
         {
             InitializeTransaction(id);
+        }
+        else
+        {
+            InitializeTransaction(Guid.Empty);
         }
     }
 

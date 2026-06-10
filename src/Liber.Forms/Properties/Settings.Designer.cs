@@ -117,5 +117,16 @@ namespace Liber.Forms.Properties {
                 this["LastAccountGroup"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.DateTime LastPosted {
+            get {
+                return ((global::System.DateTime)(this["LastPosted"]));
+            }
+            set {
+                this["LastPosted"] = value;
+            }
+        }
     }
 }

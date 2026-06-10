@@ -4,7 +4,7 @@
 
 using System;
 
-namespace Liber.Forms.Accounts;
+namespace Liber.Forms.AccountViews;
 
 internal interface IAccountView : IEquatable<Guid>
 {

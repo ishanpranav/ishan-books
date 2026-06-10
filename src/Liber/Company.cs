@@ -49,7 +49,7 @@ public sealed class Company
     }
 
     public decimal NextAccountNumber { get; private set; } = 1;
-    public decimal NextTransactionNumber { get; private set; } = 1;
+    public decimal NextTransactionNumber { get; set; } = 1;
 
     public string? Name
     {
@@ -117,18 +117,15 @@ public sealed class Company
     /// <param name="accounts">The account dictionary.</param>
     /// <param name="transactions">The transaction collection.</param>
     /// <param name="nextAccountNumber">The next account number to be assigned.</param>
-    /// <param name="nextTransactionNumber">The next journal entry number to be assigned.</param>
     [JsonConstructor]
     public Company(
         IReadOnlyDictionary<Guid, Account> accounts,
         IReadOnlyCollection<Transaction> transactions,
-        decimal nextAccountNumber,
-        decimal nextTransactionNumber)
+        decimal nextAccountNumber)
     {
         _accounts = new Dictionary<Guid, Account>(accounts);
         _transactions = new SortedSet<Transaction>(transactions);
         NextAccountNumber = nextAccountNumber;
-        NextTransactionNumber = nextTransactionNumber;
 
         foreach (KeyValuePair<Guid, Account> account in accounts)
         {
@@ -321,9 +318,11 @@ public sealed class Company
             return Resources.TransferMemo;
         }
 
-        if (value.Lines
+        List<Line> bankLines = value.Lines
             .Where(x => _accounts[x.AccountId].Type == AccountType.Bank)
-            .All(x => x.Balance > 0))
+            .ToList();
+
+        if (bankLines.Count > 0 && bankLines.TrueForAll(x => x.Balance > 0))
         {
             return Resources.DepositMemo;
         }

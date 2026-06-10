@@ -6,7 +6,7 @@ using System;
 
 namespace Liber.MathEngine.Expressions;
 
-internal class DecimalExpression : IExpression
+public class DecimalExpression : IExpression
 {
     public decimal Value { get; }
 
