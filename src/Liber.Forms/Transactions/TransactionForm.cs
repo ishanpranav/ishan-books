@@ -14,6 +14,8 @@ using Liber.Forms.AccountViews;
 using Liber.Forms.Components;
 using Liber.Forms.Properties;
 using Liber.MathEngine.Expressions;
+using MS.WindowsAPICodePack.Internal;
+using SQLitePCL;
 
 namespace Liber.Forms.Transactions;
 
@@ -128,6 +130,23 @@ internal sealed partial class TransactionForm : Form
 
             return false;
         }
+    }
+
+    private decimal GetRemainder()
+    {
+        decimal result = 0;
+
+        foreach (DataGridViewRow row in _dataGridView.Rows)
+        {
+            if (row.IsNewRow || row.ErrorText != string.Empty || !TryGetBalance(row, out decimal balance))
+            {
+                continue;
+            }
+
+            result -= balance;
+        }
+
+        return result;
     }
 
     private bool TryGetBalance(DataGridViewRow row, out decimal result)
@@ -397,6 +416,11 @@ internal sealed partial class TransactionForm : Form
         ExpressionCellEndEdit(e.ColumnIndex, e.RowIndex);
     }
 
+    private void OnDataGridViewDefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
+    {
+        SetBalance(e.Row, GetRemainder());
+    }
+
     private void AccountCellEndEdit(int columnIndex, int rowIndex)
     {
         if (_dataGridView[columnIndex, rowIndex].Value is not Guid accountId ||
@@ -436,30 +460,36 @@ internal sealed partial class TransactionForm : Form
             return;
         }
 
-        if ((column != debitColumn && column != creditColumn) ||
-            !TryGetBalance(_dataGridView.Rows[rowIndex], out decimal balance))
+        if (column != debitColumn && column != creditColumn)
         {
             return;
         }
 
-        SetBalance(_dataGridView.Rows[rowIndex], balance);
-    }
+        DataGridViewRow row = _dataGridView.Rows[rowIndex];
 
-    private void OnDataGridViewDefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
-    {
-        decimal remainder = 0;
-
-        foreach (DataGridViewRow row in _dataGridView.Rows)
+        if (!TryEvaluateExpression(row, debitColumn.Index, out decimal debit) ||
+            !TryEvaluateExpression(row, creditColumn.Index, out decimal credit))
         {
-            if (row.IsNewRow || row.ErrorText != string.Empty || !TryGetBalance(row, out decimal balance))
-            {
-                continue;
-            }
-
-            remainder -= balance;
+            return;
         }
 
-        SetBalance(e.Row, remainder);
+        decimal remainder = GetRemainder() + debit - credit;
+
+        if (debit == remainder && credit != 0)
+        {
+            SetBalance(row, -credit);
+
+            return;
+        }
+
+        if (-credit == remainder && debit != 0)
+        {
+            SetBalance(row, debit);
+
+            return;
+        }
+
+        SetBalance(_dataGridView.Rows[rowIndex], debit - credit);
     }
 
     protected override void Dispose(bool disposing)
