@@ -75,12 +75,14 @@ public sealed class Company
     }
 
     public CompanyType Type { get; set; }
-
     public Color Color { get; set; } = Color.FromArgb(red: 224, green: 220, blue: 228);
-
     public Guid EquityAccountId { get; set; }
-
     public Guid OtherEquityAccountId { get; set; }
+    public DateTime FiscalYearStarted { get; set; } = new DateTime(DateTime.Today.Year, month: 1, day: 1);
+    public DateTime FiscalYearPosted { get; set; } = new DateTime(DateTime.Today.Year, month: 12, day: 31);
+    public ReportingPeriod ReportingPeriod { get; set; }
+    public DateTime? CustomStarted { get; set; }
+    public DateTime? CustomPosted { get; set; }
 
     [JsonIgnore]
     public string? Password { get; set; }

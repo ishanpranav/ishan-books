@@ -183,7 +183,7 @@
     <value>True</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>176, 34</value>
+    <value>180, 34</value>
   </data>
   <data name="label2.ShowHelp" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -213,7 +213,7 @@
     <value>Specifies the transaction number, adjusting journal entry number, or check number.</value>
   </data>
   <data name="numberNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>236, 31</value>
+    <value>237, 31</value>
   </data>
   <data name="numberNumericUpDown.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>

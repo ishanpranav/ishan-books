@@ -5,6 +5,7 @@
 using System.Globalization;
 using Liber.MathEngine;
 using Liber.MathEngine.Exceptions;
+using Liber.MathEngine.Expressions;
 
 namespace System.ComponentModel;
 
@@ -36,11 +37,11 @@ public class ExpressionConverter : TypeConverter
         }
         catch (MathEngineException)
         {
-            return 0m;
+            return new DecimalExpression(0);
         }
         catch (DivideByZeroException)
         {
-            return 0m;
+            return new DecimalExpression(0);
         }
     }
 }

@@ -269,7 +269,16 @@ public class HtmlReport : IntervalView
     {
         if (color == Company.Color)
         {
-            ulong hash = Djb2(name, offset: 0, name.Length) >> 16;
+            int offset = 0;
+            int length = name.Length;
+
+            while (offset < length && !char.IsLetter(name[offset]))
+            {
+                offset++;
+                length--;
+            }
+
+            ulong hash = Djb2(name, offset, length) >> 16;
             bool tint = (hash & 0x1) == 0;
 
             hash >>= 1;

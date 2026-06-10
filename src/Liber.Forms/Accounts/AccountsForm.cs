@@ -83,7 +83,7 @@ internal sealed partial class AccountsForm : Form
             id = Guid.Empty;
         }
 
-        TransactionForm form = new TransactionForm(_company, _factory);
+        TransactionForm form = new TransactionForm(_company);
         DateTime lastPosted = Settings.Default.LastPosted;
         Transaction transaction = new Transaction()
         {
@@ -110,7 +110,7 @@ internal sealed partial class AccountsForm : Form
             return;
         }
 
-        TransactionsForm form = new TransactionsForm(_company, _factory, id);
+        TransactionsForm form = new TransactionsForm(_company, id);
 
         _factory.Register(id, form);
     }

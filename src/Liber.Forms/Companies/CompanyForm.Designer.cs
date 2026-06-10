@@ -38,14 +38,24 @@ partial class CompanyForm
         label3 = new System.Windows.Forms.Label();
         _colorButton = new System.Windows.Forms.ColorButton();
         label2 = new System.Windows.Forms.Label();
-        equityAccountComboBox = new Accounts.AccountComboBox();
+        equityAccountComboBox = new Liber.Forms.Accounts.AccountComboBox();
         label5 = new System.Windows.Forms.Label();
-        otherEquityAccountComboBox = new Accounts.AccountComboBox();
+        otherEquityAccountComboBox = new Liber.Forms.Accounts.AccountComboBox();
         closingAccountsGroupBox = new System.Windows.Forms.GroupBox();
         label4 = new System.Windows.Forms.Label();
         label6 = new System.Windows.Forms.Label();
+        groupBox1 = new System.Windows.Forms.GroupBox();
+        customStartedDatePicker = new System.Windows.Forms.DateTimePicker();
+        customPostedDatePicker = new System.Windows.Forms.DateTimePicker();
+        customRadioButton = new System.Windows.Forms.RadioButton();
+        lastRadioButton = new System.Windows.Forms.RadioButton();
+        currentRadioButton = new System.Windows.Forms.RadioButton();
         typeComboBox = new System.Windows.Forms.ComboBox();
+        fiscalYearStartedDatePicker = new System.Windows.Forms.DateTimePicker();
+        fiscalYearPostedDatePicker = new System.Windows.Forms.DateTimePicker();
+        label7 = new System.Windows.Forms.Label();
         closingAccountsGroupBox.SuspendLayout();
+        groupBox1.SuspendLayout();
         SuspendLayout();
         // 
         // label1
@@ -154,13 +164,83 @@ partial class CompanyForm
         label6.Name = "label6";
         _helpProvider.SetShowHelp(label6, (bool)resources.GetObject("label6.ShowHelp"));
         // 
+        // groupBox1
+        // 
+        resources.ApplyResources(groupBox1, "groupBox1");
+        groupBox1.Controls.Add(customStartedDatePicker);
+        groupBox1.Controls.Add(customPostedDatePicker);
+        groupBox1.Controls.Add(customRadioButton);
+        groupBox1.Controls.Add(lastRadioButton);
+        groupBox1.Controls.Add(currentRadioButton);
+        groupBox1.Name = "groupBox1";
+        _helpProvider.SetShowHelp(groupBox1, (bool)resources.GetObject("groupBox1.ShowHelp"));
+        groupBox1.TabStop = false;
+        // 
+        // customStartedDatePicker
+        // 
+        customStartedDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+        resources.ApplyResources(customStartedDatePicker, "customStartedDatePicker");
+        customStartedDatePicker.Name = "customStartedDatePicker";
+        _helpProvider.SetShowHelp(customStartedDatePicker, (bool)resources.GetObject("customStartedDatePicker.ShowHelp"));
+        // 
+        // customPostedDatePicker
+        // 
+        customPostedDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+        resources.ApplyResources(customPostedDatePicker, "customPostedDatePicker");
+        customPostedDatePicker.Name = "customPostedDatePicker";
+        _helpProvider.SetShowHelp(customPostedDatePicker, (bool)resources.GetObject("customPostedDatePicker.ShowHelp"));
+        // 
+        // customRadioButton
+        // 
+        resources.ApplyResources(customRadioButton, "customRadioButton");
+        customRadioButton.Name = "customRadioButton";
+        customRadioButton.TabStop = true;
+        customRadioButton.UseVisualStyleBackColor = true;
+        customRadioButton.CheckedChanged += OnCustomRadioButtonCheckedChanged;
+        // 
+        // lastRadioButton
+        // 
+        resources.ApplyResources(lastRadioButton, "lastRadioButton");
+        lastRadioButton.Name = "lastRadioButton";
+        lastRadioButton.TabStop = true;
+        lastRadioButton.UseVisualStyleBackColor = true;
+        // 
+        // currentRadioButton
+        // 
+        resources.ApplyResources(currentRadioButton, "currentRadioButton");
+        currentRadioButton.Name = "currentRadioButton";
+        currentRadioButton.TabStop = true;
+        currentRadioButton.UseVisualStyleBackColor = true;
+        // 
         // typeComboBox
         // 
         resources.ApplyResources(typeComboBox, "typeComboBox");
         typeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
         typeComboBox.FormattingEnabled = true;
+        _helpProvider.SetHelpKeyword(typeComboBox, resources.GetString("typeComboBox.HelpKeyword"));
         typeComboBox.Name = "typeComboBox";
+        _helpProvider.SetShowHelp(typeComboBox, (bool)resources.GetObject("typeComboBox.ShowHelp"));
         typeComboBox.Format += OnTypeComboBoxFormat;
+        // 
+        // fiscalYearStartedDatePicker
+        // 
+        resources.ApplyResources(fiscalYearStartedDatePicker, "fiscalYearStartedDatePicker");
+        fiscalYearStartedDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+        fiscalYearStartedDatePicker.Name = "fiscalYearStartedDatePicker";
+        _helpProvider.SetShowHelp(fiscalYearStartedDatePicker, (bool)resources.GetObject("fiscalYearStartedDatePicker.ShowHelp"));
+        // 
+        // fiscalYearPostedDatePicker
+        // 
+        resources.ApplyResources(fiscalYearPostedDatePicker, "fiscalYearPostedDatePicker");
+        fiscalYearPostedDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+        fiscalYearPostedDatePicker.Name = "fiscalYearPostedDatePicker";
+        _helpProvider.SetShowHelp(fiscalYearPostedDatePicker, (bool)resources.GetObject("fiscalYearPostedDatePicker.ShowHelp"));
+        // 
+        // label7
+        // 
+        resources.ApplyResources(label7, "label7");
+        label7.Name = "label7";
+        _helpProvider.SetShowHelp(label7, (bool)resources.GetObject("label7.ShowHelp"));
         // 
         // CompanyForm
         // 
@@ -168,6 +248,10 @@ partial class CompanyForm
         resources.ApplyResources(this, "$this");
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         CancelButton = cancelButton;
+        Controls.Add(label7);
+        Controls.Add(fiscalYearStartedDatePicker);
+        Controls.Add(fiscalYearPostedDatePicker);
+        Controls.Add(groupBox1);
         Controls.Add(label6);
         Controls.Add(typeComboBox);
         Controls.Add(closingAccountsGroupBox);
@@ -185,6 +269,8 @@ partial class CompanyForm
         ShowIcon = false;
         closingAccountsGroupBox.ResumeLayout(false);
         closingAccountsGroupBox.PerformLayout();
+        groupBox1.ResumeLayout(false);
+        groupBox1.PerformLayout();
         ResumeLayout(false);
         PerformLayout();
     }
@@ -207,4 +293,13 @@ partial class CompanyForm
     private System.Windows.Forms.ComboBox typeComboBox;
     private System.Windows.Forms.Label label6;
     private System.Windows.Forms.Button cancelButton;
+    protected System.Windows.Forms.GroupBox groupBox1;
+    private System.Windows.Forms.RadioButton customRadioButton;
+    private System.Windows.Forms.RadioButton lastRadioButton;
+    private System.Windows.Forms.RadioButton currentRadioButton;
+    private System.Windows.Forms.DateTimePicker customPostedDatePicker;
+    private System.Windows.Forms.DateTimePicker customStartedDatePicker;
+    private System.Windows.Forms.DateTimePicker fiscalYearStartedDatePicker;
+    private System.Windows.Forms.DateTimePicker fiscalYearPostedDatePicker;
+    private System.Windows.Forms.Label label7;
 }
