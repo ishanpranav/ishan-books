@@ -804,7 +804,7 @@ internal sealed partial class MainForm : Form
 
     private void OnTransactionToolStripMenuItemClick(object sender, EventArgs e)
     {
-        _factory.AutoRegister(() => new TransactionForm(_company, _factory));
+        _factory.AutoRegister(() => new TransactionForm(_company));
     }
 
     private void OnTransactionsToolStripMenuItemClick(object sender, EventArgs e)
@@ -823,7 +823,7 @@ internal sealed partial class MainForm : Form
             return;
         }
 
-        TransactionsForm transactionsForm = new TransactionsForm(_company, _factory, id);
+        TransactionsForm transactionsForm = new TransactionsForm(_company, id);
 
         _factory.Register(id, transactionsForm);
     }

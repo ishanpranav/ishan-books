@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!--
-    Microsoft ResX Schema 
+    Microsoft ResX Schema
 
     Version 2.0
 
@@ -18,7 +18,7 @@
     <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
     <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
     <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
-    <data name="Color1" type="System.Drawing.Color, System.Drawing"">Blue</data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
     <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
         <value>[base64 mime encoded serialized .NET Framework object]</value>
     </data>
@@ -48,7 +48,7 @@
     value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-    
+
     mimetype: application/x-microsoft.net.object.soap.base64
     value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
@@ -118,8 +118,14 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="acceptButton.HelpString" xml:space="preserve">
-    <value>Acepta los cambios en la empresa.</value>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 15</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>&amp;Nombre</value>
+  </data>
+  <data name="nameTextBox.HelpString" xml:space="preserve">
+    <value>Especifica el nombre de la empresa. Para una empresa individual, este es el nombre del proprietario.</value>
   </data>
   <data name="cancelButton.HelpString" xml:space="preserve">
     <value>Deshacer los cambios.</value>
@@ -127,55 +133,57 @@
   <data name="cancelButton.Text" xml:space="preserve">
     <value>&amp;Cancelar</value>
   </data>
-  <data name="closingAccountsGroupBox.Text" xml:space="preserve">
-    <value>Cuentas de cierre</value>
-  </data>
-  <data name="equityAccountComboBox.HelpString" xml:space="preserve">
-    <value>Especifica la cuenta de patrimonio utilizada para contener los ingresos y gastos acumulados de la empresa. Esta cuenta puede llamarse Utilidades Retenidas (si es positiva) o Déficit Acumulado (si es negativa), Patrimonio del Propietario en una empresa individual, o Patrimonio de los Socios en una sociedad.</value>
-  </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 20</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>&amp;Nombre</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>&amp;Color</value>
-  </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 20</value>
-  </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>Contraseña</value>
-  </data>
-  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>288, 20</value>
-  </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value>Utilidades retenidas (o déficit acumulado)</value>
-  </data>
-  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>258, 20</value>
-  </data>
-  <data name="label5.Text" xml:space="preserve">
-    <value>Acumulado de otros resultados integrales (o pérdidas)</value>
-  </data>
-  <data name="label6.Text" xml:space="preserve">
-    <value>&amp;Tipo</value>
-  </data>
-  <data name="nameTextBox.HelpString" xml:space="preserve">
-    <value>Especifica el nombre de la empresa. Para una empresa individual, este es el nombre del proprietario.</value>
-  </data>
-  <data name="otherEquityAccountComboBox.HelpString" xml:space="preserve">
-    <value>Especifica la cuenta de patrimonio utilizada para contener las ganancias y pérdidas no realizadas acumuladas de la empresa. Esta cuenta puede llamarse Acumulado de Otros Ingresos Integrales (si es positiva) o Acumulado de Otros Resultados Integrales (si es negativa).</value>
+  <data name="acceptButton.HelpString" xml:space="preserve">
+    <value>Acepta los cambios en la empresa.</value>
   </data>
   <data name="passwordTextBox.HelpString" xml:space="preserve">
     <value>Especifica la contraseña utilizada para encriptar el archivo de la empresa.</value>
+  </data>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 15</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Contraseña</value>
   </data>
   <data name="_colorButton.HelpString" xml:space="preserve">
     <value>Especifica el color predeterminado para las cuentas nuevas.</value>
   </data>
   <data name="_colorButton.Text" xml:space="preserve">
     <value>Escoger</value>
+  </data>
+  <data name="equityAccountComboBox.HelpString" xml:space="preserve">
+    <value>Especifica la cuenta de patrimonio utilizada para contener los ingresos y gastos acumulados de la empresa. Esta cuenta puede llamarse Utilidades Retenidas (si es positiva) o Déficit Acumulado (si es negativa), Patrimonio del Propietario en una empresa individual, o Patrimonio de los Socios en una sociedad.</value>
+  </data>
+  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>292, 15</value>
+  </data>
+  <data name="label5.Text" xml:space="preserve">
+    <value>Acumulado de otros resultados integrales (o pérdidas)</value>
+  </data>
+  <data name="otherEquityAccountComboBox.HelpString" xml:space="preserve">
+    <value>Especifica la cuenta de patrimonio utilizada para contener las ganancias y pérdidas no realizadas acumuladas de la empresa. Esta cuenta puede llamarse Acumulado de Otros Ingresos Integrales (si es positiva) o Acumulado de Otros Resultados Integrales (si es negativa).</value>
+  </data>
+  <data name="closingAccountsGroupBox.Text" xml:space="preserve">
+    <value>Cuentas de cierre</value>
+  </data>
+  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>227, 15</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Utilidades retenidas (o déficit acumulado)</value>
+  </data>
+  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>31, 15</value>
+  </data>
+  <data name="label6.Text" xml:space="preserve">
+    <value>&amp;Tipo</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="typeComboBox.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Inherit</value>
   </data>
 </root>

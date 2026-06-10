@@ -20,7 +20,6 @@ namespace Liber.Forms.Transactions;
 internal sealed partial class TransactionForm : Form
 {
     private readonly Company _company;
-    private readonly FormFactory _factory;
 
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     public bool ShowApplyButton
@@ -37,7 +36,7 @@ internal sealed partial class TransactionForm : Form
 
     public Transaction? Value { get; private set; }
 
-    public TransactionForm(Company company, FormFactory factory)
+    public TransactionForm(Company company)
     {
         InitializeComponent();
         SystemFeatures.Initialize(this);
@@ -46,7 +45,6 @@ internal sealed partial class TransactionForm : Form
         company.AccountUpdated += OnCompanyAccountUpdated;
         company.AccountRemoved += OnCompanyAccountRemoved;
         _company = company;
-        _factory = factory;
         DialogResult = DialogResult.Cancel;
         accountColumn.ValueMember = nameof(IAccountView.Id);
         accountColumn.DisplayMember = nameof(IAccountView.DisplayName);

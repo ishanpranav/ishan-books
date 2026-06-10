@@ -12,6 +12,10 @@ namespace Liber.Forms.Companies;
 
 internal abstract partial class CompanyForm : Form
 {
+    public Company Company { get; }
+
+    protected CompanyForm() : this(new Company()) { }
+
     protected CompanyForm(Company company)
     {
         InitializeComponent();
@@ -33,13 +37,24 @@ internal abstract partial class CompanyForm : Form
         equityAccountComboBox.SelectedItem = company.EquityAccountId;
         otherEquityAccountComboBox.SelectedItem = company.OtherEquityAccountId;
         passwordTextBox.Text = company.Password;
+        fiscalYearStartedDatePicker.Value = company.FiscalYearStarted;
+        fiscalYearPostedDatePicker.Value = company.FiscalYearPosted;
+        currentRadioButton.Checked = company.ReportingPeriod == ReportingPeriod.FiscalYear;
+        lastRadioButton.Checked = company.ReportingPeriod == ReportingPeriod.PreviousFiscalYear;
+        customRadioButton.Checked = company.ReportingPeriod == ReportingPeriod.Custom;
+        customStartedDatePicker.Value = company.CustomStarted ?? company.FiscalYearStarted;
+        customPostedDatePicker.Value = company.CustomPosted ?? company.FiscalYearPosted;
     }
-
-    public Company Company { get; }
 
     private void OnTypeComboBoxFormat(object sender, ListControlConvertEventArgs e)
     {
         e.Value = ((CompanyType)e.ListItem!).Humanize();
+    }
+
+    private void OnCustomRadioButtonCheckedChanged(object sender, EventArgs e)
+    {
+        customStartedDatePicker.Enabled = customRadioButton.Checked;
+        customPostedDatePicker.Enabled = customRadioButton.Checked;
     }
 
     private void OnAcceptButtonClick(object sender, EventArgs e)
@@ -50,6 +65,24 @@ internal abstract partial class CompanyForm : Form
         Company.EquityAccountId = equityAccountComboBox.SelectedItem;
         Company.OtherEquityAccountId = otherEquityAccountComboBox.SelectedItem;
         Company.Password = passwordTextBox.Text;
+        Company.FiscalYearStarted = fiscalYearStartedDatePicker.Value;
+        Company.FiscalYearPosted = fiscalYearPostedDatePicker.Value;
+
+        if (currentRadioButton.Checked)
+        {
+            Company.ReportingPeriod = ReportingPeriod.FiscalYear;
+        }
+        else if (lastRadioButton.Checked)
+        {
+            Company.ReportingPeriod = ReportingPeriod.PreviousFiscalYear;
+        }
+        else
+        {
+            Company.ReportingPeriod = ReportingPeriod.Custom;
+            Company.CustomStarted = customStartedDatePicker.Value;
+            Company.CustomPosted = customPostedDatePicker.Value;
+        }
+
         DialogResult = DialogResult.OK;
 
         Close();
