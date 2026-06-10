@@ -16,8 +16,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TransactionForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             postedDateTimePicker = new System.Windows.Forms.DateTimePicker();
             label1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
@@ -43,6 +43,8 @@
             nameComboBox = new System.Windows.Forms.ComboBox();
             memoTextBox = new System.Windows.Forms.TextBox();
             _helpProvider = new System.Windows.Forms.HelpProvider();
+            lastButton = new System.Windows.Forms.Button();
+            firstButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)numberNumericUpDown).BeginInit();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)_dataGridView).BeginInit();
@@ -143,26 +145,27 @@
             // _dataGridView
             // 
             _dataGridView.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Info;
-            _dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Info;
+            _dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             resources.ApplyResources(_dataGridView, "_dataGridView");
             _dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             _dataGridView.BackgroundColor = System.Drawing.Color.FromArgb(248, 249, 250);
             _dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             _dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { accountColumn, debitColumn, creditColumn, descriptionColumn });
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            _dataGridView.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            _dataGridView.DefaultCellStyle = dataGridViewCellStyle4;
             _dataGridView.MultiSelect = false;
             _dataGridView.Name = "_dataGridView";
             _dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             _helpProvider.SetShowHelp(_dataGridView, (bool)resources.GetObject("_dataGridView.ShowHelp"));
             _dataGridView.CellEndEdit += OnDataGridViewCellEndEdit;
+            _dataGridView.DataError += OnDataGridViewDataError;
             _dataGridView.DefaultValuesNeeded += OnDataGridViewDefaultValuesNeeded;
             // 
             // accountColumn
@@ -229,11 +232,29 @@
             memoTextBox.Name = "memoTextBox";
             _helpProvider.SetShowHelp(memoTextBox, (bool)resources.GetObject("memoTextBox.ShowHelp"));
             // 
+            // lastButton
+            // 
+            resources.ApplyResources(lastButton, "lastButton");
+            lastButton.Name = "lastButton";
+            _helpProvider.SetShowHelp(lastButton, (bool)resources.GetObject("lastButton.ShowHelp"));
+            lastButton.UseVisualStyleBackColor = true;
+            lastButton.Click += OnLastButtonClick;
+            // 
+            // firstButton
+            // 
+            resources.ApplyResources(firstButton, "firstButton");
+            firstButton.Name = "firstButton";
+            _helpProvider.SetShowHelp(firstButton, (bool)resources.GetObject("firstButton.ShowHelp"));
+            firstButton.UseVisualStyleBackColor = true;
+            firstButton.Click += OnFirstButtonClick;
+            // 
             // TransactionForm
             // 
             AcceptButton = applyButton;
             resources.ApplyResources(this, "$this");
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(lastButton);
+            Controls.Add(firstButton);
             Controls.Add(memoTextBox);
             Controls.Add(nameComboBox);
             Controls.Add(label4);
@@ -286,5 +307,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn debitColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn creditColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn descriptionColumn;
+        private System.Windows.Forms.Button lastButton;
+        private System.Windows.Forms.Button firstButton;
     }
 }
