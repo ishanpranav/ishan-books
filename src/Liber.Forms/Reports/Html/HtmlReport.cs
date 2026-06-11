@@ -579,7 +579,7 @@ public class HtmlReport : IntervalView
 
         decimal totalOperating = netIncome + totalWorkingCapital + totalNonCash - totalGainLoss;
 
-        Account otherEquityAccount = Company.Accounts[Company.OtherEquityAccountId];
+        Account otherEquityAccount = Company.GetAccount(Company.OtherEquityAccountId);
         (string Name, AccountType Type, CashFlow CashFlow, Color Color, BalanceInfo Balances)? otherEquityEntry = null;
 
         foreach ((string Name, AccountType Type, CashFlow CashFlow, Color Color, BalanceInfo Balances) entry in balances)

@@ -10,9 +10,6 @@ namespace Liber;
 [NewLine("\n")]
 public class GnuCashAccount
 {
-    [Ignore]
-    public Guid Id { get; set; }
-
     [Index(1)]
     [Name("Account Full Name", "Full Account Name")]
     [Optional]

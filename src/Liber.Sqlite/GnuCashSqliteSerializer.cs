@@ -77,7 +77,7 @@ public static class GnuCashSqliteSerializer
                 {
                     Guid id = reader.GetGuid(0);
                     Guid parentId = reader.GetGuid(1);
-                    Account account = new Account(parentId == emptyParentId ? Guid.Empty : parentId)
+                    Account account = new Account(id, parentId == emptyParentId ? Guid.Empty : parentId)
                     {
                         Number = reader.GetDecimal(2),
                         Name = reader.GetString(3),
@@ -138,7 +138,7 @@ public static class GnuCashSqliteSerializer
             }
         }
 
-        Company result = new Company(accounts, transactions.Values, nextAccountNumber: 1)
+        Company result = new Company(accounts, transactions.Values, nextAccountNumber: 1, nextTransactionNumber: 1)
         {
             Name = name,
             Type = type

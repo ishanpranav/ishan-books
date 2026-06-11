@@ -37,9 +37,9 @@ internal sealed partial class TransactionForm : Form
         InitializeComponent();
         SystemFeatures.Initialize(this);
 
-        accountColumn.DataSource = new AccountViewBindingList(company, x => !company.Accounts[x].ReadOnly);
-        accountColumn.ValueMember = nameof(IAccountView.Id);
-        accountColumn.DisplayMember = nameof(IAccountView.DisplayName);
+        accountColumn.DataSource = new AccountViewBindingList(company, x => !company.GetAccount(x).ReadOnly);
+        accountColumn.ValueMember = nameof(AccountView.Id);
+        accountColumn.DisplayMember = nameof(AccountView.DisplayName);
         _dataGridView.CompanyColor = company.Color;
         _dataGridView.DebitColumnIndex = debitColumn.Index;
         _dataGridView.CreditColumnIndex = creditColumn.Index;
@@ -95,19 +95,9 @@ internal sealed partial class TransactionForm : Form
     [MemberNotNullWhen(true, nameof(Value))]
     private bool Save()
     {
-        bool restoreNextTransactionNumber = false;
-        decimal transactionNumber = _company.NextTransactionNumber;
-
-        if (Value != null)
-        {
-            _company.RemoveTransaction(Value);
-
-            restoreNextTransactionNumber = true;
-        }
-
         Transaction transaction = new Transaction()
         {
-            Id = Guid.NewGuid(),
+            Id = Value?.Id ?? Guid.NewGuid(),
             Number = numberNumericUpDown.Value,
             Posted = postedDateTimePicker.Value,
             Name = nameComboBox.Text,
@@ -153,11 +143,6 @@ internal sealed partial class TransactionForm : Form
 
         _company.AddTransaction(transaction);
         SystemSounds.Asterisk.Play();
-
-        if (restoreNextTransactionNumber)
-        {
-            _company.NextTransactionNumber = transactionNumber;
-        }
 
         Settings.Default.LastPosted = postedDateTimePicker.Value;
 

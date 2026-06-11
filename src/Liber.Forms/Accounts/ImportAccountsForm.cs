@@ -36,8 +36,8 @@ internal sealed class ImportAccountsForm : ImportForm
 
         _context = new ImportContext(values)
         {
-            EquityAccount = company.Accounts[company.EquityAccountId],
-            OtherEquityAccount = company.Accounts[company.OtherEquityAccountId],
+            EquityAccount = company.GetAccount(company.EquityAccountId),
+            OtherEquityAccount = company.GetAccount(company.OtherEquityAccountId),
             Color = company.Color
         };
 
@@ -47,16 +47,16 @@ internal sealed class ImportAccountsForm : ImportForm
 
     private Guid GetParentId(Guid id, string value)
     {
-        foreach (KeyValuePair<Guid, Account> account in Company.Accounts)
+        foreach (Account account in Company.Accounts)
         {
-            if (account.Key == id)
+            if (account.Id == id)
             {
                 continue;
             }
 
-            if (account.Value.ToString() == value || account.Value.Name == value)
+            if (account.Name == value)
             {
-                return account.Key;
+                return account.Id;
             }
         }
 
@@ -69,19 +69,17 @@ internal sealed class ImportAccountsForm : ImportForm
 
         foreach (GnuCashAccount account in _accounts)
         {
-            Guid id = Company.AddAccount(account.Value, Guid.Empty);
+            Company.AddAccount(account.Value, Guid.Empty);
 
             if (_context.EquityAccount == account.Value)
             {
-                Company.EquityAccountId = id;
+                Company.EquityAccountId = account.Value.Id;
             }
 
             if (_context.OtherEquityAccount == account.Value)
             {
-                Company.OtherEquityAccountId = id;
+                Company.OtherEquityAccountId = account.Value.Id;
             }
-
-            account.Id = id;
         }
 
         foreach (GnuCashAccount account in _accounts)
@@ -93,14 +91,14 @@ internal sealed class ImportAccountsForm : ImportForm
                 continue;
             }
 
-            Guid parentId = GetParentId(account.Id, segments[segments.Length - 2]);
+            Guid parentId = GetParentId(account.Value.Id, segments[segments.Length - 2]);
 
             if (parentId == Guid.Empty)
             {
                 continue;
             }
 
-            Company.UpdateAccount(account.Id, parentId);
+            Company.UpdateAccount(account.Value.Id, parentId);
         }
 
         _factory.Register(typeof(AccountsForm).GUID, new AccountsForm(Company, _factory, _engine));

@@ -1,22 +1,22 @@
-﻿// AccountBindingList.cs
+﻿// AccountViewBindingList.cs
 // Copyright (c) 2023-2026 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using Liber.Forms.Accounts;
 
 namespace Liber.Forms.AccountViews;
 
-internal class AccountViewBindingList : BindingList<IAccountView>
+internal sealed class AccountViewBindingList : SortedBindingList<AccountView>
 {
     private readonly Company _company;
     private readonly Func<Guid, bool>? _validator;
 
     public AccountViewBindingList(Company company, Func<Guid, bool>? validator)
     {
-        Add(NullAccountView.Value);
+        _company = company;
+        _validator = validator;
 
         foreach (KeyValuePair<Guid, Account> account in company.OrderedAccounts)
         {
@@ -26,44 +26,46 @@ internal class AccountViewBindingList : BindingList<IAccountView>
         company.AccountAdded += OnCompanyAccountAdded;
         company.AccountUpdated += OnCompanyAccountUpdated;
         company.AccountRemoved += OnCompanyAccountRemoved;
-        _company = company;
-        _validator = validator;
+    }
+
+    public void AddNullAccount()
+    {
+        InsertSorted(NullAccountView.Default);
     }
 
     private void InitializeAccount(Guid id, Account value)
     {
         if (_validator == null || _validator(id))
         {
-            Add(new AccountView(id, value));
+            InsertSorted(new ReadOnlyAccountView(id, value));
         }
     }
 
     private void OnCompanyAccountAdded(object? sender, GuidEventArgs e)
     {
-        InitializeAccount(e.Id, _company.Accounts[e.Id]);
+        InitializeAccount(e.Id, _company.GetAccount(e.Id));
     }
 
     private void OnCompanyAccountRemoved(object? sender, GuidEventArgs e)
     {
-        int index = Find(e.Id);
+        int index = FindByKey(e.Id, v => v.Id);
 
         if (index != -1)
         {
-            RemoveAt(index);
+            RemoveSortedAt(index);
         }
     }
 
     private void OnCompanyAccountUpdated(object? sender, GuidEventArgs e)
     {
-        int index = Find(e.Id);
+        int index = FindByKey(e.Id, v => v.Id);
         bool validated = _validator == null || _validator(e.Id);
-
 
         if (index == -1)
         {
             if (validated)
             {
-                InitializeAccount(e.Id, _company.Accounts[e.Id]);
+                InitializeAccount(e.Id, _company.GetAccount(e.Id));
             }
 
             return;
@@ -71,22 +73,11 @@ internal class AccountViewBindingList : BindingList<IAccountView>
 
         if (!validated)
         {
-            RemoveAt(index);
+            RemoveSortedAt(index);
+
+            return;
         }
 
-        ResetItem(index);
-    }
-
-    private int Find(Guid id)
-    {
-        for (int i = 0; i < Count; i++)
-        {
-            if (this[i].Id == id)
-            {
-                return i;
-            }
-        }
-
-        return -1;
+        NotifyItemChanged(index);
     }
 }

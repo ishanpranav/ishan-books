@@ -102,7 +102,7 @@ public class Transaction :
         return lines.SingleOrDefault();
     }
 
-    int IComparable.CompareTo(object? obj)
+    public int CompareTo(object? obj)
     {
         if (obj == null)
         {

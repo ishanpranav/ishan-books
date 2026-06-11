@@ -27,7 +27,7 @@ public class GnuCashTransactionWriter : IWriter
         {
             foreach (Line line in transaction.Lines)
             {
-                Account account = company.Accounts[line.AccountId];
+                Account account = company.GetAccount(line.AccountId);
 
                 lines.Add(new GnuCashLine()
                 {

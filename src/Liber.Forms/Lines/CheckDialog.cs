@@ -25,7 +25,7 @@ internal sealed partial class CheckDialog : Form
             string key = line.AccountId.ToString();
             ListViewItem item = _listView.Items.Add(transaction.Name ?? string.Empty);
 
-            item.Group = _listView.Groups[key] ?? _listView.Groups.Add(key, value.Company.Accounts[line.AccountId].Name);
+            item.Group = _listView.Groups[key] ?? _listView.Groups.Add(key, value.Company.GetAccount(line.AccountId).Name);
             item.Tag = line;
 
             item.SubItems.Add(transaction.Posted.ToShortDateString()).Tag = transaction.Posted;

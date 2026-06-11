@@ -53,6 +53,11 @@ internal sealed partial class ReportsForm : Form
 
             item.ImageIndex = _imageList.Images.Count - 1;
             item.Tag = view.Value;
+
+            if (view.Value.Properties is IntervalView report)
+            {
+                report.Accounts = new AccountsView(report.Accounts.Company);
+            }
         }
     }
 

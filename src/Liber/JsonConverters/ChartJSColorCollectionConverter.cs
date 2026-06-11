@@ -22,7 +22,7 @@ public sealed class ChartJSColorCollectionConverter : JsonConverter<IEnumerable<
     /// <inheritdoc/>
     public override IEnumerable<Color> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        throw new InvalidOperationException();
+        throw new NotSupportedException();
     }
 
     /// <inheritdoc/>

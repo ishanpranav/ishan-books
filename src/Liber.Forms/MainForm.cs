@@ -118,7 +118,7 @@ internal sealed partial class MainForm : Form
 
         _favoriteReport.Accounts = new AccountsView(
             _company,
-            _company.Accounts.Values
+            _company.Accounts
                 .Where(x => _isFavoriteTemporary ? !x.Type.IsTemporary() : x.Type.IsTemporary())
                 .ToHashSet());
         _isFavoriteTemporary = !_isFavoriteTemporary;

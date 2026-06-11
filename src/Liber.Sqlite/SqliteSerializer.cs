@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.Common;
 using System.Drawing;
 using System.Threading.Tasks;
+using System.Transactions;
 using Microsoft.Data.Sqlite;
 using SQLitePCL;
 
@@ -96,26 +97,34 @@ public static class SqliteSerializer
             await command.ExecuteNonQueryAsync();
         }
 
-        await using (DbTransaction dbTransaction = await connection.BeginTransactionAsync())
+        await using (SqliteCommand command = connection.CreateCommand())
         {
-            foreach (KeyValuePair<Guid, Account> account in value.Accounts)
+            command.CommandText = Queries.DisableForeignKeys;
+
+            await command.ExecuteNonQueryAsync();
+        }
+
+        await using (SqliteTransaction dbTransaction = connection.BeginTransaction())
+        {
+            foreach (Account account in value.Accounts)
             {
                 await using (SqliteCommand command = connection.CreateCommand())
                 {
+                    command.Transaction = dbTransaction;
                     command.CommandText = Queries.InsertAccount;
 
-                    command.Parameters.AddWithValue("@id", account.Key);
-                    command.Parameters.AddWithValue("@parentId", ValueOf(account.Value.ParentId));
-                    command.Parameters.AddWithValue("@number", ValueOf(account.Value.Number));
-                    command.Parameters.AddWithValue("@name", account.Value.Name);
-                    command.Parameters.AddWithValue("@type", account.Value.Type);
-                    command.Parameters.AddWithValue("@placeholder", account.Value.Placeholder);
-                    command.Parameters.AddWithValue("@description", ValueOf(account.Value.Description));
-                    command.Parameters.AddWithValue("@memo", ValueOf(account.Value.Memo));
-                    command.Parameters.AddWithValue("@color", ValueOf(account.Value.Color));
-                    command.Parameters.AddWithValue("@taxType", account.Value.TaxType);
-                    command.Parameters.AddWithValue("@inactive", account.Value.Inactive);
-                    command.Parameters.AddWithValue("@cashFlow", account.Value.CashFlow);
+                    command.Parameters.AddWithValue("@id", account.Id);
+                    command.Parameters.AddWithValue("@parentId", ValueOf(account.ParentId));
+                    command.Parameters.AddWithValue("@number", ValueOf(account.Number));
+                    command.Parameters.AddWithValue("@name", account.Name);
+                    command.Parameters.AddWithValue("@type", account.Type);
+                    command.Parameters.AddWithValue("@placeholder", account.Placeholder);
+                    command.Parameters.AddWithValue("@description", ValueOf(account.Description));
+                    command.Parameters.AddWithValue("@memo", ValueOf(account.Memo));
+                    command.Parameters.AddWithValue("@color", ValueOf(account.Color));
+                    command.Parameters.AddWithValue("@taxType", account.TaxType);
+                    command.Parameters.AddWithValue("@inactive", account.Inactive);
+                    command.Parameters.AddWithValue("@cashFlow", account.CashFlow);
 
                     await command.ExecuteNonQueryAsync();
                 }
@@ -127,6 +136,7 @@ public static class SqliteSerializer
             {
                 await using (SqliteCommand command = connection.CreateCommand())
                 {
+                    command.Transaction = dbTransaction;
                     command.CommandText = Queries.InsertTransaction;
 
                     command.Parameters.AddWithValue("@id", transaction.Id);
@@ -142,6 +152,7 @@ public static class SqliteSerializer
                 {
                     await using (SqliteCommand command = connection.CreateCommand())
                     {
+                        command.Transaction = dbTransaction;
                         command.CommandText = Queries.InsertLine;
 
                         command.Parameters.AddWithValue("@accountId", line.AccountId);
@@ -157,6 +168,13 @@ public static class SqliteSerializer
             }
 
             await dbTransaction.CommitAsync();
+        }
+
+        await using (SqliteCommand command = connection.CreateCommand())
+        {
+            command.CommandText = Queries.EnableForeignKeys;
+
+            await command.ExecuteNonQueryAsync();
         }
     }
 
@@ -203,7 +221,9 @@ public static class SqliteSerializer
             {
                 while (await reader.ReadAsync())
                 {
-                    accounts.Add(reader.GetGuid(0), new Account(reader.GetGuid(1))
+                    Guid id = reader.GetGuid(0);
+
+                    accounts.Add(id, new Account(id, reader.GetGuid(1))
                     {
                         Number = reader.GetDecimal(2),
                         Name = reader.GetString(3),
@@ -270,10 +290,9 @@ public static class SqliteSerializer
             {
                 await reader.ReadAsync();
 
-                return new Company(accounts, transactions.Values, reader.GetDecimal(1))
+                return new Company(accounts, transactions.Values, reader.GetDecimal(1), reader.GetDecimal(2))
                 {
                     Name = await SqliteUtilities.GetStringAsync(reader, 0),
-                    NextTransactionNumber = reader.GetDecimal(2),
                     Type = await reader.GetFieldValueAsync<CompanyType>(3),
                     Color = await SqliteUtilities.GetColorAsync(reader, 4),
                     EquityAccountId = reader.GetGuid(5),

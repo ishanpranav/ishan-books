@@ -6,11 +6,11 @@ using System;
 
 namespace Liber.Forms.AccountViews;
 
-internal sealed class NullAccountView : IAccountView
+internal sealed class NullAccountView : AccountView
 {
     private static NullAccountView? s_instance;
 
-    public static NullAccountView Value
+    public static NullAccountView Default
     {
         get
         {
@@ -20,7 +20,7 @@ internal sealed class NullAccountView : IAccountView
         }
     }
 
-    public Guid Id
+    public override Guid Id
     {
         get
         {
@@ -28,7 +28,7 @@ internal sealed class NullAccountView : IAccountView
         }
     }
 
-    public string DisplayName
+    public override string DisplayName
     {
         get
         {
@@ -36,35 +36,13 @@ internal sealed class NullAccountView : IAccountView
         }
     }
 
+    public override Account? Value
+    {
+        get
+        {
+            return null;
+        }
+    }
+
     private NullAccountView() { }
-
-    public bool Equals(Guid other)
-    {
-        return Id.Equals(other);
-    }
-
-    public override bool Equals(object? obj)
-    {
-        if (obj == null)
-        {
-            return false;
-        }
-
-        if (this == obj)
-        {
-            return true;
-        }
-
-        return obj is Guid other && Equals(other);
-    }
-
-    public override int GetHashCode()
-    {
-        return Id.GetHashCode();
-    }
-
-    public override string ToString()
-    {
-        return DisplayName;
-    }
 }

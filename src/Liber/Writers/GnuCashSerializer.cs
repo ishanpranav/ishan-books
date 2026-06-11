@@ -70,7 +70,7 @@ public static class GnuCashSerializer
 
         while (current.ParentId != Guid.Empty)
         {
-            current = company.Accounts[current.ParentId];
+            current = company.GetAccount(current.ParentId);
 
             pathBuilder
                 .Insert(0, ':')

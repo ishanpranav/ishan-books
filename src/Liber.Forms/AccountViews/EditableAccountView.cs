@@ -11,12 +11,12 @@ using Liber.Forms.Properties;
 namespace Liber.Forms.AccountViews;
 
 [Editor(typeof(AccountEditor), typeof(UITypeEditor))]
-public class EditableAccountView : IAccountView
+public class EditableAccountView : AccountView
 {
     public Company Company { get; }
-    public Guid Id { get; }
+    public override Guid Id { get; }
 
-    public Account? Value
+    public override Account? Value
     {
         get
         {
@@ -25,11 +25,11 @@ public class EditableAccountView : IAccountView
                 return null;
             }
 
-            return Company.Accounts[Id];
+            return Company.GetAccount(Id);
         }
     }
 
-    public string DisplayName
+    public override string DisplayName
     {
         get
         {
@@ -50,35 +50,5 @@ public class EditableAccountView : IAccountView
     public EditableAccountView(Company company, Guid id) : this(company)
     {
         Id = id;
-    }
-
-    public bool Equals(Guid other)
-    {
-        return Id.Equals(other);
-    }
-
-    public override bool Equals(object? obj)
-    {
-        if (obj == null)
-        {
-            return false;
-        }
-
-        if (this == obj)
-        {
-            return true;
-        }
-
-        return obj is Guid other && Equals(other);
-    }
-
-    public override int GetHashCode()
-    {
-        return Id.GetHashCode();
-    }
-
-    public override string ToString()
-    {
-        return DisplayName;
     }
 }

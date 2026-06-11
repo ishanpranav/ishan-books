@@ -23,7 +23,7 @@ public class GnuCashAccountWriter : IWriter
         int i = 0;
         GnuCashAccount[] accounts = new GnuCashAccount[company.Accounts.Count];
 
-        foreach (Account account in company.Accounts.Values)
+        foreach (Account account in company.Accounts)
         {
             accounts[i] = new GnuCashAccount()
             {

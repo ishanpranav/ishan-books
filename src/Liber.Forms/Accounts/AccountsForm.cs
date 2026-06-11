@@ -81,7 +81,7 @@ internal sealed partial class AccountsForm : Form
             return;
         }
 
-        if (id != Guid.Empty && _company.Accounts[id].ReadOnly)
+        if (id != Guid.Empty && _company.GetAccount(id).ReadOnly)
         {
             id = Guid.Empty;
         }
@@ -108,7 +108,7 @@ internal sealed partial class AccountsForm : Form
 
     private void InitializeTransactions(Guid id)
     {
-        if (_factory.TryKill(id) || _company.Accounts[id].ReadOnly)
+        if (_factory.TryKill(id) || _company.GetAccount(id).ReadOnly)
         {
             return;
         }
@@ -166,7 +166,7 @@ internal sealed partial class AccountsForm : Form
 
     private void OnCompanyAccountAdded(object? sender, GuidEventArgs e)
     {
-        InitializeAccount(e.Id, _company.Accounts[e.Id]);
+        InitializeAccount(e.Id, _company.GetAccount(e.Id));
         _listView.AutoResizeColumns();
     }
 
@@ -175,7 +175,7 @@ internal sealed partial class AccountsForm : Form
         ListViewItem item = _items[e.Id];
 
         item.SubItems.Clear();
-        AddSubItems(item, _company.Accounts[e.Id]);
+        AddSubItems(item, _company.GetAccount(e.Id));
     }
 
     private void OnCompanyAccountRemoved(object? sender, GuidEventArgs e)
@@ -253,11 +253,7 @@ internal sealed partial class AccountsForm : Form
     private void OnListViewAfterLabelEdit(object sender, LabelEditEventArgs e)
     {
         Guid id = (Guid)_listView.Items[e.Item].Tag!;
-
-        if (!_company.Accounts.TryGetValue(id, out Account? value))
-        {
-            return;
-        }
+        Account value = _company.GetAccount(id);
 
         value.Name = e.Label!;
 
@@ -271,7 +267,7 @@ internal sealed partial class AccountsForm : Form
             return;
         }
 
-        Account value = _company.Accounts[id];
+        Account value = _company.GetAccount(id);
 
         if (value.ReadOnly)
         {
@@ -285,14 +281,16 @@ internal sealed partial class AccountsForm : Form
             report.Posted = _company.Posted;
             report.Level = ReportLevel.ByAccount;
 
-            HashSet<Account> accounts = new HashSet<Account>(value.Children) { value };
-
-            report.Accounts = new AccountsView(_company, accounts);
-
             ReportsForm form = new ReportsForm(_engine);
 
-            form.Load += (sender, e) => form.InitializeReport(ReportEngine.GeneralJournalReport);
+            form.Load += (sender, e) =>
+            {
+                HashSet<Account> accounts = new HashSet<Account>(value.Children) { value };
 
+                report.Accounts = new AccountsView(_company, accounts);
+
+                form.InitializeReport(ReportEngine.GeneralJournalReport);
+            };
             _factory.Kill(id);
             _factory.Register(id, form);
 

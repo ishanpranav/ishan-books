@@ -24,7 +24,7 @@ public class IifAccountWriter : IWriter
 
     private static IifExtra GetExtra(Company company, Guid accountId)
     {
-        Account account = company.Accounts[accountId];
+        Account account = company.GetAccount(accountId);
 
         if (account.Type == AccountType.Cost)
         {
@@ -45,9 +45,9 @@ public class IifAccountWriter : IWriter
         int i = 0;
         IifAccount[] accounts = new IifAccount[company.Accounts.Count];
 
-        foreach (KeyValuePair<Guid, Account> account in company.Accounts)
+        foreach (Account account in company.Accounts)
         {
-            accounts[i] = new IifAccount(account.Value, i + 1, GetExtra(company, account.Key));
+            accounts[i] = new IifAccount(account, i + 1, GetExtra(company, account.Id));
             i++;
         }
 

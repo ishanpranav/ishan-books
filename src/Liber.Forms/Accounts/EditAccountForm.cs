@@ -11,7 +11,7 @@ internal sealed class EditAccountForm : AccountForm
 {
     public EditAccountForm(Company company, Guid id) : base(company)
     {
-        Account account = company.Accounts[id];
+        Account account = company.GetAccount(id);
 
         Id = id;
         numberNumericUpDown.Value = account.Number;
@@ -25,8 +25,8 @@ internal sealed class EditAccountForm : AccountForm
         inactiveCheckBox.Checked = account.Inactive;
         CashFlow = account.CashFlow;
         parentComboBox.DataSource = new AccountViewBindingList(company, x => x != Id);
-        parentComboBox.ValueMember = nameof(IAccountView.Id);
-        parentComboBox.DisplayMember = nameof(IAccountView.DisplayName);
+        parentComboBox.ValueMember = nameof(AccountView.Id);
+        parentComboBox.DisplayMember = nameof(AccountView.DisplayName);
         parentComboBox.SelectedValue = account.ParentId;
     }
 
@@ -34,7 +34,7 @@ internal sealed class EditAccountForm : AccountForm
 
     protected override void CommitChanges()
     {
-        Account account = Company.Accounts[Id];
+        Account account = Company.GetAccount(Id);
 
         ApplyChanges(account);
         Company.UpdateAccount(Id, (Guid?)parentComboBox.SelectedValue ?? Guid.Empty);

@@ -42,30 +42,36 @@ internal class AccountListView : ListViewEx
     {
         BeginUpdate();
 
-        foreach (KeyValuePair<Guid, Account> account in company.OrderedAccounts)
+        try
         {
-            if (account.Value.Inactive)
+            foreach (KeyValuePair<Guid, Account> account in company.OrderedAccounts)
             {
-                continue;
+                if (account.Value.Inactive)
+                {
+                    continue;
+                }
+
+                ListViewItem item = Items.Add(account.Key.ToString(), account.Value.Name, imageIndex: 0);
+                AccountType type = account.Value.Type;
+                string key = type.ToString();
+
+                item.Tag = account;
+                item.Group = Groups[key];
+                item.SubItems.Add(account.Value.Number.ToString());
+
+                if (checkedAccounts.Contains(account.Value))
+                {
+                    item.Checked = true;
+                }
             }
 
-            ListViewItem item = Items.Add(account.Key.ToString(), account.Value.Name, imageIndex: 0);
-            AccountType type = account.Value.Type;
-            string key = type.ToString();
-
-            item.Tag = account;
-            item.Group = Groups[key];
-            item.SubItems.Add(account.Value.Number.ToString());
-
-            if (checkedAccounts.Contains(account.Value))
-            {
-                item.Checked = true;
-            }
+            AutoResizeColumns();
+            Sort();
         }
-
-        AutoResizeColumns();
-        Sort();
-        EndUpdate();
+        finally
+        {
+            EndUpdate();
+        }
     }
 
     public Guid GetSelectedAccountId()
