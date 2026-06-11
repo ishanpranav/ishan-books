@@ -1098,6 +1098,7 @@ public sealed class Company
         other._accounts.Clear();
         other._sortedAccounts.Clear();
         other._transactions.Clear();
+        other._sortedTransactions.Clear();
         other._names.Clear();
 
         foreach (KeyValuePair<Guid, Account> account in _accounts)
