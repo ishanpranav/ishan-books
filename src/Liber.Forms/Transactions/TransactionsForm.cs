@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Linq;
 using System.Media;
 using System.Windows.Forms;
 using Liber.Forms.AccountViews;
@@ -42,7 +43,7 @@ internal sealed partial class TransactionsForm : Form
         InitializeComponent();
         SystemFeatures.Initialize(this);
 
-        AccountViewBindingList bindingList = new AccountViewBindingList(company, x => !company.GetAccount(x).ReadOnly);
+        AccountViewBindingList bindingList = new AccountViewBindingList(company, x => !x.ReadOnly);
 
         bindingList.AddNullAccount();
 
@@ -104,7 +105,7 @@ internal sealed partial class TransactionsForm : Form
         _selectedLineIndex = -1;
 
         _lines.Clear();
-        _lines.AddRange(_company.GetAccount(_id).OrderedLines);
+        _lines.AddRange(_company.GetAccount(_id).Lines.Order());
         _dataGridView.SuspendLayout();
 
         try
@@ -235,16 +236,6 @@ internal sealed partial class TransactionsForm : Form
             return false;
         }
 
-        DateTime posted = (DateTime)_dataGridView[postedColumn.Index, topIndex].Value!;
-        Transaction transaction = new Transaction()
-        {
-            Id = Guid.NewGuid(),
-            Number = number,
-            Posted = posted,
-            Name = _dataGridView[nameMemoColumn.Index, topIndex].Value?.ToString(),
-            Memo = _dataGridView[nameMemoColumn.Index, bottomIndex].Value?.ToString()
-        };
-
         if (top.Cells[accountColumn.Index].Value is not Guid accountId ||
             accountId == Guid.Empty ||
             accountId == _id)
@@ -254,12 +245,15 @@ internal sealed partial class TransactionsForm : Form
             return false;
         }
 
-        transaction.Lines.Add(new Line()
+        DateTime posted = (DateTime)_dataGridView[postedColumn.Index, topIndex].Value!;
+        Transaction transaction = new Transaction()
         {
-            AccountId = accountId,
-            Balance = 0
-        });
-
+            Number = number,
+            Posted = posted,
+            Name = _dataGridView[nameMemoColumn.Index, topIndex].Value?.ToString(),
+            Memo = _dataGridView[nameMemoColumn.Index, bottomIndex].Value?.ToString()
+        };
+        
         if (transaction.Balance != 0)
         {
             top.ErrorText = Resources.ImbalanceError;
@@ -267,7 +261,14 @@ internal sealed partial class TransactionsForm : Form
             return false;
         }
 
-        _company.AddTransaction(transaction);
+        _company.AddTransaction(transaction, new Line[]
+        {
+            new Line()
+        {
+            AccountId = accountId,
+            Balance = 0
+        }
+        });
         SystemSounds.Asterisk.Play();
 
         Settings.Default.LastPosted = posted;

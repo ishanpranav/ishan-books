@@ -11,16 +11,16 @@ namespace Liber.Forms.AccountViews;
 internal sealed class AccountViewBindingList : SortedBindingList<AccountView>
 {
     private readonly Company _company;
-    private readonly Func<Guid, bool>? _validator;
+    private readonly Func<Account, bool>? _validator;
 
-    public AccountViewBindingList(Company company, Func<Guid, bool>? validator)
+    public AccountViewBindingList(Company company, Func<Account, bool>? validator)
     {
         _company = company;
         _validator = validator;
 
-        foreach (KeyValuePair<Guid, Account> account in company.OrderedAccounts)
+        foreach (Account account in company.Accounts)
         {
-            InitializeAccount(account.Key, account.Value);
+            InitializeAccount(account);
         }
 
         company.AccountAdded += OnCompanyAccountAdded;
@@ -33,17 +33,17 @@ internal sealed class AccountViewBindingList : SortedBindingList<AccountView>
         InsertSorted(NullAccountView.Default);
     }
 
-    private void InitializeAccount(Guid id, Account value)
+    private void InitializeAccount(Account value)
     {
-        if (_validator == null || _validator(id))
+        if (_validator == null || _validator(value))
         {
-            InsertSorted(new ReadOnlyAccountView(id, value));
+            InsertSorted(new ReadOnlyAccountView(value));
         }
     }
 
     private void OnCompanyAccountAdded(object? sender, GuidEventArgs e)
     {
-        InitializeAccount(e.Id, _company.GetAccount(e.Id));
+        InitializeAccount(_company.GetAccount(e.Id));
     }
 
     private void OnCompanyAccountRemoved(object? sender, GuidEventArgs e)
@@ -59,13 +59,14 @@ internal sealed class AccountViewBindingList : SortedBindingList<AccountView>
     private void OnCompanyAccountUpdated(object? sender, GuidEventArgs e)
     {
         int index = FindByKey(e.Id, v => v.Id);
-        bool validated = _validator == null || _validator(e.Id);
+        Account account = _company.GetAccount(e.Id);
+        bool validated = _validator == null || _validator(account);
 
         if (index == -1)
         {
             if (validated)
             {
-                InitializeAccount(e.Id, _company.GetAccount(e.Id));
+                InitializeAccount(account);
             }
 
             return;

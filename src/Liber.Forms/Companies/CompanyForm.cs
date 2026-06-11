@@ -33,14 +33,14 @@ internal abstract partial class CompanyForm : Form
         _colorButton.ForeColor = company.Color.GetForeColor();
         typeComboBox.DataSource = Enum.GetValues<CompanyType>();
         typeComboBox.SelectedItem = company.Type;
-        equityAccountComboBox.DataSource = new AccountViewBindingList(company, IsEquity);
+        equityAccountComboBox.DataSource = new AccountViewBindingList(company, x => x.Type == AccountType.Equity);
         equityAccountComboBox.ValueMember = nameof(AccountView.Id);
         equityAccountComboBox.DisplayMember = nameof(AccountView.DisplayName);
-        otherEquityAccountComboBox.DataSource = new AccountViewBindingList(company, IsEquity);
+        otherEquityAccountComboBox.DataSource = new AccountViewBindingList(company, x => x.Type == AccountType.Equity);
         otherEquityAccountComboBox.ValueMember = nameof(AccountView.Id);
         otherEquityAccountComboBox.DisplayMember = nameof(AccountView.DisplayName);
-        equityAccountComboBox.SelectedItem = company.EquityAccountId;
-        otherEquityAccountComboBox.SelectedItem = company.OtherEquityAccountId;
+        equityAccountComboBox.SelectedValue = company.EquityAccountId;
+        otherEquityAccountComboBox.SelectedValue = company.OtherEquityAccountId;
         passwordTextBox.Text = company.Password;
         fiscalYearStartedDatePicker.Value = company.FiscalYearStarted;
         fiscalYearPostedDatePicker.Value = company.FiscalYearPosted;
@@ -50,11 +50,6 @@ internal abstract partial class CompanyForm : Form
         customRadioButton.Checked = company.ReportingPeriod == ReportingPeriod.Custom;
         customStartedDatePicker.Value = company.CustomStarted ?? company.FiscalYearStarted;
         customPostedDatePicker.Value = company.CustomPosted ?? company.FiscalYearPosted;
-    }
-
-    private bool IsEquity(Guid id)
-    {
-        return Company.GetAccount(id).Type == AccountType.Equity;
     }
 
     private void OnTypeComboBoxFormat(object sender, ListControlConvertEventArgs e)

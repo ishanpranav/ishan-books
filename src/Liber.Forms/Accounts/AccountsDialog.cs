@@ -62,8 +62,9 @@ internal sealed partial class AccountsDialog : Form
 
         foreach (ListViewItem item in _accountListView.Items)
         {
-            if (item.Tag is not KeyValuePair<Guid, Account> account ||
-                !group.HasFlag(AccountGroup.FromType(account.Value.Type)))
+            Account account = (Account)item.Tag!;
+
+            if (!group.HasFlag(AccountGroup.FromType(account.Type)))
             {
                 continue;
             }

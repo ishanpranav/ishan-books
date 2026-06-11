@@ -19,7 +19,6 @@ internal class DataGridViewEx : DataGridView
         ColumnHeadersDefaultCellStyle.Font = new Font(Font, Drawing.FontStyle.Bold);
         DefaultCellStyle.SelectionBackColor = Colors.Primary.Tint(0.15);
         DefaultCellStyle.SelectionForeColor = Colors.Black;
-        EditMode = DataGridViewEditMode.EditOnEnter;
         GridColor = Colors.Dark;
 
         SetStyle(ControlStyles.OptimizedDoubleBuffer, true);

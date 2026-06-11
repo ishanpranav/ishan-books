@@ -40,9 +40,6 @@ public static class GnuCashSqliteSerializer
 
         await connection.OpenAsync();
 
-        Dictionary<Guid, Account> accounts = new Dictionary<Guid, Account>();
-        Dictionary<Account, Guid> accountIds = new Dictionary<Account, Guid>();
-        Dictionary<Guid, Transaction> transactions = new Dictionary<Guid, Transaction>();
         string? name;
         CompanyType type;
         Guid emptyParentId;
@@ -67,6 +64,8 @@ public static class GnuCashSqliteSerializer
             }
         }
 
+        List<Account> accounts = new List<Account>();
+
         await using (SqliteCommand command = connection.CreateCommand())
         {
             command.CommandText = Queries.GnuCashSelectAccounts;
@@ -77,7 +76,8 @@ public static class GnuCashSqliteSerializer
                 {
                     Guid id = reader.GetGuid(0);
                     Guid parentId = reader.GetGuid(1);
-                    Account account = new Account(id, parentId == emptyParentId ? Guid.Empty : parentId)
+
+                    accounts.Add(new Account(id, parentId == emptyParentId ? Guid.Empty : parentId)
                     {
                         Number = reader.GetDecimal(2),
                         Name = reader.GetString(3),
@@ -88,10 +88,36 @@ public static class GnuCashSqliteSerializer
                         Color = await SqliteUtilities.GetColorAsync(reader, 8),
                         TaxType = !await reader.IsDBNullAsync(9) && reader.GetBoolean(9),
                         Inactive = reader.GetBoolean(10)
-                    };
+                    });
+                }
+            }
+        }
 
-                    accounts[id] = account;
-                    accountIds[account] = id;
+        List<Transaction> transactions = new List<Transaction>();
+        Dictionary<Guid, List<Line>> lines = new Dictionary<Guid, List<Line>>();
+
+        await using (SqliteCommand command = connection.CreateCommand())
+        {
+            command.CommandText = Queries.GnuCashSelectLines;
+
+            await using (SqliteDataReader reader = await command.ExecuteReaderAsync())
+            {
+                while (await reader.ReadAsync())
+                {
+                    Guid id = reader.GetGuid(0);
+
+                    if (!lines.TryGetValue(id, out List<Line>? values))
+                    {
+                        values = new List<Line>();
+                        lines[id] = values;
+                    }
+
+                    values.Add(new Line()
+                    {
+                        AccountId = reader.GetGuid(1),
+                        Balance = reader.GetDecimal(2),
+                        Description = await SqliteUtilities.GetStringAsync(reader, 3)
+                    });
                 }
             }
         }
@@ -106,44 +132,23 @@ public static class GnuCashSqliteSerializer
                 {
                     Guid id = reader.GetGuid(0);
 
-                    transactions[id] = new Transaction()
+                    transactions.Add(new Transaction(id, lines[id])
                     {
-                        Id = id,
                         Posted = reader.GetDateTime(1).Date,
                         Number = reader.GetDecimal(2),
                         Name = await SqliteUtilities.GetStringAsync(reader, 3),
                         Memo = await SqliteUtilities.GetStringAsync(reader, 4)
-                    };
-                }
-            }
-        }
-
-        await using (SqliteCommand command = connection.CreateCommand())
-        {
-            command.CommandText = Queries.GnuCashSelectLines;
-
-            await using (SqliteDataReader reader = await command.ExecuteReaderAsync())
-            {
-                while (await reader.ReadAsync())
-                {
-                    Guid id = reader.GetGuid(0);
-
-                    transactions[id].Lines.Add(new Line()
-                    {
-                        AccountId = reader.GetGuid(1),
-                        Balance = reader.GetDecimal(2),
-                        Description = await SqliteUtilities.GetStringAsync(reader, 3)
                     });
                 }
             }
         }
 
-        Company result = new Company(accounts, transactions.Values, nextAccountNumber: 1, nextTransactionNumber: 1)
+        Company result = new Company(accounts, transactions, nextAccountNumber: 1, nextTransactionNumber: 1)
         {
             Name = name,
             Type = type
         };
-        ImportContext context = new ImportContext(accounts.Values)
+        ImportContext context = new ImportContext(accounts)
         {
             Color = result.Color
         };
@@ -156,7 +161,7 @@ public static class GnuCashSqliteSerializer
         }
         else
         {
-            result.EquityAccountId = accountIds[context.EquityAccount];
+            result.EquityAccountId = context.EquityAccount.Id;
         }
 
         if (context.OtherEquityAccount == null)
@@ -165,7 +170,7 @@ public static class GnuCashSqliteSerializer
         }
         else
         {
-            result.OtherEquityAccountId = accountIds[context.OtherEquityAccount];
+            result.OtherEquityAccountId = context.OtherEquityAccount.Id;
         }
 
         return result;

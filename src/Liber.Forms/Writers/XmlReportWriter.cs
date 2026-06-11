@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using Liber.Forms.Reports.Xsl;
 using Liber.Writers;
+using Microsoft.VisualBasic;
 
 namespace Liber.Forms.Writers;
 
@@ -19,8 +20,8 @@ internal sealed class XmlReportWriter : IWriter
 
         XmlReportSerializer.Serializer.Serialize(writer, new XslReport(company.DisplayName, company)
         {
-            Started = DateTime.MinValue,
-            Posted = DateTime.MaxValue
+            Started = DateTime.UnixEpoch,
+            Posted = DateTime.Today
         });
 
         return Task.CompletedTask;

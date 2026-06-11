@@ -208,8 +208,7 @@ public static class SqliteSerializer
 
         await connection.OpenAsync();
 
-        Dictionary<Guid, Account> accounts = new Dictionary<Guid, Account>();
-        Dictionary<Guid, Transaction> transactions = new Dictionary<Guid, Transaction>();
+        List<Account> accounts = new List<Account>();
 
         await using (SqliteCommand command = connection.CreateCommand())
         {
@@ -221,7 +220,7 @@ public static class SqliteSerializer
                 {
                     Guid id = reader.GetGuid(0);
 
-                    accounts[id] = new Account(id, reader.GetGuid(1))
+                    accounts.Add(new Account(id, reader.GetGuid(1))
                     {
                         Number = reader.GetDecimal(2),
                         Name = reader.GetString(3),
@@ -233,7 +232,36 @@ public static class SqliteSerializer
                         TaxType = !await reader.IsDBNullAsync(9) && reader.GetBoolean(9),
                         Inactive = reader.GetBoolean(10),
                         CashFlow = await reader.GetFieldValueAsync<CashFlow>(11)
-                    };
+                    });
+                }
+            }
+        }
+
+        List<Transaction> transactions = new List<Transaction>();
+        Dictionary<Guid, List<Line>> lines = new Dictionary<Guid, List<Line>>();
+
+        await using (SqliteCommand command = connection.CreateCommand())
+        {
+            command.CommandText = Queries.SelectLines;
+
+            await using (SqliteDataReader reader = await command.ExecuteReaderAsync())
+            {
+                while (await reader.ReadAsync())
+                {
+                    Guid id = reader.GetGuid(0);
+
+                    if (!lines.TryGetValue(id, out List<Line>? values))
+                    {
+                        values = new List<Line>();
+                        lines[id] = values;
+                    }
+
+                    values.Add(new Line()
+                    {
+                        AccountId = reader.GetGuid(1),
+                        Balance = reader.GetDecimal(2),
+                        Description = await SqliteUtilities.GetStringAsync(reader, 3)
+                    });
                 }
             }
         }
@@ -248,33 +276,12 @@ public static class SqliteSerializer
                 {
                     Guid id = reader.GetGuid(0);
 
-                    transactions[id] = new Transaction()
+                    transactions.Add(new Transaction(id, lines[id])
                     {
-                        Id = id,
                         Posted = reader.GetDateTime(1),
                         Number = reader.GetDecimal(2),
                         Name = await SqliteUtilities.GetStringAsync(reader, 3),
                         Memo = await SqliteUtilities.GetStringAsync(reader, 4)
-                    };
-                }
-            }
-        }
-
-        await using (SqliteCommand command = connection.CreateCommand())
-        {
-            command.CommandText = Queries.SelectLines;
-
-            await using (SqliteDataReader reader = await command.ExecuteReaderAsync())
-            {
-                while (await reader.ReadAsync())
-                {
-                    Guid id = reader.GetGuid(0);
-
-                    transactions[id].Lines.Add(new Line()
-                    {
-                        AccountId = reader.GetGuid(1),
-                        Balance = reader.GetDecimal(2),
-                        Description = await SqliteUtilities.GetStringAsync(reader, 3)
                     });
                 }
             }
@@ -288,7 +295,7 @@ public static class SqliteSerializer
             {
                 await reader.ReadAsync();
 
-                return new Company(accounts, transactions.Values, reader.GetDecimal(1), reader.GetDecimal(2))
+                return new Company(accounts, transactions, reader.GetDecimal(1), reader.GetDecimal(2))
                 {
                     Name = await SqliteUtilities.GetStringAsync(reader, 0),
                     Type = await reader.GetFieldValueAsync<CompanyType>(3),

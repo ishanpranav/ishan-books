@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text.Json.Serialization;
 using CsvHelper.Configuration.Attributes;
@@ -15,15 +16,15 @@ public class Transaction :
     IComparable<Transaction>,
     IEquatable<Transaction>
 {
-    public Transaction()
-    {
-        Lines = new List<Line>();
-    }
+    internal readonly SortedSet<Line> lines = new SortedSet<Line>();
+
+    public Transaction() { }
 
     [JsonConstructor]
-    public Transaction(ICollection<Line> lines)
+    public Transaction(Guid id, IReadOnlyCollection<Line> lines)
     {
-        Lines = lines;
+        Id = id;
+        this.lines = new SortedSet<Line>(lines);
 
         foreach (Line line in lines)
         {
@@ -32,23 +33,17 @@ public class Transaction :
     }
 
     [Ignore]
-    public ICollection<Line> Lines { get; }
-
-    [Ignore]
-    [JsonIgnore]
-    public IOrderedEnumerable<Line> OrderedLines
+    public IReadOnlyCollection<Line> Lines
     {
         get
         {
-            return Lines
-                .OrderBy(x => x.Debit > 0 ? -1 : 1)
-                .ThenByDescending(x => Math.Abs(x.Balance));
+            return lines;
         }
     }
 
     [Index(1)]
     [Name("Transaction ID")]
-    public Guid Id { get; set; }
+    public Guid Id { get; internal set; }
 
     [Format("M/d/yyyy")]
     [Index(0)]
@@ -72,6 +67,13 @@ public class Transaction :
     [NullValues("")]
     [Optional]
     public string? Memo { get; set; }
+
+    [Index(16)]
+    [LocalizedDisplayName(nameof(Reconciled))]
+    [Name("Reconcile Date")]
+    [NullValues("")]
+    [Optional]
+    public DateTime? Reconciled { get; set; }
 
     [Ignore]
     [JsonIgnore]

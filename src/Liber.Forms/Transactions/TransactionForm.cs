@@ -3,6 +3,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Media;
@@ -37,7 +38,7 @@ internal sealed partial class TransactionForm : Form
         InitializeComponent();
         SystemFeatures.Initialize(this);
 
-        accountColumn.DataSource = new AccountViewBindingList(company, x => !company.GetAccount(x).ReadOnly);
+        accountColumn.DataSource = new AccountViewBindingList(company, x => !x.ReadOnly);
         accountColumn.ValueMember = nameof(AccountView.Id);
         accountColumn.DisplayMember = nameof(AccountView.DisplayName);
         _dataGridView.CompanyColor = company.Color;
@@ -63,7 +64,7 @@ internal sealed partial class TransactionForm : Form
 
         _dataGridView.Rows.Clear();
 
-        foreach (Line line in transaction.OrderedLines)
+        foreach (Line line in transaction.Lines)
         {
             _dataGridView.Rows.Add(
                 line.AccountId,
@@ -97,12 +98,12 @@ internal sealed partial class TransactionForm : Form
     {
         Transaction transaction = new Transaction()
         {
-            Id = Value?.Id ?? Guid.NewGuid(),
             Number = numberNumericUpDown.Value,
             Posted = postedDateTimePicker.Value,
             Name = nameComboBox.Text,
             Memo = memoTextBox.Text
         };
+        List<Line> lines = new List<Line>();
 
         foreach (DataGridViewRow row in _dataGridView.Rows)
         {
@@ -126,7 +127,7 @@ internal sealed partial class TransactionForm : Form
                 return false;
             }
 
-            transaction.Lines.Add(new Line()
+            lines.Add(new Line()
             {
                 AccountId = accountId,
                 Balance = balance,
@@ -141,7 +142,15 @@ internal sealed partial class TransactionForm : Form
             return false;
         }
 
-        _company.AddTransaction(transaction);
+        if (Value == null)
+        {
+            _company.AddTransaction(transaction, lines);
+        }
+        else
+        {
+            _company.UpdateTransaction(Value.Id, lines);
+        }
+
         SystemSounds.Asterisk.Play();
 
         Settings.Default.LastPosted = postedDateTimePicker.Value;
@@ -191,24 +200,13 @@ internal sealed partial class TransactionForm : Form
 
         Transaction clone = new Transaction()
         {
-            Id = Guid.NewGuid(),
-            Posted = DateTime.Today,
+            Posted = Settings.Default.LastPosted,
             Number = _company.NextTransactionNumber,
             Name = Value.Name,
             Memo = Value.Memo
         };
 
-        foreach (Line line in Value.Lines)
-        {
-            clone.Lines.Add(new Line()
-            {
-                AccountId = line.AccountId,
-                Balance = line.Balance,
-                Description = line.Description
-            });
-        }
-
-        _company.AddTransaction(clone);
+        _company.AddTransaction(clone, Value.Lines);
         InitializeTransaction(clone);
     }
 

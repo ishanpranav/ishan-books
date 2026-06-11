@@ -45,11 +45,18 @@ internal sealed partial class MainForm : Form
 
         Text = SystemFeatures.ApplicationName;
         aboutToolStripMenuItem.Text = FormattedStrings.AboutText;
-        _company.AccountRemoved += (sender, e) => _factory.Kill(e.Id);
         exportCompanyXmlToolStripMenuItem.Tag = new Writer(FilterIndex.Xml, new XmlReportWriter());
         exportAccountsToolStripMenuItem.Tag = new Writer(FilterIndex.Csv, new GnuCashAccountWriter());
         exportTransactionsToolStripMenuItem.Tag = new Writer(FilterIndex.Csv, new GnuCashTransactionWriter());
         exportAccountsIifToolStripMenuItem.Tag = new Writer(FilterIndex.Iif, new IifAccountWriter());
+        _company.Invalidated += (_, e) =>
+        {
+            foreach (Form child in MdiChildren)
+            {
+                child.Close();
+            }
+        };
+        _company.AccountRemoved += (_, e) => _factory.Kill(e.Id);
     }
 
     public MainForm(string path) : this()
@@ -134,9 +141,6 @@ internal sealed partial class MainForm : Form
         }
 
         int i = 1;
-        JumpList list = JumpList.CreateJumpListForIndividualWindow(TaskbarManager.Instance.ApplicationId, Handle);
-        JumpListCustomCategory companiesCategory = new JumpListCustomCategory(Resources.CompaniesJumpListCustomCategory);
-
         foreach (string path in _recentPathManager.Paths)
         {
             if (!File.Exists(path))
@@ -158,13 +162,6 @@ internal sealed partial class MainForm : Form
                 _openFileDialog.CustomPlaces.Add(customPlace);
                 _saveFileDialog.CustomPlaces.Add(customPlace);
             }
-
-            JumpListLink link = new JumpListLink(path, Path.GetFileName(path))
-            {
-                Arguments = "-1"
-            };
-
-            companiesCategory.AddJumpListItems(link);
         }
 
         recentPathsToolStripMenuItem.Visible = true;
@@ -172,10 +169,29 @@ internal sealed partial class MainForm : Form
 
         try
         {
+            JumpList list = JumpList.CreateJumpListForIndividualWindow(TaskbarManager.Instance.ApplicationId, Handle);
+            JumpListCustomCategory companiesCategory = new JumpListCustomCategory(Resources.CompaniesJumpListCustomCategory);
+
+            foreach (string path in _recentPathManager.Paths)
+            {
+                if (!File.Exists(path))
+                {
+                    continue;
+                }
+
+                JumpListLink link = new JumpListLink(path, Path.GetFileName(path))
+                {
+                    Arguments = "-1"
+                };
+
+                companiesCategory.AddJumpListItems(link);
+            }
+
             list.AddCustomCategories(companiesCategory);
             list.Refresh();
         }
         catch (UnauthorizedAccessException) { }
+        catch (ObjectDisposedException) { }
     }
 
     [MemberNotNull(nameof(_engine))]
@@ -326,21 +342,11 @@ internal sealed partial class MainForm : Form
 
         _path = null;
 
-        CloseChildren();
-
         using NewCompanyForm form = new NewCompanyForm();
 
         if (form.ShowDialog() == DialogResult.OK)
         {
             form.Company.CopyTo(_company);
-        }
-    }
-
-    private void CloseChildren()
-    {
-        foreach (Form child in MdiChildren)
-        {
-            child.Close();
         }
     }
 
@@ -525,7 +531,6 @@ internal sealed partial class MainForm : Form
                     break;
             }
 
-            CloseChildren();
             _recentPathManager.Add(path);
 
             _path = canSave ? path : null;
@@ -581,6 +586,7 @@ internal sealed partial class MainForm : Form
             }
         }
         while (result == DialogResult.Retry);
+
     }
 
     private async Task ExportAsync(string path)

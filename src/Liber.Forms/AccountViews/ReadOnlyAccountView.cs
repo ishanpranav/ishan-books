@@ -8,7 +8,14 @@ namespace Liber.Forms.AccountViews;
 
 internal class ReadOnlyAccountView : AccountView
 {
-    public override Guid Id { get; }
+    public override Guid Id
+    {
+        get
+        {
+            return Value.Id;
+        }
+    }
+
     public override Account Value { get; }
 
     public override string DisplayName
@@ -19,9 +26,8 @@ internal class ReadOnlyAccountView : AccountView
         }
     }
 
-    public ReadOnlyAccountView(Guid id, Account value)
+    public ReadOnlyAccountView(Account value)
     {
-        Id = id;
         Value = value;
     }
 }

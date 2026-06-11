@@ -24,7 +24,7 @@ internal sealed class EditAccountForm : AccountForm
         TaxType = account.TaxType;
         inactiveCheckBox.Checked = account.Inactive;
         CashFlow = account.CashFlow;
-        parentComboBox.DataSource = new AccountViewBindingList(company, x => x != Id);
+        parentComboBox.DataSource = new AccountViewBindingList(company, x => x.Id != Id);
         parentComboBox.ValueMember = nameof(AccountView.Id);
         parentComboBox.DisplayMember = nameof(AccountView.DisplayName);
         parentComboBox.SelectedValue = account.ParentId;

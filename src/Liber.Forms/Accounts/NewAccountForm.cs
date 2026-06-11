@@ -22,7 +22,7 @@ internal sealed class NewAccountForm : AccountForm
 
     public NewAccountForm(Company company, Guid parentId) : this(company)
     {
-        parentComboBox.SelectedItem = parentId;
+        parentComboBox.SelectedValue = parentId;
 
         if (parentId == Guid.Empty)
         {

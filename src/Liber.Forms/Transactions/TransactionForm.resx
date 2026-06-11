@@ -803,17 +803,11 @@
   <data name="&gt;&gt;copyToolStripButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;_helpProvider.Name" xml:space="preserve">
-    <value>_helpProvider</value>
-  </data>
-  <data name="&gt;&gt;_helpProvider.Type" xml:space="preserve">
-    <value>System.Windows.Forms.HelpProvider, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;accountColumn.Name" xml:space="preserve">
     <value>accountColumn</value>
   </data>
   <data name="&gt;&gt;accountColumn.Type" xml:space="preserve">
-    <value>Liber.Forms.Accounts.AccountColumn, Liber.Forms, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.DataGridViewComboBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;debitColumn.Name" xml:space="preserve">
     <value>debitColumn</value>
@@ -832,6 +826,12 @@
   </data>
   <data name="&gt;&gt;descriptionColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_helpProvider.Name" xml:space="preserve">
+    <value>_helpProvider</value>
+  </data>
+  <data name="&gt;&gt;_helpProvider.Type" xml:space="preserve">
+    <value>System.Windows.Forms.HelpProvider, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>TransactionForm</value>
