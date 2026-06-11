@@ -18,6 +18,7 @@ namespace Liber;
 public sealed class Company
 {
     private readonly Dictionary<Guid, Account> _accounts;
+    private readonly SortedSet<Account> _sortedAccounts;
     private readonly SortedSet<Transaction> _transactions;
     private readonly SortedSet<string> _names = new SortedSet<string>();
 
@@ -29,11 +30,11 @@ public sealed class Company
     private DateTime? _customStarted;
     private DateTime? _customPosted;
 
-    public IReadOnlyDictionary<Guid, Account> Accounts
+    public IReadOnlyCollection<Account> Accounts
     {
         get
         {
-            return _accounts;
+            return _sortedAccounts;
         }
     }
 
@@ -55,7 +56,7 @@ public sealed class Company
     }
 
     public decimal NextAccountNumber { get; private set; } = 1;
-    public decimal NextTransactionNumber { get; set; } = 1;
+    public decimal NextTransactionNumber { get; private set; } = 1;
 
     public string? Name
     {
@@ -69,7 +70,7 @@ public sealed class Company
             {
                 _name = value;
 
-                NameChanged?.Invoke(sender: this, EventArgs.Empty);
+                NameChanged?.Invoke(sender: this, System.EventArgs.Empty);
             }
         }
     }
@@ -95,7 +96,7 @@ public sealed class Company
             {
                 _type = value;
 
-                TypeChanged?.Invoke(sender: this, EventArgs.Empty);
+                TypeChanged?.Invoke(sender: this, System.EventArgs.Empty);
             }
         }
     }
@@ -118,7 +119,7 @@ public sealed class Company
             {
                 _fiscalYearStarted = value;
 
-                ReportingChanged?.Invoke(sender: this, EventArgs.Empty);
+                ReportingChanged?.Invoke(sender: this, System.EventArgs.Empty);
             }
         }
     }
@@ -137,7 +138,7 @@ public sealed class Company
             {
                 _fiscalYearPosted = value;
 
-                ReportingChanged?.Invoke(sender: this, EventArgs.Empty);
+                ReportingChanged?.Invoke(sender: this, System.EventArgs.Empty);
             }
         }
     }
@@ -263,12 +264,15 @@ public sealed class Company
         }
     }
 
-    public event EventHandler<GuidEventArgs>? AccountAdded;
-    public event EventHandler<GuidEventArgs>? AccountUpdated;
-    public event EventHandler<GuidEventArgs>? AccountRemoved;
     public event EventHandler? NameChanged;
     public event EventHandler? TypeChanged;
     public event EventHandler? ReportingChanged;
+    public event EventHandler<GuidEventArgs>? AccountAdded;
+    public event EventHandler<GuidEventArgs>? AccountUpdated;
+    public event EventHandler<GuidEventArgs>? AccountRemoved;
+    public event EventHandler<GuidEventArgs>? TransactionAdded;
+    public event EventHandler<GuidEventArgs>? TransactionUpdated;
+    public event EventHandler<GuidEventArgs>? TransactionRemoved;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Company"/> class.
@@ -276,6 +280,7 @@ public sealed class Company
     public Company()
     {
         _accounts = new Dictionary<Guid, Account>();
+        _sortedAccounts = new SortedSet<Account>();
         _transactions = new SortedSet<Transaction>();
 
         ResetEquityAccount();
@@ -292,9 +297,11 @@ public sealed class Company
     public Company(
         IReadOnlyDictionary<Guid, Account> accounts,
         IReadOnlyCollection<Transaction> transactions,
-        decimal nextAccountNumber)
+        decimal nextAccountNumber,
+        decimal nextTransactionNumber)
     {
         _accounts = new Dictionary<Guid, Account>(accounts);
+        _sortedAccounts = new SortedSet<Account>(accounts.Values);
         _transactions = new SortedSet<Transaction>(transactions);
         NextAccountNumber = nextAccountNumber;
 
@@ -332,20 +339,28 @@ public sealed class Company
 
     public void ResetEquityAccount()
     {
-        EquityAccountId = AddAccount(new Account()
+        Account value = new Account()
         {
             Name = Resources.DefaultEquityAccountName,
             Type = AccountType.Equity
-        }, Guid.Empty);
+        };
+
+        AddAccount(value, Guid.Empty);
+
+        EquityAccountId = value.Id;
     }
 
     public void ResetOtherEquityAccount()
     {
-        OtherEquityAccountId = AddAccount(new Account()
+        Account value = new Account()
         {
             Name = Resources.DefaultOtherEquityAccountName,
             Type = AccountType.Equity
-        }, Guid.Empty);
+        };
+
+        AddAccount(value, Guid.Empty);
+
+        OtherEquityAccountId = value.Id;
     }
 
     public string[] GetNames()
@@ -399,17 +414,26 @@ public sealed class Company
         }
     }
 
-    public Guid AddAccount(Account value, Guid parentId)
+    public Account GetAccount(Guid id)
     {
-        Guid result = Guid.NewGuid();
+        return _accounts[id];
+    }
+
+    public void AddAccount(Account value, Guid parentId)
+    {
+        if (value.Id != Guid.Empty)
+        {
+            throw new InvalidOperationException();
+        }
+
+        value.Id = Guid.NewGuid();
 
         InitializeAccount(value);
         AddChild(value, parentId);
         NextAccountNumber = Math.Max(value.Number, NextAccountNumber) + 1;
-        _accounts.Add(result, value);
-        AccountAdded?.Invoke(sender: this, new GuidEventArgs(result));
-
-        return result;
+        _accounts.Add(value.Id, value);
+        _sortedAccounts.Add(value);
+        AccountAdded?.Invoke(sender: this, new GuidEventArgs(value.Id));
     }
 
     public void UpdateAccount(Guid id, Guid parentId)
@@ -424,27 +448,31 @@ public sealed class Company
 
         NextAccountNumber = Math.Max(value.Number, NextAccountNumber);
 
+        _sortedAccounts.Remove(value);
+        _sortedAccounts.Add(value);
         AccountUpdated?.Invoke(sender: this, new GuidEventArgs(id));
     }
 
-    public void RemoveAccount(Guid id)
+    public bool RemoveAccount(Guid id)
     {
         if (EquityAccountId == id || OtherEquityAccountId == id)
         {
-            return;
+            return false;
         }
 
         Account value = _accounts[id];
 
-        if (value.Children.Count > 0 || value.Lines.Count > 0)
+        if (value.children.Count > 0 || value.Lines.Count > 0)
         {
-            return;
+            return false;
         }
 
         RemoveChild(value);
         _accounts.Remove(id);
-
+        _sortedAccounts.Remove(value);
         AccountRemoved?.Invoke(sender: this, new GuidEventArgs(id));
+
+        return true;
     }
 
     public Transaction? GetTransactionBefore(Transaction value)
@@ -519,6 +547,8 @@ public sealed class Company
         {
             value.Memo = GetSuggestedMemo(value);
         }
+
+        TransactionAdded?.Invoke(sender: this, new GuidEventArgs(value.Id));
     }
 
     public string? GetSuggestedMemo(Transaction value)
@@ -1028,12 +1058,15 @@ public sealed class Company
         other.CustomPosted = CustomPosted;
 
         other._accounts.Clear();
+        other._sortedAccounts.Clear();
         other._transactions.Clear();
         other._names.Clear();
 
         foreach (KeyValuePair<Guid, Account> account in _accounts)
         {
             other._accounts[account.Key] = account.Value;
+
+            other._sortedAccounts.Add(account.Value);
         }
 
         foreach (Transaction transaction in _transactions)

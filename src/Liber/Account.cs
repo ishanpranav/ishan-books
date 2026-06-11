@@ -17,14 +17,14 @@ namespace Liber;
 /// <summary>
 /// Represents a financial account.
 /// </summary>
-public class Account : IComparable<Account>, IComparable
+public class Account :
+    IComparable<Account>,
+    IComparable,
+    IEquatable<Account>
 {
     internal readonly HashSet<Account> children = new HashSet<Account>();
     internal readonly HashSet<Line> lines = new HashSet<Line>();
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Account"/> class.
-    /// </summary>
     public Account() { }
 
     /// <summary>
@@ -32,10 +32,15 @@ public class Account : IComparable<Account>, IComparable
     /// </summary>
     /// <param name="parentId">The identifier of the parent account.</param>
     [JsonConstructor]
-    public Account(Guid parentId)
+    public Account(Guid id, Guid parentId)
     {
+        Id = id;
         ParentId = parentId;
     }
+
+    [Browsable(false)]
+    [Ignore]
+    public Guid Id { get; internal set; }
 
     /// <summary>
     /// Gets the identifier of the parent account.
@@ -303,7 +308,7 @@ public class Account : IComparable<Account>, IComparable
         return Name;
     }
 
-    int IComparable.CompareTo(object? obj)
+    public int CompareTo(object? obj)
     {
         if (obj == null)
         {
@@ -346,27 +351,71 @@ public class Account : IComparable<Account>, IComparable
             return result;
         }
 
-        result = CashFlow.CompareTo(other.CashFlow);
+        return Id.CompareTo(other.Id);
+    }
 
-        if (result != 0)
+    public override bool Equals(object? obj)
+    {
+        if (obj == null)
         {
-            return result;
+            return false;
         }
 
-        result = TaxType.CompareTo(other.TaxType);
-
-        if (result != 0)
+        if (ReferenceEquals(obj, this))
         {
-            return result;
+            return true;
         }
 
-        result = other.Balance.CompareTo(Balance);
+        return obj is Account other && Equals(other);
+    }
 
-        if (result != 0)
+    public bool Equals(Account? other)
+    {
+        if (other is null)
         {
-            return result;
+            return false;
         }
 
-        return ParentId.CompareTo(other.ParentId);
+        return Id == other.Id;
+    }
+
+    public override int GetHashCode()
+    {
+        return Id.GetHashCode();
+    }
+
+    public static bool operator ==(Account? left, Account? right)
+    {
+        if (left is null)
+        {
+            return right is null;
+        }
+
+        return left.Equals(right);
+    }
+
+    public static bool operator !=(Account? left, Account? right)
+    {
+        return !(left == right);
+    }
+
+    public static bool operator <(Account? left, Account? right)
+    {
+        return left is null ? right is not null : left.CompareTo(right) < 0;
+    }
+
+    public static bool operator <=(Account? left, Account? right)
+    {
+        return left is null || left.CompareTo(right) <= 0;
+    }
+
+    public static bool operator >(Account? left, Account? right)
+    {
+        return left is not null && left.CompareTo(right) > 0;
+    }
+
+    public static bool operator >=(Account? left, Account? right)
+    {
+        return left is null ? right is null : left.CompareTo(right) >= 0;
     }
 }

@@ -34,11 +34,11 @@ internal abstract partial class CompanyForm : Form
         typeComboBox.DataSource = Enum.GetValues<CompanyType>();
         typeComboBox.SelectedItem = company.Type;
         equityAccountComboBox.DataSource = new AccountViewBindingList(company, IsEquity);
-        equityAccountComboBox.ValueMember = nameof(IAccountView.Id);
-        equityAccountComboBox.DisplayMember = nameof(IAccountView.DisplayName);
+        equityAccountComboBox.ValueMember = nameof(AccountView.Id);
+        equityAccountComboBox.DisplayMember = nameof(AccountView.DisplayName);
         otherEquityAccountComboBox.DataSource = new AccountViewBindingList(company, IsEquity);
-        otherEquityAccountComboBox.ValueMember = nameof(IAccountView.Id);
-        otherEquityAccountComboBox.DisplayMember = nameof(IAccountView.DisplayName);
+        otherEquityAccountComboBox.ValueMember = nameof(AccountView.Id);
+        otherEquityAccountComboBox.DisplayMember = nameof(AccountView.DisplayName);
         equityAccountComboBox.SelectedItem = company.EquityAccountId;
         otherEquityAccountComboBox.SelectedItem = company.OtherEquityAccountId;
         passwordTextBox.Text = company.Password;
@@ -54,7 +54,7 @@ internal abstract partial class CompanyForm : Form
 
     private bool IsEquity(Guid id)
     {
-        return Company.Accounts[id].Type == AccountType.Equity;
+        return Company.GetAccount(id).Type == AccountType.Equity;
     }
 
     private void OnTypeComboBoxFormat(object sender, ListControlConvertEventArgs e)

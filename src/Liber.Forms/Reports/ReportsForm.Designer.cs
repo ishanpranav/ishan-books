@@ -88,7 +88,7 @@
             // 
             // _webView
             // 
-            _webView.AllowExternalDrop = true;
+            _webView.AllowExternalDrop = false;
             _webView.CreationProperties = null;
             _webView.DefaultBackgroundColor = System.Drawing.Color.White;
             resources.ApplyResources(_webView, "_webView");

@@ -16,7 +16,7 @@ public class AccountsView
     public AccountsView(Company company)
     {
         Company = company;
-        Values = company.Accounts.Values
+        Values = company.Accounts
             .Where(x => !x.Inactive)
             .ToHashSet();
     }

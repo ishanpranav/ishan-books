@@ -235,7 +235,7 @@ public class XslReport : IntervalView, IXmlSerializable
 
     void IXmlSerializable.ReadXml(XmlReader reader)
     {
-        throw new NotImplementedException();
+        throw new NotSupportedException();
     }
 
     private void WriteAccountXml(XmlWriter writer, Account value, ParentKey key, BalanceInfo balances)
@@ -247,8 +247,8 @@ public class XslReport : IntervalView, IXmlSerializable
         decimal debit;
         decimal credit;
 
-        writer.WriteElementString("equity", XmlConvert.ToString(value == Company.Accounts[Company.EquityAccountId]));
-        writer.WriteElementString("other-equity", XmlConvert.ToString(value == Company.Accounts[Company.OtherEquityAccountId]));
+        writer.WriteElementString("equity", XmlConvert.ToString(value.Id == Company.EquityAccountId));
+        writer.WriteElementString("other-equity", XmlConvert.ToString(value.Id == Company.OtherEquityAccountId));
 
         if (balances.Balance < 0)
         {
@@ -288,7 +288,7 @@ public class XslReport : IntervalView, IXmlSerializable
         writer.WriteElementString("name", value.Name);
         writer.WriteElementString("other-equity", XmlConvert.ToString(value.Lines.Any(x => x.AccountId == Company.OtherEquityAccountId)));
 
-        IOrderedEnumerable<Line> lines = value.OrderedLines.ThenBy(x => Company.Accounts[x.AccountId].Number);
+        IOrderedEnumerable<Line> lines = value.OrderedLines.ThenBy(x => Company.GetAccount(x.AccountId).Number);
 
         foreach (Line line in lines)
         {
@@ -301,13 +301,13 @@ public class XslReport : IntervalView, IXmlSerializable
     private void WriteLineXml(XmlWriter writer, Line value)
     {
         writer.WriteStartElement("line");
-        writer.WriteElementString("account", Company.Accounts[value.AccountId].Name);
+        writer.WriteElementString("account", Company.GetAccount(value.AccountId).Name);
 
         Line? sibling = value.Sibling;
 
         if (sibling != null)
         {
-            writer.WriteElementString("sibling", Company.Accounts[sibling.AccountId].Name);
+            writer.WriteElementString("sibling", Company.GetAccount(sibling.AccountId).Name);
         }
         else
         {
@@ -355,7 +355,7 @@ public class XslReport : IntervalView, IXmlSerializable
             .GetTransactionsBetween(Started, Posted)
             .Where(transaction => transaction.Lines
                 .Any(line => Accounts.Values
-                    .Contains(Company.Accounts[line.AccountId]))))
+                    .Contains(Company.GetAccount(line.AccountId)))))
         {
             WriteTransactionXml(writer, transaction);
         }

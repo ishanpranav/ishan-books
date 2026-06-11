@@ -7,11 +7,11 @@ using Liber.Forms.Properties;
 
 namespace Liber.Forms.AccountViews;
 
-internal sealed class NewAccountView : IAccountView
+internal sealed class NewAccountView : AccountView
 {
     private static NewAccountView? s_instance;
 
-    public static NewAccountView Value
+    public static NewAccountView Default
     {
         get
         {
@@ -21,7 +21,7 @@ internal sealed class NewAccountView : IAccountView
         }
     }
 
-    public Guid Id
+    public override Guid Id
     {
         get
         {
@@ -29,7 +29,7 @@ internal sealed class NewAccountView : IAccountView
         }
     }
 
-    public string DisplayName
+    public override string DisplayName
     {
         get
         {
@@ -37,35 +37,13 @@ internal sealed class NewAccountView : IAccountView
         }
     }
 
+    public override Account? Value
+    {
+        get
+        {
+            return null;        
+        }
+    }
+
     private NewAccountView() { }
-
-    public bool Equals(Guid other)
-    {
-        return Id.Equals(other);
-    }
-
-    public override bool Equals(object? obj)
-    {
-        if (obj == null)
-        {
-            return false;
-        }
-
-        if (this == obj)
-        {
-            return true;
-        }
-
-        return obj is Guid other && Equals(other);
-    }
-
-    public override int GetHashCode()
-    {
-        return Id.GetHashCode();
-    }
-
-    public override string ToString()
-    {
-        return DisplayName;
-    }
 }

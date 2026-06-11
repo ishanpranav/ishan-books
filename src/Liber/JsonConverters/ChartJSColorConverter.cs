@@ -19,7 +19,7 @@ public sealed class ChartJSColorConverter : JsonConverter<Color>
     /// <inheritdoc/>
     public override Color Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        throw new InvalidOperationException();
+        throw new NotSupportedException();
     }
 
     /// <inheritdoc/>

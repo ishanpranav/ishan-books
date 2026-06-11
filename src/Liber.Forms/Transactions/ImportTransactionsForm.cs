@@ -17,9 +17,9 @@ internal sealed class ImportTransactionsForm : ImportForm
     {
         Dictionary<string, Guid> accounts = new Dictionary<string, Guid>(company.Accounts.Count);
 
-        foreach (KeyValuePair<Guid, Account> account in company.Accounts)
+        foreach (Account account in company.Accounts)
         {
-            accounts.Add(account.Value.Name, account.Key);
+            accounts.Add(account.Name, account.Id);
         }
 
         foreach (GnuCashLine line in lines)

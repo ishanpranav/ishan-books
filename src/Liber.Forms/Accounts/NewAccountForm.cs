@@ -10,16 +10,14 @@ namespace Liber.Forms.Accounts;
 
 internal sealed class NewAccountForm : AccountForm
 {
-    public Guid Id { get; private set; }
-
     public NewAccountForm(Company company) : base(company)
     {
         numberNumericUpDown.Value = company.NextAccountNumber;
         _colorButton.BackColor = company.Color;
         _colorButton.ForeColor = company.Color.GetForeColor();
         parentComboBox.DataSource = new AccountViewBindingList(company, validator: null);
-        parentComboBox.ValueMember = nameof(IAccountView.Id);
-        parentComboBox.DisplayMember = nameof(IAccountView.DisplayName);
+        parentComboBox.ValueMember = nameof(AccountView.Id);
+        parentComboBox.DisplayMember = nameof(AccountView.DisplayName);
     }
 
     public NewAccountForm(Company company, Guid parentId) : this(company)
@@ -31,7 +29,7 @@ internal sealed class NewAccountForm : AccountForm
             return;
         }
 
-        Account parent = Company.Accounts[parentId];
+        Account parent = Company.GetAccount(parentId);
 
         typeComboBox.SelectedItem = parent.Type;
         cashFlowComboBox.SelectedItem = parent.CashFlow;
@@ -43,7 +41,6 @@ internal sealed class NewAccountForm : AccountForm
         Account account = new Account();
 
         ApplyChanges(account);
-
-        Id = Company.AddAccount(account, (Guid?)parentComboBox.SelectedValue ?? Guid.Empty);
+        Company.AddAccount(account, (Guid?)parentComboBox.SelectedValue ?? Guid.Empty);
     }
 }

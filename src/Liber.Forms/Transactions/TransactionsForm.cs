@@ -42,11 +42,15 @@ internal sealed partial class TransactionsForm : Form
         InitializeComponent();
         SystemFeatures.Initialize(this);
 
-        accountColumn.DataSource = new AccountViewBindingList(company, x => !company.Accounts[x].ReadOnly);
-        accountColumn.ValueMember = nameof(IAccountView.Id);
-        accountColumn.DisplayMember = nameof(IAccountView.DisplayName);
+        AccountViewBindingList bindingList = new AccountViewBindingList(company, x => !company.GetAccount(x).ReadOnly);
 
-        Account account = company.Accounts[id];
+        bindingList.AddNullAccount();
+
+        accountColumn.DataSource = bindingList;
+        accountColumn.ValueMember = nameof(AccountView.Id);
+        accountColumn.DisplayMember = nameof(AccountView.DisplayName);
+
+        Account account = company.GetAccount(id);
 
         _dataGridView.CompanyColor = company.GetColorOrDefault(account);
         _dataGridView.DebitColumnIndex = debitColumn.Index;
@@ -100,7 +104,7 @@ internal sealed partial class TransactionsForm : Form
         _selectedLineIndex = -1;
 
         _lines.Clear();
-        _lines.AddRange(_company.Accounts[_id].OrderedLines);
+        _lines.AddRange(_company.GetAccount(_id).OrderedLines);
         _dataGridView.SuspendLayout();
 
         try
