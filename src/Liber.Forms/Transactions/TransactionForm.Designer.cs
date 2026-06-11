@@ -18,36 +18,36 @@ namespace Liber.Forms.Transactions
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TransactionForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            postedDateTimePicker = new System.Windows.Forms.DateTimePicker();
-            label1 = new System.Windows.Forms.Label();
-            label2 = new System.Windows.Forms.Label();
-            numberNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            toolStrip1 = new System.Windows.Forms.ToolStrip();
-            newToolStripButton = new System.Windows.Forms.ToolStripButton();
-            saveToolStripButton = new System.Windows.Forms.ToolStripButton();
-            printToolStripButton = new System.Windows.Forms.ToolStripButton();
-            toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            copyToolStripButton = new System.Windows.Forms.ToolStripButton();
-            cancelButton = new System.Windows.Forms.Button();
-            applyButton = new System.Windows.Forms.Button();
-            acceptButton = new System.Windows.Forms.Button();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            postedDateTimePicker = new DateTimePicker();
+            label1 = new Label();
+            label2 = new Label();
+            numberNumericUpDown = new NumericUpDown();
+            toolStrip1 = new ToolStrip();
+            newToolStripButton = new ToolStripButton();
+            saveToolStripButton = new ToolStripButton();
+            printToolStripButton = new ToolStripButton();
+            toolStripSeparator3 = new ToolStripSeparator();
+            copyToolStripButton = new ToolStripButton();
+            cancelButton = new Button();
+            applyButton = new Button();
+            acceptButton = new Button();
             _dataGridView = new TransactionGridView();
-            previousButton = new System.Windows.Forms.Button();
-            nextButton = new System.Windows.Forms.Button();
-            label3 = new System.Windows.Forms.Label();
-            label4 = new System.Windows.Forms.Label();
-            nameComboBox = new System.Windows.Forms.ComboBox();
-            memoTextBox = new System.Windows.Forms.TextBox();
-            _helpProvider = new System.Windows.Forms.HelpProvider();
-            lastButton = new System.Windows.Forms.Button();
-            firstButton = new System.Windows.Forms.Button();
             accountColumn = new DataGridViewComboBoxColumn();
-            debitColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            creditColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            descriptionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            debitColumn = new DataGridViewTextBoxColumn();
+            creditColumn = new DataGridViewTextBoxColumn();
+            descriptionColumn = new DataGridViewTextBoxColumn();
+            previousButton = new Button();
+            nextButton = new Button();
+            label3 = new Label();
+            label4 = new Label();
+            nameComboBox = new ComboBox();
+            memoTextBox = new TextBox();
+            _helpProvider = new HelpProvider();
+            lastButton = new Button();
+            firstButton = new Button();
             ((System.ComponentModel.ISupportInitialize)numberNumericUpDown).BeginInit();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)_dataGridView).BeginInit();
@@ -55,7 +55,7 @@ namespace Liber.Forms.Transactions
             // 
             // postedDateTimePicker
             // 
-            postedDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            postedDateTimePicker.Format = DateTimePickerFormat.Short;
             _helpProvider.SetHelpString(postedDateTimePicker, resources.GetString("postedDateTimePicker.HelpString"));
             resources.ApplyResources(postedDateTimePicker, "postedDateTimePicker");
             postedDateTimePicker.Name = "postedDateTimePicker";
@@ -83,28 +83,28 @@ namespace Liber.Forms.Transactions
             // 
             // toolStrip1
             // 
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripButton, saveToolStripButton, printToolStripButton, toolStripSeparator3, copyToolStripButton });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { newToolStripButton, saveToolStripButton, printToolStripButton, toolStripSeparator3, copyToolStripButton });
             resources.ApplyResources(toolStrip1, "toolStrip1");
             toolStrip1.Name = "toolStrip1";
             _helpProvider.SetShowHelp(toolStrip1, (bool)resources.GetObject("toolStrip1.ShowHelp"));
             // 
             // newToolStripButton
             // 
-            newToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            newToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(newToolStripButton, "newToolStripButton");
             newToolStripButton.Name = "newToolStripButton";
             newToolStripButton.Click += OnNewToolStripButtonClick;
             // 
             // saveToolStripButton
             // 
-            saveToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            saveToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(saveToolStripButton, "saveToolStripButton");
             saveToolStripButton.Name = "saveToolStripButton";
             saveToolStripButton.Click += OnSaveToolStripButtonClick;
             // 
             // printToolStripButton
             // 
-            printToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            printToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(printToolStripButton, "printToolStripButton");
             printToolStripButton.Name = "printToolStripButton";
             printToolStripButton.Click += OnPrintToolStripButtonClick;
@@ -116,7 +116,7 @@ namespace Liber.Forms.Transactions
             // 
             // copyToolStripButton
             // 
-            copyToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            copyToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
             resources.ApplyResources(copyToolStripButton, "copyToolStripButton");
             copyToolStripButton.Name = "copyToolStripButton";
             copyToolStripButton.Click += OnCopyToolStripButtonClick;
@@ -151,34 +151,55 @@ namespace Liber.Forms.Transactions
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Info;
             _dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             resources.ApplyResources(_dataGridView, "_dataGridView");
-            _dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            _dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             _dataGridView.BackgroundColor = System.Drawing.Color.FromArgb(248, 249, 250);
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
             _dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            _dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            _dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { accountColumn, debitColumn, creditColumn, descriptionColumn });
+            _dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            _dataGridView.Columns.AddRange(new DataGridViewColumn[] { accountColumn, debitColumn, creditColumn, descriptionColumn });
             _dataGridView.CompanyColor = System.Drawing.Color.Empty;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F);
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             _dataGridView.DefaultCellStyle = dataGridViewCellStyle3;
-            _dataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             _dataGridView.GridColor = System.Drawing.Color.FromArgb(33, 37, 41);
             _dataGridView.MultiSelect = false;
             _dataGridView.Name = "_dataGridView";
-            _dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            _dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             _helpProvider.SetShowHelp(_dataGridView, (bool)resources.GetObject("_dataGridView.ShowHelp"));
             _dataGridView.DefaultValuesNeeded += OnDataGridViewDefaultValuesNeeded;
+            // 
+            // accountColumn
+            // 
+            resources.ApplyResources(accountColumn, "accountColumn");
+            accountColumn.Name = "accountColumn";
+            accountColumn.Resizable = DataGridViewTriState.True;
+            accountColumn.SortMode = DataGridViewColumnSortMode.Automatic;
+            // 
+            // debitColumn
+            // 
+            resources.ApplyResources(debitColumn, "debitColumn");
+            debitColumn.Name = "debitColumn";
+            // 
+            // creditColumn
+            // 
+            resources.ApplyResources(creditColumn, "creditColumn");
+            creditColumn.Name = "creditColumn";
+            // 
+            // descriptionColumn
+            // 
+            resources.ApplyResources(descriptionColumn, "descriptionColumn");
+            descriptionColumn.Name = "descriptionColumn";
             // 
             // previousButton
             // 
@@ -239,33 +260,11 @@ namespace Liber.Forms.Transactions
             firstButton.UseVisualStyleBackColor = true;
             firstButton.Click += OnFirstButtonClick;
             // 
-            // accountColumn
-            // 
-            resources.ApplyResources(accountColumn, "accountColumn");
-            accountColumn.Name = "accountColumn";
-            accountColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            accountColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // debitColumn
-            // 
-            resources.ApplyResources(debitColumn, "debitColumn");
-            debitColumn.Name = "debitColumn";
-            // 
-            // creditColumn
-            // 
-            resources.ApplyResources(creditColumn, "creditColumn");
-            creditColumn.Name = "creditColumn";
-            // 
-            // descriptionColumn
-            // 
-            resources.ApplyResources(descriptionColumn, "descriptionColumn");
-            descriptionColumn.Name = "descriptionColumn";
-            // 
             // TransactionForm
             // 
             AcceptButton = applyButton;
             resources.ApplyResources(this, "$this");
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(lastButton);
             Controls.Add(firstButton);
             Controls.Add(memoTextBox);

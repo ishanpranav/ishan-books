@@ -18,8 +18,9 @@ namespace Liber;
 public sealed class Company
 {
     private readonly Dictionary<Guid, Account> _accounts;
+    private readonly Dictionary<Guid, Transaction> _transactions;
     private readonly SortedSet<Account> _sortedAccounts;
-    private readonly SortedSet<Transaction> _transactions;
+    private readonly SortedSet<Transaction> _sortedTransactions;
     private readonly SortedSet<string> _names = new SortedSet<string>();
 
     private string? _name;
@@ -38,20 +39,11 @@ public sealed class Company
         }
     }
 
-    [JsonIgnore]
-    public IEnumerable<KeyValuePair<Guid, Account>> OrderedAccounts
-    {
-        get
-        {
-            return _accounts.OrderBy(x => x.Value);
-        }
-    }
-
     public IReadOnlyCollection<Transaction> Transactions
     {
         get
         {
-            return _transactions;
+            return _sortedTransactions;
         }
     }
 
@@ -251,7 +243,7 @@ public sealed class Company
     {
         get
         {
-            return _transactions.Min;
+            return _sortedTransactions.Min;
         }
     }
 
@@ -260,10 +252,11 @@ public sealed class Company
     {
         get
         {
-            return _transactions.Max;
+            return _sortedTransactions.Max;
         }
     }
 
+    public event EventHandler? Invalidated;
     public event EventHandler? NameChanged;
     public event EventHandler? TypeChanged;
     public event EventHandler? ReportingChanged;
@@ -281,7 +274,8 @@ public sealed class Company
     {
         _accounts = new Dictionary<Guid, Account>();
         _sortedAccounts = new SortedSet<Account>();
-        _transactions = new SortedSet<Transaction>();
+        _transactions = new Dictionary<Guid, Transaction>();
+        _sortedTransactions = new SortedSet<Transaction>();
 
         ResetEquityAccount();
         ResetOtherEquityAccount();
@@ -295,45 +289,28 @@ public sealed class Company
     /// <param name="nextAccountNumber">The next account number to be assigned.</param>
     [JsonConstructor]
     public Company(
-        IReadOnlyDictionary<Guid, Account> accounts,
+        IReadOnlyCollection<Account> accounts,
         IReadOnlyCollection<Transaction> transactions,
         decimal nextAccountNumber,
         decimal nextTransactionNumber)
     {
-        _accounts = new Dictionary<Guid, Account>(accounts);
-        _sortedAccounts = new SortedSet<Account>(accounts.Values);
-        _transactions = new SortedSet<Transaction>(transactions);
+        _accounts = accounts.ToDictionary(x => x.Id);
+        _sortedAccounts = new SortedSet<Account>(accounts);
+        _transactions = transactions.ToDictionary(x => x.Id);
+        _sortedTransactions = new SortedSet<Transaction>(transactions);
         NextAccountNumber = nextAccountNumber;
+        NextTransactionNumber = nextTransactionNumber;
 
-        foreach (KeyValuePair<Guid, Account> account in accounts)
+        foreach (Account account in accounts)
         {
-            InitializeAccount(account.Value);
-
-            if (account.Value.ParentId != Guid.Empty)
-            {
-                accounts[account.Value.ParentId].children.Add(account.Value);
-            }
+            InitializeAccount(account);
+            AddChild(account, account.ParentId);
         }
 
         foreach (Transaction transaction in transactions)
         {
-            AddName(transaction);
-
-            if (string.IsNullOrWhiteSpace(transaction.Memo))
-            {
-                transaction.Memo = GetSuggestedMemo(transaction);
-            }
-
-            foreach (Line line in transaction.Lines)
-            {
-                if (string.IsNullOrWhiteSpace(line.Description))
-                {
-                    line.Description = null;
-                }
-
-                accounts[line.AccountId].lines.Add(line);
-                line.Transaction = transaction;
-            }
+            InitializeTransaction(transaction);
+            AddLines(transaction, transaction.Lines);
         }
     }
 
@@ -355,7 +332,8 @@ public sealed class Company
         Account value = new Account()
         {
             Name = Resources.DefaultOtherEquityAccountName,
-            Type = AccountType.Equity
+            Type = AccountType.Equity,
+            CashFlow = CashFlow.OtherEquity
         };
 
         AddAccount(value, Guid.Empty);
@@ -428,16 +406,13 @@ public sealed class Company
 
         value.Id = Guid.NewGuid();
 
-        if (_accounts.ContainsKey(value.Id))
-        {
-            throw new InvalidOperationException();
-        }
-
         InitializeAccount(value);
         AddChild(value, parentId);
-        NextAccountNumber = Math.Max(value.Number, NextAccountNumber) + 1;
         _accounts.Add(value.Id, value);
         _sortedAccounts.Add(value);
+
+        NextAccountNumber = Math.Max(value.Number, NextAccountNumber) + 1;
+
         AccountAdded?.Invoke(sender: this, new GuidEventArgs(value.Id));
     }
 
@@ -473,7 +448,7 @@ public sealed class Company
             return false;
         }
 
-        if (value.children.Count > 0 || value.Lines.Count > 0)
+        if (value.children.Count > 0 || value.lines.Count > 0)
         {
             return false;
         }
@@ -488,13 +463,13 @@ public sealed class Company
 
     public Transaction? GetTransactionBefore(Transaction value)
     {
-        if (_transactions.Min == null || _transactions.Min >= value)
+        if (_sortedTransactions.Min == null || _sortedTransactions.Min >= value)
         {
             return null;
         }
 
-        return _transactions
-            .GetViewBetween(_transactions.Min, value)
+        return _sortedTransactions
+            .GetViewBetween(_sortedTransactions.Min, value)
             .Reverse()
             .Take(2)
             .Last();
@@ -507,7 +482,7 @@ public sealed class Company
             return null;
         }
 
-        return _transactions
+        return _sortedTransactions
             .GetViewBetween(value, LastTransaction)
             .Take(2)
             .Last();
@@ -521,45 +496,28 @@ public sealed class Company
     /// <returns>A collection of transactions within the specified date range.</returns>
     public IReadOnlySet<Transaction> GetTransactionsBetween(DateTime started, DateTime posted)
     {
-        return _transactions.GetViewBetween(
+        return _sortedTransactions.GetViewBetween(
             new Transaction() { Posted = started },
             new Transaction() { Posted = posted.AddDays(1) });
     }
 
-    public void AddTransaction(Transaction value)
+    private void InitializeTransaction(Transaction value)
     {
-        decimal balance = 0;
-
-        foreach (Line line in value.Lines)
+        if (string.IsNullOrWhiteSpace(value.Name))
         {
-            Account account = _accounts[line.AccountId];
-
-            if (string.IsNullOrWhiteSpace(line.Description))
-            {
-                line.Description = null;
-            }
-
-            balance += line.Balance;
-            line.Transaction = value;
-            account.lines.Add(line);
+            value.Name = null;
         }
-
-        if (balance != 0)
+        else
         {
-            throw new InvalidOperationException();
+            value.Name = value.Name.Trim();
+
+            _names.Add(value.Name);
         }
-
-        AddName(value);
-        _transactions.Add(value);
-
-        NextTransactionNumber = Math.Max(value.Number, NextTransactionNumber) + 1;
 
         if (string.IsNullOrWhiteSpace(value.Memo))
         {
             value.Memo = GetSuggestedMemo(value);
         }
-
-        TransactionAdded?.Invoke(sender: this, new GuidEventArgs(value.Id));
     }
 
     public string? GetSuggestedMemo(Transaction value)
@@ -594,33 +552,103 @@ public sealed class Company
         return null;
     }
 
-    public void RemoveTransaction(Transaction value)
+    private void AddLines(Transaction value, IReadOnlyCollection<Line> lines)
     {
-        foreach (Line line in value.Lines)
+        foreach (Line line in lines)
         {
-            line.Transaction = null;
-            _accounts[line.AccountId].lines.Remove(line);
-        }
+            Account account = _accounts[line.AccountId];
 
-        _transactions.Remove(value);
+            if (string.IsNullOrWhiteSpace(line.Description))
+            {
+                line.Description = null;
+            }
+
+            line.Transaction = value;
+            account.lines.Add(line);
+        }
     }
 
-    private void AddName(Transaction value)
+    private void RemoveLines(Transaction value)
     {
-        if (string.IsNullOrWhiteSpace(value.Name))
+        foreach (Line line in value.lines)
         {
-            value.Name = null;
+            _accounts[line.AccountId].lines.Remove(line);
+            line.Transaction = null;
         }
-        else
+
+        value.lines.Clear();
+    }
+
+    public void AddTransaction(Transaction value, IReadOnlyCollection<Line> lines)
+    {
+        if (value.Id != Guid.Empty || value.Balance != 0)
         {
-            value.Name = value.Name.Trim();
-            _names.Add(value.Name);
+            throw new InvalidOperationException();
         }
+
+        value.Id = Guid.NewGuid();
+
+        InitializeTransaction(value);
+        AddLines(value, lines);
+
+        foreach (Line line in lines)
+        {
+            value.lines.Add(line);
+        }
+
+        _transactions.Add(value.Id, value);
+        _sortedTransactions.Add(value);
+
+        NextTransactionNumber = Math.Max(value.Number, NextTransactionNumber) + 1;
+
+        TransactionAdded?.Invoke(sender: this, new GuidEventArgs(value.Id));
+    }
+
+    public void UpdateTransaction(Guid id, IReadOnlyCollection<Line> lines)
+    {
+        if (!_transactions.TryGetValue(id, out Transaction? value))
+        {
+            throw new InvalidOperationException();
+        }
+
+        RemoveLines(value);
+        AddLines(value, lines);
+
+        foreach (Line line in lines)
+        {
+            value.lines.Add(line);
+        }
+
+        NextTransactionNumber = Math.Max(value.Number, NextTransactionNumber);
+
+        _sortedTransactions.Remove(value);
+        _sortedTransactions.Add(value);
+        TransactionUpdated?.Invoke(sender: this, new GuidEventArgs(id));
+    }
+
+    public bool RemoveTransaction(Guid id)
+    {
+        if (!_transactions.TryGetValue(id, out Transaction? value))
+        {
+            throw new InvalidOperationException();
+        }
+
+        RemoveLines(value);
+        _transactions.Remove(id);
+        _sortedTransactions.Remove(value);
+        TransactionRemoved?.Invoke(sender: this, new GuidEventArgs(id));
+
+        return true;
+    }
+
+    public void RemoveTransaction(Transaction value)
+    {
+        _transactions.Remove(value.Id);
     }
 
     public IEnumerable<Transaction> GetTransfers()
     {
-        foreach (Transaction transaction in _transactions)
+        foreach (Transaction transaction in _sortedTransactions)
         {
             if (transaction.Lines.All(x => _accounts[x.AccountId].Type.IsAsset()))
             {
@@ -631,14 +659,14 @@ public sealed class Company
 
     public IEnumerable<Line> GetChecks()
     {
-        foreach (Account account in _accounts.Values)
+        foreach (Account account in _sortedAccounts)
         {
             if (account.Type != AccountType.Bank)
             {
                 continue;
             }
 
-            foreach (Line line in account.lines)
+            foreach (Line line in account.lines.Order())
             {
                 if (line.Transaction?.Name != null && line.Balance < 0)
                 {
@@ -650,14 +678,14 @@ public sealed class Company
 
     public IEnumerable<Line> GetDeposits()
     {
-        foreach (Account account in _accounts.Values)
+        foreach (Account account in _sortedAccounts)
         {
             if (account.Type != AccountType.Bank)
             {
                 continue;
             }
 
-            foreach (Line line in account.lines)
+            foreach (Line line in account.Lines.Order())
             {
                 if (line.Transaction?.Name != null && line.Balance > 0)
                 {
@@ -669,14 +697,14 @@ public sealed class Company
 
     public IEnumerable<Line> GetPayments()
     {
-        foreach (Account account in _accounts.Values)
+        foreach (Account account in _sortedAccounts)
         {
             if (account.Type != AccountType.CreditCard)
             {
                 continue;
             }
 
-            foreach (Line line in account.lines)
+            foreach (Line line in account.lines.Order())
             {
                 if (line.Balance > 0)
                 {
@@ -688,14 +716,14 @@ public sealed class Company
 
     public IEnumerable<Line> GetCharges()
     {
-        foreach (Account account in _accounts.Values)
+        foreach (Account account in _sortedAccounts)
         {
             if (account.Type != AccountType.CreditCard)
             {
                 continue;
             }
 
-            foreach (Line line in account.lines)
+            foreach (Line line in account.lines.Order())
             {
                 if (line.Balance < 0)
                 {
@@ -722,15 +750,14 @@ public sealed class Company
 
     public decimal GetBalance(Account account, Regex filter)
     {
-        if (account == _accounts[EquityAccountId] ||
-            account == _accounts[OtherEquityAccountId])
+        if (account.Id == EquityAccountId || account.Id == OtherEquityAccountId)
         {
-            return account.GetBalance(Started, filter);
+            return account.GetBalance(Posted, filter);
         }
 
         if (account.Type.IsTemporary())
         {
-            return account.GetBalance(Started, Posted, filter);
+            return account.GetBalance(Posted, Posted, filter);
         }
 
         return account.GetBalance(Posted, filter);
@@ -738,7 +765,7 @@ public sealed class Company
 
     private BalanceInfo ComputeBalances(Account account, ReportTypes type, DateTime started, DateTime posted, Regex filter)
     {
-        if (account == _accounts[EquityAccountId])
+        if (account.Id == EquityAccountId)
         {
             BalanceInfo result = new BalanceInfo()
             {
@@ -758,7 +785,7 @@ public sealed class Company
             return result;
         }
 
-        if (account == _accounts[OtherEquityAccountId])
+        if (account.Id == OtherEquityAccountId)
         {
             return new BalanceInfo()
             {
@@ -1080,14 +1107,18 @@ public sealed class Company
             other._sortedAccounts.Add(account.Value);
         }
 
-        foreach (Transaction transaction in _transactions)
+        foreach (KeyValuePair<Guid, Transaction> transaction in _transactions)
         {
-            other._transactions.Add(transaction);
+            other._transactions[transaction.Key] = transaction.Value;
+
+            other._sortedTransactions.Add(transaction.Value);
         }
 
         foreach (string name in _names)
         {
             other._names.Add(name);
         }
+
+        other.Invalidated?.Invoke(sender: this, EventArgs.Empty);
     }
 }

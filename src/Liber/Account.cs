@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Linq;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using CsvHelper.Configuration.Attributes;
@@ -198,23 +197,6 @@ public class Account :
         get
         {
             return lines;
-        }
-    }
-
-    /// <summary>
-    /// Gets the line items posted to the account, ordered chronologically by date with debits listed before credits and balances ordered by magnitude from greatest to least.
-    /// </summary>
-    /// <value>Gets the line items posted to the account, sorted in their natural order.</value>
-    [Browsable(false)]
-    [JsonIgnore]
-    public IOrderedEnumerable<Line> OrderedLines
-    {
-        get
-        {
-            return lines
-                .OrderBy(x => x.Transaction)
-                .ThenBy(x => x.Debit > 0 ? -1 : 1)
-                .ThenByDescending(x => Math.Abs(x.Balance));
         }
     }
 

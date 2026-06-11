@@ -11,7 +11,7 @@ namespace Liber.Forms.Transactions;
 
 internal sealed class ImportTransactionsForm : ImportForm
 {
-    private readonly Dictionary<Guid, Transaction> _transactions = new Dictionary<Guid, Transaction>();
+    private readonly Dictionary<Guid, (GnuCashLine, List<Line>)> lookup = new Dictionary<Guid, (GnuCashLine, List<Line>)>();
 
     public ImportTransactionsForm(Company company, IReadOnlyCollection<GnuCashLine> lines) : base(company)
     {
@@ -22,24 +22,17 @@ internal sealed class ImportTransactionsForm : ImportForm
             accounts.Add(account.Name, account.Id);
         }
 
+        
         foreach (GnuCashLine line in lines)
         {
-            if (!_transactions.TryGetValue(line.TransactionId, out Transaction? transaction))
+            if (!lookup.TryGetValue(line.TransactionId, out (GnuCashLine Line, List<Line> Values) result))
             {
-                transaction = new Transaction()
-                {
-                    Id = line.TransactionId,
-                    Number = line.TransactionNumber,
-                    Name = line.TransactionName,
-                    Posted = line.TransactionPosted,
-                    Memo = line.TransactionMemo
-                };
-                _transactions[line.TransactionId] = transaction;
+                result = (line, new List<Line>());
+                lookup[line.TransactionId] = result;
             }
 
             line.Value.AccountId = accounts[line.AccountName];
-
-            transaction.Lines.Add(line.Value);
+            result.Values.Add(line.Value);
         }
 
         SetDataSource(lines.Select(x => x.Value).ToList());
@@ -47,9 +40,15 @@ internal sealed class ImportTransactionsForm : ImportForm
 
     protected override void CommitChanges()
     {
-        foreach (Transaction transaction in _transactions.Values)
+        foreach (KeyValuePair<Guid, (GnuCashLine Line, List<Line> Values)> entry in lookup)
         {
-            Company.AddTransaction(transaction);
+            Company.AddTransaction(new Transaction()
+            {
+                Number = entry.Value.Line.TransactionNumber,
+                Name = entry.Value.Line.TransactionName,
+                Posted = entry.Value.Line.TransactionPosted,
+                Memo = entry.Value.Line.TransactionMemo,
+            }, entry.Value.Values);
         }
     }
 }

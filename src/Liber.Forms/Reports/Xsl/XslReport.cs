@@ -288,7 +288,9 @@ public class XslReport : IntervalView, IXmlSerializable
         writer.WriteElementString("name", value.Name);
         writer.WriteElementString("other-equity", XmlConvert.ToString(value.Lines.Any(x => x.AccountId == Company.OtherEquityAccountId)));
 
-        IOrderedEnumerable<Line> lines = value.OrderedLines.ThenBy(x => Company.GetAccount(x.AccountId).Number);
+        IOrderedEnumerable<Line> lines = value.Lines
+            .OrderBy(x => x)
+            .ThenBy(x => Company.GetAccount(x.AccountId).Number);
 
         foreach (Line line in lines)
         {

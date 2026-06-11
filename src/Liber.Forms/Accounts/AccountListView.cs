@@ -44,22 +44,22 @@ internal class AccountListView : ListViewEx
 
         try
         {
-            foreach (KeyValuePair<Guid, Account> account in company.OrderedAccounts)
+            foreach (Account account in company.Accounts)
             {
-                if (account.Value.Inactive)
+                if (account.Inactive)
                 {
                     continue;
                 }
 
-                ListViewItem item = Items.Add(account.Key.ToString(), account.Value.Name, imageIndex: 0);
-                AccountType type = account.Value.Type;
+                ListViewItem item = Items.Add(account.Id.ToString(), account.Name, imageIndex: 0);
+                AccountType type = account.Type;
                 string key = type.ToString();
 
                 item.Tag = account;
                 item.Group = Groups[key];
-                item.SubItems.Add(account.Value.Number.ToString());
+                item.SubItems.Add(account.Number.ToString());
 
-                if (checkedAccounts.Contains(account.Value))
+                if (checkedAccounts.Contains(account))
                 {
                     item.Checked = true;
                 }
@@ -81,7 +81,7 @@ internal class AccountListView : ListViewEx
             return Guid.Empty;
         }
 
-        return ((KeyValuePair<Guid, Account>)SelectedItems[0].Tag!).Key;
+        return ((Account)SelectedItems[0].Tag!).Id;
     }
 
     public IReadOnlySet<Account> GetCheckedAccounts()
@@ -90,7 +90,7 @@ internal class AccountListView : ListViewEx
 
         foreach (ListViewItem item in CheckedItems)
         {
-            accounts.Add(((KeyValuePair<Guid, Account>)item.Tag!).Value);
+            accounts.Add(((Account)item.Tag!));
         }
 
         return accounts;

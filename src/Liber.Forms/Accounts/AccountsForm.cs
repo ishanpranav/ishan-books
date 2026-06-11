@@ -46,9 +46,9 @@ internal sealed partial class AccountsForm : Form
         _listView.BeginUpdate();
         _listView.Items.Clear();
 
-        foreach (KeyValuePair<Guid, Account> account in _company.OrderedAccounts)
+        foreach (Account account in _company.Accounts)
         {
-            InitializeAccount(account.Key, account.Value);
+            InitializeAccount(account);
         }
 
         _listView.AutoResizeColumns();
@@ -56,7 +56,7 @@ internal sealed partial class AccountsForm : Form
         _listView.EndUpdate();
     }
 
-    private void InitializeAccount(Guid id, Account value)
+    private void InitializeAccount(Account value)
     {
         if (value.Inactive && !inactiveToolStripMenuItem.Checked)
         {
@@ -65,11 +65,11 @@ internal sealed partial class AccountsForm : Form
 
         ListViewItem item = _listView.Items.Add(new ListViewItem()
         {
-            Tag = id
+            Tag = value.Id
         });
 
         AddSubItems(item, value);
-        _items.Add(id, item);
+        _items.Add(value.Id, item);
     }
 
     private void InitializeTransaction(Guid id)
@@ -88,19 +88,18 @@ internal sealed partial class AccountsForm : Form
 
         TransactionForm form = new TransactionForm(_company);
         DateTime lastPosted = Settings.Default.LastPosted;
-        Transaction transaction = new Transaction()
+        Line[] lines = id == Guid.Empty ? Array.Empty<Line>() : new Line[]
+        {
+            new Line()
+            {
+                AccountId = id
+            }
+        };
+        Transaction transaction = new Transaction(Guid.Empty, lines)
         {
             Posted = lastPosted == default ? DateTime.Today : lastPosted,
             Number = _company.NextTransactionNumber
         };
-
-        if (id != Guid.Empty)
-        {
-            transaction.Lines.Add(new Line()
-            {
-                AccountId = id
-            });
-        }
 
         form.InitializeTransaction(transaction);
         _factory.Register(key, form);
@@ -166,7 +165,7 @@ internal sealed partial class AccountsForm : Form
 
     private void OnCompanyAccountAdded(object? sender, GuidEventArgs e)
     {
-        InitializeAccount(e.Id, _company.GetAccount(e.Id));
+        InitializeAccount(_company.GetAccount(e.Id));
         _listView.AutoResizeColumns();
     }
 

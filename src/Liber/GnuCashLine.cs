@@ -109,7 +109,7 @@ public class GnuCashLine
     {
         get
         {
-            return Value.Reconciled.HasValue;
+            return Value.Transaction?.Reconciled != null;
         }
     }
 
