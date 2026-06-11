@@ -17,6 +17,8 @@ public class Tokenizer : IEnumerable<Token>
 
     public string Text { get; }
     public CultureInfo Culture { get; }
+    public bool AllowMismatchedBracket { get; set; }
+    public bool AllowUnclosedBracket { get; set; }
 
     public Tokenizer(string text, CultureInfo culture)
     {
@@ -34,7 +36,7 @@ public class Tokenizer : IEnumerable<Token>
 
             if (_offset >= Text.Length)
             {
-                if (_brackets.TryPeek(out (char Current, int Offset) result))
+                if (!AllowUnclosedBracket && _brackets.TryPeek(out (char Current, int Offset) result))
                 {
                     throw new MathEngineException(result.Offset, length: 1);
                 }
@@ -146,13 +148,16 @@ public class Tokenizer : IEnumerable<Token>
 
                 (char expected, int expectedOffset) = _brackets.Pop();
 
-                if (expected == '(' && current != ')' ||
-                    expected == '[' && current != ']' ||
-                    expected == '{' && current != '}')
+                if (!AllowMismatchedBracket)
                 {
-                    throw new MismatchException(
-                        _offset, length: 1,
-                        expectedOffset, expectedLength: 1);
+                    if (expected == '(' && current != ')' ||
+                        expected == '[' && current != ']' ||
+                        expected == '{' && current != '}')
+                    {
+                        throw new MismatchException(
+                            _offset, length: 1,
+                            expectedOffset, expectedLength: 1);
+                    }
                 }
 
                 return new Token(TokenType.Right, current.ToString(), _offset++);

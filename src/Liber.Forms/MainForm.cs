@@ -17,6 +17,7 @@ using Liber.Forms.Companies;
 using Liber.Forms.Lines;
 using Liber.Forms.Properties;
 using Liber.Forms.Reports;
+using Liber.Forms.Reports.Gdi;
 using Liber.Forms.Saving;
 using Liber.Forms.Transactions;
 using Liber.Forms.Writers;
@@ -66,28 +67,29 @@ internal sealed partial class MainForm : Form
             await ImportAsync(_recentPathManager.Paths.First());
         }
 
-        ReportsForm form = new ReportsForm(_engine);
-
-        form.Load += (_, _) =>
+        if (_engine.TryGetReport(ReportEngine.AccountMapReport, out IntervalView? report))
         {
-            if (_engine.Views.TryGetValue("account-map", out IReportView? view) &&
-                view.Properties is IntervalView report)
+            report.Title = _company.DisplayName;
+            report.Started = _company.Started;
+            report.Posted = _company.Posted;
+            _favoriteReport = report;
+            _company.NameChanged += (_, _) =>
             {
                 report.Title = _company.DisplayName;
-                _company.NameChanged += (_, _) =>
-                {
-                    report.Title = _company.DisplayName;
-                };
-                _favoriteReport = report;
+            };
 
+            ReportsForm form = new ReportsForm(_engine);
+
+            form.Load += (_, _) =>
+            {
                 RefreshFavoriteReport();
                 _timer.Start();
-            }
-        };
-        form.Edited += OnReportsFormEdited;
-        form.FormClosed += OnReportsFormEdited;
+            };
+            form.Edited += OnReportsFormEdited;
+            form.FormClosed += OnReportsFormEdited;
 
-        _factory.RegisterEmbedded(Guid.NewGuid(), parent: this, form);
+            _factory.RegisterEmbedded(Guid.NewGuid(), parent: this, form);
+        }
     }
 
     private void OnReportsFormEdited(object? sender, EventArgs e)
@@ -121,7 +123,7 @@ internal sealed partial class MainForm : Form
                 .ToHashSet());
         _isFavoriteTemporary = !_isFavoriteTemporary;
 
-        form.InitializeReport("account-map");
+        form.InitializeReport(ReportEngine.AccountMapReport);
     }
 
     private void InitializeRecentPaths()
@@ -650,7 +652,7 @@ internal sealed partial class MainForm : Form
 
     private void OnAccountsToolStripMenuItemClick(object sender, EventArgs e)
     {
-        _factory.AutoRegister(() => new AccountsForm(_company, _factory));
+        _factory.AutoRegister(() => new AccountsForm(_company, _factory, _engine!));
     }
 
     private void OnNewAccountToolStripMenuItemClick(object sender, EventArgs e)
@@ -735,7 +737,7 @@ internal sealed partial class MainForm : Form
 
             IReadOnlyCollection<GnuCashAccount> accounts = await GnuCashSerializer.DeserializeAsync<GnuCashAccount>(input);
 
-            _factory.Register(Guid.NewGuid(), new ImportAccountsForm(_company, _factory, accounts));
+            _factory.Register(Guid.NewGuid(), new ImportAccountsForm(_company, _factory, _engine!, accounts));
         });
     }
 
@@ -775,21 +777,27 @@ internal sealed partial class MainForm : Form
 
     private void OnCheckToolStripMenuItemClick(object sender, EventArgs e)
     {
+        if (!_engine!.TryGetReport(ReportEngine.CheckReport, out GdiCheckReport? report))
+        {
+            return;
+        }
+
         using CheckDialog checkForm = new CheckDialog(new CheckView(_company));
 
-        if (checkForm.ShowDialog() == DialogResult.OK)
+        if (checkForm.ShowDialog() != DialogResult.OK)
         {
-            Guid key = Guid.NewGuid();
-            ReportsForm form = new ReportsForm(_engine!);
-
-            form.Load += (sender, e) =>
-            {
-                form.InitializeCheck(checkForm.Value);
-            };
-
-            _factory.Kill(key);
-            _factory.Register(key, form);
+            return;
         }
+
+        report.Check = checkForm.Value;
+
+        Guid key = Guid.NewGuid();
+        ReportsForm form = new ReportsForm(_engine);
+
+        form.Load += (sender, e) => form.InitializeReport(ReportEngine.CheckReport);
+
+        _factory.Kill(key);
+        _factory.Register(key, form);
     }
 
     private void OnReportsToolStripMenuItemClick(object sender, EventArgs e)

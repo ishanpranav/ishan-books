@@ -235,7 +235,7 @@
     <value>Design</value>
   </data>
   <data name="_d_Account" xml:space="preserve">
-    <value>Determines the account used in the report. The 'Transactions' and 'Accounts' fields are mutually exclusive.</value>
+    <value>Determines the account used in the report.</value>
   </data>
   <data name="_d_AccountPayable" xml:space="preserve">
     <value>Account Payable</value>
@@ -244,7 +244,7 @@
     <value>Account Receivable</value>
   </data>
   <data name="_d_Accounts" xml:space="preserve">
-    <value>Determines the accounts included in the report. The 'Transactions' and 'Accounts' fields are mutually exclusive.</value>
+    <value>Determines the accounts included in the report.</value>
   </data>
   <data name="_d_Annually" xml:space="preserve">
     <value>Annually</value>

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
+using Liber.Forms.Reports;
 
 namespace Liber.Forms.Components;
 

@@ -1,4 +1,6 @@
-﻿namespace Liber.Forms.Accounts
+﻿using System.Windows.Forms;
+
+namespace Liber.Forms.Accounts
 {
     partial class AccountForm
     {
@@ -40,7 +42,7 @@
             label3 = new System.Windows.Forms.Label();
             label4 = new System.Windows.Forms.Label();
             placeholderCheckBox = new System.Windows.Forms.CheckBox();
-            parentComboBox = new AccountComboBox();
+            parentComboBox = new ComboBox();
             label5 = new System.Windows.Forms.Label();
             label6 = new System.Windows.Forms.Label();
             label7 = new System.Windows.Forms.Label();
@@ -267,7 +269,7 @@
         protected System.Windows.Forms.TextBox descriptionTextBox;
         protected System.Windows.Forms.ColorButton _colorButton;
         private System.Windows.Forms.Label label7;
-        protected AccountComboBox parentComboBox;
+        protected ComboBox parentComboBox;
         protected System.Windows.Forms.CheckBox inactiveCheckBox;
         private System.Windows.Forms.Label label9;
         protected System.Windows.Forms.CheckBox taxTypeCheckBox;

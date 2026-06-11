@@ -53,11 +53,6 @@ internal sealed partial class ReportsForm : Form
 
             item.ImageIndex = _imageList.Images.Count - 1;
             item.Tag = view.Value;
-
-            if (view.Value.Properties is IntervalView report)
-            {
-                report.Accounts = new AccountsView(report.Accounts.Company);
-            }
         }
     }
 
@@ -89,23 +84,6 @@ internal sealed partial class ReportsForm : Form
         if (View != null && !_backgroundWorker.IsBusy)
         {
             _backgroundWorker.RunWorkerAsync();
-        }
-    }
-
-    public void InitializeCheck(CheckView value)
-    {
-        foreach (ListViewItem item in _listView.Items)
-        {
-            View = (IReportView)item.Tag!;
-
-            if (View.Properties is GdiCheckReport checkReport)
-            {
-                checkReport.Check = value;
-
-                InitializeReport();
-
-                break;
-            }
         }
     }
 

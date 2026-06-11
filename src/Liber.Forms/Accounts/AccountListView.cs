@@ -10,7 +10,7 @@ using Humanizer;
 
 namespace Liber.Forms.Accounts;
 
-internal sealed class AccountListView : ListViewEx
+internal class AccountListView : ListViewEx
 {
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public new ListViewItemCollection Items

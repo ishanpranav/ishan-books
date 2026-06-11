@@ -1,4 +1,6 @@
-﻿namespace Liber.Forms.Companies;
+﻿using System.Windows.Forms;
+
+namespace Liber.Forms.Companies;
 
 partial class CompanyForm
 {
@@ -38,9 +40,9 @@ partial class CompanyForm
         label3 = new System.Windows.Forms.Label();
         _colorButton = new System.Windows.Forms.ColorButton();
         label2 = new System.Windows.Forms.Label();
-        equityAccountComboBox = new Liber.Forms.Accounts.AccountComboBox();
+        equityAccountComboBox = new ComboBox();
         label5 = new System.Windows.Forms.Label();
-        otherEquityAccountComboBox = new Liber.Forms.Accounts.AccountComboBox();
+        otherEquityAccountComboBox = new ComboBox();
         closingAccountsGroupBox = new System.Windows.Forms.GroupBox();
         label4 = new System.Windows.Forms.Label();
         label6 = new System.Windows.Forms.Label();
@@ -297,10 +299,10 @@ partial class CompanyForm
     private System.Windows.Forms.Label label2;
     protected System.Windows.Forms.TextBox passwordTextBox;
     private System.Windows.Forms.Label label3;
-    private Accounts.AccountComboBox equityAccountComboBox;
+    private ComboBox equityAccountComboBox;
     private System.Windows.Forms.Label label4;
     private System.Windows.Forms.Label label5;
-    private Accounts.AccountComboBox otherEquityAccountComboBox;
+    private ComboBox otherEquityAccountComboBox;
     protected System.Windows.Forms.GroupBox closingAccountsGroupBox;
     private System.Windows.Forms.ComboBox typeComboBox;
     private System.Windows.Forms.Label label6;

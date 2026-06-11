@@ -25,7 +25,7 @@ internal sealed class NewAccountView : IAccountView
     {
         get
         {
-            return Guid.Empty;
+            return typeof(NewAccountView).GUID;
         }
     }
 

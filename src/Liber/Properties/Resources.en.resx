@@ -118,21 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CheckMemo" xml:space="preserve">
-    <value>Check</value>
-  </data>
-  <data name="DefaultCompanyName" xml:space="preserve">
-    <value>Untitled Company</value>
-  </data>
-  <data name="DefaultEquityAccountName" xml:space="preserve">
-    <value>Retained Earnings</value>
-  </data>
-  <data name="DefaultOtherEquityAccountName" xml:space="preserve">
-    <value>Accumulated Other Comprehensive Income</value>
-  </data>
-  <data name="DepositMemo" xml:space="preserve">
-    <value>Deposit</value>
-  </data>
-  <data name="TransferMemo" xml:space="preserve">
-    <value>Funds Transfer</value>
+    <value>Cheque</value>
   </data>
 </root>

@@ -100,7 +100,7 @@ public sealed class Company
         }
     }
 
-    public Color Color { get; set; } = Color.FromArgb(red: 224, green: 220, blue: 228);
+    public Color Color { get; set; } = ColorTranslator.FromHtml("#ccedff");
     public Guid EquityAccountId { get; set; }
     public Guid OtherEquityAccountId { get; set; }
 
@@ -300,6 +300,8 @@ public sealed class Company
 
         foreach (KeyValuePair<Guid, Account> account in accounts)
         {
+            InitializeAccount(account.Value);
+
             if (account.Value.ParentId != Guid.Empty)
             {
                 accounts[account.Value.ParentId].children.Add(account.Value);
@@ -310,8 +312,18 @@ public sealed class Company
         {
             AddName(transaction);
 
+            if (string.IsNullOrWhiteSpace(transaction.Memo))
+            {
+                transaction.Memo = GetSuggestedMemo(transaction);
+            }
+
             foreach (Line line in transaction.Lines)
             {
+                if (string.IsNullOrWhiteSpace(line.Description))
+                {
+                    line.Description = null;
+                }
+
                 accounts[line.AccountId].lines.Add(line);
                 line.Transaction = transaction;
             }
@@ -369,10 +381,29 @@ public sealed class Company
         }
     }
 
+    private void InitializeAccount(Account value)
+    {
+        if (string.IsNullOrWhiteSpace(value.Memo))
+        {
+            value.Memo = null;
+        }
+
+        if (string.IsNullOrWhiteSpace(value.Description))
+        {
+            value.Description = null;
+        }
+
+        if (value.Color == Color)
+        {
+            value.Color = default;
+        }
+    }
+
     public Guid AddAccount(Account value, Guid parentId)
     {
         Guid result = Guid.NewGuid();
 
+        InitializeAccount(value);
         AddChild(value, parentId);
         NextAccountNumber = Math.Max(value.Number, NextAccountNumber) + 1;
         _accounts.Add(result, value);
@@ -458,12 +489,25 @@ public sealed class Company
 
     public void AddTransaction(Transaction value)
     {
+        decimal balance = 0;
+
         foreach (Line line in value.Lines)
         {
             Account account = _accounts[line.AccountId];
 
+            if (string.IsNullOrWhiteSpace(line.Description))
+            {
+                line.Description = null;
+            }
+
+            balance += line.Balance;
             line.Transaction = value;
             account.lines.Add(line);
+        }
+
+        if (balance != 0)
+        {
+            throw new InvalidOperationException();
         }
 
         AddName(value);
@@ -477,7 +521,7 @@ public sealed class Company
         }
     }
 
-    private string? GetSuggestedMemo(Transaction value)
+    public string? GetSuggestedMemo(Transaction value)
     {
         if (value.Lines.Count == 0)
         {
@@ -493,9 +537,17 @@ public sealed class Company
             .Where(x => _accounts[x.AccountId].Type == AccountType.Bank)
             .ToList();
 
-        if (bankLines.Count > 0 && bankLines.TrueForAll(x => x.Balance > 0))
+        if (bankLines.Count > 0)
         {
-            return Resources.DepositMemo;
+            if (bankLines.TrueForAll(x => x.Balance > 0))
+            {
+                return Resources.DepositMemo;
+            }
+
+            if (bankLines.TrueForAll(x => x.Balance < 0))
+            {
+                return Resources.CheckMemo;
+            }
         }
 
         return null;
@@ -625,6 +677,22 @@ public sealed class Company
         }
 
         return result;
+    }
+
+    public decimal GetBalance(Account account, Regex filter)
+    {
+        if (account == _accounts[EquityAccountId] ||
+            account == _accounts[OtherEquityAccountId])
+        {
+            return account.GetBalance(Started, filter);
+        }
+
+        if (account.Type.IsTemporary())
+        {
+            return account.GetBalance(Started, Posted, filter);
+        }
+
+        return account.GetBalance(Posted, filter);
     }
 
     private BalanceInfo ComputeBalances(Account account, ReportTypes type, DateTime started, DateTime posted, Regex filter)

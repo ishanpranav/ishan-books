@@ -19,8 +19,6 @@ internal static class Colors
     public static readonly Color IntenseCherry = ColorTranslator.FromHtml("#c33149");
     public static readonly Color FlagRed = ColorTranslator.FromHtml("#c1292e");
     public static readonly Color TigerFlame = ColorTranslator.FromHtml("#f05d23");
-    public static readonly Color ToastedAlmond = ColorTranslator.FromHtml("#ea8c55");
-    public static readonly Color AmberGlow = ColorTranslator.FromHtml("#ff9f1c");
     public static readonly Color HoneyBronze = ColorTranslator.FromHtml("#f6ae2d");
     public static readonly Color JungleTeal = ColorTranslator.FromHtml("#5b9279");
     public static readonly Color DarkFrozenWater = ColorTranslator.FromHtml("#c7ede4");

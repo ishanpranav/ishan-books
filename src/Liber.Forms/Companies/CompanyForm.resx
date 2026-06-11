@@ -614,7 +614,7 @@
     <value>0</value>
   </data>
   <data name="customStartedDatePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>166, 93</value>
+    <value>166, 94</value>
   </data>
   <data name="customStartedDatePicker.ShowHelp" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -638,7 +638,7 @@
     <value>1</value>
   </data>
   <data name="customPostedDatePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>283, 93</value>
+    <value>283, 94</value>
   </data>
   <data name="customPostedDatePicker.ShowHelp" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -812,13 +812,13 @@
     <value>MMMM d</value>
   </data>
   <data name="fiscalYearStartedDatePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>183, 113</value>
+    <value>113, 113</value>
   </data>
   <data name="fiscalYearStartedDatePicker.ShowHelp" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="fiscalYearStartedDatePicker.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 23</value>
+    <value>146, 23</value>
   </data>
   <data name="fiscalYearStartedDatePicker.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -839,13 +839,13 @@
     <value>MMMM d</value>
   </data>
   <data name="fiscalYearPostedDatePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>300, 113</value>
+    <value>265, 113</value>
   </data>
   <data name="fiscalYearPostedDatePicker.ShowHelp" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="fiscalYearPostedDatePicker.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 23</value>
+    <value>146, 23</value>
   </data>
   <data name="fiscalYearPostedDatePicker.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -869,7 +869,7 @@
     <value>NoControl</value>
   </data>
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 117</value>
+    <value>10, 117</value>
   </data>
   <data name="label7.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>

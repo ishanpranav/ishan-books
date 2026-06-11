@@ -24,22 +24,10 @@ internal sealed class EditAccountForm : AccountForm
         TaxType = account.TaxType;
         inactiveCheckBox.Checked = account.Inactive;
         CashFlow = account.CashFlow;
-
-        parentComboBox.Items.Add(NullAccountView.Value);
-        parentComboBox.Initialize(company, x => x != Id);
-
-        parentComboBox.SelectedItem = account.ParentId;
-
-        //if (Id == company.EquityAccountId || Id == company.OtherEquityAccountId)
-        //{
-        //    placeholderCheckBox.Checked = true;
-        //    placeholderCheckBox.Enabled = false;
-        //}
-        //else if (account.Lines.Count > 0)
-        //{
-        //    placeholderCheckBox.Checked = false;
-        //    placeholderCheckBox.Enabled = false;
-        //}
+        parentComboBox.DataSource = new AccountViewBindingList(company, x => x != Id);
+        parentComboBox.ValueMember = nameof(IAccountView.Id);
+        parentComboBox.DisplayMember = nameof(IAccountView.DisplayName);
+        parentComboBox.SelectedValue = account.ParentId;
     }
 
     public Guid Id { get; }
@@ -49,6 +37,6 @@ internal sealed class EditAccountForm : AccountForm
         Account account = Company.Accounts[Id];
 
         ApplyChanges(account);
-        Company.UpdateAccount(Id, parentComboBox.SelectedItem);
+        Company.UpdateAccount(Id, (Guid?)parentComboBox.SelectedValue ?? Guid.Empty);
     }
 }

@@ -2,8 +2,6 @@
 // Copyright (c) 2023-2026 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
-using System.Drawing;
-
 namespace System.Windows.Forms;
 
 public class DataGridViewColorColumn : DataGridViewColumn
@@ -16,19 +14,14 @@ public class DataGridViewColorColumn : DataGridViewColumn
         }
         set
         {
-            if (value is not DataGridViewColorCell)
+            if (value != null && !value.GetType().IsAssignableFrom(typeof(DataGridViewColorCell)))
             {
-                throw new InvalidOperationException();
+                throw new InvalidCastException("Must be a DataGridViewColorCell");
             }
 
             base.CellTemplate = value;
         }
     }
 
-    public DataGridViewColorColumn() : base(new DataGridViewColorCell())
-    {
-        ValueType = typeof(Color);
-        Width = 80;
-        SortMode = DataGridViewColumnSortMode.NotSortable;
-    }
+    public DataGridViewColorColumn() : base(new DataGridViewColorCell()) { }
 }

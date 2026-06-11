@@ -14,6 +14,7 @@
     <GenerateResourceWarnOnBinaryFormatterUse>false</GenerateResourceWarnOnBinaryFormatterUse>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
     <StartupObject>Liber.Forms.Program</StartupObject>
+    <ForceDesignerDpiUnaware>true</ForceDesignerDpiUnaware>
 	</PropertyGroup>
 
 	<ItemGroup>
