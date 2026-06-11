@@ -153,7 +153,7 @@
     <value>True</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 34</value>
+    <value>12, 33</value>
   </data>
   <data name="label1.ShowHelp" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -183,7 +183,7 @@
     <value>True</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>180, 34</value>
+    <value>180, 33</value>
   </data>
   <data name="label2.ShowHelp" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -239,30 +239,6 @@
   <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>132, 17</value>
   </metadata>
-  <data name="toolStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="toolStrip1.ShowHelp" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="toolStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>584, 25</value>
-  </data>
-  <data name="toolStrip1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;toolStrip1.Name" xml:space="preserve">
-    <value>toolStrip1</value>
-  </data>
-  <data name="&gt;&gt;toolStrip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStrip1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;toolStrip1.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
   <data name="newToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -297,6 +273,25 @@
   <data name="saveToolStripButton.Text" xml:space="preserve">
     <value>&amp;Save</value>
   </data>
+  <data name="printToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADkSURBVEhL7ZVBCoMwEEU9WvFAOUOPUUMWPYG9QVZ2kVPk
+        CG0X0aXlCxPqJEQnSDet8EBk/n9RojYNO0II53Ec5xqQ5X3JQQJjjAixoG1bEVUCrfX8fLyKYOYvKPIj
+        gmmaTiGEK4aIGgGBLnTGclz03q9eHISUUktBCcxg9jNrrV1EiwQ2lGPoSCBBdwMTrbjvb8kjkIIOdNHn
+        YyXAwDDc5+7SJUEJRQHK6byWouAIdgn4btlCLOC7YguezQo4fGU5MMNzicA5F18SQirgeXRGQQ6pgOcJ
+        /ln63i+T3/IWYkENOcEb9ijlT2vCVM8AAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="printToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="printToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="printToolStripButton.Text" xml:space="preserve">
+    <value>&amp;Print</value>
+  </data>
   <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 25</value>
   </data>
@@ -317,24 +312,29 @@
   <data name="copyToolStripButton.Text" xml:space="preserve">
     <value>&amp;Duplicate</value>
   </data>
-  <data name="printToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADkSURBVEhL7ZVBCoMwEEU9WvFAOUOPUUMWPYG9QVZ2kVPk
-        CG0X0aXlCxPqJEQnSDet8EBk/n9RojYNO0II53Ec5xqQ5X3JQQJjjAixoG1bEVUCrfX8fLyKYOYvKPIj
-        gmmaTiGEK4aIGgGBLnTGclz03q9eHISUUktBCcxg9jNrrV1EiwQ2lGPoSCBBdwMTrbjvb8kjkIIOdNHn
-        YyXAwDDc5+7SJUEJRQHK6byWouAIdgn4btlCLOC7YguezQo4fGU5MMNzicA5F18SQirgeXRGQQ6pgOcJ
-        /ln63i+T3/IWYkENOcEb9ijlT2vCVM8AAAAASUVORK5CYII=
-</value>
+  <data name="toolStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
-  <data name="printToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
+  <data name="toolStrip1.ShowHelp" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="printToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+  <data name="toolStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>584, 25</value>
   </data>
-  <data name="printToolStripButton.Text" xml:space="preserve">
-    <value>&amp;Print</value>
+  <data name="toolStrip1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;toolStrip1.Name" xml:space="preserve">
+    <value>toolStrip1</value>
+  </data>
+  <data name="&gt;&gt;toolStrip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStrip1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;toolStrip1.ZOrder" xml:space="preserve">
+    <value>12</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="cancelButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -440,7 +440,7 @@
     <value>6</value>
   </data>
   <data name="accountColumn.Width" type="System.Int32, mscorlib">
-    <value>77</value>
+    <value>78</value>
   </data>
   <metadata name="debitColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -452,7 +452,7 @@
     <value>6</value>
   </data>
   <data name="debitColumn.Width" type="System.Int32, mscorlib">
-    <value>60</value>
+    <value>63</value>
   </data>
   <metadata name="creditColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -464,7 +464,7 @@
     <value>6</value>
   </data>
   <data name="creditColumn.Width" type="System.Int32, mscorlib">
-    <value>64</value>
+    <value>66</value>
   </data>
   <metadata name="descriptionColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -476,7 +476,7 @@
     <value>6</value>
   </data>
   <data name="descriptionColumn.Width" type="System.Int32, mscorlib">
-    <value>92</value>
+    <value>96</value>
   </data>
   <data name="_dataGridView.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 118</value>
@@ -497,7 +497,7 @@
     <value>_dataGridView</value>
   </data>
   <data name="&gt;&gt;_dataGridView.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewEx, Liber.Forms, Culture=neutral, PublicKeyToken=null</value>
+    <value>Liber.Forms.Transactions.TransactionGridView, Liber.Forms, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;_dataGridView.Parent" xml:space="preserve">
     <value>$this</value>
@@ -509,7 +509,7 @@
     <value>Top, Right</value>
   </data>
   <data name="previousButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>416, 59</value>
+    <value>416, 60</value>
   </data>
   <data name="previousButton.ShowHelp" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -539,7 +539,7 @@
     <value>Top, Right</value>
   </data>
   <data name="nextButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>497, 59</value>
+    <value>497, 60</value>
   </data>
   <data name="nextButton.ShowHelp" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -692,7 +692,7 @@
     <value>NoControl</value>
   </data>
   <data name="lastButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>497, 33</value>
+    <value>497, 31</value>
   </data>
   <data name="lastButton.ShowHelp" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -725,7 +725,7 @@
     <value>NoControl</value>
   </data>
   <data name="firstButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>416, 33</value>
+    <value>416, 31</value>
   </data>
   <data name="firstButton.ShowHelp" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -785,6 +785,12 @@
   <data name="&gt;&gt;saveToolStripButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;printToolStripButton.Name" xml:space="preserve">
+    <value>printToolStripButton</value>
+  </data>
+  <data name="&gt;&gt;printToolStripButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;toolStripSeparator3.Name" xml:space="preserve">
     <value>toolStripSeparator3</value>
   </data>
@@ -797,17 +803,17 @@
   <data name="&gt;&gt;copyToolStripButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;printToolStripButton.Name" xml:space="preserve">
-    <value>printToolStripButton</value>
+  <data name="&gt;&gt;_helpProvider.Name" xml:space="preserve">
+    <value>_helpProvider</value>
   </data>
-  <data name="&gt;&gt;printToolStripButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;_helpProvider.Type" xml:space="preserve">
+    <value>System.Windows.Forms.HelpProvider, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;accountColumn.Name" xml:space="preserve">
     <value>accountColumn</value>
   </data>
   <data name="&gt;&gt;accountColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewComboBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>Liber.Forms.Accounts.AccountColumn, Liber.Forms, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;debitColumn.Name" xml:space="preserve">
     <value>debitColumn</value>
@@ -826,12 +832,6 @@
   </data>
   <data name="&gt;&gt;descriptionColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_helpProvider.Name" xml:space="preserve">
-    <value>_helpProvider</value>
-  </data>
-  <data name="&gt;&gt;_helpProvider.Type" xml:space="preserve">
-    <value>System.Windows.Forms.HelpProvider, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>TransactionForm</value>

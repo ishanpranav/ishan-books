@@ -17,9 +17,9 @@ internal sealed class NewAccountForm : AccountForm
         numberNumericUpDown.Value = company.NextAccountNumber;
         _colorButton.BackColor = company.Color;
         _colorButton.ForeColor = company.Color.GetForeColor();
-
-        parentComboBox.Items.Add(NullAccountView.Value);
-        parentComboBox.Initialize(company, validator: null);
+        parentComboBox.DataSource = new AccountViewBindingList(company, validator: null);
+        parentComboBox.ValueMember = nameof(IAccountView.Id);
+        parentComboBox.DisplayMember = nameof(IAccountView.DisplayName);
     }
 
     public NewAccountForm(Company company, Guid parentId) : this(company)
@@ -44,6 +44,6 @@ internal sealed class NewAccountForm : AccountForm
 
         ApplyChanges(account);
 
-        Id = Company.AddAccount(account, parentComboBox.SelectedItem);
+        Id = Company.AddAccount(account, (Guid?)parentComboBox.SelectedValue ?? Guid.Empty);
     }
 }

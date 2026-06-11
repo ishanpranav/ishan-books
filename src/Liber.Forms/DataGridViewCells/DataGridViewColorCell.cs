@@ -10,7 +10,19 @@ namespace System.Windows.Forms;
 
 internal class DataGridViewColorCell : DataGridViewTextBoxCell
 {
-    public override void InitializeEditingControl(int rowIndex, object? initialFormattedValue, DataGridViewCellStyle dataGridViewCellStyle) { }
+    public override Type ValueType
+    {
+        get
+        {
+            return typeof(Color);
+        }
+    }
+
+    public override void InitializeEditingControl(
+        int rowIndex,
+        object? initialFormattedValue,
+        DataGridViewCellStyle dataGridViewCellStyle)
+    { }
 
     protected override void Paint(Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex, DataGridViewElementStates cellState, object? value, object? formattedValue, string? errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
     {

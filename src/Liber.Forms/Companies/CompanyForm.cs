@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using Humanizer;
+using Liber.Forms.AccountViews;
 
 namespace Liber.Forms.Companies;
 
@@ -32,8 +33,12 @@ internal abstract partial class CompanyForm : Form
         _colorButton.ForeColor = company.Color.GetForeColor();
         typeComboBox.DataSource = Enum.GetValues<CompanyType>();
         typeComboBox.SelectedItem = company.Type;
-        equityAccountComboBox.Initialize(company, x => company.Accounts[x].Type == AccountType.Equity);
-        otherEquityAccountComboBox.Initialize(company, x => company.Accounts[x].Type == AccountType.Equity);
+        equityAccountComboBox.DataSource = new AccountViewBindingList(company, IsEquity);
+        equityAccountComboBox.ValueMember = nameof(IAccountView.Id);
+        equityAccountComboBox.DisplayMember = nameof(IAccountView.DisplayName);
+        otherEquityAccountComboBox.DataSource = new AccountViewBindingList(company, IsEquity);
+        otherEquityAccountComboBox.ValueMember = nameof(IAccountView.Id);
+        otherEquityAccountComboBox.DisplayMember = nameof(IAccountView.DisplayName);
         equityAccountComboBox.SelectedItem = company.EquityAccountId;
         otherEquityAccountComboBox.SelectedItem = company.OtherEquityAccountId;
         passwordTextBox.Text = company.Password;
@@ -45,6 +50,11 @@ internal abstract partial class CompanyForm : Form
         customRadioButton.Checked = company.ReportingPeriod == ReportingPeriod.Custom;
         customStartedDatePicker.Value = company.CustomStarted ?? company.FiscalYearStarted;
         customPostedDatePicker.Value = company.CustomPosted ?? company.FiscalYearPosted;
+    }
+
+    private bool IsEquity(Guid id)
+    {
+        return Company.Accounts[id].Type == AccountType.Equity;
     }
 
     private void OnTypeComboBoxFormat(object sender, ListControlConvertEventArgs e)
@@ -79,8 +89,8 @@ internal abstract partial class CompanyForm : Form
         Company.Name = nameTextBox.Text;
         Company.Color = _colorButton.BackColor;
         Company.Type = (CompanyType)typeComboBox.SelectedItem!;
-        Company.EquityAccountId = equityAccountComboBox.SelectedItem;
-        Company.OtherEquityAccountId = otherEquityAccountComboBox.SelectedItem;
+        Company.EquityAccountId = (Guid?)equityAccountComboBox.SelectedValue ?? Guid.Empty;
+        Company.OtherEquityAccountId = (Guid?)otherEquityAccountComboBox.SelectedValue ?? Guid.Empty;
         Company.Password = passwordTextBox.Text;
         Company.FiscalYearStarted = fiscalYearStartedDatePicker.Value;
         Company.FiscalYearPosted = fiscalYearPostedDatePicker.Value;

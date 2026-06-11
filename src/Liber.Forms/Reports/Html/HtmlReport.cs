@@ -244,6 +244,11 @@ public class HtmlReport : IntervalView
 
         if (type == AccountType.Equity)
         {
+            if (type.IsDebit(balance))
+            {
+                return Colors.IntenseCherry;
+            }
+
             return Colors.DarkAmethyst;
         }
 

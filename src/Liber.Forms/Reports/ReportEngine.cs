@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using Liber.Forms.Reports.Gdi;
 using Liber.Forms.Reports.Html;
@@ -13,9 +14,13 @@ namespace Liber.Forms.Reports;
 
 internal sealed class ReportEngine
 {
+    public const string AccountMapReport = "account-map";
+    public const string GeneralJournalReport = "general-journal";
+    public const string CheckReport = "CPA 006 Middle ASAP";
+
     private readonly Company _company;
     private readonly Dictionary<string, IReportView> _views = new Dictionary<string, IReportView>();
-    
+
     public IReadOnlyDictionary<string, IReportView> Views
     {
         get
@@ -45,6 +50,21 @@ internal sealed class ReportEngine
             path: "pages",
             searchPattern: "*.html",
             x => new HtmlReportView(company, x));
+    }
+
+    public bool TryGetReport<TReport>(string key, [NotNullWhen(true)] out TReport? result)
+    {
+        if (!Views.TryGetValue(key, out IReportView? view) ||
+            view.Properties is not TReport report)
+        {
+            result = default;
+
+            return false;
+        }
+
+        result = report;
+
+        return true;
     }
 
     private IReportView CreateReportView(string path)

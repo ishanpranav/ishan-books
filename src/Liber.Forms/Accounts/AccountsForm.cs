@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using Humanizer;
 using Liber.Forms.Components;
 using Liber.Forms.Properties;
+using Liber.Forms.Reports;
 using Liber.Forms.Transactions;
 
 namespace Liber.Forms.Accounts;
@@ -20,18 +21,20 @@ internal sealed partial class AccountsForm : Form
     private readonly FormFactory _factory;
     private readonly Dictionary<Guid, ListViewItem> _items = new Dictionary<Guid, ListViewItem>();
     private readonly Dictionary<Color, int> _imageIndices = new Dictionary<Color, int>();
+    private readonly ReportEngine _engine;
 
-    public AccountsForm(Company company, FormFactory factory)
+    public AccountsForm(Company company, FormFactory factory, ReportEngine engine)
     {
         InitializeComponent();
         SystemFeatures.Initialize(this);
         Design.ApplyStyles(_contextMenu);
 
-        _company = company;
         company.AccountAdded += OnCompanyAccountAdded;
         company.AccountUpdated += OnCompanyAccountUpdated;
         company.AccountRemoved += OnCompanyAccountRemoved;
+        _company = company;
         _factory = factory;
+        _engine = engine;
         inactiveToolStripMenuItem.Checked = Settings.Default.Inactive;
 
         InitializeAccounts();
@@ -78,7 +81,7 @@ internal sealed partial class AccountsForm : Form
             return;
         }
 
-        if (id != Guid.Empty && _company.Accounts[id].Placeholder)
+        if (id != Guid.Empty && _company.Accounts[id].ReadOnly)
         {
             id = Guid.Empty;
         }
@@ -105,7 +108,7 @@ internal sealed partial class AccountsForm : Form
 
     private void InitializeTransactions(Guid id)
     {
-        if (_factory.TryKill(id) || _company.Accounts[id].Placeholder)
+        if (_factory.TryKill(id) || _company.Accounts[id].ReadOnly)
         {
             return;
         }
@@ -119,25 +122,7 @@ internal sealed partial class AccountsForm : Form
     {
         item.Text = value.Name;
 
-        decimal balance;
-        DateTime posted = DateTime.Today;
-        DateTime started = new DateTime(posted.Year, month: 1, day: 1);
-
-        if (value == _company.Accounts[_company.EquityAccountId])
-        {
-            balance = _company.GetEquity(started, Filters.Any());
-        }
-        else if (value.Type.IsTemporary())
-        {
-            balance = value.GetBalance(started, posted, Filters.Any());
-        }
-        else
-        {
-            balance = value.GetBalance(posted, Filters.Any());
-        }
-
-        balance = value.Type.ToBalance(balance);
-
+        decimal balance = value.Type.ToBalance(_company.GetBalance(value, Filters.Any()));
         Color color = _company.GetColorOrDefault(value);
 
         if (!_imageIndices.TryGetValue(color, out int imageIndex))
@@ -156,7 +141,7 @@ internal sealed partial class AccountsForm : Form
         item.SubItems.Add(FormattedStrings.GetTaxTypeText(value.TaxType));
         item.SubItems.Add(balance.ToLocalizedString()).Tag = balance;
 
-        if (value.Placeholder)
+        if (value.ReadOnly)
         {
             item.ForeColor = Colors.Gray;
         }
@@ -288,30 +273,50 @@ internal sealed partial class AccountsForm : Form
 
         Account value = _company.Accounts[id];
 
-        if (value.Placeholder)
+        if (value.ReadOnly)
         {
-            // TODO: QuickReport
+            if (!_engine.TryGetReport(ReportEngine.GeneralJournalReport, out IntervalView? report))
+            {
+                return;
+            }
+
+            report.Title = value.Name;
+            report.Started = _company.Started;
+            report.Posted = _company.Posted;
+            report.Level = ReportLevel.ByAccount;
+
+            HashSet<Account> accounts = new HashSet<Account>(value.Children) { value };
+
+            report.Accounts = new AccountsView(_company, accounts);
+
+            ReportsForm form = new ReportsForm(_engine);
+
+            form.Load += (sender, e) => form.InitializeReport(ReportEngine.GeneralJournalReport);
+
+            _factory.Kill(id);
+            _factory.Register(id, form);
 
             return;
         }
 
         if (value.Type == AccountType.Equity)
         {
-
+            return;
         }
 
         if (value.Type == AccountType.Bank || value.Type == AccountType.CreditCard)
         {
             InitializeTransactions(id);
-        }
-        else if (value.Type.IsTemporary())
-        {
 
+            return;
         }
-        else
+
+        if (value.Type.IsTemporary())
         {
-            InitializeTransaction(id);
+            return;
         }
+
+        InitializeTransaction(id);
     }
 
     private void OnRefreshToolStripMenuItemClick(object sender, EventArgs e)

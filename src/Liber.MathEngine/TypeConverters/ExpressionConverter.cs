@@ -28,11 +28,17 @@ public class ExpressionConverter : TypeConverter
             culture = CultureInfo.CurrentCulture;
         }
 
-        Tokenizer tokenizer = new Tokenizer(text, culture);
-        Parser parser = new Parser(tokenizer, culture);
+        text = text.Trim().Trim('=');
 
         try
         {
+            Tokenizer tokenizer = new Tokenizer(text, culture)
+            {
+                AllowMismatchedBracket = true,
+                AllowUnclosedBracket = true
+            };
+            Parser parser = new Parser(tokenizer, culture);
+
             return parser.Parse();
         }
         catch (MathEngineException)

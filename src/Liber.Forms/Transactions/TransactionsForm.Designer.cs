@@ -2,6 +2,9 @@
 // Copyright (c) 2023-2026 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Windows.Forms;
+using Liber.Forms.Controls;
+
 namespace Liber.Forms.Transactions;
 
 partial class TransactionsForm
@@ -19,80 +22,171 @@ partial class TransactionsForm
     /// </summary>
     private void InitializeComponent()
     {
+        DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TransactionsForm));
-        _dataGridView = new System.Windows.Forms.DataGridViewEx();
-        postedColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        numberColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        accountColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-        nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        debitColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        creditColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        balanceColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        transactionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+        _dataGridView = new TransactionGridView();
+        _toolStrip = new ToolStrip();
+        newToolStripButton = new ToolStripButton();
+        saveToolStripButton = new ToolStripButton();
+        printToolStripButton = new ToolStripButton();
+        toolStripSeparator = new ToolStripSeparator();
+        copyToolStripButton = new ToolStripButton();
+        postedColumn = new CalendarColumn();
+        numberTypeColumn = new DataGridViewTextBoxColumn();
+        nameMemoColumn = new DataGridViewTextBoxColumn();
+        accountColumn = new DataGridViewComboBoxColumn();
+        debitColumn = new DataGridViewTextBoxColumn();
+        creditColumn = new DataGridViewTextBoxColumn();
+        balanceColumn = new DataGridViewTextBoxColumn();
+        transactionColumn = new DataGridViewTextBoxColumn();
         ((System.ComponentModel.ISupportInitialize)_dataGridView).BeginInit();
+        _toolStrip.SuspendLayout();
         SuspendLayout();
         // 
         // _dataGridView
         // 
-        _dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-        _dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        _dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { postedColumn, numberColumn, accountColumn, nameColumn, debitColumn, creditColumn, balanceColumn, transactionColumn });
+        _dataGridView.AllowUserToAddRows = false;
+        _dataGridView.AllowUserToDeleteRows = false;
+        _dataGridView.AllowUserToResizeRows = false;
+        dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(242, 242, 242);
+        dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
+        dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+        _dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+        _dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+        _dataGridView.BackgroundColor = System.Drawing.Color.FromArgb(248, 249, 250);
+        dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+        dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+        dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+        dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+        dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+        dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+        _dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+        _dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+        _dataGridView.Columns.AddRange(new DataGridViewColumn[] { postedColumn, numberTypeColumn, nameMemoColumn, accountColumn, debitColumn, creditColumn, balanceColumn, transactionColumn });
+        _dataGridView.CompanyColor = System.Drawing.Color.Empty;
+        dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
+        dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 9F);
+        dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
+        dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
+        dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.Black;
+        dataGridViewCellStyle10.WrapMode = DataGridViewTriState.False;
+        _dataGridView.DefaultCellStyle = dataGridViewCellStyle10;
         resources.ApplyResources(_dataGridView, "_dataGridView");
+        _dataGridView.EditMode = DataGridViewEditMode.EditOnEnter;
+        _dataGridView.GridColor = System.Drawing.Color.FromArgb(33, 37, 41);
+        _dataGridView.MultiSelect = false;
         _dataGridView.Name = "_dataGridView";
         _dataGridView.RowTemplate.Height = 29;
-        _dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+        _dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        _dataGridView.CellClick += OnDataGridViewCellClick;
         _dataGridView.CellDoubleClick += OnDataGridViewCellDoubleClick;
+        _dataGridView.CellPainting += OnDataGridViewCellPainting;
         _dataGridView.EditingControlShowing += OnDataGridViewEditingControlShowing;
-        _dataGridView.UserAddedRow += OnDataGridViewUserAddedRow;
-        _dataGridView.UserDeletedRow += OnDataGridViewUserDeletedRow;
+        _dataGridView.SelectionChanged += OnDataGridViewSelectionChanged;
+        _dataGridView.KeyDown += OnDataGridViewKeyDown;
+        // 
+        // _toolStrip
+        // 
+        _toolStrip.Items.AddRange(new ToolStripItem[] { newToolStripButton, saveToolStripButton, printToolStripButton, toolStripSeparator, copyToolStripButton });
+        resources.ApplyResources(_toolStrip, "_toolStrip");
+        _toolStrip.Name = "_toolStrip";
+        // 
+        // newToolStripButton
+        // 
+        newToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+        resources.ApplyResources(newToolStripButton, "newToolStripButton");
+        newToolStripButton.Name = "newToolStripButton";
+        // 
+        // saveToolStripButton
+        // 
+        saveToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+        resources.ApplyResources(saveToolStripButton, "saveToolStripButton");
+        saveToolStripButton.Name = "saveToolStripButton";
+        // 
+        // printToolStripButton
+        // 
+        printToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+        resources.ApplyResources(printToolStripButton, "printToolStripButton");
+        printToolStripButton.Name = "printToolStripButton";
+        // 
+        // toolStripSeparator
+        // 
+        toolStripSeparator.Name = "toolStripSeparator";
+        resources.ApplyResources(toolStripSeparator, "toolStripSeparator");
+        // 
+        // copyToolStripButton
+        // 
+        copyToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+        resources.ApplyResources(copyToolStripButton, "copyToolStripButton");
+        copyToolStripButton.Name = "copyToolStripButton";
         // 
         // postedColumn
         // 
-        postedColumn.Frozen = true;
+        dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+        postedColumn.DefaultCellStyle = dataGridViewCellStyle3;
         resources.ApplyResources(postedColumn, "postedColumn");
         postedColumn.Name = "postedColumn";
-        postedColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+        postedColumn.Resizable = DataGridViewTriState.True;
         // 
-        // numberColumn
+        // numberTypeColumn
         // 
-        numberColumn.Frozen = true;
-        resources.ApplyResources(numberColumn, "numberColumn");
-        numberColumn.Name = "numberColumn";
-        numberColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+        dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+        numberTypeColumn.DefaultCellStyle = dataGridViewCellStyle4;
+        resources.ApplyResources(numberTypeColumn, "numberTypeColumn");
+        numberTypeColumn.Name = "numberTypeColumn";
+        numberTypeColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
+        // 
+        // nameMemoColumn
+        // 
+        nameMemoColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+        nameMemoColumn.DefaultCellStyle = dataGridViewCellStyle5;
+        resources.ApplyResources(nameMemoColumn, "nameMemoColumn");
+        nameMemoColumn.Name = "nameMemoColumn";
         // 
         // accountColumn
         // 
-        accountColumn.Frozen = true;
+        dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+        accountColumn.DefaultCellStyle = dataGridViewCellStyle6;
+        accountColumn.DisplayStyle = DataGridViewComboBoxDisplayStyle.Nothing;
         resources.ApplyResources(accountColumn, "accountColumn");
         accountColumn.Name = "accountColumn";
         // 
-        // nameColumn
-        // 
-        nameColumn.Frozen = true;
-        resources.ApplyResources(nameColumn, "nameColumn");
-        nameColumn.Name = "nameColumn";
-        nameColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-        // 
         // debitColumn
         // 
-        debitColumn.Frozen = true;
+        dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleRight;
+        debitColumn.DefaultCellStyle = dataGridViewCellStyle7;
         resources.ApplyResources(debitColumn, "debitColumn");
         debitColumn.Name = "debitColumn";
-        debitColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+        debitColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
         // 
         // creditColumn
         // 
-        creditColumn.Frozen = true;
+        dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleRight;
+        creditColumn.DefaultCellStyle = dataGridViewCellStyle8;
         resources.ApplyResources(creditColumn, "creditColumn");
         creditColumn.Name = "creditColumn";
-        creditColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+        creditColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
         // 
         // balanceColumn
         // 
-        balanceColumn.Frozen = true;
+        dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleRight;
+        balanceColumn.DefaultCellStyle = dataGridViewCellStyle9;
         resources.ApplyResources(balanceColumn, "balanceColumn");
         balanceColumn.Name = "balanceColumn";
-        balanceColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+        balanceColumn.ReadOnly = true;
+        balanceColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
         // 
         // transactionColumn
         // 
@@ -102,22 +196,47 @@ partial class TransactionsForm
         // TransactionsForm
         // 
         resources.ApplyResources(this, "$this");
-        AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+        AutoScaleMode = AutoScaleMode.Font;
         Controls.Add(_dataGridView);
+        Controls.Add(_toolStrip);
         Name = "TransactionsForm";
+        WindowState = FormWindowState.Maximized;
         ((System.ComponentModel.ISupportInitialize)_dataGridView).EndInit();
+        _toolStrip.ResumeLayout(false);
+        _toolStrip.PerformLayout();
         ResumeLayout(false);
+        PerformLayout();
     }
 
     #endregion
 
-    private System.Windows.Forms.DataGridViewEx _dataGridView;
-    private System.Windows.Forms.DataGridViewTextBoxColumn postedColumn;
-    private System.Windows.Forms.DataGridViewTextBoxColumn numberColumn;
-    private System.Windows.Forms.DataGridViewComboBoxColumn accountColumn;
-    private System.Windows.Forms.DataGridViewTextBoxColumn nameColumn;
-    private System.Windows.Forms.DataGridViewTextBoxColumn debitColumn;
-    private System.Windows.Forms.DataGridViewTextBoxColumn creditColumn;
-    private System.Windows.Forms.DataGridViewTextBoxColumn balanceColumn;
-    private System.Windows.Forms.DataGridViewTextBoxColumn transactionColumn;
+
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            if (components != null)
+            {
+                components.Dispose();
+                components = null;
+            }
+        }
+
+        base.Dispose(disposing);
+    }
+    private TransactionGridView _dataGridView;
+    private System.Windows.Forms.ToolStrip _toolStrip;
+    private System.Windows.Forms.ToolStripButton newToolStripButton;
+    private System.Windows.Forms.ToolStripButton saveToolStripButton;
+    private System.Windows.Forms.ToolStripButton printToolStripButton;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
+    private System.Windows.Forms.ToolStripButton copyToolStripButton;
+    private CalendarColumn postedColumn;
+    private DataGridViewTextBoxColumn numberTypeColumn;
+    private DataGridViewTextBoxColumn nameMemoColumn;
+    private DataGridViewComboBoxColumn accountColumn;
+    private DataGridViewTextBoxColumn debitColumn;
+    private DataGridViewTextBoxColumn creditColumn;
+    private DataGridViewTextBoxColumn balanceColumn;
+    private DataGridViewTextBoxColumn transactionColumn;
 }

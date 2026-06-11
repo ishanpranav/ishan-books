@@ -219,7 +219,7 @@ public class Account : IComparable<Account>, IComparable
     {
         get
         {
-            return Inactive || Placeholder;
+            return Inactive || Placeholder || children.Count > 0;
         }
     }
 

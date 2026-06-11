@@ -5,49 +5,62 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Media;
 using System.Windows.Forms;
-using Liber.Forms.Accounts;
 using Liber.Forms.AccountViews;
+using Liber.Forms.Properties;
+using Liber.MathEngine.Expressions;
 
 namespace Liber.Forms.Transactions;
 
 internal sealed partial class TransactionsForm : Form
 {
     private readonly Company _company;
-    private readonly Account _account;
+    private readonly Guid _id;
+    private readonly List<Line> _lines = new List<Line>();
+    private int _selectedLineIndex = -1;
+
+    private bool OnLastCell
+    {
+        get
+        {
+            DataGridViewCell? currentCell = _dataGridView.CurrentCell;
+
+            if (currentCell == null)
+            {
+                return false;
+            }
+
+            return currentCell.RowIndex == _dataGridView.Rows.Count - 1 &&
+                   currentCell.ColumnIndex == nameMemoColumn.Index;
+        }
+    }
 
     public TransactionsForm(Company company, Guid id)
     {
         InitializeComponent();
         SystemFeatures.Initialize(this);
 
-        company.AccountAdded += OnCompanyAccountAdded;
-        company.AccountUpdated += OnCompanyAccountUpdated;
-        company.AccountRemoved += OnCompanyAccountRemoved;
-        _company = company;
-        _account = company.Accounts[id];
-        postedColumn.ValueType = typeof(DateTime);
+        accountColumn.DataSource = new AccountViewBindingList(company, x => !company.Accounts[x].ReadOnly);
         accountColumn.ValueMember = nameof(IAccountView.Id);
         accountColumn.DisplayMember = nameof(IAccountView.DisplayName);
-        debitColumn.ValueType = typeof(decimal);
-        debitColumn.DefaultCellStyle.Format = DecimalExtensions.Format;
-        creditColumn.ValueType = typeof(decimal);
-        creditColumn.DefaultCellStyle.Format = DecimalExtensions.Format;
+
+        Account account = company.Accounts[id];
+
+        _dataGridView.CompanyColor = company.GetColorOrDefault(account);
+        _dataGridView.DebitColumnIndex = debitColumn.Index;
+        _dataGridView.CreditColumnIndex = creditColumn.Index;
+        _company = company;
+        _id = id;
+        postedColumn.ValueType = typeof(DateTime);
         balanceColumn.ValueType = typeof(decimal);
+        balanceColumn.DefaultCellStyle.Font = _dataGridView.ColumnHeadersDefaultCellStyle.Font;
         balanceColumn.DefaultCellStyle.Format = DecimalExtensions.Format;
         transactionColumn.ValueType = typeof(Transaction);
-        _dataGridView.AlternatingRowsDefaultCellStyle.BackColor = _company.Color;
-        _dataGridView.AlternatingRowsDefaultCellStyle.ForeColor = _company.Color.GetForeColor();
-        Text = _account.Name;
+        Text = account.Name;
 
-        accountColumn.Items.Add(NullAccountView.Value);
-
-        foreach (KeyValuePair<Guid, Account> account in _company.Accounts)
-        {
-            InitializeAccount(account.Key, account.Value);
-        }
-
-        InitializeTransactions();
+        InitializeLines();
 
         if (_dataGridView.Rows.Count > 0)
         {
@@ -55,83 +68,276 @@ internal sealed partial class TransactionsForm : Form
         }
     }
 
-    private void InitializeAccount(Guid key, Account value)
+    private string GetLineType(Line value)
     {
-        accountColumn.Items.Add(new AccountView(key, value));
-    }
-
-    private void InitializeTransactions()
-    {
-        _dataGridView.Rows.Clear();
-
-        decimal balance = 0;
-
-        foreach (Line line in _account.OrderedLines)
+        if (value.Sibling == null)
         {
-            Transaction transaction = line.Transaction!;
-            Guid accountId;
-            Line? sibling = line.Sibling;
-            bool readOnly;
-
-            if (sibling == null)
-            {
-                accountId = Guid.Empty;
-                readOnly = true;
-            }
-            else
-            {
-                accountId = sibling.AccountId;
-                readOnly = false;
-            }
-
-            balance += line.Balance;
-
-            int row = _dataGridView.Rows.Add(
-                transaction.Posted,
-                transaction.Number,
-                accountId,
-                transaction.Name ?? string.Empty,
-                line.Debit,
-                line.Credit,
-                balance,
-                transaction);
-
-            for (int column = 0; column < _dataGridView.Columns.Count; column++)
-            {
-                _dataGridView[column, row].ReadOnly = readOnly;
-            }
-
-            _dataGridView[balanceColumn.Index, row].ReadOnly = true;
+            return "GENJRN";
         }
 
-        _dataGridView.AutoResizeColumns();
-    }
+        string? memo = _company.GetSuggestedMemo(value.Transaction!);
 
-    private void OnCompanyAccountAdded(object? sender, GuidEventArgs e)
-    {
-        InitializeAccount(e.Id, _company.Accounts[e.Id]);
-    }
-
-    private void OnCompanyAccountUpdated(object? sender, GuidEventArgs e)
-    {
-        accountColumn.Items.Remove(e.Id);
-
-        if (!_company!.Accounts[e.Id].Placeholder)
+        if (memo == Liber.Properties.Resources.TransferMemo)
         {
-            accountColumn.Items.Add(e.Id);
+            return "TNF";
         }
 
-        Refresh();
+        if (memo == Liber.Properties.Resources.DepositMemo)
+        {
+            return "DEP";
+        }
+
+        if (memo == Liber.Properties.Resources.CheckMemo)
+        {
+            return "CHK";
+        }
+
+        return memo ?? string.Empty;
     }
 
-    private void OnCompanyAccountRemoved(object? sender, GuidEventArgs e)
+    private void InitializeLines()
     {
-        accountColumn.Items.Remove(e.Id);
+        _selectedLineIndex = -1;
+
+        _lines.Clear();
+        _lines.AddRange(_company.Accounts[_id].OrderedLines);
+        _dataGridView.SuspendLayout();
+
+        try
+        {
+            _dataGridView.Rows.Clear();
+
+            decimal balance = 0;
+
+            for (int i = 0; i < _lines.Count; i++)
+            {
+                Line line = _lines[i];
+                Transaction transaction = line.Transaction!;
+                DataGridViewRow top = new DataGridViewRow()
+                {
+                    Tag = new RegisterRow(i)
+                };
+
+                balance += line.Balance;
+
+                top.CreateCells(
+                    _dataGridView,
+                    transaction.Posted,
+                    transaction.Number,
+                    transaction.Name ?? string.Empty,
+                    Guid.Empty,
+                    string.Empty,
+                    new DecimalExpression(line.Debit),
+                    new DecimalExpression(line.Credit),
+                    balance);
+
+                DataGridViewRow bottom = new DataGridViewRow()
+                {
+                    Tag = new RegisterRow(i)
+                };
+                Line? sibling = line.Sibling;
+
+                bottom.CreateCells(
+                    _dataGridView,
+                    string.Empty,
+                    GetLineType(line),
+                    transaction.Memo ?? string.Empty,
+                    sibling == null ? Guid.Empty : sibling.AccountId,
+                    string.Empty,
+                    string.Empty,
+                    string.Empty,
+                    string.Empty);
+
+                AddDoubleRow(top, bottom);
+            }
+
+            DataGridViewRow newTop = new DataGridViewRow()
+            {
+                Tag = new RegisterRow(-1)
+            };
+
+            newTop.CreateCells(
+                _dataGridView,
+                Settings.Default.LastPosted,
+                string.Empty,
+                string.Empty,
+                Guid.Empty,
+                string.Empty,
+                new DecimalExpression(0),
+                new DecimalExpression(0),
+                balance);
+
+            DataGridViewRow newBottom = new DataGridViewRow()
+            {
+                Tag = new RegisterRow(-1)
+            };
+
+            newBottom.CreateCells(
+                _dataGridView,
+                string.Empty,
+                string.Empty,
+                string.Empty,
+                Guid.Empty,
+                string.Empty,
+                string.Empty,
+                string.Empty,
+                string.Empty);
+            AddDoubleRow(newTop, newBottom);
+        }
+        finally
+        {
+            _dataGridView.ResumeLayout();
+        }
+    }
+
+    private void AddDoubleRow(DataGridViewRow top, DataGridViewRow bottom)
+    {
+        top.Cells[accountColumn.Index].ReadOnly = true;
+        bottom.Cells[postedColumn.Index].ReadOnly = true;
+
+        Guid accountId = (Guid?)bottom.Cells[accountColumn.Index].Value ?? Guid.Empty;
+
+        if (accountId == Guid.Empty)
+        {
+            top.Cells[debitColumn.Index].ReadOnly = true;
+            top.Cells[creditColumn.Index].ReadOnly = true;
+            bottom.Cells[accountColumn.Index].ReadOnly = true;
+        }
+
+        bottom.Cells[debitColumn.Index].ReadOnly = true;
+        bottom.Cells[creditColumn.Index].ReadOnly = true;
+
+        _dataGridView.Rows.Add(top);
+        _dataGridView.Rows.Add(bottom);
+    }
+
+    private bool Save()
+    {
+        int count = _dataGridView.Rows.Count;
+        int topIndex = count - 2;
+        int bottomIndex = count - 1;
+
+        DataGridViewRow top = _dataGridView.Rows[topIndex];
+
+        top.ErrorText = string.Empty;
+
+        if (!decimal.TryParse(_dataGridView[numberTypeColumn.Index, topIndex].Value?.ToString(), out decimal number))
+        {
+            number = 0;
+        }
+
+        if (!_dataGridView.TryGetBalance(top, out decimal balance))
+        {
+            return false;
+        }
+
+        DateTime posted = (DateTime)_dataGridView[postedColumn.Index, topIndex].Value!;
+        Transaction transaction = new Transaction()
+        {
+            Id = Guid.NewGuid(),
+            Number = number,
+            Posted = posted,
+            Name = _dataGridView[nameMemoColumn.Index, topIndex].Value?.ToString(),
+            Memo = _dataGridView[nameMemoColumn.Index, bottomIndex].Value?.ToString()
+        };
+
+        if (top.Cells[accountColumn.Index].Value is not Guid accountId ||
+            accountId == Guid.Empty ||
+            accountId == _id)
+        {
+            top.ErrorText = Resources.InvalidAccountError;
+
+            return false;
+        }
+
+        transaction.Lines.Add(new Line()
+        {
+            AccountId = accountId,
+            Balance = 0
+        });
+
+        if (transaction.Balance != 0)
+        {
+            top.ErrorText = Resources.ImbalanceError;
+
+            return false;
+        }
+
+        _company.AddTransaction(transaction);
+        SystemSounds.Asterisk.Play();
+
+        Settings.Default.LastPosted = posted;
+
+        Settings.Default.Save();
+        InitializeLines();
+        SelectLine(_lines.Count - 1);
+
+        return true;
+    }
+
+    private void SelectLine(int index)
+    {
+        _selectedLineIndex = index;
+
+        int rowIndex = index * 2;
+
+        if (rowIndex < _dataGridView.Rows.Count)
+        {
+            _dataGridView.FirstDisplayedScrollingRowIndex = rowIndex;
+            _dataGridView.CurrentCell = _dataGridView.Rows[rowIndex].Cells[nameMemoColumn.Index];
+
+            _dataGridView.Invalidate();
+        }
+    }
+
+    private void RemoveTransaction()
+    {
+        if (_selectedLineIndex == -1 || _selectedLineIndex >= _lines.Count)
+        {
+            return;
+        }
+
+        // TODO: use resource
+
+        DialogResult result = MessageBox.Show(
+            "Delete this transaction?", "Confirm Delete",
+            MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+        if (result != DialogResult.Yes)
+        {
+            return;
+        }
+
+        Transaction transaction = _lines[_selectedLineIndex].Transaction!;
+
+        _company.RemoveTransaction(transaction);
+        InitializeLines();
+    }
+
+    private void OnDataGridViewCellClick(object sender, DataGridViewCellEventArgs e)
+    {
+        if (e.RowIndex == -1)
+        {
+            return;
+        }
+
+        RegisterRow row = (RegisterRow)_dataGridView.Rows[e.RowIndex].Tag!;
+
+        _selectedLineIndex = row.LineIndex;
+
+        _dataGridView.Invalidate();
     }
 
     private void OnDataGridViewCellDoubleClick(object sender, DataGridViewCellEventArgs e)
     {
-        if (e.RowIndex == -1 || e.ColumnIndex == balanceColumn.Index || !_dataGridView[e.ColumnIndex, e.RowIndex].ReadOnly)
+        if (e.RowIndex == -1)
+        {
+            return;
+        }
+
+        int index = e.RowIndex / 2;
+
+        if (index >= _lines.Count)
         {
             return;
         }
@@ -141,28 +347,95 @@ internal sealed partial class TransactionsForm : Form
             ShowApplyButton = false
         };
 
-        DataGridViewCell cell = _dataGridView[transactionColumn.Index, e.RowIndex];
-
-        form.InitializeTransaction((Transaction)cell.Value!);
+        form.InitializeTransaction(_lines[index].Transaction!);
 
         if (form.ShowDialog() == DialogResult.OK && form.Value != null)
         {
-            cell.Value = form.Value;
+            //cell.Value = form.Value;
 
-            InitializeTransactions();
+            // TODO: bind events for transaction added, removed, updated
 
-            _dataGridView.CurrentCell = _dataGridView[e.ColumnIndex, e.RowIndex];
+            //InitializeTransactions();
+            SelectLine(index);
         }
     }
 
-    private void OnDataGridViewEditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+    private void OnDataGridViewCellPainting(object sender, DataGridViewCellPaintingEventArgs e)
     {
-        if (e.Control is not TextBox textBox || _dataGridView.CurrentCell == null)
+        if (e.Graphics == null)
         {
             return;
         }
 
-        if (_dataGridView.CurrentCell.ColumnIndex != nameColumn.Index)
+        if (e.RowIndex == -1 || e.ColumnIndex == -1)
+        {
+            return;
+        }
+
+        RegisterRow tag = (RegisterRow)_dataGridView.Rows[e.RowIndex].Tag!;
+        int lineIndex = tag.LineIndex;
+        bool isTop = e.RowIndex % 2 == 0;
+        DataGridViewCellStyle cellStyle = isTop
+            ? _dataGridView.DefaultCellStyle
+            : _dataGridView.AlternatingRowsDefaultCellStyle;
+        Color backColor;
+
+        if (lineIndex == _selectedLineIndex)
+        {
+            backColor = cellStyle.SelectionBackColor;
+        }
+        else
+        {
+            backColor = cellStyle.BackColor;
+        }
+
+        using Brush backColorBrush = new SolidBrush(backColor);
+
+        e.Graphics.FillRectangle(backColorBrush, e.CellBounds);
+
+        using Pen pen = new Pen(_dataGridView.GridColor);
+
+        if (isTop)
+        {
+            pen.DashStyle = DashStyle.Dot;
+        }
+
+        e.Graphics.DrawLine(
+            pen,
+            e.CellBounds.Left,
+            e.CellBounds.Bottom - 1,
+            e.CellBounds.Right,
+            e.CellBounds.Bottom - 1);
+
+        if ((isTop || _dataGridView[e.ColumnIndex, e.RowIndex].ReadOnly) && e.ColumnIndex == accountColumn.Index)
+        {
+            e.Handled = true;
+
+            return;
+        }
+
+        if (!isTop && (e.ColumnIndex == postedColumn.Index || e.ColumnIndex == balanceColumn.Index))
+        {
+            e.Handled = true;
+
+            return;
+        }
+
+        e.PaintContent(e.CellBounds);
+
+        e.Handled = true;
+    }
+
+    private void OnDataGridViewEditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+    {
+        DataGridViewCell? current = _dataGridView.CurrentCell;
+
+        if (e.Control is not TextBox textBox || current == null)
+        {
+            return;
+        }
+
+        if (current.ColumnIndex != nameMemoColumn.Index || current.RowIndex % 2 != 0)
         {
             textBox.AutoCompleteCustomSource = null;
 
@@ -172,49 +445,29 @@ internal sealed partial class TransactionsForm : Form
         textBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
         textBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
         textBox.AutoCompleteCustomSource = new AutoCompleteStringCollection();
+
         textBox.AutoCompleteCustomSource.AddRange(_company.GetNames());
     }
 
-    private void OnDataGridViewUserAddedRow(object sender, DataGridViewRowEventArgs e)
+    private void OnDataGridViewSelectionChanged(object sender, EventArgs e)
     {
-        //Transaction transaction = new Transaction()
-        //{
-        //    Id = Guid.NewGuid(),
-        //    Number = (decimal)e.Row.Cells[numberColumn.Index].Value,
-        //    Posted = (DateTime)e.Row.Cells[postedColumn.Index].Value,
-        //    Name = (string)e.Row.Cells[nameColumn.Index].Value
-        //};
-
-        //e.Row.Cells[transactionColumn.Index].Value = transaction;
-
-        //transaction.Lines.Add(new Line()
-        //{
-        //    AccountId = ((IAccountView)e.Row.Cells[accountColumn.Index].Value).Id,
-        //    Balance = (decimal)e.Row.Cells[balanceColumn.Index].Value
-        //});
-        //_company.AddTransaction(transaction);
+        _dataGridView.Invalidate();
     }
 
-    private void OnDataGridViewUserDeletedRow(object sender, DataGridViewRowEventArgs e)
+    private void OnDataGridViewKeyDown(object sender, KeyEventArgs e)
     {
-        _company.RemoveTransaction((Transaction)e.Row.Cells[transactionColumn.Index].Value!);
-    }
-
-    protected override void Dispose(bool disposing)
-    {
-        if (disposing)
+        if (e.KeyCode == Keys.Enter || (e.KeyCode == Keys.Tab && OnLastCell))
         {
-            _company.AccountAdded -= OnCompanyAccountAdded;
-            _company.AccountUpdated -= OnCompanyAccountUpdated;
-            _company.AccountRemoved -= OnCompanyAccountRemoved;
+            Save();
 
-            if (components != null)
-            {
-                components.Dispose();
-                components = null;
-            }
+            e.SuppressKeyPress = true;
+
+            return;
         }
 
-        base.Dispose(disposing);
+        if (e.KeyCode == Keys.Delete && _selectedLineIndex != -1)
+        {
+            RemoveTransaction();
+        }
     }
 }

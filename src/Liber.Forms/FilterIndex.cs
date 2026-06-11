@@ -11,7 +11,6 @@ internal enum FilterIndex
     AllFiles = 1,
     AllSupportedFiles = 2,
     Liber = 3,
-    MessagePack = 4,
     Json = 5,
     Sqlite = 6,
     Csv = 7,
