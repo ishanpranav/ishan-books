@@ -5,10 +5,8 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Common;
 using System.Drawing;
 using System.Threading.Tasks;
-using System.Transactions;
 using Microsoft.Data.Sqlite;
 using SQLitePCL;
 
@@ -223,7 +221,7 @@ public static class SqliteSerializer
                 {
                     Guid id = reader.GetGuid(0);
 
-                    accounts.Add(id, new Account(id, reader.GetGuid(1))
+                    accounts[id] = new Account(id, reader.GetGuid(1))
                     {
                         Number = reader.GetDecimal(2),
                         Name = reader.GetString(3),
@@ -235,7 +233,7 @@ public static class SqliteSerializer
                         TaxType = !await reader.IsDBNullAsync(9) && reader.GetBoolean(9),
                         Inactive = reader.GetBoolean(10),
                         CashFlow = await reader.GetFieldValueAsync<CashFlow>(11)
-                    });
+                    };
                 }
             }
         }
@@ -250,14 +248,14 @@ public static class SqliteSerializer
                 {
                     Guid id = reader.GetGuid(0);
 
-                    transactions.Add(id, new Transaction()
+                    transactions[id] = new Transaction()
                     {
                         Id = id,
                         Posted = reader.GetDateTime(1),
                         Number = reader.GetDecimal(2),
                         Name = await SqliteUtilities.GetStringAsync(reader, 3),
                         Memo = await SqliteUtilities.GetStringAsync(reader, 4)
-                    });
+                    };
                 }
             }
         }

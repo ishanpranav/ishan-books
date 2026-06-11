@@ -428,6 +428,11 @@ public sealed class Company
 
         value.Id = Guid.NewGuid();
 
+        if (_accounts.ContainsKey(value.Id))
+        {
+            throw new InvalidOperationException();
+        }
+
         InitializeAccount(value);
         AddChild(value, parentId);
         NextAccountNumber = Math.Max(value.Number, NextAccountNumber) + 1;
@@ -438,7 +443,10 @@ public sealed class Company
 
     public void UpdateAccount(Guid id, Guid parentId)
     {
-        Account value = _accounts[id];
+        if (!_accounts.TryGetValue(id, out Account? value))
+        {
+            throw new InvalidOperationException();
+        }
 
         if (parentId != value.ParentId)
         {
@@ -455,12 +463,15 @@ public sealed class Company
 
     public bool RemoveAccount(Guid id)
     {
+        if (!_accounts.TryGetValue(id, out Account? value))
+        {
+            throw new InvalidOperationException();
+        }
+
         if (EquityAccountId == id || OtherEquityAccountId == id)
         {
             return false;
         }
-
-        Account value = _accounts[id];
 
         if (value.children.Count > 0 || value.Lines.Count > 0)
         {
