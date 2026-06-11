@@ -90,8 +90,8 @@ public static class GnuCashSqliteSerializer
                         Inactive = reader.GetBoolean(10)
                     };
 
-                    accounts.Add(id, account);
-                    accountIds.Add(account, id);
+                    accounts[id] = account;
+                    accountIds[account] = id;
                 }
             }
         }
@@ -106,14 +106,14 @@ public static class GnuCashSqliteSerializer
                 {
                     Guid id = reader.GetGuid(0);
 
-                    transactions.Add(id, new Transaction()
+                    transactions[id] = new Transaction()
                     {
                         Id = id,
                         Posted = reader.GetDateTime(1).Date,
                         Number = reader.GetDecimal(2),
                         Name = await SqliteUtilities.GetStringAsync(reader, 3),
                         Memo = await SqliteUtilities.GetStringAsync(reader, 4)
-                    });
+                    };
                 }
             }
         }
