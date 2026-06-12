@@ -24,7 +24,7 @@ __Bookkeeping and personal finance__
 - [X] Chart of accounts
 - [X] Make general journal entries
 - [X] Write checks
-- [ ] Use register
+- [X] Use register
 - [ ] Reconcile
 
 __Reporting__

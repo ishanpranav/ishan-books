@@ -4,7 +4,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
@@ -13,8 +12,6 @@ using System.Windows.Forms;
 using Liber.Forms.AccountViews;
 using Liber.Forms.Properties;
 using Liber.MathEngine.Expressions;
-using PdfSharp.Charting;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Liber.Forms.Transactions;
 
@@ -284,6 +281,16 @@ internal sealed partial class TransactionsForm : Form
         _dataGridView.Rows.Add(bottom);
     }
 
+    private Line? GetValue(int index)
+    {
+        if (index > _lines.Count)
+        {
+            return null;
+        }
+
+        return _lines[index];
+    }
+
     private bool Save(int index)
     {
         int topIndex = index * 2;
@@ -308,10 +315,10 @@ internal sealed partial class TransactionsForm : Form
             return false;
         }
 
-        Line? currentLine = index < _lines.Count ? _lines[index] : null;
+        Line? currentLine = GetValue(index);
 
         if (_dataGridView.Rows[bottomIndex].Cells[accountColumn.Index].Value is not Guid siblingId ||
-            ((currentLine == null || currentLine.Sibling == null) && siblingId == Guid.Empty) || siblingId == _account.Id)
+            ((currentLine == null || currentLine.Sibling != null) && siblingId == Guid.Empty) || siblingId == _account.Id)
         {
             top.ErrorText = Resources.InvalidAccountError;
 
@@ -328,43 +335,45 @@ internal sealed partial class TransactionsForm : Form
         bool addingNew;
         Transaction transaction;
 
-        if (index >= _lines.Count)
+        if (currentLine == null)
         {
             transaction = new Transaction();
             addingNew = true;
         }
         else
         {
-            transaction = _lines[index].Transaction!;
+            transaction = currentLine.Transaction!;
             addingNew = false;
         }
 
         transaction.Number = number;
         transaction.Posted = posted;
-        transaction.Name = _dataGridView[nameMemoColumn.Index, topIndex].Value?.ToString();
         transaction.Memo = _dataGridView[nameMemoColumn.Index, bottomIndex].Value?.ToString();
 
-        Line[] lines = new Line[]
-        {
-            new Line()
+        string? name = _dataGridView[nameMemoColumn.Index, topIndex].Value?.ToString();
+        IReadOnlyCollection<Line> lines = currentLine != null && currentLine.Sibling == null
+            ? transaction.Lines
+            : new Line[]
             {
-                AccountId = _account.Id,
-                Balance = balance
-            },
-            new Line()
-            {
-                AccountId = siblingId,
-                Balance = -balance
-            }
-        };
+                new Line()
+                {
+                    AccountId = _account.Id,
+                    Balance = balance
+                },
+                new Line()
+                {
+                    AccountId = siblingId,
+                    Balance = -balance
+                }
+            };
 
         if (addingNew)
         {
-            _company.AddTransaction(transaction, lines);
+            _company.AddTransaction(transaction, name, lines);
         }
         else
         {
-            _company.UpdateTransaction(transaction.Id, lines);
+            _company.UpdateTransaction(transaction.Id, name, lines);
         }
 
         SystemSounds.Asterisk.Play();
@@ -376,13 +385,6 @@ internal sealed partial class TransactionsForm : Form
         return true;
     }
 
-    /// <summary>
-    /// Saves the double-row at <paramref name="index"/> if it represents a
-    /// "blank" new-transaction row that the user left untouched. This avoids
-    /// surfacing validation errors (e.g. <see cref="Resources.InvalidAccountError"/>)
-    /// when the user merely tabs through the trailing empty row without
-    /// entering any data.
-    /// </summary>
     private bool RowHasContent(int index)
     {
         int topIndex = index * 2;
@@ -420,9 +422,6 @@ internal sealed partial class TransactionsForm : Form
 
     private void CommitRow(int index)
     {
-        // index == _lines.Count refers to the trailing "new transaction" row.
-        // Only attempt to save it if the user actually entered something;
-        // otherwise leave it alone so we don't show spurious errors.
         if (index >= _lines.Count && !RowHasContent(index))
         {
             return;
@@ -490,6 +489,17 @@ internal sealed partial class TransactionsForm : Form
         _dataGridView.Invalidate();
     }
 
+    private void Open(int index)
+    {
+        using TransactionForm form = new TransactionForm(_company)
+        {
+            ShowApplyButton = false
+        };
+
+        form.InitializeTransaction(_lines[index].Transaction!);
+        form.ShowDialog();
+    }
+
     private void OnDataGridViewCellDoubleClick(object sender, DataGridViewCellEventArgs e)
     {
         if (e.ColumnIndex == -1 || e.RowIndex == -1)
@@ -509,13 +519,7 @@ internal sealed partial class TransactionsForm : Form
             return;
         }
 
-        using TransactionForm form = new TransactionForm(_company)
-        {
-            ShowApplyButton = false
-        };
-
-        form.InitializeTransaction(_lines[index].Transaction!);
-        form.ShowDialog();
+        Open(index);
     }
 
     private void OnDataGridViewCellPainting(object sender, DataGridViewCellPaintingEventArgs e)
@@ -648,7 +652,6 @@ internal sealed partial class TransactionsForm : Form
 
     private void OnDataGridViewLeave(object sender, EventArgs e)
     {
-        // User clicked completely away from the grid (toolbar, another control, etc.)
         if (_editingIndex == null)
         {
             return;
@@ -675,6 +678,59 @@ internal sealed partial class TransactionsForm : Form
         _editingIndex = null;
 
         CommitRow(index);
+    }
+
+    private void OnCopyToolStripButtonClick(object sender, EventArgs e)
+    {
+        int index = _editingIndex ?? _selectedLineIndex;
+
+        if (index == -1)
+        {
+            return;
+        }
+
+        Line? line = GetValue(index);
+
+        if (line == null)
+        {
+            return;
+        }
+
+        _editingIndex = null;
+
+        if (!Save(index))
+        {
+            return;
+        }
+
+        line = GetValue(index);
+
+        if (line == null)
+        {
+            return;
+        }
+
+        Transaction? transaction = line.Transaction!;
+        Transaction clone = new Transaction()
+        {
+            Posted = Settings.Default.LastPosted,
+            Number = _company.NextTransactionNumber,
+            Memo = transaction.Memo
+        };
+
+        _company.AddTransaction(clone, transaction.Name, transaction.Lines);
+    }
+
+    private void OnOpenToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        int index = _editingIndex ?? _selectedLineIndex;
+
+        if (index == -1 || index >= _lines.Count)
+        {
+            return;
+        }
+
+        Open(index);
     }
 
     protected override void Dispose(bool disposing)

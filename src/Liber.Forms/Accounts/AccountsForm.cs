@@ -83,7 +83,7 @@ internal sealed partial class AccountsForm : Form
     {
         Guid key = typeof(TransactionForm).GUID;
 
-        if (_factory.TryKill(key))
+        if (_factory.TryActivate(key))
         {
             return;
         }
@@ -102,7 +102,7 @@ internal sealed partial class AccountsForm : Form
                 AccountId = account.Id
             }
         };
-        Transaction transaction = new Transaction(Guid.Empty, lines)
+        Transaction transaction = new Transaction(Guid.Empty, name: null, lines)
         {
             Posted = lastPosted == default ? DateTime.Today : lastPosted,
             Number = _company.NextTransactionNumber
@@ -114,7 +114,7 @@ internal sealed partial class AccountsForm : Form
 
     private void InitializeTransactions(Account account)
     {
-        if (_factory.TryKill(account.Id) || account.ReadOnly)
+        if (_factory.TryActivate(account.Id) || account.ReadOnly)
         {
             return;
         }
@@ -220,7 +220,7 @@ internal sealed partial class AccountsForm : Form
 
     private void OnEditToolStripMenuItemClick(object sender, EventArgs e)
     {
-        if (!TryGetSelection(out Account? account) || _factory.TryKill(account.Id))
+        if (!TryGetSelection(out Account? account) || _factory.TryActivate(account.Id))
         {
             return;
         }
@@ -247,7 +247,10 @@ internal sealed partial class AccountsForm : Form
             return;
         }
 
-        _company.RemoveAccount(account.Id);
+        if (!_company.RemoveAccount(account.Id))
+        {
+            // TODO: show remove account failed
+        }
     }
 
     private void OnTransactionToolStripMenuItemClick(object sender, EventArgs e)
@@ -341,12 +344,17 @@ internal sealed partial class AccountsForm : Form
             return;
         }
 
-        report.Title = account.Name;
+        string title = $"{_engine.Views[ReportEngine.GeneralJournalReport].GenericTitle} - {account.Name}";
+
+        report.Title = title;
         report.Started = _company.Started;
         report.Posted = _company.Posted;
         report.Level = ReportLevel.ByAccount;
 
-        ReportsForm form = new ReportsForm(_engine);
+        ReportsForm form = new ReportsForm(_engine)
+        {
+            Text = title
+        };
 
         form.Load += (sender, e) =>
         {

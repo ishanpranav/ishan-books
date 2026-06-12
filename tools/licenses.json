@@ -279,6 +279,15 @@
             "license": "mit_dotnet",
             "resource": "https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells",
             "index": "Microsoft Corporation"
+        },
+        {
+            "title": "Visual Studio 2026 Image Library",
+            "formats": [ "png" ],
+            "source": "https://www.microsoft.com/en-us/download/details.aspx?id=35825",
+            "author": "Microsoft Corporation",
+            "license": "visual-studio-image-library-eula_microsoft",
+            "resource": "https://www.microsoft.com/en-us/download/details.aspx?id=35825",
+            "index": "Microsoft Corporation"
         }
     ],
     "references": [

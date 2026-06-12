@@ -21,7 +21,7 @@ public sealed class Company
     private readonly Dictionary<Guid, Transaction> _transactions;
     private readonly SortedSet<Account> _sortedAccounts;
     private readonly SortedSet<Transaction> _sortedTransactions;
-    private readonly SortedSet<string> _names = new SortedSet<string>();
+    private readonly SortedDictionary<string, int> _names = new SortedDictionary<string, int>();
 
     private string? _name;
     private CompanyType _type;
@@ -310,6 +310,7 @@ public sealed class Company
         foreach (Transaction transaction in transactions)
         {
             InitializeTransaction(transaction);
+            AddName(transaction, transaction.Name);
             AddLines(transaction, transaction.Lines);
         }
     }
@@ -345,7 +346,7 @@ public sealed class Company
     {
         string[] result = new string[_names.Count];
 
-        _names.CopyTo(result);
+        _names.Keys.CopyTo(result, index: 0);
 
         return result;
     }
@@ -404,9 +405,10 @@ public sealed class Company
             throw new InvalidOperationException();
         }
 
+        InitializeAccount(value);
+
         value.Id = Guid.NewGuid();
 
-        InitializeAccount(value);
         AddChild(value, parentId);
         _accounts.Add(value.Id, value);
         _sortedAccounts.Add(value);
@@ -422,6 +424,8 @@ public sealed class Company
         {
             throw new InvalidOperationException();
         }
+
+        InitializeAccount(value);
 
         if (parentId != value.ParentId)
         {
@@ -508,26 +512,42 @@ public sealed class Company
 
     private void InitializeTransaction(Transaction value)
     {
-        if (value.Balance != 0)
-        {
-            throw new InvalidOperationException($"Transaction {value.Id} does not balance");
-        }
-
-        if (string.IsNullOrWhiteSpace(value.Name))
-        {
-            value.Name = null;
-        }
-        else
-        {
-            value.Name = value.Name.Trim();
-
-            _names.Add(value.Name);
-        }
-
         if (string.IsNullOrWhiteSpace(value.Memo))
         {
             value.Memo = null;
         }
+    }
+
+    private void AddName(Transaction value, string? name)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            value.Name = null;
+
+            return;
+        }
+
+        value.Name = name.Trim();
+        _names[value.Name] = _names.GetValueOrDefault(value.Name) + 1;
+    }
+
+    private void RemoveName(Transaction value)
+    {
+        if (string.IsNullOrWhiteSpace(value.Name))
+        {
+            return;
+        }
+
+        int count = _names[value.Name] - 1;
+
+        if (count < 1)
+        {
+            _names.Remove(value.Name);
+
+            return;
+        }
+
+        _names[value.Name] = count;
     }
 
     private void AddLines(Transaction value, IReadOnlyCollection<Line> lines)
@@ -541,7 +561,7 @@ public sealed class Company
                 line.Description = null;
             }
 
-            line.Transaction = value;
+            line.transaction = value;
             account.lines.Add(line);
         }
     }
@@ -551,22 +571,38 @@ public sealed class Company
         foreach (Line line in value.lines)
         {
             _accounts[line.AccountId].lines.Remove(line);
-            line.Transaction = null;
+            line.transaction = null;
         }
-
-        value.lines.Clear();
     }
 
-    public void AddTransaction(Transaction value, IReadOnlyCollection<Line> lines)
+    private static void TrialBalance(IReadOnlyCollection<Line> lines)
     {
-        if (value.Id != Guid.Empty || value.Balance != 0)
+        decimal trialBalance = 0;
+
+        foreach (Line line in lines)
         {
-            throw new InvalidOperationException();
+            trialBalance += line.Balance;
         }
+
+        if (trialBalance > 0)
+        {
+            throw new ArgumentException(message: null, nameof(lines));
+        }
+    }
+
+    public void AddTransaction(Transaction value, string? name, IReadOnlyCollection<Line> lines)
+    {
+        if (value.Id != Guid.Empty || value.lines.Count != 0)
+        {
+            throw new ArgumentException(message: null, nameof(value));
+        }
+
+        TrialBalance(lines);
 
         value.Id = Guid.NewGuid();
 
         InitializeTransaction(value);
+        AddName(value, name);
         AddLines(value, lines);
 
         foreach (Line line in lines)
@@ -582,20 +618,33 @@ public sealed class Company
         TransactionAdded?.Invoke(sender: this, new GuidEventArgs(value.Id));
     }
 
-    public void UpdateTransaction(Guid id, IReadOnlyCollection<Line> lines)
+    public void UpdateTransaction(Guid id, string? name, IReadOnlyCollection<Line> lines)
     {
         if (!_transactions.TryGetValue(id, out Transaction? value))
         {
             throw new InvalidOperationException();
         }
 
+        TrialBalance(lines);
         InitializeTransaction(value);
+
+        if (name != value.Name)
+        {
+            RemoveName(value);
+            AddName(value, name);
+        }
+
         RemoveLines(value);
         AddLines(value, lines);
 
-        foreach (Line line in lines)
+        if (lines != value.lines)
         {
-            value.lines.Add(line);
+            value.lines.Clear();
+
+            foreach (Line line in lines)
+            {
+                value.lines.Add(line);
+            }
         }
 
         NextTransactionNumber = Math.Max(value.Number, NextTransactionNumber);
@@ -1094,9 +1143,9 @@ public sealed class Company
             other._sortedTransactions.Add(transaction.Value);
         }
 
-        foreach (string name in _names)
+        foreach (KeyValuePair<string, int> entry in _names)
         {
-            other._names.Add(name);
+            other._names[entry.Key] = entry.Value;
         }
 
         other.Invalidated?.Invoke(sender: this, EventArgs.Empty);
