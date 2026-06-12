@@ -130,9 +130,9 @@ internal sealed partial class TransactionForm : Form
 
         transaction.Number = numberNumericUpDown.Value;
         transaction.Posted = postedDateTimePicker.Value;
-        transaction.Name = nameComboBox.Text;
         transaction.Memo = memoTextBox.Text;
 
+        string? name = nameComboBox.Text;
         List<Line> lines = new List<Line>();
         decimal trialBalance = 0;
 
@@ -176,11 +176,11 @@ internal sealed partial class TransactionForm : Form
 
         if (addingNew)
         {
-            _company.AddTransaction(transaction, lines);
+            _company.AddTransaction(transaction, name, lines);
         }
         else
         {
-            _company.UpdateTransaction(transaction.Id, lines);
+            _company.UpdateTransaction(transaction.Id, name, lines);
         }
 
         InitializeTransaction(transaction);
@@ -214,6 +214,11 @@ internal sealed partial class TransactionForm : Form
         numberNumericUpDown.Value = _company.NextTransactionNumber;
     }
 
+    private void OnCloseToolStripButtonClick(object sender, EventArgs e)
+    {
+        Close();
+    }
+
     private void OnNewToolStripButtonClick(object sender, EventArgs e)
     {
         CreateNew();
@@ -235,12 +240,23 @@ internal sealed partial class TransactionForm : Form
         {
             Posted = Settings.Default.LastPosted,
             Number = _company.NextTransactionNumber,
-            Name = Value.Name,
             Memo = Value.Memo
         };
 
-        _company.AddTransaction(clone, Value.Lines);
+        _company.AddTransaction(clone, Value.Name, Value.Lines);
         InitializeTransaction(clone);
+    }
+
+    private void OnRemoveToolStripButton(object sender, EventArgs e)
+    {
+        if (Value == null || Value.Id == Guid.Empty)
+        {
+            return;
+        }
+
+        // TODO: confirm the delete
+
+        _company.RemoveTransaction(Value.Id);
     }
 
     private void OnAcceptButtonClick(object sender, EventArgs e)

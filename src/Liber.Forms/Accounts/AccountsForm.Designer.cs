@@ -107,13 +107,13 @@ namespace Liber.Forms.Accounts
             // 
             // _contextMenu
             // 
-            _contextMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             _contextMenu.Items.AddRange(new ToolStripItem[] { openToolStripMenuItem1, toolStripSeparator3, newAccountToolStripMenuItem, editAccountToolStripMenuItem, renameAccountToolStripMenuItem, removeAccountToolStripMenuItem, toolStripSeparator2, transactionToolStripMenuItem1, reconcileToolStripMenuItem1, transactionsToolStripMenuItem1, toolStripSeparator5, quickReportToolStripMenuItem });
             _contextMenu.Name = "contextMenuStrip1";
             resources.ApplyResources(_contextMenu, "_contextMenu");
             // 
             // openToolStripMenuItem1
             // 
+            openToolStripMenuItem1.Image = VisualStudioImageLibrary.Open;
             openToolStripMenuItem1.Name = "openToolStripMenuItem1";
             resources.ApplyResources(openToolStripMenuItem1, "openToolStripMenuItem1");
             openToolStripMenuItem1.Click += OnListViewItemActivate;
@@ -125,24 +125,28 @@ namespace Liber.Forms.Accounts
             // 
             // newAccountToolStripMenuItem
             // 
+            newAccountToolStripMenuItem.Image = VisualStudioImageLibrary.AddTable;
             newAccountToolStripMenuItem.Name = "newAccountToolStripMenuItem";
             resources.ApplyResources(newAccountToolStripMenuItem, "newAccountToolStripMenuItem");
             newAccountToolStripMenuItem.Click += OnNewToolStripMenuItemClick;
             // 
             // editAccountToolStripMenuItem
             // 
+            editAccountToolStripMenuItem.Image = VisualStudioImageLibrary.Edit;
             editAccountToolStripMenuItem.Name = "editAccountToolStripMenuItem";
             resources.ApplyResources(editAccountToolStripMenuItem, "editAccountToolStripMenuItem");
             editAccountToolStripMenuItem.Click += OnEditToolStripMenuItemClick;
             // 
             // renameAccountToolStripMenuItem
             // 
+            renameAccountToolStripMenuItem.Image = VisualStudioImageLibrary.Rename;
             renameAccountToolStripMenuItem.Name = "renameAccountToolStripMenuItem";
             resources.ApplyResources(renameAccountToolStripMenuItem, "renameAccountToolStripMenuItem");
             renameAccountToolStripMenuItem.Click += OnRenameToolStripMenuItemClick;
             // 
             // removeAccountToolStripMenuItem
             // 
+            removeAccountToolStripMenuItem.Image = VisualStudioImageLibrary.DeleteTable;
             removeAccountToolStripMenuItem.Name = "removeAccountToolStripMenuItem";
             resources.ApplyResources(removeAccountToolStripMenuItem, "removeAccountToolStripMenuItem");
             removeAccountToolStripMenuItem.Click += OnRemoveToolStripMenuItemClick;
@@ -154,6 +158,7 @@ namespace Liber.Forms.Accounts
             // 
             // transactionToolStripMenuItem1
             // 
+            transactionToolStripMenuItem1.Image = VisualStudioImageLibrary.JournalMessage;
             transactionToolStripMenuItem1.Name = "transactionToolStripMenuItem1";
             resources.ApplyResources(transactionToolStripMenuItem1, "transactionToolStripMenuItem1");
             transactionToolStripMenuItem1.Click += OnTransactionToolStripMenuItemClick;
@@ -165,6 +170,7 @@ namespace Liber.Forms.Accounts
             // 
             // transactionsToolStripMenuItem1
             // 
+            transactionsToolStripMenuItem1.Image = VisualStudioImageLibrary.Log;
             transactionsToolStripMenuItem1.Name = "transactionsToolStripMenuItem1";
             resources.ApplyResources(transactionsToolStripMenuItem1, "transactionsToolStripMenuItem1");
             transactionsToolStripMenuItem1.Click += OnTransactionsToolStripMenuItemClick;
@@ -176,6 +182,7 @@ namespace Liber.Forms.Accounts
             // 
             // quickReportToolStripMenuItem
             // 
+            quickReportToolStripMenuItem.Image = VisualStudioImageLibrary.Report;
             quickReportToolStripMenuItem.Name = "quickReportToolStripMenuItem";
             resources.ApplyResources(quickReportToolStripMenuItem, "quickReportToolStripMenuItem");
             quickReportToolStripMenuItem.Click += OnQuickReportToolStripMenuItemClick;
@@ -188,7 +195,6 @@ namespace Liber.Forms.Accounts
             // 
             // _statusStrip
             // 
-            _statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             _statusStrip.Items.AddRange(new ToolStripItem[] { toolStripDropDownButton1, toolStripDropDownButton2, toolStripDropDownButton3 });
             resources.ApplyResources(_statusStrip, "_statusStrip");
             _statusStrip.Name = "_statusStrip";
@@ -202,24 +208,28 @@ namespace Liber.Forms.Accounts
             // 
             // newToolStripMenuItem
             // 
+            newToolStripMenuItem.Image = VisualStudioImageLibrary.AddTable;
             newToolStripMenuItem.Name = "newToolStripMenuItem";
             resources.ApplyResources(newToolStripMenuItem, "newToolStripMenuItem");
             newToolStripMenuItem.Click += OnNewToolStripMenuItemClick;
             // 
             // editToolStripMenuItem
             // 
+            editToolStripMenuItem.Image = VisualStudioImageLibrary.Edit;
             editToolStripMenuItem.Name = "editToolStripMenuItem";
             resources.ApplyResources(editToolStripMenuItem, "editToolStripMenuItem");
             editToolStripMenuItem.Click += OnEditToolStripMenuItemClick;
             // 
             // renameToolStripMenuItem
             // 
+            renameToolStripMenuItem.Image = VisualStudioImageLibrary.Rename;
             renameToolStripMenuItem.Name = "renameToolStripMenuItem";
             resources.ApplyResources(renameToolStripMenuItem, "renameToolStripMenuItem");
             renameToolStripMenuItem.Click += OnRenameToolStripMenuItemClick;
             // 
             // removeToolStripMenuItem
             // 
+            removeToolStripMenuItem.Image = VisualStudioImageLibrary.DeleteTable;
             removeToolStripMenuItem.Name = "removeToolStripMenuItem";
             resources.ApplyResources(removeToolStripMenuItem, "removeToolStripMenuItem");
             removeToolStripMenuItem.Click += OnRemoveToolStripMenuItemClick;
@@ -233,6 +243,7 @@ namespace Liber.Forms.Accounts
             // 
             // openToolStripMenuItem
             // 
+            openToolStripMenuItem.Image = VisualStudioImageLibrary.Open;
             openToolStripMenuItem.Name = "openToolStripMenuItem";
             resources.ApplyResources(openToolStripMenuItem, "openToolStripMenuItem");
             openToolStripMenuItem.Click += OnListViewItemActivate;
@@ -244,6 +255,7 @@ namespace Liber.Forms.Accounts
             // 
             // transactionToolStripMenuItem
             // 
+            transactionToolStripMenuItem.Image = VisualStudioImageLibrary.JournalMessage;
             transactionToolStripMenuItem.Name = "transactionToolStripMenuItem";
             resources.ApplyResources(transactionToolStripMenuItem, "transactionToolStripMenuItem");
             transactionToolStripMenuItem.Click += OnTransactionToolStripMenuItemClick;
@@ -255,6 +267,7 @@ namespace Liber.Forms.Accounts
             // 
             // transactionsToolStripMenuItem
             // 
+            transactionsToolStripMenuItem.Image = VisualStudioImageLibrary.Log;
             transactionsToolStripMenuItem.Name = "transactionsToolStripMenuItem";
             resources.ApplyResources(transactionsToolStripMenuItem, "transactionsToolStripMenuItem");
             transactionsToolStripMenuItem.Click += OnTransactionsToolStripMenuItemClick;
@@ -266,6 +279,7 @@ namespace Liber.Forms.Accounts
             // 
             // quickReportToolStripMenuItem1
             // 
+            quickReportToolStripMenuItem1.Image = VisualStudioImageLibrary.Report;
             quickReportToolStripMenuItem1.Name = "quickReportToolStripMenuItem1";
             resources.ApplyResources(quickReportToolStripMenuItem1, "quickReportToolStripMenuItem1");
             quickReportToolStripMenuItem1.Click += OnQuickReportToolStripMenuItemClick;
@@ -279,6 +293,7 @@ namespace Liber.Forms.Accounts
             // 
             // refreshToolStripMenuItem
             // 
+            refreshToolStripMenuItem.Image = VisualStudioImageLibrary.Refresh;
             refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
             resources.ApplyResources(refreshToolStripMenuItem, "refreshToolStripMenuItem");
             refreshToolStripMenuItem.Click += OnRefreshToolStripMenuItemClick;

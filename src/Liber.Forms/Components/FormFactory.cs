@@ -22,6 +22,16 @@ internal sealed class FormFactory : Component
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public Form? Embedded { get; private set; }
 
+    public IReadOnlyDictionary<Guid, Form> Forms
+    {
+        get
+        {
+            return _forms;
+        }
+    }
+
+    public event EventHandler? Invalidated;
+
     public FormFactory() { }
 
     public FormFactory(IContainer container)
@@ -29,13 +39,23 @@ internal sealed class FormFactory : Component
         container.Add(this);
     }
 
+    public string GetDisplayName(Guid key)
+    {
+        return _forms[key].Text;
+    }
+
     public void Register(Guid key, Form value)
     {
         _forms.Add(key, value);
 
-        value.FormClosed += (_, _) => _forms.Remove(key);
+        value.FormClosed += (_, _) =>
+        {
+            _forms.Remove(key);
+            Invalidated?.Invoke(sender: this, EventArgs.Empty);
+        };
 
         value.Show();
+        Invalidated?.Invoke(sender: this, EventArgs.Empty);
     }
 
     public void RegisterEmbedded(Guid key, Form parent, Form value)
@@ -58,6 +78,7 @@ internal sealed class FormFactory : Component
         value.FormClosed += (_, _) =>
         {
             _forms.Remove(key);
+            Invalidated?.Invoke(sender: this, EventArgs.Empty);
 
             Parent = null;
             Embedded = null;
@@ -74,6 +95,7 @@ internal sealed class FormFactory : Component
         {
             value.WindowState = FormWindowState.Maximized;
         });
+        Invalidated?.Invoke(sender: this, EventArgs.Empty);
     }
 
     private void OnParentResize(object? sender, EventArgs e)
@@ -92,7 +114,17 @@ internal sealed class FormFactory : Component
         }
     }
 
-    public bool TryKill(Guid key)
+    public void KillAll()
+    {
+        foreach (Form form in _forms.Values.ToList())
+        {
+            form.Close();
+        }
+
+        _forms.Clear();
+    }
+
+    public bool TryActivate(Guid key)
     {
         if (!_forms.TryGetValue(key, out Form? form))
         {
@@ -104,21 +136,11 @@ internal sealed class FormFactory : Component
         return true;
     }
 
-    public void KillAll()
-    {
-        foreach (Form form in _forms.Values.ToList())
-        {
-            form.Close();
-        }
-
-        _forms.Clear();
-    }
-
     public void AutoRegister<TForm>(Func<TForm> factory) where TForm : Form
     {
         Guid key = typeof(TForm).GUID;
 
-        if (TryKill(key))
+        if (TryActivate(key))
         {
             return;
         }

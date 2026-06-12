@@ -61,15 +61,6 @@ namespace Liber.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Check.
-        /// </summary>
-        public static string CheckMemo {
-            get {
-                return ResourceManager.GetString("CheckMemo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Untitled Company.
         /// </summary>
         public static string DefaultCompanyName {
@@ -93,24 +84,6 @@ namespace Liber.Properties {
         public static string DefaultOtherEquityAccountName {
             get {
                 return ResourceManager.GetString("DefaultOtherEquityAccountName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Deposit.
-        /// </summary>
-        public static string DepositMemo {
-            get {
-                return ResourceManager.GetString("DepositMemo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Funds Transfer.
-        /// </summary>
-        public static string TransferMemo {
-            get {
-                return ResourceManager.GetString("TransferMemo", resourceCulture);
             }
         }
     }

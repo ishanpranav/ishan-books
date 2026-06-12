@@ -15,7 +15,7 @@ internal sealed class NewAccountForm : AccountForm
         numberNumericUpDown.Value = company.NextAccountNumber;
         _colorButton.BackColor = company.Color;
         _colorButton.ForeColor = company.Color.GetForeColor();
-        parentComboBox.DataSource = new AccountViewBindingList(company, validator: null);
+        parentComboBox.DataSource = new AccountViewBindingList(company, x => !x.Inactive);
         parentComboBox.ValueMember = nameof(AccountView.Id);
         parentComboBox.DisplayMember = nameof(AccountView.DisplayName);
     }

@@ -15,6 +15,8 @@ public class Line :
     IComparable<Line>,
     IEquatable<Line>
 {
+    internal Transaction? transaction;
+
     [Browsable(false)]
     [Ignore]
     public Guid AccountId { get; set; }
@@ -65,7 +67,13 @@ public class Line :
     [Browsable(false)]
     [Ignore]
     [JsonIgnore]
-    public Transaction? Transaction { get; internal set; }
+    public Transaction? Transaction
+    {
+        get
+        {
+            return transaction!;
+        }
+    }
 
     [Browsable(false)]
     [Ignore]
@@ -74,12 +82,12 @@ public class Line :
     {
         get
         {
-            if (Transaction == null)
+            if (transaction == null)
             {
                 return null;
             }
 
-            return Transaction.GetDoubleEntry(this);
+            return transaction.GetDoubleEntry(this);
         }
     }
 
@@ -112,9 +120,9 @@ public class Line :
 
         int result = 0;
 
-        if (Transaction != null)
+        if (transaction != null)
         {
-            result = Transaction.CompareTo(other.Transaction);
+            result = transaction.CompareTo(other.transaction);
         }
 
         if (result != 0)
@@ -181,7 +189,7 @@ public class Line :
             return false;
         }
 
-        return Transaction == other.Transaction &&
+        return transaction == other.transaction &&
             Balance == other.Balance &&
             AccountId == other.AccountId &&
             Description == other.Description;
@@ -189,7 +197,7 @@ public class Line :
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(Transaction, Balance, AccountId, Description);
+        return HashCode.Combine(transaction, Balance, AccountId, Description);
     }
 
     public static bool operator ==(Line? left, Line? right)

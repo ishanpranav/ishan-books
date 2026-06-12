@@ -18,9 +18,9 @@ namespace Liber.Forms.Transactions
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TransactionForm));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
             postedDateTimePicker = new DateTimePicker();
             label1 = new Label();
             label2 = new Label();
@@ -28,9 +28,15 @@ namespace Liber.Forms.Transactions
             toolStrip1 = new ToolStrip();
             newToolStripButton = new ToolStripButton();
             saveToolStripButton = new ToolStripButton();
-            printToolStripButton = new ToolStripButton();
+            saveCloseToolStripButton = new ToolStripButton();
             toolStripSeparator3 = new ToolStripSeparator();
             copyToolStripButton = new ToolStripButton();
+            removeToolStripButton = new ToolStripButton();
+            toolStripSeparator1 = new ToolStripSeparator();
+            firstToolStripButton = new ToolStripButton();
+            previousToolStripButton = new ToolStripButton();
+            nextToolStripButton = new ToolStripButton();
+            lastToolStripButton = new ToolStripButton();
             cancelButton = new Button();
             applyButton = new Button();
             acceptButton = new Button();
@@ -48,6 +54,7 @@ namespace Liber.Forms.Transactions
             _helpProvider = new HelpProvider();
             lastButton = new Button();
             firstButton = new Button();
+            closeToolStripButton = new ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)numberNumericUpDown).BeginInit();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)_dataGridView).BeginInit();
@@ -83,7 +90,7 @@ namespace Liber.Forms.Transactions
             // 
             // toolStrip1
             // 
-            toolStrip1.Items.AddRange(new ToolStripItem[] { newToolStripButton, saveToolStripButton, printToolStripButton, toolStripSeparator3, copyToolStripButton });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { closeToolStripButton, newToolStripButton, saveToolStripButton, saveCloseToolStripButton, toolStripSeparator3, copyToolStripButton, removeToolStripButton, toolStripSeparator1, firstToolStripButton, previousToolStripButton, nextToolStripButton, lastToolStripButton });
             resources.ApplyResources(toolStrip1, "toolStrip1");
             toolStrip1.Name = "toolStrip1";
             _helpProvider.SetShowHelp(toolStrip1, (bool)resources.GetObject("toolStrip1.ShowHelp"));
@@ -91,6 +98,7 @@ namespace Liber.Forms.Transactions
             // newToolStripButton
             // 
             newToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            newToolStripButton.Image = VisualStudioImageLibrary.NewLog;
             resources.ApplyResources(newToolStripButton, "newToolStripButton");
             newToolStripButton.Name = "newToolStripButton";
             newToolStripButton.Click += OnNewToolStripButtonClick;
@@ -98,16 +106,18 @@ namespace Liber.Forms.Transactions
             // saveToolStripButton
             // 
             saveToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            saveToolStripButton.Image = VisualStudioImageLibrary.Save;
             resources.ApplyResources(saveToolStripButton, "saveToolStripButton");
             saveToolStripButton.Name = "saveToolStripButton";
             saveToolStripButton.Click += OnSaveToolStripButtonClick;
             // 
-            // printToolStripButton
+            // saveCloseToolStripButton
             // 
-            printToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(printToolStripButton, "printToolStripButton");
-            printToolStripButton.Name = "printToolStripButton";
-            printToolStripButton.Click += OnPrintToolStripButtonClick;
+            saveCloseToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            saveCloseToolStripButton.Image = VisualStudioImageLibrary.SaveAndClose;
+            resources.ApplyResources(saveCloseToolStripButton, "saveCloseToolStripButton");
+            saveCloseToolStripButton.Name = "saveCloseToolStripButton";
+            saveCloseToolStripButton.Click += OnAcceptButtonClick;
             // 
             // toolStripSeparator3
             // 
@@ -117,9 +127,55 @@ namespace Liber.Forms.Transactions
             // copyToolStripButton
             // 
             copyToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            copyToolStripButton.Image = VisualStudioImageLibrary.Duplicate;
             resources.ApplyResources(copyToolStripButton, "copyToolStripButton");
             copyToolStripButton.Name = "copyToolStripButton";
             copyToolStripButton.Click += OnCopyToolStripButtonClick;
+            // 
+            // removeToolStripButton
+            // 
+            removeToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            removeToolStripButton.Image = VisualStudioImageLibrary.Delete;
+            resources.ApplyResources(removeToolStripButton, "removeToolStripButton");
+            removeToolStripButton.Name = "removeToolStripButton";
+            removeToolStripButton.Click += OnRemoveToolStripButton;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            resources.ApplyResources(toolStripSeparator1, "toolStripSeparator1");
+            // 
+            // firstToolStripButton
+            // 
+            firstToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            firstToolStripButton.Image = VisualStudioImageLibrary.GoToFirst;
+            resources.ApplyResources(firstToolStripButton, "firstToolStripButton");
+            firstToolStripButton.Name = "firstToolStripButton";
+            firstToolStripButton.Click += OnFirstButtonClick;
+            // 
+            // previousToolStripButton
+            // 
+            previousToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            previousToolStripButton.Image = VisualStudioImageLibrary.GoToPrevious;
+            resources.ApplyResources(previousToolStripButton, "previousToolStripButton");
+            previousToolStripButton.Name = "previousToolStripButton";
+            previousToolStripButton.Click += OnPreviousButtonClick;
+            // 
+            // nextToolStripButton
+            // 
+            nextToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            nextToolStripButton.Image = VisualStudioImageLibrary.GoToNext;
+            resources.ApplyResources(nextToolStripButton, "nextToolStripButton");
+            nextToolStripButton.Name = "nextToolStripButton";
+            nextToolStripButton.Click += OnNextButtonClick;
+            // 
+            // lastToolStripButton
+            // 
+            lastToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            lastToolStripButton.Image = VisualStudioImageLibrary.GoToLast;
+            resources.ApplyResources(lastToolStripButton, "lastToolStripButton");
+            lastToolStripButton.Name = "lastToolStripButton";
+            lastToolStripButton.Click += OnLastButtonClick;
             // 
             // cancelButton
             // 
@@ -148,30 +204,31 @@ namespace Liber.Forms.Transactions
             // _dataGridView
             // 
             _dataGridView.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Info;
-            _dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(33, 37, 41);
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
+            _dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
             resources.ApplyResources(_dataGridView, "_dataGridView");
             _dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             _dataGridView.BackgroundColor = System.Drawing.Color.FromArgb(248, 249, 250);
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            _dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.True;
+            _dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             _dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             _dataGridView.Columns.AddRange(new DataGridViewColumn[] { accountColumn, debitColumn, creditColumn, descriptionColumn });
-            _dataGridView.SetCompanyColor(System.Drawing.Color.Empty);
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            _dataGridView.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.False;
+            _dataGridView.DefaultCellStyle = dataGridViewCellStyle9;
             _dataGridView.GridColor = System.Drawing.Color.FromArgb(33, 37, 41);
             _dataGridView.MultiSelect = false;
             _dataGridView.Name = "_dataGridView";
@@ -260,6 +317,14 @@ namespace Liber.Forms.Transactions
             firstButton.UseVisualStyleBackColor = true;
             firstButton.Click += OnFirstButtonClick;
             // 
+            // closeToolStripButton
+            // 
+            closeToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            closeToolStripButton.Image = VisualStudioImageLibrary.CloseLog;
+            resources.ApplyResources(closeToolStripButton, "closeToolStripButton");
+            closeToolStripButton.Name = "closeToolStripButton";
+            closeToolStripButton.Click += OnCloseToolStripButtonClick;
+            // 
             // TransactionForm
             // 
             AcceptButton = applyButton;
@@ -314,12 +379,19 @@ namespace Liber.Forms.Transactions
         private System.Windows.Forms.ComboBox nameComboBox;
         private System.Windows.Forms.TextBox memoTextBox;
         private System.Windows.Forms.HelpProvider _helpProvider;
-        private System.Windows.Forms.ToolStripButton printToolStripButton;
         private System.Windows.Forms.Button lastButton;
         private System.Windows.Forms.Button firstButton;
         private DataGridViewComboBoxColumn accountColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn debitColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn creditColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn descriptionColumn;
+        private ToolStripButton saveCloseToolStripButton;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripButton firstToolStripButton;
+        private ToolStripButton previousToolStripButton;
+        private ToolStripButton nextToolStripButton;
+        private ToolStripButton lastToolStripButton;
+        private ToolStripButton removeToolStripButton;
+        private ToolStripButton closeToolStripButton;
     }
 }

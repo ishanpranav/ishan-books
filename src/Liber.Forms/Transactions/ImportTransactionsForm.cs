@@ -44,10 +44,9 @@ internal sealed class ImportTransactionsForm : ImportForm
             Company.AddTransaction(new Transaction()
             {
                 Number = entry.Value.Line.TransactionNumber,
-                Name = entry.Value.Line.TransactionName,
                 Posted = entry.Value.Line.TransactionPosted,
                 Memo = entry.Value.Line.TransactionMemo,
-            }, entry.Value.Values);
+            }, entry.Value.Line.TransactionName, entry.Value.Values);
         }
     }
 }

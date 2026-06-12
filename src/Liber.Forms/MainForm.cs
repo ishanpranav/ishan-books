@@ -29,8 +29,6 @@ using PdfSharp.Pdf.IO;
 
 namespace Liber.Forms;
 
-// TODO: investigate json saving delay issue
-
 internal sealed partial class MainForm : Form
 {
     private readonly Company _company = new Company();
@@ -38,6 +36,7 @@ internal sealed partial class MainForm : Form
     private ReportEngine? _engine;
     private IntervalView? _favoriteReport;
     private bool _isFavoriteTemporary;
+    private bool _pendingClose;
     private string? _path;
 
     public MainForm()
@@ -139,12 +138,18 @@ internal sealed partial class MainForm : Form
 
     private void InitializeRecentPaths()
     {
+        recentPathsToolStripMenuItem.Visible = false;
+        recentPathsToolStripSeparator.Visible = false;
+
         if (_recentPathManager.Empty)
         {
             return;
         }
 
+        recentPathsToolStripMenuItem.DropDownItems.Clear();
+
         int i = 1;
+
         foreach (string path in _recentPathManager.Paths)
         {
             if (!File.Exists(path))
@@ -286,15 +291,18 @@ internal sealed partial class MainForm : Form
             }
         }
 
-        reportsToolStripMenuItem1.DropDownItems.Add(reportsToolStripMenuItem1.DropDownItems[0]);
-        reportsToolStripMenuItem1.DropDownItems.RemoveAt(index: 0);
+        reportsToolStripMenuItem1.DropDownItems.Add(otherReportsToolStripMenuItem);
+        reportsToolStripMenuItem1.DropDownItems.RemoveAt(0);
     }
 
     private void OnReportToolStripMenuItemClick(object? sender, EventArgs e)
     {
         string name = ((ToolStripMenuItem)sender!).Tag!.ToString()!;
         Guid key = Guid.NewGuid();
-        ReportsForm form = new ReportsForm(_engine!);
+        ReportsForm form = new ReportsForm(_engine!)
+        {
+            Text = _engine!.Views[name].GenericTitle
+        };
 
         form.Load += (sender, e) =>
         {
@@ -307,7 +315,21 @@ internal sealed partial class MainForm : Form
 
     private async void OnFormClosing(object sender, FormClosingEventArgs e)
     {
-        e.Cancel = await TryCancelAsync();
+        if (_pendingClose)
+        {
+            return;
+        }
+
+        e.Cancel = true;
+
+        if (await TryCancelAsync())
+        {
+            return;
+        }
+
+        _pendingClose = true;
+
+        Close();
     }
 
     private void OnDragOver(object sender, DragEventArgs e)
@@ -648,13 +670,6 @@ internal sealed partial class MainForm : Form
         await SaveAsync();
     }
 
-    private void OnRecentPathManagerUpdated(object sender, EventArgs e)
-    {
-        recentPathsToolStripMenuItem.DropDownItems.Clear();
-
-        InitializeRecentPaths();
-    }
-
     private void OnEditToolStripMenuItemClick(object sender, EventArgs e)
     {
         _factory.AutoRegister(() => new EditCompanyForm(_company));
@@ -670,9 +685,29 @@ internal sealed partial class MainForm : Form
         _factory.AutoRegister(() => new NewAccountForm(_company));
     }
 
-    private void OnSettingsToolStripMenuItemClick(object sender, EventArgs e)
+    private void OnRemoveAccountToolStripMenuItemClick(object sender, EventArgs e)
     {
-        _factory.AutoRegister(() => new SettingsForm());
+        using AccountDialog accountDialog = new AccountDialog(new EditableAccountView(_company), validator: null);
+
+        if (accountDialog.ShowDialog() != DialogResult.OK)
+        {
+            return;
+        }
+
+        if (!_company.RemoveAccount(accountDialog.Value.Id))
+        {
+            // TODO: show remove account failed
+        }
+    }
+
+    private void OnCultureToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        _factory.AutoRegister(() => new CultureForm());
+    }
+
+    private void OnImportSettingsToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        _factory.AutoRegister(() => new ImportRulesForm());
     }
 
     private async void OnCombinePdfDocumentsToolStripMenuItemClick(object sender, EventArgs e)
@@ -802,7 +837,10 @@ internal sealed partial class MainForm : Form
         report.Check = checkForm.Value;
 
         Guid key = Guid.NewGuid();
-        ReportsForm form = new ReportsForm(_engine);
+        ReportsForm form = new ReportsForm(_engine)
+        {
+            Text = checkToolStripMenuItem.Text
+        };
 
         form.Load += (sender, e) => form.InitializeReport(ReportEngine.CheckReport);
 
@@ -831,7 +869,7 @@ internal sealed partial class MainForm : Form
 
         Guid id = accountDialog.Value.Id;
 
-        if (_factory.TryKill(id) || accountDialog.Value.Value == null)
+        if (_factory.TryActivate(id) || accountDialog.Value.Value == null)
         {
             return;
         }
@@ -839,5 +877,54 @@ internal sealed partial class MainForm : Form
         TransactionsForm transactionsForm = new TransactionsForm(_company, accountDialog.Value.Value);
 
         _factory.Register(id, transactionsForm);
+    }
+
+    private void OnCloseAllToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        _factory.KillAll();
+    }
+
+    private void OnRecentPathManagerInvalidated(object sender, EventArgs e)
+    {
+        InitializeRecentPaths();
+    }
+
+    private void OnFactoryInvalidated(object sender, EventArgs e)
+    {
+        formsToolStripSeparator.Visible = false;
+        formsToolStripMenuItem.Visible = false;
+
+        formsToolStripMenuItem.DropDownItems.Clear();
+
+        int i = 1;
+
+        foreach (KeyValuePair<Guid, Form> entry in _factory.Forms)
+        {
+            if (entry.Value == _factory.Embedded)
+            {
+                continue;
+            }
+
+            ToolStripItem item = recentPathsToolStripMenuItem.DropDownItems.Add($"{i} - {entry.Value.Text}");
+
+            item.Click += async (_, _) =>
+            {
+                _factory.TryActivate(entry.Key);
+            };
+            entry.Value.TextChanged += async (_, _) =>
+            {
+                item.Text = $"{i} - {entry.Value.Text}";
+            };
+
+            formsToolStripMenuItem.DropDownItems.Add(item);
+
+            i++;
+        }
+
+        if (formsToolStripMenuItem.DropDownItems.Count > 0)
+        {
+            formsToolStripSeparator.Visible = true;
+            formsToolStripMenuItem.Visible = true;
+        }
     }
 }

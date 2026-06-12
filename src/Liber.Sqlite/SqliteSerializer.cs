@@ -276,11 +276,10 @@ public static class SqliteSerializer
                 {
                     Guid id = reader.GetGuid(0);
 
-                    transactions.Add(new Transaction(id, lines[id])
+                    transactions.Add(new Transaction(id, await SqliteUtilities.GetStringAsync(reader, 3), lines[id])
                     {
                         Posted = reader.GetDateTime(1),
                         Number = reader.GetDecimal(2),
-                        Name = await SqliteUtilities.GetStringAsync(reader, 3),
                         Memo = await SqliteUtilities.GetStringAsync(reader, 4)
                     });
                 }

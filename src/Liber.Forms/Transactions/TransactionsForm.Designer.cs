@@ -22,6 +22,7 @@ partial class TransactionsForm
     /// </summary>
     private void InitializeComponent()
     {
+        components = new System.ComponentModel.Container();
         DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
         DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
         DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
@@ -47,8 +48,11 @@ partial class TransactionsForm
         printToolStripButton = new ToolStripButton();
         toolStripSeparator = new ToolStripSeparator();
         copyToolStripButton = new ToolStripButton();
+        _contextMenuStrip = new ContextMenuStrip(components);
+        openToolStripMenuItem = new ToolStripMenuItem();
         ((System.ComponentModel.ISupportInitialize)_dataGridView).BeginInit();
         _toolStrip.SuspendLayout();
+        _contextMenuStrip.SuspendLayout();
         SuspendLayout();
         // 
         // _dataGridView
@@ -72,6 +76,7 @@ partial class TransactionsForm
         _dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
         _dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
         _dataGridView.Columns.AddRange(new DataGridViewColumn[] { postedColumn, numberTypeColumn, nameMemoColumn, accountColumn, debitColumn, creditColumn, balanceColumn });
+        _dataGridView.ContextMenuStrip = _contextMenuStrip;
         dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleLeft;
         dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
         dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 9F);
@@ -86,14 +91,14 @@ partial class TransactionsForm
         _dataGridView.Name = "_dataGridView";
         _dataGridView.RowTemplate.Height = 29;
         _dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-        _dataGridView.Leave += OnDataGridViewLeave;
-        _dataGridView.CellEndEdit += OnDataGridViewCellEndEdit;
         _dataGridView.CellClick += OnDataGridViewCellClick;
         _dataGridView.CellDoubleClick += OnDataGridViewCellDoubleClick;
+        _dataGridView.CellEndEdit += OnDataGridViewCellEndEdit;
         _dataGridView.CellPainting += OnDataGridViewCellPainting;
         _dataGridView.CurrentCellChanged += OnDataGridViewCurrentCellChanged;
         _dataGridView.EditingControlShowing += OnDataGridViewEditingControlShowing;
         _dataGridView.SelectionChanged += OnDataGridViewSelectionChanged;
+        _dataGridView.Leave += OnDataGridViewLeave;
         // 
         // postedColumn
         // 
@@ -194,6 +199,19 @@ partial class TransactionsForm
         copyToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
         resources.ApplyResources(copyToolStripButton, "copyToolStripButton");
         copyToolStripButton.Name = "copyToolStripButton";
+        copyToolStripButton.Click += OnCopyToolStripButtonClick;
+        // 
+        // _contextMenuStrip
+        // 
+        _contextMenuStrip.Items.AddRange(new ToolStripItem[] { openToolStripMenuItem });
+        _contextMenuStrip.Name = "_contextMenuStrip";
+        resources.ApplyResources(_contextMenuStrip, "_contextMenuStrip");
+        // 
+        // openToolStripMenuItem
+        // 
+        openToolStripMenuItem.Name = "openToolStripMenuItem";
+        resources.ApplyResources(openToolStripMenuItem, "openToolStripMenuItem");
+        openToolStripMenuItem.Click += OnOpenToolStripMenuItem_Click;
         // 
         // TransactionsForm
         // 
@@ -206,6 +224,7 @@ partial class TransactionsForm
         ((System.ComponentModel.ISupportInitialize)_dataGridView).EndInit();
         _toolStrip.ResumeLayout(false);
         _toolStrip.PerformLayout();
+        _contextMenuStrip.ResumeLayout(false);
         ResumeLayout(false);
         PerformLayout();
     }
@@ -227,4 +246,6 @@ partial class TransactionsForm
     private DataGridViewTextBoxColumn debitColumn;
     private DataGridViewTextBoxColumn creditColumn;
     private DataGridViewTextBoxColumn balanceColumn;
+    private ContextMenuStrip _contextMenuStrip;
+    private ToolStripMenuItem openToolStripMenuItem;
 }

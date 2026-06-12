@@ -1,24 +1,21 @@
-﻿// SettingsForm.cs
+﻿// CultureForm.cs
 // Copyright (c) 2023-2026 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Globalization;
 using System.Resources;
-using System.Text.Json;
 using System.Windows.Forms;
 using Liber.Forms.Properties;
 
 namespace Liber.Forms;
 
-internal sealed partial class SettingsForm : Form
+internal sealed partial class CultureForm : Form
 {
-    private readonly BindingList<ImportRule> _rules = new BindingList<ImportRule>();
     private static List<CultureInfo>? s_availableCultures;
 
-    public SettingsForm()
+    public CultureForm()
     {
         InitializeComponent();
         SystemFeatures.Initialize(this);
@@ -69,23 +66,6 @@ internal sealed partial class SettingsForm : Form
     {
         cultureComboBox.DataSource = s_availableCultures;
         cultureComboBox.SelectedItem = CultureInfo.CurrentUICulture;
-
-        _rules.Clear();
-
-        ImportRule[]? rules = JsonSerializer.Deserialize<ImportRule[]>(Settings.Default.ImportRules, FormattedStrings.JsonOptions);
-
-        if (rules != null)
-        {
-            foreach (ImportRule rule in rules)
-            {
-                _rules.Add(rule);
-            }
-        }
-
-        _textBox.Text = JsonSerializer.Serialize(_rules, FormattedStrings.JsonOptions);
-        importRulesDataGridView.DataSource = _rules;
-
-        importRulesDataGridView.AutoResizeColumns();
     }
 
     private void OnAcceptButtonClick(object sender, EventArgs e)
@@ -98,7 +78,6 @@ internal sealed partial class SettingsForm : Form
         }
 
         Settings.Default.Culture = culture.Name;
-        Settings.Default.ImportRules = JsonSerializer.Serialize(_rules, FormattedStrings.JsonOptions);
         CultureInfo.CurrentUICulture = culture;
         DialogResult = DialogResult.OK;
 
@@ -124,78 +103,6 @@ internal sealed partial class SettingsForm : Form
         if (culture != null)
         {
             e.Value = culture.DisplayName;
-        }
-    }
-
-    private void OnTabControlSelectedIndexChanged(object sender, EventArgs e)
-    {
-        if (_tabControl.SelectedTab == jsonTabPage)
-        {
-            _textBox.Text = JsonSerializer.Serialize(_rules, FormattedStrings.JsonOptions);
-
-            return;
-        }
-
-        ImportRule[]? rules;
-
-        try
-        {
-            rules = JsonSerializer.Deserialize<ImportRule[]>(_textBox.Text, FormattedStrings.JsonOptions);
-        }
-        catch (JsonException)
-        {
-            return;
-        }
-
-        if (rules == null)
-        {
-            return;
-        }
-
-        _errorProvider.SetError(_tabControl, null);
-        _rules.Clear();
-
-        foreach (ImportRule rule in rules)
-        {
-            _rules.Add(rule);
-        }
-    }
-
-    private void OnTabControlSelecting(object sender, TabControlCancelEventArgs e)
-    {
-        if (_tabControl.SelectedTab == jsonTabPage)
-        {
-            return;
-        }
-
-        if (!string.IsNullOrEmpty(_errorProvider.GetError(editorTabPage)))
-        {
-            Settings.Default.Reset();
-            InitializeSettings();
-
-            return;
-        }
-
-        try
-        {
-            ImportRule[]? rules = JsonSerializer.Deserialize<ImportRule[]>(_textBox.Text, FormattedStrings.JsonOptions);
-
-            if (rules == null)
-            {
-                _errorProvider.SetError(editorTabPage, "Bad JSON");
-
-                e.Cancel = true;
-            }
-            else
-            {
-                _errorProvider.SetError(editorTabPage, null);
-            }
-        }
-        catch (JsonException)
-        {
-            _errorProvider.SetError(editorTabPage, "Bad JSON");
-
-            e.Cancel = true;
         }
     }
 }

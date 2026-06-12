@@ -4,7 +4,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Text.Json;
@@ -17,14 +16,7 @@ internal sealed class RecentPathManager : Component
 {
     private readonly Dictionary<string, DateTime> _dates = new Dictionary<string, DateTime>();
 
-    private SortedDictionary<DateTime, string>? _paths;
-
-    public RecentPathManager() { }
-
-    public RecentPathManager(IContainer container)
-    {
-        container.Add(this);
-    }
+    private SortedSet<RecentPath>? _paths;
 
     [Browsable(false)]
     public bool Empty
@@ -55,15 +47,30 @@ internal sealed class RecentPathManager : Component
                 }
             }
 
-            return _paths.Values;
+            return _paths.Select(x => x.Path);
         }
     }
 
-    public event EventHandler? Updated;
+    [DefaultValue(10)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    public int MaxPaths { get; set; } = 1;
+
+    public event EventHandler? Invalidated;
+
+    public RecentPathManager() { }
+
+    public RecentPathManager(IContainer container)
+    {
+        container.Add(this);
+    }
 
     public void Add(string path)
     {
-        JumpList.AddToRecentCategory(path);
+        try
+        {
+            JumpList.AddToRecentCategory(path);
+        }
+        catch { }
 
         DateTime modified = DateTime.Now;
 
@@ -73,24 +80,33 @@ internal sealed class RecentPathManager : Component
 
             if (_paths == null)
             {
-                _paths = new SortedDictionary<DateTime, string>(ReverseDateTimeComparer.Default);
+                _paths = new SortedSet<RecentPath>();
             }
         }
 
         if (_dates.TryGetValue(path, out DateTime lastModified))
         {
-            _paths.Remove(lastModified);
+            _paths.Remove(new RecentPath(path, lastModified));
         }
 
-        _paths.Add(modified, path);
+        _paths.Add(new RecentPath(path, modified));
+
         _dates[path] = modified;
 
         Save();
-        Updated?.Invoke(sender: this, EventArgs.Empty);
+        Invalidated?.Invoke(sender: this, EventArgs.Empty);
     }
 
     private void Save()
     {
+        if (_paths != null)
+        {
+            while (_paths.Count > MaxPaths && _paths.Max != null)
+            {
+                _paths.Remove(_paths.Max);
+            }
+        }
+
         Settings.Default.RecentPaths = JsonSerializer.Serialize(_paths, FormattedStrings.JsonOptions);
 
         Settings.Default.Save();
@@ -98,11 +114,11 @@ internal sealed class RecentPathManager : Component
 
     private void Load()
     {
-        Dictionary<DateTime, string>? paths;
+        RecentPath[]? paths;
 
         try
         {
-            paths = JsonSerializer.Deserialize<Dictionary<DateTime, string>>(Settings.Default.RecentPaths, FormattedStrings.JsonOptions);
+            paths = JsonSerializer.Deserialize<RecentPath[]>(Settings.Default.RecentPaths, FormattedStrings.JsonOptions);
 
             if (paths == null)
             {
@@ -114,13 +130,13 @@ internal sealed class RecentPathManager : Component
             return;
         }
 
-        _paths = new SortedDictionary<DateTime, string>(paths, ReverseDateTimeComparer.Default);
+        _paths = new SortedSet<RecentPath>(paths);
 
         _dates.Clear();
 
-        foreach (KeyValuePair<DateTime, string> path in paths)
+        foreach (RecentPath path in paths)
         {
-            _dates.Add(path.Value, path.Key);
+            _dates[path.Path] = path.LastModified;
         }
     }
 }

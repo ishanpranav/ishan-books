@@ -21,23 +21,15 @@ public class Transaction :
     public Transaction() { }
 
     [JsonConstructor]
-    public Transaction(Guid id, IReadOnlyCollection<Line> lines)
+    public Transaction(Guid id, string? name, IReadOnlyCollection<Line> lines)
     {
         Id = id;
+        Name = name;
         this.lines = new SortedSet<Line>(lines);
 
         foreach (Line line in lines)
         {
-            line.Transaction = this;
-        }
-    }
-
-    [Ignore]
-    public IReadOnlyCollection<Line> Lines
-    {
-        get
-        {
-            return lines;
+            line.transaction = this;
         }
     }
 
@@ -60,7 +52,7 @@ public class Transaction :
     [Name("Description")]
     [NullValues("")]
     [Optional]
-    public string? Name { get; set; }
+    public string? Name { get; internal set; }
 
     [Index(4)]
     [Name("Notes")]
@@ -76,19 +68,11 @@ public class Transaction :
     public DateTime? Reconciled { get; set; }
 
     [Ignore]
-    [JsonIgnore]
-    public decimal Balance
+    public IReadOnlyCollection<Line> Lines
     {
         get
         {
-            decimal result = 0;
-
-            foreach (Line line in Lines)
-            {
-                result += line.Balance;
-            }
-
-            return result;
+            return lines;
         }
     }
 

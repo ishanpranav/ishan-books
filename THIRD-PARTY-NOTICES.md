@@ -30,12 +30,19 @@ the application.
 - Source: [empira/PDFsharp](https://github.com/empira/PDFsharp)
 - License: [MIT](#mit_pdfsharp)
 
-### Voucher Check 3-Part US-Letter&emsp;<sub><sup>*ini*&ensp;</sup></sub>
+### Liberty&trade; Personal Checks US-Letter&emsp;<sub><sup>*ini*&ensp;</sup></sub>
 - Author: GnuCash contributors
 - Source: [Gnucash/gnucash](https://github.com/Gnucash/gnucash)
 - License: [GNU General Public License family](#gpl-gnucash)
 
-See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/voucher.chk) for the resource included from the repository.
+See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/liberty.chk) for the resource included from the repository.
+
+### Quicken&trade;/QuickBooks&trade; US-Letter&emsp;<sub><sup>*ini*&ensp;</sup></sub>
+- Author: GnuCash contributors
+- Source: [Gnucash/gnucash](https://github.com/Gnucash/gnucash)
+- License: [GNU General Public License family](#gpl-gnucash)
+
+See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/quicken.chk) for the resource included from the repository.
 
 ### Quicken&trade; Wallet Checks with Side Stub&emsp;<sub><sup>*ini*&ensp;</sup></sub>
 - Author: GnuCash contributors
@@ -43,6 +50,20 @@ See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/voucher.ch
 - License: [GNU General Public License family](#gpl-gnucash)
 
 See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/quicken_wallet.chk) for the resource included from the repository.
+
+### Deluxe&trade; Personal Checks US-Letter&emsp;<sub><sup>*ini*&ensp;</sup></sub>
+- Author: GnuCash contributors
+- Source: [Gnucash/gnucash](https://github.com/Gnucash/gnucash)
+- License: [GNU General Public License family](#gpl-gnucash)
+
+See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/deluxe.chk) for the resource included from the repository.
+
+### Voucher Check 3-Part US-Letter&emsp;<sub><sup>*ini*&ensp;</sup></sub>
+- Author: GnuCash contributors
+- Source: [Gnucash/gnucash](https://github.com/Gnucash/gnucash)
+- License: [GNU General Public License family](#gpl-gnucash)
+
+See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/voucher.chk) for the resource included from the repository.
 
 ### Quicken&trade; Check-21&emsp;<sub><sup>*ini*&ensp;</sup></sub>
 - Author: GnuCash contributors
@@ -57,27 +78,6 @@ See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/quicken_ch
 - License: [GNU General Public License family](#gpl-gnucash)
 
 See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/quicken_3part.chk) for the resource included from the repository.
-
-### Quicken&trade;/QuickBooks&trade; US-Letter&emsp;<sub><sup>*ini*&ensp;</sup></sub>
-- Author: GnuCash contributors
-- Source: [Gnucash/gnucash](https://github.com/Gnucash/gnucash)
-- License: [GNU General Public License family](#gpl-gnucash)
-
-See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/quicken.chk) for the resource included from the repository.
-
-### Liberty&trade; Personal Checks US-Letter&emsp;<sub><sup>*ini*&ensp;</sup></sub>
-- Author: GnuCash contributors
-- Source: [Gnucash/gnucash](https://github.com/Gnucash/gnucash)
-- License: [GNU General Public License family](#gpl-gnucash)
-
-See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/liberty.chk) for the resource included from the repository.
-
-### Deluxe&trade; Personal Checks US-Letter&emsp;<sub><sup>*ini*&ensp;</sup></sub>
-- Author: GnuCash contributors
-- Source: [Gnucash/gnucash](https://github.com/Gnucash/gnucash)
-- License: [GNU General Public License family](#gpl-gnucash)
-
-See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/deluxe.chk) for the resource included from the repository.
 
 ### ini-parser&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
 - Author: Ricardo Amores Hernández
@@ -94,15 +94,41 @@ See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/deluxe.chk
 - Source: [srkirkland/Inflector](https://github.com/srkirkland/Inflector)
 - License: [MIT](#mit_kirkland)
 
+### chartjs-chart-treemap&emsp;<sub><sup>*javascript*&ensp;*typescript*&ensp;</sup></sub>
+- Author: Jukka Kurkela
+- Source: [kurkle/chartjs-chart-treemap](https://github.com/kurkle/chartjs-chart-treemap)
+- License: [MIT](#mit_charjscharttreemap)
+
 ### chartjs-chart-sankey&emsp;<sub><sup>*javascript*&ensp;*typescript*&ensp;</sup></sub>
 - Author: Jukka Kurkela
 - Source: [kurkle/chartjs-chart-sankey](https://github.com/kurkle/chartjs-chart-sankey)
 - License: [MIT](#mit_chartjschartsankey)
 
-### chartjs-chart-treemap&emsp;<sub><sup>*javascript*&ensp;*typescript*&ensp;</sup></sub>
-- Author: Jukka Kurkela
-- Source: [kurkle/chartjs-chart-treemap](https://github.com/kurkle/chartjs-chart-treemap)
-- License: [MIT](#mit_charjscharttreemap)
+### CalendarColumn&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
+- Author: .NET Foundation and contributors
+- Source: [https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells)
+- License: [MIT](#mit_dotnet)
+
+See [here](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells) for the resource included from the repository.
+
+### CalendarCell&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
+- Author: .NET Foundation and contributors
+- Source: [https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells)
+- License: [MIT](#mit_dotnet)
+
+See [here](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells) for the resource included from the repository.
+
+### Microsoft Windows API Codepack&emsp;<sub><sup>*c\#*&ensp;*c++*&ensp;*visual basic*&ensp;</sup></sub>
+- Author: Microsoft Corporation
+- Source: [Wagnerp/Windows-API-CodePack-NET](https://github.com/Wagnerp/Windows-API-CodePack-NET)
+- License: [MIT](#mit_windowsapicodepack)
+
+### .NET Runtime&emsp;<sub><sup>*c\#*&ensp;*c++*&ensp;*c*&ensp;</sup></sub>
+- Author: .NET Foundation and contributors
+- Source: [dotnet/runtime](https://github.com/dotnet/runtime)
+- License: [MIT](#mit_dotnet)
+
+For more information about this software, please see its [third-party notices](https://github.com/dotnet/runtime/blob/main/THIRD-PARTY-NOTICES.TXT).
 
 ### Humanizer&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
 - Author: .NET Foundation and contributors
@@ -124,11 +150,6 @@ See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/deluxe.chk
 - Source: [dotnet/docfx](https://github.com/dotnet/docfx)
 - License: [MIT](#mit_dotnet)
 
-### Microsoft Windows API Codepack&emsp;<sub><sup>*c\#*&ensp;*c++*&ensp;*visual basic*&ensp;</sup></sub>
-- Author: Microsoft Corporation
-- Source: [Wagnerp/Windows-API-CodePack-NET](https://github.com/Wagnerp/Windows-API-CodePack-NET)
-- License: [MIT](#mit_windowsapicodepack)
-
 ### TypeConverter to JsonConverter Adapter&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
 - Author: .NET Foundation and contributors
 - Source: [dotnet/runtime/issues/1761](https://github.com/dotnet/runtime/issues/1761)
@@ -138,12 +159,19 @@ See [here](https://github.com/dotnet/runtime/issues/1761) for the resource inclu
 
 For more information about this software, please see its [third-party notices](https://github.com/dotnet/runtime/blob/main/THIRD-PARTY-NOTICES.TXT).
 
-### .NET Runtime&emsp;<sub><sup>*c\#*&ensp;*c++*&ensp;*c*&ensp;</sup></sub>
+### CalendarEditingControl&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
 - Author: .NET Foundation and contributors
-- Source: [dotnet/runtime](https://github.com/dotnet/runtime)
+- Source: [https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells)
 - License: [MIT](#mit_dotnet)
 
-For more information about this software, please see its [third-party notices](https://github.com/dotnet/runtime/blob/main/THIRD-PARTY-NOTICES.TXT).
+See [here](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells) for the resource included from the repository.
+
+### Visual Studio 2026 Image Library&emsp;<sub><sup>*png*&ensp;</sup></sub>
+- Author: Microsoft Corporation
+- Source: [https://www.microsoft.com/en-us/download/details.aspx?id=35825](https://www.microsoft.com/en-us/download/details.aspx?id=35825)
+- License: [MICROSOFT VISUAL STUDIO IMAGE LIBRARY](#visual-studio-image-library-eula_microsoft)
+
+See [here](https://www.microsoft.com/en-us/download/details.aspx?id=35825) for the resource included from the repository.
 
 ### CPA 006 Cheque in Middle ASAP Cheques&emsp;<sub><sup>*ini*&ensp;</sup></sub>
 - Author: Doug Ransom
@@ -175,6 +203,9 @@ inspired by third-party open-source software.
 
 ### Luma&emsp;<sub><sup></sup></sub>
 - Source: [Luma (video) - Wikipedia](https://en.wikipedia.org/wiki/Luma_(video))
+
+### How to: Host Controls in Windows Forms DataGridView Cells&emsp;<sub><sup></sup></sub>
+- Source: [https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells)
 
 Resources
 ---------
@@ -1342,5 +1373,185 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+```
+________________________________________________________________________________
+
+### <a id='visual-studio-image-library-eula_microsoft'>MICROSOFT VISUAL STUDIO IMAGE LIBRARY</a>
+
+```
+These license terms are an agreement between Microsoft Corporation (or based on where you live, 
+one of its affiliates) and you. They apply to your use of the Microsoft Visual Studio Image Library 
+(�Image Library�). The terms also apply to any Microsoft services or updates for the Image Library, 
+except to the extent those have different terms.
+By using the Image Library, you accept these terms.
+1.	INSTALLATION AND USE RIGHTS
+a.	General
+Subject to your compliance with these terms, you may use copies of the software images 
+contained in the Image Library to develop and test your applications.
+b.	Third Party Components
+The Image Library may include third party components with separate legal notices or governed by 
+other agreements, as may be described in the notices file(s) accompanying the Image Library.
+2.	DISTRIBUTABLE IMAGES
+The Image Library contains images that you are permitted to distribute (�Distributable Images�) in 
+applications you develop as described in this Section. (For this Section the term �distribution� also 
+means deployment of your applications for third parties to access over the Internet.)
+a.	Right to Use and Distribute
+*	Images. You may copy and distribute the Distributable Images in applications you 
+develop with the Visual Studio family of products. Your use of the Images must be in 
+accordance with the use descriptions associated with the Images.
+*	Third Party Distribution. You may permit distributors of your applications to copy 
+and distribute the Distributable Images as part of those applications.
+b.	Distribution Requirements
+For any Distributable Images you distribute, you must:
+*	add significant primary functionality to it in your applications;
+*	require distributors and external end users to agree to terms that protect the 
+Distributable Images at least as much as this agreement; and
+*	indemnify, defend, and hold harmless Microsoft from any claims, including attorneys� 
+fees, related to the distribution or use of your applications, except to the extent that 
+any claim is based solely on the Distributable Images.
+c.	Distribution Restrictions
+You may not:
+*	use Microsoft�s trademarks in your applications� names or branding in a way that suggests 
+your applications come from or are endorsed by Microsoft; or
+*	modify or distribute any Distributable Images so that any part of it becomes subject to an 
+Excluded License. An �Excluded License� is one that requires, as a condition of use, 
+modification or distribution, that (i) the code be disclosed or distributed in source code 
+form; or (ii) others have the right to modify it.
+3.	SCOPE OF LICENSE 
+The Image Library is licensed, not sold. This agreement only gives you some rights to use the Image 
+Library. Microsoft reserves all other rights. Unless applicable law gives you more rights despite this 
+limitation, you may use the Image Library only as expressly permitted in this agreement. In doing so, 
+you must comply with any technical limitations in the Image Library that only allow you to use it in 
+certain ways.
+Without limiting the foregoing, you may not:
+*	work around any technical limitations in the Image Library;
+*	reverse engineer, decompile, or disassemble the Image Library, or otherwise attempt to 
+derive the source code for the Image Library, except and only to the extent required by third 
+party licensing terms governing use of certain open source components that may be 
+included in the Image Library;
+*	remove, minimize, block or modify any notices of Microsoft or its suppliers in the Image 
+Library;
+*	use the Image Library in any way that is against the law;
+*	share, publish, rent or lease the Image Library; or
+*	provide the Image Library as a stand-alone offering for others to use, or transfer the Image 
+Library or this agreement to any third party.
+4.	EXPORT RESTRICTIONS
+You must comply with all domestic and international export laws and regulations that apply to the 
+Image Library, which include restrictions on destinations, end users, and end use. For further 
+information on export restrictions, visit http://aka.ms/exporting.
+5.	SUPPORT SERVICES
+Microsoft is not obligated under this agreement to provide any support services for the Image 
+Library. Any support provided is �as is,� �with all faults,� and without warranty of any kind.
+6.	UPDATES
+Microsoft may make updated versions of the Image Library available from time to time. You may 
+obtain such updates only from Microsoft or authorized sources, and your use of any updated 
+Images is subject to these license terms unless Microsoft provides different terms with the update. 
+Updates may not include or support all existing Image Library features, services, images, or 
+formats.
+7.	ENTIRE AGREEMENT 
+This agreement, and any other terms Microsoft may provide for supplements, updates, or 
+third-party applications, is the entire agreement for the Image Library.
+8.	APPLICABLE LAW
+If you acquired the Image Library in the United States, Washington law applies to interpretation of 
+and claims for breach of this agreement, and the laws of the state where you live apply to all other 
+claims. If you acquired the Image Library in any other country, its laws apply.
+9.	CONSUMER RIGHTS; REGIONAL VARIATIONS
+This agreement describes certain legal rights. You may have other rights, including consumer rights, 
+under the laws of your state or country. Separate and apart from your relationship with Microsoft, 
+you may also have rights with respect to the party from which you acquired the Image Library. This 
+agreement does not change those other rights if the laws of your state or country do not permit it to 
+do so. For example, if you acquired the Image Library in one of the below regions, or mandatory country 
+law applies, then the following provisions apply to you:
+a.	Australia
+You have statutory guarantees under the Australian Consumer Law and nothing in this agreement is 
+intended to affect those rights.
+b.	Canada
+If you acquired the Image Library in Canada, you may stop receiving updates by turning off the 
+automatic update feature, disconnecting your device from the Internet (if and when you re-connect 
+to the Internet, however, the Image Library will resume checking for and installing updates), or 
+uninstalling the Image Library. The product documentation, if any, may also specify how to turn off 
+updates for your specific device or software.
+c.	Germany and Austria
+i.	Warranty. The Image Library will perform substantially as described in any Microsoft 
+materials that accompany it. However, Microsoft gives no contractual guarantee in 
+relation to the Image Library.
+ii.	Limitation of Liability. In case of intentional conduct, gross negligence, claims based 
+on the Product Liability Act, as well as in case of death or personal or physical injury, 
+Microsoft is liable according to the statutory law.
+Subject to the foregoing clause (ii), Microsoft will only be liable for slight negligence if Microsoft is in 
+breach of such material contractual obligations, the fulfillment of which facilitates the due 
+performance of this agreement, the breach of which would endanger the purpose of this agreement 
+and the compliance with which a party may constantly trust in (so-called �cardinal obligations�). In 
+other cases of slight negligence, Microsoft will not be liable.
+10.	DISCLAIMER OF WARRANTY
+THE IMAGE LIBRARY IS LICENSED �AS-IS.� YOU BEAR THE RISK OF USING IT. MICROSOFT GIVES 
+NO EXPRESS WARRANTIES, GUARANTEES OR CONDITIONS. TO THE EXTENT PERMITTED UNDER 
+YOUR LOCAL LAWS, MICROSOFT EXCLUDES THE IMPLIED WARRANTIES OF MERCHANTABILITY, 
+FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
+11.	LIMITATION ON AND EXCLUSION OF REMEDIES AND DAMAGES 
+YOU CAN RECOVER FROM MICROSOFT AND ITS SUPPLIERS ONLY DIRECT DAMAGES UP TO U.S. 
+$5.00. YOU CANNOT RECOVER ANY OTHER DAMAGES, INCLUDING CONSEQUENTIAL, LOST 
+PROFITS, SPECIAL, INDIRECT OR INCIDENTAL DAMAGES.
+This limitation applies to (a) anything related to the Image Library, services, content (including 
+code) on third-party Internet sites, or third-party applications; and (b) claims for breach of contract, 
+breach of warranty, guarantee or condition, strict liability, negligence, or other tort to the extent 
+permitted by applicable law.
+It also applies even if Microsoft knew or should have known about the possibility of the damages. 
+The above limitation or exclusion may not apply to you because your state or country may not allow 
+the exclusion or limitation of incidental, consequential or other damages.
+Please note: As the Image Library is distributed in Quebec, Canada, some of the clauses in 
+this agreement are provided below in French. For clarity, the French clauses below use the 
+term � logiciel � to refer to the Image Library.
+
+Remarque : Ce logiciel �tant distribu� au Qu�bec, Canada, certaines des clauses dans ce 
+contrat sont fournies ci-dessous en fran�ais.
+
+EXON�RATION DE GARANTIE. Le logiciel vis� par une licence est offert � tel quel �. Toute utilisation 
+de ce logiciel est � votre seule risque et p�ril. Microsoft n�accorde aucune autre garantie expresse. Vous 
+pouvez b�n�ficier de droits additionnels en vertu du droit local sur la protection des consommateurs, que 
+ce contrat ne peut modifier. La ou elles sont permises par le droit locale, les garanties implicites de 
+qualit� marchande, d�ad�quation � un usage particulier et d�absence de contrefa�on sont exclues.
+
+LIMITATION DES DOMMAGES-INT�R�TS ET EXCLUSION DE RESPONSABILIT� POUR LES 
+DOMMAGES. Vous pouvez obtenir de Microsoft et de ses fournisseurs une indemnisation en cas de 
+dommages directs uniquement � hauteur de 5,00 $ US. Vous ne pouvez pr�tendre � aucune 
+indemnisation pour les autres dommages, y compris les dommages sp�ciaux, indirects ou accessoires et 
+pertes de b�n�fices.
+
+Cette limitation concerne:
+�    	tout ce qui est reli� au logiciel, aux services ou au contenu (y compris le code) figurant sur des sites 
+Internet tiers ou dans des programmes tiers ; et
+�     les r�clamations au titre de violation de contrat ou de garantie, ou au titre de responsabilit� stricte, 
+de n�gligence ou d�une autre faute dans la limite autoris�e par la loi en vigueur.
+
+Elle s�applique �galement, m�me si Microsoft connaissait ou devrait conna�tre l��ventualit� d�un tel 
+dommage. Si votre pays n�autorise pas l�exclusion ou la limitation de responsabilit� pour les dommages 
+indirects, accessoires ou de quelque nature que ce soit, il se peut que la limitation ou l�exclusion ci-dessus 
+ne s�appliquera pas � votre �gard.
+
+EFFET JURIDIQUE. Le pr�sent contrat d�crit certains droits juridiques. Vous pourriez avoir d�autres 
+droits pr�vus par les lois de votre pays. Le pr�sent contrat ne modifie pas les droits que vous conf�rent 
+les lois de votre pays si celles-ci ne le permettent pas.
+
+Microsoft: For clarity, we replaced references to �the software� with the defined term �Image Library.� 
+Microsoft: Similar to the above comment, we switched the defined term to �Distributable Images� to help 
+avoid confusion.
+Microsoft: Some of these license restrictions are more tailored towards software releases than an image 
+library. We do not think it�s harmful to keep these restrictions, especially if any software is distributed with the 
+Visual Studio Image Library now or in the future. However, please let us know if you would prefer for us to 
+remove or rework these software-targeted restrictions. 
+Microsoft: Given Microsoft is switching to an evergreen release model, we added language here to clarify that 
+Microsoft may make updates to the Image Library. We adapted this language from a similar EULA, but please 
+let us know if it this language is consistent with the new distribution model for the Visual Studio Image Library.
+Microsoft: Please note that we have reviewed this EULA from a US law POV and have not made updates to 
+these sections beyond conforming the use of defined terms. Please let us know if the team would like for us 
+to loop in local counsel to review.
+
+
+185043978.1
+	- 1 -
+185043978.1
+
+185043978.1
 ```
 ________________________________________________________________________________
