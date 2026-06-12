@@ -43,7 +43,7 @@ public class ImportRule
     {
         if (Type == AccountType.None &&
             CashFlow == CashFlow.None &&
-            (Color == Color.Empty || Color == context.Color) &&
+            (Color.IsEmpty || Color == context.Color) &&
             !Equity && !OtherEquity)
         {
             return;
@@ -67,7 +67,7 @@ public class ImportRule
             }
 
             if (Color != Color.Empty && Color != context.Color &&
-                (Strict || account.Color == Color.Empty || account.Color == context.Color))
+                (Strict || account.Color.IsEmpty || account.Color == context.Color))
             {
                 account.Color = Color;
             }

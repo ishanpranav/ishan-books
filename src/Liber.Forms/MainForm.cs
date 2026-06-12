@@ -29,6 +29,8 @@ using PdfSharp.Pdf.IO;
 
 namespace Liber.Forms;
 
+// TODO: investigate json saving delay issue
+
 internal sealed partial class MainForm : Form
 {
     private readonly Company _company = new Company();

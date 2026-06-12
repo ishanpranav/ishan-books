@@ -41,7 +41,7 @@ internal sealed partial class TransactionForm : Form
         accountColumn.DataSource = new AccountViewBindingList(company, x => !x.ReadOnly);
         accountColumn.ValueMember = nameof(AccountView.Id);
         accountColumn.DisplayMember = nameof(AccountView.DisplayName);
-        _dataGridView.CompanyColor = company.Color;
+        _dataGridView.SetCompanyColor(company.Color);
         _dataGridView.DebitColumnIndex = debitColumn.Index;
         _dataGridView.CreditColumnIndex = creditColumn.Index;
         _dataGridView.Remainder = GetRemainder;
@@ -114,13 +114,25 @@ internal sealed partial class TransactionForm : Form
     [MemberNotNullWhen(true, nameof(Value))]
     private bool Save()
     {
-        Transaction transaction = new Transaction()
+        bool addingNew;
+        Transaction transaction;
+
+        if (Value == null)
         {
-            Number = numberNumericUpDown.Value,
-            Posted = postedDateTimePicker.Value,
-            Name = nameComboBox.Text,
-            Memo = memoTextBox.Text
-        };
+            transaction = new Transaction();
+            addingNew = true;
+        }
+        else
+        {
+            transaction = Value;
+            addingNew = false;
+        }
+
+        transaction.Number = numberNumericUpDown.Value;
+        transaction.Posted = postedDateTimePicker.Value;
+        transaction.Name = nameComboBox.Text;
+        transaction.Memo = memoTextBox.Text;
+
         List<Line> lines = new List<Line>();
         decimal trialBalance = 0;
 
@@ -162,18 +174,16 @@ internal sealed partial class TransactionForm : Form
             return false;
         }
 
-        if (Value == null)
+        if (addingNew)
         {
             _company.AddTransaction(transaction, lines);
-
-            InitializeTransaction(transaction);
         }
         else
         {
-            transaction = Value;
-
-            _company.UpdateTransaction(Value.Id, lines);
+            _company.UpdateTransaction(transaction.Id, lines);
         }
+
+        InitializeTransaction(transaction);
 
         SystemSounds.Asterisk.Play();
 
