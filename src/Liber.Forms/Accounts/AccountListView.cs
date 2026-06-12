@@ -38,7 +38,7 @@ internal class AccountListView : ListViewEx
         }
     }
 
-    public void Initialize(Company company, IReadOnlySet<Account> checkedAccounts)
+    public void Initialize(Company company, IReadOnlySet<Account> checkedAccounts, Func<Account, bool>? validator)
     {
         BeginUpdate();
 
@@ -46,7 +46,7 @@ internal class AccountListView : ListViewEx
         {
             foreach (Account account in company.Accounts)
             {
-                if (account.Inactive)
+                if (validator != null && !validator(account))
                 {
                     continue;
                 }
@@ -81,7 +81,14 @@ internal class AccountListView : ListViewEx
             return Guid.Empty;
         }
 
-        return ((Account)SelectedItems[0].Tag!).Id;
+        object? tag = SelectedItems[0].Tag;
+
+        if (tag == null)
+        {
+            return Guid.Empty;
+        }
+
+        return ((Account)tag).Id;
     }
 
     public IReadOnlySet<Account> GetCheckedAccounts()
@@ -90,7 +97,10 @@ internal class AccountListView : ListViewEx
 
         foreach (ListViewItem item in CheckedItems)
         {
-            accounts.Add(((Account)item.Tag!));
+            if (item.Tag != null)
+            {
+                accounts.Add(((Account)item.Tag));
+            }
         }
 
         return accounts;
@@ -100,7 +110,7 @@ internal class AccountListView : ListViewEx
     {
         ListViewItem nullAccount = Items.Add(Properties.Resources.NoAccount);
 
-        nullAccount.Tag = KeyValuePair.Create(Guid.Empty, default(Account));
+        nullAccount.Tag = null;
         nullAccount.Selected = true;
     }
 }

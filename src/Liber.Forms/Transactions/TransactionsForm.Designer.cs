@@ -47,7 +47,6 @@ partial class TransactionsForm
         debitColumn = new DataGridViewTextBoxColumn();
         creditColumn = new DataGridViewTextBoxColumn();
         balanceColumn = new DataGridViewTextBoxColumn();
-        transactionColumn = new DataGridViewTextBoxColumn();
         ((System.ComponentModel.ISupportInitialize)_dataGridView).BeginInit();
         _toolStrip.SuspendLayout();
         SuspendLayout();
@@ -72,7 +71,7 @@ partial class TransactionsForm
         dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
         _dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
         _dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        _dataGridView.Columns.AddRange(new DataGridViewColumn[] { postedColumn, numberTypeColumn, nameMemoColumn, accountColumn, debitColumn, creditColumn, balanceColumn, transactionColumn });
+        _dataGridView.Columns.AddRange(new DataGridViewColumn[] { postedColumn, numberTypeColumn, nameMemoColumn, accountColumn, debitColumn, creditColumn, balanceColumn });
         _dataGridView.CompanyColor = System.Drawing.Color.Empty;
         dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleLeft;
         dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
@@ -133,6 +132,7 @@ partial class TransactionsForm
         // 
         // postedColumn
         // 
+        postedColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
         dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
         postedColumn.DefaultCellStyle = dataGridViewCellStyle3;
         resources.ApplyResources(postedColumn, "postedColumn");
@@ -141,6 +141,7 @@ partial class TransactionsForm
         // 
         // numberTypeColumn
         // 
+        numberTypeColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
         dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
         numberTypeColumn.DefaultCellStyle = dataGridViewCellStyle4;
         resources.ApplyResources(numberTypeColumn, "numberTypeColumn");
@@ -154,9 +155,11 @@ partial class TransactionsForm
         nameMemoColumn.DefaultCellStyle = dataGridViewCellStyle5;
         resources.ApplyResources(nameMemoColumn, "nameMemoColumn");
         nameMemoColumn.Name = "nameMemoColumn";
+        nameMemoColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
         // 
         // accountColumn
         // 
+        accountColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
         dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
         accountColumn.DefaultCellStyle = dataGridViewCellStyle6;
         accountColumn.DisplayStyle = DataGridViewComboBoxDisplayStyle.Nothing;
@@ -165,6 +168,7 @@ partial class TransactionsForm
         // 
         // debitColumn
         // 
+        debitColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
         dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleRight;
         debitColumn.DefaultCellStyle = dataGridViewCellStyle7;
         resources.ApplyResources(debitColumn, "debitColumn");
@@ -173,6 +177,7 @@ partial class TransactionsForm
         // 
         // creditColumn
         // 
+        creditColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
         dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleRight;
         creditColumn.DefaultCellStyle = dataGridViewCellStyle8;
         resources.ApplyResources(creditColumn, "creditColumn");
@@ -181,17 +186,13 @@ partial class TransactionsForm
         // 
         // balanceColumn
         // 
+        balanceColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
         dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleRight;
         balanceColumn.DefaultCellStyle = dataGridViewCellStyle9;
         resources.ApplyResources(balanceColumn, "balanceColumn");
         balanceColumn.Name = "balanceColumn";
         balanceColumn.ReadOnly = true;
         balanceColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
-        // 
-        // transactionColumn
-        // 
-        resources.ApplyResources(transactionColumn, "transactionColumn");
-        transactionColumn.Name = "transactionColumn";
         // 
         // TransactionsForm
         // 
@@ -211,19 +212,6 @@ partial class TransactionsForm
     #endregion
 
 
-    protected override void Dispose(bool disposing)
-    {
-        if (disposing)
-        {
-            if (components != null)
-            {
-                components.Dispose();
-                components = null;
-            }
-        }
-
-        base.Dispose(disposing);
-    }
     private TransactionGridView _dataGridView;
     private System.Windows.Forms.ToolStrip _toolStrip;
     private System.Windows.Forms.ToolStripButton newToolStripButton;
@@ -238,5 +226,4 @@ partial class TransactionsForm
     private DataGridViewTextBoxColumn debitColumn;
     private DataGridViewTextBoxColumn creditColumn;
     private DataGridViewTextBoxColumn balanceColumn;
-    private DataGridViewTextBoxColumn transactionColumn;
 }

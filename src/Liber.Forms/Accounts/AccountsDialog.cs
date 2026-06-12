@@ -15,14 +15,14 @@ internal sealed partial class AccountsDialog : Form
 {
     public AccountsView Value { get; private set; }
 
-    public AccountsDialog(AccountsView value)
+    public AccountsDialog(AccountsView value, Func<Account, bool>? validator)
     {
         InitializeComponent();
         SystemFeatures.Initialize(this);
 
         DialogResult = DialogResult.Cancel;
         Value = value;
-        _accountListView.Initialize(value.Company, value.Values);
+        _accountListView.Initialize(value.Company, value.Values, validator);
 
         AccountGroups lastAccountGroup = (AccountGroups)Settings.Default.LastAccountGroup;
 

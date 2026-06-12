@@ -11,7 +11,7 @@ namespace Liber.Forms.Accounts;
 
 internal partial class AccountDialog : Form
 {
-    public AccountDialog(EditableAccountView value)
+    public AccountDialog(EditableAccountView value, Func<Account, bool>? validator)
     {
         InitializeComponent();
         SystemFeatures.Initialize(this);
@@ -19,7 +19,7 @@ internal partial class AccountDialog : Form
         DialogResult = DialogResult.Cancel;
         Value = value;
 
-        _accountListView.Initialize(value.Company, new EmptySet<Account>());
+        _accountListView.Initialize(value.Company, new EmptySet<Account>(), validator);
     }
 
     public EditableAccountView Value { get; private set; }

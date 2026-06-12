@@ -85,7 +85,7 @@ public class Line :
 
     public override string ToString()
     {
-        return $"{AccountId}: {Balance}";
+        return $"{AccountId}: {Balance.ToLocalizedString()}";
     }
 
     public int CompareTo(object? obj)

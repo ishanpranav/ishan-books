@@ -55,6 +55,8 @@ internal sealed partial class MainForm : Form
             {
                 child.Close();
             }
+
+            _factory.KillAll();
         };
         _company.AccountRemoved += (_, e) => _factory.Kill(e.Id);
     }
@@ -818,7 +820,7 @@ internal sealed partial class MainForm : Form
 
     private void OnTransactionsToolStripMenuItemClick(object sender, EventArgs e)
     {
-        using AccountDialog accountDialog = new AccountDialog(new EditableAccountView(_company));
+        using AccountDialog accountDialog = new AccountDialog(new EditableAccountView(_company), x => !x.ReadOnly);
 
         if (accountDialog.ShowDialog() != DialogResult.OK)
         {
@@ -827,12 +829,12 @@ internal sealed partial class MainForm : Form
 
         Guid id = accountDialog.Value.Id;
 
-        if (_factory.TryKill(id))
+        if (_factory.TryKill(id) || accountDialog.Value.Value == null)
         {
             return;
         }
 
-        TransactionsForm transactionsForm = new TransactionsForm(_company, id);
+        TransactionsForm transactionsForm = new TransactionsForm(_company, accountDialog.Value.Value);
 
         _factory.Register(id, transactionsForm);
     }

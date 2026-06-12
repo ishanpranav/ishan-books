@@ -22,7 +22,7 @@ internal sealed class AccountEditor : UITypeEditor
     {
         if (provider.GetService(typeof(IWindowsFormsEditorService)) is IWindowsFormsEditorService service && value is EditableAccountView account)
         {
-            using AccountDialog form = new AccountDialog(account);
+            using AccountDialog form = new AccountDialog(account, x => !x.Inactive);
 
             form.AddNullAccount();
 

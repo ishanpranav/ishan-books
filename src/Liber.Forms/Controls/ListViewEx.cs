@@ -68,18 +68,4 @@ internal class ListViewEx : ListView
         AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
         AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
     }
-
-    public bool TryGetSelection<T>([MaybeNullWhen(false)] out T value)
-    {
-        if (SelectedItems.Count == 0)
-        {
-            value = default;
-
-            return false;
-        }
-
-        value = (T)SelectedItems[0].Tag!;
-
-        return true;
-    }
 }
