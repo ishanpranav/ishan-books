@@ -181,21 +181,6 @@
   <data name="balanceColumn.Width" type="System.Int32, mscorlib">
     <value>56</value>
   </data>
-  <metadata name="transactionColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="transactionColumn.HeaderText" xml:space="preserve">
-    <value />
-  </data>
-  <data name="transactionColumn.MinimumWidth" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="transactionColumn.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="transactionColumn.Width" type="System.Int32, mscorlib">
-    <value>19</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="_dataGridView.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -409,12 +394,6 @@
     <value>balanceColumn</value>
   </data>
   <data name="&gt;&gt;balanceColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;transactionColumn.Name" xml:space="preserve">
-    <value>transactionColumn</value>
-  </data>
-  <data name="&gt;&gt;transactionColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

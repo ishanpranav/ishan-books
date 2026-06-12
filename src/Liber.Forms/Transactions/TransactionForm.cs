@@ -45,12 +45,30 @@ internal sealed partial class TransactionForm : Form
         _dataGridView.DebitColumnIndex = debitColumn.Index;
         _dataGridView.CreditColumnIndex = creditColumn.Index;
         _dataGridView.Remainder = GetRemainder;
+        company.TransactionRemoved += OnCompanyTransactionRemoved;
+        company.TransactionUpdated += OnCompanyTransactionUpdated;
         _company = company;
         DialogResult = DialogResult.Cancel;
         numberNumericUpDown.Maximum = decimal.MaxValue;
         nameComboBox.DataSource = company.GetNames();
         _dataGridView.AutoResizeColumns();
         CreateNew();
+    }
+
+    private void OnCompanyTransactionUpdated(object? sender, GuidEventArgs e)
+    {
+        if (Value != null && e.Id == Value.Id)
+        {
+            InitializeTransaction(_company.GetTransaction(e.Id));
+        }
+    }
+
+    private void OnCompanyTransactionRemoved(object? sender, GuidEventArgs e)
+    {
+        if (Value != null && e.Id == Value.Id)
+        {
+            CreateNew();
+        }
     }
 
     [MemberNotNull(nameof(Value))]
@@ -104,6 +122,7 @@ internal sealed partial class TransactionForm : Form
             Memo = memoTextBox.Text
         };
         List<Line> lines = new List<Line>();
+        decimal trialBalance = 0;
 
         foreach (DataGridViewRow row in _dataGridView.Rows)
         {
@@ -127,6 +146,7 @@ internal sealed partial class TransactionForm : Form
                 return false;
             }
 
+            trialBalance += balance;
             lines.Add(new Line()
             {
                 AccountId = accountId,
@@ -135,7 +155,7 @@ internal sealed partial class TransactionForm : Form
             });
         }
 
-        if (transaction.Balance != 0)
+        if (trialBalance != 0)
         {
             _dataGridView.Rows[_dataGridView.NewRowIndex].ErrorText = Resources.ImbalanceError;
 
@@ -145,9 +165,13 @@ internal sealed partial class TransactionForm : Form
         if (Value == null)
         {
             _company.AddTransaction(transaction, lines);
+
+            InitializeTransaction(transaction);
         }
         else
         {
+            transaction = Value;
+
             _company.UpdateTransaction(Value.Id, lines);
         }
 
@@ -156,7 +180,6 @@ internal sealed partial class TransactionForm : Form
         Settings.Default.LastPosted = postedDateTimePicker.Value;
 
         Settings.Default.Save();
-        InitializeTransaction(transaction);
 
         return true;
     }
@@ -321,5 +344,22 @@ internal sealed partial class TransactionForm : Form
     private void OnDataGridViewDefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
     {
         _dataGridView.SetBalance(e.Row, GetRemainder());
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            _company.TransactionUpdated -= OnCompanyTransactionUpdated;
+            _company.TransactionRemoved -= OnCompanyTransactionRemoved;
+
+            if (components != null)
+            {
+                components.Dispose();
+                components = null;
+            }
+        }
+
+        base.Dispose(disposing);
     }
 }

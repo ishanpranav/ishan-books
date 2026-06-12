@@ -9,11 +9,10 @@ namespace Liber.Forms.Accounts;
 
 internal sealed class EditAccountForm : AccountForm
 {
-    public EditAccountForm(Company company, Guid id) : base(company)
-    {
-        Account account = company.GetAccount(id);
+    private readonly Account _account;
 
-        Id = id;
+    public EditAccountForm(Company company, Account account) : base(company)
+    {
         numberNumericUpDown.Value = account.Number;
         nameTextBox.Text = account.Name;
         placeholderCheckBox.Checked = account.Placeholder;
@@ -24,19 +23,16 @@ internal sealed class EditAccountForm : AccountForm
         TaxType = account.TaxType;
         inactiveCheckBox.Checked = account.Inactive;
         CashFlow = account.CashFlow;
-        parentComboBox.DataSource = new AccountViewBindingList(company, x => x.Id != Id);
+        parentComboBox.DataSource = new AccountViewBindingList(company, x => x.Id != account.Id);
         parentComboBox.ValueMember = nameof(AccountView.Id);
         parentComboBox.DisplayMember = nameof(AccountView.DisplayName);
         parentComboBox.SelectedValue = account.ParentId;
+        _account = account;
     }
-
-    public Guid Id { get; }
 
     protected override void CommitChanges()
     {
-        Account account = Company.GetAccount(Id);
-
-        ApplyChanges(account);
-        Company.UpdateAccount(Id, (Guid?)parentComboBox.SelectedValue ?? Guid.Empty);
+        ApplyChanges(_account);
+        Company.UpdateAccount(_account.Id, (Guid?)parentComboBox.SelectedValue ?? Guid.Empty);
     }
 }

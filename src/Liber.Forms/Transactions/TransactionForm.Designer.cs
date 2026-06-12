@@ -294,20 +294,6 @@ namespace Liber.Forms.Transactions
 
         #endregion
 
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (components != null)
-                {
-                    components.Dispose();
-                    components = null;
-                }
-            }
-
-            base.Dispose(disposing);
-        }
         private System.Windows.Forms.DateTimePicker postedDateTimePicker;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;

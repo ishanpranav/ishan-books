@@ -18,8 +18,9 @@ namespace Liber.Forms.Transactions;
 internal sealed partial class TransactionsForm : Form
 {
     private readonly Company _company;
-    private readonly Guid _id;
+    private readonly Account _account;
     private readonly List<Line> _lines = new List<Line>();
+
     private int _selectedLineIndex = -1;
 
     private bool OnLastCell
@@ -38,7 +39,7 @@ internal sealed partial class TransactionsForm : Form
         }
     }
 
-    public TransactionsForm(Company company, Guid id)
+    public TransactionsForm(Company company, Account account)
     {
         InitializeComponent();
         SystemFeatures.Initialize(this);
@@ -50,22 +51,73 @@ internal sealed partial class TransactionsForm : Form
         accountColumn.DataSource = bindingList;
         accountColumn.ValueMember = nameof(AccountView.Id);
         accountColumn.DisplayMember = nameof(AccountView.DisplayName);
-
-        Account account = company.GetAccount(id);
-
         _dataGridView.CompanyColor = company.GetColorOrDefault(account);
         _dataGridView.DebitColumnIndex = debitColumn.Index;
         _dataGridView.CreditColumnIndex = creditColumn.Index;
+        company.AccountUpdated += OnCompanyAccountUpdated;
+        company.AccountRemoved += OnCompanyAccountRemoved;
+        company.TransactionAdded += OnCompanyTransactionAdded;
+        company.TransactionUpdated += OnCompanyTransactionInvalidated;
+        company.TransactionRemoved += OnCompanyTransactionInvalidated;
         _company = company;
-        _id = id;
         postedColumn.ValueType = typeof(DateTime);
         balanceColumn.ValueType = typeof(decimal);
         balanceColumn.DefaultCellStyle.Font = _dataGridView.ColumnHeadersDefaultCellStyle.Font;
         balanceColumn.DefaultCellStyle.Format = DecimalExtensions.Format;
-        transactionColumn.ValueType = typeof(Transaction);
         Text = account.Name;
+        _account = account;
 
         InitializeLines();
+
+        if (_dataGridView.Rows.Count > 0)
+        {
+            _dataGridView.CurrentCell = _dataGridView[0, _dataGridView.Rows.Count - 1];
+        }
+    }
+
+    private void OnCompanyAccountUpdated(object? sender, GuidEventArgs e)
+    {
+        if (e.Id == _account.Id)
+        {
+            InvalidateTransactions();
+        }
+    }
+
+    private void OnCompanyAccountRemoved(object? sender, GuidEventArgs e)
+    {
+        if (e.Id == _account.Id)
+        {
+            Close();
+        }
+    }
+
+    private void OnCompanyTransactionAdded(object? sender, GuidEventArgs e)
+    {
+        Transaction transaction = _company.GetTransaction(e.Id);
+
+        if (transaction.Lines.Any(x => x.AccountId == _account.Id))
+        {
+            InvalidateTransactions();
+        }
+    }
+
+    private void OnCompanyTransactionInvalidated(object? sender, GuidEventArgs e)
+    {
+        InvalidateTransactions();
+    }
+
+    private void InvalidateTransactions()
+    {
+        int previousSelectedLineIndex = _selectedLineIndex;
+
+        InitializeLines();
+
+        if (previousSelectedLineIndex != -1 && previousSelectedLineIndex < _lines.Count)
+        {
+            SelectLine(previousSelectedLineIndex);
+
+            return;
+        }
 
         if (_dataGridView.Rows.Count > 0)
         {
@@ -105,14 +157,14 @@ internal sealed partial class TransactionsForm : Form
         _selectedLineIndex = -1;
 
         _lines.Clear();
-        _lines.AddRange(_company.GetAccount(_id).Lines.Order());
+        _lines.AddRange(_account.Lines.Order());
         _dataGridView.SuspendLayout();
 
         try
         {
             _dataGridView.Rows.Clear();
 
-            decimal balance = 0;
+            decimal runningBalance = 0;
 
             for (int i = 0; i < _lines.Count; i++)
             {
@@ -123,7 +175,7 @@ internal sealed partial class TransactionsForm : Form
                     Tag = new RegisterRow(i)
                 };
 
-                balance += line.Balance;
+                runningBalance += line.Balance;
 
                 top.CreateCells(
                     _dataGridView,
@@ -131,10 +183,9 @@ internal sealed partial class TransactionsForm : Form
                     transaction.Number,
                     transaction.Name ?? string.Empty,
                     Guid.Empty,
-                    string.Empty,
                     new DecimalExpression(line.Debit),
                     new DecimalExpression(line.Credit),
-                    balance);
+                    _account.Type.ToBalance(runningBalance));
 
                 DataGridViewRow bottom = new DataGridViewRow()
                 {
@@ -148,7 +199,6 @@ internal sealed partial class TransactionsForm : Form
                     GetLineType(line),
                     transaction.Memo ?? string.Empty,
                     sibling == null ? Guid.Empty : sibling.AccountId,
-                    string.Empty,
                     string.Empty,
                     string.Empty,
                     string.Empty);
@@ -167,10 +217,9 @@ internal sealed partial class TransactionsForm : Form
                 string.Empty,
                 string.Empty,
                 Guid.Empty,
-                string.Empty,
                 new DecimalExpression(0),
                 new DecimalExpression(0),
-                balance);
+                runningBalance);
 
             DataGridViewRow newBottom = new DataGridViewRow()
             {
@@ -183,7 +232,6 @@ internal sealed partial class TransactionsForm : Form
                 string.Empty,
                 string.Empty,
                 Guid.Empty,
-                string.Empty,
                 string.Empty,
                 string.Empty,
                 string.Empty);
@@ -238,7 +286,7 @@ internal sealed partial class TransactionsForm : Form
 
         if (top.Cells[accountColumn.Index].Value is not Guid accountId ||
             accountId == Guid.Empty ||
-            accountId == _id)
+            accountId == _account.Id)
         {
             top.ErrorText = Resources.InvalidAccountError;
 
@@ -264,18 +312,16 @@ internal sealed partial class TransactionsForm : Form
         _company.AddTransaction(transaction, new Line[]
         {
             new Line()
-        {
-            AccountId = accountId,
-            Balance = 0
-        }
+            {
+                AccountId = accountId,
+                Balance = balance
+            }
         });
         SystemSounds.Asterisk.Play();
 
         Settings.Default.LastPosted = posted;
 
         Settings.Default.Save();
-        InitializeLines();
-        SelectLine(_lines.Count - 1);
 
         return true;
     }
@@ -316,7 +362,6 @@ internal sealed partial class TransactionsForm : Form
         Transaction transaction = _lines[_selectedLineIndex].Transaction!;
 
         _company.RemoveTransaction(transaction);
-        InitializeLines();
     }
 
     private void OnDataGridViewCellClick(object sender, DataGridViewCellEventArgs e)
@@ -394,23 +439,25 @@ internal sealed partial class TransactionsForm : Form
             backColor = cellStyle.BackColor;
         }
 
-        using Brush backColorBrush = new SolidBrush(backColor);
-
-        e.Graphics.FillRectangle(backColorBrush, e.CellBounds);
-
-        using Pen pen = new Pen(_dataGridView.GridColor);
-
-        if (isTop)
+        using (Brush backColorBrush = new SolidBrush(backColor))
         {
-            pen.DashStyle = DashStyle.Dot;
+            e.Graphics.FillRectangle(backColorBrush, e.CellBounds);
         }
 
-        e.Graphics.DrawLine(
-            pen,
-            e.CellBounds.Left,
-            e.CellBounds.Bottom - 1,
-            e.CellBounds.Right,
-            e.CellBounds.Bottom - 1);
+        using (Pen pen = new Pen(_dataGridView.GridColor))
+        {
+            if (isTop)
+            {
+                pen.DashStyle = DashStyle.Dot;
+            }
+
+            e.Graphics.DrawLine(
+                pen,
+                e.CellBounds.Left,
+                e.CellBounds.Bottom - 1,
+                e.CellBounds.Right,
+                e.CellBounds.Bottom - 1);
+        }
 
         if ((isTop || _dataGridView[e.ColumnIndex, e.RowIndex].ReadOnly) && e.ColumnIndex == accountColumn.Index)
         {
@@ -474,5 +521,25 @@ internal sealed partial class TransactionsForm : Form
         {
             RemoveTransaction();
         }
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            _company.AccountUpdated -= OnCompanyAccountUpdated;
+            _company.AccountRemoved -= OnCompanyAccountRemoved;
+            _company.TransactionAdded -= OnCompanyTransactionAdded;
+            _company.TransactionUpdated -= OnCompanyTransactionInvalidated;
+            _company.TransactionRemoved -= OnCompanyTransactionInvalidated;
+
+            if (components != null)
+            {
+                components.Dispose();
+                components = null;
+            }
+        }
+
+        base.Dispose(disposing);
     }
 }

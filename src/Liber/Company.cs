@@ -461,6 +461,11 @@ public sealed class Company
         return true;
     }
 
+    public Transaction GetTransaction(Guid id)
+    {
+        return _transactions[id];
+    }
+
     public Transaction? GetTransactionBefore(Transaction value)
     {
         if (_sortedTransactions.Min == null || _sortedTransactions.Min >= value)
@@ -503,6 +508,11 @@ public sealed class Company
 
     private void InitializeTransaction(Transaction value)
     {
+        if (value.Balance != 0)
+        {
+            throw new InvalidOperationException($"Transaction {value.Id} does not balance");
+        }
+
         if (string.IsNullOrWhiteSpace(value.Name))
         {
             value.Name = null;
@@ -611,6 +621,7 @@ public sealed class Company
             throw new InvalidOperationException();
         }
 
+        InitializeTransaction(value);
         RemoveLines(value);
         AddLines(value, lines);
 

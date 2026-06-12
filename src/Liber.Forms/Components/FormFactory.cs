@@ -5,8 +5,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
-using Liber.Forms.Reports;
 
 namespace Liber.Forms.Components;
 
@@ -102,6 +102,16 @@ internal sealed class FormFactory : Component
         form.Activate();
 
         return true;
+    }
+
+    public void KillAll()
+    {
+        foreach (Form form in _forms.Values.ToList())
+        {
+            form.Close();
+        }
+
+        _forms.Clear();
     }
 
     public void AutoRegister<TForm>(Func<TForm> factory) where TForm : Form

@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Windows.Forms;
 using Humanizer;
@@ -44,16 +45,23 @@ internal sealed partial class AccountsForm : Form
     {
         _items.Clear();
         _listView.BeginUpdate();
-        _listView.Items.Clear();
 
-        foreach (Account account in _company.Accounts)
+        try
         {
-            InitializeAccount(account);
-        }
+            _listView.Items.Clear();
 
-        _listView.AutoResizeColumns();
-        _listView.Sort();
-        _listView.EndUpdate();
+            foreach (Account account in _company.Accounts)
+            {
+                InitializeAccount(account);
+            }
+
+            _listView.AutoResizeColumns();
+            _listView.Sort();
+        }
+        finally
+        {
+            _listView.EndUpdate();
+        }
     }
 
     private void InitializeAccount(Account value)
@@ -65,14 +73,14 @@ internal sealed partial class AccountsForm : Form
 
         ListViewItem item = _listView.Items.Add(new ListViewItem()
         {
-            Tag = value.Id
+            Tag = value
         });
 
         AddSubItems(item, value);
         _items.Add(value.Id, item);
     }
 
-    private void InitializeTransaction(Guid id)
+    private void InitializeTransaction(Account? account)
     {
         Guid key = typeof(TransactionForm).GUID;
 
@@ -81,18 +89,18 @@ internal sealed partial class AccountsForm : Form
             return;
         }
 
-        if (id != Guid.Empty && _company.GetAccount(id).ReadOnly)
+        if (account != null && account.ReadOnly)
         {
-            id = Guid.Empty;
+            account = null;
         }
 
         TransactionForm form = new TransactionForm(_company);
         DateTime lastPosted = Settings.Default.LastPosted;
-        Line[] lines = id == Guid.Empty ? Array.Empty<Line>() : new Line[]
+        Line[] lines = account == null ? Array.Empty<Line>() : new Line[]
         {
             new Line()
             {
-                AccountId = id
+                AccountId = account.Id
             }
         };
         Transaction transaction = new Transaction(Guid.Empty, lines)
@@ -105,16 +113,16 @@ internal sealed partial class AccountsForm : Form
         _factory.Register(key, form);
     }
 
-    private void InitializeTransactions(Guid id)
+    private void InitializeTransactions(Account account)
     {
-        if (_factory.TryKill(id) || _company.GetAccount(id).ReadOnly)
+        if (_factory.TryKill(account.Id) || account.ReadOnly)
         {
             return;
         }
 
-        TransactionsForm form = new TransactionsForm(_company, id);
+        TransactionsForm form = new TransactionsForm(_company, account);
 
-        _factory.Register(id, form);
+        _factory.Register(account.Id, form);
     }
 
     private void AddSubItems(ListViewItem item, Account value)
@@ -185,11 +193,25 @@ internal sealed partial class AccountsForm : Form
         _listView.AutoResizeColumns();
     }
 
+    public bool TryGetSelection([NotNullWhen(true)] out Account? value)
+    {
+        if (_listView.SelectedItems.Count == 0)
+        {
+            value = default;
+
+            return false;
+        }
+
+        value = (Account)_listView.SelectedItems[0].Tag!;
+
+        return true;
+    }
+
     private void OnNewToolStripMenuItemClick(object sender, EventArgs e)
     {
-        if (_listView.TryGetSelection(out Guid id))
+        if (TryGetSelection(out Account? account))
         {
-            _factory.AutoRegister(() => new NewAccountForm(_company, id));
+            _factory.AutoRegister(() => new NewAccountForm(_company, account.Id));
         }
         else
         {
@@ -199,14 +221,14 @@ internal sealed partial class AccountsForm : Form
 
     private void OnEditToolStripMenuItemClick(object sender, EventArgs e)
     {
-        if (!_listView.TryGetSelection(out Guid id) || _factory.TryKill(id))
+        if (!TryGetSelection(out Account? account) || _factory.TryKill(account.Id))
         {
             return;
         }
 
-        EditAccountForm form = new EditAccountForm(_company, id);
+        EditAccountForm form = new EditAccountForm(_company, account);
 
-        _factory.Register(id, form);
+        _factory.Register(account.Id, form);
     }
 
     private void OnRenameToolStripMenuItemClick(object sender, EventArgs e)
@@ -221,31 +243,25 @@ internal sealed partial class AccountsForm : Form
 
     private void OnRemoveToolStripMenuItemClick(object sender, EventArgs e)
     {
-        if (!_listView.TryGetSelection(out Guid id))
+        if (!TryGetSelection(out Account? account))
         {
             return;
         }
 
-        _company.RemoveAccount(id);
+        _company.RemoveAccount(account.Id);
     }
 
     private void OnTransactionToolStripMenuItemClick(object sender, EventArgs e)
     {
-        if (_listView.TryGetSelection(out Guid id))
-        {
-            InitializeTransaction(id);
-        }
-        else
-        {
-            InitializeTransaction(Guid.Empty);
-        }
+        TryGetSelection(out Account? account);
+        InitializeTransaction(account);
     }
 
     private void OnTransactionsToolStripMenuItemClick(object sender, EventArgs e)
     {
-        if (_listView.TryGetSelection(out Guid id))
+        if (TryGetSelection(out Account? account))
         {
-            InitializeTransactions(id);
+            InitializeTransactions(account);
         }
     }
 
@@ -261,59 +277,89 @@ internal sealed partial class AccountsForm : Form
 
     private void OnListViewItemActivate(object sender, EventArgs e)
     {
-        if (!_listView.TryGetSelection(out Guid id))
+        if (!TryGetSelection(out Account? account))
         {
             return;
         }
 
-        Account value = _company.GetAccount(id);
-
-        if (value.ReadOnly)
+        if (account.ReadOnly)
         {
-            if (!_engine.TryGetReport(ReportEngine.GeneralJournalReport, out IntervalView? report))
-            {
-                return;
-            }
-
-            report.Title = value.Name;
-            report.Started = _company.Started;
-            report.Posted = _company.Posted;
-            report.Level = ReportLevel.ByAccount;
-
-            ReportsForm form = new ReportsForm(_engine);
-
-            form.Load += (sender, e) =>
-            {
-                HashSet<Account> accounts = new HashSet<Account>(value.Children) { value };
-
-                report.Accounts = new AccountsView(_company, accounts);
-
-                form.InitializeReport(ReportEngine.GeneralJournalReport);
-            };
-            _factory.Kill(id);
-            _factory.Register(id, form);
+            QuickReport(account);
 
             return;
         }
 
-        if (value.Type == AccountType.Equity)
+        if (account.Type == AccountType.Equity)
         {
             return;
         }
 
-        if (value.Type == AccountType.Bank || value.Type == AccountType.CreditCard)
+        if (account.Type == AccountType.Bank || account.Type == AccountType.CreditCard)
         {
-            InitializeTransactions(id);
+            InitializeTransactions(account);
 
             return;
         }
 
-        if (value.Type.IsTemporary())
+        if (account.Type.IsTemporary())
         {
             return;
         }
 
-        InitializeTransaction(id);
+        InitializeTransaction(account);
+    }
+
+    private void OnListViewSelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (!TryGetSelection(out Account? account))
+        {
+            return;
+        }
+
+        bool readOnly = account.ReadOnly;
+
+        transactionToolStripMenuItem.Enabled = !readOnly;
+        transactionToolStripMenuItem1.Enabled = !readOnly;
+        transactionsToolStripMenuItem.Enabled = !readOnly;
+        transactionsToolStripMenuItem1.Enabled = !readOnly;
+        reconcileToolStripMenuItem.Enabled = !readOnly;
+        reconcileToolStripMenuItem1.Enabled = !readOnly;
+    }
+
+    private void OnQuickReportToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        if (!TryGetSelection(out Account? account))
+        {
+            return;
+        }
+
+        QuickReport(account);
+    }
+
+    private void QuickReport(Account account)
+    {
+        if (!_engine.TryGetReport(ReportEngine.GeneralJournalReport, out IntervalView? report))
+        {
+            return;
+        }
+
+        report.Title = account.Name;
+        report.Started = _company.Started;
+        report.Posted = _company.Posted;
+        report.Level = ReportLevel.ByAccount;
+
+        ReportsForm form = new ReportsForm(_engine);
+
+        form.Load += (sender, e) =>
+        {
+            HashSet<Account> accounts = new HashSet<Account>(account.Children) { account };
+
+            report.Accounts = new AccountsView(_company, accounts);
+
+            form.InitializeReport(ReportEngine.GeneralJournalReport);
+        };
+        _factory.Kill(account.Id);
+        _factory.Register(account.Id, form);
     }
 
     private void OnRefreshToolStripMenuItemClick(object sender, EventArgs e)

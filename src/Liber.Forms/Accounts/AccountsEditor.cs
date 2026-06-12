@@ -21,7 +21,7 @@ internal sealed class AccountsEditor : UITypeEditor
     {
         if (provider.GetService(typeof(IWindowsFormsEditorService)) is IWindowsFormsEditorService service && value is AccountsView accounts)
         {
-            using AccountsDialog form = new AccountsDialog(accounts);
+            using AccountsDialog form = new AccountsDialog(accounts, x => !x.Inactive);
 
             if (service.ShowDialog(form) == DialogResult.OK)
             {
