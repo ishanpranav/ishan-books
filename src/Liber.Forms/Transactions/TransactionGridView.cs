@@ -12,47 +12,33 @@ namespace Liber.Forms.Transactions;
 
 internal class TransactionGridView : DataGridViewEx
 {
-    private Color _companyColor;
     private int _debitColumnIndex = -1;
     private int _creditColumnIndex = -1;
 
-    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-    public Color CompanyColor
+    public void SetCompanyColor(Color value)
     {
-        get
+        value = value.Soften();
+        AlternatingRowsDefaultCellStyle.BackColor = value;
+        AlternatingRowsDefaultCellStyle.ForeColor = value.GetForeColor();
+
+        if (AlternatingRowsDefaultCellStyle.SelectionForeColor.IsEmpty)
         {
-            return _companyColor;
+            AlternatingRowsDefaultCellStyle.SelectionForeColor = DefaultCellStyle.SelectionForeColor;
         }
-        set
+
+        if (AlternatingRowsDefaultCellStyle.SelectionBackColor.IsEmpty)
         {
-            if (_companyColor == value)
-            {
-                return;
-            }
+            AlternatingRowsDefaultCellStyle.SelectionBackColor = DefaultCellStyle.SelectionBackColor;
+        }
 
-            _companyColor = value;
-            AlternatingRowsDefaultCellStyle.BackColor = value;
-            AlternatingRowsDefaultCellStyle.ForeColor = value.GetForeColor();
+        if (value == DefaultCellStyle.SelectionBackColor)
+        {
+            DefaultCellStyle.SelectionBackColor = DefaultCellStyle.SelectionBackColor.Shade(0.95);
+        }
 
-            if (AlternatingRowsDefaultCellStyle.SelectionForeColor == Color.Empty)
-            {
-                AlternatingRowsDefaultCellStyle.SelectionForeColor = DefaultCellStyle.SelectionForeColor;
-            }
-
-            if (AlternatingRowsDefaultCellStyle.SelectionBackColor == Color.Empty)
-            {
-                AlternatingRowsDefaultCellStyle.SelectionBackColor = DefaultCellStyle.SelectionBackColor;
-            }
-
-            if (value == DefaultCellStyle.SelectionBackColor)
-            {
-                DefaultCellStyle.SelectionBackColor = DefaultCellStyle.SelectionBackColor.Shade(0.95);
-            }
-
-            if (value == AlternatingRowsDefaultCellStyle.SelectionBackColor)
-            {
-                AlternatingRowsDefaultCellStyle.SelectionBackColor = AlternatingRowsDefaultCellStyle.SelectionBackColor.Shade(0.95);
-            }
+        if (value == AlternatingRowsDefaultCellStyle.SelectionBackColor)
+        {
+            AlternatingRowsDefaultCellStyle.SelectionBackColor = AlternatingRowsDefaultCellStyle.SelectionBackColor.Shade(0.95);
         }
     }
 

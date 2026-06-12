@@ -34,12 +34,6 @@ partial class TransactionsForm
         DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
         DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
         _dataGridView = new TransactionGridView();
-        _toolStrip = new ToolStrip();
-        newToolStripButton = new ToolStripButton();
-        saveToolStripButton = new ToolStripButton();
-        printToolStripButton = new ToolStripButton();
-        toolStripSeparator = new ToolStripSeparator();
-        copyToolStripButton = new ToolStripButton();
         postedColumn = new CalendarColumn();
         numberTypeColumn = new DataGridViewTextBoxColumn();
         nameMemoColumn = new DataGridViewTextBoxColumn();
@@ -47,6 +41,12 @@ partial class TransactionsForm
         debitColumn = new DataGridViewTextBoxColumn();
         creditColumn = new DataGridViewTextBoxColumn();
         balanceColumn = new DataGridViewTextBoxColumn();
+        _toolStrip = new ToolStrip();
+        newToolStripButton = new ToolStripButton();
+        saveToolStripButton = new ToolStripButton();
+        printToolStripButton = new ToolStripButton();
+        toolStripSeparator = new ToolStripSeparator();
+        copyToolStripButton = new ToolStripButton();
         ((System.ComponentModel.ISupportInitialize)_dataGridView).BeginInit();
         _toolStrip.SuspendLayout();
         SuspendLayout();
@@ -56,7 +56,7 @@ partial class TransactionsForm
         _dataGridView.AllowUserToAddRows = false;
         _dataGridView.AllowUserToDeleteRows = false;
         _dataGridView.AllowUserToResizeRows = false;
-        dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(242, 242, 242);
+        dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(33, 37, 41);
         dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
         dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
         _dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
@@ -72,7 +72,6 @@ partial class TransactionsForm
         _dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
         _dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
         _dataGridView.Columns.AddRange(new DataGridViewColumn[] { postedColumn, numberTypeColumn, nameMemoColumn, accountColumn, debitColumn, creditColumn, balanceColumn });
-        _dataGridView.CompanyColor = System.Drawing.Color.Empty;
         dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleLeft;
         dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
         dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 9F);
@@ -82,53 +81,19 @@ partial class TransactionsForm
         dataGridViewCellStyle10.WrapMode = DataGridViewTriState.False;
         _dataGridView.DefaultCellStyle = dataGridViewCellStyle10;
         resources.ApplyResources(_dataGridView, "_dataGridView");
-        _dataGridView.EditMode = DataGridViewEditMode.EditOnEnter;
         _dataGridView.GridColor = System.Drawing.Color.FromArgb(33, 37, 41);
         _dataGridView.MultiSelect = false;
         _dataGridView.Name = "_dataGridView";
         _dataGridView.RowTemplate.Height = 29;
         _dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        _dataGridView.Leave += OnDataGridViewLeave;
+        _dataGridView.CellEndEdit += OnDataGridViewCellEndEdit;
         _dataGridView.CellClick += OnDataGridViewCellClick;
         _dataGridView.CellDoubleClick += OnDataGridViewCellDoubleClick;
         _dataGridView.CellPainting += OnDataGridViewCellPainting;
+        _dataGridView.CurrentCellChanged += OnDataGridViewCurrentCellChanged;
         _dataGridView.EditingControlShowing += OnDataGridViewEditingControlShowing;
         _dataGridView.SelectionChanged += OnDataGridViewSelectionChanged;
-        _dataGridView.KeyDown += OnDataGridViewKeyDown;
-        // 
-        // _toolStrip
-        // 
-        _toolStrip.Items.AddRange(new ToolStripItem[] { newToolStripButton, saveToolStripButton, printToolStripButton, toolStripSeparator, copyToolStripButton });
-        resources.ApplyResources(_toolStrip, "_toolStrip");
-        _toolStrip.Name = "_toolStrip";
-        // 
-        // newToolStripButton
-        // 
-        newToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
-        resources.ApplyResources(newToolStripButton, "newToolStripButton");
-        newToolStripButton.Name = "newToolStripButton";
-        // 
-        // saveToolStripButton
-        // 
-        saveToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
-        resources.ApplyResources(saveToolStripButton, "saveToolStripButton");
-        saveToolStripButton.Name = "saveToolStripButton";
-        // 
-        // printToolStripButton
-        // 
-        printToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
-        resources.ApplyResources(printToolStripButton, "printToolStripButton");
-        printToolStripButton.Name = "printToolStripButton";
-        // 
-        // toolStripSeparator
-        // 
-        toolStripSeparator.Name = "toolStripSeparator";
-        resources.ApplyResources(toolStripSeparator, "toolStripSeparator");
-        // 
-        // copyToolStripButton
-        // 
-        copyToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
-        resources.ApplyResources(copyToolStripButton, "copyToolStripButton");
-        copyToolStripButton.Name = "copyToolStripButton";
         // 
         // postedColumn
         // 
@@ -193,6 +158,42 @@ partial class TransactionsForm
         balanceColumn.Name = "balanceColumn";
         balanceColumn.ReadOnly = true;
         balanceColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
+        // 
+        // _toolStrip
+        // 
+        _toolStrip.Items.AddRange(new ToolStripItem[] { newToolStripButton, saveToolStripButton, printToolStripButton, toolStripSeparator, copyToolStripButton });
+        resources.ApplyResources(_toolStrip, "_toolStrip");
+        _toolStrip.Name = "_toolStrip";
+        // 
+        // newToolStripButton
+        // 
+        newToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+        resources.ApplyResources(newToolStripButton, "newToolStripButton");
+        newToolStripButton.Name = "newToolStripButton";
+        // 
+        // saveToolStripButton
+        // 
+        saveToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+        resources.ApplyResources(saveToolStripButton, "saveToolStripButton");
+        saveToolStripButton.Name = "saveToolStripButton";
+        saveToolStripButton.Click += OnSaveToolStripButtonClick;
+        // 
+        // printToolStripButton
+        // 
+        printToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+        resources.ApplyResources(printToolStripButton, "printToolStripButton");
+        printToolStripButton.Name = "printToolStripButton";
+        // 
+        // toolStripSeparator
+        // 
+        toolStripSeparator.Name = "toolStripSeparator";
+        resources.ApplyResources(toolStripSeparator, "toolStripSeparator");
+        // 
+        // copyToolStripButton
+        // 
+        copyToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+        resources.ApplyResources(copyToolStripButton, "copyToolStripButton");
+        copyToolStripButton.Name = "copyToolStripButton";
         // 
         // TransactionsForm
         // 

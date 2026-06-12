@@ -11,11 +11,11 @@ internal enum FilterIndex
     AllFiles = 1,
     AllSupportedFiles = 2,
     Liber = 3,
-    Json = 5,
-    Sqlite = 6,
-    Csv = 7,
-    Pdf = 8,
-    GnuCashSqlite = 11,
-    Iif = 9,
-    Xml = 10
+    Json = 4,
+    Sqlite = 5,
+    Csv = 6,
+    Pdf = 7,
+    GnuCashSqlite = 10,
+    Iif = 8,
+    Xml = 9
 }

@@ -15,7 +15,6 @@ using Liber.Forms.Transactions;
 
 namespace Liber.Forms.Accounts;
 
-// TODO: Make sure that accounts without certain permissions cannot use all the menu options
 internal sealed partial class AccountsForm : Form
 {
     private readonly Company _company;
@@ -267,12 +266,11 @@ internal sealed partial class AccountsForm : Form
 
     private void OnListViewAfterLabelEdit(object sender, LabelEditEventArgs e)
     {
-        Guid id = (Guid)_listView.Items[e.Item].Tag!;
-        Account value = _company.GetAccount(id);
+        Account account = (Account)_listView.Items[e.Item].Tag!;
 
-        value.Name = e.Label!;
+        account.Name = e.Label!;
 
-        _company.UpdateAccount(id, value.ParentId);
+        _company.UpdateAccount(account.Id, account.ParentId);
     }
 
     private void OnListViewItemActivate(object sender, EventArgs e)

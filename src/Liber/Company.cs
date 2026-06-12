@@ -1068,7 +1068,7 @@ public sealed class Company
     {
         Color result = account.Color;
 
-        if (result == Color.Empty)
+        if (result.IsEmpty)
         {
             result = Color;
         }
@@ -1077,7 +1077,7 @@ public sealed class Company
         {
             result = _accounts[account.ParentId].Color;
 
-            if (result == Color.Empty)
+            if (result.IsEmpty)
             {
                 result = Color;
             }

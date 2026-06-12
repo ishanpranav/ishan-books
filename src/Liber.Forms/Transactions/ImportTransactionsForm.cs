@@ -22,7 +22,6 @@ internal sealed class ImportTransactionsForm : ImportForm
             accounts.Add(account.Name, account.Id);
         }
 
-        
         foreach (GnuCashLine line in lines)
         {
             if (!lookup.TryGetValue(line.TransactionId, out (GnuCashLine Line, List<Line> Values) result))

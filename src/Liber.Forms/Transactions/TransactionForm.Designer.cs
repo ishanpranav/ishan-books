@@ -163,7 +163,7 @@ namespace Liber.Forms.Transactions
             _dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             _dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             _dataGridView.Columns.AddRange(new DataGridViewColumn[] { accountColumn, debitColumn, creditColumn, descriptionColumn });
-            _dataGridView.CompanyColor = System.Drawing.Color.Empty;
+            _dataGridView.SetCompanyColor(System.Drawing.Color.Empty);
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F);

@@ -8,16 +8,19 @@ namespace System.Drawing;
 
 internal static class ColorExtensions
 {
-    public static Color GetForeColor(this Color source)
+    public static double GetLuma(this Color value)
     {
-        if (source.IsEmpty)
+        return ((0.2126 * value.R) + (0.7152 * value.G) + (0.0722 * value.B)) / 255;
+    }
+
+    public static Color GetForeColor(this Color value)
+    {
+        if (value.IsEmpty)
         {
             return Colors.Dark;
         }
 
-        double luma = ((0.2126 * source.R) + (0.7152 * source.G) + (0.0722 * source.B)) / 255;
-
-        if (luma < 0.5)
+        if (value.GetLuma() < 0.5)
         {
             return Colors.Light;
         }
@@ -45,5 +48,26 @@ internal static class ColorExtensions
     public static Color Shade(this Color source, double weight)
     {
         return source.Mix(Color.Black, weight);
+    }
+
+    public static Color Soften(this Color value, double targetLuma = 0.5)
+    {
+        if (value.IsEmpty)
+        {
+            return value;
+        }
+
+        double luma = value.GetLuma();
+
+        if (luma >= targetLuma)
+        {
+            return value;
+        }
+
+        double weight = (targetLuma - luma) / (1 - luma);
+
+        weight = double.Clamp(weight, min: 0, max: 1);
+
+        return value.Tint(weight);
     }
 }

@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
@@ -12,6 +13,8 @@ using System.Windows.Forms;
 using Liber.Forms.AccountViews;
 using Liber.Forms.Properties;
 using Liber.MathEngine.Expressions;
+using PdfSharp.Charting;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Liber.Forms.Transactions;
 
@@ -22,22 +25,8 @@ internal sealed partial class TransactionsForm : Form
     private readonly List<Line> _lines = new List<Line>();
 
     private int _selectedLineIndex = -1;
-
-    private bool OnLastCell
-    {
-        get
-        {
-            DataGridViewCell? currentCell = _dataGridView.CurrentCell;
-
-            if (currentCell == null)
-            {
-                return false;
-            }
-
-            return currentCell.RowIndex == _dataGridView.Rows.Count - 1 &&
-                   currentCell.ColumnIndex == nameMemoColumn.Index;
-        }
-    }
+    private bool _pendingInitialization;
+    private int? _editingIndex;
 
     public TransactionsForm(Company company, Account account)
     {
@@ -51,7 +40,9 @@ internal sealed partial class TransactionsForm : Form
         accountColumn.DataSource = bindingList;
         accountColumn.ValueMember = nameof(AccountView.Id);
         accountColumn.DisplayMember = nameof(AccountView.DisplayName);
-        _dataGridView.CompanyColor = company.GetColorOrDefault(account);
+
+        _dataGridView.SetCompanyColor(company.GetColorOrDefault(account));
+
         _dataGridView.DebitColumnIndex = debitColumn.Index;
         _dataGridView.CreditColumnIndex = creditColumn.Index;
         company.AccountUpdated += OnCompanyAccountUpdated;
@@ -154,7 +145,13 @@ internal sealed partial class TransactionsForm : Form
 
     private void InitializeLines()
     {
+        if (_pendingInitialization)
+        {
+            return;
+        }
+
         _selectedLineIndex = -1;
+        _pendingInitialization = true;
 
         _lines.Clear();
         _lines.AddRange(_account.Lines.Order());
@@ -203,6 +200,13 @@ internal sealed partial class TransactionsForm : Form
                     string.Empty,
                     string.Empty);
 
+                if (sibling == null)
+                {
+                    top.Cells[debitColumn.Index].ReadOnly = true;
+                    top.Cells[creditColumn.Index].ReadOnly = true;
+                    bottom.Cells[accountColumn.Index].ReadOnly = true;
+                }
+
                 AddDoubleRow(top, bottom);
             }
 
@@ -240,6 +244,8 @@ internal sealed partial class TransactionsForm : Form
         finally
         {
             _dataGridView.ResumeLayout();
+
+            _pendingInitialization = false;
         }
     }
 
@@ -247,16 +253,6 @@ internal sealed partial class TransactionsForm : Form
     {
         top.Cells[accountColumn.Index].ReadOnly = true;
         bottom.Cells[postedColumn.Index].ReadOnly = true;
-
-        Guid accountId = (Guid?)bottom.Cells[accountColumn.Index].Value ?? Guid.Empty;
-
-        if (accountId == Guid.Empty)
-        {
-            top.Cells[debitColumn.Index].ReadOnly = true;
-            top.Cells[creditColumn.Index].ReadOnly = true;
-            bottom.Cells[accountColumn.Index].ReadOnly = true;
-        }
-
         bottom.Cells[debitColumn.Index].ReadOnly = true;
         bottom.Cells[creditColumn.Index].ReadOnly = true;
 
@@ -264,11 +260,15 @@ internal sealed partial class TransactionsForm : Form
         _dataGridView.Rows.Add(bottom);
     }
 
-    private bool Save()
+    private bool Save(int index)
     {
-        int count = _dataGridView.Rows.Count;
-        int topIndex = count - 2;
-        int bottomIndex = count - 1;
+        int topIndex = index * 2;
+        int bottomIndex = topIndex + 1;
+
+        if (topIndex < 0 || bottomIndex >= _dataGridView.Rows.Count)
+        {
+            return false;
+        }
 
         DataGridViewRow top = _dataGridView.Rows[topIndex];
 
@@ -284,46 +284,134 @@ internal sealed partial class TransactionsForm : Form
             return false;
         }
 
-        if (top.Cells[accountColumn.Index].Value is not Guid accountId ||
-            accountId == Guid.Empty ||
-            accountId == _account.Id)
+        Line? currentLine = index < _lines.Count ? _lines[index] : null;
+
+        if (_dataGridView.Rows[bottomIndex].Cells[accountColumn.Index].Value is not Guid siblingId ||
+            ((currentLine == null || currentLine.Sibling == null) && siblingId == Guid.Empty) || siblingId == _account.Id)
         {
             top.ErrorText = Resources.InvalidAccountError;
 
             return false;
         }
 
-        DateTime posted = (DateTime)_dataGridView[postedColumn.Index, topIndex].Value!;
-        Transaction transaction = new Transaction()
+        if (_dataGridView[postedColumn.Index, topIndex].Value is not DateTime posted)
         {
-            Number = number,
-            Posted = posted,
-            Name = _dataGridView[nameMemoColumn.Index, topIndex].Value?.ToString(),
-            Memo = _dataGridView[nameMemoColumn.Index, bottomIndex].Value?.ToString()
-        };
-        
-        if (transaction.Balance != 0)
-        {
-            top.ErrorText = Resources.ImbalanceError;
+            top.ErrorText = Resources.InvalidAccountError;
 
             return false;
         }
 
-        _company.AddTransaction(transaction, new Line[]
+        bool addingNew;
+        Transaction transaction;
+
+        if (index >= _lines.Count)
+        {
+            transaction = new Transaction();
+            addingNew = true;
+        }
+        else
+        {
+            transaction = _lines[index].Transaction!;
+            addingNew = false;
+        }
+
+        transaction.Number = number;  
+        transaction.Posted = posted;
+        transaction.Name = _dataGridView[nameMemoColumn.Index, topIndex].Value?.ToString();
+        transaction.Memo = _dataGridView[nameMemoColumn.Index, bottomIndex].Value?.ToString();
+
+        Line[] lines = new Line[]
         {
             new Line()
             {
-                AccountId = accountId,
+                AccountId = _account.Id,
                 Balance = balance
+            },
+            new Line()
+            {
+                AccountId = siblingId,
+                Balance = -balance
             }
-        });
+        };
+
+        if (addingNew)
+        {
+            _company.AddTransaction(transaction, lines);
+        }
+        else
+        {
+            _company.UpdateTransaction(transaction.Id, lines);
+        }
+
         SystemSounds.Asterisk.Play();
 
-        Settings.Default.LastPosted = posted;
+        Settings.Default.LastPosted = transaction.Posted;
 
         Settings.Default.Save();
 
         return true;
+    }
+
+    /// <summary>
+    /// Saves the double-row at <paramref name="index"/> if it represents a
+    /// "blank" new-transaction row that the user left untouched. This avoids
+    /// surfacing validation errors (e.g. <see cref="Resources.InvalidAccountError"/>)
+    /// when the user merely tabs through the trailing empty row without
+    /// entering any data.
+    /// </summary>
+    private bool RowHasContent(int index)
+    {
+        int topIndex = index * 2;
+        int bottomIndex = topIndex + 1;
+
+        if (topIndex < 0 || bottomIndex >= _dataGridView.Rows.Count)
+        {
+            return false;
+        }
+
+        object? name = _dataGridView[nameMemoColumn.Index, topIndex].Value;
+        object? memo = _dataGridView[nameMemoColumn.Index, bottomIndex].Value;
+        object? number = _dataGridView[numberTypeColumn.Index, topIndex].Value;
+        object? account = _dataGridView[accountColumn.Index, bottomIndex].Value;
+
+        if (!string.IsNullOrEmpty(name?.ToString()) ||
+            !string.IsNullOrEmpty(memo?.ToString()) ||
+            !string.IsNullOrEmpty(number?.ToString()))
+        {
+            return true;
+        }
+
+        if (account is Guid accountId && accountId != Guid.Empty)
+        {
+            return true;
+        }
+
+        if (_dataGridView.TryGetBalance(_dataGridView.Rows[topIndex], out decimal balance) && balance != 0)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private void CommitRow(int index)
+    {
+        // index == _lines.Count refers to the trailing "new transaction" row.
+        // Only attempt to save it if the user actually entered something;
+        // otherwise leave it alone so we don't show spurious errors.
+        if (index >= _lines.Count && !RowHasContent(index))
+        {
+            return;
+        }
+
+        int topIndex = index * 2;
+
+        if (topIndex < 0 || topIndex >= _dataGridView.Rows.Count)
+        {
+            return;
+        }
+
+        BeginInvoke(() => Save(index));
     }
 
     private void SelectLine(int index)
@@ -380,7 +468,7 @@ internal sealed partial class TransactionsForm : Form
 
     private void OnDataGridViewCellDoubleClick(object sender, DataGridViewCellEventArgs e)
     {
-        if (e.RowIndex == -1)
+        if (e.ColumnIndex == -1 || e.RowIndex == -1)
         {
             return;
         }
@@ -392,22 +480,18 @@ internal sealed partial class TransactionsForm : Form
             return;
         }
 
+        if (_lines[index].Sibling != null)
+        {
+            return;
+        }
+
         using TransactionForm form = new TransactionForm(_company)
         {
             ShowApplyButton = false
         };
 
         form.InitializeTransaction(_lines[index].Transaction!);
-
-        if (form.ShowDialog() == DialogResult.OK && form.Value != null)
-        {
-            //cell.Value = form.Value;
-
-            // TODO: bind events for transaction added, removed, updated
-
-            //InitializeTransactions();
-            SelectLine(index);
-        }
+        form.ShowDialog();
     }
 
     private void OnDataGridViewCellPainting(object sender, DataGridViewCellPaintingEventArgs e)
@@ -506,21 +590,67 @@ internal sealed partial class TransactionsForm : Form
         _dataGridView.Invalidate();
     }
 
-    private void OnDataGridViewKeyDown(object sender, KeyEventArgs e)
+    private void OnDataGridViewCellEndEdit(object sender, DataGridViewCellEventArgs e)
     {
-        if (e.KeyCode == Keys.Enter || (e.KeyCode == Keys.Tab && OnLastCell))
+        if (e.RowIndex == -1)
         {
-            Save();
-
-            e.SuppressKeyPress = true;
-
             return;
         }
 
-        if (e.KeyCode == Keys.Delete && _selectedLineIndex != -1)
+        _editingIndex = e.RowIndex / 2;
+    }
+
+    private void OnDataGridViewCurrentCellChanged(object sender, EventArgs e)
+    {
+        if (_pendingInitialization || _editingIndex == null)
         {
-            RemoveTransaction();
+            return;
         }
+
+        DataGridViewCell? current = _dataGridView.CurrentCell;
+        int newIndex = current == null ? -1 : current.RowIndex / 2;
+
+        if (newIndex == _editingIndex.Value)
+        {
+            return;
+        }
+
+        int index = _editingIndex.Value;
+
+        _editingIndex = null;
+
+        CommitRow(index);
+    }
+
+    private void OnDataGridViewLeave(object sender, EventArgs e)
+    {
+        // User clicked completely away from the grid (toolbar, another control, etc.)
+        if (_editingIndex == null)
+        {
+            return;
+        }
+
+        _dataGridView.EndEdit();
+
+        int index = _editingIndex.Value;
+
+        _editingIndex = null;
+
+        CommitRow(index);
+    }
+
+    private void OnSaveToolStripButtonClick(object sender, EventArgs e)
+    {
+        int index = _editingIndex ?? _selectedLineIndex;
+
+        if (index == -1)
+        {
+            return;
+        }
+
+        _editingIndex = null;
+
+        CommitRow(index);
     }
 
     protected override void Dispose(bool disposing)
