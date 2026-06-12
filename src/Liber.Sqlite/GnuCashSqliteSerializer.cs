@@ -148,7 +148,7 @@ public static class GnuCashSqliteSerializer
             Name = name,
             Type = type
         };
-        ImportContext context = new ImportContext(accounts)
+        ImportContext context = new ImportContext(result.Accounts)
         {
             Color = result.Color
         };

@@ -526,40 +526,8 @@ public sealed class Company
 
         if (string.IsNullOrWhiteSpace(value.Memo))
         {
-            value.Memo = GetSuggestedMemo(value);
+            value.Memo = null;
         }
-    }
-
-    public string? GetSuggestedMemo(Transaction value)
-    {
-        if (value.Lines.Count == 0)
-        {
-            return null;
-        }
-
-        if (value.Lines.All(x => _accounts[x.AccountId].Type.IsAsset()))
-        {
-            return Resources.TransferMemo;
-        }
-
-        List<Line> bankLines = value.Lines
-            .Where(x => _accounts[x.AccountId].Type == AccountType.Bank)
-            .ToList();
-
-        if (bankLines.Count > 0)
-        {
-            if (bankLines.TrueForAll(x => x.Balance > 0))
-            {
-                return Resources.DepositMemo;
-            }
-
-            if (bankLines.TrueForAll(x => x.Balance < 0))
-            {
-                return Resources.CheckMemo;
-            }
-        }
-
-        return null;
     }
 
     private void AddLines(Transaction value, IReadOnlyCollection<Line> lines)
