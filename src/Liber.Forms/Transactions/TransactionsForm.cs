@@ -118,29 +118,53 @@ internal sealed partial class TransactionsForm : Form
 
     private string GetLineType(Line value)
     {
-        if (value.Sibling == null)
+        Line? sibling = value.Sibling;
+
+        if (sibling == null)
         {
             return "GENJRN";
         }
 
-        string? memo = _company.GetSuggestedMemo(value.Transaction!);
+        AccountType left = _account.Type;
+        AccountType right = _company.GetAccount(sibling.AccountId).Type;
 
-        if (memo == Liber.Properties.Resources.TransferMemo)
+        if (left == AccountType.Bank)
         {
-            return "TNF";
+            if (right == AccountType.Bank)
+            {
+                return "TNF";
+            }
+
+            if (value.Balance > 0)
+            {
+                return "DEP";
+            }
+
+            if (value.Balance < 0)
+            {
+                return "CHK";
+            }
         }
 
-        if (memo == Liber.Properties.Resources.DepositMemo)
+        if (left == AccountType.CreditCard)
         {
-            return "DEP";
+            if (right == AccountType.CreditCard)
+            {
+                return "TNF";
+            }
+
+            if (value.Balance > 0)
+            {
+                return "PMT";
+            }
+
+            if (value.Balance < 0)
+            {
+                return "BILL";
+            }
         }
 
-        if (memo == Liber.Properties.Resources.CheckMemo)
-        {
-            return "CHK";
-        }
-
-        return memo ?? string.Empty;
+        return string.Empty;
     }
 
     private void InitializeLines()
@@ -315,7 +339,7 @@ internal sealed partial class TransactionsForm : Form
             addingNew = false;
         }
 
-        transaction.Number = number;  
+        transaction.Number = number;
         transaction.Posted = posted;
         transaction.Name = _dataGridView[nameMemoColumn.Index, topIndex].Value?.ToString();
         transaction.Memo = _dataGridView[nameMemoColumn.Index, bottomIndex].Value?.ToString();
