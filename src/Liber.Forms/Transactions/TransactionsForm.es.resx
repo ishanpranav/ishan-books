@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
-    Microsoft ResX Schema 
-    
+  <!--
+    Microsoft ResX Schema
+
     Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
     associated with the data types.
-    
+
     Example:
-    
+
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -26,36 +26,36 @@
         <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-                
-    There are any number of "resheader" rows that contain simple 
+
+    There are any number of "resheader" rows that contain simple
     name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
     mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
     extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
     read any of the formats listed below.
-    
+
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-    
+
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
+    value   : The object must be serialized into a byte array
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
@@ -117,25 +117,80 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="postedColumn.HeaderText" xml:space="preserve">
+    <value>Fecha</value>
+  </data>
+  <data name="numberTypeColumn.HeaderText" xml:space="preserve">
+    <value>N.º / Tipo</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="numberTypeColumn.Width" type="System.Int32, mscorlib">
+    <value>70</value>
+  </data>
+  <data name="nameMemoColumn.HeaderText" xml:space="preserve">
+    <value>Nombre / Concepto</value>
+  </data>
   <data name="accountColumn.HeaderText" xml:space="preserve">
     <value>Cuenta</value>
   </data>
-  <data name="balanceColumn.HeaderText" xml:space="preserve">
-    <value>Saldo</value>
-  </data>
-  <data name="creditColumn.HeaderText" xml:space="preserve">
-    <value>Crédito</value>
+  <data name="accountColumn.Width" type="System.Int32, mscorlib">
+    <value>52</value>
   </data>
   <data name="debitColumn.HeaderText" xml:space="preserve">
     <value>Débito</value>
   </data>
-  <data name="nameColumn.HeaderText" xml:space="preserve">
-    <value>Nombre</value>
+  <data name="debitColumn.Width" type="System.Int32, mscorlib">
+    <value>51</value>
   </data>
-  <data name="numberColumn.HeaderText" xml:space="preserve">
-    <value>Número</value>
+  <data name="creditColumn.HeaderText" xml:space="preserve">
+    <value>Crédito</value>
   </data>
-  <data name="postedColumn.HeaderText" xml:space="preserve">
-    <value>Fecha</value>
+  <data name="creditColumn.Width" type="System.Int32, mscorlib">
+    <value>54</value>
+  </data>
+  <data name="balanceColumn.HeaderText" xml:space="preserve">
+    <value>Saldo</value>
+  </data>
+  <data name="balanceColumn.Width" type="System.Int32, mscorlib">
+    <value>43</value>
+  </data>
+  <data name="closeToolStripButton.Text" xml:space="preserve">
+    <value>Salir</value>
+  </data>
+  <data name="newToolStripButton.Text" xml:space="preserve">
+    <value>Nueva transacción</value>
+  </data>
+  <data name="saveToolStripButton.Text" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="saveCloseToolStripButton.Text" xml:space="preserve">
+    <value>Guardar y cerrar</value>
+  </data>
+  <data name="copyToolStripButton.Text" xml:space="preserve">
+    <value>D&amp;uplicar</value>
+  </data>
+  <data name="removeToolStripButton.Text" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
+  <data name="firstToolStripButton.Text" xml:space="preserve">
+    <value>Ir al primer</value>
+  </data>
+  <data name="previousToolStripButton.Text" xml:space="preserve">
+    <value>Ir al anterior</value>
+  </data>
+  <data name="nextToolStripButton.Text" xml:space="preserve">
+    <value>Ir al siguiente</value>
+  </data>
+  <data name="lastToolStripButton.Text" xml:space="preserve">
+    <value>Ir al último</value>
+  </data>
+  <data name="goToSelectedToolStripButton.Text" xml:space="preserve">
+    <value>Ir a la selección</value>
+  </data>
+  <data name="goToSiblingToolStripButton.Text" xml:space="preserve">
+    <value>Ir a la referencia</value>
+  </data>
+  <data name="transactionToolStripButton.Text" xml:space="preserve">
+    <value>Ir al diario general</value>
   </data>
 </root>

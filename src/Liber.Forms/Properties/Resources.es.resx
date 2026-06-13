@@ -126,6 +126,15 @@
   <data name="CompaniesJumpListCustomCategory" xml:space="preserve">
     <value>Empresas</value>
   </data>
+  <data name="DeleteAccountText" xml:space="preserve">
+    <value>No se pudo eliminar la cuenta porque contiene transacciones.</value>
+  </data>
+  <data name="DeleteTransactionCaption" xml:space="preserve">
+    <value>Eliminar transacción</value>
+  </data>
+  <data name="DeleteTransactionText" xml:space="preserve">
+    <value>¿Está seguro de que desea eliminar esta transacción?</value>
+  </data>
   <data name="ExceptionCaption" xml:space="preserve">
     <value>Error</value>
   </data>

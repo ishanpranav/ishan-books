@@ -127,7 +127,7 @@
     <value>Companies</value>
   </data>
   <data name="DeleteAccountText" xml:space="preserve">
-    <value>The account is not empty.</value>
+    <value>The account could not be deleted because it contains transactions.</value>
   </data>
   <data name="DeleteTransactionCaption" xml:space="preserve">
     <value>Delete Transaction</value>
@@ -140,7 +140,7 @@
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\favicon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\favicon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ImbalanceError" xml:space="preserve">
     <value>The transaction does not balance. Please ensure that total amount entered in the debit column is equal to the total amount entered in the credit column.</value>

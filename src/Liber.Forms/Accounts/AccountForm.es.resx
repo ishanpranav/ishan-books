@@ -126,7 +126,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="cancelButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>304, 312</value>
+    <value>275, 311</value>
   </data>
   <data name="cancelButton.Text" xml:space="preserve">
     <value>&amp;Cancelar</value>
@@ -138,7 +138,7 @@
     <value>NoControl</value>
   </data>
   <data name="acceptButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>223, 312</value>
+    <value>194, 311</value>
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 44</value>
@@ -153,28 +153,28 @@
     <value>Especifica el nombre de la cuenta.</value>
   </data>
   <data name="nameTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>146, 41</value>
+    <value>112, 41</value>
   </data>
   <data name="nameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>233, 23</value>
+    <value>238, 23</value>
   </data>
   <data name="numberNumericUpDown.HelpString" xml:space="preserve">
     <value>Especifica el número utilizado para identificar de forma única la cuenta.</value>
   </data>
   <data name="numberNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>272, 12</value>
+    <value>243, 12</value>
   </data>
   <data name="descriptionTextBox.HelpString" xml:space="preserve">
     <value>Proporciona una descripción detallada para la cuenta.</value>
   </data>
   <data name="descriptionTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>146, 126</value>
+    <value>112, 126</value>
   </data>
   <data name="descriptionTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>233, 23</value>
+    <value>238, 23</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>215, 14</value>
+    <value>186, 14</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>Nú&amp;mero</value>
@@ -201,25 +201,25 @@
     <value>Bottom, Right</value>
   </data>
   <data name="placeholderCheckBox.HelpString" xml:space="preserve">
-    <value>Especifica si la cuenta es un marcador de posición. No se pueden registrar transacciones en cuentas marcador de posición.</value>
+    <value>Indica si la cuenta es un marcador de posición. No se pueden registrar transacciones en cuentas marcador de posición.</value>
   </data>
   <data name="placeholderCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>165, 288</value>
+    <value>190, 287</value>
   </data>
   <data name="placeholderCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 19</value>
+    <value>87, 19</value>
   </data>
   <data name="placeholderCheckBox.Text" xml:space="preserve">
-    <value>Marcador de posición</value>
+    <value>Sola lectura</value>
   </data>
   <data name="parentComboBox.HelpString" xml:space="preserve">
     <value>Especifica la cuenta madre.</value>
   </data>
   <data name="parentComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>146, 98</value>
+    <value>112, 98</value>
   </data>
   <data name="parentComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>233, 23</value>
+    <value>238, 23</value>
   </data>
   <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 129</value>
@@ -243,19 +243,19 @@
     <value>Especifica notas adicionales asociadas con la cuenta.</value>
   </data>
   <data name="memoTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>146, 181</value>
+    <value>112, 181</value>
   </data>
   <data name="memoTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>233, 69</value>
+    <value>238, 69</value>
   </data>
   <data name="_colorButton.HelpString" xml:space="preserve">
     <value>Especifica el color mostrado en el registro de cuentas.</value>
   </data>
   <data name="_colorButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>147, 254</value>
+    <value>113, 254</value>
   </data>
   <data name="_colorButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>232, 26</value>
+    <value>237, 26</value>
   </data>
   <data name="_colorButton.Text" xml:space="preserve">
     <value>E&amp;scoger</value>
@@ -264,10 +264,10 @@
     <value>Bottom, Right</value>
   </data>
   <data name="inactiveCheckBox.HelpString" xml:space="preserve">
-    <value>Especifica si la cuenta está inactiva y debe ocultarse.</value>
+    <value>Indica si la cuenta está inactiva y debe ocultarse.</value>
   </data>
   <data name="inactiveCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>312, 288</value>
+    <value>283, 287</value>
   </data>
   <data name="inactiveCheckBox.Text" xml:space="preserve">
     <value>Inactiva</value>
@@ -276,10 +276,10 @@
     <value>Especifica la información de flujo de efectivo para la cuenta.</value>
   </data>
   <data name="cashFlowComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>146, 154</value>
+    <value>112, 154</value>
   </data>
   <data name="cashFlowComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>233, 23</value>
+    <value>238, 23</value>
   </data>
   <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 157</value>
@@ -294,18 +294,27 @@
     <value>Especifica el tipo de cuenta.</value>
   </data>
   <data name="typeComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>146, 70</value>
+    <value>112, 70</value>
   </data>
   <data name="typeComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>233, 23</value>
+    <value>238, 23</value>
   </data>
   <data name="taxTypeCheckBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
+  <data name="taxTypeCheckBox.HelpString" xml:space="preserve">
+    <value>Indica si la cuenta está relacionada con impuestos y afecta la declaración del impuesto sobre la renta del año en curso.</value>
+  </data>
   <data name="taxTypeCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>75, 288</value>
+    <value>12, 287</value>
+  </data>
+  <data name="taxTypeCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 19</value>
+  </data>
+  <data name="taxTypeCheckBox.Text" xml:space="preserve">
+    <value>Relacionada con impuestos</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>391, 347</value>
+    <value>362, 346</value>
   </data>
 </root>
