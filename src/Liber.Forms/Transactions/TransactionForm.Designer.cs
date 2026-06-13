@@ -18,14 +18,15 @@ namespace Liber.Forms.Transactions
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TransactionForm));
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             postedDateTimePicker = new DateTimePicker();
             label1 = new Label();
             label2 = new Label();
             numberNumericUpDown = new NumericUpDown();
             toolStrip1 = new ToolStrip();
+            closeToolStripButton = new ToolStripButton();
             newToolStripButton = new ToolStripButton();
             saveToolStripButton = new ToolStripButton();
             saveCloseToolStripButton = new ToolStripButton();
@@ -54,7 +55,6 @@ namespace Liber.Forms.Transactions
             _helpProvider = new HelpProvider();
             lastButton = new Button();
             firstButton = new Button();
-            closeToolStripButton = new ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)numberNumericUpDown).BeginInit();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)_dataGridView).BeginInit();
@@ -94,6 +94,14 @@ namespace Liber.Forms.Transactions
             resources.ApplyResources(toolStrip1, "toolStrip1");
             toolStrip1.Name = "toolStrip1";
             _helpProvider.SetShowHelp(toolStrip1, (bool)resources.GetObject("toolStrip1.ShowHelp"));
+            // 
+            // closeToolStripButton
+            // 
+            closeToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            closeToolStripButton.Image = VisualStudioImageLibrary.CloseLog;
+            resources.ApplyResources(closeToolStripButton, "closeToolStripButton");
+            closeToolStripButton.Name = "closeToolStripButton";
+            closeToolStripButton.Click += OnCloseToolStripButtonClick;
             // 
             // newToolStripButton
             // 
@@ -148,7 +156,7 @@ namespace Liber.Forms.Transactions
             // firstToolStripButton
             // 
             firstToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            firstToolStripButton.Image = VisualStudioImageLibrary.GoToFirst;
+            firstToolStripButton.Image = VisualStudioImageLibrary.GoToTop;
             resources.ApplyResources(firstToolStripButton, "firstToolStripButton");
             firstToolStripButton.Name = "firstToolStripButton";
             firstToolStripButton.Click += OnFirstButtonClick;
@@ -172,7 +180,7 @@ namespace Liber.Forms.Transactions
             // lastToolStripButton
             // 
             lastToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            lastToolStripButton.Image = VisualStudioImageLibrary.GoToLast;
+            lastToolStripButton.Image = VisualStudioImageLibrary.GoToBottom;
             resources.ApplyResources(lastToolStripButton, "lastToolStripButton");
             lastToolStripButton.Name = "lastToolStripButton";
             lastToolStripButton.Click += OnLastButtonClick;
@@ -204,31 +212,31 @@ namespace Liber.Forms.Transactions
             // _dataGridView
             // 
             _dataGridView.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(33, 37, 41);
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.Black;
-            _dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(33, 37, 41);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            _dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             resources.ApplyResources(_dataGridView, "_dataGridView");
             _dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             _dataGridView.BackgroundColor = System.Drawing.Color.FromArgb(248, 249, 250);
-            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.True;
-            _dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            _dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             _dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             _dataGridView.Columns.AddRange(new DataGridViewColumn[] { accountColumn, debitColumn, creditColumn, descriptionColumn });
-            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.False;
-            _dataGridView.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            _dataGridView.DefaultCellStyle = dataGridViewCellStyle3;
             _dataGridView.GridColor = System.Drawing.Color.FromArgb(33, 37, 41);
             _dataGridView.MultiSelect = false;
             _dataGridView.Name = "_dataGridView";
@@ -316,14 +324,6 @@ namespace Liber.Forms.Transactions
             _helpProvider.SetShowHelp(firstButton, (bool)resources.GetObject("firstButton.ShowHelp"));
             firstButton.UseVisualStyleBackColor = true;
             firstButton.Click += OnFirstButtonClick;
-            // 
-            // closeToolStripButton
-            // 
-            closeToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            closeToolStripButton.Image = VisualStudioImageLibrary.CloseLog;
-            resources.ApplyResources(closeToolStripButton, "closeToolStripButton");
-            closeToolStripButton.Name = "closeToolStripButton";
-            closeToolStripButton.Click += OnCloseToolStripButtonClick;
             // 
             // TransactionForm
             // 

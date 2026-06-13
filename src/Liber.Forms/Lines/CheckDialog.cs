@@ -21,7 +21,7 @@ internal sealed partial class CheckDialog : Form
 
         foreach (Line line in value.Company.GetChecks())
         {
-            Transaction transaction = line.Transaction!;
+            Transaction transaction = line.Transaction;
             string key = line.AccountId.ToString();
             ListViewItem item = _listView.Items.Add(transaction.Name ?? string.Empty);
 

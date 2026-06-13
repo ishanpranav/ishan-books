@@ -378,11 +378,7 @@ internal sealed partial class MainForm : Form
 
     private async Task<bool> TryCancelAsync()
     {
-        switch (MessageBox.Show(
-            _company.GetCancelText(),
-            Resources.CancelCaption,
-            MessageBoxButtons.YesNoCancel,
-            MessageBoxIcon.Warning))
+        switch (FormattedStrings.ShowCancelMessage(_company))
         {
             case DialogResult.No:
                 return false;
@@ -696,7 +692,7 @@ internal sealed partial class MainForm : Form
 
         if (!_company.RemoveAccount(accountDialog.Value.Id))
         {
-            // TODO: show remove account failed
+            FormattedStrings.ShowDeleteAccountMessage();
         }
     }
 
@@ -874,9 +870,9 @@ internal sealed partial class MainForm : Form
             return;
         }
 
-        TransactionsForm transactionsForm = new TransactionsForm(_company, accountDialog.Value.Value);
+        TransactionsForm form = new TransactionsForm(_company, accountDialog.Value.Value, _factory);
 
-        _factory.Register(id, transactionsForm);
+        _factory.Register(id, form);
     }
 
     private void OnCloseAllToolStripMenuItem_Click(object sender, EventArgs e)

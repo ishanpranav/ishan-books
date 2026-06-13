@@ -229,11 +229,6 @@ internal static class FormattedStrings
         }
     }
 
-    public static string GetCancelText(this Company company)
-    {
-        return string.Format(GetString("CancelText{0}"), company.DisplayName);
-    }
-
     public static string GetCheckWords(decimal amount)
     {
         decimal integral = decimal.Floor(amount);
@@ -277,7 +272,7 @@ internal static class FormattedStrings
         return GetString(string.Format("TaxType{0}", taxType));
     }
 
-    public static void ShowNotSupportedMessage(string extension)
+    public static DialogResult ShowNotSupportedMessage(string extension)
     {
         string text;
 
@@ -290,7 +285,35 @@ internal static class FormattedStrings
             text = string.Format(GetString("NotSupportedText{0}"), extension.Substring(1).ToUpper());
         }
 
-        MessageBox.Show(text, Properties.Resources.ExceptionCaption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        return MessageBox.Show(text, Properties.Resources.ExceptionCaption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+    }
+
+    public static DialogResult ShowDeleteTransactionMessage()
+    {
+        return MessageBox.Show(
+            Properties.Resources.DeleteTransactionText,
+            Properties.Resources.DeleteTransactionCaption,
+            MessageBoxButtons.OKCancel,
+            MessageBoxIcon.Warning,
+            MessageBoxDefaultButton.Button2);
+    }
+
+    public static DialogResult ShowDeleteAccountMessage()
+    {
+        return MessageBox.Show(
+            Properties.Resources.DeleteAccountText,
+            Properties.Resources.ExceptionCaption,
+            MessageBoxButtons.OK,
+            MessageBoxIcon.Error);
+    }
+
+    public static DialogResult ShowCancelMessage(Company company)
+    {
+        return MessageBox.Show(
+            string.Format(GetString("CancelText{0}"), company.DisplayName),
+            Properties.Resources.CancelCaption,
+            MessageBoxButtons.YesNoCancel,
+            MessageBoxIcon.Warning);
     }
 
     public static string GetTitle(string name)

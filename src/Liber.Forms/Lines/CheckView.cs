@@ -32,7 +32,7 @@ internal sealed class CheckView
             return string.Empty;
         }
 
-        Transaction transaction = Value.Transaction!;
+        Transaction transaction = Value.Transaction;
         StringBuilder result = new StringBuilder(transaction.Posted.ToShortDateString());
 
         if (transaction.Number != 0)

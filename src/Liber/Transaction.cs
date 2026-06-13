@@ -12,6 +12,7 @@ using CsvHelper.Configuration.Attributes;
 namespace Liber;
 
 public class Transaction :
+    ICloneable,
     IComparable,
     IComparable<Transaction>,
     IEquatable<Transaction>
@@ -78,14 +79,40 @@ public class Transaction :
 
     public Line? GetDoubleEntry(Line value)
     {
-        IEnumerable<Line> lines = Lines.Where(x => x.Balance == -value.Balance);
+        IEnumerable<Line> results = lines.Where(x => x.Balance == -value.Balance);
 
-        if (lines.Skip(1).Any())
+        if (results.Skip(1).Any())
         {
             return null;
         }
 
-        return lines.SingleOrDefault();
+        return results.SingleOrDefault();
+    }
+
+    public Transaction Clone()
+    {
+        int length = lines.Count;
+        Line[] clonedLines = new Line[length];
+        int i = 0;
+
+        foreach (Line line in lines)
+        {
+            clonedLines[i] = line.Clone();
+            i++;
+        }
+
+        return new Transaction(Guid.Empty, Name, clonedLines)
+        {
+            Number = Number,
+            Memo = Memo,
+            Posted = Posted,
+            Reconciled = Reconciled
+        };
+    }
+
+    object ICloneable.Clone()
+    {
+        return Clone();
     }
 
     public int CompareTo(object? obj)

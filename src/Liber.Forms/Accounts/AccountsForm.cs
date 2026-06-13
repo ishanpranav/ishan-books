@@ -119,7 +119,7 @@ internal sealed partial class AccountsForm : Form
             return;
         }
 
-        TransactionsForm form = new TransactionsForm(_company, account);
+        TransactionsForm form = new TransactionsForm(_company, account, _factory);
 
         _factory.Register(account.Id, form);
     }
@@ -249,7 +249,7 @@ internal sealed partial class AccountsForm : Form
 
         if (!_company.RemoveAccount(account.Id))
         {
-            // TODO: show remove account failed
+            FormattedStrings.ShowDeleteAccountMessage();
         }
     }
 

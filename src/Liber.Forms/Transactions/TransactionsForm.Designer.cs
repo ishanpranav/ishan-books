@@ -42,17 +42,36 @@ partial class TransactionsForm
         debitColumn = new DataGridViewTextBoxColumn();
         creditColumn = new DataGridViewTextBoxColumn();
         balanceColumn = new DataGridViewTextBoxColumn();
-        _toolStrip = new ToolStrip();
-        newToolStripButton = new ToolStripButton();
-        saveToolStripButton = new ToolStripButton();
-        printToolStripButton = new ToolStripButton();
-        toolStripSeparator = new ToolStripSeparator();
-        copyToolStripButton = new ToolStripButton();
         _contextMenuStrip = new ContextMenuStrip(components);
         openToolStripMenuItem = new ToolStripMenuItem();
+        toolStripSeparator4 = new ToolStripSeparator();
+        duplicateToolStripMenuItem = new ToolStripMenuItem();
+        deleteToolStripMenuItem = new ToolStripMenuItem();
+        _toolStrip = new ToolStrip();
+        closeToolStripButton = new ToolStripButton();
+        newToolStripButton = new ToolStripButton();
+        toolStripSeparator = new ToolStripSeparator();
+        saveToolStripButton = new ToolStripButton();
+        saveCloseToolStripButton = new ToolStripButton();
+        toolStripSeparator1 = new ToolStripSeparator();
+        copyToolStripButton = new ToolStripButton();
+        removeToolStripButton = new ToolStripButton();
+        toolStripSeparator2 = new ToolStripSeparator();
+        firstToolStripButton = new ToolStripButton();
+        previousToolStripButton = new ToolStripButton();
+        nextToolStripButton = new ToolStripButton();
+        lastToolStripButton = new ToolStripButton();
+        toolStripSeparator3 = new ToolStripSeparator();
+        goToSelectedToolStripButton = new ToolStripButton();
+        goToSiblingToolStripButton = new ToolStripButton();
+        transactionToolStripButton = new ToolStripButton();
+        toolStripSeparator5 = new ToolStripSeparator();
+        goToReferenceToolStripMenuItem = new ToolStripMenuItem();
+        goToSelectedToolStripMenuItem = new ToolStripMenuItem();
+        toolStripSeparator7 = new ToolStripSeparator();
         ((System.ComponentModel.ISupportInitialize)_dataGridView).BeginInit();
-        _toolStrip.SuspendLayout();
         _contextMenuStrip.SuspendLayout();
+        _toolStrip.SuspendLayout();
         SuspendLayout();
         // 
         // _dataGridView
@@ -164,54 +183,189 @@ partial class TransactionsForm
         balanceColumn.ReadOnly = true;
         balanceColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
         // 
+        // _contextMenuStrip
+        // 
+        _contextMenuStrip.Items.AddRange(new ToolStripItem[] { openToolStripMenuItem, toolStripSeparator4, duplicateToolStripMenuItem, deleteToolStripMenuItem, toolStripSeparator5, goToSelectedToolStripMenuItem, goToReferenceToolStripMenuItem });
+        _contextMenuStrip.Name = "_contextMenuStrip";
+        resources.ApplyResources(_contextMenuStrip, "_contextMenuStrip");
+        // 
+        // openToolStripMenuItem
+        // 
+        openToolStripMenuItem.Image = VisualStudioImageLibrary.Open;
+        openToolStripMenuItem.Name = "openToolStripMenuItem";
+        resources.ApplyResources(openToolStripMenuItem, "openToolStripMenuItem");
+        openToolStripMenuItem.Click += OnTransactionToolStripButtonClick;
+        // 
+        // toolStripSeparator4
+        // 
+        toolStripSeparator4.Name = "toolStripSeparator4";
+        resources.ApplyResources(toolStripSeparator4, "toolStripSeparator4");
+        // 
+        // duplicateToolStripMenuItem
+        // 
+        duplicateToolStripMenuItem.Image = VisualStudioImageLibrary.Duplicate;
+        duplicateToolStripMenuItem.Name = "duplicateToolStripMenuItem";
+        resources.ApplyResources(duplicateToolStripMenuItem, "duplicateToolStripMenuItem");
+        // 
+        // deleteToolStripMenuItem
+        // 
+        deleteToolStripMenuItem.Image = VisualStudioImageLibrary.Delete;
+        deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+        resources.ApplyResources(deleteToolStripMenuItem, "deleteToolStripMenuItem");
+        // 
         // _toolStrip
         // 
-        _toolStrip.Items.AddRange(new ToolStripItem[] { newToolStripButton, saveToolStripButton, printToolStripButton, toolStripSeparator, copyToolStripButton });
+        _toolStrip.Items.AddRange(new ToolStripItem[] { closeToolStripButton, newToolStripButton, toolStripSeparator, saveToolStripButton, saveCloseToolStripButton, toolStripSeparator1, copyToolStripButton, removeToolStripButton, toolStripSeparator2, firstToolStripButton, previousToolStripButton, nextToolStripButton, lastToolStripButton, toolStripSeparator3, goToSelectedToolStripButton, goToSiblingToolStripButton, toolStripSeparator7, transactionToolStripButton });
         resources.ApplyResources(_toolStrip, "_toolStrip");
         _toolStrip.Name = "_toolStrip";
+        // 
+        // closeToolStripButton
+        // 
+        closeToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+        closeToolStripButton.Image = VisualStudioImageLibrary.CloseLog;
+        resources.ApplyResources(closeToolStripButton, "closeToolStripButton");
+        closeToolStripButton.Name = "closeToolStripButton";
+        closeToolStripButton.Click += OnCloseToolStripButtonClick;
         // 
         // newToolStripButton
         // 
         newToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+        newToolStripButton.Image = VisualStudioImageLibrary.NewLog;
         resources.ApplyResources(newToolStripButton, "newToolStripButton");
         newToolStripButton.Name = "newToolStripButton";
-        // 
-        // saveToolStripButton
-        // 
-        saveToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
-        resources.ApplyResources(saveToolStripButton, "saveToolStripButton");
-        saveToolStripButton.Name = "saveToolStripButton";
-        saveToolStripButton.Click += OnSaveToolStripButtonClick;
-        // 
-        // printToolStripButton
-        // 
-        printToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
-        resources.ApplyResources(printToolStripButton, "printToolStripButton");
-        printToolStripButton.Name = "printToolStripButton";
+        newToolStripButton.Click += OnNewToolStripButtonClick;
         // 
         // toolStripSeparator
         // 
         toolStripSeparator.Name = "toolStripSeparator";
         resources.ApplyResources(toolStripSeparator, "toolStripSeparator");
         // 
+        // saveToolStripButton
+        // 
+        saveToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+        saveToolStripButton.Image = VisualStudioImageLibrary.Save;
+        resources.ApplyResources(saveToolStripButton, "saveToolStripButton");
+        saveToolStripButton.Name = "saveToolStripButton";
+        saveToolStripButton.Click += OnSaveToolStripButtonClick;
+        // 
+        // saveCloseToolStripButton
+        // 
+        saveCloseToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+        saveCloseToolStripButton.Image = VisualStudioImageLibrary.SaveAndClose;
+        resources.ApplyResources(saveCloseToolStripButton, "saveCloseToolStripButton");
+        saveCloseToolStripButton.Name = "saveCloseToolStripButton";
+        saveCloseToolStripButton.Click += OnSaveCloseToolStripButtonClick;
+        // 
+        // toolStripSeparator1
+        // 
+        toolStripSeparator1.Name = "toolStripSeparator1";
+        resources.ApplyResources(toolStripSeparator1, "toolStripSeparator1");
+        // 
         // copyToolStripButton
         // 
         copyToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+        copyToolStripButton.Image = VisualStudioImageLibrary.Duplicate;
         resources.ApplyResources(copyToolStripButton, "copyToolStripButton");
         copyToolStripButton.Name = "copyToolStripButton";
         copyToolStripButton.Click += OnCopyToolStripButtonClick;
         // 
-        // _contextMenuStrip
+        // removeToolStripButton
         // 
-        _contextMenuStrip.Items.AddRange(new ToolStripItem[] { openToolStripMenuItem });
-        _contextMenuStrip.Name = "_contextMenuStrip";
-        resources.ApplyResources(_contextMenuStrip, "_contextMenuStrip");
+        removeToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+        removeToolStripButton.Image = VisualStudioImageLibrary.Delete;
+        resources.ApplyResources(removeToolStripButton, "removeToolStripButton");
+        removeToolStripButton.Name = "removeToolStripButton";
+        removeToolStripButton.Click += OnRemoveToolStripButtonClick;
         // 
-        // openToolStripMenuItem
+        // toolStripSeparator2
         // 
-        openToolStripMenuItem.Name = "openToolStripMenuItem";
-        resources.ApplyResources(openToolStripMenuItem, "openToolStripMenuItem");
-        openToolStripMenuItem.Click += OnOpenToolStripMenuItem_Click;
+        toolStripSeparator2.Name = "toolStripSeparator2";
+        resources.ApplyResources(toolStripSeparator2, "toolStripSeparator2");
+        // 
+        // firstToolStripButton
+        // 
+        firstToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+        firstToolStripButton.Image = VisualStudioImageLibrary.GoToTop;
+        resources.ApplyResources(firstToolStripButton, "firstToolStripButton");
+        firstToolStripButton.Name = "firstToolStripButton";
+        firstToolStripButton.Click += OnFirstToolStripButtonClick;
+        // 
+        // previousToolStripButton
+        // 
+        previousToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+        previousToolStripButton.Image = VisualStudioImageLibrary.GoToPrevious;
+        resources.ApplyResources(previousToolStripButton, "previousToolStripButton");
+        previousToolStripButton.Name = "previousToolStripButton";
+        previousToolStripButton.Click += OnPreviousToolStripButtonClick;
+        // 
+        // nextToolStripButton
+        // 
+        nextToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+        nextToolStripButton.Image = VisualStudioImageLibrary.GoToNext;
+        resources.ApplyResources(nextToolStripButton, "nextToolStripButton");
+        nextToolStripButton.Name = "nextToolStripButton";
+        nextToolStripButton.Click += OnNextToolStripButtonClick;
+        // 
+        // lastToolStripButton
+        // 
+        lastToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+        lastToolStripButton.Image = VisualStudioImageLibrary.GoToBottom;
+        resources.ApplyResources(lastToolStripButton, "lastToolStripButton");
+        lastToolStripButton.Name = "lastToolStripButton";
+        lastToolStripButton.Click += OnLastToolStripButtonClick;
+        // 
+        // toolStripSeparator3
+        // 
+        toolStripSeparator3.Name = "toolStripSeparator3";
+        resources.ApplyResources(toolStripSeparator3, "toolStripSeparator3");
+        // 
+        // goToSelectedToolStripButton
+        // 
+        goToSelectedToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+        goToSelectedToolStripButton.Image = VisualStudioImageLibrary.GoToCurrentLine;
+        resources.ApplyResources(goToSelectedToolStripButton, "goToSelectedToolStripButton");
+        goToSelectedToolStripButton.Name = "goToSelectedToolStripButton";
+        goToSelectedToolStripButton.Click += OnGoToSelectedToolStripButtonClick;
+        // 
+        // goToSiblingToolStripButton
+        // 
+        goToSiblingToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+        goToSiblingToolStripButton.Image = VisualStudioImageLibrary.GoToReference;
+        resources.ApplyResources(goToSiblingToolStripButton, "goToSiblingToolStripButton");
+        goToSiblingToolStripButton.Name = "goToSiblingToolStripButton";
+        goToSiblingToolStripButton.Click += OnGoToSiblingToolStripButtonClick;
+        // 
+        // transactionToolStripButton
+        // 
+        transactionToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+        transactionToolStripButton.Image = VisualStudioImageLibrary.JournalMessage;
+        resources.ApplyResources(transactionToolStripButton, "transactionToolStripButton");
+        transactionToolStripButton.Name = "transactionToolStripButton";
+        transactionToolStripButton.Click += OnTransactionToolStripButtonClick;
+        // 
+        // toolStripSeparator5
+        // 
+        toolStripSeparator5.Name = "toolStripSeparator5";
+        resources.ApplyResources(toolStripSeparator5, "toolStripSeparator5");
+        // 
+        // goToReferenceToolStripMenuItem
+        // 
+        goToReferenceToolStripMenuItem.Image = VisualStudioImageLibrary.GoToReference;
+        goToReferenceToolStripMenuItem.Name = "goToReferenceToolStripMenuItem";
+        resources.ApplyResources(goToReferenceToolStripMenuItem, "goToReferenceToolStripMenuItem");
+        goToReferenceToolStripMenuItem.Click += OnGoToSiblingToolStripButtonClick;
+        // 
+        // goToSelectedToolStripMenuItem
+        // 
+        goToSelectedToolStripMenuItem.Image = VisualStudioImageLibrary.GoToCurrentLine;
+        goToSelectedToolStripMenuItem.Name = "goToSelectedToolStripMenuItem";
+        resources.ApplyResources(goToSelectedToolStripMenuItem, "goToSelectedToolStripMenuItem");
+        goToSelectedToolStripMenuItem.Click += OnGoToSelectedToolStripButtonClick;
+        // 
+        // toolStripSeparator7
+        // 
+        toolStripSeparator7.Name = "toolStripSeparator7";
+        resources.ApplyResources(toolStripSeparator7, "toolStripSeparator7");
         // 
         // TransactionsForm
         // 
@@ -222,9 +376,9 @@ partial class TransactionsForm
         Name = "TransactionsForm";
         WindowState = FormWindowState.Maximized;
         ((System.ComponentModel.ISupportInitialize)_dataGridView).EndInit();
+        _contextMenuStrip.ResumeLayout(false);
         _toolStrip.ResumeLayout(false);
         _toolStrip.PerformLayout();
-        _contextMenuStrip.ResumeLayout(false);
         ResumeLayout(false);
         PerformLayout();
     }
@@ -236,7 +390,6 @@ partial class TransactionsForm
     private System.Windows.Forms.ToolStrip _toolStrip;
     private System.Windows.Forms.ToolStripButton newToolStripButton;
     private System.Windows.Forms.ToolStripButton saveToolStripButton;
-    private System.Windows.Forms.ToolStripButton printToolStripButton;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
     private System.Windows.Forms.ToolStripButton copyToolStripButton;
     private CalendarColumn postedColumn;
@@ -248,4 +401,24 @@ partial class TransactionsForm
     private DataGridViewTextBoxColumn balanceColumn;
     private ContextMenuStrip _contextMenuStrip;
     private ToolStripMenuItem openToolStripMenuItem;
+    private ToolStripButton closeToolStripButton;
+    private ToolStripButton saveCloseToolStripButton;
+    private ToolStripSeparator toolStripSeparator1;
+    private ToolStripButton removeToolStripButton;
+    private ToolStripSeparator toolStripSeparator2;
+    private ToolStripButton firstToolStripButton;
+    private ToolStripButton previousToolStripButton;
+    private ToolStripButton nextToolStripButton;
+    private ToolStripButton lastToolStripButton;
+    private ToolStripSeparator toolStripSeparator3;
+    private ToolStripButton goToSelectedToolStripButton;
+    private ToolStripButton goToSiblingToolStripButton;
+    private ToolStripButton transactionToolStripButton;
+    private ToolStripSeparator toolStripSeparator4;
+    private ToolStripMenuItem duplicateToolStripMenuItem;
+    private ToolStripMenuItem deleteToolStripMenuItem;
+    private ToolStripSeparator toolStripSeparator5;
+    private ToolStripMenuItem goToReferenceToolStripMenuItem;
+    private ToolStripMenuItem goToSelectedToolStripMenuItem;
+    private ToolStripSeparator toolStripSeparator7;
 }

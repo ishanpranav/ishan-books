@@ -11,6 +11,7 @@ using CsvHelper.Configuration.Attributes;
 namespace Liber;
 
 public class Line :
+    ICloneable,
     IComparable,
     IComparable<Line>,
     IEquatable<Line>
@@ -67,7 +68,7 @@ public class Line :
     [Browsable(false)]
     [Ignore]
     [JsonIgnore]
-    public Transaction? Transaction
+    public Transaction Transaction
     {
         get
         {
@@ -94,6 +95,21 @@ public class Line :
     public override string ToString()
     {
         return $"{AccountId}: {Balance.ToLocalizedString()}";
+    }
+
+    public Line Clone()
+    {
+        return new Line()
+        {
+            AccountId = AccountId,
+            Balance = Balance,
+            Description = Description
+        };
+    }
+
+    object ICloneable.Clone()
+    {
+        return Clone();
     }
 
     public int CompareTo(object? obj)

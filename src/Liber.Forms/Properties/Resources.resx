@@ -121,10 +121,19 @@
     <value>account</value>
   </data>
   <data name="CancelCaption" xml:space="preserve">
-    <value>Save changes</value>
+    <value>Save Changes</value>
   </data>
   <data name="CompaniesJumpListCustomCategory" xml:space="preserve">
     <value>Companies</value>
+  </data>
+  <data name="DeleteAccountText" xml:space="preserve">
+    <value>The account is not empty.</value>
+  </data>
+  <data name="DeleteTransactionCaption" xml:space="preserve">
+    <value>Delete Transaction</value>
+  </data>
+  <data name="DeleteTransactionText" xml:space="preserve">
+    <value>Are you sure you want to delete this transaction?</value>
   </data>
   <data name="ExceptionCaption" xml:space="preserve">
     <value>Error</value>
