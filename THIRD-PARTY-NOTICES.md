@@ -15,6 +15,11 @@ Dependencies
 This section contains notices for binary dependencies redistributed alongside
 the application.
 
+### Bootstrap&emsp;<sub><sup>*js*&ensp;*scss*&ensp;*css*&ensp;</sup></sub>
+- Author: The Bootstrap Authors
+- Source: [twbs/bootstrap](https://github.com/twbs/bootstrap)
+- License: [MIT](#mit_bootstrap)
+
 ### Chart.js&emsp;<sub><sup>*javascript*&ensp;*typescript*&ensp;</sup></sub>
 - Author: Chart.js contributors
 - Source: [chartjs/Chart.js](https://github.com/chartjs/Chart.js)
@@ -30,19 +35,12 @@ the application.
 - Source: [empira/PDFsharp](https://github.com/empira/PDFsharp)
 - License: [MIT](#mit_pdfsharp)
 
-### Liberty&trade; Personal Checks US-Letter&emsp;<sub><sup>*ini*&ensp;</sup></sub>
+### Voucher Check 3-Part US-Letter&emsp;<sub><sup>*ini*&ensp;</sup></sub>
 - Author: GnuCash contributors
 - Source: [Gnucash/gnucash](https://github.com/Gnucash/gnucash)
 - License: [GNU General Public License family](#gpl-gnucash)
 
-See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/liberty.chk) for the resource included from the repository.
-
-### Quicken&trade;/QuickBooks&trade; US-Letter&emsp;<sub><sup>*ini*&ensp;</sup></sub>
-- Author: GnuCash contributors
-- Source: [Gnucash/gnucash](https://github.com/Gnucash/gnucash)
-- License: [GNU General Public License family](#gpl-gnucash)
-
-See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/quicken.chk) for the resource included from the repository.
+See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/voucher.chk) for the resource included from the repository.
 
 ### Quicken&trade; Wallet Checks with Side Stub&emsp;<sub><sup>*ini*&ensp;</sup></sub>
 - Author: GnuCash contributors
@@ -50,20 +48,6 @@ See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/quicken.ch
 - License: [GNU General Public License family](#gpl-gnucash)
 
 See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/quicken_wallet.chk) for the resource included from the repository.
-
-### Deluxe&trade; Personal Checks US-Letter&emsp;<sub><sup>*ini*&ensp;</sup></sub>
-- Author: GnuCash contributors
-- Source: [Gnucash/gnucash](https://github.com/Gnucash/gnucash)
-- License: [GNU General Public License family](#gpl-gnucash)
-
-See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/deluxe.chk) for the resource included from the repository.
-
-### Voucher Check 3-Part US-Letter&emsp;<sub><sup>*ini*&ensp;</sup></sub>
-- Author: GnuCash contributors
-- Source: [Gnucash/gnucash](https://github.com/Gnucash/gnucash)
-- License: [GNU General Public License family](#gpl-gnucash)
-
-See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/voucher.chk) for the resource included from the repository.
 
 ### Quicken&trade; Check-21&emsp;<sub><sup>*ini*&ensp;</sup></sub>
 - Author: GnuCash contributors
@@ -78,6 +62,27 @@ See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/quicken_ch
 - License: [GNU General Public License family](#gpl-gnucash)
 
 See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/quicken_3part.chk) for the resource included from the repository.
+
+### Liberty&trade; Personal Checks US-Letter&emsp;<sub><sup>*ini*&ensp;</sup></sub>
+- Author: GnuCash contributors
+- Source: [Gnucash/gnucash](https://github.com/Gnucash/gnucash)
+- License: [GNU General Public License family](#gpl-gnucash)
+
+See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/liberty.chk) for the resource included from the repository.
+
+### Deluxe&trade; Personal Checks US-Letter&emsp;<sub><sup>*ini*&ensp;</sup></sub>
+- Author: GnuCash contributors
+- Source: [Gnucash/gnucash](https://github.com/Gnucash/gnucash)
+- License: [GNU General Public License family](#gpl-gnucash)
+
+See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/deluxe.chk) for the resource included from the repository.
+
+### Quicken&trade;/QuickBooks&trade; US-Letter&emsp;<sub><sup>*ini*&ensp;</sup></sub>
+- Author: GnuCash contributors
+- Source: [Gnucash/gnucash](https://github.com/Gnucash/gnucash)
+- License: [GNU General Public License family](#gpl-gnucash)
+
+See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/quicken.chk) for the resource included from the repository.
 
 ### ini-parser&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
 - Author: Ricardo Amores Hernández
@@ -94,17 +99,17 @@ See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/quicken_3p
 - Source: [srkirkland/Inflector](https://github.com/srkirkland/Inflector)
 - License: [MIT](#mit_kirkland)
 
-### chartjs-chart-treemap&emsp;<sub><sup>*javascript*&ensp;*typescript*&ensp;</sup></sub>
-- Author: Jukka Kurkela
-- Source: [kurkle/chartjs-chart-treemap](https://github.com/kurkle/chartjs-chart-treemap)
-- License: [MIT](#mit_charjscharttreemap)
-
 ### chartjs-chart-sankey&emsp;<sub><sup>*javascript*&ensp;*typescript*&ensp;</sup></sub>
 - Author: Jukka Kurkela
 - Source: [kurkle/chartjs-chart-sankey](https://github.com/kurkle/chartjs-chart-sankey)
 - License: [MIT](#mit_chartjschartsankey)
 
-### CalendarColumn&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
+### chartjs-chart-treemap&emsp;<sub><sup>*javascript*&ensp;*typescript*&ensp;</sup></sub>
+- Author: Jukka Kurkela
+- Source: [kurkle/chartjs-chart-treemap](https://github.com/kurkle/chartjs-chart-treemap)
+- License: [MIT](#mit_charjscharttreemap)
+
+### CalendarEditingControl&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
 - Author: .NET Foundation and contributors
 - Source: [https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells)
 - License: [MIT](#mit_dotnet)
@@ -118,37 +123,12 @@ See [here](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/ho
 
 See [here](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells) for the resource included from the repository.
 
-### Microsoft Windows API Codepack&emsp;<sub><sup>*c\#*&ensp;*c++*&ensp;*visual basic*&ensp;</sup></sub>
-- Author: Microsoft Corporation
-- Source: [Wagnerp/Windows-API-CodePack-NET](https://github.com/Wagnerp/Windows-API-CodePack-NET)
-- License: [MIT](#mit_windowsapicodepack)
-
-### .NET Runtime&emsp;<sub><sup>*c\#*&ensp;*c++*&ensp;*c*&ensp;</sup></sub>
+### CalendarColumn&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
 - Author: .NET Foundation and contributors
-- Source: [dotnet/runtime](https://github.com/dotnet/runtime)
+- Source: [https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells)
 - License: [MIT](#mit_dotnet)
 
-For more information about this software, please see its [third-party notices](https://github.com/dotnet/runtime/blob/main/THIRD-PARTY-NOTICES.TXT).
-
-### Humanizer&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
-- Author: .NET Foundation and contributors
-- Source: [Humanizr/Humanizer](https://github.com/Humanizr/Humanizer)
-- License: [MIT](#mit_dotnet)
-
-### Microsoft.Data.Sqlite&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
-- Author: .NET Foundation and contributors
-- Source: [dotnet/efcore](https://github.com/dotnet/efcore)
-- License: [MIT](#mit_dotnet)
-
-### Microsoft Edge WebView2&emsp;<sub><sup>*c++*&ensp;</sup></sub>
-- Author: Microsoft Corporation
-- Source: [https://developer.microsoft.com/en-us/microsoft-edge/webview2](https://developer.microsoft.com/en-us/microsoft-edge/webview2)
-- License: [BSD 3-clause "New" or "Revised" license](#bsd-3-clause-microsoft)
-
-### DocFX&emsp;<sub><sup>*c\#*&ensp;*html*&ensp;</sup></sub>
-- Author: .NET Foundation and contributors
-- Source: [dotnet/docfx](https://github.com/dotnet/docfx)
-- License: [MIT](#mit_dotnet)
+See [here](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells) for the resource included from the repository.
 
 ### TypeConverter to JsonConverter Adapter&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
 - Author: .NET Foundation and contributors
@@ -159,12 +139,22 @@ See [here](https://github.com/dotnet/runtime/issues/1761) for the resource inclu
 
 For more information about this software, please see its [third-party notices](https://github.com/dotnet/runtime/blob/main/THIRD-PARTY-NOTICES.TXT).
 
-### CalendarEditingControl&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
+### DocFX&emsp;<sub><sup>*c\#*&ensp;*html*&ensp;</sup></sub>
 - Author: .NET Foundation and contributors
-- Source: [https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells)
+- Source: [dotnet/docfx](https://github.com/dotnet/docfx)
 - License: [MIT](#mit_dotnet)
 
-See [here](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells) for the resource included from the repository.
+### .NET Runtime&emsp;<sub><sup>*c\#*&ensp;*c++*&ensp;*c*&ensp;</sup></sub>
+- Author: .NET Foundation and contributors
+- Source: [dotnet/runtime](https://github.com/dotnet/runtime)
+- License: [MIT](#mit_dotnet)
+
+For more information about this software, please see its [third-party notices](https://github.com/dotnet/runtime/blob/main/THIRD-PARTY-NOTICES.TXT).
+
+### Microsoft Edge WebView2&emsp;<sub><sup>*c++*&ensp;</sup></sub>
+- Author: Microsoft Corporation
+- Source: [https://developer.microsoft.com/en-us/microsoft-edge/webview2](https://developer.microsoft.com/en-us/microsoft-edge/webview2)
+- License: [BSD 3-clause "New" or "Revised" license](#bsd-3-clause-microsoft)
 
 ### Visual Studio 2026 Image Library&emsp;<sub><sup>*png*&ensp;</sup></sub>
 - Author: Microsoft Corporation
@@ -172,6 +162,21 @@ See [here](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/ho
 - License: [MICROSOFT VISUAL STUDIO IMAGE LIBRARY](#visual-studio-image-library-eula_microsoft)
 
 See [here](https://www.microsoft.com/en-us/download/details.aspx?id=35825) for the resource included from the repository.
+
+### Microsoft.Data.Sqlite&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
+- Author: .NET Foundation and contributors
+- Source: [dotnet/efcore](https://github.com/dotnet/efcore)
+- License: [MIT](#mit_dotnet)
+
+### Humanizer&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
+- Author: .NET Foundation and contributors
+- Source: [Humanizr/Humanizer](https://github.com/Humanizr/Humanizer)
+- License: [MIT](#mit_dotnet)
+
+### Microsoft Windows API Codepack&emsp;<sub><sup>*c\#*&ensp;*c++*&ensp;*visual basic*&ensp;</sup></sub>
+- Author: Microsoft Corporation
+- Source: [Wagnerp/Windows-API-CodePack-NET](https://github.com/Wagnerp/Windows-API-CodePack-NET)
+- License: [MIT](#mit_windowsapicodepack)
 
 ### CPA 006 Cheque in Middle ASAP Cheques&emsp;<sub><sup>*ini*&ensp;</sup></sub>
 - Author: Doug Ransom
@@ -1103,6 +1108,33 @@ consider it more useful to permit linking proprietary applications with the
 library.  If this is what you want to do, use the GNU Library General
 Public License instead of this License.
 
+```
+________________________________________________________________________________
+
+### <a id='mit_bootstrap'>MIT</a>
+
+```
+The MIT License (MIT)
+
+Copyright Copyright (c) 2011-2026 The Bootstrap Authors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the “Software”), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
 ```
 ________________________________________________________________________________
 
