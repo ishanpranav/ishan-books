@@ -70,7 +70,7 @@ namespace Liber.Forms.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save changes.
+        ///   Looks up a localized string similar to Save Changes.
         /// </summary>
         internal static string CancelCaption {
             get {
@@ -84,6 +84,33 @@ namespace Liber.Forms.Properties {
         internal static string CompaniesJumpListCustomCategory {
             get {
                 return ResourceManager.GetString("CompaniesJumpListCustomCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The account is not empty..
+        /// </summary>
+        internal static string DeleteAccountText {
+            get {
+                return ResourceManager.GetString("DeleteAccountText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete Transaction.
+        /// </summary>
+        internal static string DeleteTransactionCaption {
+            get {
+                return ResourceManager.GetString("DeleteTransactionCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete this transaction?.
+        /// </summary>
+        internal static string DeleteTransactionText {
+            get {
+                return ResourceManager.GetString("DeleteTransactionText", resourceCulture);
             }
         }
         

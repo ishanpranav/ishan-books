@@ -7,9 +7,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
-using System.Media;
 using System.Windows.Forms;
 using Liber.Forms.AccountViews;
+using Liber.Forms.Components;
 using Liber.Forms.Properties;
 using Liber.MathEngine.Expressions;
 
@@ -19,13 +19,20 @@ internal sealed partial class TransactionsForm : Form
 {
     private readonly Company _company;
     private readonly Account _account;
+    private readonly FormFactory _factory;
     private readonly List<Line> _lines = new List<Line>();
 
     private int _selectedLineIndex = -1;
     private bool _pendingInitialization;
     private int? _editingIndex;
 
-    public TransactionsForm(Company company, Account account)
+    public TransactionsForm(Company company, Account account, FormFactory factory, Line line) :
+        this(company, account, factory)
+    {
+        SelectLine(_lines.IndexOf(line));
+    }
+
+    public TransactionsForm(Company company, Account account, FormFactory factory)
     {
         InitializeComponent();
         SystemFeatures.Initialize(this);
@@ -54,6 +61,7 @@ internal sealed partial class TransactionsForm : Form
         balanceColumn.DefaultCellStyle.Format = DecimalExtensions.Format;
         Text = account.Name;
         _account = account;
+        _factory = factory;
 
         InitializeLines();
 
@@ -187,7 +195,7 @@ internal sealed partial class TransactionsForm : Form
             for (int i = 0; i < _lines.Count; i++)
             {
                 Line line = _lines[i];
-                Transaction transaction = line.Transaction!;
+                Transaction transaction = line.Transaction;
                 DataGridViewRow top = new DataGridViewRow()
                 {
                     Tag = new RegisterRow(i)
@@ -291,13 +299,15 @@ internal sealed partial class TransactionsForm : Form
         return _lines[index];
     }
 
-    private bool Save(int index)
+    private bool Save(int index, out DateTime posted)
     {
         int topIndex = index * 2;
         int bottomIndex = topIndex + 1;
 
         if (topIndex < 0 || bottomIndex >= _dataGridView.Rows.Count)
         {
+            posted = default;
+
             return false;
         }
 
@@ -312,6 +322,8 @@ internal sealed partial class TransactionsForm : Form
 
         if (!_dataGridView.TryGetBalance(top, out decimal balance))
         {
+            posted = default;
+
             return false;
         }
 
@@ -321,16 +333,20 @@ internal sealed partial class TransactionsForm : Form
             ((currentLine == null || currentLine.Sibling != null) && siblingId == Guid.Empty) || siblingId == _account.Id)
         {
             top.ErrorText = Resources.InvalidAccountError;
+            posted = default;
 
             return false;
         }
 
-        if (_dataGridView[postedColumn.Index, topIndex].Value is not DateTime posted)
+        if (_dataGridView[postedColumn.Index, topIndex].Value is not DateTime postedValue)
         {
+            posted = default;
             top.ErrorText = Resources.InvalidAccountError;
 
             return false;
         }
+
+        posted = postedValue;
 
         bool addingNew;
         Transaction transaction;
@@ -342,7 +358,7 @@ internal sealed partial class TransactionsForm : Form
         }
         else
         {
-            transaction = currentLine.Transaction!;
+            transaction = currentLine.Transaction;
             addingNew = false;
         }
 
@@ -375,12 +391,6 @@ internal sealed partial class TransactionsForm : Form
         {
             _company.UpdateTransaction(transaction.Id, name, lines);
         }
-
-        SystemSounds.Asterisk.Play();
-
-        Settings.Default.LastPosted = transaction.Posted;
-
-        Settings.Default.Save();
 
         return true;
     }
@@ -434,12 +444,18 @@ internal sealed partial class TransactionsForm : Form
             return;
         }
 
-        BeginInvoke(() => Save(index));
+        BeginInvoke(() =>
+        {
+            if (Save(index, out DateTime posted))
+            {
+                TransactionHelpers.Post(posted);
+            }
+        });
     }
 
     private void SelectLine(int index)
     {
-        _selectedLineIndex = index;
+        _selectedLineIndex = (index < 0 || index >= _lines.Count) ? -1 : index;
 
         int rowIndex = index * 2;
 
@@ -450,29 +466,6 @@ internal sealed partial class TransactionsForm : Form
 
             _dataGridView.Invalidate();
         }
-    }
-
-    private void RemoveTransaction()
-    {
-        if (_selectedLineIndex == -1 || _selectedLineIndex >= _lines.Count)
-        {
-            return;
-        }
-
-        // TODO: use resource
-
-        DialogResult result = MessageBox.Show(
-            "Delete this transaction?", "Confirm Delete",
-            MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-        if (result != DialogResult.Yes)
-        {
-            return;
-        }
-
-        Transaction transaction = _lines[_selectedLineIndex].Transaction!;
-
-        _company.RemoveTransaction(transaction);
     }
 
     private void OnDataGridViewCellClick(object sender, DataGridViewCellEventArgs e)
@@ -496,7 +489,7 @@ internal sealed partial class TransactionsForm : Form
             ShowApplyButton = false
         };
 
-        form.InitializeTransaction(_lines[index].Transaction!);
+        form.InitializeTransaction(_lines[index].Transaction);
         form.ShowDialog();
     }
 
@@ -666,6 +659,16 @@ internal sealed partial class TransactionsForm : Form
         CommitRow(index);
     }
 
+    private void OnCloseToolStripButtonClick(object sender, EventArgs e)
+    {
+        Close();
+    }
+
+    private void OnNewToolStripButtonClick(object sender, EventArgs e)
+    {
+        SelectLine(_lines.Count);
+    }
+
     private void OnSaveToolStripButtonClick(object sender, EventArgs e)
     {
         int index = _editingIndex ?? _selectedLineIndex;
@@ -677,7 +680,30 @@ internal sealed partial class TransactionsForm : Form
 
         _editingIndex = null;
 
-        CommitRow(index);
+        if (Save(index, out DateTime posted))
+        {
+            TransactionHelpers.Post(posted);
+        }
+    }
+
+    private void OnSaveCloseToolStripButtonClick(object sender, EventArgs e)
+    {
+        int index = _editingIndex ?? _selectedLineIndex;
+
+        if (index == -1)
+        {
+            Close();
+
+            return;
+        }
+
+        _editingIndex = null;
+
+        if (Save(index, out DateTime posted))
+        {
+            TransactionHelpers.Post(posted);
+            Close();
+        }
     }
 
     private void OnCopyToolStripButtonClick(object sender, EventArgs e)
@@ -698,7 +724,7 @@ internal sealed partial class TransactionsForm : Form
 
         _editingIndex = null;
 
-        if (!Save(index))
+        if (!Save(index, out DateTime posted))
         {
             return;
         }
@@ -710,18 +736,111 @@ internal sealed partial class TransactionsForm : Form
             return;
         }
 
-        Transaction? transaction = line.Transaction!;
-        Transaction clone = new Transaction()
-        {
-            Posted = Settings.Default.LastPosted,
-            Number = _company.NextTransactionNumber,
-            Memo = transaction.Memo
-        };
+        Transaction? clone = line.Transaction.Clone();
 
-        _company.AddTransaction(clone, transaction.Name, transaction.Lines);
+        clone.Number = _company.NextTransactionNumber;
+
+        _company.AddTransaction(clone, clone.Name, clone.Lines);
+        TransactionHelpers.Post(posted);
     }
 
-    private void OnOpenToolStripMenuItem_Click(object sender, EventArgs e)
+    private void OnRemoveToolStripButtonClick(object sender, EventArgs e)
+    {
+        int index = _editingIndex ?? _selectedLineIndex;
+
+        if (index == -1)
+        {
+            return;
+        }
+
+        Line? line = GetValue(index);
+
+        if (line == null)
+        {
+            return;
+        }
+
+        if (FormattedStrings.ShowDeleteTransactionMessage() != DialogResult.OK)
+        {
+            return;
+        }
+
+        Transaction remove = line.Transaction;
+
+        SelectLine(_selectedLineIndex);
+        _company.RemoveTransaction(remove.Id);
+    }
+
+    private void OnFirstToolStripButtonClick(object sender, EventArgs e)
+    {
+        SelectLine(index: 0);
+    }
+
+    private void OnPreviousToolStripButtonClick(object sender, EventArgs e)
+    {
+        SelectLine(_selectedLineIndex - 1);
+    }
+
+    private void OnNextToolStripButtonClick(object sender, EventArgs e)
+    {
+        SelectLine(_selectedLineIndex + 1);
+    }
+
+    private void OnLastToolStripButtonClick(object sender, EventArgs e)
+    {
+        SelectLine(_lines.Count - 1);
+    }
+
+    private void OnGoToSelectedToolStripButtonClick(object sender, EventArgs e)
+    {
+        SelectLine(_selectedLineIndex);
+    }
+
+    private void OnGoToSiblingToolStripButtonClick(object sender, EventArgs e)
+    {
+        int index = _editingIndex ?? _selectedLineIndex;
+
+        if (index == -1)
+        {
+            return;
+        }
+
+        Line? line = GetValue(index);
+
+        if (line == null)
+        {
+            return;
+        }
+
+        Line? sibling = line.Sibling;
+
+        if (sibling == null)
+        {
+            return;
+        }
+
+        Transaction transaction = sibling.Transaction;
+
+        if (sibling.AccountId == _account.Id)
+        {
+            SelectLine(_lines.IndexOf(sibling));
+
+            return;
+        }
+
+        Account siblingAccount = _company.GetAccount(sibling.AccountId);
+
+        if (_factory.TryActivate(siblingAccount.Id) || siblingAccount.ReadOnly)
+        {
+            return;
+        }
+
+        TransactionsForm form = new TransactionsForm(_company, siblingAccount, _factory, sibling);
+
+        _factory.Register(siblingAccount.Id, form);
+    }
+
+    private void OnTransactionToolStripButtonClick(object sender, EventArgs e)
     {
         int index = _editingIndex ?? _selectedLineIndex;
 

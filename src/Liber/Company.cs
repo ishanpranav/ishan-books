@@ -592,7 +592,7 @@ public sealed class Company
 
     public void AddTransaction(Transaction value, string? name, IReadOnlyCollection<Line> lines)
     {
-        if (value.Id != Guid.Empty || value.lines.Count != 0)
+        if (value.Id != Guid.Empty)
         {
             throw new ArgumentException(message: null, nameof(value));
         }
@@ -605,9 +605,12 @@ public sealed class Company
         AddName(value, name);
         AddLines(value, lines);
 
-        foreach (Line line in lines)
+        if (value.lines.Count == 0)
         {
-            value.lines.Add(line);
+            foreach (Line line in lines)
+            {
+                value.lines.Add(line);
+            }
         }
 
         _transactions.Add(value.Id, value);
@@ -668,12 +671,7 @@ public sealed class Company
 
         return true;
     }
-
-    public void RemoveTransaction(Transaction value)
-    {
-        _transactions.Remove(value.Id);
-    }
-
+    
     public IEnumerable<Transaction> GetTransfers()
     {
         foreach (Transaction transaction in _sortedTransactions)

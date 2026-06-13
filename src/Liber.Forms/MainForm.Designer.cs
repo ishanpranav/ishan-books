@@ -91,15 +91,15 @@ partial class MainForm
         toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
         accountsToolStripButton = new System.Windows.Forms.ToolStripButton();
         transactionToolStripButton = new System.Windows.Forms.ToolStripButton();
+        toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
         transactionsToolStripButton = new System.Windows.Forms.ToolStripButton();
+        toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
+        reportsToolStripButton = new System.Windows.Forms.ToolStripButton();
         _openFileDialog = new System.Windows.Forms.OpenFileDialog();
         _saveFileDialog = new System.Windows.Forms.SaveFileDialog();
         _recentPathManager = new RecentPathManager(components);
         _factory = new FormFactory(components);
         _timer = new System.Windows.Forms.Timer(components);
-        toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
-        toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
-        reportsToolStripButton = new System.Windows.Forms.ToolStripButton();
         _menuStrip.SuspendLayout();
         _toolStrip.SuspendLayout();
         SuspendLayout();
@@ -419,6 +419,7 @@ partial class MainForm
         // 
         aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
         resources.ApplyResources(aboutToolStripMenuItem, "aboutToolStripMenuItem");
+        aboutToolStripMenuItem.Click += OnAboutToolStripMenuItemClick;
         // 
         // _toolStrip
         // 
@@ -471,6 +472,11 @@ partial class MainForm
         transactionToolStripButton.Name = "transactionToolStripButton";
         transactionToolStripButton.Click += OnTransactionToolStripMenuItemClick;
         // 
+        // toolStripSeparator10
+        // 
+        toolStripSeparator10.Name = "toolStripSeparator10";
+        resources.ApplyResources(toolStripSeparator10, "toolStripSeparator10");
+        // 
         // transactionsToolStripButton
         // 
         transactionsToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -478,6 +484,19 @@ partial class MainForm
         resources.ApplyResources(transactionsToolStripButton, "transactionsToolStripButton");
         transactionsToolStripButton.Name = "transactionsToolStripButton";
         transactionsToolStripButton.Click += OnTransactionsToolStripMenuItemClick;
+        // 
+        // toolStripSeparator11
+        // 
+        toolStripSeparator11.Name = "toolStripSeparator11";
+        resources.ApplyResources(toolStripSeparator11, "toolStripSeparator11");
+        // 
+        // reportsToolStripButton
+        // 
+        reportsToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+        reportsToolStripButton.Image = VisualStudioImageLibrary.Report;
+        resources.ApplyResources(reportsToolStripButton, "reportsToolStripButton");
+        reportsToolStripButton.Name = "reportsToolStripButton";
+        reportsToolStripButton.Click += OnReportsToolStripMenuItemClick;
         // 
         // _openFileDialog
         // 
@@ -506,24 +525,6 @@ partial class MainForm
         // 
         _timer.Interval = 30000;
         _timer.Tick += OnTimerTick;
-        // 
-        // toolStripSeparator10
-        // 
-        toolStripSeparator10.Name = "toolStripSeparator10";
-        resources.ApplyResources(toolStripSeparator10, "toolStripSeparator10");
-        // 
-        // toolStripSeparator11
-        // 
-        toolStripSeparator11.Name = "toolStripSeparator11";
-        resources.ApplyResources(toolStripSeparator11, "toolStripSeparator11");
-        // 
-        // reportsToolStripButton
-        // 
-        reportsToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-        reportsToolStripButton.Image = VisualStudioImageLibrary.Report;
-        resources.ApplyResources(reportsToolStripButton, "reportsToolStripButton");
-        reportsToolStripButton.Name = "reportsToolStripButton";
-        reportsToolStripButton.Click += OnReportsToolStripMenuItemClick;
         // 
         // MainForm
         // 

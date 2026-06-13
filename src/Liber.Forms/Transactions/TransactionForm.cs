@@ -6,8 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Media;
 using System.Windows.Forms;
+using System.Windows.Shapes;
 using Liber.Forms.AccountViews;
 using Liber.Forms.Properties;
 using Liber.MathEngine.Expressions;
@@ -184,13 +184,7 @@ internal sealed partial class TransactionForm : Form
         }
 
         InitializeTransaction(transaction);
-
-        SystemSounds.Asterisk.Play();
-
-        Settings.Default.LastPosted = postedDateTimePicker.Value;
-
-        Settings.Default.Save();
-
+        
         return true;
     }
 
@@ -227,6 +221,7 @@ internal sealed partial class TransactionForm : Form
     private void OnSaveToolStripButtonClick(object sender, EventArgs e)
     {
         Save();
+        TransactionHelpers.Post(postedDateTimePicker.Value);
     }
 
     private void OnCopyToolStripButtonClick(object sender, EventArgs e)
@@ -236,15 +231,13 @@ internal sealed partial class TransactionForm : Form
             return;
         }
 
-        Transaction clone = new Transaction()
-        {
-            Posted = Settings.Default.LastPosted,
-            Number = _company.NextTransactionNumber,
-            Memo = Value.Memo
-        };
+        Transaction? clone = Value.Clone();
 
-        _company.AddTransaction(clone, Value.Name, Value.Lines);
+        clone.Number = _company.NextTransactionNumber;
+
+        _company.AddTransaction(clone, clone.Name, clone.Lines);
         InitializeTransaction(clone);
+        TransactionHelpers.Post(postedDateTimePicker.Value);
     }
 
     private void OnRemoveToolStripButton(object sender, EventArgs e)
@@ -254,9 +247,24 @@ internal sealed partial class TransactionForm : Form
             return;
         }
 
-        // TODO: confirm the delete
+        if (FormattedStrings.ShowDeleteTransactionMessage() != DialogResult.OK)
+        {
+            return;
+        }
 
-        _company.RemoveTransaction(Value.Id);
+        Transaction remove = Value;
+        Transaction? next = _company.GetTransactionAfter(remove);
+
+        if (next == null)
+        {
+            CreateNew();
+        }
+        else
+        {
+            InitializeTransaction(next);
+        }
+
+        _company.RemoveTransaction(remove.Id);
     }
 
     private void OnAcceptButtonClick(object sender, EventArgs e)
@@ -266,6 +274,7 @@ internal sealed partial class TransactionForm : Form
             return;
         }
 
+        TransactionHelpers.Post(postedDateTimePicker.Value);
         DialogResult = DialogResult.OK;
 
         Close();
@@ -275,6 +284,7 @@ internal sealed partial class TransactionForm : Form
     {
         if (Save())
         {
+            TransactionHelpers.Post(postedDateTimePicker.Value);
             CreateNew();
         }
     }
@@ -350,21 +360,6 @@ internal sealed partial class TransactionForm : Form
         }
 
         InitializeTransaction(next);
-    }
-
-    private void OnPrintToolStripButtonClick(object sender, EventArgs e)
-    {
-        //ReportsForm form = new ReportsForm(_engine);
-
-        //form.Load += (sender, e) =>
-        //{
-        //    form.InitializeReport("transaction-report");
-        //};
-
-        //_factory.Kill(key);
-        //_factory.Register(key, form);
-
-        // TODO: Print transaction
     }
 
     private void OnDataGridViewDefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)

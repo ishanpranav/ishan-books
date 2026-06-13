@@ -285,7 +285,7 @@
     <value>23, 22</value>
   </data>
   <data name="copyToolStripButton.Text" xml:space="preserve">
-    <value>&amp;Duplicate</value>
+    <value>D&amp;uplicate</value>
   </data>
   <data name="removeToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
@@ -796,6 +796,12 @@
   <data name="$this.Text" xml:space="preserve">
     <value>General Journal</value>
   </data>
+  <data name="&gt;&gt;closeToolStripButton.Name" xml:space="preserve">
+    <value>closeToolStripButton</value>
+  </data>
+  <data name="&gt;&gt;closeToolStripButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;newToolStripButton.Name" xml:space="preserve">
     <value>newToolStripButton</value>
   </data>
@@ -891,12 +897,6 @@
   </data>
   <data name="&gt;&gt;_helpProvider.Type" xml:space="preserve">
     <value>System.Windows.Forms.HelpProvider, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;closeToolStripButton.Name" xml:space="preserve">
-    <value>closeToolStripButton</value>
-  </data>
-  <data name="&gt;&gt;closeToolStripButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>TransactionForm</value>

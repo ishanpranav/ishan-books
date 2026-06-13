@@ -153,9 +153,9 @@ namespace Liber.Forms {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap GoToFirst {
+        internal static System.Drawing.Bitmap GoToBottom {
             get {
-                object obj = ResourceManager.GetObject("GoToFirst", resourceCulture);
+                object obj = ResourceManager.GetObject("GoToBottom", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -163,9 +163,9 @@ namespace Liber.Forms {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap GoToLast {
+        internal static System.Drawing.Bitmap GoToCurrentLine {
             get {
-                object obj = ResourceManager.GetObject("GoToLast", resourceCulture);
+                object obj = ResourceManager.GetObject("GoToCurrentLine", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -186,6 +186,26 @@ namespace Liber.Forms {
         internal static System.Drawing.Bitmap GoToPrevious {
             get {
                 object obj = ResourceManager.GetObject("GoToPrevious", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap GoToReference {
+            get {
+                object obj = ResourceManager.GetObject("GoToReference", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap GoToTop {
+            get {
+                object obj = ResourceManager.GetObject("GoToTop", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

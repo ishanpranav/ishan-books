@@ -221,9 +221,9 @@ public class Account :
 
         foreach (Line line in lines)
         {
-            Transaction transaction = line.Transaction!;
+            Transaction transaction = line.Transaction;
 
-            if (transaction!.Posted <= posted && filter.IsMatch(transaction.Memo ?? string.Empty))
+            if (transaction.Posted <= posted && filter.IsMatch(transaction.Memo ?? string.Empty))
             {
                 result += line.Balance;
             }
@@ -244,7 +244,7 @@ public class Account :
 
         foreach (Line line in lines)
         {
-            Transaction transaction = line.Transaction!;
+            Transaction transaction = line.Transaction;
 
             if (transaction.Posted >= started && transaction.Posted <= posted && filter.IsMatch(transaction.Memo ?? string.Empty))
             {
@@ -265,7 +265,7 @@ public class Account :
 
         foreach (Line line in lines)
         {
-            Transaction transaction = line.Transaction!;
+            Transaction transaction = line.Transaction;
 
             if (transaction.Posted >= started && transaction.Posted <= posted && filter.IsMatch(transaction.Memo ?? string.Empty))
             {

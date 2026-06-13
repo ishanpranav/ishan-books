@@ -145,17 +145,23 @@
   <data name="Export" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>images\Export.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GoToFirst" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>images\GoToFirst.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="GoToBottom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>images\GoToBottom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="GoToLast" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>images\GoToLast.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="GoToCurrentLine" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>images\GoToCurrentLine.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="GoToNext" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>images\GoToNext.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="GoToPrevious" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>images\GoToPrevious.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GoToReference" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>images\GoToReference.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GoToTop" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>images\GoToTop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="HelpIndexFile" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>images\HelpIndexFile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
