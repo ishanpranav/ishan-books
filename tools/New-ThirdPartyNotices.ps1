@@ -124,6 +124,18 @@ function Out-Dependencies {
     Out-ThirdPartyNotices ""
 }
 
+function ConvertTo-Hashtable {
+    param($obj)
+
+    $hash = @{}
+
+    $obj.PSObject.Properties | ForEach-Object {
+        $hash[$_.Name] = $_.Value
+    }
+
+    return $hash
+}
+
 $json = Get-Content -Path "licenses.json" -Raw | ConvertFrom-Json -AsHashtable   
 
 Out-ThirdPartyNotices "Third-Party Notices

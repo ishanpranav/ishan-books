@@ -139,22 +139,20 @@ See [here](https://github.com/dotnet/runtime/issues/1761) for the resource inclu
 
 For more information about this software, please see its [third-party notices](https://github.com/dotnet/runtime/blob/main/THIRD-PARTY-NOTICES.TXT).
 
-### DocFX&emsp;<sub><sup>*c\#*&ensp;*html*&ensp;</sup></sub>
-- Author: .NET Foundation and contributors
-- Source: [dotnet/docfx](https://github.com/dotnet/docfx)
-- License: [MIT](#mit_dotnet)
-
-### .NET Runtime&emsp;<sub><sup>*c\#*&ensp;*c++*&ensp;*c*&ensp;</sup></sub>
-- Author: .NET Foundation and contributors
-- Source: [dotnet/runtime](https://github.com/dotnet/runtime)
-- License: [MIT](#mit_dotnet)
-
-For more information about this software, please see its [third-party notices](https://github.com/dotnet/runtime/blob/main/THIRD-PARTY-NOTICES.TXT).
-
 ### Microsoft Edge WebView2&emsp;<sub><sup>*c++*&ensp;</sup></sub>
 - Author: Microsoft Corporation
 - Source: [https://developer.microsoft.com/en-us/microsoft-edge/webview2](https://developer.microsoft.com/en-us/microsoft-edge/webview2)
 - License: [BSD 3-clause "New" or "Revised" license](#bsd-3-clause-microsoft)
+
+### Microsoft Windows API Codepack&emsp;<sub><sup>*c\#*&ensp;*c++*&ensp;*visual basic*&ensp;</sup></sub>
+- Author: Microsoft Corporation
+- Source: [Wagnerp/Windows-API-CodePack-NET](https://github.com/Wagnerp/Windows-API-CodePack-NET)
+- License: [MIT](#mit_windowsapicodepack)
+
+### Microsoft.Data.Sqlite&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
+- Author: .NET Foundation and contributors
+- Source: [dotnet/efcore](https://github.com/dotnet/efcore)
+- License: [MIT](#mit_dotnet)
 
 ### Visual Studio 2026 Image Library&emsp;<sub><sup>*png*&ensp;</sup></sub>
 - Author: Microsoft Corporation
@@ -163,20 +161,17 @@ For more information about this software, please see its [third-party notices](h
 
 See [here](https://www.microsoft.com/en-us/download/details.aspx?id=35825) for the resource included from the repository.
 
-### Microsoft.Data.Sqlite&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
-- Author: .NET Foundation and contributors
-- Source: [dotnet/efcore](https://github.com/dotnet/efcore)
-- License: [MIT](#mit_dotnet)
-
 ### Humanizer&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
 - Author: .NET Foundation and contributors
 - Source: [Humanizr/Humanizer](https://github.com/Humanizr/Humanizer)
 - License: [MIT](#mit_dotnet)
 
-### Microsoft Windows API Codepack&emsp;<sub><sup>*c\#*&ensp;*c++*&ensp;*visual basic*&ensp;</sup></sub>
-- Author: Microsoft Corporation
-- Source: [Wagnerp/Windows-API-CodePack-NET](https://github.com/Wagnerp/Windows-API-CodePack-NET)
-- License: [MIT](#mit_windowsapicodepack)
+### .NET Runtime&emsp;<sub><sup>*c\#*&ensp;*c++*&ensp;*c*&ensp;</sup></sub>
+- Author: .NET Foundation and contributors
+- Source: [dotnet/runtime](https://github.com/dotnet/runtime)
+- License: [MIT](#mit_dotnet)
+
+For more information about this software, please see its [third-party notices](https://github.com/dotnet/runtime/blob/main/THIRD-PARTY-NOTICES.TXT).
 
 ### CPA 006 Cheque in Middle ASAP Cheques&emsp;<sub><sup>*ini*&ensp;</sup></sub>
 - Author: Doug Ransom
