@@ -288,6 +288,15 @@
             "license": "visual-studio-image-library-eula_microsoft",
             "resource": "https://www.microsoft.com/en-us/download/details.aspx?id=35825",
             "index": "Microsoft Corporation"
+        },
+        {
+            "title": "Bootstrap",
+            "formats": [ "js", "scss", "css" ],
+            "source": "https://github.com/twbs/bootstrap",
+            "author": "The Bootstrap Authors",
+            "copyright": "Copyright (c) 2011-2026 The Bootstrap Authors",
+            "license": "mit_bootstrap",
+            "index": "Bootstrap"
         }
     ],
     "references": [

@@ -33,8 +33,8 @@ Licensed under the MIT License.
                 <title>
                     <xsl:value-of select="$CompanyName"/> - <xsl:value-of select="$ProductName"/>
                 </title>
-                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous"/>
-                <link href="index.css" rel="stylesheet" type="text/css"/>
+                <link href="styles/bootstrap.css" rel="stylesheet" />
+                <link href="styles/index.css" rel="stylesheet" type="text/css"/>
                 <link href="favicon.ico" rel="icon" type="image/x-icon"/>
             </head>
             <body>
@@ -70,8 +70,36 @@ Licensed under the MIT License.
                             </a>
                         </div>
                         <hr class="col-3 col-md-2 mb-5"/>
+                        <div class="row g-5 mb-5">
+                            <div class="col-md-4">
+                                <h2 class="text-body-emphasis">Prerequisities</h2>
+                                <p>
+                                    <xsl:value-of select="$BootstrapperSection/TR[1]/TD"/>
+                                </p>
+                                <ul class="list-unstyled ps-0">
+                                    <xsl:for-each select="$BootstrapperSection/TR/TD/UL/LI">
+                                        <li>
+                                            <a class="icon-link mb-1" href="#">
+                                                <svg class="bi" width="16" height="16">
+                                                    <use href="#arrow-right-circle"/>
+                                                </svg>
+                                                <xsl:value-of select="."/>
+                                            </a>
+                                        </li>
+                                    </xsl:for-each>
+                                </ul>
+                                <p>
+                                    <xsl:copy-of select="$BootstrapperSection/TR[3]/TD"/>
+                                </p>
+                                <a href="{$InstallerHref}"
+                                   class="btn btn-light btn-md px-4">Download installer</a>
+                            </div>
+                            <div class="col-md-8">
+                                <img src="images/capture-1.png" alt="Screenshot of the IshanBooks application with visual income statement, chart of accounts, and general journal." class="img-fluid" />
+                            </div>
+                        </div>
                         <div class="row g-5">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <h2 class="text-body-emphasis">Features</h2>
                                 <ul class="list-unstyled ps-0">
                                     <li>
@@ -98,30 +126,18 @@ Licensed under the MIT License.
                                             Write checks
                                         </a>
                                     </li>
+                                    <li>
+                                        <a class="icon-link mb-1" href="https://en.wikipedia.org/wiki/Check_register">
+                                            <svg class="bi" width="16" height="16">
+                                                <use href="#arrow-right-circle"/>
+                                            </svg>
+                                            Use register
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
-                            <div class="col-md-6">
-                                <h2 class="text-body-emphasis">Prerequisities</h2>
-                                <p>
-                                    <xsl:value-of select="$BootstrapperSection/TR[1]/TD"/>
-                                </p>
-                                <ul class="list-unstyled ps-0">
-                                    <xsl:for-each select="$BootstrapperSection/TR/TD/UL/LI">
-                                        <li>
-                                            <a class="icon-link mb-1" href="#">
-                                                <svg class="bi" width="16" height="16">
-                                                    <use href="#arrow-right-circle"/>
-                                                </svg>
-                                                <xsl:value-of select="."/>
-                                            </a>
-                                        </li>
-                                    </xsl:for-each>
-                                </ul>
-                                <p>
-                                    <xsl:copy-of select="$BootstrapperSection/TR[3]/TD"/>
-                                </p>
-                                <a href="{$InstallerHref}"
-                                   class="btn btn-light btn-md px-4">Download installer</a>
+                            <div class="col-md-8">
+                                <img src="images/capture-2.png" alt="Screenshot of the IshanBooks application with statement of financial condition (balance sheet), visual balance sheet, customized asset allocation chart, and new account form." class="img-fluid" />
                             </div>
                         </div>
                     </main>
