@@ -88,7 +88,7 @@ namespace Liber.Forms.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The account is not empty..
+        ///   Looks up a localized string similar to The account could not be deleted because it contains transactions..
         /// </summary>
         internal static string DeleteAccountText {
             get {

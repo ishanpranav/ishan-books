@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using Liber.Forms.Properties;
 using Microsoft.Win32;
@@ -36,7 +35,10 @@ internal static class SystemFeatures
     {
         get
         {
-            Version.TryParse("CLICKONCE_CURRENTVERSION", out Version? result);
+            if (!Version.TryParse("CLICKONCE_CURRENTVERSION", out Version? result))
+            {
+                result = null;
+            }
 
             return result;
         }
@@ -46,7 +48,10 @@ internal static class SystemFeatures
     {
         get
         {
-            Version.TryParse("CLICKONCE_UPDATEDVERSION", out Version? result);
+            if (!Version.TryParse("CLICKONCE_UPDATEDVERSION", out Version? result))
+            {
+                result = null;
+            }
 
             return result;
         }

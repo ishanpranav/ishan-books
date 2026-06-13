@@ -31,32 +31,32 @@ partial class CompanyForm
     private void InitializeComponent()
     {
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CompanyForm));
-        label1 = new System.Windows.Forms.Label();
-        nameTextBox = new System.Windows.Forms.TextBox();
-        cancelButton = new System.Windows.Forms.Button();
-        acceptButton = new System.Windows.Forms.Button();
-        _helpProvider = new System.Windows.Forms.HelpProvider();
-        passwordTextBox = new System.Windows.Forms.TextBox();
-        label3 = new System.Windows.Forms.Label();
-        _colorButton = new System.Windows.Forms.ColorButton();
-        label2 = new System.Windows.Forms.Label();
+        label1 = new Label();
+        nameTextBox = new TextBox();
+        cancelButton = new Button();
+        acceptButton = new Button();
+        _helpProvider = new HelpProvider();
+        passwordTextBox = new TextBox();
+        label3 = new Label();
+        _colorButton = new ColorButton();
+        label2 = new Label();
         equityAccountComboBox = new ComboBox();
-        label5 = new System.Windows.Forms.Label();
+        label5 = new Label();
         otherEquityAccountComboBox = new ComboBox();
-        closingAccountsGroupBox = new System.Windows.Forms.GroupBox();
-        label4 = new System.Windows.Forms.Label();
-        label6 = new System.Windows.Forms.Label();
-        groupBox1 = new System.Windows.Forms.GroupBox();
-        ytdRadioButton = new System.Windows.Forms.RadioButton();
-        customStartedDatePicker = new System.Windows.Forms.DateTimePicker();
-        customPostedDatePicker = new System.Windows.Forms.DateTimePicker();
-        customRadioButton = new System.Windows.Forms.RadioButton();
-        lastRadioButton = new System.Windows.Forms.RadioButton();
-        currentRadioButton = new System.Windows.Forms.RadioButton();
-        typeComboBox = new System.Windows.Forms.ComboBox();
-        fiscalYearStartedDatePicker = new System.Windows.Forms.DateTimePicker();
-        fiscalYearPostedDatePicker = new System.Windows.Forms.DateTimePicker();
-        label7 = new System.Windows.Forms.Label();
+        closingAccountsGroupBox = new GroupBox();
+        label4 = new Label();
+        label6 = new Label();
+        groupBox1 = new GroupBox();
+        ytdRadioButton = new RadioButton();
+        customStartedDatePicker = new DateTimePicker();
+        customPostedDatePicker = new DateTimePicker();
+        customRadioButton = new RadioButton();
+        lastRadioButton = new RadioButton();
+        currentRadioButton = new RadioButton();
+        typeComboBox = new ComboBox();
+        fiscalYearStartedDatePicker = new DateTimePicker();
+        fiscalYearPostedDatePicker = new DateTimePicker();
+        label7 = new Label();
         closingAccountsGroupBox.SuspendLayout();
         groupBox1.SuspendLayout();
         SuspendLayout();
@@ -64,12 +64,17 @@ partial class CompanyForm
         // label1
         // 
         resources.ApplyResources(label1, "label1");
+        _helpProvider.SetHelpKeyword(label1, resources.GetString("label1.HelpKeyword"));
+        _helpProvider.SetHelpNavigator(label1, (HelpNavigator)resources.GetObject("label1.HelpNavigator"));
+        _helpProvider.SetHelpString(label1, resources.GetString("label1.HelpString"));
         label1.Name = "label1";
         _helpProvider.SetShowHelp(label1, (bool)resources.GetObject("label1.ShowHelp"));
         // 
         // nameTextBox
         // 
         resources.ApplyResources(nameTextBox, "nameTextBox");
+        _helpProvider.SetHelpKeyword(nameTextBox, resources.GetString("nameTextBox.HelpKeyword"));
+        _helpProvider.SetHelpNavigator(nameTextBox, (HelpNavigator)resources.GetObject("nameTextBox.HelpNavigator"));
         _helpProvider.SetHelpString(nameTextBox, resources.GetString("nameTextBox.HelpString"));
         nameTextBox.Name = "nameTextBox";
         _helpProvider.SetShowHelp(nameTextBox, (bool)resources.GetObject("nameTextBox.ShowHelp"));
@@ -77,6 +82,8 @@ partial class CompanyForm
         // cancelButton
         // 
         resources.ApplyResources(cancelButton, "cancelButton");
+        _helpProvider.SetHelpKeyword(cancelButton, resources.GetString("cancelButton.HelpKeyword"));
+        _helpProvider.SetHelpNavigator(cancelButton, (HelpNavigator)resources.GetObject("cancelButton.HelpNavigator"));
         _helpProvider.SetHelpString(cancelButton, resources.GetString("cancelButton.HelpString"));
         cancelButton.Name = "cancelButton";
         _helpProvider.SetShowHelp(cancelButton, (bool)resources.GetObject("cancelButton.ShowHelp"));
@@ -86,15 +93,23 @@ partial class CompanyForm
         // acceptButton
         // 
         resources.ApplyResources(acceptButton, "acceptButton");
+        _helpProvider.SetHelpKeyword(acceptButton, resources.GetString("acceptButton.HelpKeyword"));
+        _helpProvider.SetHelpNavigator(acceptButton, (HelpNavigator)resources.GetObject("acceptButton.HelpNavigator"));
         _helpProvider.SetHelpString(acceptButton, resources.GetString("acceptButton.HelpString"));
         acceptButton.Name = "acceptButton";
         _helpProvider.SetShowHelp(acceptButton, (bool)resources.GetObject("acceptButton.ShowHelp"));
         acceptButton.UseVisualStyleBackColor = true;
         acceptButton.Click += OnAcceptButtonClick;
         // 
+        // _helpProvider
+        // 
+        resources.ApplyResources(_helpProvider, "_helpProvider");
+        // 
         // passwordTextBox
         // 
         resources.ApplyResources(passwordTextBox, "passwordTextBox");
+        _helpProvider.SetHelpKeyword(passwordTextBox, resources.GetString("passwordTextBox.HelpKeyword"));
+        _helpProvider.SetHelpNavigator(passwordTextBox, (HelpNavigator)resources.GetObject("passwordTextBox.HelpNavigator"));
         _helpProvider.SetHelpString(passwordTextBox, resources.GetString("passwordTextBox.HelpString"));
         passwordTextBox.Name = "passwordTextBox";
         _helpProvider.SetShowHelp(passwordTextBox, (bool)resources.GetObject("passwordTextBox.ShowHelp"));
@@ -103,12 +118,17 @@ partial class CompanyForm
         // label3
         // 
         resources.ApplyResources(label3, "label3");
+        _helpProvider.SetHelpKeyword(label3, resources.GetString("label3.HelpKeyword"));
+        _helpProvider.SetHelpNavigator(label3, (HelpNavigator)resources.GetObject("label3.HelpNavigator"));
+        _helpProvider.SetHelpString(label3, resources.GetString("label3.HelpString"));
         label3.Name = "label3";
         _helpProvider.SetShowHelp(label3, (bool)resources.GetObject("label3.ShowHelp"));
         // 
         // _colorButton
         // 
         resources.ApplyResources(_colorButton, "_colorButton");
+        _helpProvider.SetHelpKeyword(_colorButton, resources.GetString("_colorButton.HelpKeyword"));
+        _helpProvider.SetHelpNavigator(_colorButton, (HelpNavigator)resources.GetObject("_colorButton.HelpNavigator"));
         _helpProvider.SetHelpString(_colorButton, resources.GetString("_colorButton.HelpString"));
         _colorButton.Name = "_colorButton";
         _helpProvider.SetShowHelp(_colorButton, (bool)resources.GetObject("_colorButton.ShowHelp"));
@@ -117,14 +137,19 @@ partial class CompanyForm
         // label2
         // 
         resources.ApplyResources(label2, "label2");
+        _helpProvider.SetHelpKeyword(label2, resources.GetString("label2.HelpKeyword"));
+        _helpProvider.SetHelpNavigator(label2, (HelpNavigator)resources.GetObject("label2.HelpNavigator"));
+        _helpProvider.SetHelpString(label2, resources.GetString("label2.HelpString"));
         label2.Name = "label2";
         _helpProvider.SetShowHelp(label2, (bool)resources.GetObject("label2.ShowHelp"));
         // 
         // equityAccountComboBox
         // 
         resources.ApplyResources(equityAccountComboBox, "equityAccountComboBox");
-        equityAccountComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+        equityAccountComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
         equityAccountComboBox.FormattingEnabled = true;
+        _helpProvider.SetHelpKeyword(equityAccountComboBox, resources.GetString("equityAccountComboBox.HelpKeyword"));
+        _helpProvider.SetHelpNavigator(equityAccountComboBox, (HelpNavigator)resources.GetObject("equityAccountComboBox.HelpNavigator"));
         _helpProvider.SetHelpString(equityAccountComboBox, resources.GetString("equityAccountComboBox.HelpString"));
         equityAccountComboBox.Name = "equityAccountComboBox";
         _helpProvider.SetShowHelp(equityAccountComboBox, (bool)resources.GetObject("equityAccountComboBox.ShowHelp"));
@@ -132,14 +157,19 @@ partial class CompanyForm
         // label5
         // 
         resources.ApplyResources(label5, "label5");
+        _helpProvider.SetHelpKeyword(label5, resources.GetString("label5.HelpKeyword"));
+        _helpProvider.SetHelpNavigator(label5, (HelpNavigator)resources.GetObject("label5.HelpNavigator"));
+        _helpProvider.SetHelpString(label5, resources.GetString("label5.HelpString"));
         label5.Name = "label5";
         _helpProvider.SetShowHelp(label5, (bool)resources.GetObject("label5.ShowHelp"));
         // 
         // otherEquityAccountComboBox
         // 
         resources.ApplyResources(otherEquityAccountComboBox, "otherEquityAccountComboBox");
-        otherEquityAccountComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+        otherEquityAccountComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
         otherEquityAccountComboBox.FormattingEnabled = true;
+        _helpProvider.SetHelpKeyword(otherEquityAccountComboBox, resources.GetString("otherEquityAccountComboBox.HelpKeyword"));
+        _helpProvider.SetHelpNavigator(otherEquityAccountComboBox, (HelpNavigator)resources.GetObject("otherEquityAccountComboBox.HelpNavigator"));
         _helpProvider.SetHelpString(otherEquityAccountComboBox, resources.GetString("otherEquityAccountComboBox.HelpString"));
         otherEquityAccountComboBox.Name = "otherEquityAccountComboBox";
         _helpProvider.SetShowHelp(otherEquityAccountComboBox, (bool)resources.GetObject("otherEquityAccountComboBox.ShowHelp"));
@@ -151,6 +181,9 @@ partial class CompanyForm
         closingAccountsGroupBox.Controls.Add(otherEquityAccountComboBox);
         closingAccountsGroupBox.Controls.Add(label4);
         closingAccountsGroupBox.Controls.Add(equityAccountComboBox);
+        _helpProvider.SetHelpKeyword(closingAccountsGroupBox, resources.GetString("closingAccountsGroupBox.HelpKeyword"));
+        _helpProvider.SetHelpNavigator(closingAccountsGroupBox, (HelpNavigator)resources.GetObject("closingAccountsGroupBox.HelpNavigator"));
+        _helpProvider.SetHelpString(closingAccountsGroupBox, resources.GetString("closingAccountsGroupBox.HelpString"));
         closingAccountsGroupBox.Name = "closingAccountsGroupBox";
         _helpProvider.SetShowHelp(closingAccountsGroupBox, (bool)resources.GetObject("closingAccountsGroupBox.ShowHelp"));
         closingAccountsGroupBox.TabStop = false;
@@ -158,12 +191,18 @@ partial class CompanyForm
         // label4
         // 
         resources.ApplyResources(label4, "label4");
+        _helpProvider.SetHelpKeyword(label4, resources.GetString("label4.HelpKeyword"));
+        _helpProvider.SetHelpNavigator(label4, (HelpNavigator)resources.GetObject("label4.HelpNavigator"));
+        _helpProvider.SetHelpString(label4, resources.GetString("label4.HelpString"));
         label4.Name = "label4";
         _helpProvider.SetShowHelp(label4, (bool)resources.GetObject("label4.ShowHelp"));
         // 
         // label6
         // 
         resources.ApplyResources(label6, "label6");
+        _helpProvider.SetHelpKeyword(label6, resources.GetString("label6.HelpKeyword"));
+        _helpProvider.SetHelpNavigator(label6, (HelpNavigator)resources.GetObject("label6.HelpNavigator"));
+        _helpProvider.SetHelpString(label6, resources.GetString("label6.HelpString"));
         label6.Name = "label6";
         _helpProvider.SetShowHelp(label6, (bool)resources.GetObject("label6.ShowHelp"));
         // 
@@ -176,6 +215,9 @@ partial class CompanyForm
         groupBox1.Controls.Add(customRadioButton);
         groupBox1.Controls.Add(lastRadioButton);
         groupBox1.Controls.Add(currentRadioButton);
+        _helpProvider.SetHelpKeyword(groupBox1, resources.GetString("groupBox1.HelpKeyword"));
+        _helpProvider.SetHelpNavigator(groupBox1, (HelpNavigator)resources.GetObject("groupBox1.HelpNavigator"));
+        _helpProvider.SetHelpString(groupBox1, resources.GetString("groupBox1.HelpString"));
         groupBox1.Name = "groupBox1";
         _helpProvider.SetShowHelp(groupBox1, (bool)resources.GetObject("groupBox1.ShowHelp"));
         groupBox1.TabStop = false;
@@ -183,6 +225,9 @@ partial class CompanyForm
         // ytdRadioButton
         // 
         resources.ApplyResources(ytdRadioButton, "ytdRadioButton");
+        _helpProvider.SetHelpKeyword(ytdRadioButton, resources.GetString("ytdRadioButton.HelpKeyword"));
+        _helpProvider.SetHelpNavigator(ytdRadioButton, (HelpNavigator)resources.GetObject("ytdRadioButton.HelpNavigator"));
+        _helpProvider.SetHelpString(ytdRadioButton, resources.GetString("ytdRadioButton.HelpString"));
         ytdRadioButton.Name = "ytdRadioButton";
         _helpProvider.SetShowHelp(ytdRadioButton, (bool)resources.GetObject("ytdRadioButton.ShowHelp"));
         ytdRadioButton.TabStop = true;
@@ -190,23 +235,33 @@ partial class CompanyForm
         // 
         // customStartedDatePicker
         // 
-        customStartedDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
         resources.ApplyResources(customStartedDatePicker, "customStartedDatePicker");
+        customStartedDatePicker.Format = DateTimePickerFormat.Short;
+        _helpProvider.SetHelpKeyword(customStartedDatePicker, resources.GetString("customStartedDatePicker.HelpKeyword"));
+        _helpProvider.SetHelpNavigator(customStartedDatePicker, (HelpNavigator)resources.GetObject("customStartedDatePicker.HelpNavigator"));
+        _helpProvider.SetHelpString(customStartedDatePicker, resources.GetString("customStartedDatePicker.HelpString"));
         customStartedDatePicker.Name = "customStartedDatePicker";
         _helpProvider.SetShowHelp(customStartedDatePicker, (bool)resources.GetObject("customStartedDatePicker.ShowHelp"));
         customStartedDatePicker.ValueChanged += OnCustomStartedDatePickerValueChanged;
         // 
         // customPostedDatePicker
         // 
-        customPostedDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
         resources.ApplyResources(customPostedDatePicker, "customPostedDatePicker");
+        customPostedDatePicker.Format = DateTimePickerFormat.Short;
+        _helpProvider.SetHelpKeyword(customPostedDatePicker, resources.GetString("customPostedDatePicker.HelpKeyword"));
+        _helpProvider.SetHelpNavigator(customPostedDatePicker, (HelpNavigator)resources.GetObject("customPostedDatePicker.HelpNavigator"));
+        _helpProvider.SetHelpString(customPostedDatePicker, resources.GetString("customPostedDatePicker.HelpString"));
         customPostedDatePicker.Name = "customPostedDatePicker";
         _helpProvider.SetShowHelp(customPostedDatePicker, (bool)resources.GetObject("customPostedDatePicker.ShowHelp"));
         // 
         // customRadioButton
         // 
         resources.ApplyResources(customRadioButton, "customRadioButton");
+        _helpProvider.SetHelpKeyword(customRadioButton, resources.GetString("customRadioButton.HelpKeyword"));
+        _helpProvider.SetHelpNavigator(customRadioButton, (HelpNavigator)resources.GetObject("customRadioButton.HelpNavigator"));
+        _helpProvider.SetHelpString(customRadioButton, resources.GetString("customRadioButton.HelpString"));
         customRadioButton.Name = "customRadioButton";
+        _helpProvider.SetShowHelp(customRadioButton, (bool)resources.GetObject("customRadioButton.ShowHelp"));
         customRadioButton.TabStop = true;
         customRadioButton.UseVisualStyleBackColor = true;
         customRadioButton.CheckedChanged += OnCustomRadioButtonCheckedChanged;
@@ -214,23 +269,33 @@ partial class CompanyForm
         // lastRadioButton
         // 
         resources.ApplyResources(lastRadioButton, "lastRadioButton");
+        _helpProvider.SetHelpKeyword(lastRadioButton, resources.GetString("lastRadioButton.HelpKeyword"));
+        _helpProvider.SetHelpNavigator(lastRadioButton, (HelpNavigator)resources.GetObject("lastRadioButton.HelpNavigator"));
+        _helpProvider.SetHelpString(lastRadioButton, resources.GetString("lastRadioButton.HelpString"));
         lastRadioButton.Name = "lastRadioButton";
+        _helpProvider.SetShowHelp(lastRadioButton, (bool)resources.GetObject("lastRadioButton.ShowHelp"));
         lastRadioButton.TabStop = true;
         lastRadioButton.UseVisualStyleBackColor = true;
         // 
         // currentRadioButton
         // 
         resources.ApplyResources(currentRadioButton, "currentRadioButton");
+        _helpProvider.SetHelpKeyword(currentRadioButton, resources.GetString("currentRadioButton.HelpKeyword"));
+        _helpProvider.SetHelpNavigator(currentRadioButton, (HelpNavigator)resources.GetObject("currentRadioButton.HelpNavigator"));
+        _helpProvider.SetHelpString(currentRadioButton, resources.GetString("currentRadioButton.HelpString"));
         currentRadioButton.Name = "currentRadioButton";
+        _helpProvider.SetShowHelp(currentRadioButton, (bool)resources.GetObject("currentRadioButton.ShowHelp"));
         currentRadioButton.TabStop = true;
         currentRadioButton.UseVisualStyleBackColor = true;
         // 
         // typeComboBox
         // 
         resources.ApplyResources(typeComboBox, "typeComboBox");
-        typeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+        typeComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
         typeComboBox.FormattingEnabled = true;
         _helpProvider.SetHelpKeyword(typeComboBox, resources.GetString("typeComboBox.HelpKeyword"));
+        _helpProvider.SetHelpNavigator(typeComboBox, (HelpNavigator)resources.GetObject("typeComboBox.HelpNavigator"));
+        _helpProvider.SetHelpString(typeComboBox, resources.GetString("typeComboBox.HelpString"));
         typeComboBox.Name = "typeComboBox";
         _helpProvider.SetShowHelp(typeComboBox, (bool)resources.GetObject("typeComboBox.ShowHelp"));
         typeComboBox.Format += OnTypeComboBoxFormat;
@@ -238,7 +303,10 @@ partial class CompanyForm
         // fiscalYearStartedDatePicker
         // 
         resources.ApplyResources(fiscalYearStartedDatePicker, "fiscalYearStartedDatePicker");
-        fiscalYearStartedDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+        fiscalYearStartedDatePicker.Format = DateTimePickerFormat.Custom;
+        _helpProvider.SetHelpKeyword(fiscalYearStartedDatePicker, resources.GetString("fiscalYearStartedDatePicker.HelpKeyword"));
+        _helpProvider.SetHelpNavigator(fiscalYearStartedDatePicker, (HelpNavigator)resources.GetObject("fiscalYearStartedDatePicker.HelpNavigator"));
+        _helpProvider.SetHelpString(fiscalYearStartedDatePicker, resources.GetString("fiscalYearStartedDatePicker.HelpString"));
         fiscalYearStartedDatePicker.Name = "fiscalYearStartedDatePicker";
         _helpProvider.SetShowHelp(fiscalYearStartedDatePicker, (bool)resources.GetObject("fiscalYearStartedDatePicker.ShowHelp"));
         fiscalYearStartedDatePicker.ValueChanged += OnFiscalYearStartedDatePickerValueChanged;
@@ -246,13 +314,19 @@ partial class CompanyForm
         // fiscalYearPostedDatePicker
         // 
         resources.ApplyResources(fiscalYearPostedDatePicker, "fiscalYearPostedDatePicker");
-        fiscalYearPostedDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+        fiscalYearPostedDatePicker.Format = DateTimePickerFormat.Custom;
+        _helpProvider.SetHelpKeyword(fiscalYearPostedDatePicker, resources.GetString("fiscalYearPostedDatePicker.HelpKeyword"));
+        _helpProvider.SetHelpNavigator(fiscalYearPostedDatePicker, (HelpNavigator)resources.GetObject("fiscalYearPostedDatePicker.HelpNavigator"));
+        _helpProvider.SetHelpString(fiscalYearPostedDatePicker, resources.GetString("fiscalYearPostedDatePicker.HelpString"));
         fiscalYearPostedDatePicker.Name = "fiscalYearPostedDatePicker";
         _helpProvider.SetShowHelp(fiscalYearPostedDatePicker, (bool)resources.GetObject("fiscalYearPostedDatePicker.ShowHelp"));
         // 
         // label7
         // 
         resources.ApplyResources(label7, "label7");
+        _helpProvider.SetHelpKeyword(label7, resources.GetString("label7.HelpKeyword"));
+        _helpProvider.SetHelpNavigator(label7, (HelpNavigator)resources.GetObject("label7.HelpNavigator"));
+        _helpProvider.SetHelpString(label7, resources.GetString("label7.HelpString"));
         label7.Name = "label7";
         _helpProvider.SetShowHelp(label7, (bool)resources.GetObject("label7.ShowHelp"));
         // 
@@ -260,7 +334,7 @@ partial class CompanyForm
         // 
         AcceptButton = acceptButton;
         resources.ApplyResources(this, "$this");
-        AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+        AutoScaleMode = AutoScaleMode.Font;
         CancelButton = cancelButton;
         Controls.Add(label7);
         Controls.Add(fiscalYearStartedDatePicker);
@@ -277,6 +351,9 @@ partial class CompanyForm
         Controls.Add(cancelButton);
         Controls.Add(nameTextBox);
         Controls.Add(label1);
+        _helpProvider.SetHelpKeyword(this, resources.GetString("$this.HelpKeyword"));
+        _helpProvider.SetHelpNavigator(this, (HelpNavigator)resources.GetObject("$this.HelpNavigator"));
+        _helpProvider.SetHelpString(this, resources.GetString("$this.HelpString"));
         MaximizeBox = false;
         Name = "CompanyForm";
         _helpProvider.SetShowHelp(this, (bool)resources.GetObject("$this.ShowHelp"));

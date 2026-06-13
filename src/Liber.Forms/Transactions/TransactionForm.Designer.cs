@@ -62,132 +62,148 @@ namespace Liber.Forms.Transactions
             // 
             // postedDateTimePicker
             // 
-            postedDateTimePicker.Format = DateTimePickerFormat.Short;
-            _helpProvider.SetHelpString(postedDateTimePicker, resources.GetString("postedDateTimePicker.HelpString"));
             resources.ApplyResources(postedDateTimePicker, "postedDateTimePicker");
+            postedDateTimePicker.Format = DateTimePickerFormat.Short;
+            _helpProvider.SetHelpKeyword(postedDateTimePicker, resources.GetString("postedDateTimePicker.HelpKeyword"));
+            _helpProvider.SetHelpNavigator(postedDateTimePicker, (HelpNavigator)resources.GetObject("postedDateTimePicker.HelpNavigator"));
+            _helpProvider.SetHelpString(postedDateTimePicker, resources.GetString("postedDateTimePicker.HelpString"));
             postedDateTimePicker.Name = "postedDateTimePicker";
             _helpProvider.SetShowHelp(postedDateTimePicker, (bool)resources.GetObject("postedDateTimePicker.ShowHelp"));
             // 
             // label1
             // 
             resources.ApplyResources(label1, "label1");
+            _helpProvider.SetHelpKeyword(label1, resources.GetString("label1.HelpKeyword"));
+            _helpProvider.SetHelpNavigator(label1, (HelpNavigator)resources.GetObject("label1.HelpNavigator"));
+            _helpProvider.SetHelpString(label1, resources.GetString("label1.HelpString"));
             label1.Name = "label1";
             _helpProvider.SetShowHelp(label1, (bool)resources.GetObject("label1.ShowHelp"));
             // 
             // label2
             // 
             resources.ApplyResources(label2, "label2");
+            _helpProvider.SetHelpKeyword(label2, resources.GetString("label2.HelpKeyword"));
+            _helpProvider.SetHelpNavigator(label2, (HelpNavigator)resources.GetObject("label2.HelpNavigator"));
+            _helpProvider.SetHelpString(label2, resources.GetString("label2.HelpString"));
             label2.Name = "label2";
             _helpProvider.SetShowHelp(label2, (bool)resources.GetObject("label2.ShowHelp"));
             // 
             // numberNumericUpDown
             // 
-            _helpProvider.SetHelpString(numberNumericUpDown, resources.GetString("numberNumericUpDown.HelpString"));
             resources.ApplyResources(numberNumericUpDown, "numberNumericUpDown");
+            _helpProvider.SetHelpKeyword(numberNumericUpDown, resources.GetString("numberNumericUpDown.HelpKeyword"));
+            _helpProvider.SetHelpNavigator(numberNumericUpDown, (HelpNavigator)resources.GetObject("numberNumericUpDown.HelpNavigator"));
+            _helpProvider.SetHelpString(numberNumericUpDown, resources.GetString("numberNumericUpDown.HelpString"));
             numberNumericUpDown.Name = "numberNumericUpDown";
             _helpProvider.SetShowHelp(numberNumericUpDown, (bool)resources.GetObject("numberNumericUpDown.ShowHelp"));
             numberNumericUpDown.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // toolStrip1
             // 
-            toolStrip1.Items.AddRange(new ToolStripItem[] { closeToolStripButton, newToolStripButton, saveToolStripButton, saveCloseToolStripButton, toolStripSeparator3, copyToolStripButton, removeToolStripButton, toolStripSeparator1, firstToolStripButton, previousToolStripButton, nextToolStripButton, lastToolStripButton });
             resources.ApplyResources(toolStrip1, "toolStrip1");
+            _helpProvider.SetHelpKeyword(toolStrip1, resources.GetString("toolStrip1.HelpKeyword"));
+            _helpProvider.SetHelpNavigator(toolStrip1, (HelpNavigator)resources.GetObject("toolStrip1.HelpNavigator"));
+            _helpProvider.SetHelpString(toolStrip1, resources.GetString("toolStrip1.HelpString"));
+            toolStrip1.Items.AddRange(new ToolStripItem[] { closeToolStripButton, newToolStripButton, saveToolStripButton, saveCloseToolStripButton, toolStripSeparator3, copyToolStripButton, removeToolStripButton, toolStripSeparator1, firstToolStripButton, previousToolStripButton, nextToolStripButton, lastToolStripButton });
             toolStrip1.Name = "toolStrip1";
             _helpProvider.SetShowHelp(toolStrip1, (bool)resources.GetObject("toolStrip1.ShowHelp"));
             // 
             // closeToolStripButton
             // 
+            resources.ApplyResources(closeToolStripButton, "closeToolStripButton");
             closeToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
             closeToolStripButton.Image = VisualStudioImageLibrary.CloseLog;
-            resources.ApplyResources(closeToolStripButton, "closeToolStripButton");
             closeToolStripButton.Name = "closeToolStripButton";
             closeToolStripButton.Click += OnCloseToolStripButtonClick;
             // 
             // newToolStripButton
             // 
+            resources.ApplyResources(newToolStripButton, "newToolStripButton");
             newToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
             newToolStripButton.Image = VisualStudioImageLibrary.NewLog;
-            resources.ApplyResources(newToolStripButton, "newToolStripButton");
             newToolStripButton.Name = "newToolStripButton";
             newToolStripButton.Click += OnNewToolStripButtonClick;
             // 
             // saveToolStripButton
             // 
+            resources.ApplyResources(saveToolStripButton, "saveToolStripButton");
             saveToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
             saveToolStripButton.Image = VisualStudioImageLibrary.Save;
-            resources.ApplyResources(saveToolStripButton, "saveToolStripButton");
             saveToolStripButton.Name = "saveToolStripButton";
             saveToolStripButton.Click += OnSaveToolStripButtonClick;
             // 
             // saveCloseToolStripButton
             // 
+            resources.ApplyResources(saveCloseToolStripButton, "saveCloseToolStripButton");
             saveCloseToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
             saveCloseToolStripButton.Image = VisualStudioImageLibrary.SaveAndClose;
-            resources.ApplyResources(saveCloseToolStripButton, "saveCloseToolStripButton");
             saveCloseToolStripButton.Name = "saveCloseToolStripButton";
             saveCloseToolStripButton.Click += OnAcceptButtonClick;
             // 
             // toolStripSeparator3
             // 
-            toolStripSeparator3.Name = "toolStripSeparator3";
             resources.ApplyResources(toolStripSeparator3, "toolStripSeparator3");
+            toolStripSeparator3.Name = "toolStripSeparator3";
             // 
             // copyToolStripButton
             // 
+            resources.ApplyResources(copyToolStripButton, "copyToolStripButton");
             copyToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
             copyToolStripButton.Image = VisualStudioImageLibrary.Duplicate;
-            resources.ApplyResources(copyToolStripButton, "copyToolStripButton");
             copyToolStripButton.Name = "copyToolStripButton";
             copyToolStripButton.Click += OnCopyToolStripButtonClick;
             // 
             // removeToolStripButton
             // 
+            resources.ApplyResources(removeToolStripButton, "removeToolStripButton");
             removeToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
             removeToolStripButton.Image = VisualStudioImageLibrary.Delete;
-            resources.ApplyResources(removeToolStripButton, "removeToolStripButton");
             removeToolStripButton.Name = "removeToolStripButton";
             removeToolStripButton.Click += OnRemoveToolStripButton;
             // 
             // toolStripSeparator1
             // 
-            toolStripSeparator1.Name = "toolStripSeparator1";
             resources.ApplyResources(toolStripSeparator1, "toolStripSeparator1");
+            toolStripSeparator1.Name = "toolStripSeparator1";
             // 
             // firstToolStripButton
             // 
+            resources.ApplyResources(firstToolStripButton, "firstToolStripButton");
             firstToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
             firstToolStripButton.Image = VisualStudioImageLibrary.GoToTop;
-            resources.ApplyResources(firstToolStripButton, "firstToolStripButton");
             firstToolStripButton.Name = "firstToolStripButton";
             firstToolStripButton.Click += OnFirstButtonClick;
             // 
             // previousToolStripButton
             // 
+            resources.ApplyResources(previousToolStripButton, "previousToolStripButton");
             previousToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
             previousToolStripButton.Image = VisualStudioImageLibrary.GoToPrevious;
-            resources.ApplyResources(previousToolStripButton, "previousToolStripButton");
             previousToolStripButton.Name = "previousToolStripButton";
             previousToolStripButton.Click += OnPreviousButtonClick;
             // 
             // nextToolStripButton
             // 
+            resources.ApplyResources(nextToolStripButton, "nextToolStripButton");
             nextToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
             nextToolStripButton.Image = VisualStudioImageLibrary.GoToNext;
-            resources.ApplyResources(nextToolStripButton, "nextToolStripButton");
             nextToolStripButton.Name = "nextToolStripButton";
             nextToolStripButton.Click += OnNextButtonClick;
             // 
             // lastToolStripButton
             // 
+            resources.ApplyResources(lastToolStripButton, "lastToolStripButton");
             lastToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
             lastToolStripButton.Image = VisualStudioImageLibrary.GoToBottom;
-            resources.ApplyResources(lastToolStripButton, "lastToolStripButton");
             lastToolStripButton.Name = "lastToolStripButton";
             lastToolStripButton.Click += OnLastButtonClick;
             // 
             // cancelButton
             // 
             resources.ApplyResources(cancelButton, "cancelButton");
+            _helpProvider.SetHelpKeyword(cancelButton, resources.GetString("cancelButton.HelpKeyword"));
+            _helpProvider.SetHelpNavigator(cancelButton, (HelpNavigator)resources.GetObject("cancelButton.HelpNavigator"));
+            _helpProvider.SetHelpString(cancelButton, resources.GetString("cancelButton.HelpString"));
             cancelButton.Name = "cancelButton";
             _helpProvider.SetShowHelp(cancelButton, (bool)resources.GetObject("cancelButton.ShowHelp"));
             cancelButton.UseVisualStyleBackColor = true;
@@ -196,6 +212,9 @@ namespace Liber.Forms.Transactions
             // applyButton
             // 
             resources.ApplyResources(applyButton, "applyButton");
+            _helpProvider.SetHelpKeyword(applyButton, resources.GetString("applyButton.HelpKeyword"));
+            _helpProvider.SetHelpNavigator(applyButton, (HelpNavigator)resources.GetObject("applyButton.HelpNavigator"));
+            _helpProvider.SetHelpString(applyButton, resources.GetString("applyButton.HelpString"));
             applyButton.Name = "applyButton";
             _helpProvider.SetShowHelp(applyButton, (bool)resources.GetObject("applyButton.ShowHelp"));
             applyButton.UseVisualStyleBackColor = true;
@@ -204,6 +223,9 @@ namespace Liber.Forms.Transactions
             // acceptButton
             // 
             resources.ApplyResources(acceptButton, "acceptButton");
+            _helpProvider.SetHelpKeyword(acceptButton, resources.GetString("acceptButton.HelpKeyword"));
+            _helpProvider.SetHelpNavigator(acceptButton, (HelpNavigator)resources.GetObject("acceptButton.HelpNavigator"));
+            _helpProvider.SetHelpString(acceptButton, resources.GetString("acceptButton.HelpString"));
             acceptButton.Name = "acceptButton";
             _helpProvider.SetShowHelp(acceptButton, (bool)resources.GetObject("acceptButton.ShowHelp"));
             acceptButton.UseVisualStyleBackColor = true;
@@ -211,12 +233,12 @@ namespace Liber.Forms.Transactions
             // 
             // _dataGridView
             // 
+            resources.ApplyResources(_dataGridView, "_dataGridView");
             _dataGridView.AllowUserToOrderColumns = true;
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(33, 37, 41);
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
             _dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            resources.ApplyResources(_dataGridView, "_dataGridView");
             _dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             _dataGridView.BackgroundColor = System.Drawing.Color.FromArgb(248, 249, 250);
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -238,6 +260,9 @@ namespace Liber.Forms.Transactions
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             _dataGridView.DefaultCellStyle = dataGridViewCellStyle3;
             _dataGridView.GridColor = System.Drawing.Color.FromArgb(33, 37, 41);
+            _helpProvider.SetHelpKeyword(_dataGridView, resources.GetString("_dataGridView.HelpKeyword"));
+            _helpProvider.SetHelpNavigator(_dataGridView, (HelpNavigator)resources.GetObject("_dataGridView.HelpNavigator"));
+            _helpProvider.SetHelpString(_dataGridView, resources.GetString("_dataGridView.HelpString"));
             _dataGridView.MultiSelect = false;
             _dataGridView.Name = "_dataGridView";
             _dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -269,6 +294,9 @@ namespace Liber.Forms.Transactions
             // previousButton
             // 
             resources.ApplyResources(previousButton, "previousButton");
+            _helpProvider.SetHelpKeyword(previousButton, resources.GetString("previousButton.HelpKeyword"));
+            _helpProvider.SetHelpNavigator(previousButton, (HelpNavigator)resources.GetObject("previousButton.HelpNavigator"));
+            _helpProvider.SetHelpString(previousButton, resources.GetString("previousButton.HelpString"));
             previousButton.Name = "previousButton";
             _helpProvider.SetShowHelp(previousButton, (bool)resources.GetObject("previousButton.ShowHelp"));
             previousButton.UseVisualStyleBackColor = true;
@@ -277,6 +305,9 @@ namespace Liber.Forms.Transactions
             // nextButton
             // 
             resources.ApplyResources(nextButton, "nextButton");
+            _helpProvider.SetHelpKeyword(nextButton, resources.GetString("nextButton.HelpKeyword"));
+            _helpProvider.SetHelpNavigator(nextButton, (HelpNavigator)resources.GetObject("nextButton.HelpNavigator"));
+            _helpProvider.SetHelpString(nextButton, resources.GetString("nextButton.HelpString"));
             nextButton.Name = "nextButton";
             _helpProvider.SetShowHelp(nextButton, (bool)resources.GetObject("nextButton.ShowHelp"));
             nextButton.UseVisualStyleBackColor = true;
@@ -285,33 +316,50 @@ namespace Liber.Forms.Transactions
             // label3
             // 
             resources.ApplyResources(label3, "label3");
+            _helpProvider.SetHelpKeyword(label3, resources.GetString("label3.HelpKeyword"));
+            _helpProvider.SetHelpNavigator(label3, (HelpNavigator)resources.GetObject("label3.HelpNavigator"));
+            _helpProvider.SetHelpString(label3, resources.GetString("label3.HelpString"));
             label3.Name = "label3";
             _helpProvider.SetShowHelp(label3, (bool)resources.GetObject("label3.ShowHelp"));
             // 
             // label4
             // 
             resources.ApplyResources(label4, "label4");
+            _helpProvider.SetHelpKeyword(label4, resources.GetString("label4.HelpKeyword"));
+            _helpProvider.SetHelpNavigator(label4, (HelpNavigator)resources.GetObject("label4.HelpNavigator"));
+            _helpProvider.SetHelpString(label4, resources.GetString("label4.HelpString"));
             label4.Name = "label4";
             _helpProvider.SetShowHelp(label4, (bool)resources.GetObject("label4.ShowHelp"));
             // 
             // nameComboBox
             // 
-            nameComboBox.FormattingEnabled = true;
-            _helpProvider.SetHelpString(nameComboBox, resources.GetString("nameComboBox.HelpString"));
             resources.ApplyResources(nameComboBox, "nameComboBox");
+            nameComboBox.FormattingEnabled = true;
+            _helpProvider.SetHelpKeyword(nameComboBox, resources.GetString("nameComboBox.HelpKeyword"));
+            _helpProvider.SetHelpNavigator(nameComboBox, (HelpNavigator)resources.GetObject("nameComboBox.HelpNavigator"));
+            _helpProvider.SetHelpString(nameComboBox, resources.GetString("nameComboBox.HelpString"));
             nameComboBox.Name = "nameComboBox";
             _helpProvider.SetShowHelp(nameComboBox, (bool)resources.GetObject("nameComboBox.ShowHelp"));
             // 
             // memoTextBox
             // 
             resources.ApplyResources(memoTextBox, "memoTextBox");
+            _helpProvider.SetHelpKeyword(memoTextBox, resources.GetString("memoTextBox.HelpKeyword"));
+            _helpProvider.SetHelpNavigator(memoTextBox, (HelpNavigator)resources.GetObject("memoTextBox.HelpNavigator"));
             _helpProvider.SetHelpString(memoTextBox, resources.GetString("memoTextBox.HelpString"));
             memoTextBox.Name = "memoTextBox";
             _helpProvider.SetShowHelp(memoTextBox, (bool)resources.GetObject("memoTextBox.ShowHelp"));
             // 
+            // _helpProvider
+            // 
+            resources.ApplyResources(_helpProvider, "_helpProvider");
+            // 
             // lastButton
             // 
             resources.ApplyResources(lastButton, "lastButton");
+            _helpProvider.SetHelpKeyword(lastButton, resources.GetString("lastButton.HelpKeyword"));
+            _helpProvider.SetHelpNavigator(lastButton, (HelpNavigator)resources.GetObject("lastButton.HelpNavigator"));
+            _helpProvider.SetHelpString(lastButton, resources.GetString("lastButton.HelpString"));
             lastButton.Name = "lastButton";
             _helpProvider.SetShowHelp(lastButton, (bool)resources.GetObject("lastButton.ShowHelp"));
             lastButton.UseVisualStyleBackColor = true;
@@ -320,6 +368,9 @@ namespace Liber.Forms.Transactions
             // firstButton
             // 
             resources.ApplyResources(firstButton, "firstButton");
+            _helpProvider.SetHelpKeyword(firstButton, resources.GetString("firstButton.HelpKeyword"));
+            _helpProvider.SetHelpNavigator(firstButton, (HelpNavigator)resources.GetObject("firstButton.HelpNavigator"));
+            _helpProvider.SetHelpString(firstButton, resources.GetString("firstButton.HelpString"));
             firstButton.Name = "firstButton";
             _helpProvider.SetShowHelp(firstButton, (bool)resources.GetObject("firstButton.ShowHelp"));
             firstButton.UseVisualStyleBackColor = true;
@@ -347,6 +398,9 @@ namespace Liber.Forms.Transactions
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(postedDateTimePicker);
+            _helpProvider.SetHelpKeyword(this, resources.GetString("$this.HelpKeyword"));
+            _helpProvider.SetHelpNavigator(this, (HelpNavigator)resources.GetObject("$this.HelpNavigator"));
+            _helpProvider.SetHelpString(this, resources.GetString("$this.HelpString"));
             Name = "TransactionForm";
             _helpProvider.SetShowHelp(this, (bool)resources.GetObject("$this.ShowHelp"));
             ((System.ComponentModel.ISupportInitialize)numberNumericUpDown).EndInit();

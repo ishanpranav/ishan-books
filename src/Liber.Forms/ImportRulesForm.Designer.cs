@@ -30,9 +30,9 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ImportRulesForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             acceptButton = new System.Windows.Forms.Button();
             cancelButton = new System.Windows.Forms.Button();
             _helpProvider = new System.Windows.Forms.HelpProvider();
@@ -53,7 +53,12 @@
             // acceptButton
             // 
             resources.ApplyResources(acceptButton, "acceptButton");
+            _errorProvider.SetError(acceptButton, resources.GetString("acceptButton.Error"));
+            _helpProvider.SetHelpKeyword(acceptButton, resources.GetString("acceptButton.HelpKeyword"));
+            _helpProvider.SetHelpNavigator(acceptButton, (System.Windows.Forms.HelpNavigator)resources.GetObject("acceptButton.HelpNavigator"));
             _helpProvider.SetHelpString(acceptButton, resources.GetString("acceptButton.HelpString"));
+            _errorProvider.SetIconAlignment(acceptButton, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("acceptButton.IconAlignment"));
+            _errorProvider.SetIconPadding(acceptButton, (int)resources.GetObject("acceptButton.IconPadding"));
             acceptButton.Name = "acceptButton";
             _helpProvider.SetShowHelp(acceptButton, (bool)resources.GetObject("acceptButton.ShowHelp"));
             acceptButton.UseVisualStyleBackColor = true;
@@ -62,16 +67,30 @@
             // cancelButton
             // 
             resources.ApplyResources(cancelButton, "cancelButton");
+            _errorProvider.SetError(cancelButton, resources.GetString("cancelButton.Error"));
+            _helpProvider.SetHelpKeyword(cancelButton, resources.GetString("cancelButton.HelpKeyword"));
+            _helpProvider.SetHelpNavigator(cancelButton, (System.Windows.Forms.HelpNavigator)resources.GetObject("cancelButton.HelpNavigator"));
             _helpProvider.SetHelpString(cancelButton, resources.GetString("cancelButton.HelpString"));
+            _errorProvider.SetIconAlignment(cancelButton, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("cancelButton.IconAlignment"));
+            _errorProvider.SetIconPadding(cancelButton, (int)resources.GetObject("cancelButton.IconPadding"));
             cancelButton.Name = "cancelButton";
             _helpProvider.SetShowHelp(cancelButton, (bool)resources.GetObject("cancelButton.ShowHelp"));
             cancelButton.UseVisualStyleBackColor = true;
             cancelButton.Click += OnCancelButtonClick;
             // 
+            // _helpProvider
+            // 
+            resources.ApplyResources(_helpProvider, "_helpProvider");
+            // 
             // resetButton
             // 
             resources.ApplyResources(resetButton, "resetButton");
+            _errorProvider.SetError(resetButton, resources.GetString("resetButton.Error"));
+            _helpProvider.SetHelpKeyword(resetButton, resources.GetString("resetButton.HelpKeyword"));
+            _helpProvider.SetHelpNavigator(resetButton, (System.Windows.Forms.HelpNavigator)resources.GetObject("resetButton.HelpNavigator"));
             _helpProvider.SetHelpString(resetButton, resources.GetString("resetButton.HelpString"));
+            _errorProvider.SetIconAlignment(resetButton, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("resetButton.IconAlignment"));
+            _errorProvider.SetIconPadding(resetButton, (int)resources.GetObject("resetButton.IconPadding"));
             resetButton.Name = "resetButton";
             _helpProvider.SetShowHelp(resetButton, (bool)resources.GetObject("resetButton.ShowHelp"));
             resetButton.UseVisualStyleBackColor = true;
@@ -79,32 +98,38 @@
             // 
             // importRulesDataGridView
             // 
+            resources.ApplyResources(importRulesDataGridView, "importRulesDataGridView");
             importRulesDataGridView.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(242, 242, 242);
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
-            importRulesDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(242, 242, 242);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            importRulesDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             importRulesDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             importRulesDataGridView.BackgroundColor = System.Drawing.Color.FromArgb(248, 249, 250);
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            importRulesDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            importRulesDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             importRulesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            importRulesDataGridView.DefaultCellStyle = dataGridViewCellStyle6;
-            resources.ApplyResources(importRulesDataGridView, "importRulesDataGridView");
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            importRulesDataGridView.DefaultCellStyle = dataGridViewCellStyle3;
+            _errorProvider.SetError(importRulesDataGridView, resources.GetString("importRulesDataGridView.Error"));
             importRulesDataGridView.GridColor = System.Drawing.Color.FromArgb(33, 37, 41);
+            _helpProvider.SetHelpKeyword(importRulesDataGridView, resources.GetString("importRulesDataGridView.HelpKeyword"));
+            _helpProvider.SetHelpNavigator(importRulesDataGridView, (System.Windows.Forms.HelpNavigator)resources.GetObject("importRulesDataGridView.HelpNavigator"));
+            _helpProvider.SetHelpString(importRulesDataGridView, resources.GetString("importRulesDataGridView.HelpString"));
+            _errorProvider.SetIconAlignment(importRulesDataGridView, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("importRulesDataGridView.IconAlignment"));
+            _errorProvider.SetIconPadding(importRulesDataGridView, (int)resources.GetObject("importRulesDataGridView.IconPadding"));
             importRulesDataGridView.Name = "importRulesDataGridView";
             // 
             // _tabControl
@@ -112,6 +137,12 @@
             resources.ApplyResources(_tabControl, "_tabControl");
             _tabControl.Controls.Add(editorTabPage);
             _tabControl.Controls.Add(jsonTabPage);
+            _errorProvider.SetError(_tabControl, resources.GetString("_tabControl.Error"));
+            _helpProvider.SetHelpKeyword(_tabControl, resources.GetString("_tabControl.HelpKeyword"));
+            _helpProvider.SetHelpNavigator(_tabControl, (System.Windows.Forms.HelpNavigator)resources.GetObject("_tabControl.HelpNavigator"));
+            _helpProvider.SetHelpString(_tabControl, resources.GetString("_tabControl.HelpString"));
+            _errorProvider.SetIconAlignment(_tabControl, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("_tabControl.IconAlignment"));
+            _errorProvider.SetIconPadding(_tabControl, (int)resources.GetObject("_tabControl.IconPadding"));
             _tabControl.Name = "_tabControl";
             _tabControl.SelectedIndex = 0;
             _tabControl.SelectedIndexChanged += OnTabControlSelectedIndexChanged;
@@ -119,15 +150,27 @@
             // 
             // editorTabPage
             // 
-            editorTabPage.Controls.Add(importRulesDataGridView);
             resources.ApplyResources(editorTabPage, "editorTabPage");
+            editorTabPage.Controls.Add(importRulesDataGridView);
+            _errorProvider.SetError(editorTabPage, resources.GetString("editorTabPage.Error"));
+            _helpProvider.SetHelpKeyword(editorTabPage, resources.GetString("editorTabPage.HelpKeyword"));
+            _helpProvider.SetHelpNavigator(editorTabPage, (System.Windows.Forms.HelpNavigator)resources.GetObject("editorTabPage.HelpNavigator"));
+            _helpProvider.SetHelpString(editorTabPage, resources.GetString("editorTabPage.HelpString"));
+            _errorProvider.SetIconAlignment(editorTabPage, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("editorTabPage.IconAlignment"));
+            _errorProvider.SetIconPadding(editorTabPage, (int)resources.GetObject("editorTabPage.IconPadding"));
             editorTabPage.Name = "editorTabPage";
             editorTabPage.UseVisualStyleBackColor = true;
             // 
             // jsonTabPage
             // 
-            jsonTabPage.Controls.Add(_textBox);
             resources.ApplyResources(jsonTabPage, "jsonTabPage");
+            jsonTabPage.Controls.Add(_textBox);
+            _errorProvider.SetError(jsonTabPage, resources.GetString("jsonTabPage.Error"));
+            _helpProvider.SetHelpKeyword(jsonTabPage, resources.GetString("jsonTabPage.HelpKeyword"));
+            _helpProvider.SetHelpNavigator(jsonTabPage, (System.Windows.Forms.HelpNavigator)resources.GetObject("jsonTabPage.HelpNavigator"));
+            _helpProvider.SetHelpString(jsonTabPage, resources.GetString("jsonTabPage.HelpString"));
+            _errorProvider.SetIconAlignment(jsonTabPage, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("jsonTabPage.IconAlignment"));
+            _errorProvider.SetIconPadding(jsonTabPage, (int)resources.GetObject("jsonTabPage.IconPadding"));
             jsonTabPage.Name = "jsonTabPage";
             jsonTabPage.UseVisualStyleBackColor = true;
             // 
@@ -136,11 +179,18 @@
             _textBox.AcceptsReturn = true;
             _textBox.AcceptsTab = true;
             resources.ApplyResources(_textBox, "_textBox");
+            _errorProvider.SetError(_textBox, resources.GetString("_textBox.Error"));
+            _helpProvider.SetHelpKeyword(_textBox, resources.GetString("_textBox.HelpKeyword"));
+            _helpProvider.SetHelpNavigator(_textBox, (System.Windows.Forms.HelpNavigator)resources.GetObject("_textBox.HelpNavigator"));
+            _helpProvider.SetHelpString(_textBox, resources.GetString("_textBox.HelpString"));
+            _errorProvider.SetIconAlignment(_textBox, (System.Windows.Forms.ErrorIconAlignment)resources.GetObject("_textBox.IconAlignment"));
+            _errorProvider.SetIconPadding(_textBox, (int)resources.GetObject("_textBox.IconPadding"));
             _textBox.Name = "_textBox";
             // 
             // _errorProvider
             // 
             _errorProvider.ContainerControl = this;
+            resources.ApplyResources(_errorProvider, "_errorProvider");
             // 
             // ImportRulesForm
             // 
@@ -152,6 +202,9 @@
             Controls.Add(resetButton);
             Controls.Add(acceptButton);
             Controls.Add(cancelButton);
+            _helpProvider.SetHelpKeyword(this, resources.GetString("$this.HelpKeyword"));
+            _helpProvider.SetHelpNavigator(this, (System.Windows.Forms.HelpNavigator)resources.GetObject("$this.HelpNavigator"));
+            _helpProvider.SetHelpString(this, resources.GetString("$this.HelpString"));
             Name = "ImportRulesForm";
             _helpProvider.SetShowHelp(this, (bool)resources.GetObject("$this.ShowHelp"));
             ShowIcon = false;

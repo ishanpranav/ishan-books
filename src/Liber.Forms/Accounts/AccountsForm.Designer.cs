@@ -64,10 +64,10 @@ namespace Liber.Forms.Accounts
             // 
             // _listView
             // 
+            resources.ApplyResources(_listView, "_listView");
             _listView.AllowColumnReorder = true;
             _listView.Columns.AddRange(new ColumnHeader[] { nameColumn, numberColumn, typeColumn, cashFlowColumn, taxType, balanceColumn });
             _listView.ContextMenuStrip = _contextMenu;
-            resources.ApplyResources(_listView, "_listView");
             _listView.FullRowSelect = true;
             _listView.LabelEdit = true;
             _listView.MultiSelect = false;
@@ -107,84 +107,84 @@ namespace Liber.Forms.Accounts
             // 
             // _contextMenu
             // 
+            resources.ApplyResources(_contextMenu, "_contextMenu");
             _contextMenu.Items.AddRange(new ToolStripItem[] { openToolStripMenuItem1, toolStripSeparator3, newAccountToolStripMenuItem, editAccountToolStripMenuItem, renameAccountToolStripMenuItem, removeAccountToolStripMenuItem, toolStripSeparator2, transactionToolStripMenuItem1, reconcileToolStripMenuItem1, transactionsToolStripMenuItem1, toolStripSeparator5, quickReportToolStripMenuItem });
             _contextMenu.Name = "contextMenuStrip1";
-            resources.ApplyResources(_contextMenu, "_contextMenu");
             // 
             // openToolStripMenuItem1
             // 
+            resources.ApplyResources(openToolStripMenuItem1, "openToolStripMenuItem1");
             openToolStripMenuItem1.Image = VisualStudioImageLibrary.Open;
             openToolStripMenuItem1.Name = "openToolStripMenuItem1";
-            resources.ApplyResources(openToolStripMenuItem1, "openToolStripMenuItem1");
             openToolStripMenuItem1.Click += OnListViewItemActivate;
             // 
             // toolStripSeparator3
             // 
-            toolStripSeparator3.Name = "toolStripSeparator3";
             resources.ApplyResources(toolStripSeparator3, "toolStripSeparator3");
+            toolStripSeparator3.Name = "toolStripSeparator3";
             // 
             // newAccountToolStripMenuItem
             // 
+            resources.ApplyResources(newAccountToolStripMenuItem, "newAccountToolStripMenuItem");
             newAccountToolStripMenuItem.Image = VisualStudioImageLibrary.AddTable;
             newAccountToolStripMenuItem.Name = "newAccountToolStripMenuItem";
-            resources.ApplyResources(newAccountToolStripMenuItem, "newAccountToolStripMenuItem");
             newAccountToolStripMenuItem.Click += OnNewToolStripMenuItemClick;
             // 
             // editAccountToolStripMenuItem
             // 
+            resources.ApplyResources(editAccountToolStripMenuItem, "editAccountToolStripMenuItem");
             editAccountToolStripMenuItem.Image = VisualStudioImageLibrary.Edit;
             editAccountToolStripMenuItem.Name = "editAccountToolStripMenuItem";
-            resources.ApplyResources(editAccountToolStripMenuItem, "editAccountToolStripMenuItem");
             editAccountToolStripMenuItem.Click += OnEditToolStripMenuItemClick;
             // 
             // renameAccountToolStripMenuItem
             // 
+            resources.ApplyResources(renameAccountToolStripMenuItem, "renameAccountToolStripMenuItem");
             renameAccountToolStripMenuItem.Image = VisualStudioImageLibrary.Rename;
             renameAccountToolStripMenuItem.Name = "renameAccountToolStripMenuItem";
-            resources.ApplyResources(renameAccountToolStripMenuItem, "renameAccountToolStripMenuItem");
             renameAccountToolStripMenuItem.Click += OnRenameToolStripMenuItemClick;
             // 
             // removeAccountToolStripMenuItem
             // 
+            resources.ApplyResources(removeAccountToolStripMenuItem, "removeAccountToolStripMenuItem");
             removeAccountToolStripMenuItem.Image = VisualStudioImageLibrary.DeleteTable;
             removeAccountToolStripMenuItem.Name = "removeAccountToolStripMenuItem";
-            resources.ApplyResources(removeAccountToolStripMenuItem, "removeAccountToolStripMenuItem");
             removeAccountToolStripMenuItem.Click += OnRemoveToolStripMenuItemClick;
             // 
             // toolStripSeparator2
             // 
-            toolStripSeparator2.Name = "toolStripSeparator2";
             resources.ApplyResources(toolStripSeparator2, "toolStripSeparator2");
+            toolStripSeparator2.Name = "toolStripSeparator2";
             // 
             // transactionToolStripMenuItem1
             // 
+            resources.ApplyResources(transactionToolStripMenuItem1, "transactionToolStripMenuItem1");
             transactionToolStripMenuItem1.Image = VisualStudioImageLibrary.JournalMessage;
             transactionToolStripMenuItem1.Name = "transactionToolStripMenuItem1";
-            resources.ApplyResources(transactionToolStripMenuItem1, "transactionToolStripMenuItem1");
             transactionToolStripMenuItem1.Click += OnTransactionToolStripMenuItemClick;
             // 
             // reconcileToolStripMenuItem1
             // 
-            reconcileToolStripMenuItem1.Name = "reconcileToolStripMenuItem1";
             resources.ApplyResources(reconcileToolStripMenuItem1, "reconcileToolStripMenuItem1");
+            reconcileToolStripMenuItem1.Name = "reconcileToolStripMenuItem1";
             // 
             // transactionsToolStripMenuItem1
             // 
+            resources.ApplyResources(transactionsToolStripMenuItem1, "transactionsToolStripMenuItem1");
             transactionsToolStripMenuItem1.Image = VisualStudioImageLibrary.Log;
             transactionsToolStripMenuItem1.Name = "transactionsToolStripMenuItem1";
-            resources.ApplyResources(transactionsToolStripMenuItem1, "transactionsToolStripMenuItem1");
             transactionsToolStripMenuItem1.Click += OnTransactionsToolStripMenuItemClick;
             // 
             // toolStripSeparator5
             // 
-            toolStripSeparator5.Name = "toolStripSeparator5";
             resources.ApplyResources(toolStripSeparator5, "toolStripSeparator5");
+            toolStripSeparator5.Name = "toolStripSeparator5";
             // 
             // quickReportToolStripMenuItem
             // 
+            resources.ApplyResources(quickReportToolStripMenuItem, "quickReportToolStripMenuItem");
             quickReportToolStripMenuItem.Image = VisualStudioImageLibrary.Report;
             quickReportToolStripMenuItem.Name = "quickReportToolStripMenuItem";
-            resources.ApplyResources(quickReportToolStripMenuItem, "quickReportToolStripMenuItem");
             quickReportToolStripMenuItem.Click += OnQuickReportToolStripMenuItemClick;
             // 
             // _imageList
@@ -195,119 +195,119 @@ namespace Liber.Forms.Accounts
             // 
             // _statusStrip
             // 
-            _statusStrip.Items.AddRange(new ToolStripItem[] { toolStripDropDownButton1, toolStripDropDownButton2, toolStripDropDownButton3 });
             resources.ApplyResources(_statusStrip, "_statusStrip");
+            _statusStrip.Items.AddRange(new ToolStripItem[] { toolStripDropDownButton1, toolStripDropDownButton2, toolStripDropDownButton3 });
             _statusStrip.Name = "_statusStrip";
             // 
             // toolStripDropDownButton1
             // 
+            resources.ApplyResources(toolStripDropDownButton1, "toolStripDropDownButton1");
             toolStripDropDownButton1.DisplayStyle = ToolStripItemDisplayStyle.Text;
             toolStripDropDownButton1.DropDownItems.AddRange(new ToolStripItem[] { newToolStripMenuItem, editToolStripMenuItem, renameToolStripMenuItem, removeToolStripMenuItem });
-            resources.ApplyResources(toolStripDropDownButton1, "toolStripDropDownButton1");
             toolStripDropDownButton1.Name = "toolStripDropDownButton1";
             // 
             // newToolStripMenuItem
             // 
+            resources.ApplyResources(newToolStripMenuItem, "newToolStripMenuItem");
             newToolStripMenuItem.Image = VisualStudioImageLibrary.AddTable;
             newToolStripMenuItem.Name = "newToolStripMenuItem";
-            resources.ApplyResources(newToolStripMenuItem, "newToolStripMenuItem");
             newToolStripMenuItem.Click += OnNewToolStripMenuItemClick;
             // 
             // editToolStripMenuItem
             // 
+            resources.ApplyResources(editToolStripMenuItem, "editToolStripMenuItem");
             editToolStripMenuItem.Image = VisualStudioImageLibrary.Edit;
             editToolStripMenuItem.Name = "editToolStripMenuItem";
-            resources.ApplyResources(editToolStripMenuItem, "editToolStripMenuItem");
             editToolStripMenuItem.Click += OnEditToolStripMenuItemClick;
             // 
             // renameToolStripMenuItem
             // 
+            resources.ApplyResources(renameToolStripMenuItem, "renameToolStripMenuItem");
             renameToolStripMenuItem.Image = VisualStudioImageLibrary.Rename;
             renameToolStripMenuItem.Name = "renameToolStripMenuItem";
-            resources.ApplyResources(renameToolStripMenuItem, "renameToolStripMenuItem");
             renameToolStripMenuItem.Click += OnRenameToolStripMenuItemClick;
             // 
             // removeToolStripMenuItem
             // 
+            resources.ApplyResources(removeToolStripMenuItem, "removeToolStripMenuItem");
             removeToolStripMenuItem.Image = VisualStudioImageLibrary.DeleteTable;
             removeToolStripMenuItem.Name = "removeToolStripMenuItem";
-            resources.ApplyResources(removeToolStripMenuItem, "removeToolStripMenuItem");
             removeToolStripMenuItem.Click += OnRemoveToolStripMenuItemClick;
             // 
             // toolStripDropDownButton2
             // 
+            resources.ApplyResources(toolStripDropDownButton2, "toolStripDropDownButton2");
             toolStripDropDownButton2.DisplayStyle = ToolStripItemDisplayStyle.Text;
             toolStripDropDownButton2.DropDownItems.AddRange(new ToolStripItem[] { openToolStripMenuItem, toolStripSeparator1, transactionToolStripMenuItem, reconcileToolStripMenuItem, transactionsToolStripMenuItem, quickReportToolStripSeparator, quickReportToolStripMenuItem1 });
-            resources.ApplyResources(toolStripDropDownButton2, "toolStripDropDownButton2");
             toolStripDropDownButton2.Name = "toolStripDropDownButton2";
             // 
             // openToolStripMenuItem
             // 
+            resources.ApplyResources(openToolStripMenuItem, "openToolStripMenuItem");
             openToolStripMenuItem.Image = VisualStudioImageLibrary.Open;
             openToolStripMenuItem.Name = "openToolStripMenuItem";
-            resources.ApplyResources(openToolStripMenuItem, "openToolStripMenuItem");
             openToolStripMenuItem.Click += OnListViewItemActivate;
             // 
             // toolStripSeparator1
             // 
-            toolStripSeparator1.Name = "toolStripSeparator1";
             resources.ApplyResources(toolStripSeparator1, "toolStripSeparator1");
+            toolStripSeparator1.Name = "toolStripSeparator1";
             // 
             // transactionToolStripMenuItem
             // 
+            resources.ApplyResources(transactionToolStripMenuItem, "transactionToolStripMenuItem");
             transactionToolStripMenuItem.Image = VisualStudioImageLibrary.JournalMessage;
             transactionToolStripMenuItem.Name = "transactionToolStripMenuItem";
-            resources.ApplyResources(transactionToolStripMenuItem, "transactionToolStripMenuItem");
             transactionToolStripMenuItem.Click += OnTransactionToolStripMenuItemClick;
             // 
             // reconcileToolStripMenuItem
             // 
-            reconcileToolStripMenuItem.Name = "reconcileToolStripMenuItem";
             resources.ApplyResources(reconcileToolStripMenuItem, "reconcileToolStripMenuItem");
+            reconcileToolStripMenuItem.Name = "reconcileToolStripMenuItem";
             // 
             // transactionsToolStripMenuItem
             // 
+            resources.ApplyResources(transactionsToolStripMenuItem, "transactionsToolStripMenuItem");
             transactionsToolStripMenuItem.Image = VisualStudioImageLibrary.Log;
             transactionsToolStripMenuItem.Name = "transactionsToolStripMenuItem";
-            resources.ApplyResources(transactionsToolStripMenuItem, "transactionsToolStripMenuItem");
             transactionsToolStripMenuItem.Click += OnTransactionsToolStripMenuItemClick;
             // 
             // quickReportToolStripSeparator
             // 
-            quickReportToolStripSeparator.Name = "quickReportToolStripSeparator";
             resources.ApplyResources(quickReportToolStripSeparator, "quickReportToolStripSeparator");
+            quickReportToolStripSeparator.Name = "quickReportToolStripSeparator";
             // 
             // quickReportToolStripMenuItem1
             // 
+            resources.ApplyResources(quickReportToolStripMenuItem1, "quickReportToolStripMenuItem1");
             quickReportToolStripMenuItem1.Image = VisualStudioImageLibrary.Report;
             quickReportToolStripMenuItem1.Name = "quickReportToolStripMenuItem1";
-            resources.ApplyResources(quickReportToolStripMenuItem1, "quickReportToolStripMenuItem1");
             quickReportToolStripMenuItem1.Click += OnQuickReportToolStripMenuItemClick;
             // 
             // toolStripDropDownButton3
             // 
+            resources.ApplyResources(toolStripDropDownButton3, "toolStripDropDownButton3");
             toolStripDropDownButton3.DisplayStyle = ToolStripItemDisplayStyle.Text;
             toolStripDropDownButton3.DropDownItems.AddRange(new ToolStripItem[] { refreshToolStripMenuItem, toolStripSeparator4, inactiveToolStripMenuItem });
-            resources.ApplyResources(toolStripDropDownButton3, "toolStripDropDownButton3");
             toolStripDropDownButton3.Name = "toolStripDropDownButton3";
             // 
             // refreshToolStripMenuItem
             // 
+            resources.ApplyResources(refreshToolStripMenuItem, "refreshToolStripMenuItem");
             refreshToolStripMenuItem.Image = VisualStudioImageLibrary.Refresh;
             refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
-            resources.ApplyResources(refreshToolStripMenuItem, "refreshToolStripMenuItem");
             refreshToolStripMenuItem.Click += OnRefreshToolStripMenuItemClick;
             // 
             // toolStripSeparator4
             // 
-            toolStripSeparator4.Name = "toolStripSeparator4";
             resources.ApplyResources(toolStripSeparator4, "toolStripSeparator4");
+            toolStripSeparator4.Name = "toolStripSeparator4";
             // 
             // inactiveToolStripMenuItem
             // 
+            resources.ApplyResources(inactiveToolStripMenuItem, "inactiveToolStripMenuItem");
             inactiveToolStripMenuItem.CheckOnClick = true;
             inactiveToolStripMenuItem.Name = "inactiveToolStripMenuItem";
-            resources.ApplyResources(inactiveToolStripMenuItem, "inactiveToolStripMenuItem");
             inactiveToolStripMenuItem.CheckedChanged += OnInactiveToolStripMenuItemCheckedChanged;
             // 
             // AccountsForm
