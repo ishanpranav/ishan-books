@@ -40,15 +40,6 @@
             "index": "Microsoft Corporation"
         },
         {
-            "title": "DocFX",
-            "formats": [ "c#", "html" ],
-            "source": "https://github.com/dotnet/docfx",
-            "author": ".NET Foundation and contributors",
-            "copyright": ".NET Foundation and Contributors",
-            "license": "mit_dotnet",
-            "index": "Microsoft Corporation"
-        },
-        {
             "title": "CsvHelper",
             "formats": [ "c#", "css" ],
             "source": "https://github.com/JoshClose/CsvHelper",
