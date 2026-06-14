@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Humanizer;
 using Liber.Forms.Components;
+using Liber.Forms.LineSources;
 using Liber.Forms.Properties;
 using Liber.Forms.Reports;
 using Liber.Forms.Transactions;
@@ -97,16 +98,14 @@ internal sealed partial class AccountsForm : Form
         DateTime lastPosted = Settings.Default.LastPosted;
         Line[] lines = account == null ? Array.Empty<Line>() : new Line[]
         {
-            new Line()
-            {
-                AccountId = account.Id
-            }
+            new Line(account.Id, balance: 0, description: null)
         };
-        Transaction transaction = new Transaction(Guid.Empty, name: null, lines)
-        {
-            Posted = lastPosted == default ? DateTime.Today : lastPosted,
-            Number = _company.NextTransactionNumber
-        };
+        Transaction transaction = new Transaction(
+            Guid.Empty,
+            _company.NextTransactionNumber,
+            name: null,
+            lastPosted == default ? DateTime.Today : lastPosted,
+            lines);
 
         form.InitializeTransaction(transaction);
         _factory.Register(key, form);
@@ -119,7 +118,7 @@ internal sealed partial class AccountsForm : Form
             return;
         }
 
-        TransactionsForm form = new TransactionsForm(_company, account, _factory);
+        TransactionsForm form = new TransactionsForm(_company, new AccountLineSource(_company, account), _factory);
 
         _factory.Register(account.Id, form);
     }
@@ -271,9 +270,7 @@ internal sealed partial class AccountsForm : Form
     {
         Account account = (Account)_listView.Items[e.Item].Tag!;
 
-        account.Name = e.Label!;
-
-        _company.UpdateAccount(account.Id, account.ParentId);
+        _company.UpdateAccount(account.Id, account.ParentId, account.Number, e.Label!, account.Type);
     }
 
     private void OnListViewItemActivate(object sender, EventArgs e)
@@ -364,6 +361,7 @@ internal sealed partial class AccountsForm : Form
 
             form.InitializeReport(ReportEngine.GeneralJournalReport);
         };
+
         _factory.Kill(account.Id);
         _factory.Register(account.Id, form);
     }

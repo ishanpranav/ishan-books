@@ -18,12 +18,12 @@ namespace Liber.Forms.Reports.Html;
 [ComVisible(true)]
 public class HtmlReport : IntervalView
 {
-    private static readonly JsonSerializerOptions s_options = new JsonSerializerOptions(FormattedStrings.JsonOptions);
-
-    public HtmlReport(string name, Company company) : base(name, company)
+    private static readonly JsonSerializerOptions s_options = new JsonSerializerOptions(FormattedStrings.JsonOptions)
     {
-        s_options.DefaultIgnoreCondition = JsonIgnoreCondition.Never;
-    }
+        DefaultIgnoreCondition = JsonIgnoreCondition.Never
+    };
+
+    public HtmlReport(string name, Company company) : base(name, company) { }
 
     [LocalizedCategory(nameof(Periodicity))]
     [LocalizedDescription(nameof(Periodicity))]
@@ -165,7 +165,7 @@ public class HtmlReport : IntervalView
             case ReportLevel.ByType:
                 return Company
                     .GetBalancesByType(Accounts.Values, ReportTypes.None, Started, Posted, Filter)
-                    .OrderBy(x => x.Type)   
+                    .OrderBy(x => x.Type)
                     .Select(x => (FormattedStrings.GetString(x.Type.ToString()), x.Type, Company.Color, x.Balances));
         }
 
@@ -200,7 +200,7 @@ public class HtmlReport : IntervalView
 
                 data[label] = (double)account.Type.ToBalance(debit);
                 colors[label] = GetColorOrDefault(account.Name, account.Type, Company.GetColorOrDefault(account), debit);
-                
+
                 if (data[label] != 0)
                 {
                     nonZero = true;

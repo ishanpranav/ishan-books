@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using System.Security.Principal;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,6 +16,7 @@ using Liber.Forms.Accounts;
 using Liber.Forms.AccountViews;
 using Liber.Forms.Companies;
 using Liber.Forms.Lines;
+using Liber.Forms.LineSources;
 using Liber.Forms.Properties;
 using Liber.Forms.Reports;
 using Liber.Forms.Reports.Gdi;
@@ -31,13 +33,14 @@ namespace Liber.Forms;
 
 internal sealed partial class MainForm : Form
 {
-    private readonly Company _company = new Company();
+    private readonly JsonCompanyWriter _jsonWriter = new JsonCompanyWriter(FormattedStrings.JsonOptions);
+    private readonly XmlReportWriter _xmlWriter = new XmlReportWriter();
+    private readonly Dictionary<string, Guid> _nameKeys = new Dictionary<string, Guid>();
 
-    private ReportEngine? _engine;
-    private IntervalView? _favoriteReport;
-    private bool _isFavoriteTemporary;
     private bool _pendingClose;
     private string? _path;
+    private ReportEngine _engine;
+    private Company _company;
 
     public MainForm()
     {
@@ -46,25 +49,35 @@ internal sealed partial class MainForm : Form
 
         Text = SystemFeatures.ApplicationName;
         aboutToolStripMenuItem.Text = FormattedStrings.AboutText;
-        exportCompanyXmlToolStripMenuItem.Tag = new Writer(FilterIndex.Xml, new XmlReportWriter());
+        exportCompanyJsonToolStripMenuItem.Tag = new Writer(FilterIndex.Json, _jsonWriter);
+        exportCompanyXmlToolStripMenuItem.Tag = new Writer(FilterIndex.Xml, _xmlWriter);
         exportAccountsToolStripMenuItem.Tag = new Writer(FilterIndex.Csv, new GnuCashAccountWriter());
         exportTransactionsToolStripMenuItem.Tag = new Writer(FilterIndex.Csv, new GnuCashTransactionWriter());
         exportAccountsIifToolStripMenuItem.Tag = new Writer(FilterIndex.Iif, new IifAccountWriter());
-        _company.Invalidated += (_, e) =>
-        {
-            foreach (Form child in MdiChildren)
-            {
-                child.Close();
-            }
 
-            _factory.KillAll();
-        };
-        _company.AccountRemoved += (_, e) => _factory.Kill(e.Id);
+        SetCompany(new Company());
     }
 
     public MainForm(string path) : this()
     {
         _recentPathManager.Add(path);
+    }
+
+    [MemberNotNull(nameof(_engine))]
+    [MemberNotNull(nameof(_company))]
+    private void SetCompany(Company value)
+    {
+        _engine = new ReportEngine(value);
+        value.AccountRemoved += (_, e) => _factory.Kill(e.Id);
+
+        foreach (Form child in MdiChildren)
+        {
+            child.Close();
+        }
+
+        _factory.KillAll();
+
+        _company = value;
     }
 
     private async void OnLoad(object sender, EventArgs e)
@@ -77,63 +90,7 @@ internal sealed partial class MainForm : Form
             await ImportAsync(_recentPathManager.Paths.First());
         }
 
-        if (_engine.TryGetReport(ReportEngine.AccountMapReport, out IntervalView? report))
-        {
-            report.Title = _company.DisplayName;
-            report.Started = _company.Started;
-            report.Posted = _company.Posted;
-            _favoriteReport = report;
-            _company.NameChanged += (_, _) =>
-            {
-                report.Title = _company.DisplayName;
-            };
-
-            ReportsForm form = new ReportsForm(_engine);
-
-            form.Load += (_, _) =>
-            {
-                RefreshFavoriteReport();
-                _timer.Start();
-            };
-            form.Edited += OnReportsFormEdited;
-            form.FormClosed += OnReportsFormEdited;
-
-            _factory.RegisterEmbedded(Guid.NewGuid(), parent: this, form);
-        }
-    }
-
-    private void OnReportsFormEdited(object? sender, EventArgs e)
-    {
-        _timer.Stop();
-
-        _favoriteReport = null;
-    }
-
-    private void OnTimerTick(object sender, EventArgs e)
-    {
-        RefreshFavoriteReport();
-    }
-
-    private void RefreshFavoriteReport()
-    {
-        if (_favoriteReport == null || _factory.Embedded is not ReportsForm form)
-        {
-            if (_timer.Enabled)
-            {
-                _timer.Stop();
-            }
-
-            return;
-        }
-
-        _favoriteReport.Accounts = new AccountsView(
-            _company,
-            _company.Accounts
-                .Where(x => _isFavoriteTemporary ? !x.Type.IsTemporary() : x.Type.IsTemporary())
-                .ToHashSet());
-        _isFavoriteTemporary = !_isFavoriteTemporary;
-
-        form.InitializeReport(ReportEngine.AccountMapReport);
+        _factory.RegisterEmbedded(Guid.NewGuid(), parent: this, new ReportsForm(_engine));
     }
 
     private void InitializeRecentPaths()
@@ -203,11 +160,8 @@ internal sealed partial class MainForm : Form
         catch (ObjectDisposedException) { }
     }
 
-    [MemberNotNull(nameof(_engine))]
     private void InitializeReportEngine()
     {
-        _engine = new ReportEngine(_company);
-
         if (_engine.Views.Count == 0)
         {
             reportsToolStripMenuItem1.Visible = false;
@@ -299,9 +253,9 @@ internal sealed partial class MainForm : Form
     {
         string name = ((ToolStripMenuItem)sender!).Tag!.ToString()!;
         Guid key = Guid.NewGuid();
-        ReportsForm form = new ReportsForm(_engine!)
+        ReportsForm form = new ReportsForm(_engine)
         {
-            Text = _engine!.Views[name].GenericTitle
+            Text = _engine.Views[name].GenericTitle
         };
 
         form.Load += (sender, e) =>
@@ -372,7 +326,7 @@ internal sealed partial class MainForm : Form
 
         if (form.ShowDialog() == DialogResult.OK)
         {
-            form.Company.CopyTo(_company);
+            SetCompany(form.Company);
         }
     }
 
@@ -397,7 +351,7 @@ internal sealed partial class MainForm : Form
             return false;
         }
 
-        await ExportAsync(path);
+        await ExportAsync(path, _company);
 
         return true;
     }
@@ -475,14 +429,14 @@ internal sealed partial class MainForm : Form
             throw new JsonException();
         }
 
-        company.CopyTo(_company);
+        SetCompany(company);
     }
 
     private async Task ImportSqliteCompanyAsync(string path)
     {
         if (await SqliteSerializer.CheckPasswordAsync(path, string.Empty))
         {
-            (await SqliteSerializer.DeserializeAsync(path, string.Empty)).CopyTo(_company);
+            SetCompany(await SqliteSerializer.DeserializeAsync(path, string.Empty));
 
             return;
         }
@@ -520,14 +474,14 @@ internal sealed partial class MainForm : Form
         }
         while (result == DialogResult.Retry);
 
-        (await SqliteSerializer.DeserializeAsync(path, password)).CopyTo(_company);
+        SetCompany(await SqliteSerializer.DeserializeAsync(path, password));
     }
 
     private async Task ImportGnuCashSqliteCompanyAsync(string path)
     {
         ImportRule[]? rules = JsonSerializer.Deserialize<ImportRule[]>(Settings.Default.ImportRules, FormattedStrings.JsonOptions);
 
-        (await GnuCashSqliteSerializer.DeserializeAsync(path, rules ?? Enumerable.Empty<ImportRule>())).CopyTo(_company);
+        SetCompany(await GnuCashSqliteSerializer.DeserializeAsync(path, rules ?? Enumerable.Empty<ImportRule>()));
     }
 
     private async Task ImportAsync(string path)
@@ -536,13 +490,13 @@ internal sealed partial class MainForm : Form
         {
             bool canSave = true;
 
-            switch (Path.GetExtension(path).ToUpperInvariant())
+            switch (FilterIndexExtensions.FromExtension(Path.GetExtension(path)))
             {
-                case ".JSON":
+                case FilterIndex.Json:
                     await ImportJsonCompanyAsync(path);
                     break;
 
-                case ".GNUCASH":
+                case FilterIndex.GnuCashSqlite:
                     await ImportGnuCashSqliteCompanyAsync(path);
 
                     canSave = false;
@@ -574,18 +528,18 @@ internal sealed partial class MainForm : Form
         _factory.AutoRegister(() => new UrlForm(FormattedStrings.AboutUrl));
     }
 
-    private async Task ExportJsonCompanyAsync(string path)
+    private async Task ExportCompanyAsync(string path, Company company, IWriter writer)
     {
         await using FileStream output = File.Create(path);
 
-        await JsonSerializer.SerializeAsync(output, _company, FormattedStrings.JsonOptions);
+        await writer.WriteAsync(output, company);
 
         _path = path;
     }
 
-    private async Task ExportSqliteCompanyAsync(string path, IProgress progress)
+    private async Task ExportSqliteCompanyAsync(string path, Company company, IProgress progress)
     {
-        await SqliteSerializer.SerializeAsync(path, _company, progress);
+        await SqliteSerializer.SerializeAsync(path, company, progress);
 
         _path = path;
     }
@@ -611,10 +565,10 @@ internal sealed partial class MainForm : Form
 
     }
 
-    private async Task ExportAsync(string path)
+    private async Task ExportAsync(string path, Company company)
     {
         SavingForm form = new SavingForm();
-        SavingProgress progress = new SavingProgress(form, _company);
+        SavingProgress progress = new SavingProgress(form, company);
 
         form.Show();
 
@@ -622,20 +576,19 @@ internal sealed partial class MainForm : Form
         {
             string extension = Path.GetExtension(path);
 
-            switch (extension.ToUpperInvariant())
+            switch (FilterIndexExtensions.FromExtension(extension))
             {
-                case ".IZBK":
-                case ".SQLITE":
-                case ".SQLITE3":
-                case ".DB":
-                case ".DB3":
-                case ".S3DB":
-                case ".SL3":
-                    await ExportSqliteCompanyAsync(path, progress);
+                case FilterIndex.Sqlite:
+                case FilterIndex.Liber:
+                    await ExportSqliteCompanyAsync(path, company, progress);
                     break;
 
-                case ".JSON":
-                    await ExportJsonCompanyAsync(path);
+                case FilterIndex.Json:
+                    await ExportCompanyAsync(path, company, _jsonWriter);
+                    break;
+
+                case FilterIndex.Xml:
+                    await ExportCompanyAsync(path, company, _xmlWriter);
                     break;
 
                 default:
@@ -656,7 +609,7 @@ internal sealed partial class MainForm : Form
             return await SaveAsAsync();
         }
 
-        await ExportAsync(_path);
+        await ExportAsync(_path, _company);
 
         return true;
     }
@@ -673,7 +626,7 @@ internal sealed partial class MainForm : Form
 
     private void OnAccountsToolStripMenuItemClick(object sender, EventArgs e)
     {
-        _factory.AutoRegister(() => new AccountsForm(_company, _factory, _engine!));
+        _factory.AutoRegister(() => new AccountsForm(_company, _factory, _engine));
     }
 
     private void OnNewAccountToolStripMenuItemClick(object sender, EventArgs e)
@@ -778,7 +731,7 @@ internal sealed partial class MainForm : Form
 
             IReadOnlyCollection<GnuCashAccount> accounts = await GnuCashSerializer.DeserializeAsync<GnuCashAccount>(input);
 
-            _factory.Register(Guid.NewGuid(), new ImportAccountsForm(_company, _factory, _engine!, accounts));
+            _factory.Register(Guid.NewGuid(), new ImportAccountsForm(_company, _factory, _engine, accounts));
         });
     }
 
@@ -818,7 +771,7 @@ internal sealed partial class MainForm : Form
 
     private void OnCheckToolStripMenuItemClick(object sender, EventArgs e)
     {
-        if (!_engine!.TryGetReport(ReportEngine.CheckReport, out GdiCheckReport? report))
+        if (!_engine.TryGetReport(ReportEngine.CheckReport, out GdiCheckReport? report))
         {
             return;
         }
@@ -846,7 +799,7 @@ internal sealed partial class MainForm : Form
 
     private void OnReportsToolStripMenuItemClick(object sender, EventArgs e)
     {
-        _factory.Register(Guid.NewGuid(), new ReportsForm(_engine!));
+        _factory.Register(Guid.NewGuid(), new ReportsForm(_engine));
     }
 
     private void OnTransactionToolStripMenuItemClick(object sender, EventArgs e)
@@ -854,7 +807,7 @@ internal sealed partial class MainForm : Form
         _factory.AutoRegister(() => new TransactionForm(_company));
     }
 
-    private void OnTransactionsToolStripMenuItemClick(object sender, EventArgs e)
+    private void OnAccountTransactionsToolStripMenuItemClick(object sender, EventArgs e)
     {
         using AccountDialog accountDialog = new AccountDialog(new EditableAccountView(_company), x => !x.ReadOnly);
 
@@ -870,9 +823,29 @@ internal sealed partial class MainForm : Form
             return;
         }
 
-        TransactionsForm form = new TransactionsForm(_company, accountDialog.Value.Value, _factory);
+        TransactionsForm form = new TransactionsForm(_company, new AccountLineSource(_company, accountDialog.Value.Value), _factory);
 
         _factory.Register(id, form);
+    }
+
+    private void OnNameTransactionsToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        using NameDialog nameDialog = new NameDialog(_company);
+
+        if (nameDialog.ShowDialog() != DialogResult.OK)
+        {
+            return;
+        }
+
+        if (!_nameKeys.TryGetValue(nameDialog.Value, out Guid key))
+        {
+            key = Guid.NewGuid();
+            _nameKeys[nameDialog.Value] = key;
+        }
+
+        TransactionsForm form = new TransactionsForm(_company, new NameLineSource(_company, nameDialog.Value), _factory);
+
+        _factory.Register(key, form);
     }
 
     private void OnCloseAllToolStripMenuItem_Click(object sender, EventArgs e)
@@ -883,6 +856,22 @@ internal sealed partial class MainForm : Form
     private void OnRecentPathManagerInvalidated(object sender, EventArgs e)
     {
         InitializeRecentPaths();
+    }
+
+    private async void OnAnonymizeToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        Company clone = _company.Clone();
+        Anonymizer anonymizer = new Anonymizer(clone);
+
+        anonymizer.Anonymize();
+
+        if (TryGetSavePath(FilterIndex.Liber, out string? path))
+        {
+            await ExportAsync(path, clone);
+            SetCompany(clone);
+
+            _path = path;
+        }
     }
 
     private void OnFactoryInvalidated(object sender, EventArgs e)

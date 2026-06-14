@@ -25,6 +25,7 @@
             _webView = new Microsoft.Web.WebView2.WinForms.WebView2();
             _backgroundWorker = new System.ComponentModel.BackgroundWorker();
             _recentPathManager = new Liber.Forms.Components.RecentPathManager(components);
+            _timer = new System.Windows.Forms.Timer(components);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -101,6 +102,15 @@
             _backgroundWorker.DoWork += OnBackgroundWorkerDoWork;
             _backgroundWorker.RunWorkerCompleted += OnBackgroundWorkerRunWorkerCompleted;
             // 
+            // _recentPathManager
+            // 
+            _recentPathManager.MaxPaths = 1;
+            // 
+            // _timer
+            // 
+            _timer.Interval = 30000;
+            _timer.Tick += OnTimerTick;
+            // 
             // ReportsForm
             // 
             resources.ApplyResources(this, "$this");
@@ -130,5 +140,6 @@
         private System.Windows.Forms.PropertyGrid _propertyGrid;
         private System.ComponentModel.BackgroundWorker _backgroundWorker;
         private Components.RecentPathManager _recentPathManager;
+        private System.Windows.Forms.Timer _timer;
     }
 }

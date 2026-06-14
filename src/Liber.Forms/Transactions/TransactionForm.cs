@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Windows.Forms;
-using System.Windows.Shapes;
 using Liber.Forms.AccountViews;
 using Liber.Forms.Properties;
 using Liber.MathEngine.Expressions;
@@ -128,8 +127,6 @@ internal sealed partial class TransactionForm : Form
             addingNew = false;
         }
 
-        transaction.Number = numberNumericUpDown.Value;
-        transaction.Posted = postedDateTimePicker.Value;
         transaction.Memo = memoTextBox.Text;
 
         string? name = nameComboBox.Text;
@@ -159,12 +156,7 @@ internal sealed partial class TransactionForm : Form
             }
 
             trialBalance += balance;
-            lines.Add(new Line()
-            {
-                AccountId = accountId,
-                Balance = balance,
-                Description = (string?)row.Cells[descriptionColumn.Index].Value
-            });
+            lines.Add(new Line(accountId, balance, (string?)row.Cells[descriptionColumn.Index].Value));
         }
 
         if (trialBalance != 0)
@@ -178,13 +170,10 @@ internal sealed partial class TransactionForm : Form
         {
             _company.AddTransaction(transaction, name, lines);
         }
-        else
-        {
-            _company.UpdateTransaction(transaction.Id, name, lines);
-        }
 
+        _company.UpdateTransaction(transaction.Id, numberNumericUpDown.Value, name, postedDateTimePicker.Value, lines);
         InitializeTransaction(transaction);
-        
+
         return true;
     }
 
@@ -233,9 +222,8 @@ internal sealed partial class TransactionForm : Form
 
         Transaction? clone = Value.Clone();
 
-        clone.Number = _company.NextTransactionNumber;
-
         _company.AddTransaction(clone, clone.Name, clone.Lines);
+        _company.UpdateTransaction(clone.Id, _company.NextTransactionNumber, clone.Name, clone.Posted, clone.Lines);
         InitializeTransaction(clone);
         TransactionHelpers.Post(postedDateTimePicker.Value);
     }

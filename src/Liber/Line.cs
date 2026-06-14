@@ -20,13 +20,13 @@ public class Line :
 
     [Browsable(false)]
     [Ignore]
-    public Guid AccountId { get; set; }
+    public Guid AccountId { get; private set; }
 
     [Browsable(false)]
     [Index(14)]
     [Name("Value Num.")]
     [NumberStyles(NumberStyles.Currency)]
-    public decimal Balance { get; set; }
+    public decimal Balance { get; private set; }
 
     [JsonIgnore]
     [LocalizedDisplayName(nameof(Debit))]
@@ -63,7 +63,7 @@ public class Line :
     [Name("Memo")]
     [NullValues("")]
     [Optional]
-    public string? Description { get; set; }
+    public string? Description { get; internal set; }
 
     [Browsable(false)]
     [Ignore]
@@ -92,19 +92,24 @@ public class Line :
         }
     }
 
+    public Line() { }
+
+    [JsonConstructor]
+    public Line(Guid accountId, decimal balance, string? description)
+    {
+        AccountId = accountId;
+        Balance = balance;
+        Description = description;
+    }
+
     public override string ToString()
     {
-        return $"{AccountId}: {Balance.ToLocalizedString()}";
+        return $"{AccountId}: {Balance.ToLocalizedString()} {Description}";
     }
 
     public Line Clone()
     {
-        return new Line()
-        {
-            AccountId = AccountId,
-            Balance = Balance,
-            Description = Description
-        };
+        return new Line(AccountId, Balance, Description);
     }
 
     object ICloneable.Clone()

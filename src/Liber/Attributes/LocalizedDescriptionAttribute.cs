@@ -12,7 +12,7 @@ namespace System.ComponentModel;
 /// <remarks>
 /// This attribute is used to provide localized descriptions for properties, events, or other members in user interfaces.
 /// </remarks>
-public sealed class LocalizedDescriptionAttribute : DescriptionAttribute
+public class LocalizedDescriptionAttribute : DescriptionAttribute
 {
     /// <inheritdoc/>
     public override string Description

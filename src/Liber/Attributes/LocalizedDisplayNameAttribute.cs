@@ -12,7 +12,7 @@ namespace System.ComponentModel;
 /// <remarks>
 /// This attribute is used to provide localized display names for properties, events, or other members in user interfaces.
 /// </remarks>
-public sealed class LocalizedDisplayNameAttribute : DisplayNameAttribute
+public class LocalizedDisplayNameAttribute : DisplayNameAttribute
 {
     public override string DisplayName
     {

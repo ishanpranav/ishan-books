@@ -30,8 +30,7 @@ internal sealed class ImportTransactionsForm : ImportForm
                 lookup[line.TransactionId] = result;
             }
 
-            line.Value.AccountId = accounts[line.AccountName];
-            result.Values.Add(line.Value);
+            result.Values.Add(new Line(accounts[line.AccountName], line.Value.Balance, line.Value.Description));
         }
 
         SetDataSource(lines.Select(x => x.Value).ToList());
@@ -41,12 +40,18 @@ internal sealed class ImportTransactionsForm : ImportForm
     {
         foreach (KeyValuePair<Guid, (GnuCashLine Line, List<Line> Values)> entry in lookup)
         {
-            Company.AddTransaction(new Transaction()
-            {
-                Number = entry.Value.Line.TransactionNumber,
-                Posted = entry.Value.Line.TransactionPosted,
-                Memo = entry.Value.Line.TransactionMemo,
-            }, entry.Value.Line.TransactionName, entry.Value.Values);
+            Company.AddTransaction(
+                new Transaction(
+                    Guid.Empty,
+                    entry.Value.Line.TransactionNumber,
+                    entry.Value.Line.TransactionName,
+                    entry.Value.Line.TransactionPosted,
+                    entry.Value.Values)
+                {
+                    Memo = entry.Value.Line.TransactionMemo,
+                },
+                entry.Value.Line.TransactionName,
+                entry.Value.Values);
         }
     }
 }

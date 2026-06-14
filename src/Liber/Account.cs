@@ -17,6 +17,7 @@ namespace Liber;
 /// Represents a financial account.
 /// </summary>
 public class Account :
+    ICloneable,
     IComparable<Account>,
     IComparable,
     IEquatable<Account>
@@ -26,15 +27,14 @@ public class Account :
 
     public Account() { }
 
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Account"/> class with a specified parent identifier.
-    /// </summary>
-    /// <param name="parentId">The identifier of the parent account.</param>
     [JsonConstructor]
-    public Account(Guid id, Guid parentId)
+    public Account(Guid id, Guid parentId, decimal number, string name, AccountType type)
     {
         Id = id;
         ParentId = parentId;
+        Number = number;
+        Name = name;
+        Type = type;
     }
 
     [Browsable(false)]
@@ -58,7 +58,7 @@ public class Account :
     [LocalizedDisplayName(nameof(Number))]
     [Name("Account Code")]
     [Optional]
-    public decimal Number { get; set; }
+    public decimal Number { get; internal set; }
 
     /// <summary>
     /// Gets or sets the account name.
@@ -68,7 +68,7 @@ public class Account :
     [LocalizedDisplayName(nameof(Name))]
     [Name("Account Name")]
     [Optional]
-    public string Name { get; set; } = string.Empty;
+    public string Name { get; internal set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the account type.
@@ -80,7 +80,7 @@ public class Account :
     [Optional]
     [CsvHelper.Configuration.Attributes.TypeConverter(typeof(GnuCashAccountTypeConverter))]
     [System.ComponentModel.TypeConverter(typeof(LocalizedEnumConverter<AccountType>))]
-    public AccountType Type { get; set; }
+    public AccountType Type { get; internal set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether the account is a placeholder.
@@ -288,6 +288,25 @@ public class Account :
     public override string ToString()
     {
         return Name;
+    }
+
+    public Account Clone()
+    {
+        return new Account(Guid.Empty, ParentId, Number, Name, Type)
+        {
+            CashFlow = CashFlow,
+            Color = Color,
+            Description = Description,
+            Inactive = Inactive,
+            Memo = Memo,
+            Placeholder = Placeholder,
+            TaxType = TaxType
+        };
+    }
+
+    object ICloneable.Clone()
+    {
+        return Clone();
     }
 
     public int CompareTo(object? obj)

@@ -75,9 +75,6 @@ internal abstract partial class AccountForm : Form
 
     protected void ApplyChanges(Account account)
     {
-        account.Number = numberNumericUpDown.Value;
-        account.Name = nameTextBox.Text;
-        account.Type = Type;
         account.Placeholder = placeholderCheckBox.Checked;
         account.Description = descriptionTextBox.Text;
         account.Memo = memoTextBox.Text;

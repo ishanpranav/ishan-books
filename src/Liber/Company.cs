@@ -15,7 +15,7 @@ namespace Liber;
 /// <summary>
 /// Represents an individual, sole proprietorship, partnership, corporation, or other entity.
 /// </summary>
-public sealed class Company
+public class Company : ICloneable
 {
     private readonly Dictionary<Guid, Account> _accounts;
     private readonly Dictionary<Guid, Transaction> _transactions;
@@ -47,8 +47,8 @@ public sealed class Company
         }
     }
 
-    public decimal NextAccountNumber { get; private set; } = 1;
-    public decimal NextTransactionNumber { get; private set; } = 1;
+    public decimal NextAccountNumber { get; internal set; } = 1;
+    public decimal NextTransactionNumber { get; internal set; } = 1;
 
     public string? Name
     {
@@ -256,7 +256,6 @@ public sealed class Company
         }
     }
 
-    public event EventHandler? Invalidated;
     public event EventHandler? NameChanged;
     public event EventHandler? TypeChanged;
     public event EventHandler? ReportingChanged;
@@ -405,9 +404,11 @@ public sealed class Company
             throw new InvalidOperationException();
         }
 
+        Guid id = Guid.NewGuid();
+
         InitializeAccount(value);
 
-        value.Id = Guid.NewGuid();
+        value.Id = id;
 
         AddChild(value, parentId);
         _accounts.Add(value.Id, value);
@@ -418,7 +419,7 @@ public sealed class Company
         AccountAdded?.Invoke(sender: this, new GuidEventArgs(value.Id));
     }
 
-    public void UpdateAccount(Guid id, Guid parentId)
+    public void UpdateAccount(Guid id, Guid parentId, decimal number, string name, AccountType type)
     {
         if (!_accounts.TryGetValue(id, out Account? value))
         {
@@ -436,6 +437,11 @@ public sealed class Company
         NextAccountNumber = Math.Max(value.Number, NextAccountNumber);
 
         _sortedAccounts.Remove(value);
+
+        value.Number = number;
+        value.Name = name;
+        value.Type = type;
+
         _sortedAccounts.Add(value);
         AccountUpdated?.Invoke(sender: this, new GuidEventArgs(id));
     }
@@ -506,11 +512,11 @@ public sealed class Company
     public IReadOnlySet<Transaction> GetTransactionsBetween(DateTime started, DateTime posted)
     {
         return _sortedTransactions.GetViewBetween(
-            new Transaction() { Posted = started },
-            new Transaction() { Posted = posted.AddDays(1) });
+            new Transaction(started),
+            new Transaction(posted) { Posted = posted.AddDays(1) });
     }
 
-    private void InitializeTransaction(Transaction value)
+    private static void InitializeTransaction(Transaction value)
     {
         if (string.IsNullOrWhiteSpace(value.Memo))
         {
@@ -594,14 +600,17 @@ public sealed class Company
     {
         if (value.Id != Guid.Empty)
         {
-            throw new ArgumentException(message: null, nameof(value));
+            throw new InvalidOperationException();
         }
 
         TrialBalance(lines);
 
-        value.Id = Guid.NewGuid();
-
+        Guid id = Guid.NewGuid();
+        
         InitializeTransaction(value);
+
+        value.Id = id;
+
         AddName(value, name);
         AddLines(value, lines);
 
@@ -613,15 +622,15 @@ public sealed class Company
             }
         }
 
-        _transactions.Add(value.Id, value);
+        _transactions.Add(id, value);
         _sortedTransactions.Add(value);
 
         NextTransactionNumber = Math.Max(value.Number, NextTransactionNumber) + 1;
 
-        TransactionAdded?.Invoke(sender: this, new GuidEventArgs(value.Id));
+        TransactionAdded?.Invoke(sender: this, new GuidEventArgs(id));
     }
 
-    public void UpdateTransaction(Guid id, string? name, IReadOnlyCollection<Line> lines)
+    public void UpdateTransaction(Guid id, decimal number, string? name, DateTime posted, IReadOnlyCollection<Line> lines)
     {
         if (!_transactions.TryGetValue(id, out Transaction? value))
         {
@@ -653,6 +662,10 @@ public sealed class Company
         NextTransactionNumber = Math.Max(value.Number, NextTransactionNumber);
 
         _sortedTransactions.Remove(value);
+
+        value.Number = number;
+        value.Posted = posted;
+
         _sortedTransactions.Add(value);
         TransactionUpdated?.Invoke(sender: this, new GuidEventArgs(id));
     }
@@ -671,7 +684,7 @@ public sealed class Company
 
         return true;
     }
-    
+
     public IEnumerable<Transaction> GetTransfers()
     {
         foreach (Transaction transaction in _sortedTransactions)
@@ -694,64 +707,7 @@ public sealed class Company
 
             foreach (Line line in account.lines.Order())
             {
-                if (line.Transaction?.Name != null && line.Balance < 0)
-                {
-                    yield return line;
-                }
-            }
-        }
-    }
-
-    public IEnumerable<Line> GetDeposits()
-    {
-        foreach (Account account in _sortedAccounts)
-        {
-            if (account.Type != AccountType.Bank)
-            {
-                continue;
-            }
-
-            foreach (Line line in account.Lines.Order())
-            {
-                if (line.Transaction?.Name != null && line.Balance > 0)
-                {
-                    yield return line;
-                }
-            }
-        }
-    }
-
-    public IEnumerable<Line> GetPayments()
-    {
-        foreach (Account account in _sortedAccounts)
-        {
-            if (account.Type != AccountType.CreditCard)
-            {
-                continue;
-            }
-
-            foreach (Line line in account.lines.Order())
-            {
-                if (line.Balance > 0)
-                {
-                    yield return line;
-                }
-            }
-        }
-    }
-
-    public IEnumerable<Line> GetCharges()
-    {
-        foreach (Account account in _sortedAccounts)
-        {
-            if (account.Type != AccountType.CreditCard)
-            {
-                continue;
-            }
-
-            foreach (Line line in account.lines.Order())
-            {
-                if (line.Balance < 0)
+                if (line.Transaction.Name != null && line.Balance < 0)
                 {
                     yield return line;
                 }
@@ -783,7 +739,7 @@ public sealed class Company
 
         if (account.Type.IsTemporary())
         {
-            return account.GetBalance(Posted, Posted, filter);
+            return account.GetBalance(Started, Posted, filter);
         }
 
         return account.GetBalance(Posted, filter);
@@ -1101,51 +1057,18 @@ public sealed class Company
         return result;
     }
 
-    /// <summary>
-    /// Copies the data from the current <see cref="Company"/> instance to another <see cref="Company"/> instance.
-    /// </summary>
-    /// <param name="other">The target <see cref="Company"/> instance to which the data will be copied.</param>
-    public void CopyTo(Company other)
+    public override string ToString()
     {
-        other.Name = Name;
-        other.NextAccountNumber = NextAccountNumber;
-        other.NextTransactionNumber = NextTransactionNumber;
-        other.Color = Color;
-        other.EquityAccountId = EquityAccountId;
-        other.OtherEquityAccountId = OtherEquityAccountId;
-        other.Password = Password;
-        other.Type = Type;
-        other.FiscalYearStarted = FiscalYearStarted;
-        other.FiscalYearPosted = FiscalYearPosted;
-        other.ReportingPeriod = ReportingPeriod;
-        other.CustomStarted = CustomStarted;
-        other.CustomPosted = CustomPosted;
+        return DisplayName;
+    }
 
-        other._accounts.Clear();
-        other._sortedAccounts.Clear();
-        other._transactions.Clear();
-        other._sortedTransactions.Clear();
-        other._names.Clear();
+    public Company Clone()
+    {
+        return new Company(_accounts.Values, _transactions.Values, NextAccountNumber, NextTransactionNumber);
+    }
 
-        foreach (KeyValuePair<Guid, Account> account in _accounts)
-        {
-            other._accounts[account.Key] = account.Value;
-
-            other._sortedAccounts.Add(account.Value);
-        }
-
-        foreach (KeyValuePair<Guid, Transaction> transaction in _transactions)
-        {
-            other._transactions[transaction.Key] = transaction.Value;
-
-            other._sortedTransactions.Add(transaction.Value);
-        }
-
-        foreach (KeyValuePair<string, int> entry in _names)
-        {
-            other._names[entry.Key] = entry.Value;
-        }
-
-        other.Invalidated?.Invoke(sender: this, EventArgs.Empty);
+    object ICloneable.Clone()
+    {
+        return Clone();
     }
 }

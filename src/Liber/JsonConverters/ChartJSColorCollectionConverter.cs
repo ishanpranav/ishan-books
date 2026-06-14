@@ -10,7 +10,7 @@ namespace System.Text.Json.Serialization;
 /// <summary>
 /// Converts a collection of <see cref="Color"/> objects to its ChartJS-compatible JSON representation.
 /// </summary>
-public sealed class ChartJSColorCollectionConverter : JsonConverter<IEnumerable<Color>>
+public class ChartJSColorCollectionConverter : JsonConverter<IEnumerable<Color>>
 {
     private static readonly ChartJSColorConverter s_itemConverter = new ChartJSColorConverter();
 

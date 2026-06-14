@@ -9,7 +9,7 @@ namespace System.Text.Json.Serialization;
 /// <summary>
 /// Converts a <see cref="Regex"/> to and from its JSON representation.
 /// </summary>
-public sealed class JsonRegexConverter : JsonConverter<Regex>
+public class JsonRegexConverter : JsonConverter<Regex>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="JsonColorConverter"/> class.

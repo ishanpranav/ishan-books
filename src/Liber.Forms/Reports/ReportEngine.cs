@@ -17,9 +17,9 @@ internal sealed class ReportEngine
     public const string AccountMapReport = "account-map";
     public const string GeneralJournalReport = "general-journal";
     public const string CheckReport = "CPA 006 Middle ASAP";
-
-    private readonly Company _company;
     private readonly Dictionary<string, IReportView> _views = new Dictionary<string, IReportView>();
+
+    public Company Company { get; }
 
     public IReadOnlyDictionary<string, IReportView> Views
     {
@@ -31,7 +31,7 @@ internal sealed class ReportEngine
 
     public ReportEngine(Company company)
     {
-        _company = company;
+        Company = company;
 
         XslReportView.InitializeReports(Path.Combine("data", Path.ChangeExtension("reports", "json")));
         InitializeReports(
@@ -69,7 +69,7 @@ internal sealed class ReportEngine
 
     private IReportView CreateReportView(string path)
     {
-        GdiCheckReport report = IniSerializer.DeserializeGdiCheckReport(_company, path);
+        GdiCheckReport report = IniSerializer.DeserializeGdiCheckReport(Company, path);
 
         return new GdiReportView(report);
     }
