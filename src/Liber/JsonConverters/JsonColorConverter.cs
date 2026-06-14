@@ -9,7 +9,7 @@ namespace System.Text.Json.Serialization;
 /// <summary>
 /// Converts a <see cref="Color"/> to and from its JSON representation.
 /// </summary>
-public sealed class JsonColorConverter : JsonConverter<Color>
+public class JsonColorConverter : JsonConverter<Color>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="JsonColorConverter"/> class.

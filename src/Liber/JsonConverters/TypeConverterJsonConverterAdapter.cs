@@ -37,7 +37,7 @@ namespace System.Text.Json.Serialization;
 /// <summary>
 /// Provides an adapter between the <see cref="TypeConverter"/> class and the <see cref="JsonConverter"/> class.
 /// </summary>
-public sealed class TypeConverterJsonConverterAdapter : JsonConverterFactory
+public class TypeConverterJsonConverterAdapter : JsonConverterFactory
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="TypeConverterJsonConverterAdapter"/> class.

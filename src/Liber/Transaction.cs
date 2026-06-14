@@ -17,15 +17,26 @@ public class Transaction :
     IComparable<Transaction>,
     IEquatable<Transaction>
 {
-    internal readonly SortedSet<Line> lines = new SortedSet<Line>();
+    internal readonly SortedSet<Line> lines;
 
-    public Transaction() { }
+    public Transaction()
+    {
+        lines = new SortedSet<Line>();
+    }
+
+    public Transaction(DateTime posted)
+    {
+        Posted = posted;
+        lines = new SortedSet<Line>();
+    }
 
     [JsonConstructor]
-    public Transaction(Guid id, string? name, IReadOnlyCollection<Line> lines)
+    public Transaction(Guid id, decimal number, string? name, DateTime posted, IReadOnlyCollection<Line> lines)
     {
         Id = id;
+        Number = number;
         Name = name;
+        Posted = posted;
         this.lines = new SortedSet<Line>(lines);
 
         foreach (Line line in lines)
@@ -41,13 +52,13 @@ public class Transaction :
     [Format("M/d/yyyy")]
     [Index(0)]
     [Name("Date")]
-    public DateTime Posted { get; set; }
+    public DateTime Posted { get; internal set; }
 
     [Default(0)]
     [Index(2)]
     [Name("Number")]
     [Optional]
-    public decimal Number { get; set; }
+    public decimal Number { get; internal set; }
 
     [Index(3)]
     [Name("Description")]
@@ -101,12 +112,10 @@ public class Transaction :
             i++;
         }
 
-        return new Transaction(Guid.Empty, Name, clonedLines)
+        return new Transaction(Guid.Empty, Number, Name, Posted, clonedLines)
         {
-            Number = Number,
             Memo = Memo,
             Posted = Posted,
-            Reconciled = Reconciled
         };
     }
 

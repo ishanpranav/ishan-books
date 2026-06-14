@@ -12,7 +12,7 @@ namespace System.ComponentModel;
 /// <remarks>
 /// This attribute is used to provide localized display names for property categories in user interfaces.
 /// </remarks>
-public sealed class LocalizedCategoryAttribute : CategoryAttribute
+public class LocalizedCategoryAttribute : CategoryAttribute
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="LocalizedCategoryAttribute"/> class with the specified category name.

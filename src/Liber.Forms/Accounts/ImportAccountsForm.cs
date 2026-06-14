@@ -69,7 +69,7 @@ internal sealed class ImportAccountsForm : ImportForm
 
         foreach (GnuCashAccount account in _accounts)
         {
-            Company.AddAccount(account.Value, Guid.Empty);
+            Company.AddAccount(account.Value, parentId: Guid.Empty);
 
             if (_context.EquityAccount == account.Value)
             {
@@ -98,7 +98,7 @@ internal sealed class ImportAccountsForm : ImportForm
                 continue;
             }
 
-            Company.UpdateAccount(account.Value.Id, parentId);
+            Company.UpdateAccount(account.Value.Id, parentId, account.Value.Number, account.Value.Name, account.Value.Type);
         }
 
         _factory.Register(typeof(AccountsForm).GUID, new AccountsForm(Company, _factory, _engine));

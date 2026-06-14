@@ -33,6 +33,11 @@ internal sealed class EditAccountForm : AccountForm
     protected override void CommitChanges()
     {
         ApplyChanges(_account);
-        Company.UpdateAccount(_account.Id, (Guid?)parentComboBox.SelectedValue ?? Guid.Empty);
+        Company.UpdateAccount(
+            _account.Id,
+            (Guid?)parentComboBox.SelectedValue ?? Guid.Empty,
+            numberNumericUpDown.Value,
+            nameTextBox.Text,
+            Type);
     }
 }

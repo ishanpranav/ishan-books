@@ -77,11 +77,13 @@ public static class GnuCashSqliteSerializer
                     Guid id = reader.GetGuid(0);
                     Guid parentId = reader.GetGuid(1);
 
-                    accounts.Add(new Account(id, parentId == emptyParentId ? Guid.Empty : parentId)
+                    accounts.Add(new Account(
+                        id,
+                        parentId == emptyParentId ? Guid.Empty : parentId,
+                        reader.GetDecimal(2),
+                        reader.GetString(3),
+                        GnuCashAccountTypeConverter.Parse(await SqliteUtilities.GetStringAsync(reader, 4)))
                     {
-                        Number = reader.GetDecimal(2),
-                        Name = reader.GetString(3),
-                        Type = GnuCashAccountTypeConverter.Parse(await SqliteUtilities.GetStringAsync(reader, 4)),
                         Placeholder = reader.GetBoolean(5),
                         Description = await SqliteUtilities.GetStringAsync(reader, 6),
                         Memo = await SqliteUtilities.GetStringAsync(reader, 7),
@@ -112,12 +114,7 @@ public static class GnuCashSqliteSerializer
                         lines[id] = values;
                     }
 
-                    values.Add(new Line()
-                    {
-                        AccountId = reader.GetGuid(1),
-                        Balance = reader.GetDecimal(2),
-                        Description = await SqliteUtilities.GetStringAsync(reader, 3)
-                    });
+                    values.Add(new Line(reader.GetGuid(1), reader.GetDecimal(2), await SqliteUtilities.GetStringAsync(reader, 3)));
                 }
             }
         }
@@ -132,10 +129,13 @@ public static class GnuCashSqliteSerializer
                 {
                     Guid id = reader.GetGuid(0);
 
-                    transactions.Add(new Transaction(id, await SqliteUtilities.GetStringAsync(reader, 3), lines[id])
+                    transactions.Add(new Transaction(
+                        id,
+                        reader.GetDecimal(2),
+                        await SqliteUtilities.GetStringAsync(reader, 3),
+                        reader.GetDateTime(1).Date,
+                        lines[id])
                     {
-                        Posted = reader.GetDateTime(1).Date,
-                        Number = reader.GetDecimal(2),
                         Memo = await SqliteUtilities.GetStringAsync(reader, 4)
                     });
                 }

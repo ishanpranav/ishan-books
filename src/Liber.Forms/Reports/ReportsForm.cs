@@ -19,6 +19,9 @@ namespace Liber.Forms.Reports;
 
 internal sealed partial class ReportsForm : Form
 {
+    private readonly ReportEngine _engine;
+    private int _favoriteIndex = 0;
+
     private IReportView? _view;
 
     private IReportView? View
@@ -38,8 +41,6 @@ internal sealed partial class ReportsForm : Form
         }
     }
 
-    public event EventHandler? Edited;
-
     public ReportsForm(ReportEngine engine)
     {
         InitializeComponent();
@@ -56,8 +57,18 @@ internal sealed partial class ReportsForm : Form
 
             if (view.Value.Properties is IntervalView report)
             {
-                report.Accounts = new AccountsView(report.Accounts.Company);
+                report.Accounts = new AccountsView(engine.Company);
             }
+        }
+
+        _engine = engine;
+
+        if (engine.Views.TryGetValue(ReportEngine.AccountMapReport, out IReportView? favoriteView) &&
+            favoriteView.Properties is IntervalView favoriteReport)
+        {
+            View = favoriteView;
+
+            RefreshFavorite(favoriteReport);
         }
     }
 
@@ -82,6 +93,7 @@ internal sealed partial class ReportsForm : Form
         catch (COMException) { }
 
         InitializeReport();
+        _timer.Start();
     }
 
     private void InitializeReport()
@@ -106,6 +118,8 @@ internal sealed partial class ReportsForm : Form
             return;
         }
 
+        _timer.Stop();
+
         View = (IReportView)_listView.SelectedItems[0].Tag!;
 
         if (View.Properties is GdiCheckReport checkReport && checkReport.Check.Value == null)
@@ -118,13 +132,12 @@ internal sealed partial class ReportsForm : Form
             }
         }
 
-        Edited?.Invoke(sender: this, EventArgs.Empty);
         InitializeReport();
     }
 
     private void OnPropertyGridPropertyValueChanged(object sender, PropertyValueChangedEventArgs e)
     {
-        Edited?.Invoke(sender: this, EventArgs.Empty);
+        _timer.Stop();
         InitializeReport();
     }
 
@@ -151,6 +164,32 @@ internal sealed partial class ReportsForm : Form
         {
             View.Navigate(_webView.CoreWebView2);
         }
+    }
+
+    private void RefreshFavorite(IntervalView report)
+    {
+        report.Accounts = new AccountsView(
+            _engine.Company,
+            _engine.Company.Accounts
+                .Where(x => _favoriteIndex == 0 ? x.Type.IsTemporary() : !x.Type.IsTemporary())
+                .ToHashSet());
+        _favoriteIndex = _favoriteIndex == 0 ? 1 : 0;
+    }
+
+    private void OnTimerTick(object sender, EventArgs e)
+    {
+        if (View == null || View.Properties is not IntervalView report)
+        {
+            if (_timer.Enabled)
+            {
+                _timer.Stop();
+            }
+
+            return;
+        }
+
+        RefreshFavorite(report);
+        InitializeReport();
     }
 
     protected override void Dispose(bool disposing)

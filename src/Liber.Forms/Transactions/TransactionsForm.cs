@@ -6,10 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
 using System.Windows.Forms;
 using Liber.Forms.AccountViews;
 using Liber.Forms.Components;
+using Liber.Forms.LineSources;
 using Liber.Forms.Properties;
 using Liber.MathEngine.Expressions;
 
@@ -18,21 +18,21 @@ namespace Liber.Forms.Transactions;
 internal sealed partial class TransactionsForm : Form
 {
     private readonly Company _company;
-    private readonly Account _account;
     private readonly FormFactory _factory;
     private readonly List<Line> _lines = new List<Line>();
+    private readonly ILineSource _source;
 
     private int _selectedLineIndex = -1;
     private bool _pendingInitialization;
     private int? _editingIndex;
 
-    public TransactionsForm(Company company, Account account, FormFactory factory, Line line) :
-        this(company, account, factory)
+    public TransactionsForm(Company company, ILineSource source, FormFactory factory, Line line) :
+        this(company, source, factory)
     {
         SelectLine(_lines.IndexOf(line));
     }
 
-    public TransactionsForm(Company company, Account account, FormFactory factory)
+    public TransactionsForm(Company company, ILineSource source, FormFactory factory)
     {
         InitializeComponent();
         SystemFeatures.Initialize(this);
@@ -45,22 +45,22 @@ internal sealed partial class TransactionsForm : Form
         accountColumn.ValueMember = nameof(AccountView.Id);
         accountColumn.DisplayMember = nameof(AccountView.DisplayName);
 
-        _dataGridView.SetCompanyColor(company.GetColorOrDefault(account));
+        _dataGridView.SetCompanyColor(source.Color);
 
         _dataGridView.DebitColumnIndex = debitColumn.Index;
         _dataGridView.CreditColumnIndex = creditColumn.Index;
         company.AccountUpdated += OnCompanyAccountUpdated;
         company.AccountRemoved += OnCompanyAccountRemoved;
         company.TransactionAdded += OnCompanyTransactionAdded;
-        company.TransactionUpdated += OnCompanyTransactionInvalidated;
-        company.TransactionRemoved += OnCompanyTransactionInvalidated;
+        company.TransactionUpdated += OnCompanyTransactionUpdated;
+        company.TransactionRemoved += OnCompanyTransactionRemoved;
         _company = company;
         postedColumn.ValueType = typeof(DateTime);
         balanceColumn.ValueType = typeof(decimal);
         balanceColumn.DefaultCellStyle.Font = _dataGridView.ColumnHeadersDefaultCellStyle.Font;
         balanceColumn.DefaultCellStyle.Format = DecimalExtensions.Format;
-        Text = account.Name;
-        _account = account;
+        Text = source.Name;
+        _source = source;
         _factory = factory;
 
         InitializeLines();
@@ -73,7 +73,7 @@ internal sealed partial class TransactionsForm : Form
 
     private void OnCompanyAccountUpdated(object? sender, GuidEventArgs e)
     {
-        if (e.Id == _account.Id)
+        if (_source.IsInvalidatedByAccountUpdated(e.Id))
         {
             InvalidateTransactions();
         }
@@ -81,7 +81,7 @@ internal sealed partial class TransactionsForm : Form
 
     private void OnCompanyAccountRemoved(object? sender, GuidEventArgs e)
     {
-        if (e.Id == _account.Id)
+        if (_source.IsInvalidatedByAccountRemoved(e.Id))
         {
             Close();
         }
@@ -89,17 +89,26 @@ internal sealed partial class TransactionsForm : Form
 
     private void OnCompanyTransactionAdded(object? sender, GuidEventArgs e)
     {
-        Transaction transaction = _company.GetTransaction(e.Id);
-
-        if (transaction.Lines.Any(x => x.AccountId == _account.Id))
+        if (_source.IsInvalidatedByTransactionAdded(e.Id))
         {
             InvalidateTransactions();
         }
     }
 
-    private void OnCompanyTransactionInvalidated(object? sender, GuidEventArgs e)
+    private void OnCompanyTransactionUpdated(object? sender, GuidEventArgs e)
     {
-        InvalidateTransactions();
+        if (_source.IsInvalidatedByTransactionUpdated(e.Id))
+        {
+            InvalidateTransactions();
+        }
+    }
+
+    private void OnCompanyTransactionRemoved(object? sender, GuidEventArgs e)
+    {
+        if (_source.IsInvalidatedByAccountRemoved(e.Id))
+        {
+            InvalidateTransactions();
+        }
     }
 
     private void InvalidateTransactions()
@@ -121,7 +130,7 @@ internal sealed partial class TransactionsForm : Form
         }
     }
 
-    private string GetLineType(Line value)
+    private string GetLineType(Line value, AccountType type)
     {
         Line? sibling = value.Sibling;
 
@@ -130,12 +139,11 @@ internal sealed partial class TransactionsForm : Form
             return "GENJRN";
         }
 
-        AccountType left = _account.Type;
-        AccountType right = _company.GetAccount(sibling.AccountId).Type;
+        AccountType siblingType = _company.GetAccount(sibling.AccountId).Type;
 
-        if (left == AccountType.Bank)
+        if (type == AccountType.Bank)
         {
-            if (right == AccountType.Bank)
+            if (siblingType == AccountType.Bank)
             {
                 return "TNF";
             }
@@ -151,9 +159,9 @@ internal sealed partial class TransactionsForm : Form
             }
         }
 
-        if (left == AccountType.CreditCard)
+        if (type == AccountType.CreditCard)
         {
-            if (right == AccountType.CreditCard)
+            if (siblingType == AccountType.CreditCard)
             {
                 return "TNF";
             }
@@ -183,8 +191,10 @@ internal sealed partial class TransactionsForm : Form
         _pendingInitialization = true;
 
         _lines.Clear();
-        _lines.AddRange(_account.Lines.Order());
+        _lines.AddRange(_source.GetOrderedLines());
         _dataGridView.SuspendLayout();
+
+        AccountType type = _source.GetRepresentativeType();
 
         try
         {
@@ -211,7 +221,7 @@ internal sealed partial class TransactionsForm : Form
                     Guid.Empty,
                     new DecimalExpression(line.Debit),
                     new DecimalExpression(line.Credit),
-                    _account.Type.ToBalance(runningBalance));
+                    type.ToBalance(runningBalance));
 
                 DataGridViewRow bottom = new DataGridViewRow()
                 {
@@ -222,7 +232,7 @@ internal sealed partial class TransactionsForm : Form
                 bottom.CreateCells(
                     _dataGridView,
                     string.Empty,
-                    GetLineType(line),
+                    GetLineType(line, type),
                     transaction.Memo ?? string.Empty,
                     sibling == null ? Guid.Empty : sibling.AccountId,
                     string.Empty,
@@ -330,7 +340,7 @@ internal sealed partial class TransactionsForm : Form
         Line? currentLine = GetValue(index);
 
         if (_dataGridView.Rows[bottomIndex].Cells[accountColumn.Index].Value is not Guid siblingId ||
-            ((currentLine == null || currentLine.Sibling != null) && siblingId == Guid.Empty) || siblingId == _account.Id)
+            ((currentLine == null || currentLine.Sibling != null) && siblingId == Guid.Empty) || !_source.CanGetNewLines(siblingId))
         {
             top.ErrorText = Resources.InvalidAccountError;
             posted = default;
@@ -362,35 +372,19 @@ internal sealed partial class TransactionsForm : Form
             addingNew = false;
         }
 
-        transaction.Number = number;
-        transaction.Posted = posted;
         transaction.Memo = _dataGridView[nameMemoColumn.Index, bottomIndex].Value?.ToString();
 
         string? name = _dataGridView[nameMemoColumn.Index, topIndex].Value?.ToString();
         IReadOnlyCollection<Line> lines = currentLine != null && currentLine.Sibling == null
             ? transaction.Lines
-            : new Line[]
-            {
-                new Line()
-                {
-                    AccountId = _account.Id,
-                    Balance = balance
-                },
-                new Line()
-                {
-                    AccountId = siblingId,
-                    Balance = -balance
-                }
-            };
+            : _source.GetNewLines(siblingId, balance);
 
         if (addingNew)
         {
             _company.AddTransaction(transaction, name, lines);
         }
-        else
-        {
-            _company.UpdateTransaction(transaction.Id, name, lines);
-        }
+
+        _company.UpdateTransaction(transaction.Id, number, name, posted, lines);
 
         return true;
     }
@@ -738,9 +732,8 @@ internal sealed partial class TransactionsForm : Form
 
         Transaction? clone = line.Transaction.Clone();
 
-        clone.Number = _company.NextTransactionNumber;
-
         _company.AddTransaction(clone, clone.Name, clone.Lines);
+        _company.UpdateTransaction(clone.Id, _company.NextTransactionNumber, clone.Name, clone.Posted, clone.Lines);
         TransactionHelpers.Post(posted);
     }
 
@@ -819,25 +812,23 @@ internal sealed partial class TransactionsForm : Form
             return;
         }
 
-        Transaction transaction = sibling.Transaction;
-
-        if (sibling.AccountId == _account.Id)
+        if (_source.Contains(sibling))
         {
             SelectLine(_lines.IndexOf(sibling));
 
             return;
         }
 
-        Account siblingAccount = _company.GetAccount(sibling.AccountId);
+        Account? siblingAccount = _company.GetAccount(sibling.AccountId);
 
-        if (_factory.TryActivate(siblingAccount.Id) || siblingAccount.ReadOnly)
+        if (_factory.TryActivate(sibling.AccountId) || siblingAccount.ReadOnly)
         {
             return;
         }
 
-        TransactionsForm form = new TransactionsForm(_company, siblingAccount, _factory, sibling);
+        TransactionsForm form = new TransactionsForm(_company, new AccountLineSource(_company, siblingAccount), _factory, sibling);
 
-        _factory.Register(siblingAccount.Id, form);
+        _factory.Register(sibling.AccountId, form);
     }
 
     private void OnTransactionToolStripButtonClick(object sender, EventArgs e)
@@ -859,8 +850,8 @@ internal sealed partial class TransactionsForm : Form
             _company.AccountUpdated -= OnCompanyAccountUpdated;
             _company.AccountRemoved -= OnCompanyAccountRemoved;
             _company.TransactionAdded -= OnCompanyTransactionAdded;
-            _company.TransactionUpdated -= OnCompanyTransactionInvalidated;
-            _company.TransactionRemoved -= OnCompanyTransactionInvalidated;
+            _company.TransactionUpdated -= OnCompanyTransactionUpdated;
+            _company.TransactionRemoved -= OnCompanyTransactionRemoved;
 
             if (components != null)
             {
