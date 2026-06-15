@@ -53,7 +53,7 @@ internal sealed class RecentPathManager : Component
 
     [DefaultValue(10)]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-    public int MaxPaths { get; set; } = 1;
+    public int MaxPaths { get; set; } = 10;
 
     public event EventHandler? Invalidated;
 

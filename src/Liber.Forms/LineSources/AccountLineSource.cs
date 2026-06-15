@@ -14,12 +14,6 @@ internal class AccountLineSource : ILineSource
     private readonly Company _company;
     private readonly Account _value;
 
-    public AccountLineSource(Company company, Account value)
-    {
-        _company = company;
-        _value = value;
-    }
-
     public string Name
     {
         get
@@ -36,9 +30,20 @@ internal class AccountLineSource : ILineSource
         }
     }
 
+    public AccountLineSource(Company company, Account value)
+    {
+        _company = company;
+        _value = value;
+    }
+
     public bool Contains(Line value)
     {
         return value.AccountId == _value.Id;
+    }
+
+    public bool IsAccountReadOnly(Line value)
+    {
+        return value.Sibling == null;
     }
 
     public bool CanGetNewLines(Guid siblingId)

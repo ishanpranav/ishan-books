@@ -239,7 +239,7 @@ internal sealed partial class TransactionsForm : Form
                     string.Empty,
                     string.Empty);
 
-                if (sibling == null)
+                if (_source.IsAccountReadOnly(line))
                 {
                     top.Cells[debitColumn.Index].ReadOnly = true;
                     top.Cells[creditColumn.Index].ReadOnly = true;
@@ -262,7 +262,7 @@ internal sealed partial class TransactionsForm : Form
                 Guid.Empty,
                 new DecimalExpression(0),
                 new DecimalExpression(0),
-                runningBalance);
+                type.ToBalance(runningBalance));
 
             DataGridViewRow newBottom = new DataGridViewRow()
             {
@@ -301,7 +301,7 @@ internal sealed partial class TransactionsForm : Form
 
     private Line? GetValue(int index)
     {
-        if (index > _lines.Count)
+        if (index >= _lines.Count)
         {
             return null;
         }
@@ -424,7 +424,7 @@ internal sealed partial class TransactionsForm : Form
         return false;
     }
 
-    private void CommitRow(int index)
+    private void CommitChanges(int index)
     {
         if (index >= _lines.Count && !RowHasContent(index))
         {
@@ -445,6 +445,17 @@ internal sealed partial class TransactionsForm : Form
                 TransactionHelpers.Post(posted);
             }
         });
+    }
+
+    private void RevertChanges()
+    {
+        if (_editingIndex == null)
+        {
+            return;
+        }
+
+        _editingIndex = null;
+        _dataGridView.CancelEdit();
     }
 
     private void SelectLine(int index)
@@ -501,7 +512,9 @@ internal sealed partial class TransactionsForm : Form
             return;
         }
 
-        if (_lines[index].Sibling != null)
+        SelectLine(index);
+
+        if (!_source.IsAccountReadOnly(_lines[index]))
         {
             return;
         }
@@ -634,7 +647,86 @@ internal sealed partial class TransactionsForm : Form
 
         _editingIndex = null;
 
-        CommitRow(index);
+        CommitChanges(index);
+    }
+
+    private void OnDataGridViewKeyDown(object sender, KeyEventArgs e)
+    {
+        switch (e.KeyCode)
+        {
+            case Keys.Tab:
+                DataGridViewCell? cell = _dataGridView.CurrentCell;
+
+                if (cell == null)
+                {
+                    break;
+                }
+
+                int columnIndex = cell.ColumnIndex;
+                int rowIndex = cell.RowIndex;
+                bool forward = !e.Shift;
+                int nextColumnIndex = forward ? columnIndex + 1 : columnIndex - 1;
+
+                if (nextColumnIndex < _dataGridView.ColumnCount &&
+                    _dataGridView[nextColumnIndex, rowIndex].ReadOnly)
+                {
+                    e.SuppressKeyPress = true;
+
+                    nextColumnIndex += forward ? 1 : -1;
+
+                    if (nextColumnIndex >= _dataGridView.ColumnCount)
+                    {
+                        int nextRowIndex = rowIndex + 1;
+
+                        if (nextRowIndex < _dataGridView.Rows.Count)
+                        {
+                            _dataGridView.CurrentCell = _dataGridView.Rows[nextRowIndex].Cells[0];
+                        }
+                    }
+                    else if (nextColumnIndex < 0)
+                    {
+                        int previousRowIndex = rowIndex - 1;
+
+                        if (previousRowIndex >= 0)
+                        {
+                            _dataGridView.CurrentCell = _dataGridView.Rows[previousRowIndex]
+                                .Cells[_dataGridView.ColumnCount - 1];
+                        }
+                    }
+                    else
+                    {
+                        _dataGridView.CurrentCell = _dataGridView.Rows[rowIndex].Cells[nextColumnIndex];
+                    }
+                }
+                break;
+
+            case Keys.Enter:
+                e.SuppressKeyPress = true;
+
+                if (_editingIndex == null)
+                {
+                    break;
+                }
+
+                _dataGridView.EndEdit();
+
+                int index = _editingIndex.Value;
+
+                _editingIndex = null;
+
+                CommitChanges(index);
+                SelectLine(index + 1);
+                break;
+
+            case Keys.Escape:
+                RevertChanges();
+                break;
+        }
+    }
+
+    private void OnRevertToolStripMenuItem(object sender, EventArgs e)
+    {
+        RevertChanges();
     }
 
     private void OnDataGridViewLeave(object sender, EventArgs e)
@@ -650,7 +742,7 @@ internal sealed partial class TransactionsForm : Form
 
         _editingIndex = null;
 
-        CommitRow(index);
+        CommitChanges(index);
     }
 
     private void OnCloseToolStripButtonClick(object sender, EventArgs e)

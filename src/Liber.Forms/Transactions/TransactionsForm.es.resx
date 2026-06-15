@@ -154,6 +154,16 @@
   <data name="balanceColumn.Width" type="System.Int32, mscorlib">
     <value>43</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="deleteToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+D</value>
+  </data>
+  <data name="saveToolStripMenuItem.Text" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="revertToolStripMenuItem.Text" xml:space="preserve">
+    <value>Revertir</value>
+  </data>
   <data name="closeToolStripButton.Text" xml:space="preserve">
     <value>Salir</value>
   </data>

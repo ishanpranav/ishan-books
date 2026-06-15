@@ -28,6 +28,11 @@ internal class NameLineSource : ILineSource
         return value.Transaction.Name == Name;
     }
 
+    public bool IsAccountReadOnly(Line value)
+    {
+        return true;
+    }
+
     public bool CanGetNewLines(Guid siblingId)
     {
         return false;

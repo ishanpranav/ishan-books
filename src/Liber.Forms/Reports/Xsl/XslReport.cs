@@ -167,7 +167,7 @@ public class XslReport : IntervalView, IXmlSerializable
 
         if (posted == started.Date.AddYears(1))
         {
-            return started.Year.ToString();
+            return posted.Year.ToString();
         }
 
         if (posted == started.Date.AddMonths(1))
