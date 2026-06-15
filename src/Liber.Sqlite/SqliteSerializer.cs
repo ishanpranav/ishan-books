@@ -194,9 +194,14 @@ public static class SqliteSerializer
                 }
             }
         }
-        catch (SqliteException)
+        catch (SqliteException exception)
         {
-            return false;
+            if (exception.SqliteErrorCode == 26)
+            {
+                return false;
+            }
+
+            throw;
         }
 
         return true;

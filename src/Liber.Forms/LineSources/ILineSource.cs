@@ -14,6 +14,7 @@ internal interface ILineSource
     Color Color { get; }
 
     bool Contains(Line value);
+    bool IsAccountReadOnly(Line value);
 
     bool CanGetNewLines(Guid siblingId);
     IReadOnlyCollection<Line> GetNewLines(Guid siblingId, decimal balance);
