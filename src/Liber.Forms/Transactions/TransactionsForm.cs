@@ -15,7 +15,7 @@ using Liber.MathEngine.Expressions;
 
 namespace Liber.Forms.Transactions;
 
-internal sealed partial class TransactionsForm : Form
+internal partial class TransactionsForm : Form
 {
     private readonly Company _company;
     private readonly FormFactory _factory;

@@ -13,7 +13,7 @@ using Liber.MathEngine.Expressions;
 
 namespace Liber.Forms.Transactions;
 
-internal sealed partial class TransactionForm : Form
+internal partial class TransactionForm : Form
 {
     private readonly Company _company;
 
@@ -156,7 +156,11 @@ internal sealed partial class TransactionForm : Form
             }
 
             trialBalance += balance;
-            lines.Add(new Line(accountId, balance, (string?)row.Cells[descriptionColumn.Index].Value));
+            lines.Add(new Line(
+                accountId,
+                balance,
+                (string?)row.Cells[descriptionColumn.Index].Value,
+                reconciled: null));
         }
 
         if (trialBalance != 0)

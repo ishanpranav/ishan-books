@@ -11,7 +11,7 @@ using Liber.Forms.Properties;
 
 namespace Liber.Forms.Accounts;
 
-internal sealed partial class AccountsDialog : Form
+internal partial class AccountsDialog : Form
 {
     public AccountsView Value { get; private set; }
 

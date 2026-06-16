@@ -72,13 +72,6 @@ public class Transaction :
     [Optional]
     public string? Memo { get; set; }
 
-    [Index(16)]
-    [LocalizedDisplayName(nameof(Reconciled))]
-    [Name("Reconcile Date")]
-    [NullValues("")]
-    [Optional]
-    public DateTime? Reconciled { get; set; }
-
     [Ignore]
     public IReadOnlyCollection<Line> Lines
     {

@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Drawing;
 using System.Linq;
 using System.Text.Json.Serialization;
@@ -569,6 +570,16 @@ public class Company : ICloneable
 
             line.transaction = value;
             account.lines.Add(line);
+
+            if (line.Reconciled != null)
+            {
+                DateTime reconciled = line.Reconciled.Value;
+
+                if (account.Reconciled == null || reconciled > account.Reconciled)
+                {
+                    account.Reconciled = line.Reconciled;
+                }
+            }
         }
     }
 
@@ -606,7 +617,7 @@ public class Company : ICloneable
         TrialBalance(lines);
 
         Guid id = Guid.NewGuid();
-        
+
         InitializeTransaction(value);
 
         value.Id = id;

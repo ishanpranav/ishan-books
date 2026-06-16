@@ -16,7 +16,8 @@ SELECT
             CASE WHEN slot.string_val = 'true' THEN 1 ELSE 0 END
         END) "TaxRelated",
 	account."hidden" "Inactive",
-    NULL "CashFlow"
+    NULL "CashFlow",
+    MIN(CASE WHEN slot."name" = 'reconcile-info/last-date' THEN slot.int64_val END) "Reconciled"
 FROM accounts account
 LEFT JOIN slots slot
 ON account."guid" = slot.obj_guid

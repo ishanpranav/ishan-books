@@ -6,5 +6,6 @@ SELECT
     "TransactionId",
     "AccountId",
     "Balance",
-    "Description"
+    "Description",
+    "Reconciled"
 FROM "main"."Line";

@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Liber.Forms.Lines;
 
-internal sealed partial class CheckDialog : Form
+internal partial class CheckDialog : Form
 {
     public CheckDialog(CheckView value)
     {

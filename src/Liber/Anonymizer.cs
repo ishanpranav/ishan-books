@@ -104,11 +104,6 @@ public class Anonymizer
 
         value.Memo = null;
 
-        if (value.Reconciled != null)
-        {
-            value.Reconciled = Offset(value.Reconciled.Value);
-        }
-
         Line[]? lines;
 
         if (value.Lines.Count > 0)
@@ -122,14 +117,22 @@ public class Anonymizer
             {
                 decimal balance = (decimal)double.Round((double)line.Balance * _balanceFactor, 2);
 
-                lines[i] = new Line(line.AccountId, balance, line.Description);
+                lines[i] = new Line(
+                    line.AccountId,
+                    balance,
+                    line.Description,
+                    line.Reconciled == null ? null : Offset(line.Reconciled.Value));
                 trialBalance += balance;
                 i++;
             }
 
             Line last = lines[lines.Length - 1];
 
-            lines[lines.Length - 1] = new Line(last.AccountId, last.Balance - trialBalance, last.Description);
+            lines[lines.Length - 1] = new Line(
+                last.AccountId,
+                last.Balance - trialBalance,
+                last.Description,
+                last.Reconciled == null ? null : Offset(last.Reconciled.Value));
         }
         else
         {

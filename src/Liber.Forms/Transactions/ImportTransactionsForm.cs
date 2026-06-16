@@ -30,7 +30,11 @@ internal sealed class ImportTransactionsForm : ImportForm
                 lookup[line.TransactionId] = result;
             }
 
-            result.Values.Add(new Line(accounts[line.AccountName], line.Value.Balance, line.Value.Description));
+            result.Values.Add(new Line(
+                accounts[line.AccountName],
+                line.Value.Balance,
+                line.Value.Description,
+                line.Value.Reconciled));
         }
 
         SetDataSource(lines.Select(x => x.Value).ToList());

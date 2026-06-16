@@ -10,7 +10,7 @@ using Liber.Forms.Properties;
 
 namespace Liber.Forms;
 
-internal sealed partial class ImportRulesForm : Form
+internal partial class ImportRulesForm : Form
 {
     private readonly BindingList<ImportRule> _rules = new BindingList<ImportRule>();
 

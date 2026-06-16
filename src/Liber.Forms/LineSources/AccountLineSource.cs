@@ -55,8 +55,8 @@ internal class AccountLineSource : ILineSource
     {
         return new Line[]
         {
-            new Line(_value.Id,  balance, description: null),
-            new Line(siblingId, -balance, description: null)
+            new Line(_value.Id,  balance, description: null, reconciled: null),
+            new Line(siblingId, -balance, description: null, reconciled: null)
         };
     }
 

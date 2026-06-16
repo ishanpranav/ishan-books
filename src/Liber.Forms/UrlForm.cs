@@ -10,7 +10,7 @@ using Microsoft.Web.WebView2.Core;
 
 namespace Liber.Forms;
 
-internal sealed partial class UrlForm : Form
+internal partial class UrlForm : Form
 {
     private readonly Uri? _uri;
 

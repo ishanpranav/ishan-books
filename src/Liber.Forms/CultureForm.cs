@@ -11,7 +11,7 @@ using Liber.Forms.Properties;
 
 namespace Liber.Forms;
 
-internal sealed partial class CultureForm : Form
+internal partial class CultureForm : Form
 {
     private static List<CultureInfo>? s_availableCultures;
 

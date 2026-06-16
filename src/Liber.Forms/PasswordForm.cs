@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Liber.Forms;
 
-internal sealed partial class PasswordForm : Form
+internal partial class PasswordForm : Form
 {
     public PasswordForm()
     {
