@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Drawing;
 using System.Text.Json.Serialization;
@@ -210,6 +211,11 @@ public class Account :
         }
     }
 
+    [Browsable(false)]
+    [Ignore]
+    [JsonIgnore]
+    public DateTime? Reconciled { get; internal set; }
+
     /// <summary>
     /// Gets the balance of the account up to a specific posted date.
     /// </summary>
@@ -300,7 +306,8 @@ public class Account :
             Inactive = Inactive,
             Memo = Memo,
             Placeholder = Placeholder,
-            TaxType = TaxType
+            TaxType = TaxType,
+            Reconciled = Reconciled
         };
     }
 

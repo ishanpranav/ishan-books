@@ -118,42 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 20</value>
-  </data>
-  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
-    <value>Archivo</value>
-  </data>
-  <data name="editToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 20</value>
-  </data>
-  <data name="editToolStripMenuItem1.Text" xml:space="preserve">
-    <value>&amp;Editar</value>
-  </data>
-  <data name="viewToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 20</value>
-  </data>
-  <data name="viewToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Ver</value>
-  </data>
-  <data name="reportsToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 20</value>
-  </data>
-  <data name="reportsToolStripMenuItem1.Text" xml:space="preserve">
-    <value>&amp;Reportes</value>
-  </data>
-  <data name="formToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 20</value>
-  </data>
-  <data name="formToolStripMenuItem.Text" xml:space="preserve">
-    <value>Ventana</value>
-  </data>
-  <data name="helpToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 20</value>
-  </data>
-  <data name="helpToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Ayuda</value>
-  </data>
   <data name="newToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>170, 22</value>
   </data>
@@ -166,12 +130,6 @@
   <data name="openToolStripMenuItem.Text" xml:space="preserve">
     <value>Abrir</value>
   </data>
-  <data name="importToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 22</value>
-  </data>
-  <data name="importToolStripMenuItem.Text" xml:space="preserve">
-    <value>I&amp;mportar</value>
-  </data>
   <data name="importAccountsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>193, 22</value>
   </data>
@@ -183,6 +141,12 @@
   </data>
   <data name="importTransactionsToolStripMenuItem.Text" xml:space="preserve">
     <value>Diario general (*.csv)</value>
+  </data>
+  <data name="importToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>170, 22</value>
+  </data>
+  <data name="importToolStripMenuItem.Text" xml:space="preserve">
+    <value>I&amp;mportar</value>
   </data>
   <data name="toolStripSeparator.Size" type="System.Drawing.Size, System.Drawing">
     <value>167, 6</value>
@@ -199,11 +163,8 @@
   <data name="saveAsToolStripMenuItem.Text" xml:space="preserve">
     <value>Guardar como</value>
   </data>
-  <data name="exportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 22</value>
-  </data>
-  <data name="exportToolStripMenuItem.Text" xml:space="preserve">
-    <value>Exportar</value>
+  <data name="exportCompanyJsonToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 22</value>
   </data>
   <data name="exportCompanyXmlToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>193, 22</value>
@@ -235,6 +196,12 @@
   <data name="exportAccountsIifToolStripMenuItem.Text" xml:space="preserve">
     <value>Plan de cuentas (*.iif)</value>
   </data>
+  <data name="exportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>170, 22</value>
+  </data>
+  <data name="exportToolStripMenuItem.Text" xml:space="preserve">
+    <value>Exportar</value>
+  </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
     <value>167, 6</value>
   </data>
@@ -243,6 +210,12 @@
   </data>
   <data name="editToolStripMenuItem.Text" xml:space="preserve">
     <value>Configu&amp;ración</value>
+  </data>
+  <data name="toolStripSeparator12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>167, 6</value>
+  </data>
+  <data name="anonymizeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>170, 22</value>
   </data>
   <data name="toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
     <value>167, 6</value>
@@ -261,6 +234,12 @@
   </data>
   <data name="exitToolStripMenuItem.Text" xml:space="preserve">
     <value>Salir</value>
+  </data>
+  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 20</value>
+  </data>
+  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
+    <value>Archivo</value>
   </data>
   <data name="cultureToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>234, 22</value>
@@ -283,6 +262,12 @@
   <data name="combinePdfDocumentsToolStripMenuItem.Text" xml:space="preserve">
     <value>Combinar documentos PDF</value>
   </data>
+  <data name="editToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 20</value>
+  </data>
+  <data name="editToolStripMenuItem1.Text" xml:space="preserve">
+    <value>&amp;Editar</value>
+  </data>
   <data name="accountsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>226, 22</value>
   </data>
@@ -304,11 +289,8 @@
   <data name="checkToolStripMenuItem.Text" xml:space="preserve">
     <value>Hacer cheques</value>
   </data>
-  <data name="transactionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="accountTransactionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>226, 22</value>
-  </data>
-  <data name="transactionsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Usar registro</value>
   </data>
   <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
     <value>223, 6</value>
@@ -322,29 +304,53 @@
   <data name="toolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
     <value>223, 6</value>
   </data>
+  <data name="newAccountToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 22</value>
+  </data>
+  <data name="newAccountToolStripMenuItem.Text" xml:space="preserve">
+    <value>Nueva cuenta</value>
+  </data>
+  <data name="reconcileAccountToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 22</value>
+  </data>
+  <data name="reconcileAccountToolStripMenuItem.Text" xml:space="preserve">
+    <value>Conciliar cuenta</value>
+  </data>
+  <data name="removeAccountToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 22</value>
+  </data>
+  <data name="removeAccountToolStripMenuItem.Text" xml:space="preserve">
+    <value>Eliminar cuenta</value>
+  </data>
+  <data name="toolStripSeparator13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>211, 6</value>
+  </data>
+  <data name="nameTransactionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 22</value>
+  </data>
+  <data name="nameTransactionsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Transacciones por nombre</value>
+  </data>
   <data name="otherWindowsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>226, 22</value>
   </data>
   <data name="otherWindowsToolStripMenuItem.Text" xml:space="preserve">
     <value>Otros ventanas</value>
   </data>
-  <data name="newAccountToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 22</value>
+  <data name="viewToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 20</value>
   </data>
-  <data name="newAccountToolStripMenuItem.Text" xml:space="preserve">
-    <value>Nueva cuenta</value>
-  </data>
-  <data name="removeAccountToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 22</value>
-  </data>
-  <data name="removeAccountToolStripMenuItem.Text" xml:space="preserve">
-    <value>Eliminar cuenta</value>
-  </data>
-  <data name="otherReportsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 22</value>
+  <data name="viewToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Ver</value>
   </data>
   <data name="otherReportsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Otros reportes</value>
+  </data>
+  <data name="reportsToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 20</value>
+  </data>
+  <data name="reportsToolStripMenuItem1.Text" xml:space="preserve">
+    <value>&amp;Reportes</value>
   </data>
   <data name="closeAllToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>138, 22</value>
@@ -360,6 +366,12 @@
   </data>
   <data name="formsToolStripMenuItem.Text" xml:space="preserve">
     <value>Ventanas</value>
+  </data>
+  <data name="formToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 20</value>
+  </data>
+  <data name="formToolStripMenuItem.Text" xml:space="preserve">
+    <value>Ventana</value>
   </data>
   <data name="contentsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>130, 22</value>
@@ -384,6 +396,12 @@
   </data>
   <data name="aboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>130, 22</value>
+  </data>
+  <data name="helpToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 20</value>
+  </data>
+  <data name="helpToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Ayuda</value>
   </data>
   <data name="newToolStripButton.Text" xml:space="preserve">
     <value>&amp;Nuevo</value>

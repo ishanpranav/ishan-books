@@ -6,10 +6,12 @@ INSERT INTO "main"."Line" (
     "TransactionId",
     "AccountId",
     "Balance",
-    "Description"
+    "Description",
+    "Reconciled"
 ) VALUES (
     @transactionId,
     @accountId,
     @balance,
-    @description
+    @description,
+    @reconciled
 );

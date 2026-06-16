@@ -16,7 +16,7 @@ using Liber.Forms.Transactions;
 
 namespace Liber.Forms.Accounts;
 
-internal sealed partial class AccountsForm : Form
+internal partial class AccountsForm : Form
 {
     private readonly Company _company;
     private readonly FormFactory _factory;
@@ -98,7 +98,7 @@ internal sealed partial class AccountsForm : Form
         DateTime lastPosted = Settings.Default.LastPosted;
         Line[] lines = account == null ? Array.Empty<Line>() : new Line[]
         {
-            new Line(account.Id, balance: 0, description: null)
+            new Line(account.Id, balance: 0, description: null, reconciled: null)
         };
         Transaction transaction = new Transaction(
             Guid.Empty,

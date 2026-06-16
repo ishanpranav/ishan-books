@@ -40,17 +40,17 @@ CREATE TABLE "Account" (
 	"Color"	        INTEGER,
 	"TaxType"	    TEXT,
     "Inactive"      INTEGER NOT NULL DEFAULT 0,
-    "CashFlow"      INTEGER NOT NULL DEFAULT 0,
+    "CashFlow"      INTEGER NOT NULL DEFAULT 0
 	PRIMARY KEY("Id"),
     FOREIGN KEY("ParentId") REFERENCES "Account"("Id")
 );
 
 CREATE TABLE "Transaction" (
-    "Id"     TEXT NOT NULL UNIQUE,
-    "Posted" TEXT NOT NULL,
-    "Number" INTEGER       DEFAULT 0,
-    "Name"   TEXT,
-    "Memo"   TEXT,
+    "Id"            TEXT NOT NULL UNIQUE,
+    "Posted"        TEXT NOT NULL,
+    "Number"        INTEGER       DEFAULT 0,
+    "Name"          TEXT,
+    "Memo"          TEXT
     PRIMARY KEY("Id")
 );
 
@@ -59,7 +59,7 @@ CREATE TABLE "Line" (
     "AccountId"     TEXT    NOT NULL,
     "Balance"       INTEGER,
     "Description"   TEXT,
-    "Reconciled"    TEXT,
+    "Reconciled"    TEXT
     FOREIGN KEY("TransactionId") REFERENCES "Transaction"("Id"),
     FOREIGN KEY("AccountId")     REFERENCES "Account"("Id")
 );

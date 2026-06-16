@@ -31,7 +31,7 @@ using PdfSharp.Pdf.IO;
 
 namespace Liber.Forms;
 
-internal sealed partial class MainForm : Form
+internal partial class MainForm : Form
 {
     private readonly JsonCompanyWriter _jsonWriter = new JsonCompanyWriter(FormattedStrings.JsonOptions);
     private readonly XmlReportWriter _xmlWriter = new XmlReportWriter();
@@ -632,6 +632,10 @@ internal sealed partial class MainForm : Form
     private void OnNewAccountToolStripMenuItemClick(object sender, EventArgs e)
     {
         _factory.AutoRegister(() => new NewAccountForm(_company));
+    }
+
+    private void OnReconcileAccountToolStripMenuItemClick(object sender, EventArgs e)
+    {
     }
 
     private void OnRemoveAccountToolStripMenuItemClick(object sender, EventArgs e)

@@ -91,6 +91,8 @@ public static class GnuCashSqliteSerializer
                         TaxType = !await reader.IsDBNullAsync(9) && reader.GetBoolean(9),
                         Inactive = reader.GetBoolean(10)
                     });
+
+                    DateTime? reconciled = await SqliteUtilities.GetDateTimeAsync(reader, 12);
                 }
             }
         }
@@ -114,7 +116,11 @@ public static class GnuCashSqliteSerializer
                         lines[id] = values;
                     }
 
-                    values.Add(new Line(reader.GetGuid(1), reader.GetDecimal(2), await SqliteUtilities.GetStringAsync(reader, 3)));
+                    values.Add(new Line(
+                        reader.GetGuid(1),
+                        reader.GetDecimal(2),
+                        await SqliteUtilities.GetStringAsync(reader, 3),
+                        await SqliteUtilities.GetDateTimeAsync(reader, 4)));
                 }
             }
         }

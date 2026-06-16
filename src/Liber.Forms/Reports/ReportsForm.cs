@@ -17,7 +17,7 @@ using Microsoft.Web.WebView2.Core;
 
 namespace Liber.Forms.Reports;
 
-internal sealed partial class ReportsForm : Form
+internal partial class ReportsForm : Form
 {
     private readonly ReportEngine _engine;
     private int _favoriteIndex = 0;

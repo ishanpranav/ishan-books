@@ -153,10 +153,11 @@ public static class SqliteSerializer
                         command.Transaction = dbTransaction;
                         command.CommandText = Queries.InsertLine;
 
+                        command.Parameters.AddWithValue("@transactionId", transaction.Id);
                         command.Parameters.AddWithValue("@accountId", line.AccountId);
                         command.Parameters.AddWithValue("@balance", line.Balance);
                         command.Parameters.AddWithValue("@description", ValueOf(line.Description));
-                        command.Parameters.AddWithValue("@transactionId", transaction.Id);
+                        command.Parameters.AddWithValue("@reconciled", line.Reconciled);
 
                         await command.ExecuteNonQueryAsync();
                     }
@@ -263,7 +264,11 @@ public static class SqliteSerializer
                         lines[id] = values;
                     }
 
-                    values.Add(new Line(reader.GetGuid(1), reader.GetDecimal(2), await SqliteUtilities.GetStringAsync(reader, 3)));
+                    values.Add(new Line(
+                        reader.GetGuid(1),
+                        reader.GetDecimal(2),
+                        await SqliteUtilities.GetStringAsync(reader, 3),
+                        await SqliteUtilities.GetDateTimeAsync(reader, 4)));
                 }
             }
         }

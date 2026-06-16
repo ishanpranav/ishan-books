@@ -39,11 +39,6 @@ internal sealed class FormFactory : Component
         container.Add(this);
     }
 
-    public string GetDisplayName(Guid key)
-    {
-        return _forms[key].Text;
-    }
-
     public void Register(Guid key, Form value)
     {
         _forms.Add(key, value);
@@ -120,8 +115,6 @@ internal sealed class FormFactory : Component
         {
             form.Close();
         }
-
-        _forms.Clear();
     }
 
     public bool TryActivate(Guid key)

@@ -28,6 +28,13 @@ public class Line :
     [NumberStyles(NumberStyles.Currency)]
     public decimal Balance { get; private set; }
 
+    [Index(16)]
+    [LocalizedDisplayName(nameof(Reconciled))]
+    [Name("Reconcile Date")]
+    [NullValues("")]
+    [Optional]
+    public DateTime? Reconciled { get; internal set; }
+
     [JsonIgnore]
     [LocalizedDisplayName(nameof(Debit))]
     public decimal Debit
@@ -95,11 +102,12 @@ public class Line :
     public Line() { }
 
     [JsonConstructor]
-    public Line(Guid accountId, decimal balance, string? description)
+    public Line(Guid accountId, decimal balance, string? description, DateTime? reconciled)
     {
         AccountId = accountId;
         Balance = balance;
         Description = description;
+        Reconciled = reconciled;
     }
 
     public override string ToString()
@@ -109,7 +117,7 @@ public class Line :
 
     public Line Clone()
     {
-        return new Line(AccountId, Balance, Description);
+        return new Line(AccountId, Balance, Description, Reconciled);
     }
 
     object ICloneable.Clone()
