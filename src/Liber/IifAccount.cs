@@ -83,7 +83,7 @@ public class IifAccount
     {
         get
         {
-            return Value.Balance;
+            return Value.GetBalance();
         }
     }
 

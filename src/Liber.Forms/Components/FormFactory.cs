@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Liber.Forms.Components;
 
-internal sealed class FormFactory : Component
+internal class FormFactory : Component
 {
     private readonly Dictionary<Guid, Form> _forms = new Dictionary<Guid, Form>();
 

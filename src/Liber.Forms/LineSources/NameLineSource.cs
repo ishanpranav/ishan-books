@@ -28,9 +28,9 @@ internal class NameLineSource : ILineSource
         return value.Transaction.Name == Name;
     }
 
-    public bool IsAccountReadOnly(Line value)
+    public bool CanEditSibling(Line value)
     {
-        return true;
+        return false;
     }
 
     public bool CanGetNewLines(Guid siblingId)
@@ -92,6 +92,11 @@ internal class NameLineSource : ILineSource
     public bool IsInvalidatedByTransactionRemoved(Guid id)
     {
         return true;
+    }
+
+    public bool IsInvalidatedByTransactionReconciled(Guid id)
+    {
+        return _company.GetTransaction(id).Name == Name;
     }
 
     public bool IsInvalidatedByTransactionUpdated(Guid id)

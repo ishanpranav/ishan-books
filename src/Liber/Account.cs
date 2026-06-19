@@ -152,28 +152,6 @@ public class Account :
     public bool Inactive { get; set; }
 
     /// <summary>
-    /// Gets the current balance of the account.
-    /// </summary>
-    /// <value>The current balance of the account.</value>
-    [Browsable(false)]
-    [Ignore]
-    [JsonIgnore]
-    public decimal Balance
-    {
-        get
-        {
-            decimal result = 0;
-
-            foreach (Line line in lines)
-            {
-                result += line.Balance;
-            }
-
-            return result;
-        }
-    }
-
-    /// <summary>
     /// Gets the subaccounts of the current account.
     /// </summary>
     /// <value>The account children.</value>
@@ -238,6 +216,18 @@ public class Account :
         return result;
     }
 
+    public decimal GetBalance()
+    {
+        decimal result = 0;
+
+        foreach (Line line in lines)
+        {
+            result += line.Balance;
+        }
+
+        return result;
+    }
+
     /// <summary>
     /// Gets the balance of the account within a specific date range.
     /// </summary>
@@ -253,6 +243,21 @@ public class Account :
             Transaction transaction = line.Transaction;
 
             if (transaction.Posted >= started && transaction.Posted <= posted && filter.IsMatch(transaction.Memo ?? string.Empty))
+            {
+                result += line.Balance;
+            }
+        }
+
+        return result;
+    }
+
+    public decimal GetReconciledBalance()
+    {
+        decimal result = 0;
+
+        foreach (Line line in lines)
+        {
+            if (line.Reconciled != null)
             {
                 result += line.Balance;
             }

@@ -198,7 +198,7 @@ public class HtmlReport : IntervalView
                     ? account.GetBalance(started, posted, Filter)
                     : account.GetBalance(posted, Filter);
 
-                data[label] = (double)account.Type.ToBalance(debit);
+                data[label] = (double)account.Type.Toggle(debit);
                 colors[label] = GetColorOrDefault(account.Name, account.Type, Company.GetColorOrDefault(account), debit);
 
                 if (data[label] != 0)
@@ -240,7 +240,7 @@ public class HtmlReport : IntervalView
 
     private static Color GetBaseColor(AccountType type, decimal debit)
     {
-        decimal balance = type.ToBalance(debit);
+        decimal balance = type.Toggle(debit);
 
         if (type == AccountType.Equity)
         {
@@ -424,7 +424,7 @@ public class HtmlReport : IntervalView
         {
             double value = balances.Previous == 0
                 ? double.PositiveInfinity
-                : double.Round((double)type.ToBalance((balances.Balance / balances.Previous) - 1) * 100, digits: 2);
+                : double.Round((double)type.Toggle((balances.Balance / balances.Previous) - 1) * 100, digits: 2);
 
             if (value < min)
             {
@@ -439,7 +439,7 @@ public class HtmlReport : IntervalView
             nodes.Add(new ChartJSChartDatasetTree(name)
             {
                 Parent = FormattedStrings.GetString(type.ToString()),
-                Value = (double)type.ToBalance(balances.Balance)
+                Value = (double)type.Toggle(balances.Balance)
             });
             values.Add((value, type));
             types.Add(type);
@@ -516,7 +516,7 @@ public class HtmlReport : IntervalView
 
         foreach ((string, AccountType Type, CashFlow CashFlow, Color, BalanceInfo Balances) entry in balances)
         {
-            decimal flow = entry.Type.ToBalance(entry.Balances.Balance);
+            decimal flow = entry.Type.Toggle(entry.Balances.Balance);
 
             switch (entry.Type)
             {
@@ -591,7 +591,7 @@ public class HtmlReport : IntervalView
 
             if (entry.Type.IsTemporary())
             {
-                decimal value = entry.Type.ToBalance(entry.Balances.Balance);
+                decimal value = entry.Type.Toggle(entry.Balances.Balance);
 
                 if (value != 0)
                 {

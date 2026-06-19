@@ -54,6 +54,6 @@ internal static class SqliteUtilities
             return null;
         }
 
-        return reader.GetDateTime(ordinal);
+        return reader.GetDateTime(ordinal).Date;
     }
 }

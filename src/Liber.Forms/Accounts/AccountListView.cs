@@ -25,11 +25,12 @@ internal class AccountListView : ListViewEx
     {
         View = View.Details;
         FullRowSelect = true;
+        SmallImageList = AccountImageListManager.ImageList;
 
         ColumnHeader nameColumn = Columns.Add(Properties.Resources.Name);
+        ColumnHeader numberColumn = Columns.Add(Properties.Resources.Number);
 
-        Columns.Add(Properties.Resources.Number);
-
+        numberColumn.DisplayIndex = 0;
         nameColumn.DisplayIndex = 1;
 
         foreach (AccountType type in AccountTypeExtensions.GetSortedValues())
@@ -51,13 +52,16 @@ internal class AccountListView : ListViewEx
                     continue;
                 }
 
-                ListViewItem item = Items.Add(account.Id.ToString(), account.Name, imageIndex: 0);
+                ListViewItem item = Items.Add(
+                    account.Id.ToString(),
+                    account.Name,
+                    AccountImageListManager.GetImageIndex(company.GetColorOrDefault(account)));
                 AccountType type = account.Type;
                 string key = type.ToString();
 
                 item.Tag = account;
                 item.Group = Groups[key];
-                item.SubItems.Add(account.Number.ToString());
+                item.SubItems.Add(account.Number.ToStringOrEmpty());
 
                 if (checkedAccounts.Contains(account))
                 {

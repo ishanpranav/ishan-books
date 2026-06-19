@@ -8,7 +8,6 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
-using System.Security.Principal;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -47,8 +46,10 @@ internal partial class MainForm : Form
         InitializeComponent();
         SystemFeatures.Initialize(this);
 
-        Text = SystemFeatures.ApplicationName;
-        aboutToolStripMenuItem.Text = FormattedStrings.AboutText;
+        string applicationName = SystemFeatures.ApplicationName;
+
+        Text = applicationName;
+        aboutToolStripMenuItem.Text = string.Format(aboutToolStripMenuItem.Text ?? "{0}", applicationName);
         exportCompanyJsonToolStripMenuItem.Tag = new Writer(FilterIndex.Json, _jsonWriter);
         exportCompanyXmlToolStripMenuItem.Tag = new Writer(FilterIndex.Xml, _xmlWriter);
         exportAccountsToolStripMenuItem.Tag = new Writer(FilterIndex.Csv, new GnuCashAccountWriter());
@@ -636,18 +637,41 @@ internal partial class MainForm : Form
 
     private void OnReconcileAccountToolStripMenuItemClick(object sender, EventArgs e)
     {
-    }
+        IEnumerator<Account> enumerator = _company.Accounts.GetEnumerator();
 
-    private void OnRemoveAccountToolStripMenuItemClick(object sender, EventArgs e)
-    {
-        using AccountDialog accountDialog = new AccountDialog(new EditableAccountView(_company), validator: null);
-
-        if (accountDialog.ShowDialog() != DialogResult.OK)
+        if (!enumerator.MoveNext())
         {
             return;
         }
 
-        if (!_company.RemoveAccount(accountDialog.Value.Id))
+        using StatementForm form = new StatementForm(_company)
+        {
+            AccountId = _company.Accounts.MaxBy(x => x.Reconciled)!.Id
+        };
+
+        if (form.ShowDialog() != DialogResult.OK)
+        {
+            return;
+        }
+
+        _factory.AutoRegister(() => new ReconcileForm(
+            _company,
+            form.Reconciled,
+            form.ReconciledBalance,
+            form.EndingBalance,
+            _company.GetAccount(form.AccountId)));
+    }
+
+    private void OnRemoveAccountToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        using AccountDialog form = new AccountDialog(new EditableAccountView(_company), validator: null);
+
+        if (form.ShowDialog() != DialogResult.OK)
+        {
+            return;
+        }
+
+        if (!_company.RemoveAccount(form.Value.Id))
         {
             FormattedStrings.ShowDeleteAccountMessage();
         }

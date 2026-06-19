@@ -171,9 +171,9 @@ public static class AccountTypeExtensions
         return value == Debit || value == Credit;
     }
 
-    public static decimal ToBalance(this AccountType value, decimal debit)
+    public static decimal Toggle(this AccountType value, decimal balance)
     {
-        return short.Sign((short)value) * debit;
+        return short.Sign((short)value) * balance;
     }
 
     public static CashFlow ToCashFlow(this AccountType value)
@@ -186,14 +186,14 @@ public static class AccountTypeExtensions
             case AccountType.CreditCard:
             case AccountType.OtherCurrentLiability:
                 return CashFlow.Operating;
-                
+
             case AccountType.FixedAsset:
             case AccountType.OtherAsset:
                 return CashFlow.Investing;
 
             case AccountType.LongTermLiability:
                 return CashFlow.Financing;
-               
+
             default: return CashFlow.None;
         }
     }

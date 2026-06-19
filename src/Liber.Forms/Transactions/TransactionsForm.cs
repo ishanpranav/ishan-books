@@ -22,8 +22,8 @@ internal partial class TransactionsForm : Form
     private readonly List<Line> _lines = new List<Line>();
     private readonly ILineSource _source;
 
-    private int _selectedLineIndex = -1;
     private bool _pendingInitialization;
+    private int _selectedLineIndex = -1;
     private int? _editingIndex;
 
     public TransactionsForm(Company company, ILineSource source, FormFactory factory, Line line) :
@@ -53,6 +53,7 @@ internal partial class TransactionsForm : Form
         company.AccountRemoved += OnCompanyAccountRemoved;
         company.TransactionAdded += OnCompanyTransactionAdded;
         company.TransactionUpdated += OnCompanyTransactionUpdated;
+        company.TransactionReconciled += OnCompanyTransactionReconciled;
         company.TransactionRemoved += OnCompanyTransactionRemoved;
         _company = company;
         postedColumn.ValueType = typeof(DateTime);
@@ -98,6 +99,14 @@ internal partial class TransactionsForm : Form
     private void OnCompanyTransactionUpdated(object? sender, GuidEventArgs e)
     {
         if (_source.IsInvalidatedByTransactionUpdated(e.Id))
+        {
+            InvalidateTransactions();
+        }
+    }
+
+    private void OnCompanyTransactionReconciled(object? sender, GuidEventArgs e)
+    {
+        if (_source.IsInvalidatedByTransactionReconciled(e.Id))
         {
             InvalidateTransactions();
         }
@@ -216,12 +225,13 @@ internal partial class TransactionsForm : Form
                 top.CreateCells(
                     _dataGridView,
                     transaction.Posted,
-                    transaction.Number,
+                    transaction.Number.ToStringOrEmpty(),
                     transaction.Name ?? string.Empty,
                     Guid.Empty,
+                    line.Reconciled != null,
                     new DecimalExpression(line.Debit),
                     new DecimalExpression(line.Credit),
-                    type.ToBalance(runningBalance));
+                    type.Toggle(runningBalance));
 
                 DataGridViewRow bottom = new DataGridViewRow()
                 {
@@ -235,11 +245,12 @@ internal partial class TransactionsForm : Form
                     GetLineType(line, type),
                     transaction.Memo ?? string.Empty,
                     sibling == null ? Guid.Empty : sibling.AccountId,
+                    false,
                     string.Empty,
                     string.Empty,
                     string.Empty);
 
-                if (_source.IsAccountReadOnly(line))
+                if (!_source.CanEditSibling(line))
                 {
                     top.Cells[debitColumn.Index].ReadOnly = true;
                     top.Cells[creditColumn.Index].ReadOnly = true;
@@ -260,9 +271,10 @@ internal partial class TransactionsForm : Form
                 string.Empty,
                 string.Empty,
                 Guid.Empty,
+                false,
                 new DecimalExpression(0),
                 new DecimalExpression(0),
-                type.ToBalance(runningBalance));
+                type.Toggle(runningBalance));
 
             DataGridViewRow newBottom = new DataGridViewRow()
             {
@@ -275,6 +287,7 @@ internal partial class TransactionsForm : Form
                 string.Empty,
                 string.Empty,
                 Guid.Empty,
+                false,
                 string.Empty,
                 string.Empty,
                 string.Empty);
@@ -339,8 +352,7 @@ internal partial class TransactionsForm : Form
 
         Line? currentLine = GetValue(index);
 
-        if (_dataGridView.Rows[bottomIndex].Cells[accountColumn.Index].Value is not Guid siblingId ||
-            ((currentLine == null || currentLine.Sibling != null) && siblingId == Guid.Empty) || !_source.CanGetNewLines(siblingId))
+        if (_dataGridView.Rows[bottomIndex].Cells[accountColumn.Index].Value is not Guid siblingId)
         {
             top.ErrorText = Resources.InvalidAccountError;
             posted = default;
@@ -348,10 +360,29 @@ internal partial class TransactionsForm : Form
             return false;
         }
 
+        if (siblingId == Guid.Empty)
+        {
+            if (currentLine == null && !_source.CanGetNewLines(siblingId))
+            {
+                top.ErrorText = Resources.InvalidAccountError;
+                posted = default;
+
+                return false;
+            }
+
+            if (currentLine != null && !_source.CanEditSibling(currentLine))
+            {
+                top.ErrorText = Resources.InvalidAccountError;
+                posted = default;
+
+                return false;
+            }
+        }
+
         if (_dataGridView[postedColumn.Index, topIndex].Value is not DateTime postedValue)
         {
-            posted = default;
             top.ErrorText = Resources.InvalidAccountError;
+            posted = default;
 
             return false;
         }
@@ -514,7 +545,7 @@ internal partial class TransactionsForm : Form
 
         SelectLine(index);
 
-        if (!_source.IsAccountReadOnly(_lines[index]))
+        if (_source.CanEditSibling(_lines[index]))
         {
             return;
         }
@@ -943,6 +974,7 @@ internal partial class TransactionsForm : Form
             _company.AccountRemoved -= OnCompanyAccountRemoved;
             _company.TransactionAdded -= OnCompanyTransactionAdded;
             _company.TransactionUpdated -= OnCompanyTransactionUpdated;
+            _company.TransactionReconciled -= OnCompanyTransactionReconciled;
             _company.TransactionRemoved -= OnCompanyTransactionRemoved;
 
             if (components != null)

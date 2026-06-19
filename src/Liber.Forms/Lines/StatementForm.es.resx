@@ -137,19 +137,31 @@
     <value>Saldo final</value>
   </data>
   <data name="reconciledDateTimePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>192, 9</value>
+    <value>294, 9</value>
   </data>
-  <data name="openingBalanceNumericUpDown.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 23</value>
+  <data name="reconciledBalanceNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
+    <value>172, 38</value>
+  </data>
+  <data name="reconciledBalanceNumericUpDown.Size" type="System.Drawing.Size, System.Drawing">
+    <value>233, 23</value>
+  </data>
+  <data name="endingBalanceNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
+    <value>172, 67</value>
   </data>
   <data name="endingBalanceNumericUpDown.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 23</value>
+    <value>233, 23</value>
   </data>
   <data name="acceptButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>228, 96</value>
+    <value>330, 125</value>
+  </data>
+  <data name="accountComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>172, 96</value>
+  </data>
+  <data name="accountComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>233, 23</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>315, 129</value>
+    <value>417, 158</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Conciliar cuenta</value>

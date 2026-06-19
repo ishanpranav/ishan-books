@@ -265,6 +265,7 @@ public class Company : ICloneable
     public event EventHandler<GuidEventArgs>? AccountRemoved;
     public event EventHandler<GuidEventArgs>? TransactionAdded;
     public event EventHandler<GuidEventArgs>? TransactionUpdated;
+    public event EventHandler<GuidEventArgs>? TransactionReconciled;
     public event EventHandler<GuidEventArgs>? TransactionRemoved;
 
     /// <summary>
@@ -561,6 +562,11 @@ public class Company : ICloneable
     {
         foreach (Line line in lines)
         {
+            if (line.Balance == 0)
+            {
+                continue;
+            }
+
             Account account = _accounts[line.AccountId];
 
             if (string.IsNullOrWhiteSpace(line.Description))
@@ -629,6 +635,11 @@ public class Company : ICloneable
         {
             foreach (Line line in lines)
             {
+                if (line.Balance == 0)
+                {
+                    continue;
+                }
+
                 value.lines.Add(line);
             }
         }
@@ -666,6 +677,11 @@ public class Company : ICloneable
 
             foreach (Line line in lines)
             {
+                if (line.Balance == 0)
+                {
+                    continue;
+                }
+
                 value.lines.Add(line);
             }
         }
@@ -743,17 +759,52 @@ public class Company : ICloneable
 
     public decimal GetBalance(Account account, Regex filter)
     {
-        if (account.Id == EquityAccountId || account.Id == OtherEquityAccountId)
-        {
-            return account.GetBalance(Posted, filter);
-        }
-
         if (account.Type.IsTemporary())
         {
             return account.GetBalance(Started, Posted, filter);
         }
 
         return account.GetBalance(Posted, filter);
+    }
+
+    public decimal Reconcile(Account account, DateTime reconciled, decimal endingBalance, IEnumerable<Line> lines)
+    {
+        if (account.Type.IsTemporary())
+        {
+            throw new ArgumentException(message: null, nameof(account));
+        }
+
+        decimal reconciledBalance = account.GetReconciledBalance();
+        HashSet<Guid> transactionIds = new HashSet<Guid>();
+
+        foreach (Line line in lines)
+        {
+            if (line.AccountId != account.Id)
+            {
+                throw new ArgumentException(message: null, nameof(lines));
+            }
+
+            reconciledBalance += line.Balance;
+
+            transactionIds.Add(line.Transaction.Id);
+        }
+
+        if (endingBalance != reconciledBalance)
+        {
+            return endingBalance - reconciledBalance;
+        }
+
+        foreach (Line line in lines)
+        {
+            line.Reconciled = reconciled;
+        }
+
+        foreach (Guid transactionId in transactionIds)
+        {
+            TransactionReconciled?.Invoke(sender: this, new GuidEventArgs(transactionId));
+        }
+
+        return 0;
     }
 
     private BalanceInfo ComputeBalances(Account account, ReportTypes type, DateTime started, DateTime posted, Regex filter)
