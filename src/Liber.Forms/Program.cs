@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Forms;
+using Liber.Forms.Accounts;
 using Liber.Forms.Properties;
 
 namespace Liber.Forms;
@@ -15,36 +16,43 @@ internal static class Program
     [STAThread]
     private static void Main(string[] args)
     {
-        ApplicationConfiguration.Initialize();
-        SystemFeatures.Initialize();
-
-        if (!string.IsNullOrWhiteSpace(Settings.Default.Culture))
+        try
         {
-            CultureInfo culture = new CultureInfo(Settings.Default.Culture);
+            ApplicationConfiguration.Initialize();
+            SystemFeatures.Initialize();
 
-            CultureInfo.CurrentCulture = culture;
-            CultureInfo.CurrentUICulture = culture;
-            Application.CurrentCulture = culture;
+            if (!string.IsNullOrWhiteSpace(Settings.Default.Culture))
+            {
+                CultureInfo culture = new CultureInfo(Settings.Default.Culture);
+
+                CultureInfo.CurrentCulture = culture;
+                CultureInfo.CurrentUICulture = culture;
+                Application.CurrentCulture = culture;
+            }
+
+            IReadOnlyList<string> arguments;
+
+            if (SystemFeatures.IsNetworkDeployed)
+            {
+                arguments = SystemFeatures.GetArguments();
+            }
+            else
+            {
+                arguments = args;
+            }
+
+            if (arguments.Count > 0)
+            {
+                Application.Run(new MainForm(arguments[0]));
+            }
+            else
+            {
+                Application.Run(new MainForm());
+            }
         }
-
-        IReadOnlyList<string> arguments;
-
-        if (SystemFeatures.IsNetworkDeployed)
+        finally
         {
-            arguments = SystemFeatures.GetArguments();
-        }
-        else
-        {
-            arguments = args;
-        }
-
-        if (arguments.Count > 0)
-        {
-            Application.Run(new MainForm(arguments[0]));
-        }
-        else
-        {
-            Application.Run(new MainForm());
+            AccountImageListManager.ImageList.Dispose();
         }
     }
 }

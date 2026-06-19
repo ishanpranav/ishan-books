@@ -88,7 +88,7 @@ public class XslReport : IntervalView, IXmlSerializable
     {
         return fm(Enum
             .Parse<AccountType>(type)
-            .ToBalance(balance));
+            .Toggle(balance));
     }
 
     [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "<Pending>")]
@@ -131,7 +131,7 @@ public class XslReport : IntervalView, IXmlSerializable
 
         return fp((double)(Enum
             .Parse<AccountType>(type)
-            .ToBalance(balance) / denominator));
+            .Toggle(balance) / denominator));
     }
 
     [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "<Pending>")]

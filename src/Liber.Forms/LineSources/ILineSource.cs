@@ -14,8 +14,8 @@ internal interface ILineSource
     Color Color { get; }
 
     bool Contains(Line value);
-    bool IsAccountReadOnly(Line value);
 
+    bool CanEditSibling(Line value);
     bool CanGetNewLines(Guid siblingId);
     IReadOnlyCollection<Line> GetNewLines(Guid siblingId, decimal balance);
 
@@ -25,6 +25,7 @@ internal interface ILineSource
     bool IsInvalidatedByAccountRemoved(Guid id);
     bool IsInvalidatedByAccountUpdated(Guid id);
     bool IsInvalidatedByTransactionAdded(Guid id);
+    bool IsInvalidatedByTransactionReconciled(Guid id);
     bool IsInvalidatedByTransactionRemoved(Guid id);
     bool IsInvalidatedByTransactionUpdated(Guid id);
 }

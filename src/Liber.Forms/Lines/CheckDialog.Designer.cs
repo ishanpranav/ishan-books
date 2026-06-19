@@ -33,11 +33,7 @@ partial class CheckDialog
     private void InitializeComponent()
     {
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CheckDialog));
-        _listView = new System.Windows.Forms.ListViewEx();
-        nameColumn = new System.Windows.Forms.ColumnHeader();
-        postedColumn = new System.Windows.Forms.ColumnHeader();
-        numberColumn = new System.Windows.Forms.ColumnHeader();
-        balanceColumn = new System.Windows.Forms.ColumnHeader();
+        _listView = new LineListView();
         acceptButton = new System.Windows.Forms.Button();
         cancelButton = new System.Windows.Forms.Button();
         SuspendLayout();
@@ -46,31 +42,13 @@ partial class CheckDialog
         // 
         _listView.AllowColumnReorder = true;
         resources.ApplyResources(_listView, "_listView");
-        _listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { nameColumn, postedColumn, numberColumn, balanceColumn });
         _listView.FullRowSelect = true;
         _listView.MultiSelect = false;
         _listView.Name = "_listView";
         _listView.SortColumn = 0;
-        _listView.SortOrder = System.Windows.Forms.SortOrder.None;
         _listView.UseCompatibleStateImageBehavior = false;
         _listView.View = System.Windows.Forms.View.Details;
         _listView.ItemActivate += OnAcceptButtonClick;
-        // 
-        // nameColumn
-        // 
-        resources.ApplyResources(nameColumn, "nameColumn");
-        // 
-        // postedColumn
-        // 
-        resources.ApplyResources(postedColumn, "postedColumn");
-        // 
-        // numberColumn
-        // 
-        resources.ApplyResources(numberColumn, "numberColumn");
-        // 
-        // balanceColumn
-        // 
-        resources.ApplyResources(balanceColumn, "balanceColumn");
         // 
         // acceptButton
         // 
@@ -86,7 +64,7 @@ partial class CheckDialog
         cancelButton.UseVisualStyleBackColor = true;
         cancelButton.Click += OnCancelButtonClick;
         // 
-        // CheckForm
+        // CheckDialog
         // 
         AcceptButton = acceptButton;
         resources.ApplyResources(this, "$this");
@@ -95,17 +73,13 @@ partial class CheckDialog
         Controls.Add(acceptButton);
         Controls.Add(cancelButton);
         Controls.Add(_listView);
-        Name = "CheckForm";
+        Name = "CheckDialog";
         ResumeLayout(false);
     }
 
     #endregion
 
-    private System.Windows.Forms.ListViewEx _listView;
+    private LineListView _listView;
     private System.Windows.Forms.Button acceptButton;
     private System.Windows.Forms.Button cancelButton;
-    private System.Windows.Forms.ColumnHeader postedColumn;
-    private System.Windows.Forms.ColumnHeader numberColumn;
-    private System.Windows.Forms.ColumnHeader nameColumn;
-    private System.Windows.Forms.ColumnHeader balanceColumn;
 }

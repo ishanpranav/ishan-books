@@ -5,7 +5,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Drawing;
 using System.Windows.Forms;
 using Humanizer;
 using Liber.Forms.Components;
@@ -21,7 +20,6 @@ internal partial class AccountsForm : Form
     private readonly Company _company;
     private readonly FormFactory _factory;
     private readonly Dictionary<Guid, ListViewItem> _items = new Dictionary<Guid, ListViewItem>();
-    private readonly Dictionary<Color, int> _imageIndices = new Dictionary<Color, int>();
     private readonly ReportEngine _engine;
 
     public AccountsForm(Company company, FormFactory factory, ReportEngine engine)
@@ -37,6 +35,7 @@ internal partial class AccountsForm : Form
         _factory = factory;
         _engine = engine;
         inactiveToolStripMenuItem.Checked = Settings.Default.Inactive;
+        _listView.SmallImageList = AccountImageListManager.ImageList;
 
         InitializeAccounts();
     }
@@ -126,47 +125,21 @@ internal partial class AccountsForm : Form
     private void AddSubItems(ListViewItem item, Account value)
     {
         item.Text = value.Name;
+        item.ImageIndex = AccountImageListManager.GetImageIndex(_company.GetColorOrDefault(value));
 
-        decimal balance = value.Type.ToBalance(_company.GetBalance(value, Filters.Any()));
-        Color color = _company.GetColorOrDefault(value);
+        item.SubItems.Add(value.Number.ToStringOrEmpty()).Tag = value.Number;
+        item.SubItems.Add(value.Type.Humanize()).Tag = value.Type;
+        item.SubItems.Add(value.CashFlow.Humanize()).Tag = value.CashFlow;
+        item.SubItems.Add(FormattedStrings.GetTaxTypeText(value.TaxType)).Tag = value.TaxType;
 
-        if (!_imageIndices.TryGetValue(color, out int imageIndex))
-        {
-            imageIndex = _imageList.Images.Count;
-            _imageIndices[color] = imageIndex;
+        decimal balance = value.Type.Toggle(_company.GetBalance(value, Filters.Any()));
 
-            _imageList.Images.Add(CreateColorImage(color));
-        }
-
-        item.ImageIndex = imageIndex;
-
-        item.SubItems.Add(value.Number.ToString()).Tag = value.Number;
-        item.SubItems.Add(value.Type.Humanize());
-        item.SubItems.Add(value.CashFlow.Humanize());
-        item.SubItems.Add(FormattedStrings.GetTaxTypeText(value.TaxType));
         item.SubItems.Add(balance.ToLocalizedString()).Tag = balance;
 
         if (value.ReadOnly)
         {
             item.ForeColor = Colors.Gray;
         }
-    }
-
-    private static Bitmap CreateColorImage(Color color)
-    {
-        Bitmap result = new Bitmap(16, 16);
-
-        using Graphics graphics = Graphics.FromImage(result);
-
-        graphics.Clear(Color.Transparent);
-
-        using SolidBrush solidBrush = new SolidBrush(color);
-        using Pen pen = new Pen(Colors.Gray);
-
-        graphics.FillRectangle(solidBrush, x: 3, y: 3, width: 10, height: 10);
-        graphics.DrawRectangle(pen, x: 3, y: 3, width: 9, height: 9);
-
-        return result;
     }
 
     private void OnCompanyAccountAdded(object? sender, GuidEventArgs e)
@@ -264,6 +237,31 @@ internal partial class AccountsForm : Form
         {
             InitializeTransactions(account);
         }
+    }
+
+    private void OnReconcileToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        if (!TryGetSelection(out Account? account))
+        {
+            return;
+        }
+
+        using StatementForm form = new StatementForm(_company)
+        {
+            AccountId = account.Id
+        };
+
+        if (form.ShowDialog() != DialogResult.OK)
+        {
+            return;
+        }
+
+        _factory.AutoRegister(() => new ReconcileForm(
+            _company,
+            form.Reconciled,
+            form.ReconciledBalance,
+            form.EndingBalance,
+            account));
     }
 
     private void OnListViewAfterLabelEdit(object sender, LabelEditEventArgs e)

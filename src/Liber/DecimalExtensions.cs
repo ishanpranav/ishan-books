@@ -48,6 +48,16 @@ public static class DecimalExtensions
         return rounded.ToString(" #,##0 ;(#,##0);   -   ");
     }
 
+    public static string ToStringOrEmpty(this decimal value)
+    {
+        if (value == 0)
+        {
+            return string.Empty;
+        }
+
+        return value.ToString();
+    }
+
     public static bool IsPow10(this decimal value)
     {
         if (value <= 0)

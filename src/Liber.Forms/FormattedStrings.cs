@@ -34,14 +34,6 @@ internal static class FormattedStrings
         JsonOptions.Converters.Add(new TypeConverterJsonConverterAdapter());
     }
 
-    public static string AboutText
-    {
-        get
-        {
-            return string.Format(GetString("AboutText{0}"), SystemFeatures.ApplicationName);
-        }
-    }
-
     public static string GrossProfit
     {
         get
@@ -240,6 +232,21 @@ internal static class FormattedStrings
         }
 
         return string.Format(GetString("CheckWords{0}{1}"), ((int)integral).ToWords(), fractional);
+    }
+
+    private static string GetClearedCountFormat()
+    {
+        return GetString("ClearedCount{0}{1}");
+    }
+
+    public static string GetClearedDebitCount(int count)
+    {
+        return string.Format(GetClearedCountFormat(), count, Properties.Resources.Debit.ToQuantity(count));
+    }
+
+    public static string GetClearedCreditCount(int count)
+    {
+        return string.Format(GetClearedCountFormat(), count, Properties.Resources.Credit.ToQuantity(count));
     }
 
     public static string GetMultipleWords(decimal multiple)

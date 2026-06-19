@@ -3,7 +3,6 @@
 // Licensed under the MIT License.
 
 using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
 
 namespace System.Windows.Forms;
 
@@ -12,6 +11,7 @@ internal class ListViewEx : ListView
     public ListViewEx()
     {
         AllowColumnReorder = true;
+        GridLines = true;
         ListViewItemSorter = new ListViewItemComparer(this);
     }
 

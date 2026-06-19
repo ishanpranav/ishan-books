@@ -117,4 +117,50 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Débitos</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Créditos</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 15</value>
+  </data>
+  <data name="label7.Text" xml:space="preserve">
+    <value>Diferencia</value>
+  </data>
+  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 15</value>
+  </data>
+  <data name="label6.Text" xml:space="preserve">
+    <value>Saldo conciliado</value>
+  </data>
+  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 15</value>
+  </data>
+  <data name="label5.Text" xml:space="preserve">
+    <value>Saldo final</value>
+  </data>
+  <data name="cancelButton.Text" xml:space="preserve">
+    <value>&amp;Cancelar</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 15</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Fecha del estado de cuenta</value>
+  </data>
+  <data name="reconciledDateTimePicker.Location" type="System.Drawing.Point, System.Drawing">
+    <value>168, 6</value>
+  </data>
+  <data name="label11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 15</value>
+  </data>
+  <data name="label11.Text" xml:space="preserve">
+    <value>Saldo inicial</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Conciliar {0}</value>
+  </data>
 </root>

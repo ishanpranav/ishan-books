@@ -8,6 +8,6 @@ namespace Liber;
 
 public static partial class Filters
 {
-    [GeneratedRegex(".*")]
+    [GeneratedRegex(@"[\s\S]*")]
     public static partial Regex Any();
 }

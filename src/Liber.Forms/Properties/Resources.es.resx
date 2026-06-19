@@ -126,6 +126,15 @@
   <data name="CompaniesJumpListCustomCategory" xml:space="preserve">
     <value>Empresas</value>
   </data>
+  <data name="Credit" xml:space="preserve">
+    <value>débito</value>
+  </data>
+  <data name="Debit" xml:space="preserve">
+    <value>crédito</value>
+  </data>
+  <data name="DebitCredit" xml:space="preserve">
+    <value>Importe</value>
+  </data>
   <data name="DeleteAccountText" xml:space="preserve">
     <value>No se pudo eliminar la cuenta porque contiene transacciones.</value>
   </data>
@@ -158,5 +167,8 @@
   </data>
   <data name="Number" xml:space="preserve">
     <value>Número</value>
+  </data>
+  <data name="Posted" xml:space="preserve">
+    <value>Fecha</value>
   </data>
 </root>

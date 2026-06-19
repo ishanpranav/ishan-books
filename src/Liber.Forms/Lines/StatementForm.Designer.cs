@@ -37,12 +37,12 @@ partial class StatementForm
         label2 = new System.Windows.Forms.Label();
         label3 = new System.Windows.Forms.Label();
         reconciledDateTimePicker = new System.Windows.Forms.DateTimePicker();
-        openingBalanceNumericUpDown = new System.Windows.Forms.NumericUpDown();
+        reconciledBalanceNumericUpDown = new System.Windows.Forms.NumericUpDown();
         endingBalanceNumericUpDown = new System.Windows.Forms.NumericUpDown();
         acceptButton = new System.Windows.Forms.Button();
         label4 = new System.Windows.Forms.Label();
         accountComboBox = new System.Windows.Forms.ComboBox();
-        ((System.ComponentModel.ISupportInitialize)openingBalanceNumericUpDown).BeginInit();
+        ((System.ComponentModel.ISupportInitialize)reconciledBalanceNumericUpDown).BeginInit();
         ((System.ComponentModel.ISupportInitialize)endingBalanceNumericUpDown).BeginInit();
         SuspendLayout();
         // 
@@ -66,12 +66,14 @@ partial class StatementForm
         resources.ApplyResources(reconciledDateTimePicker, "reconciledDateTimePicker");
         reconciledDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
         reconciledDateTimePicker.Name = "reconciledDateTimePicker";
+        reconciledDateTimePicker.ValueChanged += OnReconciledDateTimePickerValueChanged;
         // 
-        // openingBalanceNumericUpDown
+        // reconciledBalanceNumericUpDown
         // 
-        resources.ApplyResources(openingBalanceNumericUpDown, "openingBalanceNumericUpDown");
-        openingBalanceNumericUpDown.DecimalPlaces = 2;
-        openingBalanceNumericUpDown.Name = "openingBalanceNumericUpDown";
+        resources.ApplyResources(reconciledBalanceNumericUpDown, "reconciledBalanceNumericUpDown");
+        reconciledBalanceNumericUpDown.DecimalPlaces = 2;
+        reconciledBalanceNumericUpDown.Name = "reconciledBalanceNumericUpDown";
+        reconciledBalanceNumericUpDown.ReadOnly = true;
         // 
         // endingBalanceNumericUpDown
         // 
@@ -97,8 +99,9 @@ partial class StatementForm
         accountComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
         accountComboBox.FormattingEnabled = true;
         accountComboBox.Name = "accountComboBox";
+        accountComboBox.SelectedIndexChanged += OnAccountComboBoxSelectedIndexChanged;
         // 
-        // ReconciliationContextForm
+        // StatementForm
         // 
         AcceptButton = acceptButton;
         resources.ApplyResources(this, "$this");
@@ -107,14 +110,14 @@ partial class StatementForm
         Controls.Add(label4);
         Controls.Add(acceptButton);
         Controls.Add(endingBalanceNumericUpDown);
-        Controls.Add(openingBalanceNumericUpDown);
+        Controls.Add(reconciledBalanceNumericUpDown);
         Controls.Add(reconciledDateTimePicker);
         Controls.Add(label3);
         Controls.Add(label2);
         Controls.Add(label1);
         MaximizeBox = false;
-        Name = "ReconciliationContextForm";
-        ((System.ComponentModel.ISupportInitialize)openingBalanceNumericUpDown).EndInit();
+        Name = "StatementForm";
+        ((System.ComponentModel.ISupportInitialize)reconciledBalanceNumericUpDown).EndInit();
         ((System.ComponentModel.ISupportInitialize)endingBalanceNumericUpDown).EndInit();
         ResumeLayout(false);
         PerformLayout();
@@ -126,7 +129,7 @@ partial class StatementForm
     private System.Windows.Forms.Label label2;
     private System.Windows.Forms.Label label3;
     private System.Windows.Forms.DateTimePicker reconciledDateTimePicker;
-    private System.Windows.Forms.NumericUpDown openingBalanceNumericUpDown;
+    private System.Windows.Forms.NumericUpDown reconciledBalanceNumericUpDown;
     private System.Windows.Forms.NumericUpDown endingBalanceNumericUpDown;
     private System.Windows.Forms.Button acceptButton;
     private System.Windows.Forms.Label label4;

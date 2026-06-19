@@ -41,9 +41,9 @@ internal class AccountLineSource : ILineSource
         return value.AccountId == _value.Id;
     }
 
-    public bool IsAccountReadOnly(Line value)
+    public bool CanEditSibling(Line value)
     {
-        return value.Sibling == null;
+        return value.Sibling != null;
     }
 
     public bool CanGetNewLines(Guid siblingId)
@@ -81,6 +81,13 @@ internal class AccountLineSource : ILineSource
     }
 
     public bool IsInvalidatedByTransactionAdded(Guid id)
+    {
+        Transaction transaction = _company.GetTransaction(id);
+
+        return transaction.Lines.Any(x => x.AccountId == _value.Id);
+    }
+
+    public bool IsInvalidatedByTransactionReconciled(Guid id)
     {
         Transaction transaction = _company.GetTransaction(id);
 

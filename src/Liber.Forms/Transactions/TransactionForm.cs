@@ -44,8 +44,9 @@ internal partial class TransactionForm : Form
         _dataGridView.DebitColumnIndex = debitColumn.Index;
         _dataGridView.CreditColumnIndex = creditColumn.Index;
         _dataGridView.Remainder = GetRemainder;
-        company.TransactionRemoved += OnCompanyTransactionRemoved;
         company.TransactionUpdated += OnCompanyTransactionUpdated;
+        company.TransactionReconciled += OnCompanyTransactionReconciled;
+        company.TransactionRemoved += OnCompanyTransactionRemoved;
         _company = company;
         DialogResult = DialogResult.Cancel;
         numberNumericUpDown.Maximum = decimal.MaxValue;
@@ -57,6 +58,14 @@ internal partial class TransactionForm : Form
     private void OnCompanyTransactionUpdated(object? sender, GuidEventArgs e)
     {
         if (Value != null && e.Id == Value.Id)
+        {
+            InitializeTransaction(_company.GetTransaction(e.Id));
+        }
+    }
+
+    private void OnCompanyTransactionReconciled(object? sender, GuidEventArgs e)
+    {
+        if (Value != null && e.Id != Value.Id)
         {
             InitializeTransaction(_company.GetTransaction(e.Id));
         }
@@ -87,7 +96,8 @@ internal partial class TransactionForm : Form
                 line.AccountId,
                 new DecimalExpression(line.Debit),
                 new DecimalExpression(line.Credit),
-                line.Description ?? string.Empty);
+                line.Description ?? string.Empty,
+                line.Reconciled != null);
         }
 
         _dataGridView.AutoResizeColumns();
@@ -365,6 +375,7 @@ internal partial class TransactionForm : Form
         {
             _company.TransactionUpdated -= OnCompanyTransactionUpdated;
             _company.TransactionRemoved -= OnCompanyTransactionRemoved;
+            _company.TransactionReconciled -= OnCompanyTransactionReconciled;
 
             if (components != null)
             {

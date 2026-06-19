@@ -12,7 +12,7 @@ using Liber.Forms.Properties;
 
 namespace Liber.Forms.Components;
 
-internal sealed class RecentPathManager : Component
+internal class RecentPathManager : Component
 {
     private readonly Dictionary<string, DateTime> _dates = new Dictionary<string, DateTime>();
 
