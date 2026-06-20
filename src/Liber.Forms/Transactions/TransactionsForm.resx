@@ -460,6 +460,54 @@
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 2, 3, 2</value>
   </data>
+  <data name="&gt;&gt;postedColumn.Name" xml:space="preserve">
+    <value>postedColumn</value>
+  </data>
+  <data name="&gt;&gt;postedColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CalendarColumn, Liber.Forms, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;numberTypeColumn.Name" xml:space="preserve">
+    <value>numberTypeColumn</value>
+  </data>
+  <data name="&gt;&gt;numberTypeColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nameMemoColumn.Name" xml:space="preserve">
+    <value>nameMemoColumn</value>
+  </data>
+  <data name="&gt;&gt;nameMemoColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;accountColumn.Name" xml:space="preserve">
+    <value>accountColumn</value>
+  </data>
+  <data name="&gt;&gt;accountColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewComboBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;reconciledColumn.Name" xml:space="preserve">
+    <value>reconciledColumn</value>
+  </data>
+  <data name="&gt;&gt;reconciledColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;debitColumn.Name" xml:space="preserve">
+    <value>debitColumn</value>
+  </data>
+  <data name="&gt;&gt;debitColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;creditColumn.Name" xml:space="preserve">
+    <value>creditColumn</value>
+  </data>
+  <data name="&gt;&gt;creditColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;balanceColumn.Name" xml:space="preserve">
+    <value>balanceColumn</value>
+  </data>
+  <data name="&gt;&gt;balanceColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;openToolStripMenuItem.Name" xml:space="preserve">
     <value>openToolStripMenuItem</value>
   </data>
@@ -627,54 +675,6 @@
   </data>
   <data name="&gt;&gt;transactionToolStripButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;postedColumn.Name" xml:space="preserve">
-    <value>postedColumn</value>
-  </data>
-  <data name="&gt;&gt;postedColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CalendarColumn, Liber.Forms, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;numberTypeColumn.Name" xml:space="preserve">
-    <value>numberTypeColumn</value>
-  </data>
-  <data name="&gt;&gt;numberTypeColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;nameMemoColumn.Name" xml:space="preserve">
-    <value>nameMemoColumn</value>
-  </data>
-  <data name="&gt;&gt;nameMemoColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;accountColumn.Name" xml:space="preserve">
-    <value>accountColumn</value>
-  </data>
-  <data name="&gt;&gt;accountColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewComboBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;reconciledColumn.Name" xml:space="preserve">
-    <value>reconciledColumn</value>
-  </data>
-  <data name="&gt;&gt;reconciledColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;debitColumn.Name" xml:space="preserve">
-    <value>debitColumn</value>
-  </data>
-  <data name="&gt;&gt;debitColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;creditColumn.Name" xml:space="preserve">
-    <value>creditColumn</value>
-  </data>
-  <data name="&gt;&gt;creditColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;balanceColumn.Name" xml:space="preserve">
-    <value>balanceColumn</value>
-  </data>
-  <data name="&gt;&gt;balanceColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>TransactionsForm</value>

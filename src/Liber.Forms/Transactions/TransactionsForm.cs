@@ -370,7 +370,7 @@ internal partial class TransactionsForm : Form
                 return false;
             }
 
-            if (currentLine != null && !_source.CanEditSibling(currentLine))
+            if (currentLine != null && _source.CanEditSibling(currentLine))
             {
                 top.ErrorText = Resources.InvalidAccountError;
                 posted = default;

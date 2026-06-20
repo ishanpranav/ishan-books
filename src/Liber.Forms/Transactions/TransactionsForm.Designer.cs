@@ -35,6 +35,14 @@ partial class TransactionsForm
         DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
         DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
         _dataGridView = new TransactionGridView();
+        postedColumn = new CalendarColumn();
+        numberTypeColumn = new DataGridViewTextBoxColumn();
+        nameMemoColumn = new DataGridViewTextBoxColumn();
+        accountColumn = new DataGridViewComboBoxColumn();
+        reconciledColumn = new DataGridViewCheckBoxColumn();
+        debitColumn = new DataGridViewTextBoxColumn();
+        creditColumn = new DataGridViewTextBoxColumn();
+        balanceColumn = new DataGridViewTextBoxColumn();
         _contextMenuStrip = new ContextMenuStrip(components);
         openToolStripMenuItem = new ToolStripMenuItem();
         toolStripSeparator4 = new ToolStripSeparator();
@@ -65,14 +73,6 @@ partial class TransactionsForm
         goToSiblingToolStripButton = new ToolStripButton();
         toolStripSeparator7 = new ToolStripSeparator();
         transactionToolStripButton = new ToolStripButton();
-        postedColumn = new CalendarColumn();
-        numberTypeColumn = new DataGridViewTextBoxColumn();
-        nameMemoColumn = new DataGridViewTextBoxColumn();
-        accountColumn = new DataGridViewComboBoxColumn();
-        reconciledColumn = new DataGridViewCheckBoxColumn();
-        debitColumn = new DataGridViewTextBoxColumn();
-        creditColumn = new DataGridViewTextBoxColumn();
-        balanceColumn = new DataGridViewTextBoxColumn();
         ((System.ComponentModel.ISupportInitialize)_dataGridView).BeginInit();
         _contextMenuStrip.SuspendLayout();
         _toolStrip.SuspendLayout();
@@ -89,6 +89,7 @@ partial class TransactionsForm
         _dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
         _dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
         _dataGridView.BackgroundColor = System.Drawing.Color.FromArgb(248, 249, 250);
+        _dataGridView.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
         dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
         dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
         dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
@@ -123,6 +124,77 @@ partial class TransactionsForm
         _dataGridView.SelectionChanged += OnDataGridViewSelectionChanged;
         _dataGridView.KeyDown += OnDataGridViewKeyDown;
         _dataGridView.Leave += OnDataGridViewLeave;
+        // 
+        // postedColumn
+        // 
+        postedColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+        dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+        postedColumn.DefaultCellStyle = dataGridViewCellStyle3;
+        resources.ApplyResources(postedColumn, "postedColumn");
+        postedColumn.Name = "postedColumn";
+        postedColumn.Resizable = DataGridViewTriState.True;
+        // 
+        // numberTypeColumn
+        // 
+        numberTypeColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+        dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+        numberTypeColumn.DefaultCellStyle = dataGridViewCellStyle4;
+        resources.ApplyResources(numberTypeColumn, "numberTypeColumn");
+        numberTypeColumn.Name = "numberTypeColumn";
+        numberTypeColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
+        // 
+        // nameMemoColumn
+        // 
+        nameMemoColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+        nameMemoColumn.DefaultCellStyle = dataGridViewCellStyle5;
+        resources.ApplyResources(nameMemoColumn, "nameMemoColumn");
+        nameMemoColumn.Name = "nameMemoColumn";
+        nameMemoColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
+        // 
+        // accountColumn
+        // 
+        accountColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+        dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+        accountColumn.DefaultCellStyle = dataGridViewCellStyle6;
+        accountColumn.DisplayStyle = DataGridViewComboBoxDisplayStyle.Nothing;
+        resources.ApplyResources(accountColumn, "accountColumn");
+        accountColumn.Name = "accountColumn";
+        // 
+        // reconciledColumn
+        // 
+        resources.ApplyResources(reconciledColumn, "reconciledColumn");
+        reconciledColumn.Name = "reconciledColumn";
+        reconciledColumn.ReadOnly = true;
+        reconciledColumn.Resizable = DataGridViewTriState.False;
+        // 
+        // debitColumn
+        // 
+        debitColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+        dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleRight;
+        debitColumn.DefaultCellStyle = dataGridViewCellStyle7;
+        resources.ApplyResources(debitColumn, "debitColumn");
+        debitColumn.Name = "debitColumn";
+        debitColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
+        // 
+        // creditColumn
+        // 
+        creditColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+        dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleRight;
+        creditColumn.DefaultCellStyle = dataGridViewCellStyle8;
+        resources.ApplyResources(creditColumn, "creditColumn");
+        creditColumn.Name = "creditColumn";
+        creditColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
+        // 
+        // balanceColumn
+        // 
+        balanceColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+        dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleRight;
+        balanceColumn.DefaultCellStyle = dataGridViewCellStyle9;
+        resources.ApplyResources(balanceColumn, "balanceColumn");
+        balanceColumn.Name = "balanceColumn";
+        balanceColumn.ReadOnly = true;
+        balanceColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
         // 
         // _contextMenuStrip
         // 
@@ -325,77 +397,6 @@ partial class TransactionsForm
         resources.ApplyResources(transactionToolStripButton, "transactionToolStripButton");
         transactionToolStripButton.Name = "transactionToolStripButton";
         transactionToolStripButton.Click += OnTransactionToolStripButtonClick;
-        // 
-        // postedColumn
-        // 
-        postedColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-        dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-        postedColumn.DefaultCellStyle = dataGridViewCellStyle3;
-        resources.ApplyResources(postedColumn, "postedColumn");
-        postedColumn.Name = "postedColumn";
-        postedColumn.Resizable = DataGridViewTriState.True;
-        // 
-        // numberTypeColumn
-        // 
-        numberTypeColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-        dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-        numberTypeColumn.DefaultCellStyle = dataGridViewCellStyle4;
-        resources.ApplyResources(numberTypeColumn, "numberTypeColumn");
-        numberTypeColumn.Name = "numberTypeColumn";
-        numberTypeColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
-        // 
-        // nameMemoColumn
-        // 
-        nameMemoColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-        dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-        nameMemoColumn.DefaultCellStyle = dataGridViewCellStyle5;
-        resources.ApplyResources(nameMemoColumn, "nameMemoColumn");
-        nameMemoColumn.Name = "nameMemoColumn";
-        nameMemoColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
-        // 
-        // accountColumn
-        // 
-        accountColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-        dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-        accountColumn.DefaultCellStyle = dataGridViewCellStyle6;
-        accountColumn.DisplayStyle = DataGridViewComboBoxDisplayStyle.Nothing;
-        resources.ApplyResources(accountColumn, "accountColumn");
-        accountColumn.Name = "accountColumn";
-        // 
-        // reconciledColumn
-        // 
-        resources.ApplyResources(reconciledColumn, "reconciledColumn");
-        reconciledColumn.Name = "reconciledColumn";
-        reconciledColumn.ReadOnly = true;
-        reconciledColumn.Resizable = DataGridViewTriState.False;
-        // 
-        // debitColumn
-        // 
-        debitColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-        dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleRight;
-        debitColumn.DefaultCellStyle = dataGridViewCellStyle7;
-        resources.ApplyResources(debitColumn, "debitColumn");
-        debitColumn.Name = "debitColumn";
-        debitColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
-        // 
-        // creditColumn
-        // 
-        creditColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-        dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleRight;
-        creditColumn.DefaultCellStyle = dataGridViewCellStyle8;
-        resources.ApplyResources(creditColumn, "creditColumn");
-        creditColumn.Name = "creditColumn";
-        creditColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
-        // 
-        // balanceColumn
-        // 
-        balanceColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-        dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleRight;
-        balanceColumn.DefaultCellStyle = dataGridViewCellStyle9;
-        resources.ApplyResources(balanceColumn, "balanceColumn");
-        balanceColumn.Name = "balanceColumn";
-        balanceColumn.ReadOnly = true;
-        balanceColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
         // 
         // TransactionsForm
         // 
