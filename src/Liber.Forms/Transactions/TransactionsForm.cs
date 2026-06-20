@@ -8,7 +8,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using Liber.Forms.AccountViews;
-using Liber.Forms.Components;
+using Liber.Forms.Forms;
 using Liber.Forms.LineSources;
 using Liber.Forms.Properties;
 using Liber.MathEngine.Expressions;
@@ -99,10 +99,7 @@ internal partial class TransactionsForm : Form
 
     private void OnCompanyTransactionUpdated(object? sender, GuidEventArgs e)
     {
-        if (_source.IsInvalidatedByTransactionUpdated(e.Id))
-        {
-            InvalidateTransactions();
-        }
+        InvalidateTransactions();
     }
 
     private void OnCompanyTransactionReconciled(object? sender, GuidEventArgs e)

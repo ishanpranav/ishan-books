@@ -68,6 +68,7 @@ namespace Liber.Forms.Accounts
             _listView.ContextMenuStrip = _contextMenu;
             resources.ApplyResources(_listView, "_listView");
             _listView.FullRowSelect = true;
+            _listView.GridLines = true;
             _listView.LabelEdit = true;
             _listView.MultiSelect = false;
             _listView.Name = "_listView";

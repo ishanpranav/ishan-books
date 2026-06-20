@@ -201,6 +201,7 @@ internal partial class ReportsForm : Form
                 if (item.Tag is IDisposable disposable)
                 {
                     disposable.Dispose();
+
                     item.Tag = null;
                 }
             }
@@ -208,6 +209,7 @@ internal partial class ReportsForm : Form
             if (components != null)
             {
                 components.Dispose();
+
                 components = null;
             }
         }

@@ -42,7 +42,7 @@ internal sealed class ListViewItemComparer : Comparer<ListViewItem>
                 y?.SubItems[_listView.SortColumn].Text);
         }
 
-        switch (_listView.SortOrder)
+        switch (_listView.Sorting)
         {
             case SortOrder.Ascending:
                 return comparison;

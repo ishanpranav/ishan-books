@@ -4,7 +4,7 @@
 
 using System;
 
-namespace Liber.Forms.Components;
+namespace Liber.Forms.RecentPaths;
 
 internal sealed class RecentPath : IComparable<RecentPath>, IComparable
 {

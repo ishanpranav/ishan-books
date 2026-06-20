@@ -638,7 +638,16 @@
   <data name="_r_1_sankey-diagram" xml:space="preserve">
     <value>Income and Expense Report</value>
   </data>
-  <data name="ClearedCount{0}{1}" xml:space="preserve">
-    <value>{0} cleared {1}</value>
+  <data name="ClearedCount{0}" xml:space="preserve">
+    <value>{0} cleared</value>
+  </data>
+  <data name="NullReconciledDescription{0}" xml:space="preserve">
+    <value>{0} has never been reconciled</value>
+  </data>
+  <data name="OverdueReconciledDescription{0}{1}" xml:space="preserve">
+    <value>{0} has not been reconciled in {1}</value>
+  </data>
+  <data name="OverduePostedDescription{0}{1}" xml:space="preserve">
+    <value>{0} has no transactions in the last {1}</value>
   </data>
 </root>

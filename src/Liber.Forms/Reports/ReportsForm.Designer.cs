@@ -1,4 +1,6 @@
-﻿namespace Liber.Forms.Reports
+﻿using Liber.Forms.RecentPaths;
+
+namespace Liber.Forms.Reports
 {
     partial class ReportsForm
     {
@@ -24,7 +26,7 @@
             _propertyGrid = new System.Windows.Forms.PropertyGrid();
             _webView = new Microsoft.Web.WebView2.WinForms.WebView2();
             _backgroundWorker = new System.ComponentModel.BackgroundWorker();
-            _recentPathManager = new Liber.Forms.Components.RecentPathManager(components);
+            _recentPathManager = new Liber.Forms.RecentPaths.RecentPathManager(components);
             _timer = new System.Windows.Forms.Timer(components);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
@@ -139,7 +141,7 @@
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.PropertyGrid _propertyGrid;
         private System.ComponentModel.BackgroundWorker _backgroundWorker;
-        private Components.RecentPathManager _recentPathManager;
+        private RecentPathManager _recentPathManager;
         private System.Windows.Forms.Timer _timer;
     }
 }

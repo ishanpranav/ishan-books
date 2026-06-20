@@ -89,18 +89,8 @@ internal class NameLineSource : ILineSource
         return _company.GetTransaction(id).Name == Name;
     }
 
-    public bool IsInvalidatedByTransactionRemoved(Guid id)
-    {
-        return true;
-    }
-
     public bool IsInvalidatedByTransactionReconciled(Guid id)
     {
         return _company.GetTransaction(id).Name == Name;
-    }
-
-    public bool IsInvalidatedByTransactionUpdated(Guid id)
-    {
-        return true;
     }
 }
