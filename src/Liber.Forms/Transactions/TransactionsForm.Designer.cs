@@ -23,17 +23,17 @@ partial class TransactionsForm
     private void InitializeComponent()
     {
         components = new System.ComponentModel.Container();
-        DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-        DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-        DataGridViewCellStyle dataGridViewCellStyle10 = new DataGridViewCellStyle();
-        DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle11 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle12 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle20 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TransactionsForm));
-        DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-        DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-        DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-        DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-        DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-        DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle16 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle17 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle18 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle19 = new DataGridViewCellStyle();
         _dataGridView = new TransactionGridView();
         postedColumn = new CalendarColumn();
         numberTypeColumn = new DataGridViewTextBoxColumn();
@@ -43,7 +43,7 @@ partial class TransactionsForm
         debitColumn = new DataGridViewTextBoxColumn();
         creditColumn = new DataGridViewTextBoxColumn();
         balanceColumn = new DataGridViewTextBoxColumn();
-        _contextMenuStrip = new ContextMenuStrip(components);
+        _contextMenu = new ContextMenuStrip(components);
         openToolStripMenuItem = new ToolStripMenuItem();
         toolStripSeparator4 = new ToolStripSeparator();
         duplicateToolStripMenuItem = new ToolStripMenuItem();
@@ -74,7 +74,7 @@ partial class TransactionsForm
         toolStripSeparator7 = new ToolStripSeparator();
         transactionToolStripButton = new ToolStripButton();
         ((System.ComponentModel.ISupportInitialize)_dataGridView).BeginInit();
-        _contextMenuStrip.SuspendLayout();
+        _contextMenu.SuspendLayout();
         _toolStrip.SuspendLayout();
         SuspendLayout();
         // 
@@ -83,32 +83,32 @@ partial class TransactionsForm
         _dataGridView.AllowUserToAddRows = false;
         _dataGridView.AllowUserToDeleteRows = false;
         _dataGridView.AllowUserToResizeRows = false;
-        dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(33, 37, 41);
-        dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
-        dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-        _dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+        dataGridViewCellStyle11.ForeColor = System.Drawing.Color.FromArgb(33, 37, 41);
+        dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
+        dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.Black;
+        _dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
         _dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
         _dataGridView.BackgroundColor = System.Drawing.Color.FromArgb(248, 249, 250);
         _dataGridView.ClipboardCopyMode = DataGridViewClipboardCopyMode.Disable;
-        dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-        dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-        dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-        dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-        dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-        dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-        _dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+        dataGridViewCellStyle12.Alignment = DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
+        dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+        dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
+        dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+        dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+        dataGridViewCellStyle12.WrapMode = DataGridViewTriState.True;
+        _dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
         _dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
         _dataGridView.Columns.AddRange(new DataGridViewColumn[] { postedColumn, numberTypeColumn, nameMemoColumn, accountColumn, reconciledColumn, debitColumn, creditColumn, balanceColumn });
-        _dataGridView.ContextMenuStrip = _contextMenuStrip;
-        dataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
-        dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 9F);
-        dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
-        dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
-        dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.Black;
-        dataGridViewCellStyle10.WrapMode = DataGridViewTriState.False;
-        _dataGridView.DefaultCellStyle = dataGridViewCellStyle10;
+        _dataGridView.ContextMenuStrip = _contextMenu;
+        dataGridViewCellStyle20.Alignment = DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Window;
+        dataGridViewCellStyle20.Font = new System.Drawing.Font("Segoe UI", 9F);
+        dataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.ControlText;
+        dataGridViewCellStyle20.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
+        dataGridViewCellStyle20.SelectionForeColor = System.Drawing.Color.Black;
+        dataGridViewCellStyle20.WrapMode = DataGridViewTriState.False;
+        _dataGridView.DefaultCellStyle = dataGridViewCellStyle20;
         resources.ApplyResources(_dataGridView, "_dataGridView");
         _dataGridView.GridColor = System.Drawing.Color.FromArgb(33, 37, 41);
         _dataGridView.MultiSelect = false;
@@ -128,8 +128,8 @@ partial class TransactionsForm
         // postedColumn
         // 
         postedColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-        dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-        postedColumn.DefaultCellStyle = dataGridViewCellStyle3;
+        dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleLeft;
+        postedColumn.DefaultCellStyle = dataGridViewCellStyle13;
         resources.ApplyResources(postedColumn, "postedColumn");
         postedColumn.Name = "postedColumn";
         postedColumn.Resizable = DataGridViewTriState.True;
@@ -137,8 +137,8 @@ partial class TransactionsForm
         // numberTypeColumn
         // 
         numberTypeColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-        dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-        numberTypeColumn.DefaultCellStyle = dataGridViewCellStyle4;
+        dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleLeft;
+        numberTypeColumn.DefaultCellStyle = dataGridViewCellStyle14;
         resources.ApplyResources(numberTypeColumn, "numberTypeColumn");
         numberTypeColumn.Name = "numberTypeColumn";
         numberTypeColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -146,8 +146,8 @@ partial class TransactionsForm
         // nameMemoColumn
         // 
         nameMemoColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-        dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-        nameMemoColumn.DefaultCellStyle = dataGridViewCellStyle5;
+        dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleLeft;
+        nameMemoColumn.DefaultCellStyle = dataGridViewCellStyle15;
         resources.ApplyResources(nameMemoColumn, "nameMemoColumn");
         nameMemoColumn.Name = "nameMemoColumn";
         nameMemoColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -155,8 +155,8 @@ partial class TransactionsForm
         // accountColumn
         // 
         accountColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-        dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-        accountColumn.DefaultCellStyle = dataGridViewCellStyle6;
+        dataGridViewCellStyle16.Alignment = DataGridViewContentAlignment.MiddleLeft;
+        accountColumn.DefaultCellStyle = dataGridViewCellStyle16;
         accountColumn.DisplayStyle = DataGridViewComboBoxDisplayStyle.Nothing;
         resources.ApplyResources(accountColumn, "accountColumn");
         accountColumn.Name = "accountColumn";
@@ -171,8 +171,8 @@ partial class TransactionsForm
         // debitColumn
         // 
         debitColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-        dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleRight;
-        debitColumn.DefaultCellStyle = dataGridViewCellStyle7;
+        dataGridViewCellStyle17.Alignment = DataGridViewContentAlignment.MiddleRight;
+        debitColumn.DefaultCellStyle = dataGridViewCellStyle17;
         resources.ApplyResources(debitColumn, "debitColumn");
         debitColumn.Name = "debitColumn";
         debitColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -180,8 +180,8 @@ partial class TransactionsForm
         // creditColumn
         // 
         creditColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-        dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleRight;
-        creditColumn.DefaultCellStyle = dataGridViewCellStyle8;
+        dataGridViewCellStyle18.Alignment = DataGridViewContentAlignment.MiddleRight;
+        creditColumn.DefaultCellStyle = dataGridViewCellStyle18;
         resources.ApplyResources(creditColumn, "creditColumn");
         creditColumn.Name = "creditColumn";
         creditColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -189,18 +189,18 @@ partial class TransactionsForm
         // balanceColumn
         // 
         balanceColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-        dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleRight;
-        balanceColumn.DefaultCellStyle = dataGridViewCellStyle9;
+        dataGridViewCellStyle19.Alignment = DataGridViewContentAlignment.MiddleRight;
+        balanceColumn.DefaultCellStyle = dataGridViewCellStyle19;
         resources.ApplyResources(balanceColumn, "balanceColumn");
         balanceColumn.Name = "balanceColumn";
         balanceColumn.ReadOnly = true;
         balanceColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
         // 
-        // _contextMenuStrip
+        // _contextMenu
         // 
-        _contextMenuStrip.Items.AddRange(new ToolStripItem[] { openToolStripMenuItem, toolStripSeparator4, duplicateToolStripMenuItem, deleteToolStripMenuItem, toolStripSeparator5, goToSelectedToolStripMenuItem, goToReferenceToolStripMenuItem, toolStripSeparator6, saveToolStripMenuItem, revertToolStripMenuItem });
-        _contextMenuStrip.Name = "_contextMenuStrip";
-        resources.ApplyResources(_contextMenuStrip, "_contextMenuStrip");
+        _contextMenu.Items.AddRange(new ToolStripItem[] { openToolStripMenuItem, toolStripSeparator4, duplicateToolStripMenuItem, deleteToolStripMenuItem, toolStripSeparator5, goToSelectedToolStripMenuItem, goToReferenceToolStripMenuItem, toolStripSeparator6, saveToolStripMenuItem, revertToolStripMenuItem });
+        _contextMenu.Name = "_contextMenuStrip";
+        resources.ApplyResources(_contextMenu, "_contextMenu");
         // 
         // openToolStripMenuItem
         // 
@@ -407,7 +407,7 @@ partial class TransactionsForm
         Name = "TransactionsForm";
         WindowState = FormWindowState.Maximized;
         ((System.ComponentModel.ISupportInitialize)_dataGridView).EndInit();
-        _contextMenuStrip.ResumeLayout(false);
+        _contextMenu.ResumeLayout(false);
         _toolStrip.ResumeLayout(false);
         _toolStrip.PerformLayout();
         ResumeLayout(false);
@@ -423,7 +423,7 @@ partial class TransactionsForm
     private System.Windows.Forms.ToolStripButton saveToolStripButton;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
     private System.Windows.Forms.ToolStripButton copyToolStripButton;
-    private ContextMenuStrip _contextMenuStrip;
+    private ContextMenuStrip _contextMenu;
     private ToolStripMenuItem openToolStripMenuItem;
     private ToolStripButton closeToolStripButton;
     private ToolStripButton saveCloseToolStripButton;
