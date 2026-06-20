@@ -166,6 +166,11 @@ public static class AccountTypeExtensions
         }
     }
 
+    public static bool IsBankOrCreditCard(this AccountType value)
+    {
+        return value == AccountType.Bank || value == AccountType.CreditCard;
+    }
+
     public static bool IsUncategorized(this AccountType value)
     {
         return value == Debit || value == Credit;

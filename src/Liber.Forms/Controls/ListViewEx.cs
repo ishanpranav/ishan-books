@@ -15,9 +15,6 @@ internal class ListViewEx : ListView
         ListViewItemSorter = new ListViewItemComparer(this);
     }
 
-    [DefaultValue(SortOrder.None)]
-    public SortOrder SortOrder { get; set; }
-
     [DefaultValue(-1)]
     public int SortColumn { get; set; } = -1;
 
@@ -25,19 +22,19 @@ internal class ListViewEx : ListView
     {
         if (e.Column == SortColumn)
         {
-            if (SortOrder == SortOrder.Ascending)
+            if (Sorting == SortOrder.Ascending)
             {
-                SortOrder = SortOrder.Descending;
+                Sorting = SortOrder.Descending;
             }
             else
             {
-                SortOrder = SortOrder.Ascending;
+                Sorting = SortOrder.Ascending;
             }
         }
         else
         {
             SortColumn = e.Column;
-            SortOrder = SortOrder.Ascending;
+            Sorting = SortOrder.Ascending;
         }
 
         Sort();

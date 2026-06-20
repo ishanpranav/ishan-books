@@ -5,11 +5,11 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Humanizer;
-using Liber.Forms.Components;
-using Liber.Forms.LineSources;
+using Liber.Forms.Forms;
 using Liber.Forms.Properties;
 using Liber.Forms.Reports;
 using Liber.Forms.Transactions;
@@ -22,6 +22,8 @@ internal partial class AccountsForm : Form
     private readonly FormFactory _factory;
     private readonly Dictionary<Guid, ListViewItem> _items = new Dictionary<Guid, ListViewItem>();
     private readonly ReportEngine _engine;
+
+    private Font? _strikeoutFont;
 
     public AccountsForm(Company company, FormFactory factory, ReportEngine engine)
     {
@@ -114,18 +116,6 @@ internal partial class AccountsForm : Form
         _factory.Register(key, form);
     }
 
-    private void InitializeTransactions(Account account)
-    {
-        if (_factory.TryActivate(account.Id) || account.ReadOnly)
-        {
-            return;
-        }
-
-        TransactionsForm form = new TransactionsForm(_company, new AccountLineSource(_company, account), _factory);
-
-        _factory.Register(account.Id, form);
-    }
-
     private void AddSubItems(ListViewItem item, Account value)
     {
         item.Text = value.Name;
@@ -143,6 +133,16 @@ internal partial class AccountsForm : Form
         if (value.ReadOnly)
         {
             item.ForeColor = Colors.Gray;
+        }
+
+        if (value.Inactive)
+        {
+            if (_strikeoutFont == null)
+            {
+                _strikeoutFont = new Font(_listView.Font, FontStyle.Strikeout);
+            }
+
+            item.Font = _strikeoutFont;
         }
     }
 
@@ -177,7 +177,7 @@ internal partial class AccountsForm : Form
     private void OnCompanyTransactionChanged(object? sender, GuidEventArgs e)
     {
         Transaction transaction = _company.GetTransaction(e.Id);
-        
+
         foreach (Guid accountId in transaction.Lines
             .Select(x => x.AccountId)
             .Distinct())
@@ -259,33 +259,16 @@ internal partial class AccountsForm : Form
     {
         if (TryGetSelection(out Account? account))
         {
-            InitializeTransactions(account);
+            AccountHelpers.BeginTransactions(_company, _factory, account);
         }
     }
 
     private void OnReconcileToolStripMenuItemClick(object sender, EventArgs e)
     {
-        if (!TryGetSelection(out Account? account))
+        if (TryGetSelection(out Account? account))
         {
-            return;
+            AccountHelpers.BeginReconcile(_company, _factory, account.Id);
         }
-
-        using StatementForm form = new StatementForm(_company)
-        {
-            AccountId = account.Id
-        };
-
-        if (form.ShowDialog() != DialogResult.OK)
-        {
-            return;
-        }
-
-        _factory.AutoRegister(() => new ReconcileForm(
-            _company,
-            form.Reconciled,
-            form.ReconciledBalance,
-            form.EndingBalance,
-            account));
     }
 
     private void OnListViewAfterLabelEdit(object sender, LabelEditEventArgs e)
@@ -314,9 +297,9 @@ internal partial class AccountsForm : Form
             return;
         }
 
-        if (account.Type == AccountType.Bank || account.Type == AccountType.CreditCard)
+        if (account.Type.IsBankOrCreditCard())
         {
-            InitializeTransactions(account);
+            AccountHelpers.BeginTransactions(_company, _factory, account);
 
             return;
         }
@@ -412,9 +395,17 @@ internal partial class AccountsForm : Form
             _company.TransactionRemoved -= OnCompanyTransactionChanged;
             _company.TransactionUpdated -= OnCompanyTransactionChanged;
 
+            if (_strikeoutFont != null)
+            {
+                _strikeoutFont.Dispose();
+
+                _strikeoutFont = null;
+            }
+
             if (components != null)
             {
                 components.Dispose();
+
                 components = null;
             }
         }

@@ -10,7 +10,7 @@ using System.Text.Json;
 using System.Windows.Shell;
 using Liber.Forms.Properties;
 
-namespace Liber.Forms.Components;
+namespace Liber.Forms.RecentPaths;
 
 internal class RecentPathManager : Component
 {

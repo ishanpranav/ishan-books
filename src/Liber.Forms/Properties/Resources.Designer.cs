@@ -231,5 +231,14 @@ namespace Liber.Forms.Properties {
                 return ResourceManager.GetString("Posted", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to tasks.
+        /// </summary>
+        internal static string TaskItems {
+            get {
+                return ResourceManager.GetString("TaskItems", resourceCulture);
+            }
+        }
     }
 }

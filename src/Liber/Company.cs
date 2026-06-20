@@ -799,6 +799,8 @@ public class Company : ICloneable
             line.Reconciled = reconciled;
         }
 
+        account.Reconciled = reconciled;
+
         foreach (Guid transactionId in transactionIds)
         {
             TransactionReconciled?.Invoke(sender: this, new GuidEventArgs(transactionId));

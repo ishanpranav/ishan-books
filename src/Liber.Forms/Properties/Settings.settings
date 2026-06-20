@@ -121,5 +121,11 @@
     <Setting Name="LastPosted" Type="System.DateTime" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="OverdueReconciled" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">30.00:00:00</Value>
+    </Setting>
+    <Setting Name="OverduePosted" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">90.00:00:00</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -9,6 +9,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Resources;
 using System.Runtime.CompilerServices;
+using System.Security.Principal;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Windows.Forms;
@@ -236,17 +237,17 @@ internal static class FormattedStrings
 
     private static string GetClearedCountFormat()
     {
-        return GetString("ClearedCount{0}{1}");
+        return GetString("ClearedCount{0}");
     }
 
     public static string GetClearedDebitCount(int count)
     {
-        return string.Format(GetClearedCountFormat(), count, Properties.Resources.Debit.ToQuantity(count));
+        return string.Format(GetClearedCountFormat(), Properties.Resources.Debit.ToQuantity(count));
     }
 
     public static string GetClearedCreditCount(int count)
     {
-        return string.Format(GetClearedCountFormat(), count, Properties.Resources.Credit.ToQuantity(count));
+        return string.Format(GetClearedCountFormat(), Properties.Resources.Credit.ToQuantity(count));
     }
 
     public static string GetMultipleWords(decimal multiple)
@@ -342,5 +343,24 @@ internal static class FormattedStrings
         }
 
         return result;
+    }
+
+    public static string GetNullReconciledDescription(Account account)
+    {
+        return string.Format(GetString("NullReconciledDescription{0}"), account.Name);
+    }
+
+    public static string GetOverdueReconciledDescription(Account account, TimeSpan overdue)
+    {
+        return string.Format(GetString("OverdueReconciledDescription{0}{1}"),
+                account.Name,
+                overdue.Humanize(precision: 2, minUnit: TimeUnit.Day, maxUnit: TimeUnit.Year));
+    }
+
+    public static string GetOverduePostedDescription(Account account, TimeSpan overdue)
+    {
+        return string.Format(GetString("OverduePostedDescription{0}{1}"),
+            account.Name,
+            overdue.Humanize(precision: 2, minUnit: TimeUnit.Day, maxUnit: TimeUnit.Year));
     }
 }

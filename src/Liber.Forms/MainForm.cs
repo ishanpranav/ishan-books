@@ -8,18 +8,21 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using System.Security.Principal;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Liber.Forms.Accounts;
 using Liber.Forms.AccountViews;
 using Liber.Forms.Companies;
+using Liber.Forms.Forms;
 using Liber.Forms.Lines;
 using Liber.Forms.LineSources;
 using Liber.Forms.Properties;
 using Liber.Forms.Reports;
 using Liber.Forms.Reports.Gdi;
 using Liber.Forms.Saving;
+using Liber.Forms.TaskItems;
 using Liber.Forms.Transactions;
 using Liber.Forms.Writers;
 using Liber.Sqlite;
@@ -55,6 +58,7 @@ internal partial class MainForm : Form
         exportAccountsToolStripMenuItem.Tag = new Writer(FilterIndex.Csv, new GnuCashAccountWriter());
         exportTransactionsToolStripMenuItem.Tag = new Writer(FilterIndex.Csv, new GnuCashTransactionWriter());
         exportAccountsIifToolStripMenuItem.Tag = new Writer(FilterIndex.Iif, new IifAccountWriter());
+        _factory.Parent = this;
 
         SetCompany(new Company());
     }
@@ -91,7 +95,7 @@ internal partial class MainForm : Form
             await ImportAsync(_recentPathManager.Paths.First());
         }
 
-        _factory.RegisterEmbedded(Guid.NewGuid(), parent: this, new ReportsForm(_engine));
+        _factory.RegisterEmbedded(Guid.NewGuid(), new ReportsForm(_engine));
     }
 
     private void InitializeRecentPaths()
@@ -637,29 +641,13 @@ internal partial class MainForm : Form
 
     private void OnReconcileAccountToolStripMenuItemClick(object sender, EventArgs e)
     {
-        IEnumerator<Account> enumerator = _company.Accounts.GetEnumerator();
-
-        if (!enumerator.MoveNext())
+        if (_company.Accounts.Count > 0)
         {
-            return;
+            AccountHelpers.BeginReconcile(
+                _company,
+                _factory,
+                _company.Accounts.MaxBy(x => x.Reconciled)!.Id);
         }
-
-        using StatementForm form = new StatementForm(_company)
-        {
-            AccountId = _company.Accounts.MaxBy(x => x.Reconciled)!.Id
-        };
-
-        if (form.ShowDialog() != DialogResult.OK)
-        {
-            return;
-        }
-
-        _factory.AutoRegister(() => new ReconcileForm(
-            _company,
-            form.Reconciled,
-            form.ReconciledBalance,
-            form.EndingBalance,
-            _company.GetAccount(form.AccountId)));
     }
 
     private void OnRemoveAccountToolStripMenuItemClick(object sender, EventArgs e)
@@ -835,25 +823,21 @@ internal partial class MainForm : Form
         _factory.AutoRegister(() => new TransactionForm(_company));
     }
 
+    private void OnTaskItemsToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        _factory.AutoRegister(() => new TaskItemsForm(_company, _factory));
+    }
+
     private void OnAccountTransactionsToolStripMenuItemClick(object sender, EventArgs e)
     {
         using AccountDialog accountDialog = new AccountDialog(new EditableAccountView(_company), x => !x.ReadOnly);
 
-        if (accountDialog.ShowDialog() != DialogResult.OK)
+        if (accountDialog.ShowDialog() != DialogResult.OK || accountDialog.Value.Value == null)
         {
             return;
         }
 
-        Guid id = accountDialog.Value.Id;
-
-        if (_factory.TryActivate(id) || accountDialog.Value.Value == null)
-        {
-            return;
-        }
-
-        TransactionsForm form = new TransactionsForm(_company, new AccountLineSource(_company, accountDialog.Value.Value), _factory);
-
-        _factory.Register(id, form);
+        AccountHelpers.BeginTransactions(_company, _factory, accountDialog.Value.Value);
     }
 
     private void OnNameTransactionsToolStripMenuItemClick(object sender, EventArgs e)
@@ -881,6 +865,11 @@ internal partial class MainForm : Form
         _factory.KillAll();
     }
 
+    private void OnFormsToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        _factory.AutoRegister(() => new FormsForm(_factory));
+    }
+
     private void OnRecentPathManagerInvalidated(object sender, EventArgs e)
     {
         InitializeRecentPaths();
@@ -905,9 +894,9 @@ internal partial class MainForm : Form
     private void OnFactoryInvalidated(object sender, EventArgs e)
     {
         formsToolStripSeparator.Visible = false;
-        formsToolStripMenuItem.Visible = false;
+        formsToolStripMenuItem1.Visible = false;
 
-        formsToolStripMenuItem.DropDownItems.Clear();
+        formsToolStripMenuItem1.DropDownItems.Clear();
 
         int i = 1;
 
@@ -929,15 +918,15 @@ internal partial class MainForm : Form
                 item.Text = $"{i} - {entry.Value.Text}";
             };
 
-            formsToolStripMenuItem.DropDownItems.Add(item);
+            formsToolStripMenuItem1.DropDownItems.Add(item);
 
             i++;
         }
 
-        if (formsToolStripMenuItem.DropDownItems.Count > 0)
+        if (formsToolStripMenuItem1.DropDownItems.Count > 0)
         {
             formsToolStripSeparator.Visible = true;
-            formsToolStripMenuItem.Visible = true;
+            formsToolStripMenuItem1.Visible = true;
         }
     }
 }

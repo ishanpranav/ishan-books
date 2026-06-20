@@ -12,8 +12,8 @@ namespace Liber.Forms.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "18.6.0.0")]
-    internal partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "18.7.0.0")]
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
         
@@ -126,6 +126,30 @@ namespace Liber.Forms.Properties {
             }
             set {
                 this["LastPosted"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30.00:00:00")]
+        public global::System.TimeSpan OverdueReconciled {
+            get {
+                return ((global::System.TimeSpan)(this["OverdueReconciled"]));
+            }
+            set {
+                this["OverdueReconciled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("90.00:00:00")]
+        public global::System.TimeSpan OverduePosted {
+            get {
+                return ((global::System.TimeSpan)(this["OverduePosted"]));
+            }
+            set {
+                this["OverduePosted"] = value;
             }
         }
     }

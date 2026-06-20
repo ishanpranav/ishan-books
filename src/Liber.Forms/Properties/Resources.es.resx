@@ -171,4 +171,7 @@
   <data name="Posted" xml:space="preserve">
     <value>Fecha</value>
   </data>
+  <data name="TaskItems" xml:space="preserve">
+    <value>tareas</value>
+  </data>
 </root>

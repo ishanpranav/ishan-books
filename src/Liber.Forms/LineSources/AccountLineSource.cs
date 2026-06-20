@@ -94,16 +94,6 @@ internal class AccountLineSource : ILineSource
         return transaction.Lines.Any(x => x.AccountId == _value.Id);
     }
 
-    public bool IsInvalidatedByTransactionRemoved(Guid id)
-    {
-        return true;
-    }
-
-    public bool IsInvalidatedByTransactionUpdated(Guid id)
-    {
-        return true;
-    }
-
     public override string ToString()
     {
         return Name;
