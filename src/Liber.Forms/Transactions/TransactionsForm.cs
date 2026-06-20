@@ -36,6 +36,7 @@ internal partial class TransactionsForm : Form
     {
         InitializeComponent();
         SystemFeatures.Initialize(this);
+        Design.ApplyStyles(_contextMenu);
 
         AccountViewBindingList bindingList = new AccountViewBindingList(company, x => !x.ReadOnly);
 

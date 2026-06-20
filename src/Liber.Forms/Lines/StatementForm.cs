@@ -14,6 +14,7 @@ internal partial class StatementForm : Form
     private readonly Company _company;
 
     private DateTime _lastReconciled;
+    private bool _pendingInitialization;
 
     public decimal ReconciledBalance { get; private set; }
 
@@ -57,9 +58,24 @@ internal partial class StatementForm : Form
         reconciledBalanceNumericUpDown.Maximum = decimal.MaxValue;
         endingBalanceNumericUpDown.Minimum = decimal.MinValue;
         endingBalanceNumericUpDown.Maximum = decimal.MaxValue;
-        accountComboBox.DataSource = new AccountViewBindingList(company, x => !x.ReadOnly && !x.Type.IsTemporary());
-        accountComboBox.ValueMember = nameof(AccountView.Id);
-        accountComboBox.DisplayMember = nameof(AccountView.DisplayName);
+        _pendingInitialization = true;
+        
+        try
+        {
+            accountComboBox.DataSource = new AccountViewBindingList(company, x => !x.ReadOnly && !x.Type.IsTemporary());
+            accountComboBox.ValueMember = nameof(AccountView.Id);
+            accountComboBox.DisplayMember = nameof(AccountView.DisplayName);
+        }
+        finally
+        {
+            _pendingInitialization = false;
+        }
+
+        Account account = company.GetAccount(AccountId);
+
+        InitializeReconciledBalance(account);
+        InitializeEndingBalance(account);
+
         _company = company;
     }
 
@@ -77,6 +93,11 @@ internal partial class StatementForm : Form
 
     private void OnAccountComboBoxSelectedIndexChanged(object sender, EventArgs e)
     {
+        if (_pendingInitialization)
+        {
+            return;
+        }
+
         if (Reconciled == DateTime.Today || Reconciled == _lastReconciled)
         {
             DateTime? reconciled = _company.GetAccount(AccountId).Reconciled;
