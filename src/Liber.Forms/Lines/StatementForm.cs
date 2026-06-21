@@ -59,7 +59,7 @@ internal partial class StatementForm : Form
         endingBalanceNumericUpDown.Minimum = decimal.MinValue;
         endingBalanceNumericUpDown.Maximum = decimal.MaxValue;
         _pendingInitialization = true;
-        
+
         try
         {
             accountComboBox.DataSource = new AccountViewBindingList(company, x => !x.ReadOnly && !x.Type.IsTemporary());
@@ -98,9 +98,11 @@ internal partial class StatementForm : Form
             return;
         }
 
+        Account account = _company.GetAccount(AccountId);
+
         if (Reconciled == DateTime.Today || Reconciled == _lastReconciled)
         {
-            DateTime? reconciled = _company.GetAccount(AccountId).Reconciled;
+            DateTime? reconciled = account.Reconciled;
 
             _lastReconciled = reconciled == null ? DateTime.Today : reconciled.Value.AddMonths(1);
 
@@ -112,10 +114,14 @@ internal partial class StatementForm : Form
             reconciledDateTimePicker.Value = _lastReconciled;
         }
 
-        Account account = _company.GetAccount(AccountId);
-
+        InitializeUnreconciledButton(account);
         InitializeReconciledBalance(account);
         InitializeEndingBalance(account);
+    }
+
+    private void InitializeUnreconciledButton(Account account)
+    {
+        unreconcileButton.Enabled = account.Reconciled != null;
     }
 
     private void InitializeReconciledBalance(Account account)
@@ -129,5 +135,16 @@ internal partial class StatementForm : Form
     private void InitializeEndingBalance(Account account)
     {
         endingBalanceNumericUpDown.Value = account.Type.Toggle(account.GetBalance(Reconciled, Filters.Any()));
+    }
+
+    private void OnUnreconcileButtonClick(object sender, EventArgs e)
+    {
+        Account account = _company.GetAccount(AccountId);
+
+        if (account.Reconciled != null && FormattedStrings.ShowUnreconcileMessage(account) == DialogResult.OK)
+        {
+            _company.Unreconcile(_company.GetAccount(AccountId));
+            InitializeUnreconciledButton(account);
+        }
     }
 }

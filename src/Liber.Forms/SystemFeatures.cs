@@ -67,21 +67,6 @@ internal static class SystemFeatures
         }
     }
 
-    public static string ApplicationName
-    {
-        get
-        {
-            AssemblyTitleAttribute? customAttribute = typeof(SystemFeatures).Assembly.GetCustomAttribute<AssemblyTitleAttribute>();
-
-            if (customAttribute != null)
-            {
-                return customAttribute.Title;
-            }
-
-            return string.Empty;
-        }
-    }
-
     public static DateTime LastUpdateCheck
     {
         get
@@ -109,6 +94,74 @@ internal static class SystemFeatures
             return Environment.GetEnvironmentVariable("CLICKONCE_DATADIRECTORY");
         }
     }
+    public static string ApplicationName
+    {
+        get
+        {
+            AssemblyTitleAttribute? attribute = typeof(SystemFeatures).Assembly.GetCustomAttribute<AssemblyTitleAttribute>();
+
+            if (attribute == null)
+            {
+                return string.Empty;
+            }
+
+            return attribute.Title;
+        }
+    }
+
+    public static Version? ApplicationVersion
+    {
+        get
+        {
+            return CurrentVersion ?? typeof(SystemFeatures).Assembly.GetName().Version;
+        }
+    }
+
+    public static string ApplicationCopyright
+    {
+        get
+        {
+            AssemblyCopyrightAttribute? attribute = typeof(SystemFeatures).Assembly.GetCustomAttribute<AssemblyCopyrightAttribute>();
+
+            if (attribute == null)
+            {
+                return string.Empty;
+            }
+
+            return attribute.Copyright;
+        }
+    }
+
+    public static string ApplicationDescription
+    {
+        get
+        {
+            AssemblyDescriptionAttribute? attribute = typeof(SystemFeatures).Assembly.GetCustomAttribute<AssemblyDescriptionAttribute>();
+
+            if (attribute == null)
+            {
+                return string.Empty;
+            }
+
+            return attribute.Description;
+        }
+    }
+
+    public static string ApplicationCompany
+    {
+        get
+        {
+            AssemblyCompanyAttribute? attribute = typeof(SystemFeatures).Assembly.GetCustomAttribute<AssemblyCompanyAttribute>();
+
+            if (attribute == null)
+            {
+                return string.Empty;
+            }
+
+            return attribute.Company;
+        }
+    }
+
 
     public static IReadOnlyList<string> GetArguments()
     {

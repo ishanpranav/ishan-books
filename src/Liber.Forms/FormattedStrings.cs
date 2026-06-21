@@ -163,7 +163,23 @@ internal static class FormattedStrings
         }
     }
 
-    public static Uri AboutUrl
+    public static Uri AboutUri
+    {
+        get
+        {
+            return new Uri(GetString());
+        }
+    }
+
+    public static Uri LicenseUri
+    {
+        get
+        {
+            return new Uri(GetString());
+        }
+    }
+
+    public static Uri ThirdPartyNoticesUri
     {
         get
         {
@@ -242,12 +258,12 @@ internal static class FormattedStrings
 
     public static string GetClearedDebitCount(int count)
     {
-        return string.Format(GetClearedCountFormat(), Properties.Resources.Debit.ToQuantity(count));
+        return string.Format(GetClearedCountFormat(), Properties.Resources.Debit.ToQuantity(count, format: "n0"));
     }
 
     public static string GetClearedCreditCount(int count)
     {
-        return string.Format(GetClearedCountFormat(), Properties.Resources.Credit.ToQuantity(count));
+        return string.Format(GetClearedCountFormat(), Properties.Resources.Credit.ToQuantity(count, format: "n0"));
     }
 
     public static string GetMultipleWords(decimal multiple)
@@ -313,6 +329,19 @@ internal static class FormattedStrings
             Properties.Resources.ExceptionCaption,
             MessageBoxButtons.OK,
             MessageBoxIcon.Error);
+    }
+
+    public static DialogResult ShowUnreconcileMessage(Account account)
+    {
+        return MessageBox.Show(
+            string.Format(GetString("UnreconcileText{0}{1}{2}"),
+                account.Name,
+                account.Reconciled,
+                Properties.Resources.Lines.ToQuantity(account.LastReconciledLines?.Count ?? 0, format: "n0")),
+            Properties.Resources.UnreconcileCaption,
+            MessageBoxButtons.OKCancel,
+            MessageBoxIcon.Warning,
+            MessageBoxDefaultButton.Button2);
     }
 
     public static DialogResult ShowCancelMessage(Company company)

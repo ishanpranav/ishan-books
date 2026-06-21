@@ -58,6 +58,14 @@ internal static class Design
             }
         }
 
+        if (control is LinkLabel linkLabel)
+        {
+            linkLabel.Font = new Font(linkLabel.Font, FontStyle.Bold);
+            linkLabel.ActiveLinkColor = Colors.Primary.Tint(0.85);
+            linkLabel.LinkColor = Colors.Primary;
+            linkLabel.VisitedLinkColor = Colors.Primary;
+        }
+
         //if (control is TabControl tabControl)
         //{
         //    foreach (TabPage tabPage in tabControl.TabPages)

@@ -136,4 +136,7 @@
   <data name="_r_pie-chart" xml:space="preserve">
     <value>Doughnut Chart</value>
   </data>
+  <data name="UnreconcileText{0}{1}{2}" xml:space="preserve">
+    <value>¿Está seguro de que desea deshacer la última conciliación de {0} del {1:d}? Esta operación afectará a {2}.</value>
+  </data>
 </root>

@@ -160,6 +160,9 @@
   <data name="InvalidAccountError" xml:space="preserve">
     <value>Please select a valid account.</value>
   </data>
+  <data name="Lines" xml:space="preserve">
+    <value>line item</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
@@ -177,5 +180,8 @@
   </data>
   <data name="TaskItems" xml:space="preserve">
     <value>tasks</value>
+  </data>
+  <data name="UnreconcileCaption" xml:space="preserve">
+    <value>Undo Last Reconciliation</value>
   </data>
 </root>
