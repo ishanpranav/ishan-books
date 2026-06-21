@@ -68,7 +68,9 @@ internal partial class TaskItemsForm : Form
             return;
         }
 
-        if (value.Reconciled == null)
+        DateTime? reconciled = value.Reconciled;
+
+        if (reconciled == null)
         {
             if (value.Lines.Count > 0)
             {
@@ -77,7 +79,7 @@ internal partial class TaskItemsForm : Form
         }
         else if (value.Lines.Any(x => x.Reconciled == null))
         {
-            TimeSpan overdue = DateTime.Today - value.Reconciled.Value;
+            TimeSpan overdue = DateTime.Today - reconciled.Value;
 
             if (overdue > Settings.Default.OverdueReconciled)
             {

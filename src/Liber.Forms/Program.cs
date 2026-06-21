@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Windows.Forms;
 using Liber.Forms.Accounts;
+using Liber.Forms.Help;
 using Liber.Forms.Properties;
 
 namespace Liber.Forms;
@@ -30,6 +31,11 @@ internal static class Program
                 Application.CurrentCulture = culture;
             }
 
+            SplashScreen splashScreen = new SplashScreen();
+
+            splashScreen.Show();
+            splashScreen.Refresh();
+
             IReadOnlyList<string> arguments;
 
             if (SystemFeatures.IsNetworkDeployed)
@@ -41,14 +47,11 @@ internal static class Program
                 arguments = args;
             }
 
-            if (arguments.Count > 0)
-            {
-                Application.Run(new MainForm(arguments[0]));
-            }
-            else
-            {
-                Application.Run(new MainForm());
-            }
+            MainForm mainForm = arguments.Count > 0 ? new MainForm(arguments[0]) : new MainForm();
+
+            mainForm.Loaded += (_, _) => splashScreen.Close();
+
+            Application.Run(mainForm);
         }
         finally
         {

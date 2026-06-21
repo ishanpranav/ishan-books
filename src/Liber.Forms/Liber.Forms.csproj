@@ -9,12 +9,14 @@
     <AssemblyTitle>IshanBooks</AssemblyTitle>
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
     <UseWPF>true</UseWPF>
-    <AssemblyVersion>1.2.0.0</AssemblyVersion>
-    <FileVersion>1.2.0.0</FileVersion>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <FileVersion>1.0.0</FileVersion>
     <GenerateResourceWarnOnBinaryFormatterUse>false</GenerateResourceWarnOnBinaryFormatterUse>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
     <StartupObject>Liber.Forms.Program</StartupObject>
     <ForceDesignerDpiUnaware>true</ForceDesignerDpiUnaware>
+    <Copyright>© 2023-2026 Ishan Pranav. All rights reserved.</Copyright>
+    <Authors>Ishan Pranav</Authors>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -277,7 +279,7 @@
 	  <Compile Update="Import\ImportRulesForm.cs">
 	    <SubType>Form</SubType>
 	  </Compile>
-	  <Compile Update="UrlForm.cs">
+	  <Compile Update="Help\UriForm.cs">
 	    <SubType>Form</SubType>
 	  </Compile>
 	  <Compile Update="VisualStudioImageLibrary.Designer.cs">

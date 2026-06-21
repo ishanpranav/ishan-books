@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AboutUrl" xml:space="preserve">
+  <data name="AboutUri" xml:space="preserve">
     <value>https://github.com/ishanpranav/ishan-books</value>
     <comment>@Invariant</comment>
   </data>
@@ -649,5 +649,15 @@
   </data>
   <data name="OverduePostedDescription{0}{1}" xml:space="preserve">
     <value>{0} has no transactions in the last {1}</value>
+  </data>
+  <data name="UnreconcileText{0}{1}{2}" xml:space="preserve">
+    <value>Are you sure you want to undo the last reconciliation for {0} on {1:d}? This operation will affect {2}.</value>
+  </data>
+  <data name="LicenseUri" xml:space="preserve">
+    <value>https://github.com/ishanpranav/ishan-books/blob/master/LICENSE.txt</value>
+    <comment>@Invariant</comment>
+  </data>
+  <data name="ThirdPartyNoticesUri" xml:space="preserve">
+    <value>https://github.com/ishanpranav/ishan-books/blob/master/THIRD-PARTY-NOTICES.md</value>
   </data>
 </root>

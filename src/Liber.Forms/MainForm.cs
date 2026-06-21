@@ -8,7 +8,6 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
-using System.Security.Principal;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,6 +15,7 @@ using Liber.Forms.Accounts;
 using Liber.Forms.AccountViews;
 using Liber.Forms.Companies;
 using Liber.Forms.Forms;
+using Liber.Forms.Help;
 using Liber.Forms.Lines;
 using Liber.Forms.LineSources;
 using Liber.Forms.Properties;
@@ -44,23 +44,16 @@ internal partial class MainForm : Form
     private ReportEngine _engine;
     private Company _company;
 
+    public event EventHandler? Loaded;
+
     public MainForm()
     {
         InitializeComponent();
         SystemFeatures.Initialize(this);
-
-        string applicationName = SystemFeatures.ApplicationName;
-
-        Text = applicationName;
-        aboutToolStripMenuItem.Text = string.Format(aboutToolStripMenuItem.Text ?? "{0}", applicationName);
-        exportCompanyJsonToolStripMenuItem.Tag = new Writer(FilterIndex.Json, _jsonWriter);
-        exportCompanyXmlToolStripMenuItem.Tag = new Writer(FilterIndex.Xml, _xmlWriter);
-        exportAccountsToolStripMenuItem.Tag = new Writer(FilterIndex.Csv, new GnuCashAccountWriter());
-        exportTransactionsToolStripMenuItem.Tag = new Writer(FilterIndex.Csv, new GnuCashTransactionWriter());
-        exportAccountsIifToolStripMenuItem.Tag = new Writer(FilterIndex.Iif, new IifAccountWriter());
-        _factory.Parent = this;
-
         SetCompany(new Company());
+
+        Text = SystemFeatures.ApplicationName;
+        _factory.Parent = this;
     }
 
     public MainForm(string path) : this()
@@ -87,6 +80,13 @@ internal partial class MainForm : Form
 
     private async void OnLoad(object sender, EventArgs e)
     {
+        aboutToolStripMenuItem.Text = string.Format(aboutToolStripMenuItem.Text ?? "{0}", SystemFeatures.ApplicationName);
+        exportCompanyJsonToolStripMenuItem.Tag = new Writer(FilterIndex.Json, _jsonWriter);
+        exportCompanyXmlToolStripMenuItem.Tag = new Writer(FilterIndex.Xml, _xmlWriter);
+        exportAccountsToolStripMenuItem.Tag = new Writer(FilterIndex.Csv, new GnuCashAccountWriter());
+        exportTransactionsToolStripMenuItem.Tag = new Writer(FilterIndex.Csv, new GnuCashTransactionWriter());
+        exportAccountsIifToolStripMenuItem.Tag = new Writer(FilterIndex.Iif, new IifAccountWriter());
+
         InitializeRecentPaths();
         InitializeReportEngine();
 
@@ -96,6 +96,7 @@ internal partial class MainForm : Form
         }
 
         _factory.RegisterEmbedded(Guid.NewGuid(), new ReportsForm(_engine));
+        Loaded?.Invoke(sender: this, EventArgs.Empty);
     }
 
     private void InitializeRecentPaths()
@@ -523,16 +524,6 @@ internal partial class MainForm : Form
         await SaveAsAsync();
     }
 
-    private void OnExitToolStripMenuItemClick(object sender, EventArgs e)
-    {
-        Close();
-    }
-
-    private void OnAboutToolStripMenuItemClick(object sender, EventArgs e)
-    {
-        _factory.AutoRegister(() => new UrlForm(FormattedStrings.AboutUrl));
-    }
-
     private async Task ExportCompanyAsync(string path, Company company, IWriter writer)
     {
         await using FileStream output = File.Create(path);
@@ -647,6 +638,21 @@ internal partial class MainForm : Form
                 _company,
                 _factory,
                 _company.Accounts.MaxBy(x => x.Reconciled)!.Id);
+        }
+    }
+
+    private void OnUnreconcileToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        if (_company.Accounts.Count < 1)
+        {
+            return;
+        }
+
+        Account account = _company.Accounts.MaxBy(x => x.Reconciled)!;
+
+        if (FormattedStrings.ShowUnreconcileMessage(account) == DialogResult.OK)
+        {
+            _company.Unreconcile(account);
         }
     }
 
@@ -928,5 +934,35 @@ internal partial class MainForm : Form
             formsToolStripSeparator.Visible = true;
             formsToolStripMenuItem1.Visible = true;
         }
+    }
+
+    private void OnContentsToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        _factory.AutoRegister(() => new UriForm(FormattedStrings.AboutUri));
+    }
+
+    private void OnIndexToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        _factory.AutoRegister(() => new UriForm(FormattedStrings.AboutUri));
+    }
+
+    private void OnSearchToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        _factory.AutoRegister(() => new UriForm(FormattedStrings.AboutUri));
+    }
+
+    private void OnAboutToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        _factory.AutoRegister(() => new AboutBox(_factory));
+    }
+
+    private void OnSplashScreenToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        _factory.AutoRegister(() => new SplashScreen());
+    }
+
+    private void OnExitToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        Close();
     }
 }
