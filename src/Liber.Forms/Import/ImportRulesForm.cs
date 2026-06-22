@@ -28,7 +28,7 @@ internal partial class ImportRulesForm : Form
     {
         _rules.Clear();
 
-        ImportRule[]? rules = JsonSerializer.Deserialize<ImportRule[]>(Settings.Default.ImportRules, FormattedStrings.JsonOptions);
+        ImportRule[]? rules = JsonSerializer.Deserialize<ImportRule[]>(Settings.Default.ImportRules, SerializationOptions.Json);
 
         if (rules != null)
         {
@@ -38,7 +38,7 @@ internal partial class ImportRulesForm : Form
             }
         }
 
-        _textBox.Text = JsonSerializer.Serialize(_rules, FormattedStrings.JsonOptions);
+        _textBox.Text = JsonSerializer.Serialize(_rules, SerializationOptions.Json);
         importRulesDataGridView.DataSource = _rules;
 
         importRulesDataGridView.AutoResizeColumns();
@@ -46,7 +46,7 @@ internal partial class ImportRulesForm : Form
 
     private void OnAcceptButtonClick(object sender, EventArgs e)
     {
-        Settings.Default.ImportRules = JsonSerializer.Serialize(_rules, FormattedStrings.JsonOptions);
+        Settings.Default.ImportRules = JsonSerializer.Serialize(_rules, SerializationOptions.Json);
 
         Settings.Default.Save();
 
@@ -70,7 +70,7 @@ internal partial class ImportRulesForm : Form
     {
         if (_tabControl.SelectedTab == jsonTabPage)
         {
-            _textBox.Text = JsonSerializer.Serialize(_rules, FormattedStrings.JsonOptions);
+            _textBox.Text = JsonSerializer.Serialize(_rules, SerializationOptions.Json);
 
             return;
         }
@@ -79,7 +79,7 @@ internal partial class ImportRulesForm : Form
 
         try
         {
-            rules = JsonSerializer.Deserialize<ImportRule[]>(_textBox.Text, FormattedStrings.JsonOptions);
+            rules = JsonSerializer.Deserialize<ImportRule[]>(_textBox.Text, SerializationOptions.Json);
         }
         catch (JsonException)
         {
@@ -117,7 +117,7 @@ internal partial class ImportRulesForm : Form
 
         try
         {
-            ImportRule[]? rules = JsonSerializer.Deserialize<ImportRule[]>(_textBox.Text, FormattedStrings.JsonOptions);
+            ImportRule[]? rules = JsonSerializer.Deserialize<ImportRule[]>(_textBox.Text, SerializationOptions.Json);
 
             if (rules == null)
             {

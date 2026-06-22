@@ -35,7 +35,7 @@ namespace Liber.Forms;
 
 internal partial class MainForm : Form
 {
-    private readonly JsonCompanyWriter _jsonWriter = new JsonCompanyWriter(FormattedStrings.JsonOptions);
+    private readonly JsonCompanyWriter _jsonWriter = new JsonCompanyWriter(SerializationOptions.Json);
     private readonly XmlReportWriter _xmlWriter = new XmlReportWriter();
     private readonly Dictionary<string, Guid> _nameKeys = new Dictionary<string, Guid>();
 
@@ -428,7 +428,7 @@ internal partial class MainForm : Form
     {
         await using FileStream input = File.OpenRead(path);
 
-        Company? company = await JsonSerializer.DeserializeAsync<Company>(input, FormattedStrings.JsonOptions);
+        Company? company = await JsonSerializer.DeserializeAsync<Company>(input, SerializationOptions.Json);
 
         if (company == null)
         {
@@ -485,7 +485,7 @@ internal partial class MainForm : Form
 
     private async Task ImportGnuCashSqliteCompanyAsync(string path)
     {
-        ImportRule[]? rules = JsonSerializer.Deserialize<ImportRule[]>(Settings.Default.ImportRules, FormattedStrings.JsonOptions);
+        ImportRule[]? rules = JsonSerializer.Deserialize<ImportRule[]>(Settings.Default.ImportRules, SerializationOptions.Json);
 
         SetCompany(await GnuCashSqliteSerializer.DeserializeAsync(path, rules ?? Enumerable.Empty<ImportRule>()));
     }

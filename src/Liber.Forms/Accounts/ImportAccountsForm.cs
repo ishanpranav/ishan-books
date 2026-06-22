@@ -32,7 +32,7 @@ internal sealed class ImportAccountsForm : ImportForm
         List<Account> values = accounts
             .Select(x => x.Value)
             .ToList();
-        ImportRule[]? rules = JsonSerializer.Deserialize<ImportRule[]>(Settings.Default.ImportRules, FormattedStrings.JsonOptions);
+        ImportRule[]? rules = JsonSerializer.Deserialize<ImportRule[]>(Settings.Default.ImportRules, SerializationOptions.Json);
 
         _context = new ImportContext(values)
         {
