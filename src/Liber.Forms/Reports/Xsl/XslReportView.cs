@@ -89,6 +89,6 @@ internal sealed class XslReportView : IReportView
 
         using FileStream input = File.OpenRead(path);
 
-        s_reports = JsonSerializer.Deserialize<Dictionary<string, ReportTypes>>(input, FormattedStrings.JsonOptions);
+        s_reports = JsonSerializer.Deserialize<Dictionary<string, ReportTypes>>(input, SerializationOptions.Json);
     }
 }
