@@ -404,7 +404,7 @@ internal partial class TransactionsForm : Form
         transaction.Memo = _dataGridView[nameMemoColumn.Index, bottomIndex].Value?.ToString();
 
         string? name = _dataGridView[nameMemoColumn.Index, topIndex].Value?.ToString();
-        IReadOnlyCollection<Line> lines = currentLine != null && currentLine.Sibling == null
+        IReadOnlyCollection<Line> lines = currentLine != null && !_source.CanEditSibling(currentLine)
             ? transaction.Lines
             : _source.GetNewLines(siblingId, balance);
 
@@ -607,7 +607,7 @@ internal partial class TransactionsForm : Form
             return;
         }
 
-        if (!isTop && (e.ColumnIndex == postedColumn.Index || e.ColumnIndex == balanceColumn.Index))
+        if (!isTop && (e.ColumnIndex == postedColumn.Index || e.ColumnIndex == balanceColumn.Index || e.ColumnIndex == reconciledColumn.Index))
         {
             e.Handled = true;
 

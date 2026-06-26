@@ -40,21 +40,27 @@ internal class NameLineSource : ILineSource
 
     public IReadOnlyCollection<Line> GetNewLines(Guid siblingId, decimal balance)
     {
-        throw new NotSupportedException();
+        throw new InvalidOperationException();
     }
 
     public IEnumerable<Line> GetOrderedLines()
     {
+        List<Line> results = new List<Line>();
+
         foreach (Account account in _company.Accounts)
         {
-            foreach (Line line in account.Lines.Order())
+            foreach (Line line in account.Lines)
             {
                 if (line.Transaction.Name == Name)
                 {
-                    yield return line;
+                    results.Add(line);
                 }
             }
         }
+
+        results.Sort();
+
+        return results;
     }
 
     public AccountType GetRepresentativeType()

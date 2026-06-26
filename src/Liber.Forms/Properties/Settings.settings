@@ -67,13 +67,7 @@
     "strict": true
   },
   {
-    "filter": "Charles Schwab Individual Short[-\\s]Term",
-    "cashFlow": "investing",
-    "strict": true
-  },
-  {
-    "filter": "Charles Schwab Individual Long[-\\s]Term",
-    "type": "otherAsset",
+    "filter": "(Individual|ESPP) Short[-\\s]Term",
     "cashFlow": "investing",
     "strict": true
   },
@@ -112,6 +106,14 @@
   {
     "filter": "Citibank",
     "color": -14328861
+  },
+  {
+    "filter": "[\\s\\S]*"
+  },
+  {
+    "filter": "(Individual|ESPP) Long[-\\s]Term",
+    "type": "otherAsset",
+    "cashFlow": "investing"
   }
 ]</Value>
     </Setting>

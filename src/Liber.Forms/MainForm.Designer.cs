@@ -609,7 +609,7 @@ partial class MainForm
         // 
         // _recentPathManager
         // 
-        _recentPathManager.MaxPaths = 1;
+        _recentPathManager.MaxPaths = 10;
         _recentPathManager.Invalidated += OnRecentPathManagerInvalidated;
         // 
         // _factory

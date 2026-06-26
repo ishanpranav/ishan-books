@@ -648,7 +648,14 @@ internal partial class MainForm : Form
             return;
         }
 
-        Account account = _company.Accounts.MaxBy(x => x.Reconciled)!;
+        Account? account = _company.Accounts.MaxBy(x => x.Reconciled);
+
+        if (account == null || account.Reconciled == null)
+        {
+            FormattedStrings.ShowUnreconcileMessage();
+
+            return;
+        }
 
         if (FormattedStrings.ShowUnreconcileMessage(account) == DialogResult.OK)
         {

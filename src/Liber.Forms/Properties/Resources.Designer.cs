@@ -258,5 +258,14 @@ namespace Liber.Forms.Properties {
                 return ResourceManager.GetString("UnreconcileCaption", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is no previous reconciliation to undo..
+        /// </summary>
+        internal static string UnreconcileText {
+            get {
+                return ResourceManager.GetString("UnreconcileText", resourceCulture);
+            }
+        }
     }
 }
