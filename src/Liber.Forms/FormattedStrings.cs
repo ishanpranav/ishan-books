@@ -312,6 +312,15 @@ internal static class FormattedStrings
             MessageBoxIcon.Error);
     }
 
+    public static DialogResult ShowUnreconcileMessage()
+    {
+        return MessageBox.Show(
+            Properties.Resources.UnreconcileText,
+            Properties.Resources.UnreconcileCaption,
+            MessageBoxButtons.OK,
+            MessageBoxIcon.Warning);
+    }
+
     public static DialogResult ShowUnreconcileMessage(Account account)
     {
         return MessageBox.Show(

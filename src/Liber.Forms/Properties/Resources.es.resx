@@ -180,4 +180,7 @@
   <data name="UnreconcileCaption" xml:space="preserve">
     <value>Deshacer la última conciliación</value>
   </data>
+  <data name="UnreconcileText" xml:space="preserve">
+    <value>No hay una conciliación previa que deshacer.</value>
+  </data>
 </root>

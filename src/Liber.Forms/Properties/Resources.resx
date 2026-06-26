@@ -184,4 +184,7 @@
   <data name="UnreconcileCaption" xml:space="preserve">
     <value>Undo Last Reconciliation</value>
   </data>
+  <data name="UnreconcileText" xml:space="preserve">
+    <value>There is no previous reconciliation to undo.</value>
+  </data>
 </root>
