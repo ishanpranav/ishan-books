@@ -15,12 +15,14 @@ internal interface ILineSource
 
     bool Contains(Line value);
 
-    bool CanEditSibling(Line value);
+    bool CanEditAccount(Line value);
     bool CanGetNewLines(Guid siblingId);
     IReadOnlyCollection<Line> GetNewLines(Guid siblingId, decimal balance);
 
     IEnumerable<Line> GetOrderedLines();
     AccountType GetRepresentativeType();
+    string? GetRepresentativeAccountName(Line value);
+    Guid GetRepresentativeAccountId(Line value);
 
     bool IsInvalidatedByAccountRemoved(Guid id);
     bool IsInvalidatedByAccountUpdated(Guid id);

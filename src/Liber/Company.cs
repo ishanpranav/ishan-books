@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
+using Liber.Filters;
 using Liber.Properties;
 
 namespace Liber;
@@ -733,7 +734,7 @@ public class Company : ICloneable
         }
     }
 
-    public decimal GetEquity(DateTime posted, Regex filter)
+    public decimal GetEquity(DateTime posted, Filter filter)
     {
         decimal result = _accounts[EquityAccountId].GetBalance(posted, filter);
 
@@ -748,7 +749,7 @@ public class Company : ICloneable
         return result;
     }
 
-    public decimal GetBalance(Account account, Regex filter)
+    public decimal GetBalance(Account account, Filter filter)
     {
         if (account.Type.IsTemporary())
         {
@@ -832,7 +833,7 @@ public class Company : ICloneable
         }
     }
 
-    private BalanceInfo ComputeBalances(Account account, ReportTypes type, DateTime started, DateTime posted, Regex filter)
+    private BalanceInfo ComputeBalances(Account account, ReportTypes type, DateTime started, DateTime posted, Filter filter)
     {
         if (account.Id == EquityAccountId)
         {
@@ -880,13 +881,63 @@ public class Company : ICloneable
         };
     }
 
+    public LineType GetLineType(Line value, AccountType representativeType)
+    {
+        Line? sibling = value.Sibling;
+
+        if (sibling == null)
+        {
+            return LineType.GeneralJournal;
+        }
+
+        AccountType siblingType = GetAccount(sibling.AccountId).Type;
+
+        if (representativeType == AccountType.Bank)
+        {
+            if (siblingType == AccountType.Bank)
+            {
+                return LineType.Transfer;
+            }
+
+            if (value.Balance > 0)
+            {
+                return LineType.Deposit;
+            }
+
+            if (value.Balance < 0)
+            {
+                return LineType.Check;
+            }
+        }
+
+        if (representativeType == AccountType.CreditCard)
+        {
+            if (siblingType == AccountType.CreditCard)
+            {
+                return LineType.Transfer;
+            }
+
+            if (value.Balance > 0)
+            {
+                return LineType.Payment;
+            }
+
+            if (value.Balance < 0)
+            {
+                return LineType.Bill;
+            }
+        }
+
+        return LineType.None;
+    }
+
     private void ComputeSubtreeBalances(
         Account account,
         IReadOnlySet<Account> visibleAccounts,
         ReportTypes type,
         DateTime started,
         DateTime posted,
-        Regex filter,
+        Filter filter,
         Dictionary<ParentKey, BalanceInfo> results)
     {
         BalanceInfo balances = ComputeBalances(account, type, started, posted, filter);
@@ -919,7 +970,7 @@ public class Company : ICloneable
         ReportTypes type,
         DateTime started,
         DateTime posted,
-        Regex filter)
+        Filter filter)
     {
         foreach (Account account in visibleAccounts)
         {
@@ -937,7 +988,7 @@ public class Company : ICloneable
         ReportTypes type,
         DateTime started,
         DateTime posted,
-        Regex filter)
+        Filter filter)
     {
         foreach (Account root in GetVisibleRoots(visibleAccounts))
         {
@@ -957,7 +1008,7 @@ public class Company : ICloneable
         ReportTypes type,
         DateTime started,
         DateTime posted,
-        Regex filter)
+        Filter filter)
     {
         foreach (IGrouping<AccountType, (Account, ParentKey, BalanceInfo)> group in GetBalancesByKey(
                 visibleAccounts,
@@ -985,7 +1036,7 @@ public class Company : ICloneable
         ReportTypes type,
         DateTime started,
         DateTime posted,
-        Regex filter)
+        Filter filter)
     {
         foreach (IGrouping<Account, (Account, ParentKey, BalanceInfo)> group in GetBalancesByKey(
                 visibleAccounts,
@@ -1013,7 +1064,7 @@ public class Company : ICloneable
         ReportTypes type,
         DateTime started,
         DateTime posted,
-        Regex filter)
+        Filter filter)
     {
         foreach (IGrouping<(AccountType Type, Account Parent), (Account, ParentKey, BalanceInfo)> group in GetBalancesByKey(
                 visibleAccounts,
@@ -1041,7 +1092,7 @@ public class Company : ICloneable
         ReportTypes type,
         DateTime started,
         DateTime posted,
-        Regex filter)
+        Filter filter)
     {
         foreach (IGrouping<AccountType, Account> typeGroup in GetVisibleRoots(visibleAccounts).GroupBy(x => x.Type))
         {
@@ -1071,7 +1122,7 @@ public class Company : ICloneable
         ReportTypes type,
         DateTime started,
         DateTime posted,
-        Regex filter)
+        Filter filter)
     {
         List<Account> sameTypeChildren = new List<Account>();
         List<Account> crossTypeChildren = new List<Account>();

@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Humanizer;
+using Liber.Filters;
 using Liber.Forms.Forms;
 using Liber.Forms.Properties;
 using Liber.Forms.Reports;
@@ -126,7 +127,7 @@ internal partial class AccountsForm : Form
         item.SubItems.Add(value.CashFlow.Humanize()).Tag = value.CashFlow;
         item.SubItems.Add(FormattedStrings.GetTaxTypeText(value.TaxType)).Tag = value.TaxType;
 
-        decimal balance = value.Type.Toggle(_company.GetBalance(value, Filters.Any()));
+        decimal balance = value.Type.Toggle(_company.GetBalance(value, new ConjunctionFilter()));
 
         item.SubItems.Add(balance.ToLocalizedString()).Tag = balance;
 

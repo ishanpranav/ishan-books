@@ -163,20 +163,23 @@
   <data name="otherEquityAccountComboBox.HelpString" xml:space="preserve">
     <value>Especifica la cuenta de patrimonio utilizada para contener las ganancias y pérdidas no realizadas acumuladas de la empresa. Esta cuenta puede llamarse Acumulado de Otros Ingresos Integrales (si es positiva) o Acumulado de Otros Resultados Integrales (si es negativa).</value>
   </data>
+  <data name="closingAccountsGroupBox.Text" xml:space="preserve">
+    <value>Cuentas de cierre</value>
+  </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>227, 15</value>
   </data>
   <data name="label4.Text" xml:space="preserve">
     <value>Utilidades retenidas (o déficit acumulado)</value>
   </data>
-  <data name="closingAccountsGroupBox.Text" xml:space="preserve">
-    <value>Cuentas de cierre</value>
-  </data>
   <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
     <value>31, 15</value>
   </data>
   <data name="label6.Text" xml:space="preserve">
     <value>&amp;Tipo</value>
+  </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Periodo de informe</value>
   </data>
   <data name="ytdRadioButton.HelpString" xml:space="preserve">
     <value>Indica que el período de informe predeterminado es el acumulado del año fiscal actual hasta la fecha.</value>
@@ -219,9 +222,6 @@
   </data>
   <data name="currentRadioButton.Text" xml:space="preserve">
     <value>Año fiscal actual</value>
-  </data>
-  <data name="groupBox1.Text" xml:space="preserve">
-    <value>Periodo de informe</value>
   </data>
   <data name="typeComboBox.HelpKeyword" xml:space="preserve">
     <value>Especifica el tipo de entidad declarante, como una empresa o una persona física.</value>

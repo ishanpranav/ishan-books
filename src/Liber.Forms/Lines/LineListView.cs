@@ -37,6 +37,8 @@ internal class LineListView : ListViewEx
 
         try
         {
+            Items.Clear();
+
             foreach (Line line in lines)
             {
                 Transaction transaction = line.Transaction;

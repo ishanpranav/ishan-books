@@ -304,7 +304,7 @@ This computer program is licensed under the MIT license.</value>
     <value>True</value>
   </data>
   <data name="thirdPartyNoticesLinkLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>135, 7</value>
+    <value>136, 4</value>
   </data>
   <data name="thirdPartyNoticesLinkLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>108, 15</value>
@@ -331,7 +331,7 @@ This computer program is licensed under the MIT license.</value>
     <value>True</value>
   </data>
   <data name="licenseLinkLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 7</value>
+    <value>3, 4</value>
   </data>
   <data name="licenseLinkLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>104, 15</value>

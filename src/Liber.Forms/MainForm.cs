@@ -14,6 +14,7 @@ using System.Windows.Forms;
 using Liber.Forms.Accounts;
 using Liber.Forms.AccountViews;
 using Liber.Forms.Companies;
+using Liber.Forms.Filters;
 using Liber.Forms.Forms;
 using Liber.Forms.Help;
 using Liber.Forms.Lines;
@@ -27,7 +28,6 @@ using Liber.Forms.Transactions;
 using Liber.Forms.Writers;
 using Liber.Sqlite;
 using Liber.Writers;
-using Microsoft.WindowsAPICodePack.Taskbar;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 
@@ -139,31 +139,31 @@ internal partial class MainForm : Form
         recentPathsToolStripMenuItem.Visible = true;
         recentPathsToolStripSeparator.Visible = true;
 
-        try
-        {
-            JumpList list = JumpList.CreateJumpListForIndividualWindow(TaskbarManager.Instance.ApplicationId, Handle);
-            JumpListCustomCategory companiesCategory = new JumpListCustomCategory(Resources.CompaniesJumpListCustomCategory);
+        //try
+        //{
+        //    JumpList list = JumpList.CreateJumpListForIndividualWindow(TaskbarManager.Instance.ApplicationId, Handle);
+        //    JumpListCustomCategory companiesCategory = new JumpListCustomCategory(Resources.CompaniesJumpListCustomCategory);
 
-            foreach (string path in _recentPathManager.Paths)
-            {
-                if (!File.Exists(path))
-                {
-                    continue;
-                }
+        //    foreach (string path in _recentPathManager.Paths)
+        //    {
+        //        if (!File.Exists(path))
+        //        {
+        //            continue;
+        //        }
 
-                JumpListLink link = new JumpListLink(path, Path.GetFileName(path))
-                {
-                    Arguments = "-1"
-                };
+        //        JumpListLink link = new JumpListLink(path, Path.GetFileName(path))
+        //        {
+        //            Arguments = "-1"
+        //        };
 
-                companiesCategory.AddJumpListItems(link);
-            }
+        //        companiesCategory.AddJumpListItems(link);
+        //    }
 
-            list.AddCustomCategories(companiesCategory);
-            list.Refresh();
-        }
-        catch (UnauthorizedAccessException) { }
-        catch (ObjectDisposedException) { }
+        //    list.AddCustomCategories(companiesCategory);
+        //    list.Refresh();
+        //}
+        //catch (UnauthorizedAccessException) { }
+        //catch (ObjectDisposedException) { }
     }
 
     private void InitializeReportEngine()
@@ -628,6 +628,11 @@ internal partial class MainForm : Form
     private void OnNewAccountToolStripMenuItemClick(object sender, EventArgs e)
     {
         _factory.AutoRegister(() => new NewAccountForm(_company));
+    }
+
+    private void OnFindToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        _factory.Register(Guid.NewGuid(), new FindForm(_company));
     }
 
     private void OnReconcileAccountToolStripMenuItemClick(object sender, EventArgs e)

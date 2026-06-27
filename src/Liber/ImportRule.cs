@@ -14,7 +14,7 @@ public class ImportRule
     [JsonConverter(typeof(JsonRegexConverter))]
     [LocalizedDisplayName(nameof(Filter))]
     [TypeConverter(typeof(RegexConverter))]
-    public Regex Filter { get; set; } = Filters.Any();
+    public Regex Filter { get; set; } = Regexes.Any();
 
     [LocalizedDisplayName(nameof(Type))]
     [TypeConverter(typeof(LocalizedEnumConverter<AccountType>))]

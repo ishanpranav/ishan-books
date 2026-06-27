@@ -5,7 +5,6 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 
 namespace Liber.Forms.LineSources;
 
@@ -28,7 +27,7 @@ internal class NameLineSource : ILineSource
         return value.Transaction.Name == Name;
     }
 
-    public bool CanEditSibling(Line value)
+    public bool CanEditAccount(Line value)
     {
         return false;
     }
@@ -78,6 +77,16 @@ internal class NameLineSource : ILineSource
         }
 
         return AccountTypeExtensions.Debit;
+    }
+
+    public string GetRepresentativeAccountName(Line value)
+    {
+        return _company.GetAccount(value.AccountId).Name;
+    }
+
+    public Guid GetRepresentativeAccountId(Line value)
+    {
+        return value.AccountId;
     }
 
     public bool IsInvalidatedByAccountRemoved(Guid id)

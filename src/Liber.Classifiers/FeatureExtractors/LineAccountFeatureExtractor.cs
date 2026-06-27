@@ -43,7 +43,6 @@ internal class LineAccountFeatureExtractor : IFeatureExtractor<Line, Guid>
         DateTime posted = transaction.Posted;
 
         yield return new Feature("dayofweek", posted.DayOfWeek.ToString(), weight);
-        yield return new Feature("year", posted.Year.ToString(), weight);
         yield return new Feature("month", posted.Month.ToString(), weight);
 
         int day = posted.Day;

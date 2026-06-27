@@ -10,6 +10,7 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 using Humanizer;
+using Liber.Filters;
 
 namespace Liber.Forms.Reports.Xsl;
 
@@ -357,7 +358,7 @@ public class XslReport : IntervalView, IXmlSerializable
             .GetTransactionsBetween(Started, Posted)
             .Where(transaction => transaction.Lines
                 .Any(line => Accounts.Values
-                    .Contains(Company.GetAccount(line.AccountId)))))
+                    .Contains(Company.GetAccount(line.AccountId)) && Filter.IsMatch(line))))
         {
             WriteTransactionXml(writer, transaction);
         }

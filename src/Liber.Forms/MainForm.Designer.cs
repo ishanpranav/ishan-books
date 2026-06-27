@@ -60,11 +60,13 @@ partial class MainForm
         recentPathsToolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
         exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         editToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+        findToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
+        unreconcileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
         cultureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         importSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-        unreconcileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-        toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
         combinePdfDocumentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         accountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -83,6 +85,8 @@ partial class MainForm
         removeAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
         nameTransactionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
+        splashScreenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         reportsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
         otherReportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         formToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -113,8 +117,6 @@ partial class MainForm
         _saveFileDialog = new System.Windows.Forms.SaveFileDialog();
         _recentPathManager = new RecentPathManager(components);
         _factory = new FormFactory(components);
-        toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
-        splashScreenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         _menuStrip.SuspendLayout();
         _toolStrip.SuspendLayout();
         SuspendLayout();
@@ -281,9 +283,32 @@ partial class MainForm
         // 
         // editToolStripMenuItem1
         // 
-        editToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { cultureToolStripMenuItem, importSettingsToolStripMenuItem, toolStripSeparator7, unreconcileToolStripMenuItem, toolStripSeparator17, combinePdfDocumentsToolStripMenuItem });
+        editToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { findToolStripMenuItem, toolStripSeparator19, unreconcileToolStripMenuItem, toolStripSeparator17, cultureToolStripMenuItem, importSettingsToolStripMenuItem, toolStripSeparator7, combinePdfDocumentsToolStripMenuItem });
         editToolStripMenuItem1.Name = "editToolStripMenuItem1";
         resources.ApplyResources(editToolStripMenuItem1, "editToolStripMenuItem1");
+        // 
+        // findToolStripMenuItem
+        // 
+        findToolStripMenuItem.Image = VisualStudioImageLibrary.QuickFind;
+        findToolStripMenuItem.Name = "findToolStripMenuItem";
+        resources.ApplyResources(findToolStripMenuItem, "findToolStripMenuItem");
+        findToolStripMenuItem.Click += OnFindToolStripMenuItemClick;
+        // 
+        // toolStripSeparator19
+        // 
+        toolStripSeparator19.Name = "toolStripSeparator19";
+        resources.ApplyResources(toolStripSeparator19, "toolStripSeparator19");
+        // 
+        // unreconcileToolStripMenuItem
+        // 
+        unreconcileToolStripMenuItem.Name = "unreconcileToolStripMenuItem";
+        resources.ApplyResources(unreconcileToolStripMenuItem, "unreconcileToolStripMenuItem");
+        unreconcileToolStripMenuItem.Click += OnUnreconcileToolStripMenuItemClick;
+        // 
+        // toolStripSeparator17
+        // 
+        toolStripSeparator17.Name = "toolStripSeparator17";
+        resources.ApplyResources(toolStripSeparator17, "toolStripSeparator17");
         // 
         // cultureToolStripMenuItem
         // 
@@ -303,17 +328,6 @@ partial class MainForm
         // 
         toolStripSeparator7.Name = "toolStripSeparator7";
         resources.ApplyResources(toolStripSeparator7, "toolStripSeparator7");
-        // 
-        // unreconcileToolStripMenuItem
-        // 
-        unreconcileToolStripMenuItem.Name = "unreconcileToolStripMenuItem";
-        resources.ApplyResources(unreconcileToolStripMenuItem, "unreconcileToolStripMenuItem");
-        unreconcileToolStripMenuItem.Click += OnUnreconcileToolStripMenuItemClick;
-        // 
-        // toolStripSeparator17
-        // 
-        toolStripSeparator17.Name = "toolStripSeparator17";
-        resources.ApplyResources(toolStripSeparator17, "toolStripSeparator17");
         // 
         // combinePdfDocumentsToolStripMenuItem
         // 
@@ -424,6 +438,17 @@ partial class MainForm
         nameTransactionsToolStripMenuItem.Name = "nameTransactionsToolStripMenuItem";
         resources.ApplyResources(nameTransactionsToolStripMenuItem, "nameTransactionsToolStripMenuItem");
         nameTransactionsToolStripMenuItem.Click += OnNameTransactionsToolStripMenuItemClick;
+        // 
+        // toolStripSeparator18
+        // 
+        toolStripSeparator18.Name = "toolStripSeparator18";
+        resources.ApplyResources(toolStripSeparator18, "toolStripSeparator18");
+        // 
+        // splashScreenToolStripMenuItem
+        // 
+        splashScreenToolStripMenuItem.Name = "splashScreenToolStripMenuItem";
+        resources.ApplyResources(splashScreenToolStripMenuItem, "splashScreenToolStripMenuItem");
+        splashScreenToolStripMenuItem.Click += OnSplashScreenToolStripMenuItemClick;
         // 
         // reportsToolStripMenuItem1
         // 
@@ -609,23 +634,11 @@ partial class MainForm
         // 
         // _recentPathManager
         // 
-        _recentPathManager.MaxPaths = 10;
         _recentPathManager.Invalidated += OnRecentPathManagerInvalidated;
         // 
         // _factory
         // 
         _factory.Invalidated += OnFactoryInvalidated;
-        // 
-        // toolStripSeparator18
-        // 
-        toolStripSeparator18.Name = "toolStripSeparator18";
-        resources.ApplyResources(toolStripSeparator18, "toolStripSeparator18");
-        // 
-        // splashScreenToolStripMenuItem
-        // 
-        splashScreenToolStripMenuItem.Name = "splashScreenToolStripMenuItem";
-        resources.ApplyResources(splashScreenToolStripMenuItem, "splashScreenToolStripMenuItem");
-        splashScreenToolStripMenuItem.Click += OnSplashScreenToolStripMenuItemClick;
         // 
         // MainForm
         // 
@@ -734,4 +747,6 @@ partial class MainForm
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator18;
     private System.Windows.Forms.ToolStripMenuItem splashScreenToolStripMenuItem;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator19;
+    private System.Windows.Forms.ToolStripMenuItem findToolStripMenuItem;
 }
