@@ -25,7 +25,7 @@ __Bookkeeping and personal finance__
 - [X] Make general journal entries
 - [X] Write checks
 - [X] Use register
-- [ ] Reconcile
+- [X] Reconcile
 
 __Reporting__
 - [X] Trial balance
