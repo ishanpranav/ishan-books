@@ -5,8 +5,10 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text.RegularExpressions;
+using System.Drawing.Design;
+using Liber.Filters;
 using Liber.Forms.Accounts;
+using Liber.Forms.Filters;
 
 namespace Liber.Forms.Reports;
 
@@ -43,11 +45,11 @@ public abstract class IntervalView : IStandardValuesProvider
     [LocalizedDisplayName(nameof(Accounts))]
     public AccountsView Accounts { get; set; }
 
+    [Editor(typeof(FilterEditor), typeof(UITypeEditor))]
     [LocalizedCategory(nameof(Filter))]
     [LocalizedDescription(nameof(Filter))]
     [LocalizedDisplayName(nameof(Filter))]
-    [TypeConverter(typeof(RegexConverter))]
-    public Regex Filter { get; set; } = Filters.Any();
+    public Filter Filter { get; set; } = new ConjunctionFilter();
 
     [LocalizedCategory(nameof(Started))]
     [LocalizedDescription(nameof(Started))]

@@ -117,1031 +117,944 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;equityAccountComboBox.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
-    <value>closingAccountsGroupBox</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="passwordTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>323, 23</value>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 8</value>
+  </data>
+  <metadata name="_helpProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>146, 17</value>
+  </metadata>
+  <data name="label1.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 15</value>
+  </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>&amp;Name</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
   </data>
   <data name="&gt;&gt;label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;customPostedDatePicker.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>14</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ytdRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="nameTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
-  <data name="fiscalYearPostedDatePicker.HelpString" xml:space="preserve">
-    <value>Specifies the last day of each fiscal year.</value>
+  <data name="nameTextBox.HelpString" xml:space="preserve">
+    <value>Specifies the name of the company. For a sole proprietorship, this is the name of the proprietor or reporting entity.</value>
   </data>
-  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 22</value>
+  <data name="nameTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>88, 6</value>
   </data>
-  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
+  <data name="nameTextBox.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="nameTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>346, 23</value>
+  </data>
+  <data name="nameTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;nameTextBox.Name" xml:space="preserve">
+    <value>nameTextBox</value>
+  </data>
+  <data name="&gt;&gt;nameTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nameTextBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="currentRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 21</value>
+  <data name="&gt;&gt;nameTextBox.ZOrder" xml:space="preserve">
+    <value>13</value>
   </data>
-  <data name="lastRadioButton.HelpString" xml:space="preserve">
-    <value>Indicates that the default reporting period is the previous fiscal year.</value>
-  </data>
-  <data name="lastRadioButton.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
-    <value>AssociateIndex</value>
-  </data>
-  <data name="label3.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>&amp;Color</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="acceptButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="cancelButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
-  <data name="&gt;&gt;typeComboBox.Name" xml:space="preserve">
-    <value>typeComboBox</value>
+  <data name="cancelButton.HelpString" xml:space="preserve">
+    <value>Reverts the changes.</value>
   </data>
-  <data name="&gt;&gt;otherEquityAccountComboBox.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="cancelButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>366, 389</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="lastRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="cancelButton.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="&gt;&gt;fiscalYearPostedDatePicker.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 15</value>
-  </data>
-  <data name="_colorButton.Text" xml:space="preserve">
-    <value>Select</value>
-  </data>
-  <data name="customRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="typeComboBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
-  </data>
-  <data name="customStartedDatePicker.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 23</value>
-  </data>
-  <data name="acceptButton.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>234, 15</value>
-  </data>
-  <data name="ytdRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 19</value>
-  </data>
-  <data name="&gt;&gt;ytdRadioButton.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>424, 422</value>
-  </data>
-  <data name="label6.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="&gt;&gt;equityAccountComboBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="cancelButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 23</value>
   </data>
   <data name="cancelButton.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="_colorButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
+  <data name="cancelButton.Text" xml:space="preserve">
+    <value>&amp;Cancel</value>
   </data>
-  <data name="label7.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="&gt;&gt;cancelButton.Name" xml:space="preserve">
+    <value>cancelButton</value>
   </data>
-  <data name="&gt;&gt;label4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;cancelButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="groupBox1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
-  </data>
-  <data name="customStartedDatePicker.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
-    <value>AssociateIndex</value>
-  </data>
-  <data name="typeComboBox.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;currentRadioButton.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="ytdRadioButton.HelpString" xml:space="preserve">
-    <value>Indicates that the default reporting period is the current fiscal year to date.</value>
-  </data>
-  <data name="acceptButton.HelpString" xml:space="preserve">
-    <value>Accepts the changes to the company.</value>
-  </data>
-  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cancelButton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cancelButton.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
-  <data name="ytdRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 46</value>
+  <data name="acceptButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
   </data>
-  <data name="groupBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
+  <data name="acceptButton.HelpString" xml:space="preserve">
+    <value>Accepts the changes to the company.</value>
   </data>
-  <data name="&gt;&gt;customStartedDatePicker.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+  <data name="acceptButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>290, 389</value>
   </data>
-  <data name="label5.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
-    <value>AssociateIndex</value>
-  </data>
-  <data name="currentRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 19</value>
-  </data>
-  <data name="&gt;&gt;label6.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="label7.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
-    <value>AssociateIndex</value>
-  </data>
-  <data name="groupBox1.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
-    <value>AssociateIndex</value>
-  </data>
-  <data name="typeComboBox.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
-    <value>AssociateIndex</value>
-  </data>
-  <data name="passwordTextBox.HelpString" xml:space="preserve">
-    <value>Optionally specifies a passphrase for the company file.</value>
-  </data>
-  <data name="ytdRadioButton.Text" xml:space="preserve">
-    <value>Fiscal year to date</value>
-  </data>
-  <data name="&gt;&gt;otherEquityAccountComboBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="closingAccountsGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 144</value>
-  </data>
-  <data name="&gt;&gt;customPostedDatePicker.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;customStartedDatePicker.Name" xml:space="preserve">
-    <value>customStartedDatePicker</value>
-  </data>
-  <data name="customStartedDatePicker.ShowHelp" type="System.Boolean, mscorlib">
+  <data name="acceptButton.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="customPostedDatePicker.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 23</value>
+  <data name="acceptButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 23</value>
   </data>
-  <data name="&gt;&gt;fiscalYearPostedDatePicker.Name" xml:space="preserve">
-    <value>fiscalYearPostedDatePicker</value>
+  <data name="acceptButton.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
   </data>
-  <data name="&gt;&gt;cancelButton.Type" xml:space="preserve">
+  <data name="acceptButton.Text" xml:space="preserve">
+    <value>O&amp;K</value>
+  </data>
+  <data name="&gt;&gt;acceptButton.Name" xml:space="preserve">
+    <value>acceptButton</value>
+  </data>
+  <data name="&gt;&gt;acceptButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;equityAccountComboBox.Name" xml:space="preserve">
-    <value>equityAccountComboBox</value>
-  </data>
-  <data name="&gt;&gt;passwordTextBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;acceptButton.Parent" xml:space="preserve">
     <value>$this</value>
-  </data>
-  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 34</value>
-  </data>
-  <data name="&gt;&gt;typeComboBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="equityAccountComboBox.HelpString" xml:space="preserve">
-    <value>Specifies the equity account used to hold the company's accumulated income and expenses. This account might be called Retained Earnings (if positive) or Accumulated Deficit (if negative), Owner's Equity in a sole proprietorship, or Partner's Equity in a partnership. If this is the only equity account, the account may simply be called Equity.</value>
-  </data>
-  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="lastRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 71</value>
-  </data>
-  <data name="&gt;&gt;cancelButton.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="ytdRadioButton.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
-    <value>AssociateIndex</value>
-  </data>
-  <data name="label6.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="otherEquityAccountComboBox.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
-    <value>AssociateIndex</value>
-  </data>
-  <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="fiscalYearPostedDatePicker.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 117</value>
-  </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 15</value>
-  </data>
-  <data name="label7.Text" xml:space="preserve">
-    <value>&amp;Fiscal Year</value>
-  </data>
-  <data name="&gt;&gt;label7.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="label2.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
-    <value>AssociateIndex</value>
-  </data>
-  <data name="ytdRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;customStartedDatePicker.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="lastRadioButton.Text" xml:space="preserve">
-    <value>Last fiscal year</value>
-  </data>
-  <data name="&gt;&gt;lastRadioButton.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="label2.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="&gt;&gt;label7.Name" xml:space="preserve">
-    <value>label7</value>
-  </data>
-  <data name="label3.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="typeComboBox.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="cancelButton.Text" xml:space="preserve">
-    <value>&amp;Cancel</value>
-  </data>
-  <data name="&gt;&gt;customStartedDatePicker.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="passwordTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>88, 84</value>
-  </data>
-  <data name="customPostedDatePicker.HelpString" xml:space="preserve">
-    <value>Specifies the last day of the default reporting period.</value>
-  </data>
-  <data name="acceptButton.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="currentRadioButton.Text" xml:space="preserve">
-    <value>Current fiscal year</value>
-  </data>
-  <data name="&gt;&gt;_colorButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColorButton, Liber.Forms, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="closingAccountsGroupBox.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="label5.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="customPostedDatePicker.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="typeComboBox.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="label2.ShowHelp" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="typeComboBox.HelpKeyword" xml:space="preserve">
-    <value>Specifies the type of reporting entity, such as a company or natural person.</value>
-  </data>
-  <data name="currentRadioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;label5.Name" xml:space="preserve">
-    <value>label5</value>
-  </data>
-  <data name="typeComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>88, 58</value>
-  </data>
-  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 15</value>
-  </data>
-  <data name="customRadioButton.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
-    <value>AssociateIndex</value>
-  </data>
-  <data name="customRadioButton.HelpString" xml:space="preserve">
-    <value>Indicates that the default reporting period is a custom date range.</value>
-  </data>
-  <data name="equityAccountComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 23</value>
-  </data>
-  <data name="passwordTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="fiscalYearPostedDatePicker.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 23</value>
-  </data>
-  <data name="fiscalYearPostedDatePicker.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
-    <value>AssociateIndex</value>
-  </data>
-  <data name="nameTextBox.HelpString" xml:space="preserve">
-    <value>Specifies the name of the company. For a sole proprietorship, this is the name of the proprietor or reporting entity.</value>
   </data>
   <data name="&gt;&gt;acceptButton.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
-  <data name="fiscalYearStartedDatePicker.CustomFormat" xml:space="preserve">
-    <value>MMMM d</value>
+  <data name="passwordTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
-  <data name="customStartedDatePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>166, 94</value>
+  <data name="passwordTextBox.HelpString" xml:space="preserve">
+    <value>Optionally specifies a passphrase for the company file.</value>
   </data>
-  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="passwordTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>88, 84</value>
   </data>
-  <data name="&gt;&gt;ytdRadioButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="passwordTextBox.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="fiscalYearPostedDatePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 113</value>
+  <data name="passwordTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>346, 23</value>
   </data>
-  <data name="&gt;&gt;nameTextBox.Parent" xml:space="preserve">
+  <data name="passwordTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;passwordTextBox.Name" xml:space="preserve">
+    <value>passwordTextBox</value>
+  </data>
+  <data name="&gt;&gt;passwordTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;passwordTextBox.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>CompanyForm</value>
+  <data name="&gt;&gt;passwordTextBox.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
-  <data name="currentRadioButton.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
-    <value>AssociateIndex</value>
+  <data name="label3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="acceptButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>267, 389</value>
+  <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="label2.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 86</value>
   </data>
-  <data name="cancelButton.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
-    <value>AssociateIndex</value>
+  <data name="label3.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="otherEquityAccountComboBox.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 15</value>
   </data>
-  <data name="currentRadioButton.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="label3.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
-  <data name="closingAccountsGroupBox.ShowHelp" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="label3.Text" xml:space="preserve">
+    <value>&amp;Password</value>
+  </data>
+  <data name="&gt;&gt;label3.Name" xml:space="preserve">
+    <value>label3</value>
+  </data>
+  <data name="&gt;&gt;label3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="_colorButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="_colorButton.HelpString" xml:space="preserve">
+    <value>Specifies the default color for new accounts.</value>
+  </data>
+  <data name="_colorButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>88, 32</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="_colorButton.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="_colorButton.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="_colorButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>323, 23</value>
+    <value>346, 23</value>
   </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>&amp;Name</value>
+  <data name="_colorButton.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
-  <data name="fiscalYearStartedDatePicker.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="_colorButton.Text" xml:space="preserve">
+    <value>Select</value>
   </data>
-  <data name="nameTextBox.ShowHelp" type="System.Boolean, mscorlib">
+  <data name="&gt;&gt;_colorButton.Name" xml:space="preserve">
+    <value>_colorButton</value>
+  </data>
+  <data name="&gt;&gt;_colorButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColorButton, Liber.Forms, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;_colorButton.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;_colorButton.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 34</value>
+  </data>
+  <data name="label2.ShowHelp" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 15</value>
+  </data>
+  <data name="label2.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>&amp;Color</value>
+  </data>
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+    <value>label2</value>
+  </data>
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="equityAccountComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="equityAccountComboBox.HelpString" xml:space="preserve">
+    <value>Specifies the equity account used to hold the company's accumulated income and expenses. This account might be called Retained Earnings (if positive) or Accumulated Deficit (if negative), Owner's Equity in a sole proprietorship, or Partner's Equity in a partnership. If this is the only equity account, the account may simply be called Equity.</value>
+  </data>
+  <data name="equityAccountComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 39</value>
+  </data>
+  <data name="equityAccountComboBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="equityAccountComboBox.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="equityAccountComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>411, 23</value>
+  </data>
+  <data name="equityAccountComboBox.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;equityAccountComboBox.Name" xml:space="preserve">
+    <value>equityAccountComboBox</value>
+  </data>
+  <data name="&gt;&gt;equityAccountComboBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;equityAccountComboBox.Parent" xml:space="preserve">
+    <value>closingAccountsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;equityAccountComboBox.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="label5.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 64</value>
+  </data>
+  <data name="label5.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>288, 15</value>
   </data>
-  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="currentRadioButton.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="otherEquityAccountComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 81</value>
-  </data>
-  <data name="&gt;&gt;customRadioButton.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="typeComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>323, 23</value>
-  </data>
-  <data name="otherEquityAccountComboBox.HelpString" xml:space="preserve">
-    <value>Specifies the equity account used to hold the company's accumulated unrealized gains and losses. This account might be called Accumulated Other Comprehensive Income (if positive) or Accumulated Other Comprehensive Loss (if negative).</value>
-  </data>
-  <data name="closingAccountsGroupBox.Text" xml:space="preserve">
-    <value>Closing Accounts</value>
-  </data>
-  <data name="typeComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="label4.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;passwordTextBox.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;label6.Name" xml:space="preserve">
-    <value>label6</value>
-  </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 64</value>
-  </data>
-  <data name="ytdRadioButton.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="_colorButton.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="label6.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="customPostedDatePicker.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
-    <value>AssociateIndex</value>
-  </data>
-  <data name="label2.TabIndex" type="System.Int32, mscorlib">
+  <data name="label5.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
-  </data>
-  <data name="lastRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>101, 19</value>
-  </data>
-  <data name="_colorButton.HelpString" xml:space="preserve">
-    <value>Specifies the default color for new accounts.</value>
-  </data>
-  <data name="ytdRadioButton.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="groupBox1.ShowHelp" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="groupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label7.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label5.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;label7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="cancelButton.HelpString" xml:space="preserve">
-    <value>Reverts the changes.</value>
   </data>
   <data name="label5.Text" xml:space="preserve">
     <value>Accumulated Other Comprehensive Income (or Loss)</value>
   </data>
-  <data name="&gt;&gt;nameTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>7, 15</value>
-  </data>
-  <data name="cancelButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 23</value>
-  </data>
-  <data name="passwordTextBox.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label1.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="label6.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
-    <value>AssociateIndex</value>
-  </data>
-  <data name="customRadioButton.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lastRadioButton.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="closingAccountsGroupBox.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="closingAccountsGroupBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
-  </data>
-  <data name="passwordTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="fiscalYearStartedDatePicker.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 23</value>
-  </data>
-  <data name="&gt;&gt;label3.Name" xml:space="preserve">
-    <value>label3</value>
-  </data>
-  <data name="label7.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 60</value>
-  </data>
-  <data name="otherEquityAccountComboBox.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="customRadioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 96</value>
-  </data>
-  <data name="label4.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="customPostedDatePicker.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;passwordTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;fiscalYearPostedDatePicker.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="equityAccountComboBox.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;_colorButton.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="$this.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="closingAccountsGroupBox.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="_colorButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="&gt;&gt;lastRadioButton.Name" xml:space="preserve">
-    <value>lastRadioButton</value>
-  </data>
-  <data name="&gt;&gt;fiscalYearPostedDatePicker.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 8</value>
-  </data>
-  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;_colorButton.Name" xml:space="preserve">
-    <value>_colorButton</value>
-  </data>
-  <data name="&gt;&gt;lastRadioButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="_colorButton.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
-    <value>AssociateIndex</value>
-  </data>
-  <data name="passwordTextBox.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
-    <value>AssociateIndex</value>
-  </data>
-  <data name="label3.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
-    <value>AssociateIndex</value>
-  </data>
-  <data name="$this.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
-    <value>AssociateIndex</value>
-  </data>
-  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="closingAccountsGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="&gt;&gt;label5.Name" xml:space="preserve">
+    <value>label5</value>
   </data>
   <data name="&gt;&gt;label5.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="cancelButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>343, 389</value>
+  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
+    <value>closingAccountsGroupBox</value>
   </data>
-  <data name="label6.Text" xml:space="preserve">
-    <value>&amp;Type</value>
+  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="label3.AutoSize" type="System.Boolean, mscorlib">
+  <data name="otherEquityAccountComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="otherEquityAccountComboBox.HelpString" xml:space="preserve">
+    <value>Specifies the equity account used to hold the company's accumulated unrealized gains and losses. This account might be called Accumulated Other Comprehensive Income (if positive) or Accumulated Other Comprehensive Loss (if negative).</value>
+  </data>
+  <data name="otherEquityAccountComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 81</value>
+  </data>
+  <data name="otherEquityAccountComboBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="otherEquityAccountComboBox.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="otherEquityAccountComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 23</value>
+    <value>411, 23</value>
   </data>
-  <data name="passwordTextBox.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="label6.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lastRadioButton.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="&gt;&gt;fiscalYearStartedDatePicker.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;equityAccountComboBox.Parent" xml:space="preserve">
-    <value>closingAccountsGroupBox</value>
-  </data>
-  <data name="equityAccountComboBox.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
-    <value>AssociateIndex</value>
-  </data>
-  <data name="label3.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="label5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="acceptButton.Text" xml:space="preserve">
-    <value>O&amp;K</value>
-  </data>
-  <data name="equityAccountComboBox.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="label5.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="_colorButton.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>400, 125</value>
-  </data>
-  <data name="&gt;&gt;fiscalYearStartedDatePicker.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="label5.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label5.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="equityAccountComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 39</value>
-  </data>
-  <data name="label6.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label4.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
-    <value>AssociateIndex</value>
-  </data>
-  <data name="groupBox1.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="customPostedDatePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>283, 94</value>
-  </data>
-  <data name="currentRadioButton.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;currentRadioButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="acceptButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 23</value>
-  </data>
-  <data name="lastRadioButton.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="otherEquityAccountComboBox.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;otherEquityAccountComboBox.Name" xml:space="preserve">
     <value>otherEquityAccountComboBox</value>
   </data>
-  <data name="&gt;&gt;cancelButton.Name" xml:space="preserve">
-    <value>cancelButton</value>
+  <data name="&gt;&gt;otherEquityAccountComboBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;otherEquityAccountComboBox.Parent" xml:space="preserve">
     <value>closingAccountsGroupBox</value>
   </data>
-  <data name="&gt;&gt;_helpProvider.Name" xml:space="preserve">
-    <value>_helpProvider</value>
+  <data name="&gt;&gt;otherEquityAccountComboBox.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
-  <data name="otherEquityAccountComboBox.ShowHelp" type="System.Boolean, mscorlib">
+  <data name="closingAccountsGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;label4.Name" xml:space="preserve">
+    <value>label4</value>
+  </data>
+  <data name="&gt;&gt;label4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
+    <value>closingAccountsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="closingAccountsGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 144</value>
+  </data>
+  <data name="closingAccountsGroupBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="closingAccountsGroupBox.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="closingAccountsGroupBox.ShowHelp" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="closingAccountsGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>423, 111</value>
+  </data>
+  <data name="closingAccountsGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="closingAccountsGroupBox.Text" xml:space="preserve">
+    <value>Closing Accounts</value>
+  </data>
+  <data name="&gt;&gt;closingAccountsGroupBox.Name" xml:space="preserve">
+    <value>closingAccountsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;closingAccountsGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;closingAccountsGroupBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;closingAccountsGroupBox.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 22</value>
+  </data>
+  <data name="label4.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>234, 15</value>
+  </data>
+  <data name="label4.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label4.Text" xml:space="preserve">
+    <value>Retained Earnings (or Accumulated Deficit)</value>
+  </data>
+  <data name="&gt;&gt;label4.Name" xml:space="preserve">
+    <value>label4</value>
+  </data>
+  <data name="&gt;&gt;label4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
+    <value>closingAccountsGroupBox</value>
+  </data>
+  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="label6.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="label6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
+  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 60</value>
   </data>
-  <data name="currentRadioButton.HelpString" xml:space="preserve">
-    <value>Indicates that the default reporting period is the current fiscal year.</value>
-  </data>
-  <data name="fiscalYearPostedDatePicker.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="closingAccountsGroupBox.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
-    <value>AssociateIndex</value>
-  </data>
-  <data name="fiscalYearStartedDatePicker.Location" type="System.Drawing.Point, System.Drawing">
-    <value>113, 113</value>
-  </data>
-  <data name="otherEquityAccountComboBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
-  </data>
-  <data name="acceptButton.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
-    <value>AssociateIndex</value>
-  </data>
-  <data name="&gt;&gt;closingAccountsGroupBox.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>313, 163</value>
-  </data>
-  <data name="customRadioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>126, 19</value>
-  </data>
-  <data name="cancelButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="nameTextBox.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="&gt;&gt;ytdRadioButton.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="customStartedDatePicker.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="customRadioButton.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="nameTextBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>88, 6</value>
-  </data>
-  <data name="nameTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="customStartedDatePicker.HelpString" xml:space="preserve">
-    <value>Specifies the first day of the default reporting period.</value>
-  </data>
-  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+  <data name="label6.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="closingAccountsGroupBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
+  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 15</value>
   </data>
-  <data name="&gt;&gt;lastRadioButton.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+  <data name="label6.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
-  <data name="&gt;&gt;fiscalYearStartedDatePicker.Name" xml:space="preserve">
-    <value>fiscalYearStartedDatePicker</value>
+  <data name="label6.Text" xml:space="preserve">
+    <value>&amp;Type</value>
   </data>
-  <data name="nameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>323, 23</value>
-  </data>
-  <data name="&gt;&gt;customPostedDatePicker.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="nameTextBox.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
-    <value>AssociateIndex</value>
-  </data>
-  <data name="groupBox1.Text" xml:space="preserve">
-    <value>Reporting Period</value>
-  </data>
-  <data name="closingAccountsGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>400, 111</value>
-  </data>
-  <data name="equityAccountComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="&gt;&gt;label6.Name" xml:space="preserve">
+    <value>label6</value>
   </data>
   <data name="&gt;&gt;label6.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="fiscalYearStartedDatePicker.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
-    <value>AssociateIndex</value>
+  <data name="&gt;&gt;label6.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="groupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;ytdRadioButton.Name" xml:space="preserve">
+    <value>ytdRadioButton</value>
+  </data>
+  <data name="&gt;&gt;ytdRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ytdRadioButton.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;ytdRadioButton.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;customStartedDatePicker.Name" xml:space="preserve">
+    <value>customStartedDatePicker</value>
+  </data>
+  <data name="&gt;&gt;customStartedDatePicker.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;customStartedDatePicker.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;customStartedDatePicker.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;customPostedDatePicker.Name" xml:space="preserve">
     <value>customPostedDatePicker</value>
   </data>
-  <data name="_colorButton.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <data name="&gt;&gt;customPostedDatePicker.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;customPostedDatePicker.Parent" xml:space="preserve">
+    <value>groupBox1</value>
   </data>
-  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
-    <value>closingAccountsGroupBox</value>
-  </data>
-  <data name="&gt;&gt;closingAccountsGroupBox.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 86</value>
-  </data>
-  <data name="label4.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;typeComboBox.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;label4.Name" xml:space="preserve">
-    <value>label4</value>
-  </data>
-  <data name="cancelButton.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="fiscalYearStartedDatePicker.HelpString" xml:space="preserve">
-    <value>Specifies the first day of each fiscal year.</value>
-  </data>
-  <data name="&gt;&gt;label3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="ytdRadioButton.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;fiscalYearStartedDatePicker.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="nameTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="fiscalYearStartedDatePicker.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="equityAccountComboBox.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="$this.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="&gt;&gt;customPostedDatePicker.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;customRadioButton.Name" xml:space="preserve">
     <value>customRadioButton</value>
   </data>
-  <data name="&gt;&gt;typeComboBox.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="equityAccountComboBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 2, 3, 2</value>
-  </data>
-  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="_colorButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>88, 32</value>
-  </data>
-  <data name="label7.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="label3.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="customRadioButton.Text" xml:space="preserve">
-    <value>Custom date range</value>
-  </data>
   <data name="&gt;&gt;customRadioButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="acceptButton.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label1.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="&gt;&gt;passwordTextBox.Name" xml:space="preserve">
-    <value>passwordTextBox</value>
-  </data>
-  <data name="&gt;&gt;_colorButton.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
   <data name="&gt;&gt;customRadioButton.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;customRadioButton.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;lastRadioButton.Name" xml:space="preserve">
+    <value>lastRadioButton</value>
+  </data>
+  <data name="&gt;&gt;lastRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lastRadioButton.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;lastRadioButton.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;currentRadioButton.Name" xml:space="preserve">
+    <value>currentRadioButton</value>
+  </data>
+  <data name="&gt;&gt;currentRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;currentRadioButton.Parent" xml:space="preserve">
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;currentRadioButton.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 15</value>
-  </data>
-  <data name="customPostedDatePicker.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="customStartedDatePicker.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="label1.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
-    <value>AssociateIndex</value>
-  </data>
-  <data name="&gt;&gt;acceptButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="label7.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>&amp;Password</value>
-  </data>
-  <data name="fiscalYearPostedDatePicker.CustomFormat" xml:space="preserve">
-    <value>MMMM d</value>
-  </data>
-  <data name="&gt;&gt;currentRadioButton.Name" xml:space="preserve">
-    <value>currentRadioButton</value>
-  </data>
-  <data name="&gt;&gt;acceptButton.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 259</value>
   </data>
-  <data name="label1.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="groupBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
   </data>
-  <data name="&gt;&gt;nameTextBox.ZOrder" xml:space="preserve">
-    <value>13</value>
+  <data name="groupBox1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
   </data>
-  <data name="otherEquityAccountComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+  <data name="groupBox1.ShowHelp" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>39, 15</value>
+  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>423, 125</value>
   </data>
-  <data name="fiscalYearStartedDatePicker.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
   </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
-    <value>label2</value>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Reporting Period</value>
   </data>
-  <data name="&gt;&gt;closingAccountsGroupBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value>Retained Earnings (or Accumulated Deficit)</value>
+  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="&gt;&gt;acceptButton.Name" xml:space="preserve">
-    <value>acceptButton</value>
+  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
-  <data name="customRadioButton.AutoSize" type="System.Boolean, mscorlib">
+  <data name="ytdRadioButton.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="cancelButton.ShowHelp" type="System.Boolean, mscorlib">
+  <data name="ytdRadioButton.HelpString" xml:space="preserve">
+    <value>Indicates that the default reporting period is the current fiscal year to date.</value>
+  </data>
+  <data name="ytdRadioButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="ytdRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 46</value>
+  </data>
+  <data name="ytdRadioButton.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="label4.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="ytdRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 19</value>
   </data>
-  <data name="&gt;&gt;closingAccountsGroupBox.Name" xml:space="preserve">
-    <value>closingAccountsGroupBox</value>
+  <data name="ytdRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
-  <data name="fiscalYearPostedDatePicker.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="$this.ShowHelp" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;_helpProvider.Type" xml:space="preserve">
-    <value>System.Windows.Forms.HelpProvider, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="groupBox1.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="ytdRadioButton.Text" xml:space="preserve">
+    <value>Fiscal year to date</value>
   </data>
   <data name="&gt;&gt;ytdRadioButton.Name" xml:space="preserve">
     <value>ytdRadioButton</value>
   </data>
-  <data name="&gt;&gt;nameTextBox.Name" xml:space="preserve">
-    <value>nameTextBox</value>
+  <data name="&gt;&gt;ytdRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="&gt;&gt;ytdRadioButton.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;ytdRadioButton.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="customStartedDatePicker.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="customStartedDatePicker.HelpString" xml:space="preserve">
+    <value>Specifies the first day of the default reporting period.</value>
+  </data>
+  <data name="customStartedDatePicker.Location" type="System.Drawing.Point, System.Drawing">
+    <value>189, 94</value>
+  </data>
+  <data name="customStartedDatePicker.ShowHelp" type="System.Boolean, mscorlib">
     <value>True</value>
-  </metadata>
-  <metadata name="_helpProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>146, 17</value>
-  </metadata>
+  </data>
+  <data name="customStartedDatePicker.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 23</value>
+  </data>
+  <data name="customStartedDatePicker.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;customStartedDatePicker.Name" xml:space="preserve">
+    <value>customStartedDatePicker</value>
+  </data>
+  <data name="&gt;&gt;customStartedDatePicker.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;customStartedDatePicker.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;customStartedDatePicker.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="customPostedDatePicker.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="customPostedDatePicker.HelpString" xml:space="preserve">
+    <value>Specifies the last day of the default reporting period.</value>
+  </data>
+  <data name="customPostedDatePicker.Location" type="System.Drawing.Point, System.Drawing">
+    <value>306, 94</value>
+  </data>
+  <data name="customPostedDatePicker.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="customPostedDatePicker.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 23</value>
+  </data>
+  <data name="customPostedDatePicker.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;customPostedDatePicker.Name" xml:space="preserve">
+    <value>customPostedDatePicker</value>
+  </data>
+  <data name="&gt;&gt;customPostedDatePicker.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;customPostedDatePicker.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;customPostedDatePicker.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="customRadioButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="customRadioButton.HelpString" xml:space="preserve">
+    <value>Indicates that the default reporting period is a custom date range.</value>
+  </data>
+  <data name="customRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 96</value>
+  </data>
+  <data name="customRadioButton.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="customRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 19</value>
+  </data>
+  <data name="customRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="customRadioButton.Text" xml:space="preserve">
+    <value>Custom date range</value>
+  </data>
+  <data name="&gt;&gt;customRadioButton.Name" xml:space="preserve">
+    <value>customRadioButton</value>
+  </data>
+  <data name="&gt;&gt;customRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;customRadioButton.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;customRadioButton.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lastRadioButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lastRadioButton.HelpString" xml:space="preserve">
+    <value>Indicates that the default reporting period is the previous fiscal year.</value>
+  </data>
+  <data name="lastRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 71</value>
+  </data>
+  <data name="lastRadioButton.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lastRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 19</value>
+  </data>
+  <data name="lastRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lastRadioButton.Text" xml:space="preserve">
+    <value>Last fiscal year</value>
+  </data>
+  <data name="&gt;&gt;lastRadioButton.Name" xml:space="preserve">
+    <value>lastRadioButton</value>
+  </data>
+  <data name="&gt;&gt;lastRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lastRadioButton.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;lastRadioButton.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="currentRadioButton.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="currentRadioButton.HelpString" xml:space="preserve">
+    <value>Indicates that the default reporting period is the current fiscal year.</value>
+  </data>
+  <data name="currentRadioButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 21</value>
+  </data>
+  <data name="currentRadioButton.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="currentRadioButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 19</value>
+  </data>
+  <data name="currentRadioButton.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="currentRadioButton.Text" xml:space="preserve">
+    <value>Current fiscal year</value>
+  </data>
+  <data name="&gt;&gt;currentRadioButton.Name" xml:space="preserve">
+    <value>currentRadioButton</value>
+  </data>
+  <data name="&gt;&gt;currentRadioButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;currentRadioButton.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;currentRadioButton.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="typeComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="typeComboBox.HelpKeyword" xml:space="preserve">
+    <value>Specifies the type of reporting entity, such as a company or natural person.</value>
+  </data>
+  <data name="typeComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>88, 58</value>
+  </data>
+  <data name="typeComboBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 2, 3, 2</value>
+  </data>
+  <data name="typeComboBox.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="typeComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>346, 23</value>
+  </data>
+  <data name="typeComboBox.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;typeComboBox.Name" xml:space="preserve">
+    <value>typeComboBox</value>
+  </data>
+  <data name="&gt;&gt;typeComboBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;typeComboBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;typeComboBox.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="fiscalYearStartedDatePicker.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="fiscalYearStartedDatePicker.CustomFormat" xml:space="preserve">
+    <value>MMMM d</value>
+  </data>
+  <data name="fiscalYearStartedDatePicker.HelpString" xml:space="preserve">
+    <value>Specifies the first day of each fiscal year.</value>
+  </data>
+  <data name="fiscalYearStartedDatePicker.Location" type="System.Drawing.Point, System.Drawing">
+    <value>136, 113</value>
+  </data>
+  <data name="fiscalYearStartedDatePicker.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="fiscalYearStartedDatePicker.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 23</value>
+  </data>
+  <data name="fiscalYearStartedDatePicker.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;fiscalYearStartedDatePicker.Name" xml:space="preserve">
+    <value>fiscalYearStartedDatePicker</value>
+  </data>
+  <data name="&gt;&gt;fiscalYearStartedDatePicker.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;fiscalYearStartedDatePicker.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;fiscalYearStartedDatePicker.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="fiscalYearPostedDatePicker.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="fiscalYearPostedDatePicker.CustomFormat" xml:space="preserve">
+    <value>MMMM d</value>
+  </data>
+  <data name="fiscalYearPostedDatePicker.HelpString" xml:space="preserve">
+    <value>Specifies the last day of each fiscal year.</value>
+  </data>
+  <data name="fiscalYearPostedDatePicker.Location" type="System.Drawing.Point, System.Drawing">
+    <value>288, 113</value>
+  </data>
+  <data name="fiscalYearPostedDatePicker.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="fiscalYearPostedDatePicker.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 23</value>
+  </data>
+  <data name="fiscalYearPostedDatePicker.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;fiscalYearPostedDatePicker.Name" xml:space="preserve">
+    <value>fiscalYearPostedDatePicker</value>
+  </data>
+  <data name="&gt;&gt;fiscalYearPostedDatePicker.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;fiscalYearPostedDatePicker.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;fiscalYearPostedDatePicker.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="label7.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 117</value>
+  </data>
+  <data name="label7.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 15</value>
+  </data>
+  <data name="label7.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="label7.Text" xml:space="preserve">
+    <value>&amp;Fiscal Year</value>
+  </data>
+  <data name="&gt;&gt;label7.Name" xml:space="preserve">
+    <value>label7</value>
+  </data>
+  <data name="&gt;&gt;label7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label7.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <metadata name="$this.Language" type="System.Globalization.CultureInfo, System.Private.CoreLib, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
     <value>es</value>
   </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>7, 15</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>447, 422</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>409, 461</value>
+  </data>
+  <data name="$this.ShowHelp" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;_helpProvider.Name" xml:space="preserve">
+    <value>_helpProvider</value>
+  </data>
+  <data name="&gt;&gt;_helpProvider.Type" xml:space="preserve">
+    <value>System.Windows.Forms.HelpProvider, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>CompanyForm</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

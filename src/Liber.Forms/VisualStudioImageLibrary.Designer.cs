@@ -113,6 +113,16 @@ namespace Liber.Forms {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap DeleteFilter {
+            get {
+                object obj = ResourceManager.GetObject("DeleteFilter", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap DeleteTable {
             get {
                 object obj = ResourceManager.GetObject("DeleteTable", resourceCulture);
@@ -136,6 +146,16 @@ namespace Liber.Forms {
         internal static System.Drawing.Bitmap Edit {
             get {
                 object obj = ResourceManager.GetObject("Edit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EditFilter {
+            get {
+                object obj = ResourceManager.GetObject("EditFilter", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -273,6 +293,16 @@ namespace Liber.Forms {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap NewFilter {
+            get {
+                object obj = ResourceManager.GetObject("NewFilter", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap NewLog {
             get {
                 object obj = ResourceManager.GetObject("NewLog", resourceCulture);
@@ -296,6 +326,16 @@ namespace Liber.Forms {
         internal static System.Drawing.Bitmap OpenFile {
             get {
                 object obj = ResourceManager.GetObject("OpenFile", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap QuickFind {
+            get {
+                object obj = ResourceManager.GetObject("QuickFind", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -5,6 +5,7 @@
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using Liber.Filters;
 using Liber.Forms.AccountViews;
 
 namespace Liber.Forms.Transactions;
@@ -134,7 +135,7 @@ internal partial class StatementForm : Form
 
     private void InitializeEndingBalance(Account account)
     {
-        endingBalanceNumericUpDown.Value = account.Type.Toggle(account.GetBalance(Reconciled, Filters.Any()));
+        endingBalanceNumericUpDown.Value = account.Type.Toggle(account.GetBalance(Reconciled, new ConjunctionFilter()));
     }
 
     private void OnUnreconcileButtonClick(object sender, EventArgs e)

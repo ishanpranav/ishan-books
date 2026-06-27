@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+using Humanizer;
 using Liber.Forms.AccountViews;
 using Liber.Forms.Forms;
 using Liber.Forms.LineSources;
@@ -137,56 +138,6 @@ internal partial class TransactionsForm : Form
         }
     }
 
-    private string GetLineType(Line value, AccountType type)
-    {
-        Line? sibling = value.Sibling;
-
-        if (sibling == null)
-        {
-            return "GENJRN";
-        }
-
-        AccountType siblingType = _company.GetAccount(sibling.AccountId).Type;
-
-        if (type == AccountType.Bank)
-        {
-            if (siblingType == AccountType.Bank)
-            {
-                return "TNF";
-            }
-
-            if (value.Balance > 0)
-            {
-                return "DEP";
-            }
-
-            if (value.Balance < 0)
-            {
-                return "CHK";
-            }
-        }
-
-        if (type == AccountType.CreditCard)
-        {
-            if (siblingType == AccountType.CreditCard)
-            {
-                return "TNF";
-            }
-
-            if (value.Balance > 0)
-            {
-                return "PMT";
-            }
-
-            if (value.Balance < 0)
-            {
-                return "BILL";
-            }
-        }
-
-        return string.Empty;
-    }
-
     private void InitializeLines()
     {
         if (_pendingInitialization)
@@ -235,20 +186,19 @@ internal partial class TransactionsForm : Form
                 {
                     Tag = new RegisterRow(i)
                 };
-                Line? sibling = line.Sibling;
-
+                
                 bottom.CreateCells(
                     _dataGridView,
                     string.Empty,
-                    GetLineType(line, type),
+                    _company.GetLineType(line, type).Humanize(),
                     transaction.Memo ?? string.Empty,
-                    sibling == null ? Guid.Empty : sibling.AccountId,
+                    _source.GetRepresentativeAccountId(line),
                     false,
                     string.Empty,
                     string.Empty,
                     string.Empty);
 
-                if (!_source.CanEditSibling(line))
+                if (!_source.CanEditAccount(line))
                 {
                     top.Cells[debitColumn.Index].ReadOnly = true;
                     top.Cells[creditColumn.Index].ReadOnly = true;
@@ -352,7 +302,7 @@ internal partial class TransactionsForm : Form
 
         if (_dataGridView.Rows[bottomIndex].Cells[accountColumn.Index].Value is not Guid siblingId)
         {
-            top.ErrorText = Resources.InvalidAccountError;
+            top.ErrorText = Properties.Resources.InvalidAccountError;
             posted = default;
 
             return false;
@@ -362,15 +312,15 @@ internal partial class TransactionsForm : Form
         {
             if (currentLine == null && !_source.CanGetNewLines(siblingId))
             {
-                top.ErrorText = Resources.InvalidAccountError;
+                top.ErrorText = Properties.Resources.InvalidAccountError;
                 posted = default;
 
                 return false;
             }
 
-            if (currentLine != null && _source.CanEditSibling(currentLine))
+            if (currentLine != null && _source.CanEditAccount(currentLine))
             {
-                top.ErrorText = Resources.InvalidAccountError;
+                top.ErrorText = Properties.Resources.InvalidAccountError;
                 posted = default;
 
                 return false;
@@ -379,7 +329,7 @@ internal partial class TransactionsForm : Form
 
         if (_dataGridView[postedColumn.Index, topIndex].Value is not DateTime postedValue)
         {
-            top.ErrorText = Resources.InvalidAccountError;
+            top.ErrorText = Properties.Resources.InvalidAccountError;
             posted = default;
 
             return false;
@@ -404,7 +354,7 @@ internal partial class TransactionsForm : Form
         transaction.Memo = _dataGridView[nameMemoColumn.Index, bottomIndex].Value?.ToString();
 
         string? name = _dataGridView[nameMemoColumn.Index, topIndex].Value?.ToString();
-        IReadOnlyCollection<Line> lines = currentLine != null && !_source.CanEditSibling(currentLine)
+        IReadOnlyCollection<Line> lines = currentLine != null && !_source.CanEditAccount(currentLine)
             ? transaction.Lines
             : _source.GetNewLines(siblingId, balance);
 
@@ -543,7 +493,7 @@ internal partial class TransactionsForm : Form
 
         SelectLine(index);
 
-        if (_source.CanEditSibling(_lines[index]))
+        if (_source.CanEditAccount(_lines[index]))
         {
             return;
         }
@@ -580,7 +530,7 @@ internal partial class TransactionsForm : Form
             backColor = cellStyle.BackColor;
         }
 
-        using (Brush backColorBrush = new SolidBrush(backColor))
+        using (SolidBrush backColorBrush = new SolidBrush(backColor))
         {
             e.Graphics.FillRectangle(backColorBrush, e.CellBounds);
         }
@@ -600,11 +550,35 @@ internal partial class TransactionsForm : Form
                 e.CellBounds.Bottom - 1);
         }
 
-        if ((isTop || _dataGridView[e.ColumnIndex, e.RowIndex].ReadOnly) && e.ColumnIndex == accountColumn.Index)
+        if (e.ColumnIndex == accountColumn.Index)
         {
-            e.Handled = true;
+            if (isTop || lineIndex < 0 || lineIndex > _lines.Count)
+            {
+                e.Handled = true;
 
-            return;
+                return;
+            }
+
+            Line line = _lines[lineIndex];
+
+            if (!_source.CanEditAccount(line))
+            {
+                using SolidBrush foreColorBrush = new SolidBrush(backColor.GetForeColor());
+
+                e.Graphics.DrawString(
+                    _source.GetRepresentativeAccountName(line),
+                    e.CellStyle?.Font ?? _dataGridView.Font,
+                    foreColorBrush,
+                    e.CellBounds,
+                    new StringFormat(StringFormatFlags.NoWrap)
+                    {
+                        Trimming = StringTrimming.EllipsisWord
+                    });
+
+                e.Handled = true;
+
+                return;
+            }
         }
 
         if (!isTop && (e.ColumnIndex == postedColumn.Index || e.ColumnIndex == balanceColumn.Index || e.ColumnIndex == reconciledColumn.Index))

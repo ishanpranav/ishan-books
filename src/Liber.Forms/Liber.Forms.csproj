@@ -14,6 +14,8 @@
     <GenerateResourceWarnOnBinaryFormatterUse>false</GenerateResourceWarnOnBinaryFormatterUse>
     <StartupObject>Liber.Forms.Program</StartupObject>
     <ForceDesignerDpiUnaware>true</ForceDesignerDpiUnaware>
+    <Copyright>© 2023-2026 Ishan Pranav. All rights reserved.</Copyright>
+    <Authors>Ishan Pranav</Authors>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -221,11 +223,9 @@
 	  <PackageReference Include="ini-parser-netstandard" Version="2.5.3" />
 	  <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3595.46" />
 	  <PackageReference Include="PDFsharp" Version="6.2.2" />
-	  <PackageReference Include="WindowsAPICodePack" Version="8.0.12" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Liber.MathEngine\Liber.MathEngine.csproj" />
 	  <ProjectReference Include="..\Liber.Sqlite\Liber.Sqlite.csproj" />
 	</ItemGroup>
 
@@ -316,6 +316,9 @@
 	  <None Update="images\Delete.png">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
+	  <None Update="images\DeleteFilter.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
 	  <None Update="images\DeleteTable.png">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
@@ -323,6 +326,9 @@
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
 	  <None Update="images\Edit.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="images\EditFilter.png">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
 	  <None Update="images\Export.png">
@@ -367,6 +373,9 @@
 	  <None Update="images\LogError.png">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
+	  <None Update="images\NewFilter.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
 	  <None Update="images\NewLog.png">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
@@ -374,6 +383,9 @@
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
 	  <None Update="images\OpenFile.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="images\QuickFind.png">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
 	  <None Update="images\Refresh.png">
@@ -404,6 +416,9 @@
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
 	  <None Update="images\TableGroup.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="images\TaskList.png">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
 	  <None Update="Properties\Settings.settings">

@@ -35,7 +35,7 @@ internal static class SystemFeatures
     {
         get
         {
-            if (!Version.TryParse("CLICKONCE_CURRENTVERSION", out Version? result))
+            if (!Version.TryParse(Environment.GetEnvironmentVariable("CLICKONCE_CURRENTVERSION"), out Version? result))
             {
                 result = null;
             }
@@ -48,7 +48,7 @@ internal static class SystemFeatures
     {
         get
         {
-            if (!Version.TryParse("CLICKONCE_UPDATEDVERSION", out Version? result))
+            if (!Version.TryParse(Environment.GetEnvironmentVariable("CLICKONCE_UPDATEDVERSION"), out Version? result))
             {
                 result = null;
             }
@@ -61,7 +61,7 @@ internal static class SystemFeatures
     {
         get
         {
-            Uri.TryCreate("CLICKONCE_UPDATELOCATION", UriKind.RelativeOrAbsolute, out Uri? result);
+            Uri.TryCreate(Environment.GetEnvironmentVariable("CLICKONCE_UPDATELOCATION"), UriKind.RelativeOrAbsolute, out Uri? result);
 
             return result;
         }
@@ -81,7 +81,7 @@ internal static class SystemFeatures
     {
         get
         {
-            Uri.TryCreate("CLICKONCE_ACTIVATIONURI", UriKind.RelativeOrAbsolute, out Uri? result);
+            Uri.TryCreate(Environment.GetEnvironmentVariable("CLICKONCE_ACTIVATIONURI"), UriKind.RelativeOrAbsolute, out Uri? result);
 
             return result;
         }

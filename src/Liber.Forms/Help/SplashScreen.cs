@@ -49,6 +49,12 @@ internal partial class SplashScreen : Form
         _mouseDown = false;
     }
 
+    protected override void OnMouseDoubleClick(MouseEventArgs e)
+    {
+        base.OnMouseDoubleClick(e);
+        Close();
+    }
+
     protected override void OnPaintBackground(PaintEventArgs e)
     {
         using (LinearGradientBrush brush = new LinearGradientBrush(

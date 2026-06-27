@@ -111,9 +111,11 @@ partial class AboutBox
         resources.ApplyResources(acceptButton, "acceptButton");
         acceptButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
         acceptButton.Name = "acceptButton";
+        acceptButton.Click += OnAcceptButtonClick;
         // 
         // AboutBox
         // 
+        AcceptButton = acceptButton;
         resources.ApplyResources(this, "$this");
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         Controls.Add(tableLayoutPanel);

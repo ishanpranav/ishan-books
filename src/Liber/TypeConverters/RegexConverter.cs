@@ -30,7 +30,7 @@ public class RegexConverter : TypeConverter
         }
         catch (ArgumentException)
         {
-            return Filters.Any();
+            return Regexes.Any();
         }
     }
 }

@@ -41,9 +41,9 @@ internal class AccountLineSource : ILineSource
         return value.AccountId == _value.Id;
     }
 
-    public bool CanEditSibling(Line value)
+    public bool CanEditAccount(Line value)
     {
-        return value.Sibling != null;
+        return value.Sibling != null && !_company.GetAccount(value.Sibling.AccountId).ReadOnly;
     }
 
     public bool CanGetNewLines(Guid siblingId)
@@ -68,6 +68,30 @@ internal class AccountLineSource : ILineSource
     public AccountType GetRepresentativeType()
     {
         return _value.Type;
+    }
+
+    public string GetRepresentativeAccountName(Line value)
+    {
+        Line? sibling = value.Sibling;
+
+        if (sibling == null)
+        {
+            return "--Split--";
+        }
+
+        return _company.GetAccount(sibling.AccountId).Name;
+    }
+
+    public Guid GetRepresentativeAccountId(Line value)
+    {
+        Line? sibling = value.Sibling;
+
+        if (sibling == null)
+        {
+            return Guid.Empty;
+        }
+
+        return sibling.AccountId;
     }
 
     public bool IsInvalidatedByAccountRemoved(Guid id)

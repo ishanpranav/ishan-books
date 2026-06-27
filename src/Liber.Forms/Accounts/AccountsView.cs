@@ -13,6 +13,9 @@ namespace Liber.Forms.Accounts;
 [Editor(typeof(AccountsEditor), typeof(UITypeEditor))]
 public class AccountsView
 {
+    public Company Company { get; }
+    public IReadOnlySet<Account> Values { get; }
+
     public AccountsView(Company company)
     {
         Company = company;
@@ -26,9 +29,6 @@ public class AccountsView
         Company = company;
         Values = values;
     }
-
-    public Company Company { get; }
-    public IReadOnlySet<Account> Values { get; }
 
     public override string ToString()
     {
