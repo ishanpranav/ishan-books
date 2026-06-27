@@ -8,7 +8,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using Liber.Forms.AccountViews;
-using Liber.Forms.Components;
+using Liber.Forms.Forms;
 using Liber.Forms.LineSources;
 using Liber.Forms.Properties;
 using Liber.MathEngine.Expressions;
@@ -36,6 +36,7 @@ internal partial class TransactionsForm : Form
     {
         InitializeComponent();
         SystemFeatures.Initialize(this);
+        Design.ApplyStyles(_contextMenu);
 
         AccountViewBindingList bindingList = new AccountViewBindingList(company, x => !x.ReadOnly);
 
@@ -98,10 +99,7 @@ internal partial class TransactionsForm : Form
 
     private void OnCompanyTransactionUpdated(object? sender, GuidEventArgs e)
     {
-        if (_source.IsInvalidatedByTransactionUpdated(e.Id))
-        {
-            InvalidateTransactions();
-        }
+        InvalidateTransactions();
     }
 
     private void OnCompanyTransactionReconciled(object? sender, GuidEventArgs e)
@@ -370,7 +368,7 @@ internal partial class TransactionsForm : Form
                 return false;
             }
 
-            if (currentLine != null && !_source.CanEditSibling(currentLine))
+            if (currentLine != null && _source.CanEditSibling(currentLine))
             {
                 top.ErrorText = Resources.InvalidAccountError;
                 posted = default;
@@ -406,7 +404,7 @@ internal partial class TransactionsForm : Form
         transaction.Memo = _dataGridView[nameMemoColumn.Index, bottomIndex].Value?.ToString();
 
         string? name = _dataGridView[nameMemoColumn.Index, topIndex].Value?.ToString();
-        IReadOnlyCollection<Line> lines = currentLine != null && currentLine.Sibling == null
+        IReadOnlyCollection<Line> lines = currentLine != null && !_source.CanEditSibling(currentLine)
             ? transaction.Lines
             : _source.GetNewLines(siblingId, balance);
 
@@ -609,7 +607,7 @@ internal partial class TransactionsForm : Form
             return;
         }
 
-        if (!isTop && (e.ColumnIndex == postedColumn.Index || e.ColumnIndex == balanceColumn.Index))
+        if (!isTop && (e.ColumnIndex == postedColumn.Index || e.ColumnIndex == balanceColumn.Index || e.ColumnIndex == reconciledColumn.Index))
         {
             e.Handled = true;
 

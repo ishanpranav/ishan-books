@@ -380,6 +380,7 @@ internal partial class TransactionForm : Form
             if (components != null)
             {
                 components.Dispose();
+
                 components = null;
             }
         }

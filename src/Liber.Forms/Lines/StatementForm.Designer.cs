@@ -42,6 +42,7 @@ partial class StatementForm
         acceptButton = new System.Windows.Forms.Button();
         label4 = new System.Windows.Forms.Label();
         accountComboBox = new System.Windows.Forms.ComboBox();
+        unreconcileButton = new System.Windows.Forms.Button();
         ((System.ComponentModel.ISupportInitialize)reconciledBalanceNumericUpDown).BeginInit();
         ((System.ComponentModel.ISupportInitialize)endingBalanceNumericUpDown).BeginInit();
         SuspendLayout();
@@ -101,11 +102,19 @@ partial class StatementForm
         accountComboBox.Name = "accountComboBox";
         accountComboBox.SelectedIndexChanged += OnAccountComboBoxSelectedIndexChanged;
         // 
+        // unreconcileButton
+        // 
+        resources.ApplyResources(unreconcileButton, "unreconcileButton");
+        unreconcileButton.Name = "unreconcileButton";
+        unreconcileButton.UseVisualStyleBackColor = true;
+        unreconcileButton.Click += OnUnreconcileButtonClick;
+        // 
         // StatementForm
         // 
         AcceptButton = acceptButton;
         resources.ApplyResources(this, "$this");
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+        Controls.Add(unreconcileButton);
         Controls.Add(accountComboBox);
         Controls.Add(label4);
         Controls.Add(acceptButton);
@@ -134,4 +143,5 @@ partial class StatementForm
     private System.Windows.Forms.Button acceptButton;
     private System.Windows.Forms.Label label4;
     private System.Windows.Forms.ComboBox accountComboBox;
+    private System.Windows.Forms.Button unreconcileButton;
 }

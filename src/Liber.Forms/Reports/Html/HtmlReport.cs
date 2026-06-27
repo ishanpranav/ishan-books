@@ -18,7 +18,7 @@ namespace Liber.Forms.Reports.Html;
 [ComVisible(true)]
 public class HtmlReport : IntervalView
 {
-    private static readonly JsonSerializerOptions s_options = new JsonSerializerOptions(FormattedStrings.JsonOptions)
+    private static readonly JsonSerializerOptions s_options = new JsonSerializerOptions(SerializationOptions.Json)
     {
         DefaultIgnoreCondition = JsonIgnoreCondition.Never
     };

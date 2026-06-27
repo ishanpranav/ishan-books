@@ -10,13 +10,19 @@ This is a cross-platform library and application for double-entry bookkeeping.
 The project includes a standalone class library and a Windows GUI application.
 
 You can download the software from the
-[repository website](https://ishanpranav.github.io/ishan-books).
+[repository website](https://ishanpranav.github.io/ishan-books-dist).
 
 ## Screenshots
 
-![Screenshot of the IshanBooks application with visual income statement, chart of accounts, and general journal.](docs/images/capture-1.png "IshanBooks: visual income statement, chart of accounts, and general journal.")
+![Screenshot of the IshanBooks application.](docs/images/story-1.png "IshanBooks")
 
-![Screenshot of the IshanBooks application with statement of financial condition (balance sheet), visual balance sheet, customized asset allocation chart, and new account form.](docs/images/capture-2.png "IshanBooks: statement of financial condition (balance sheet), visual balance sheet, customized asset allocation chart, and new account form.")
+![Screenshot of the IshanBooks application.](docs/images/story-2.png "IshanBooks")
+
+![Screenshot of the IshanBooks application.](docs/images/story-3.png "IshanBooks")
+
+![Screenshot of the IshanBooks application.](docs/images/story-4.png "IshanBooks")
+
+![Screenshot of the IshanBooks application.](docs/images/story-5.png "IshanBooks")
 
 ## Features
 

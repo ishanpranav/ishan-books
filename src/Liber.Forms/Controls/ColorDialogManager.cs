@@ -16,7 +16,7 @@ internal static class ColorDialogManager
         using ColorDialog colorDialog = new ColorDialog()
         {
             Color = value,
-            CustomColors = JsonSerializer.Deserialize<int[]>(Settings.Default.CustomColors, FormattedStrings.JsonOptions),
+            CustomColors = JsonSerializer.Deserialize<int[]>(Settings.Default.CustomColors, SerializationOptions.Json),
             FullOpen = true,
             SolidColorOnly = true
         };

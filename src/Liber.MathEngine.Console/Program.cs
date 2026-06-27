@@ -6,7 +6,7 @@ using System.Globalization;
 using Liber.MathEngine.Exceptions;
 using Liber.MathEngine.Expressions;
 
-namespace Liber.MathEngine.Calculator;
+namespace Liber.MathEngine.Console;
 
 internal static class Program
 {
@@ -14,20 +14,20 @@ internal static class Program
     {
         if (args.Length > 0)
         {
-            Console.WriteLine(Parse(args[0]).Evaluate());
+            System.Console.WriteLine(Parse(args[0]).Evaluate());
 
             return;
         }
 
         while (true)
         {
-            Console.ForegroundColor = ConsoleColor.Yellow;
+            System.Console.ForegroundColor = ConsoleColor.Yellow;
 
-            Console.Write("=");
+            System.Console.Write("=");
 
-            Console.ForegroundColor = ConsoleColor.Gray;
+            System.Console.ForegroundColor = ConsoleColor.Gray;
 
-            string? line = Console.ReadLine();
+            string? line = System.Console.ReadLine();
 
             if (line == null)
             {
@@ -39,7 +39,7 @@ internal static class Program
                 IExpression expression = Parse(line);
                 decimal result = expression.Evaluate();
 
-                Console.WriteLine("\t{0} = {1}", expression, result);
+                System.Console.WriteLine("\t{0} = {1}", expression, result);
             }
             catch (MismatchException mismatchException)
             {
@@ -48,58 +48,58 @@ internal static class Program
                 int leftLength = mismatchException.ExpectedLength;
                 int rightLength = mismatchException.Length;
 
-                Console.ForegroundColor = ConsoleColor.Gray;
+                System.Console.ForegroundColor = ConsoleColor.Gray;
 
-                Console.Write(line.AsSpan(start: 0, left));
+                System.Console.Write(line.AsSpan(start: 0, left));
 
-                Console.ForegroundColor = ConsoleColor.Green;
+                System.Console.ForegroundColor = ConsoleColor.Green;
 
-                Console.Write(line.AsSpan(left, leftLength));
+                System.Console.Write(line.AsSpan(left, leftLength));
 
-                Console.ForegroundColor = ConsoleColor.Gray;
+                System.Console.ForegroundColor = ConsoleColor.Gray;
 
-                Console.Write(line.AsSpan(left + leftLength, right - left - leftLength));
+                System.Console.Write(line.AsSpan(left + leftLength, right - left - leftLength));
 
-                Console.ForegroundColor = ConsoleColor.Red;
+                System.Console.ForegroundColor = ConsoleColor.Red;
 
-                Console.Write(line.AsSpan(right, rightLength));
+                System.Console.Write(line.AsSpan(right, rightLength));
 
-                Console.ForegroundColor = ConsoleColor.Gray;
+                System.Console.ForegroundColor = ConsoleColor.Gray;
 
-                Console.WriteLine(line.AsSpan(right + rightLength));
-                Console.WriteLine("\tSyntax error");
+                System.Console.WriteLine(line.AsSpan(right + rightLength));
+                System.Console.WriteLine("\tSyntax error");
             }
             catch (MathEngineException mathEngineException)
             {
                 int offset = mathEngineException.Offset;
                 int length = mathEngineException.Length;
 
-                Console.ForegroundColor = ConsoleColor.Gray;
+                System.Console.ForegroundColor = ConsoleColor.Gray;
 
-                Console.Write(line.AsSpan(start: 0, offset));
+                System.Console.Write(line.AsSpan(start: 0, offset));
 
-                Console.ForegroundColor = ConsoleColor.Red;
+                System.Console.ForegroundColor = ConsoleColor.Red;
 
-                Console.Write(line.AsSpan(offset, length));
+                System.Console.Write(line.AsSpan(offset, length));
 
-                Console.ForegroundColor = ConsoleColor.Gray;
+                System.Console.ForegroundColor = ConsoleColor.Gray;
 
-                Console.WriteLine(line.AsSpan(offset + length));
+                System.Console.WriteLine(line.AsSpan(offset + length));
 
                 if (mathEngineException is ParsingException parsingException)
                 {
-                    Console.WriteLine("\tSyntax error: expected {0} but read {1}",
+                    System.Console.WriteLine("\tSyntax error: expected {0} but read {1}",
                         parsingException.ExpectedType,
                         parsingException.Type);
                 }
                 else
                 {
-                    Console.WriteLine("\tSyntax error");
+                    System.Console.WriteLine("\tSyntax error");
                 }
             }
             catch (DivideByZeroException divideByZeroException)
             {
-                Console.WriteLine("\tError: {0}", divideByZeroException.Message);
+                System.Console.WriteLine("\tError: {0}", divideByZeroException.Message);
             }
         }
     }
@@ -116,7 +116,7 @@ internal static class Program
         Parser parser = new Parser(tokens, culture);
         IExpression expression = parser.Parse();
 
-        Console.WriteLine("\nTokens: {0}\n", string.Join(' ', tokens), expression);
+        System.Console.WriteLine("\nTokens: {0}\n", string.Join(' ', tokens));
 
         return expression;
     }

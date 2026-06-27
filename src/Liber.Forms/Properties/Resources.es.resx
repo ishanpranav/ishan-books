@@ -156,6 +156,9 @@
   <data name="InvalidAccountError" xml:space="preserve">
     <value>Por favor, selecciona una cuenta válida.</value>
   </data>
+  <data name="Lines" xml:space="preserve">
+    <value>movimiento</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Nombre</value>
   </data>
@@ -170,5 +173,14 @@
   </data>
   <data name="Posted" xml:space="preserve">
     <value>Fecha</value>
+  </data>
+  <data name="TaskItems" xml:space="preserve">
+    <value>tareas</value>
+  </data>
+  <data name="UnreconcileCaption" xml:space="preserve">
+    <value>Deshacer la última conciliación</value>
+  </data>
+  <data name="UnreconcileText" xml:space="preserve">
+    <value>No hay una conciliación previa que deshacer.</value>
   </data>
 </root>

@@ -8,13 +8,13 @@ using System.IO;
 using System.Windows.Forms;
 using Microsoft.Web.WebView2.Core;
 
-namespace Liber.Forms;
+namespace Liber.Forms.Help;
 
-internal partial class UrlForm : Form
+internal partial class UriForm : Form
 {
     private readonly Uri? _uri;
 
-    public UrlForm(Uri uri)
+    public UriForm(Uri uri)
     {
         InitializeComponent();
         SystemFeatures.Initialize(this);

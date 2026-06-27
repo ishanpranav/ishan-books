@@ -10,7 +10,7 @@ using System.Text.Json;
 using System.Windows.Shell;
 using Liber.Forms.Properties;
 
-namespace Liber.Forms.Components;
+namespace Liber.Forms.RecentPaths;
 
 internal class RecentPathManager : Component
 {
@@ -107,7 +107,7 @@ internal class RecentPathManager : Component
             }
         }
 
-        Settings.Default.RecentPaths = JsonSerializer.Serialize(_paths, FormattedStrings.JsonOptions);
+        Settings.Default.RecentPaths = JsonSerializer.Serialize(_paths, SerializationOptions.Json);
 
         Settings.Default.Save();
     }
@@ -118,7 +118,7 @@ internal class RecentPathManager : Component
 
         try
         {
-            paths = JsonSerializer.Deserialize<RecentPath[]>(Settings.Default.RecentPaths, FormattedStrings.JsonOptions);
+            paths = JsonSerializer.Deserialize<RecentPath[]>(Settings.Default.RecentPaths, SerializationOptions.Json);
 
             if (paths == null)
             {

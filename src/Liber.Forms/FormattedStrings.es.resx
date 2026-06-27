@@ -520,7 +520,16 @@
   <data name="_r_sankey-diagram" xml:space="preserve">
     <value>Diagrama de flujos de Sankey</value>
   </data>
-  <data name="ClearedCount{0}{1}" xml:space="preserve">
-    <value>{0} {1} conciliados</value>
+  <data name="ClearedCount{0}" xml:space="preserve">
+    <value>{0} conciliados</value>
+  </data>
+  <data name="NullReconciledDescription{0}" xml:space="preserve">
+    <value>{0} nunca se ha conciliado</value>
+  </data>
+  <data name="OverdueReconciledDescription{0}{1}" xml:space="preserve">
+    <value>{0} no se ha conciliado desde hace {1}</value>
+  </data>
+  <data name="OverduePostedDescription{0}{1}" xml:space="preserve">
+    <value>{0} no ha tenido transacciones desde hace {1}</value>
   </data>
 </root>

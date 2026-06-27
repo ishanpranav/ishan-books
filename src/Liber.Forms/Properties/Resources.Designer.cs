@@ -188,6 +188,15 @@ namespace Liber.Forms.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to line item.
+        /// </summary>
+        internal static string Lines {
+            get {
+                return ResourceManager.GetString("Lines", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         internal static string Name {
@@ -229,6 +238,33 @@ namespace Liber.Forms.Properties {
         internal static string Posted {
             get {
                 return ResourceManager.GetString("Posted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to tasks.
+        /// </summary>
+        internal static string TaskItems {
+            get {
+                return ResourceManager.GetString("TaskItems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Undo Last Reconciliation.
+        /// </summary>
+        internal static string UnreconcileCaption {
+            get {
+                return ResourceManager.GetString("UnreconcileCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is no previous reconciliation to undo..
+        /// </summary>
+        internal static string UnreconcileText {
+            get {
+                return ResourceManager.GetString("UnreconcileText", resourceCulture);
             }
         }
     }

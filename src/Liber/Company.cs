@@ -4,7 +4,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Drawing;
 using System.Linq;
 using System.Text.Json.Serialization;
@@ -576,16 +575,7 @@ public class Company : ICloneable
 
             line.transaction = value;
             account.lines.Add(line);
-
-            if (line.Reconciled != null)
-            {
-                DateTime reconciled = line.Reconciled.Value;
-
-                if (account.Reconciled == null || reconciled > account.Reconciled)
-                {
-                    account.Reconciled = line.Reconciled;
-                }
-            }
+            account.IndexReconciledAdd(line);
         }
     }
 
@@ -593,7 +583,10 @@ public class Company : ICloneable
     {
         foreach (Line line in value.lines)
         {
-            _accounts[line.AccountId].lines.Remove(line);
+            Account account = _accounts[line.AccountId];
+
+            account.lines.Remove(line);
+            account.IndexReconciledRemove(line);
             line.transaction = null;
         }
     }
@@ -697,7 +690,7 @@ public class Company : ICloneable
         TransactionUpdated?.Invoke(sender: this, new GuidEventArgs(id));
     }
 
-    public bool RemoveTransaction(Guid id)
+    public void RemoveTransaction(Guid id)
     {
         if (!_transactions.TryGetValue(id, out Transaction? value))
         {
@@ -708,8 +701,6 @@ public class Company : ICloneable
         _transactions.Remove(id);
         _sortedTransactions.Remove(value);
         TransactionRemoved?.Invoke(sender: this, new GuidEventArgs(id));
-
-        return true;
     }
 
     public IEnumerable<Transaction> GetTransfers()
@@ -796,7 +787,11 @@ public class Company : ICloneable
 
         foreach (Line line in lines)
         {
+            account.IndexReconciledRemove(line);
+
             line.Reconciled = reconciled;
+
+            account.IndexReconciledAdd(line);
         }
 
         foreach (Guid transactionId in transactionIds)
@@ -805,6 +800,36 @@ public class Company : ICloneable
         }
 
         return 0;
+    }
+
+    public void Unreconcile(Account account)
+    {
+        if (account.Type.IsTemporary())
+        {
+            throw new ArgumentException(message: null, nameof(account));
+        }
+
+        if (account.Reconciled == null)
+        {
+            throw new InvalidOperationException();
+        }
+
+        DateTime reconciled = account.reconciledKeys.Max;
+        HashSet<Guid> transactionIds = new HashSet<Guid>();
+
+        foreach (Line line in account.reconciledBuckets[reconciled].ToList())
+        {
+            account.IndexReconciledRemove(line);
+
+            line.Reconciled = null;
+
+            transactionIds.Add(line.Transaction.Id);
+        }
+
+        foreach (Guid transactionId in transactionIds)
+        {
+            TransactionReconciled?.Invoke(sender: this, new GuidEventArgs(transactionId));
+        }
     }
 
     private BalanceInfo ComputeBalances(Account account, ReportTypes type, DateTime started, DateTime posted, Regex filter)

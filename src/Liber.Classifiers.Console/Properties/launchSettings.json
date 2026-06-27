@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Liber.Classifiers.Console": {
+      "commandName": "Project",
+      "commandLineArgs": "I:\\main.json"
+    }
+  }
+}
