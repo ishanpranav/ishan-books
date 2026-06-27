@@ -1,4 +1,5 @@
-﻿using Liber.Forms.Components;
+﻿using Liber.Forms.Forms;
+using Liber.Forms.RecentPaths;
 
 namespace Liber.Forms;
 
@@ -62,6 +63,8 @@ partial class MainForm
         cultureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         importSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+        unreconcileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
         combinePdfDocumentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         accountsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -72,6 +75,8 @@ partial class MainForm
         toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
         reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+        taskItemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
         otherWindowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         newAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         reconcileAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -83,7 +88,8 @@ partial class MainForm
         formToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         closeAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         formsToolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-        formsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        formsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+        formsToolStripMenUtem = new System.Windows.Forms.ToolStripMenuItem();
         helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
         contentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         indexToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -101,10 +107,14 @@ partial class MainForm
         transactionsToolStripButton = new System.Windows.Forms.ToolStripButton();
         toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
         reportsToolStripButton = new System.Windows.Forms.ToolStripButton();
+        toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
+        taskItemsToolStripButton = new System.Windows.Forms.ToolStripButton();
         _openFileDialog = new System.Windows.Forms.OpenFileDialog();
         _saveFileDialog = new System.Windows.Forms.SaveFileDialog();
         _recentPathManager = new RecentPathManager(components);
         _factory = new FormFactory(components);
+        toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
+        splashScreenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         _menuStrip.SuspendLayout();
         _toolStrip.SuspendLayout();
         SuspendLayout();
@@ -271,7 +281,7 @@ partial class MainForm
         // 
         // editToolStripMenuItem1
         // 
-        editToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { cultureToolStripMenuItem, importSettingsToolStripMenuItem, toolStripSeparator7, combinePdfDocumentsToolStripMenuItem });
+        editToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { cultureToolStripMenuItem, importSettingsToolStripMenuItem, toolStripSeparator7, unreconcileToolStripMenuItem, toolStripSeparator17, combinePdfDocumentsToolStripMenuItem });
         editToolStripMenuItem1.Name = "editToolStripMenuItem1";
         resources.ApplyResources(editToolStripMenuItem1, "editToolStripMenuItem1");
         // 
@@ -294,6 +304,17 @@ partial class MainForm
         toolStripSeparator7.Name = "toolStripSeparator7";
         resources.ApplyResources(toolStripSeparator7, "toolStripSeparator7");
         // 
+        // unreconcileToolStripMenuItem
+        // 
+        unreconcileToolStripMenuItem.Name = "unreconcileToolStripMenuItem";
+        resources.ApplyResources(unreconcileToolStripMenuItem, "unreconcileToolStripMenuItem");
+        unreconcileToolStripMenuItem.Click += OnUnreconcileToolStripMenuItemClick;
+        // 
+        // toolStripSeparator17
+        // 
+        toolStripSeparator17.Name = "toolStripSeparator17";
+        resources.ApplyResources(toolStripSeparator17, "toolStripSeparator17");
+        // 
         // combinePdfDocumentsToolStripMenuItem
         // 
         combinePdfDocumentsToolStripMenuItem.Name = "combinePdfDocumentsToolStripMenuItem";
@@ -302,7 +323,7 @@ partial class MainForm
         // 
         // viewToolStripMenuItem
         // 
-        viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { accountsToolStripMenuItem, transactionToolStripMenuItem, toolStripSeparator2, checkToolStripMenuItem, accountTransactionsToolStripMenuItem, toolStripSeparator4, reportsToolStripMenuItem, toolStripSeparator9, otherWindowsToolStripMenuItem });
+        viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { accountsToolStripMenuItem, transactionToolStripMenuItem, toolStripSeparator2, checkToolStripMenuItem, accountTransactionsToolStripMenuItem, toolStripSeparator4, reportsToolStripMenuItem, toolStripSeparator9, taskItemsToolStripMenuItem, toolStripSeparator14, otherWindowsToolStripMenuItem });
         viewToolStripMenuItem.Name = "viewToolStripMenuItem";
         resources.ApplyResources(viewToolStripMenuItem, "viewToolStripMenuItem");
         // 
@@ -355,9 +376,21 @@ partial class MainForm
         toolStripSeparator9.Name = "toolStripSeparator9";
         resources.ApplyResources(toolStripSeparator9, "toolStripSeparator9");
         // 
+        // taskItemsToolStripMenuItem
+        // 
+        taskItemsToolStripMenuItem.Image = VisualStudioImageLibrary.TaskList;
+        taskItemsToolStripMenuItem.Name = "taskItemsToolStripMenuItem";
+        resources.ApplyResources(taskItemsToolStripMenuItem, "taskItemsToolStripMenuItem");
+        taskItemsToolStripMenuItem.Click += OnTaskItemsToolStripMenuItemClick;
+        // 
+        // toolStripSeparator14
+        // 
+        toolStripSeparator14.Name = "toolStripSeparator14";
+        resources.ApplyResources(toolStripSeparator14, "toolStripSeparator14");
+        // 
         // otherWindowsToolStripMenuItem
         // 
-        otherWindowsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { newAccountToolStripMenuItem, reconcileAccountToolStripMenuItem, removeAccountToolStripMenuItem, toolStripSeparator13, nameTransactionsToolStripMenuItem });
+        otherWindowsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { newAccountToolStripMenuItem, reconcileAccountToolStripMenuItem, removeAccountToolStripMenuItem, toolStripSeparator13, nameTransactionsToolStripMenuItem, toolStripSeparator18, splashScreenToolStripMenuItem });
         otherWindowsToolStripMenuItem.Name = "otherWindowsToolStripMenuItem";
         resources.ApplyResources(otherWindowsToolStripMenuItem, "otherWindowsToolStripMenuItem");
         // 
@@ -405,7 +438,7 @@ partial class MainForm
         // 
         // formToolStripMenuItem
         // 
-        formToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { closeAllToolStripMenuItem, formsToolStripSeparator, formsToolStripMenuItem });
+        formToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { closeAllToolStripMenuItem, formsToolStripSeparator, formsToolStripMenuItem1, formsToolStripMenUtem });
         formToolStripMenuItem.Name = "formToolStripMenuItem";
         resources.ApplyResources(formToolStripMenuItem, "formToolStripMenuItem");
         // 
@@ -421,10 +454,16 @@ partial class MainForm
         formsToolStripSeparator.Name = "formsToolStripSeparator";
         resources.ApplyResources(formsToolStripSeparator, "formsToolStripSeparator");
         // 
-        // formsToolStripMenuItem
+        // formsToolStripMenuItem1
         // 
-        formsToolStripMenuItem.Name = "formsToolStripMenuItem";
-        resources.ApplyResources(formsToolStripMenuItem, "formsToolStripMenuItem");
+        formsToolStripMenuItem1.Name = "formsToolStripMenuItem1";
+        resources.ApplyResources(formsToolStripMenuItem1, "formsToolStripMenuItem1");
+        // 
+        // formsToolStripMenUtem
+        // 
+        formsToolStripMenUtem.Name = "formsToolStripMenUtem";
+        resources.ApplyResources(formsToolStripMenUtem, "formsToolStripMenUtem");
+        formsToolStripMenUtem.Click += OnFormsToolStripMenuItemClick;
         // 
         // helpToolStripMenuItem1
         // 
@@ -437,18 +476,21 @@ partial class MainForm
         contentsToolStripMenuItem.Image = VisualStudioImageLibrary.HelpTableOfContents;
         contentsToolStripMenuItem.Name = "contentsToolStripMenuItem";
         resources.ApplyResources(contentsToolStripMenuItem, "contentsToolStripMenuItem");
+        contentsToolStripMenuItem.Click += OnContentsToolStripMenuItemClick;
         // 
         // indexToolStripMenuItem
         // 
         indexToolStripMenuItem.Image = VisualStudioImageLibrary.HelpIndexFile;
         indexToolStripMenuItem.Name = "indexToolStripMenuItem";
         resources.ApplyResources(indexToolStripMenuItem, "indexToolStripMenuItem");
+        indexToolStripMenuItem.Click += OnIndexToolStripMenuItemClick;
         // 
         // searchToolStripMenuItem
         // 
         searchToolStripMenuItem.Image = VisualStudioImageLibrary.Search;
         searchToolStripMenuItem.Name = "searchToolStripMenuItem";
         resources.ApplyResources(searchToolStripMenuItem, "searchToolStripMenuItem");
+        searchToolStripMenuItem.Click += OnSearchToolStripMenuItemClick;
         // 
         // toolStripSeparator16
         // 
@@ -463,7 +505,7 @@ partial class MainForm
         // 
         // _toolStrip
         // 
-        _toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripButton, openToolStripButton, saveToolStripButton, toolStripSeparator6, accountsToolStripButton, transactionToolStripButton, toolStripSeparator10, transactionsToolStripButton, toolStripSeparator11, reportsToolStripButton });
+        _toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripButton, openToolStripButton, saveToolStripButton, toolStripSeparator6, accountsToolStripButton, transactionToolStripButton, toolStripSeparator10, transactionsToolStripButton, toolStripSeparator11, reportsToolStripButton, toolStripSeparator15, taskItemsToolStripButton });
         resources.ApplyResources(_toolStrip, "_toolStrip");
         _toolStrip.Name = "_toolStrip";
         // 
@@ -538,6 +580,19 @@ partial class MainForm
         reportsToolStripButton.Name = "reportsToolStripButton";
         reportsToolStripButton.Click += OnReportsToolStripMenuItemClick;
         // 
+        // toolStripSeparator15
+        // 
+        toolStripSeparator15.Name = "toolStripSeparator15";
+        resources.ApplyResources(toolStripSeparator15, "toolStripSeparator15");
+        // 
+        // taskItemsToolStripButton
+        // 
+        taskItemsToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+        taskItemsToolStripButton.Image = VisualStudioImageLibrary.TaskList;
+        resources.ApplyResources(taskItemsToolStripButton, "taskItemsToolStripButton");
+        taskItemsToolStripButton.Name = "taskItemsToolStripButton";
+        taskItemsToolStripButton.Click += OnTaskItemsToolStripMenuItemClick;
+        // 
         // _openFileDialog
         // 
         _openFileDialog.DefaultExt = "shbk";
@@ -554,12 +609,23 @@ partial class MainForm
         // 
         // _recentPathManager
         // 
-        _recentPathManager.MaxPaths = 1;
+        _recentPathManager.MaxPaths = 10;
         _recentPathManager.Invalidated += OnRecentPathManagerInvalidated;
         // 
         // _factory
         // 
         _factory.Invalidated += OnFactoryInvalidated;
+        // 
+        // toolStripSeparator18
+        // 
+        toolStripSeparator18.Name = "toolStripSeparator18";
+        resources.ApplyResources(toolStripSeparator18, "toolStripSeparator18");
+        // 
+        // splashScreenToolStripMenuItem
+        // 
+        splashScreenToolStripMenuItem.Name = "splashScreenToolStripMenuItem";
+        resources.ApplyResources(splashScreenToolStripMenuItem, "splashScreenToolStripMenuItem");
+        splashScreenToolStripMenuItem.Click += OnSplashScreenToolStripMenuItemClick;
         // 
         // MainForm
         // 
@@ -638,7 +704,7 @@ partial class MainForm
     private System.Windows.Forms.ToolStripMenuItem formToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem closeAllToolStripMenuItem;
     private System.Windows.Forms.ToolStripSeparator formsToolStripSeparator;
-    private System.Windows.Forms.ToolStripMenuItem formsToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem formsToolStripMenuItem1;
     private System.Windows.Forms.ToolStripMenuItem importSettingsToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem removeAccountToolStripMenuItem;
     private System.Windows.Forms.ToolStripButton accountsToolStripButton;
@@ -659,4 +725,13 @@ partial class MainForm
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
     private System.Windows.Forms.ToolStripMenuItem nameTransactionsToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem reconcileAccountToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem taskItemsToolStripMenuItem;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
+    private System.Windows.Forms.ToolStripMenuItem formsToolStripMenUtem;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
+    private System.Windows.Forms.ToolStripButton taskItemsToolStripButton;
+    private System.Windows.Forms.ToolStripMenuItem unreconcileToolStripMenuItem;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator18;
+    private System.Windows.Forms.ToolStripMenuItem splashScreenToolStripMenuItem;
 }

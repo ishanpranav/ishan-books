@@ -187,6 +187,7 @@ internal sealed class GdiCheckReport : GdiReport, IDisposable
         if (disposing)
         {
             FreeFont();
+            FreeBrush();
         }
     }
 

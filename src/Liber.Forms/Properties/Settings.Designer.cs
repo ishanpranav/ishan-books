@@ -12,8 +12,8 @@ namespace Liber.Forms.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "18.6.0.0")]
-    internal partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "18.7.0.0")]
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
         
@@ -85,18 +85,18 @@ namespace Liber.Forms.Properties {
             "\n    \"cashFlow\": \"operating\",\r\n    \"strict\": true\r\n  },\r\n  {\r\n    \"filter\": \"US " +
             "Treasury Bill\",\r\n    \"cashFlow\": \"investing\",\r\n    \"strict\": true\r\n  },\r\n  {\r\n  " +
             "  \"filter\": \"(Retained Earning|Accumulated Deficit)\",\r\n    \"type\": \"equity\",\r\n  " +
-            "  \"equity\": true,\r\n    \"strict\": true\r\n  },\r\n  {\r\n    \"filter\": \"Charles Schwab " +
-            "Individual Short[-\\\\s]Term\",\r\n    \"cashFlow\": \"investing\",\r\n    \"strict\": true\r\n" +
-            "  },\r\n  {\r\n    \"filter\": \"Charles Schwab Individual Long[-\\\\s]Term\",\r\n    \"type\"" +
-            ": \"otherAsset\",\r\n    \"cashFlow\": \"investing\",\r\n    \"strict\": true\r\n  },\r\n  {\r\n  " +
-            "  \"filter\": \"Chase Bank\",\r\n    \"color\": -16752968\r\n  },\r\n  {\r\n    \"filter\": \"Ven" +
-            "mo\",\r\n    \"color\": -16741121\r\n  },\r\n  {\r\n    \"filter\": \"US Bank\",\r\n    \"color\": " +
-            "-3200458\r\n  },\r\n  {\r\n    \"filter\": \"Fidelity Investments\",\r\n    \"color\": -133999" +
-            "99\r\n  },\r\n  {\r\n    \"filter\": \"Charles Schwab\",\r\n    \"color\": -16736805\r\n  },\r\n  " +
-            "{\r\n    \"filter\": \"Wealthfront\",\r\n    \"color\": -12042053\r\n  },\r\n  {\r\n    \"filter\"" +
-            ": \"Goldman Sachs\",\r\n    \"color\": -9201210\r\n  },\r\n  {\r\n    \"filter\": \"PNC Financi" +
-            "al Services\",\r\n    \"color\": -688091\r\n  },\r\n  {\r\n    \"filter\": \"Citibank\",\r\n    \"" +
-            "color\": -14328861\r\n  }\r\n]")]
+            "  \"equity\": true,\r\n    \"strict\": true\r\n  },\r\n  {\r\n    \"filter\": \"(Individual|ESP" +
+            "P) Short[-\\\\s]Term\",\r\n    \"cashFlow\": \"investing\",\r\n    \"strict\": true\r\n  },\r\n  " +
+            "{\r\n    \"filter\": \"Chase Bank\",\r\n    \"color\": -16752968\r\n  },\r\n  {\r\n    \"filter\":" +
+            " \"Venmo\",\r\n    \"color\": -16741121\r\n  },\r\n  {\r\n    \"filter\": \"US Bank\",\r\n    \"col" +
+            "or\": -3200458\r\n  },\r\n  {\r\n    \"filter\": \"Fidelity Investments\",\r\n    \"color\": -1" +
+            "3399999\r\n  },\r\n  {\r\n    \"filter\": \"Charles Schwab\",\r\n    \"color\": -16736805\r\n  }" +
+            ",\r\n  {\r\n    \"filter\": \"Wealthfront\",\r\n    \"color\": -12042053\r\n  },\r\n  {\r\n    \"fi" +
+            "lter\": \"Goldman Sachs\",\r\n    \"color\": -9201210\r\n  },\r\n  {\r\n    \"filter\": \"PNC Fi" +
+            "nancial Services\",\r\n    \"color\": -688091\r\n  },\r\n  {\r\n    \"filter\": \"Citibank\",\r\n" +
+            "    \"color\": -14328861\r\n  },\r\n  {\r\n    \"filter\": \"[\\\\s\\\\S]*\"\r\n  },\r\n  {\r\n    \"fi" +
+            "lter\": \"(Individual|ESPP) Long[-\\\\s]Term\",\r\n    \"type\": \"otherAsset\",\r\n    \"cash" +
+            "Flow\": \"investing\"\r\n  }\r\n]")]
         public string ImportRules {
             get {
                 return ((string)(this["ImportRules"]));
@@ -126,6 +126,30 @@ namespace Liber.Forms.Properties {
             }
             set {
                 this["LastPosted"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30.00:00:00")]
+        public global::System.TimeSpan OverdueReconciled {
+            get {
+                return ((global::System.TimeSpan)(this["OverdueReconciled"]));
+            }
+            set {
+                this["OverdueReconciled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("90.00:00:00")]
+        public global::System.TimeSpan OverduePosted {
+            get {
+                return ((global::System.TimeSpan)(this["OverduePosted"]));
+            }
+            set {
+                this["OverduePosted"] = value;
             }
         }
     }

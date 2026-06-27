@@ -25,6 +25,8 @@ public class Account :
 {
     internal readonly HashSet<Account> children = new HashSet<Account>();
     internal readonly HashSet<Line> lines = new HashSet<Line>();
+    internal readonly SortedSet<DateTime> reconciledKeys = new SortedSet<DateTime>();
+    internal readonly Dictionary<DateTime, HashSet<Line>> reconciledBuckets = new Dictionary<DateTime, HashSet<Line>>();
 
     public Account() { }
 
@@ -190,9 +192,29 @@ public class Account :
     }
 
     [Browsable(false)]
-    [Ignore]
     [JsonIgnore]
-    public DateTime? Reconciled { get; internal set; }
+    public DateTime? Reconciled
+    {
+        get
+        {
+            return reconciledKeys.Count == 0 ? null : reconciledKeys.Max;
+        }
+    }
+
+    [Browsable(false)]
+    [JsonIgnore]
+    public IReadOnlyCollection<Line>? LastReconciledLines
+    {
+        get
+        {
+            if (reconciledKeys.Count == 0)
+            {
+                return null;
+            }
+
+            return reconciledBuckets[reconciledKeys.Max];
+        }
+    }
 
     /// <summary>
     /// Gets the balance of the account up to a specific posted date.
@@ -295,6 +317,46 @@ public class Account :
         return weightedSum / totalDays;
     }
 
+
+    internal void IndexReconciledAdd(Line line)
+    {
+        if (line.Reconciled == null)
+        {
+            return;
+        }
+
+        DateTime key = line.Reconciled.Value;
+
+        if (!reconciledBuckets.TryGetValue(key, out HashSet<Line>? bucket))
+        {
+            bucket = new HashSet<Line>();
+
+            reconciledBuckets[key] = bucket;
+            reconciledKeys.Add(key);
+        }
+
+        bucket.Add(line);
+    }
+
+    internal void IndexReconciledRemove(Line line)
+    {
+        if (line.Reconciled == null)
+        {
+            return;
+        }
+
+        DateTime key = line.Reconciled.Value;
+        HashSet<Line> bucket = reconciledBuckets[key];
+
+        bucket.Remove(line);
+
+        if (bucket.Count == 0)
+        {
+            reconciledBuckets.Remove(key);
+            reconciledKeys.Remove(key);
+        }
+    }
+
     /// <inheritdoc/>
     public override string ToString()
     {
@@ -311,8 +373,7 @@ public class Account :
             Inactive = Inactive,
             Memo = Memo,
             Placeholder = Placeholder,
-            TaxType = TaxType,
-            Reconciled = Reconciled
+            TaxType = TaxType
         };
     }
 

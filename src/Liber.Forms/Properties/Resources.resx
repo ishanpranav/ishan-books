@@ -160,6 +160,9 @@
   <data name="InvalidAccountError" xml:space="preserve">
     <value>Please select a valid account.</value>
   </data>
+  <data name="Lines" xml:space="preserve">
+    <value>line item</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
@@ -174,5 +177,14 @@
   </data>
   <data name="Posted" xml:space="preserve">
     <value>Date</value>
+  </data>
+  <data name="TaskItems" xml:space="preserve">
+    <value>tasks</value>
+  </data>
+  <data name="UnreconcileCaption" xml:space="preserve">
+    <value>Undo Last Reconciliation</value>
+  </data>
+  <data name="UnreconcileText" xml:space="preserve">
+    <value>There is no previous reconciliation to undo.</value>
   </data>
 </root>

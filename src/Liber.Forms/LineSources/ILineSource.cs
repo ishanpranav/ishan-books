@@ -26,6 +26,4 @@ internal interface ILineSource
     bool IsInvalidatedByAccountUpdated(Guid id);
     bool IsInvalidatedByTransactionAdded(Guid id);
     bool IsInvalidatedByTransactionReconciled(Guid id);
-    bool IsInvalidatedByTransactionRemoved(Guid id);
-    bool IsInvalidatedByTransactionUpdated(Guid id);
 }

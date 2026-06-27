@@ -9,8 +9,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Resources;
 using System.Runtime.CompilerServices;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Windows.Forms;
 using Humanizer;
 
@@ -18,22 +16,6 @@ namespace Liber.Forms;
 
 internal static class FormattedStrings
 {
-    public static readonly JsonSerializerOptions JsonOptions = new JsonSerializerOptions()
-    {
-        AllowTrailingCommas = true,
-        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
-        PropertyNameCaseInsensitive = true,
-        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-        WriteIndented = true
-    };
-
-    static FormattedStrings()
-    {
-        JsonOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase, allowIntegerValues: true));
-        JsonOptions.Converters.Add(new JsonColorConverter());
-        JsonOptions.Converters.Add(new TypeConverterJsonConverterAdapter());
-    }
-
     public static string GrossProfit
     {
         get
@@ -162,7 +144,23 @@ internal static class FormattedStrings
         }
     }
 
-    public static Uri AboutUrl
+    public static Uri AboutUri
+    {
+        get
+        {
+            return new Uri(GetString());
+        }
+    }
+
+    public static Uri LicenseUri
+    {
+        get
+        {
+            return new Uri(GetString());
+        }
+    }
+
+    public static Uri ThirdPartyNoticesUri
     {
         get
         {
@@ -236,17 +234,17 @@ internal static class FormattedStrings
 
     private static string GetClearedCountFormat()
     {
-        return GetString("ClearedCount{0}{1}");
+        return GetString("ClearedCount{0}");
     }
 
     public static string GetClearedDebitCount(int count)
     {
-        return string.Format(GetClearedCountFormat(), count, Properties.Resources.Debit.ToQuantity(count));
+        return string.Format(GetClearedCountFormat(), Properties.Resources.Debit.ToQuantity(count, format: "n0"));
     }
 
     public static string GetClearedCreditCount(int count)
     {
-        return string.Format(GetClearedCountFormat(), count, Properties.Resources.Credit.ToQuantity(count));
+        return string.Format(GetClearedCountFormat(), Properties.Resources.Credit.ToQuantity(count, format: "n0"));
     }
 
     public static string GetMultipleWords(decimal multiple)
@@ -314,6 +312,28 @@ internal static class FormattedStrings
             MessageBoxIcon.Error);
     }
 
+    public static DialogResult ShowUnreconcileMessage()
+    {
+        return MessageBox.Show(
+            Properties.Resources.UnreconcileText,
+            Properties.Resources.UnreconcileCaption,
+            MessageBoxButtons.OK,
+            MessageBoxIcon.Warning);
+    }
+
+    public static DialogResult ShowUnreconcileMessage(Account account)
+    {
+        return MessageBox.Show(
+            string.Format(GetString("UnreconcileText{0}{1}{2}"),
+                account.Name,
+                account.Reconciled,
+                Properties.Resources.Lines.ToQuantity(account.LastReconciledLines?.Count ?? 0, format: "n0")),
+            Properties.Resources.UnreconcileCaption,
+            MessageBoxButtons.OKCancel,
+            MessageBoxIcon.Warning,
+            MessageBoxDefaultButton.Button2);
+    }
+
     public static DialogResult ShowCancelMessage(Company company)
     {
         return MessageBox.Show(
@@ -342,5 +362,24 @@ internal static class FormattedStrings
         }
 
         return result;
+    }
+
+    public static string GetNullReconciledDescription(Account account)
+    {
+        return string.Format(GetString("NullReconciledDescription{0}"), account.Name);
+    }
+
+    public static string GetOverdueReconciledDescription(Account account, TimeSpan overdue)
+    {
+        return string.Format(GetString("OverdueReconciledDescription{0}{1}"),
+                account.Name,
+                overdue.Humanize(precision: 2, minUnit: TimeUnit.Day, maxUnit: TimeUnit.Year));
+    }
+
+    public static string GetOverduePostedDescription(Account account, TimeSpan overdue)
+    {
+        return string.Format(GetString("OverduePostedDescription{0}{1}"),
+            account.Name,
+            overdue.Humanize(precision: 2, minUnit: TimeUnit.Day, maxUnit: TimeUnit.Year));
     }
 }

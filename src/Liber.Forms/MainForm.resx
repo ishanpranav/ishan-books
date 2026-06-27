@@ -294,6 +294,15 @@
   <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
     <value>208, 6</value>
   </data>
+  <data name="unreconcileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>211, 22</value>
+  </data>
+  <data name="unreconcileToolStripMenuItem.Text" xml:space="preserve">
+    <value>Undo Last Reconciliation</value>
+  </data>
+  <data name="toolStripSeparator17.Size" type="System.Drawing.Size, System.Drawing">
+    <value>208, 6</value>
+  </data>
   <data name="combinePdfDocumentsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>211, 22</value>
   </data>
@@ -351,6 +360,15 @@
   <data name="toolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
     <value>222, 6</value>
   </data>
+  <data name="taskItemsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>225, 22</value>
+  </data>
+  <data name="taskItemsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Task List</value>
+  </data>
+  <data name="toolStripSeparator14.Size" type="System.Drawing.Size, System.Drawing">
+    <value>222, 6</value>
+  </data>
   <data name="newAccountToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>191, 22</value>
   </data>
@@ -378,6 +396,15 @@
   <data name="nameTransactionsToolStripMenuItem.Text" xml:space="preserve">
     <value>Transactions by Name</value>
   </data>
+  <data name="toolStripSeparator18.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 6</value>
+  </data>
+  <data name="splashScreenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>191, 22</value>
+  </data>
+  <data name="splashScreenToolStripMenuItem.Text" xml:space="preserve">
+    <value>Splash Screen</value>
+  </data>
   <data name="otherWindowsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>225, 22</value>
   </data>
@@ -403,19 +430,25 @@
     <value>&amp;Reports</value>
   </data>
   <data name="closeAllToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 22</value>
+    <value>167, 22</value>
   </data>
   <data name="closeAllToolStripMenuItem.Text" xml:space="preserve">
     <value>Close All</value>
   </data>
   <data name="formsToolStripSeparator.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 6</value>
+    <value>164, 6</value>
   </data>
-  <data name="formsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 22</value>
+  <data name="formsToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>167, 22</value>
   </data>
-  <data name="formsToolStripMenuItem.Text" xml:space="preserve">
+  <data name="formsToolStripMenuItem1.Text" xml:space="preserve">
     <value>Windows</value>
+  </data>
+  <data name="formsToolStripMenUtem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>167, 22</value>
+  </data>
+  <data name="formsToolStripMenUtem.Text" xml:space="preserve">
+    <value>Manage windows</value>
   </data>
   <data name="formToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>63, 20</value>
@@ -424,28 +457,28 @@
     <value>&amp;Window</value>
   </data>
   <data name="contentsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>124, 22</value>
   </data>
   <data name="contentsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Contents</value>
   </data>
   <data name="indexToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>124, 22</value>
   </data>
   <data name="indexToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Index</value>
   </data>
   <data name="searchToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>124, 22</value>
   </data>
   <data name="searchToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Search</value>
   </data>
   <data name="toolStripSeparator16.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>121, 6</value>
   </data>
   <data name="aboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>124, 22</value>
   </data>
   <data name="aboutToolStripMenuItem.Text" xml:space="preserve">
     <value>About {0}</value>
@@ -555,6 +588,18 @@
   </data>
   <data name="reportsToolStripButton.Text" xml:space="preserve">
     <value>Report &amp;Center</value>
+  </data>
+  <data name="toolStripSeparator15.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 25</value>
+  </data>
+  <data name="taskItemsToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="taskItemsToolStripButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="taskItemsToolStripButton.Text" xml:space="preserve">
+    <value>Task List</value>
   </data>
   <data name="_toolStrip.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 24</value>
@@ -3533,6 +3578,18 @@
   <data name="&gt;&gt;toolStripSeparator7.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;unreconcileToolStripMenuItem.Name" xml:space="preserve">
+    <value>unreconcileToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;unreconcileToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator17.Name" xml:space="preserve">
+    <value>toolStripSeparator17</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator17.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;combinePdfDocumentsToolStripMenuItem.Name" xml:space="preserve">
     <value>combinePdfDocumentsToolStripMenuItem</value>
   </data>
@@ -3591,6 +3648,18 @@
     <value>toolStripSeparator9</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskItemsToolStripMenuItem.Name" xml:space="preserve">
+    <value>taskItemsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;taskItemsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator14.Name" xml:space="preserve">
+    <value>toolStripSeparator14</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator14.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;otherWindowsToolStripMenuItem.Name" xml:space="preserve">
@@ -3659,10 +3728,16 @@
   <data name="&gt;&gt;formsToolStripSeparator.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;formsToolStripMenuItem.Name" xml:space="preserve">
-    <value>formsToolStripMenuItem</value>
+  <data name="&gt;&gt;formsToolStripMenuItem1.Name" xml:space="preserve">
+    <value>formsToolStripMenuItem1</value>
   </data>
-  <data name="&gt;&gt;formsToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;formsToolStripMenuItem1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;formsToolStripMenUtem.Name" xml:space="preserve">
+    <value>formsToolStripMenUtem</value>
+  </data>
+  <data name="&gt;&gt;formsToolStripMenUtem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;helpToolStripMenuItem1.Name" xml:space="preserve">
@@ -3761,6 +3836,18 @@
   <data name="&gt;&gt;reportsToolStripButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;toolStripSeparator15.Name" xml:space="preserve">
+    <value>toolStripSeparator15</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator15.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskItemsToolStripButton.Name" xml:space="preserve">
+    <value>taskItemsToolStripButton</value>
+  </data>
+  <data name="&gt;&gt;taskItemsToolStripButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;_openFileDialog.Name" xml:space="preserve">
     <value>_openFileDialog</value>
   </data>
@@ -3777,13 +3864,25 @@
     <value>_recentPathManager</value>
   </data>
   <data name="&gt;&gt;_recentPathManager.Type" xml:space="preserve">
-    <value>Liber.Forms.Components.RecentPathManager, Liber.Forms, Culture=neutral, PublicKeyToken=null</value>
+    <value>Liber.Forms.RecentPaths.RecentPathManager, Liber.Forms, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;_factory.Name" xml:space="preserve">
     <value>_factory</value>
   </data>
   <data name="&gt;&gt;_factory.Type" xml:space="preserve">
-    <value>Liber.Forms.Components.FormFactory, Liber.Forms, Culture=neutral, PublicKeyToken=null</value>
+    <value>Liber.Forms.Forms.FormFactory, Liber.Forms, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator18.Name" xml:space="preserve">
+    <value>toolStripSeparator18</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator18.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splashScreenToolStripMenuItem.Name" xml:space="preserve">
+    <value>splashScreenToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;splashScreenToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainForm</value>

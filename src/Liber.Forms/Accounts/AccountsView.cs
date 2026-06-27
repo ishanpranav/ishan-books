@@ -32,6 +32,6 @@ public class AccountsView
 
     public override string ToString()
     {
-        return Properties.Resources.Account.ToQuantity(Values.Count, "n0");
+        return Properties.Resources.Account.ToQuantity(Values.Count, format: "n0");
     }
 }

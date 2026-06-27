@@ -14,12 +14,15 @@ using System.Windows.Forms;
 using Liber.Forms.Accounts;
 using Liber.Forms.AccountViews;
 using Liber.Forms.Companies;
+using Liber.Forms.Forms;
+using Liber.Forms.Help;
 using Liber.Forms.Lines;
 using Liber.Forms.LineSources;
 using Liber.Forms.Properties;
 using Liber.Forms.Reports;
 using Liber.Forms.Reports.Gdi;
 using Liber.Forms.Saving;
+using Liber.Forms.TaskItems;
 using Liber.Forms.Transactions;
 using Liber.Forms.Writers;
 using Liber.Sqlite;
@@ -32,7 +35,7 @@ namespace Liber.Forms;
 
 internal partial class MainForm : Form
 {
-    private readonly JsonCompanyWriter _jsonWriter = new JsonCompanyWriter(FormattedStrings.JsonOptions);
+    private readonly JsonCompanyWriter _jsonWriter = new JsonCompanyWriter(SerializationOptions.Json);
     private readonly XmlReportWriter _xmlWriter = new XmlReportWriter();
     private readonly Dictionary<string, Guid> _nameKeys = new Dictionary<string, Guid>();
 
@@ -41,22 +44,16 @@ internal partial class MainForm : Form
     private ReportEngine _engine;
     private Company _company;
 
+    public event EventHandler? Loaded;
+
     public MainForm()
     {
         InitializeComponent();
         SystemFeatures.Initialize(this);
-
-        string applicationName = SystemFeatures.ApplicationName;
-
-        Text = applicationName;
-        aboutToolStripMenuItem.Text = string.Format(aboutToolStripMenuItem.Text ?? "{0}", applicationName);
-        exportCompanyJsonToolStripMenuItem.Tag = new Writer(FilterIndex.Json, _jsonWriter);
-        exportCompanyXmlToolStripMenuItem.Tag = new Writer(FilterIndex.Xml, _xmlWriter);
-        exportAccountsToolStripMenuItem.Tag = new Writer(FilterIndex.Csv, new GnuCashAccountWriter());
-        exportTransactionsToolStripMenuItem.Tag = new Writer(FilterIndex.Csv, new GnuCashTransactionWriter());
-        exportAccountsIifToolStripMenuItem.Tag = new Writer(FilterIndex.Iif, new IifAccountWriter());
-
         SetCompany(new Company());
+
+        Text = SystemFeatures.ApplicationName;
+        _factory.Parent = this;
     }
 
     public MainForm(string path) : this()
@@ -83,6 +80,13 @@ internal partial class MainForm : Form
 
     private async void OnLoad(object sender, EventArgs e)
     {
+        aboutToolStripMenuItem.Text = string.Format(aboutToolStripMenuItem.Text ?? "{0}", SystemFeatures.ApplicationName);
+        exportCompanyJsonToolStripMenuItem.Tag = new Writer(FilterIndex.Json, _jsonWriter);
+        exportCompanyXmlToolStripMenuItem.Tag = new Writer(FilterIndex.Xml, _xmlWriter);
+        exportAccountsToolStripMenuItem.Tag = new Writer(FilterIndex.Csv, new GnuCashAccountWriter());
+        exportTransactionsToolStripMenuItem.Tag = new Writer(FilterIndex.Csv, new GnuCashTransactionWriter());
+        exportAccountsIifToolStripMenuItem.Tag = new Writer(FilterIndex.Iif, new IifAccountWriter());
+
         InitializeRecentPaths();
         InitializeReportEngine();
 
@@ -91,7 +95,8 @@ internal partial class MainForm : Form
             await ImportAsync(_recentPathManager.Paths.First());
         }
 
-        _factory.RegisterEmbedded(Guid.NewGuid(), parent: this, new ReportsForm(_engine));
+        _factory.RegisterEmbedded(Guid.NewGuid(), new ReportsForm(_engine));
+        Loaded?.Invoke(sender: this, EventArgs.Empty);
     }
 
     private void InitializeRecentPaths()
@@ -423,7 +428,7 @@ internal partial class MainForm : Form
     {
         await using FileStream input = File.OpenRead(path);
 
-        Company? company = await JsonSerializer.DeserializeAsync<Company>(input, FormattedStrings.JsonOptions);
+        Company? company = await JsonSerializer.DeserializeAsync<Company>(input, SerializationOptions.Json);
 
         if (company == null)
         {
@@ -480,7 +485,7 @@ internal partial class MainForm : Form
 
     private async Task ImportGnuCashSqliteCompanyAsync(string path)
     {
-        ImportRule[]? rules = JsonSerializer.Deserialize<ImportRule[]>(Settings.Default.ImportRules, FormattedStrings.JsonOptions);
+        ImportRule[]? rules = JsonSerializer.Deserialize<ImportRule[]>(Settings.Default.ImportRules, SerializationOptions.Json);
 
         SetCompany(await GnuCashSqliteSerializer.DeserializeAsync(path, rules ?? Enumerable.Empty<ImportRule>()));
     }
@@ -517,16 +522,6 @@ internal partial class MainForm : Form
     private async void OnSaveAsToolStripMenuItemClick(object sender, EventArgs e)
     {
         await SaveAsAsync();
-    }
-
-    private void OnExitToolStripMenuItemClick(object sender, EventArgs e)
-    {
-        Close();
-    }
-
-    private void OnAboutToolStripMenuItemClick(object sender, EventArgs e)
-    {
-        _factory.AutoRegister(() => new UrlForm(FormattedStrings.AboutUrl));
     }
 
     private async Task ExportCompanyAsync(string path, Company company, IWriter writer)
@@ -637,29 +632,35 @@ internal partial class MainForm : Form
 
     private void OnReconcileAccountToolStripMenuItemClick(object sender, EventArgs e)
     {
-        IEnumerator<Account> enumerator = _company.Accounts.GetEnumerator();
+        if (_company.Accounts.Count > 0)
+        {
+            AccountHelpers.BeginReconcile(
+                _company,
+                _factory,
+                _company.Accounts.MaxBy(x => x.Reconciled)!.Id);
+        }
+    }
 
-        if (!enumerator.MoveNext())
+    private void OnUnreconcileToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        if (_company.Accounts.Count < 1)
         {
             return;
         }
 
-        using StatementForm form = new StatementForm(_company)
-        {
-            AccountId = _company.Accounts.MaxBy(x => x.Reconciled)!.Id
-        };
+        Account? account = _company.Accounts.MaxBy(x => x.Reconciled);
 
-        if (form.ShowDialog() != DialogResult.OK)
+        if (account == null || account.Reconciled == null)
         {
+            FormattedStrings.ShowUnreconcileMessage();
+
             return;
         }
 
-        _factory.AutoRegister(() => new ReconcileForm(
-            _company,
-            form.Reconciled,
-            form.ReconciledBalance,
-            form.EndingBalance,
-            _company.GetAccount(form.AccountId)));
+        if (FormattedStrings.ShowUnreconcileMessage(account) == DialogResult.OK)
+        {
+            _company.Unreconcile(account);
+        }
     }
 
     private void OnRemoveAccountToolStripMenuItemClick(object sender, EventArgs e)
@@ -835,25 +836,21 @@ internal partial class MainForm : Form
         _factory.AutoRegister(() => new TransactionForm(_company));
     }
 
+    private void OnTaskItemsToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        _factory.AutoRegister(() => new TaskItemsForm(_company, _factory));
+    }
+
     private void OnAccountTransactionsToolStripMenuItemClick(object sender, EventArgs e)
     {
         using AccountDialog accountDialog = new AccountDialog(new EditableAccountView(_company), x => !x.ReadOnly);
 
-        if (accountDialog.ShowDialog() != DialogResult.OK)
+        if (accountDialog.ShowDialog() != DialogResult.OK || accountDialog.Value.Value == null)
         {
             return;
         }
 
-        Guid id = accountDialog.Value.Id;
-
-        if (_factory.TryActivate(id) || accountDialog.Value.Value == null)
-        {
-            return;
-        }
-
-        TransactionsForm form = new TransactionsForm(_company, new AccountLineSource(_company, accountDialog.Value.Value), _factory);
-
-        _factory.Register(id, form);
+        AccountHelpers.BeginTransactions(_company, _factory, accountDialog.Value.Value);
     }
 
     private void OnNameTransactionsToolStripMenuItemClick(object sender, EventArgs e)
@@ -881,6 +878,11 @@ internal partial class MainForm : Form
         _factory.KillAll();
     }
 
+    private void OnFormsToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        _factory.AutoRegister(() => new FormsForm(_factory));
+    }
+
     private void OnRecentPathManagerInvalidated(object sender, EventArgs e)
     {
         InitializeRecentPaths();
@@ -905,9 +907,9 @@ internal partial class MainForm : Form
     private void OnFactoryInvalidated(object sender, EventArgs e)
     {
         formsToolStripSeparator.Visible = false;
-        formsToolStripMenuItem.Visible = false;
+        formsToolStripMenuItem1.Visible = false;
 
-        formsToolStripMenuItem.DropDownItems.Clear();
+        formsToolStripMenuItem1.DropDownItems.Clear();
 
         int i = 1;
 
@@ -929,15 +931,45 @@ internal partial class MainForm : Form
                 item.Text = $"{i} - {entry.Value.Text}";
             };
 
-            formsToolStripMenuItem.DropDownItems.Add(item);
+            formsToolStripMenuItem1.DropDownItems.Add(item);
 
             i++;
         }
 
-        if (formsToolStripMenuItem.DropDownItems.Count > 0)
+        if (formsToolStripMenuItem1.DropDownItems.Count > 0)
         {
             formsToolStripSeparator.Visible = true;
-            formsToolStripMenuItem.Visible = true;
+            formsToolStripMenuItem1.Visible = true;
         }
+    }
+
+    private void OnContentsToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        _factory.AutoRegister(() => new UriForm(FormattedStrings.AboutUri));
+    }
+
+    private void OnIndexToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        _factory.AutoRegister(() => new UriForm(FormattedStrings.AboutUri));
+    }
+
+    private void OnSearchToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        _factory.AutoRegister(() => new UriForm(FormattedStrings.AboutUri));
+    }
+
+    private void OnAboutToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        _factory.AutoRegister(() => new AboutBox(_factory));
+    }
+
+    private void OnSplashScreenToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        _factory.AutoRegister(() => new SplashScreen());
+    }
+
+    private void OnExitToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        Close();
     }
 }

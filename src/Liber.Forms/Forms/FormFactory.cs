@@ -8,7 +8,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace Liber.Forms.Components;
+namespace Liber.Forms.Forms;
 
 internal class FormFactory : Component
 {
@@ -16,7 +16,7 @@ internal class FormFactory : Component
 
     [Browsable(false)]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    public Form? Parent { get; private set; }
+    public Form? Parent { get; set; }
 
     [Browsable(false)]
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -43,6 +43,7 @@ internal class FormFactory : Component
     {
         _forms.Add(key, value);
 
+        value.Owner = Parent;
         value.FormClosed += (_, _) =>
         {
             _forms.Remove(key);
@@ -53,11 +54,11 @@ internal class FormFactory : Component
         Invalidated?.Invoke(sender: this, EventArgs.Empty);
     }
 
-    public void RegisterEmbedded(Guid key, Form parent, Form value)
+    public void RegisterEmbedded(Guid key, Form value)
     {
-        if (Parent != null)
+        if (Parent == null)
         {
-            Parent.Resize -= OnParentResize;
+            throw new InvalidOperationException();
         }
 
         if (Embedded != null)
@@ -66,7 +67,6 @@ internal class FormFactory : Component
         }
 
         Embedded = value;
-        Parent = parent;
 
         _forms.Add(key, value);
 
@@ -75,18 +75,17 @@ internal class FormFactory : Component
             _forms.Remove(key);
             Invalidated?.Invoke(sender: this, EventArgs.Empty);
 
-            Parent = null;
             Embedded = null;
         };
         value.FormBorderStyle = FormBorderStyle.None;
         value.ControlBox = false;
-        value.MdiParent = parent;
+        value.MdiParent = Parent;
         value.Text = string.Empty;
         value.WindowState = FormWindowState.Minimized;
-        parent.Resize += OnParentResize;
+        Parent.Resize += OnParentResize;
 
         value.Show();
-        parent.BeginInvoke(() =>
+        Parent.BeginInvoke(() =>
         {
             value.WindowState = FormWindowState.Maximized;
         });
@@ -139,5 +138,18 @@ internal class FormFactory : Component
         }
 
         Register(key, factory());
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            if (Parent != null)
+            {
+                Parent.Resize -= OnParentResize;
+            }
+        }
+
+        base.Dispose(disposing);
     }
 }
