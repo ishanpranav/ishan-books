@@ -106,15 +106,6 @@ namespace Liber.Forms.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Amount.
-        /// </summary>
-        internal static string DebitCredit {
-            get {
-                return ResourceManager.GetString("DebitCredit", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The account could not be deleted because it contains transactions..
         /// </summary>
         internal static string DeleteAccountText {
@@ -197,15 +188,6 @@ namespace Liber.Forms.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Name.
-        /// </summary>
-        internal static string Name {
-            get {
-                return ResourceManager.GetString("Name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to (New account).
         /// </summary>
         internal static string NewAccount {
@@ -220,15 +202,6 @@ namespace Liber.Forms.Properties {
         internal static string NoAccount {
             get {
                 return ResourceManager.GetString("NoAccount", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Number.
-        /// </summary>
-        internal static string Number {
-            get {
-                return ResourceManager.GetString("Number", resourceCulture);
             }
         }
         

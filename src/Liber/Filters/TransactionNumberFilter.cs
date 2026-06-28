@@ -1,4 +1,4 @@
-﻿// BalanceFilter.cs
+﻿// TransactionNumberFilter.cs
 // Copyright (c) 2023-2026 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
@@ -7,7 +7,7 @@ using Liber.Properties;
 
 namespace Liber.Filters;
 
-public class BalanceFilter : Filter
+public class TransactionNumberFilter : Filter
 {
     private decimal _from;
     private decimal _to;
@@ -17,20 +17,17 @@ public class BalanceFilter : Filter
     {
         get
         {
-            decimal from = From;
-            decimal to = To;
-
-            if (from == 0 && to == 0)
+            if (_from == 0 && _to == 0)
             {
-                return Resources.DebitCredit;
+                return Resources.Number;
             }
 
-            if (from == to)
+            if (_from == _to)
             {
-                return $"{Resources.DebitCredit} = {from}";
+                return $"{Resources.Number} = {_from}";
             }
 
-            return $"{from} ≤ {Resources.DebitCredit} ≤ {to}";
+            return $"{_from} ≤ {Resources.Number} ≤ {_to}";
         }
     }
 
@@ -41,12 +38,10 @@ public class BalanceFilter : Filter
     {
         get
         {
-            return decimal.Abs(_from);
+            return _from;
         }
         set
         {
-            value = decimal.Abs(value);
-
             if (value > _to)
             {
                 _to = value;
@@ -63,12 +58,10 @@ public class BalanceFilter : Filter
     {
         get
         {
-            return decimal.Abs(_to);
+            return _to;
         }
         set
         {
-            value = decimal.Abs(value);
-
             if (value < _from)
             {
                 _from = value;
@@ -80,17 +73,17 @@ public class BalanceFilter : Filter
 
     public override bool IsMatch(Line value)
     {
-        decimal balance = decimal.Abs(value.Balance);
+        decimal number = value.Transaction.Number;
 
-        return balance >= From && balance <= To;
+        return number >= From && number <= To;
     }
 
     public override Filter Clone()
     {
-        return new BalanceFilter()
+        return new TransactionNumberFilter()
         {
-            From = From,
-            To = To
+            From = _from,
+            To = _to
         };
     }
 }

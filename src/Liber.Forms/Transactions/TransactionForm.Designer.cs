@@ -18,9 +18,9 @@ namespace Liber.Forms.Transactions
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TransactionForm));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             postedDateTimePicker = new DateTimePicker();
             label1 = new Label();
             label2 = new Label();
@@ -42,6 +42,11 @@ namespace Liber.Forms.Transactions
             applyButton = new Button();
             acceptButton = new Button();
             _dataGridView = new TransactionGridView();
+            accountColumn = new DataGridViewComboBoxColumn();
+            debitColumn = new DataGridViewTextBoxColumn();
+            creditColumn = new DataGridViewTextBoxColumn();
+            descriptionColumn = new DataGridViewTextBoxColumn();
+            reconciledColumn = new DataGridViewCheckBoxColumn();
             previousButton = new Button();
             nextButton = new Button();
             label3 = new Label();
@@ -51,11 +56,6 @@ namespace Liber.Forms.Transactions
             _helpProvider = new HelpProvider();
             lastButton = new Button();
             firstButton = new Button();
-            accountColumn = new DataGridViewComboBoxColumn();
-            debitColumn = new DataGridViewTextBoxColumn();
-            creditColumn = new DataGridViewTextBoxColumn();
-            descriptionColumn = new DataGridViewTextBoxColumn();
-            reconciledColumn = new DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)numberNumericUpDown).BeginInit();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)_dataGridView).BeginInit();
@@ -216,37 +216,65 @@ namespace Liber.Forms.Transactions
             // _dataGridView
             // 
             _dataGridView.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(33, 37, 41);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            _dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(33, 37, 41);
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
+            _dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             resources.ApplyResources(_dataGridView, "_dataGridView");
             _dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             _dataGridView.BackgroundColor = System.Drawing.Color.FromArgb(248, 249, 250);
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            _dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
+            _dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             _dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             _dataGridView.Columns.AddRange(new DataGridViewColumn[] { accountColumn, debitColumn, creditColumn, descriptionColumn, reconciledColumn });
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            _dataGridView.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9F);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
+            _dataGridView.DefaultCellStyle = dataGridViewCellStyle6;
             _dataGridView.GridColor = System.Drawing.Color.FromArgb(33, 37, 41);
             _dataGridView.MultiSelect = false;
             _dataGridView.Name = "_dataGridView";
             _dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             _helpProvider.SetShowHelp(_dataGridView, (bool)resources.GetObject("_dataGridView.ShowHelp"));
             _dataGridView.DefaultValuesNeeded += OnDataGridViewDefaultValuesNeeded;
+            // 
+            // accountColumn
+            // 
+            resources.ApplyResources(accountColumn, "accountColumn");
+            accountColumn.Name = "accountColumn";
+            accountColumn.Resizable = DataGridViewTriState.True;
+            accountColumn.SortMode = DataGridViewColumnSortMode.Automatic;
+            // 
+            // debitColumn
+            // 
+            resources.ApplyResources(debitColumn, "debitColumn");
+            debitColumn.Name = "debitColumn";
+            // 
+            // creditColumn
+            // 
+            resources.ApplyResources(creditColumn, "creditColumn");
+            creditColumn.Name = "creditColumn";
+            // 
+            // descriptionColumn
+            // 
+            resources.ApplyResources(descriptionColumn, "descriptionColumn");
+            descriptionColumn.Name = "descriptionColumn";
+            // 
+            // reconciledColumn
+            // 
+            resources.ApplyResources(reconciledColumn, "reconciledColumn");
+            reconciledColumn.Name = "reconciledColumn";
+            reconciledColumn.ReadOnly = true;
             // 
             // previousButton
             // 
@@ -310,34 +338,6 @@ namespace Liber.Forms.Transactions
             _helpProvider.SetShowHelp(firstButton, (bool)resources.GetObject("firstButton.ShowHelp"));
             firstButton.UseVisualStyleBackColor = true;
             firstButton.Click += OnFirstButtonClick;
-            // 
-            // accountColumn
-            // 
-            resources.ApplyResources(accountColumn, "accountColumn");
-            accountColumn.Name = "accountColumn";
-            accountColumn.Resizable = DataGridViewTriState.True;
-            accountColumn.SortMode = DataGridViewColumnSortMode.Automatic;
-            // 
-            // debitColumn
-            // 
-            resources.ApplyResources(debitColumn, "debitColumn");
-            debitColumn.Name = "debitColumn";
-            // 
-            // creditColumn
-            // 
-            resources.ApplyResources(creditColumn, "creditColumn");
-            creditColumn.Name = "creditColumn";
-            // 
-            // descriptionColumn
-            // 
-            resources.ApplyResources(descriptionColumn, "descriptionColumn");
-            descriptionColumn.Name = "descriptionColumn";
-            // 
-            // reconciledColumn
-            // 
-            resources.ApplyResources(reconciledColumn, "reconciledColumn");
-            reconciledColumn.Name = "reconciledColumn";
-            reconciledColumn.ReadOnly = true;
             // 
             // TransactionForm
             // 

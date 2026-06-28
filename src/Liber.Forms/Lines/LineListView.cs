@@ -5,7 +5,9 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows.Forms;
+using Liber.Properties;
 
 namespace Liber.Forms.Lines;
 
@@ -26,9 +28,9 @@ internal class LineListView : ListViewEx
         FullRowSelect = true;
 
         Columns.Add(Properties.Resources.Posted);
-        Columns.Add(Properties.Resources.Number);
-        Columns.Add(Properties.Resources.Name);
-        Columns.Add(Properties.Resources.DebitCredit);
+        Columns.Add(Resources.Number);
+        Columns.Add(Resources.Name);
+        Columns.Add(Resources.DebitCredit);
     }
 
     public void Initialize(IEnumerable<Line> lines, AccountType representativeType, Func<Line, (string, string)>? grouping)
@@ -64,5 +66,19 @@ internal class LineListView : ListViewEx
         {
             EndUpdate();
         }
+    }
+
+    public bool TryGetSelection([NotNullWhen(true)] out Line? value)
+    {
+        if (SelectedItems.Count < 1)
+        {
+            value = null;
+
+            return false;
+        }
+
+        value = (Line)SelectedItems[0].Tag!;
+
+        return true;
     }
 }

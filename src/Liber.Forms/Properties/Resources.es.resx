@@ -132,9 +132,6 @@
   <data name="Debit" xml:space="preserve">
     <value>crédito</value>
   </data>
-  <data name="DebitCredit" xml:space="preserve">
-    <value>Importe</value>
-  </data>
   <data name="DeleteAccountText" xml:space="preserve">
     <value>No se pudo eliminar la cuenta porque contiene transacciones.</value>
   </data>
@@ -159,17 +156,11 @@
   <data name="Lines" xml:space="preserve">
     <value>movimiento</value>
   </data>
-  <data name="Name" xml:space="preserve">
-    <value>Nombre</value>
-  </data>
   <data name="NewAccount" xml:space="preserve">
     <value>(Nueva cuenta)</value>
   </data>
   <data name="NoAccount" xml:space="preserve">
     <value>Ninguna cuenta</value>
-  </data>
-  <data name="Number" xml:space="preserve">
-    <value>Número</value>
   </data>
   <data name="Posted" xml:space="preserve">
     <value>Fecha</value>

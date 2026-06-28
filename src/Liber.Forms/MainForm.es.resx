@@ -271,6 +271,24 @@
   <data name="exitToolStripMenuItem.Text" xml:space="preserve">
     <value>Salir</value>
   </data>
+  <data name="findToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>238, 22</value>
+  </data>
+  <data name="findToolStripMenuItem.Text" xml:space="preserve">
+    <value>Buscar</value>
+  </data>
+  <data name="toolStripSeparator19.Size" type="System.Drawing.Size, System.Drawing">
+    <value>235, 6</value>
+  </data>
+  <data name="unreconcileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>238, 22</value>
+  </data>
+  <data name="unreconcileToolStripMenuItem.Text" xml:space="preserve">
+    <value>Deshacer la última conciliación</value>
+  </data>
+  <data name="toolStripSeparator17.Size" type="System.Drawing.Size, System.Drawing">
+    <value>235, 6</value>
+  </data>
   <data name="cultureToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>238, 22</value>
   </data>
@@ -284,15 +302,6 @@
     <value>Configuración de importación</value>
   </data>
   <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>235, 6</value>
-  </data>
-  <data name="unreconcileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>238, 22</value>
-  </data>
-  <data name="unreconcileToolStripMenuItem.Text" xml:space="preserve">
-    <value>Deshacer la última conciliación</value>
-  </data>
-  <data name="toolStripSeparator17.Size" type="System.Drawing.Size, System.Drawing">
     <value>235, 6</value>
   </data>
   <data name="combinePdfDocumentsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">

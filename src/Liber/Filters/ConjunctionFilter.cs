@@ -5,26 +5,31 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using Liber.Properties;
 
 namespace Liber.Filters;
 
 public class ConjunctionFilter : Filter
 {
+    [Browsable(false)]
     public override string Name
     {
         get
         {
             switch (Conjunction)
             {
-                case Conjunction.And: return "All of the following";
-                case Conjunction.Or: return "Any of the following";
+                case Conjunction.And: return Resources.And;
+                case Conjunction.Or: return Resources.Or;
             }
 
-            return "None";
+            return Resources.None;
         }
     }
 
     [DefaultValue(Conjunction.And)]
+    [LocalizedCategory(nameof(Conjunction))]
+    [LocalizedDescription(nameof(Conjunction))]
+    [LocalizedDisplayName(nameof(Conjunction))]
     public Conjunction Conjunction { get; set; } = Conjunction.And;
 
     [Browsable(false)]
@@ -56,15 +61,15 @@ public class ConjunctionFilter : Filter
     {
         if (Children.Count == 0)
         {
-            return "All";
+            return Resources.All;
         }
 
         switch (Conjunction)
         {
-            case Conjunction.And: return $"({string.Join(separator: " and ", Children)})";
-            case Conjunction.Or: return $"({string.Join(separator: " or ", Children)})";
+            case Conjunction.And: return $"({string.Join(separator: $" {Resources.AndSeparator} ", Children)})";
+            case Conjunction.Or: return $"({string.Join(separator: $" {Resources.OrSeparator} ", Children)})";
         }
 
-        return "None";
+        return Resources.None;
     }
 }

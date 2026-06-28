@@ -36,6 +36,8 @@ internal partial class FilterControl : UserControl
 
         Filter?[] filters = new Filter?[]
         {
+            new TransactionNumberFilter(),
+            new TransactionNameFilter(),
             new TransactionMemoFilter(),
             null,
             new BalanceFilter(),

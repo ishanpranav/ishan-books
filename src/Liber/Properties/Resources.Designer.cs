@@ -61,6 +61,42 @@ namespace Liber.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All transactions.
+        /// </summary>
+        public static string All {
+            get {
+                return ResourceManager.GetString("All", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Match all of the following.
+        /// </summary>
+        public static string And {
+            get {
+                return ResourceManager.GetString("And", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to and.
+        /// </summary>
+        public static string AndSeparator {
+            get {
+                return ResourceManager.GetString("AndSeparator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Amount.
+        /// </summary>
+        public static string DebitCredit {
+            get {
+                return ResourceManager.GetString("DebitCredit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Untitled Company.
         /// </summary>
         public static string DefaultCompanyName {
@@ -84,6 +120,87 @@ namespace Liber.Properties {
         public static string DefaultOtherEquityAccountName {
             get {
                 return ResourceManager.GetString("DefaultOtherEquityAccountName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string Description {
+            get {
+                return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Memo.
+        /// </summary>
+        public static string Memo {
+            get {
+                return ResourceManager.GetString("Memo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No transactions.
+        /// </summary>
+        public static string None {
+            get {
+                return ResourceManager.GetString("None", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number.
+        /// </summary>
+        public static string Number {
+            get {
+                return ResourceManager.GetString("Number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Match any of the following.
+        /// </summary>
+        public static string Or {
+            get {
+                return ResourceManager.GetString("Or", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to or.
+        /// </summary>
+        public static string OrSeparator {
+            get {
+                return ResourceManager.GetString("OrSeparator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reconciled.
+        /// </summary>
+        public static string Reconciled {
+            get {
+                return ResourceManager.GetString("Reconciled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not Reconciled.
+        /// </summary>
+        public static string Unreconciled {
+            get {
+                return ResourceManager.GetString("Unreconciled", resourceCulture);
             }
         }
     }
