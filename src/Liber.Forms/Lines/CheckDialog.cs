@@ -27,12 +27,12 @@ internal partial class CheckDialog : Form
 
     private void OnAcceptButtonClick(object sender, EventArgs e)
     {
-        if (_listView.SelectedItems.Count != 1)
+        if (!_listView.TryGetSelection(out Line? line))
         {
             return;
         }
 
-        Value = new CheckView(Value.Company, (Line)_listView.SelectedItems[0].Tag!);
+        Value = new CheckView(Value.Company, line);
         DialogResult = DialogResult.OK;
 
         Close();

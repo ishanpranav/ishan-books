@@ -32,98 +32,114 @@ partial class FindForm
     /// </summary>
     private void InitializeComponent()
     {
-        _listView = new Liber.Forms.Lines.LineListView();
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FindForm));
+        splitContainer1 = new System.Windows.Forms.SplitContainer();
+        tabControl1 = new System.Windows.Forms.TabControl();
+        tabPage1 = new System.Windows.Forms.TabPage();
+        tabPage2 = new System.Windows.Forms.TabPage();
         _filterControl = new FilterControl();
+        _listView = new Liber.Forms.Lines.LineListView();
         findButton = new System.Windows.Forms.Button();
         closeButton = new System.Windows.Forms.Button();
-        splitContainer1 = new System.Windows.Forms.SplitContainer();
+        goToButton = new System.Windows.Forms.Button();
         ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
         splitContainer1.Panel1.SuspendLayout();
         splitContainer1.Panel2.SuspendLayout();
         splitContainer1.SuspendLayout();
+        tabControl1.SuspendLayout();
+        tabPage2.SuspendLayout();
         SuspendLayout();
         // 
-        // _listView
+        // splitContainer1
         // 
-        _listView.AllowColumnReorder = true;
-        _listView.Dock = System.Windows.Forms.DockStyle.Fill;
-        _listView.FullRowSelect = true;
-        _listView.GridLines = true;
-        _listView.Location = new System.Drawing.Point(0, 0);
-        _listView.Name = "_listView";
-        _listView.Size = new System.Drawing.Size(589, 209);
-        _listView.TabIndex = 0;
-        _listView.UseCompatibleStateImageBehavior = false;
-        _listView.View = System.Windows.Forms.View.Details;
+        resources.ApplyResources(splitContainer1, "splitContainer1");
+        splitContainer1.Name = "splitContainer1";
+        // 
+        // splitContainer1.Panel1
+        // 
+        resources.ApplyResources(splitContainer1.Panel1, "splitContainer1.Panel1");
+        splitContainer1.Panel1.Controls.Add(tabControl1);
+        // 
+        // splitContainer1.Panel2
+        // 
+        resources.ApplyResources(splitContainer1.Panel2, "splitContainer1.Panel2");
+        splitContainer1.Panel2.Controls.Add(_listView);
+        // 
+        // tabControl1
+        // 
+        resources.ApplyResources(tabControl1, "tabControl1");
+        tabControl1.Controls.Add(tabPage1);
+        tabControl1.Controls.Add(tabPage2);
+        tabControl1.Name = "tabControl1";
+        tabControl1.SelectedIndex = 0;
+        // 
+        // tabPage1
+        // 
+        resources.ApplyResources(tabPage1, "tabPage1");
+        tabPage1.Name = "tabPage1";
+        tabPage1.UseVisualStyleBackColor = true;
+        // 
+        // tabPage2
+        // 
+        resources.ApplyResources(tabPage2, "tabPage2");
+        tabPage2.Controls.Add(_filterControl);
+        tabPage2.Name = "tabPage2";
+        tabPage2.UseVisualStyleBackColor = true;
         // 
         // _filterControl
         // 
-        _filterControl.Dock = System.Windows.Forms.DockStyle.Fill;
-        _filterControl.Location = new System.Drawing.Point(0, 0);
+        resources.ApplyResources(_filterControl, "_filterControl");
         _filterControl.Name = "_filterControl";
-        _filterControl.Size = new System.Drawing.Size(589, 170);
-        _filterControl.TabIndex = 1;
+        // 
+        // _listView
+        // 
+        resources.ApplyResources(_listView, "_listView");
+        _listView.AllowColumnReorder = true;
+        _listView.FullRowSelect = true;
+        _listView.GridLines = true;
+        _listView.Name = "_listView";
+        _listView.UseCompatibleStateImageBehavior = false;
+        _listView.View = System.Windows.Forms.View.Details;
+        _listView.ItemActivate += OnListViewItemActivate;
         // 
         // findButton
         // 
-        findButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-        findButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-        findButton.Location = new System.Drawing.Point(431, 400);
-        findButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+        resources.ApplyResources(findButton, "findButton");
         findButton.Name = "findButton";
-        findButton.Size = new System.Drawing.Size(82, 23);
-        findButton.TabIndex = 11;
-        findButton.Text = "&Find";
         findButton.UseVisualStyleBackColor = true;
         findButton.Click += OnFindButtonClick;
         // 
         // closeButton
         // 
-        closeButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-        closeButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-        closeButton.Location = new System.Drawing.Point(519, 400);
-        closeButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+        resources.ApplyResources(closeButton, "closeButton");
         closeButton.Name = "closeButton";
-        closeButton.Size = new System.Drawing.Size(82, 23);
-        closeButton.TabIndex = 10;
-        closeButton.Text = "&Close";
         closeButton.UseVisualStyleBackColor = true;
         closeButton.Click += OnCloseButtonClick;
         // 
-        // splitContainer1
+        // goToButton
         // 
-        splitContainer1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-        splitContainer1.Location = new System.Drawing.Point(12, 12);
-        splitContainer1.Name = "splitContainer1";
-        splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-        // 
-        // splitContainer1.Panel1
-        // 
-        splitContainer1.Panel1.Controls.Add(_filterControl);
-        // 
-        // splitContainer1.Panel2
-        // 
-        splitContainer1.Panel2.Controls.Add(_listView);
-        splitContainer1.Size = new System.Drawing.Size(589, 383);
-        splitContainer1.SplitterDistance = 170;
-        splitContainer1.TabIndex = 12;
+        resources.ApplyResources(goToButton, "goToButton");
+        goToButton.Name = "goToButton";
+        goToButton.UseVisualStyleBackColor = true;
+        goToButton.Click += OnListViewItemActivate;
         // 
         // FindForm
         // 
         AcceptButton = findButton;
-        AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+        resources.ApplyResources(this, "$this");
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         CancelButton = closeButton;
-        ClientSize = new System.Drawing.Size(613, 434);
+        Controls.Add(goToButton);
         Controls.Add(splitContainer1);
         Controls.Add(findButton);
         Controls.Add(closeButton);
         Name = "FindForm";
-        Text = "Find";
         splitContainer1.Panel1.ResumeLayout(false);
         splitContainer1.Panel2.ResumeLayout(false);
         ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
         splitContainer1.ResumeLayout(false);
+        tabControl1.ResumeLayout(false);
+        tabPage2.ResumeLayout(false);
         ResumeLayout(false);
     }
 
@@ -133,4 +149,8 @@ partial class FindForm
     private System.Windows.Forms.Button findButton;
     private System.Windows.Forms.Button closeButton;
     private System.Windows.Forms.SplitContainer splitContainer1;
+    private System.Windows.Forms.TabControl tabControl1;
+    private System.Windows.Forms.TabPage tabPage1;
+    private System.Windows.Forms.TabPage tabPage2;
+    private System.Windows.Forms.Button goToButton;
 }

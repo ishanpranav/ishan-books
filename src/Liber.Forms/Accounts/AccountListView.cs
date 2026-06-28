@@ -27,8 +27,8 @@ internal class AccountListView : ListViewEx
         FullRowSelect = true;
         SmallImageList = AccountImageListManager.ImageList;
 
-        ColumnHeader nameColumn = Columns.Add(Properties.Resources.Name);
-        ColumnHeader numberColumn = Columns.Add(Properties.Resources.Number);
+        ColumnHeader nameColumn = Columns.Add(Liber.Properties.Resources.Name);
+        ColumnHeader numberColumn = Columns.Add(Liber.Properties.Resources.Number);
 
         numberColumn.DisplayIndex = 0;
         nameColumn.DisplayIndex = 1;

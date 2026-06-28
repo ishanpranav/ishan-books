@@ -84,8 +84,6 @@ partial class MainForm
         reconcileAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         removeAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
-        nameTransactionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-        toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
         splashScreenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         reportsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
         otherReportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -404,7 +402,7 @@ partial class MainForm
         // 
         // otherWindowsToolStripMenuItem
         // 
-        otherWindowsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { newAccountToolStripMenuItem, reconcileAccountToolStripMenuItem, removeAccountToolStripMenuItem, toolStripSeparator13, nameTransactionsToolStripMenuItem, toolStripSeparator18, splashScreenToolStripMenuItem });
+        otherWindowsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { newAccountToolStripMenuItem, reconcileAccountToolStripMenuItem, removeAccountToolStripMenuItem, toolStripSeparator13, splashScreenToolStripMenuItem });
         otherWindowsToolStripMenuItem.Name = "otherWindowsToolStripMenuItem";
         resources.ApplyResources(otherWindowsToolStripMenuItem, "otherWindowsToolStripMenuItem");
         // 
@@ -432,17 +430,6 @@ partial class MainForm
         // 
         toolStripSeparator13.Name = "toolStripSeparator13";
         resources.ApplyResources(toolStripSeparator13, "toolStripSeparator13");
-        // 
-        // nameTransactionsToolStripMenuItem
-        // 
-        nameTransactionsToolStripMenuItem.Name = "nameTransactionsToolStripMenuItem";
-        resources.ApplyResources(nameTransactionsToolStripMenuItem, "nameTransactionsToolStripMenuItem");
-        nameTransactionsToolStripMenuItem.Click += OnNameTransactionsToolStripMenuItemClick;
-        // 
-        // toolStripSeparator18
-        // 
-        toolStripSeparator18.Name = "toolStripSeparator18";
-        resources.ApplyResources(toolStripSeparator18, "toolStripSeparator18");
         // 
         // splashScreenToolStripMenuItem
         // 
@@ -736,7 +723,6 @@ partial class MainForm
     private System.Windows.Forms.ToolStripMenuItem anonymizeToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem exportCompanyJsonToolStripMenuItem;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
-    private System.Windows.Forms.ToolStripMenuItem nameTransactionsToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem reconcileAccountToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem taskItemsToolStripMenuItem;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
@@ -745,7 +731,6 @@ partial class MainForm
     private System.Windows.Forms.ToolStripButton taskItemsToolStripButton;
     private System.Windows.Forms.ToolStripMenuItem unreconcileToolStripMenuItem;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;
-    private System.Windows.Forms.ToolStripSeparator toolStripSeparator18;
     private System.Windows.Forms.ToolStripMenuItem splashScreenToolStripMenuItem;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator19;
     private System.Windows.Forms.ToolStripMenuItem findToolStripMenuItem;

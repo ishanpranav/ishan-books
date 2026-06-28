@@ -2,6 +2,9 @@
 // Copyright (c) 2023-2026 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
+using System.ComponentModel;
+using Liber.Properties;
+
 namespace Liber.Filters;
 
 public class BalanceFilter : Filter
@@ -9,32 +12,41 @@ public class BalanceFilter : Filter
     private decimal _from;
     private decimal _to;
 
+    [Browsable(false)]
     public override string Name
     {
         get
         {
-            if (_from == 0 && _to == 0)
+            decimal from = From;
+            decimal to = To;
+
+            if (from == 0 && to == 0)
             {
-                return "Balance";
+                return Resources.DebitCredit;
             }
 
-            if (_from == _to)
+            if (from == to)
             {
-                return $"Balance = {_from}";
+                return $"{Resources.DebitCredit} = {from}";
             }
 
-            return $"Balance from {_from} to {_to}";
+            return $"{from} ≤ {Resources.DebitCredit} ≤ {to}";
         }
     }
 
+    [LocalizedCategory(nameof(From))]
+    [LocalizedDescription(nameof(From))]
+    [LocalizedDisplayName(nameof(From))]
     public decimal From
     {
         get
         {
-            return _from;
+            return decimal.Abs(_from);
         }
         set
         {
+            value = decimal.Abs(value);
+
             if (value > _to)
             {
                 _to = value;
@@ -44,14 +56,19 @@ public class BalanceFilter : Filter
         }
     }
 
+    [LocalizedCategory(nameof(To))]
+    [LocalizedDescription(nameof(To))]
+    [LocalizedDisplayName(nameof(To))]
     public decimal To
     {
         get
         {
-            return _to;
+            return decimal.Abs(_to);
         }
         set
         {
+            value = decimal.Abs(value);
+
             if (value < _from)
             {
                 _from = value;
@@ -64,18 +81,16 @@ public class BalanceFilter : Filter
     public override bool IsMatch(Line value)
     {
         decimal balance = decimal.Abs(value.Balance);
-        decimal from = decimal.Abs(_from);
-        decimal to = decimal.Abs(_to);
 
-        return balance >= from && balance <= to;
+        return balance >= From && balance <= To;
     }
 
     public override Filter Clone()
     {
         return new BalanceFilter()
         {
-            From = _from,
-            To = _to
+            From = From,
+            To = To
         };
     }
 }

@@ -117,7 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="tabPage1.Text" xml:space="preserve">
+    <value>Básico</value>
+  </data>
+  <data name="tabPage2.Text" xml:space="preserve">
+    <value>Avanzado</value>
+  </data>
+  <data name="findButton.Text" xml:space="preserve">
+    <value>Buscar</value>
+  </data>
+  <data name="closeButton.Text" xml:space="preserve">
+    <value>&amp;Cerrar</value>
+  </data>
+  <data name="goToButton.Text" xml:space="preserve">
+    <value>Ir a</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Nombre</value>
+    <value>Buscar</value>
   </data>
 </root>

@@ -39,7 +39,10 @@ internal static class AccountHelpers
             return;
         }
 
-        TransactionsForm form = new TransactionsForm(company, new AccountLineSource(company, account), factory);
+        TransactionsForm form = new TransactionsForm(
+            company,
+            new AccountLineSource(company, account),
+            factory);
 
         factory.Register(account.Id, form);
     }

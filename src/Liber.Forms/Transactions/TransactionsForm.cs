@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Humanizer;
 using Liber.Forms.AccountViews;
 using Liber.Forms.Forms;
+using Liber.Forms.Lines;
 using Liber.Forms.LineSources;
 using Liber.Forms.Properties;
 using Liber.MathEngine.Expressions;
@@ -30,7 +31,7 @@ internal partial class TransactionsForm : Form
     public TransactionsForm(Company company, ILineSource source, FormFactory factory, Line line) :
         this(company, source, factory)
     {
-        SelectLine(_lines.IndexOf(line));
+        SelectIndex(_lines.IndexOf(line));
     }
 
     public TransactionsForm(Company company, ILineSource source, FormFactory factory)
@@ -127,7 +128,7 @@ internal partial class TransactionsForm : Form
 
         if (previousSelectedLineIndex != -1 && previousSelectedLineIndex < _lines.Count)
         {
-            SelectLine(previousSelectedLineIndex);
+            SelectIndex(previousSelectedLineIndex);
 
             return;
         }
@@ -186,7 +187,7 @@ internal partial class TransactionsForm : Form
                 {
                     Tag = new RegisterRow(i)
                 };
-                
+
                 bottom.CreateCells(
                     _dataGridView,
                     string.Empty,
@@ -437,11 +438,19 @@ internal partial class TransactionsForm : Form
         _dataGridView.CancelEdit();
     }
 
-    private void SelectLine(int index)
+    public void SelectLine(Line value)
     {
-        _selectedLineIndex = (index < 0 || index >= _lines.Count) ? -1 : index;
+        if (_source.Contains(value))
+        {
+            SelectIndex(_lines.IndexOf(value));
+        }
+    }
 
-        int rowIndex = index * 2;
+    private void SelectIndex(int value)
+    {
+        _selectedLineIndex = (value < 0 || value >= _lines.Count) ? -1 : value;
+
+        int rowIndex = value * 2;
 
         if (rowIndex < _dataGridView.Rows.Count)
         {
@@ -491,7 +500,7 @@ internal partial class TransactionsForm : Form
             return;
         }
 
-        SelectLine(index);
+        SelectIndex(index);
 
         if (_source.CanEditAccount(_lines[index]))
         {
@@ -718,7 +727,7 @@ internal partial class TransactionsForm : Form
                 _editingIndex = null;
 
                 CommitChanges(index);
-                SelectLine(index + 1);
+                SelectIndex(index + 1);
                 break;
 
             case Keys.Escape:
@@ -755,7 +764,7 @@ internal partial class TransactionsForm : Form
 
     private void OnNewToolStripButtonClick(object sender, EventArgs e)
     {
-        SelectLine(_lines.Count);
+        SelectIndex(_lines.Count);
     }
 
     private void OnSaveToolStripButtonClick(object sender, EventArgs e)
@@ -855,33 +864,33 @@ internal partial class TransactionsForm : Form
 
         Transaction remove = line.Transaction;
 
-        SelectLine(_selectedLineIndex);
+        SelectIndex(_selectedLineIndex);
         _company.RemoveTransaction(remove.Id);
     }
 
     private void OnFirstToolStripButtonClick(object sender, EventArgs e)
     {
-        SelectLine(index: 0);
+        SelectIndex(value: 0);
     }
 
     private void OnPreviousToolStripButtonClick(object sender, EventArgs e)
     {
-        SelectLine(_selectedLineIndex - 1);
+        SelectIndex(_selectedLineIndex - 1);
     }
 
     private void OnNextToolStripButtonClick(object sender, EventArgs e)
     {
-        SelectLine(_selectedLineIndex + 1);
+        SelectIndex(_selectedLineIndex + 1);
     }
 
     private void OnLastToolStripButtonClick(object sender, EventArgs e)
     {
-        SelectLine(_lines.Count - 1);
+        SelectIndex(_lines.Count - 1);
     }
 
     private void OnGoToSelectedToolStripButtonClick(object sender, EventArgs e)
     {
-        SelectLine(_selectedLineIndex);
+        SelectIndex(_selectedLineIndex);
     }
 
     private void OnGoToSiblingToolStripButtonClick(object sender, EventArgs e)
@@ -907,23 +916,7 @@ internal partial class TransactionsForm : Form
             return;
         }
 
-        if (_source.Contains(sibling))
-        {
-            SelectLine(_lines.IndexOf(sibling));
-
-            return;
-        }
-
-        Account? siblingAccount = _company.GetAccount(sibling.AccountId);
-
-        if (_factory.TryActivate(sibling.AccountId) || siblingAccount.ReadOnly)
-        {
-            return;
-        }
-
-        TransactionsForm form = new TransactionsForm(_company, new AccountLineSource(_company, siblingAccount), _factory, sibling);
-
-        _factory.Register(sibling.AccountId, form);
+        LineHelpers.BeginTransactions(_company, _factory, sibling);
     }
 
     private void OnTransactionToolStripButtonClick(object sender, EventArgs e)

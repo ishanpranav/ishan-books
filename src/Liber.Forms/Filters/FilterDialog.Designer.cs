@@ -32,6 +32,7 @@ partial class FilterDialog
     /// </summary>
     private void InitializeComponent()
     {
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FilterDialog));
         acceptButton = new System.Windows.Forms.Button();
         cancelButton = new System.Windows.Forms.Button();
         _filterControl = new FilterControl();
@@ -39,50 +40,33 @@ partial class FilterDialog
         // 
         // acceptButton
         // 
-        acceptButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-        acceptButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-        acceptButton.Location = new System.Drawing.Point(420, 311);
-        acceptButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+        resources.ApplyResources(acceptButton, "acceptButton");
         acceptButton.Name = "acceptButton";
-        acceptButton.Size = new System.Drawing.Size(82, 23);
-        acceptButton.TabIndex = 9;
-        acceptButton.Text = "O&K";
         acceptButton.UseVisualStyleBackColor = true;
         acceptButton.Click += OnAcceptButtonClick;
         // 
         // cancelButton
         // 
-        cancelButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-        cancelButton.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-        cancelButton.Location = new System.Drawing.Point(508, 311);
-        cancelButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+        resources.ApplyResources(cancelButton, "cancelButton");
         cancelButton.Name = "cancelButton";
-        cancelButton.Size = new System.Drawing.Size(82, 23);
-        cancelButton.TabIndex = 8;
-        cancelButton.Text = "&Cancel";
         cancelButton.UseVisualStyleBackColor = true;
         cancelButton.Click += OnCancelButtonClick;
         // 
         // _filterControl
         // 
-        _filterControl.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-        _filterControl.Location = new System.Drawing.Point(12, 12);
+        resources.ApplyResources(_filterControl, "_filterControl");
         _filterControl.Name = "_filterControl";
-        _filterControl.Size = new System.Drawing.Size(578, 294);
-        _filterControl.TabIndex = 10;
         // 
         // FilterDialog
         // 
         AcceptButton = acceptButton;
-        AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+        resources.ApplyResources(this, "$this");
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         CancelButton = cancelButton;
-        ClientSize = new System.Drawing.Size(602, 345);
         Controls.Add(_filterControl);
         Controls.Add(acceptButton);
         Controls.Add(cancelButton);
         Name = "FilterDialog";
-        Text = "Filter";
         ResumeLayout(false);
     }
 

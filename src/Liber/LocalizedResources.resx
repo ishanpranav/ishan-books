@@ -420,4 +420,46 @@
   <data name="Level" xml:space="preserve">
     <value>Reporting Level</value>
   </data>
+  <data name="_d_Or" xml:space="preserve">
+    <value>Any</value>
+  </data>
+  <data name="_d_And" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="_d_From" xml:space="preserve">
+    <value>Specifies the start of the range.</value>
+  </data>
+  <data name="_d_To" xml:space="preserve">
+    <value>Specifies the end of the range.</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="_c_From" xml:space="preserve">
+    <value>Filter Settings</value>
+  </data>
+  <data name="_c_Conjunction" xml:space="preserve">
+    <value>Filter Settings</value>
+  </data>
+  <data name="_c_Value" xml:space="preserve">
+    <value>Filter Settings</value>
+  </data>
+  <data name="_c_To" xml:space="preserve">
+    <value>Filter Settings</value>
+  </data>
+  <data name="_d_Conjunction" xml:space="preserve">
+    <value>Specifies the type of composite filter.</value>
+  </data>
+  <data name="Conjunction" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="Value" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="_d_Value" xml:space="preserve">
+    <value>Specifies the value to search for or filter by.</value>
+  </data>
 </root>

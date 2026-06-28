@@ -89,14 +89,14 @@ internal partial class MainForm : Form
 
         InitializeRecentPaths();
         InitializeReportEngine();
+        Loaded?.Invoke(sender: this, EventArgs.Empty);
 
         if (!_recentPathManager.Empty)
         {
             await ImportAsync(_recentPathManager.Paths.First());
-        }
 
-        _factory.RegisterEmbedded(Guid.NewGuid(), new ReportsForm(_engine));
-        Loaded?.Invoke(sender: this, EventArgs.Empty);
+            _factory.RegisterEmbedded(Guid.NewGuid(), new ReportsForm(_engine));
+        }
     }
 
     private void InitializeRecentPaths()
@@ -632,7 +632,7 @@ internal partial class MainForm : Form
 
     private void OnFindToolStripMenuItemClick(object sender, EventArgs e)
     {
-        _factory.Register(Guid.NewGuid(), new FindForm(_company));
+        _factory.Register(Guid.NewGuid(), new FindForm(_company, _factory));
     }
 
     private void OnReconcileAccountToolStripMenuItemClick(object sender, EventArgs e)
@@ -856,26 +856,6 @@ internal partial class MainForm : Form
         }
 
         AccountHelpers.BeginTransactions(_company, _factory, accountDialog.Value.Value);
-    }
-
-    private void OnNameTransactionsToolStripMenuItemClick(object sender, EventArgs e)
-    {
-        using NameDialog nameDialog = new NameDialog(_company);
-
-        if (nameDialog.ShowDialog() != DialogResult.OK)
-        {
-            return;
-        }
-
-        if (!_nameKeys.TryGetValue(nameDialog.Value, out Guid key))
-        {
-            key = Guid.NewGuid();
-            _nameKeys[nameDialog.Value] = key;
-        }
-
-        TransactionsForm form = new TransactionsForm(_company, new NameLineSource(_company, nameDialog.Value), _factory);
-
-        _factory.Register(key, form);
     }
 
     private void OnCloseAllToolStripMenuItem_Click(object sender, EventArgs e)

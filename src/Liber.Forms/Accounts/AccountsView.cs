@@ -19,9 +19,7 @@ public class AccountsView
     public AccountsView(Company company)
     {
         Company = company;
-        Values = company.Accounts
-            .Where(x => !x.Inactive)
-            .ToHashSet();
+        Values = company.Accounts.ToHashSet();
     }
 
     public AccountsView(Company company, IReadOnlySet<Account> values)

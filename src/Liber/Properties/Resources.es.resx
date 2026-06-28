@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Or" xml:space="preserve">
+    <value>Coincidir con cualquiera de los siguientes</value>
+  </data>
+  <data name="And" xml:space="preserve">
+    <value>Coincidir con todos los siguientes</value>
+  </data>
+  <data name="DebitCredit" xml:space="preserve">
+    <value>Importe</value>
+  </data>
   <data name="DefaultCompanyName" xml:space="preserve">
     <value>Compañía sin título</value>
   </data>
@@ -125,5 +134,35 @@
   </data>
   <data name="DefaultOtherEquityAccountName" xml:space="preserve">
     <value>Acumulado de otros resultados integrales</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>Todas las transacciones</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>Sin transacciones</value>
+  </data>
+  <data name="AndSeparator" xml:space="preserve">
+    <value>y</value>
+  </data>
+  <data name="OrSeparator" xml:space="preserve">
+    <value>o</value>
+  </data>
+  <data name="Number" xml:space="preserve">
+    <value>Número</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Descripción</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="Reconciled" xml:space="preserve">
+    <value>Conciliado</value>
+  </data>
+  <data name="Unreconciled" xml:space="preserve">
+    <value>No conciliado</value>
+  </data>
+  <data name="Memo" xml:space="preserve">
+    <value>Concepto</value>
   </data>
 </root>

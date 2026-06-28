@@ -148,7 +148,7 @@
     <value>Fuente</value>
   </data>
   <data name="Memo" xml:space="preserve">
-    <value>Notas</value>
+    <value>Concepto</value>
   </data>
   <data name="Multiple" xml:space="preserve">
     <value>Múltiplo de redondeo</value>
@@ -419,5 +419,47 @@
   </data>
   <data name="Level" xml:space="preserve">
     <value>Nivel de presentación</value>
+  </data>
+  <data name="_d_Or" xml:space="preserve">
+    <value>Cualquiera</value>
+  </data>
+  <data name="_d_And" xml:space="preserve">
+    <value>Todos</value>
+  </data>
+  <data name="_d_From" xml:space="preserve">
+    <value>Especifica el inicio del rango.</value>
+  </data>
+  <data name="_d_To" xml:space="preserve">
+    <value>Especifica el final del rango.</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>Desde</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>Hace</value>
+  </data>
+  <data name="_c_From" xml:space="preserve">
+    <value>Configuración del filtro</value>
+  </data>
+  <data name="_c_Conjunction" xml:space="preserve">
+    <value>Configuración del filtro</value>
+  </data>
+  <data name="_c_Value" xml:space="preserve">
+    <value>Configuración del filtro</value>
+  </data>
+  <data name="_c_To" xml:space="preserve">
+    <value>Configuración del filtro</value>
+  </data>
+  <data name="_d_Conjunction" xml:space="preserve">
+    <value>Especifica el tipo de filtro compuesto.</value>
+  </data>
+  <data name="Conjunction" xml:space="preserve">
+    <value>Filtro</value>
+  </data>
+  <data name="Value" xml:space="preserve">
+    <value>Valor</value>
+  </data>
+  <data name="_d_Value" xml:space="preserve">
+    <value>Especifica el valor por el que buscar o filtrar.</value>
   </data>
 </root>
