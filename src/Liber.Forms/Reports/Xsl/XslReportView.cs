@@ -2,6 +2,7 @@
 // Copyright (c) 2023-2026 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
@@ -77,7 +78,11 @@ internal sealed class XslReportView : IReportView
 
     public void Navigate(CoreWebView2 coreWebView2)
     {
-        coreWebView2.NavigateToString(_xhtml);
+        try
+        {
+            coreWebView2.NavigateToString(_xhtml);
+        }
+        catch (ArgumentException) { }
     }
 
     public static void InitializeReports(string path)
