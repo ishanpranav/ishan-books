@@ -157,37 +157,29 @@ public class XslReport : IntervalView, IXmlSerializable
     [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "<Pending>")]
     public string ftspans(DateTime started, DateTime posted)
     {
-        DateTime effectiveEnd = posted;
+        DateTime exclusiveEnd = posted.Date.AddDays(1);
 
-        posted = posted.Date.AddDays(1);
-
-        if (effectiveEnd.Day != 1)
+        if (exclusiveEnd == started.Date.AddYears(1))
         {
-            effectiveEnd = posted;
+            return started.Year.ToString();
         }
 
-        if (posted == started.Date.AddYears(1))
+        if (exclusiveEnd == started.Date.AddMonths(1))
         {
-            return posted.Year.ToString();
+            return new DateTime(started.Year, started.Month, 1).ToString("MMMM yyyy");
         }
 
-        if (posted == started.Date.AddMonths(1))
+        if (started.Day == 1 && exclusiveEnd.Day == 1)
         {
-            DateTime month = new DateTime(started.Year, started.Month, 1);
-
-            return month.ToString("MMMM yyyy");
-        }
-
-        if (started.Day == 1 && effectiveEnd.Day == 1)
-        {
-            int months = ((effectiveEnd.Year - started.Year) * 12) + effectiveEnd.Month - started.Month;
+            int months = ((exclusiveEnd.Year - started.Year) * 12) + exclusiveEnd.Month - started.Month;
 
             return TimeSpan
                 .FromDays(months * 32)
                 .Humanize(precision: 2, countEmptyUnits: true, maxUnit: TimeUnit.Year);
         }
 
-        return (posted - started.Date).Humanize(precision: 2, countEmptyUnits: true, maxUnit: TimeUnit.Year);
+        return (exclusiveEnd - started.Date)
+            .Humanize(precision: 2, countEmptyUnits: true, maxUnit: TimeUnit.Year);
     }
 
     [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "<Pending>")]

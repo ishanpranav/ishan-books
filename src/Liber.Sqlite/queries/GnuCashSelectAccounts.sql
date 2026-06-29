@@ -11,7 +11,7 @@ SELECT
 	account.placeholder "Placeholder",
 	account."description" "Description",
 	MIN(CASE WHEN slot."name" = 'notes' THEN slot.string_val END) "Memo",
-    NULL "Color",
+	MIN(CASE WHEN slot."name" = 'color' THEN slot.string_val END) "Color",
 	MIN(CASE WHEN slot."name" = 'tax-related' THEN
             CASE WHEN slot.string_val = 'true' THEN 1 ELSE 0 END
         END) "TaxRelated",
