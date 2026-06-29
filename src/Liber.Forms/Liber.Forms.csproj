@@ -16,6 +16,7 @@
     <ForceDesignerDpiUnaware>true</ForceDesignerDpiUnaware>
     <Copyright>© 2023-2026 Ishan Pranav. All rights reserved.</Copyright>
     <Authors>Ishan Pranav</Authors>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
 	</PropertyGroup>
 
 	<ItemGroup>
