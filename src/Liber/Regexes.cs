@@ -10,4 +10,7 @@ public static partial class Regexes
 {
     [GeneratedRegex(@"[\s\S]*")]
     public static partial Regex Any();
+
+    [GeneratedRegex(@"rgb\((\d+),\s*(\d+),\s*(\d+)\)")]
+    public static partial Regex Rgb();
 }
