@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.Drawing;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using CsvHelper.TypeConversion;
 using Microsoft.Data.Sqlite;
@@ -77,7 +79,7 @@ public static class GnuCashSqliteSerializer
                     Guid id = reader.GetGuid(0);
                     Guid parentId = reader.GetGuid(1);
 
-                    accounts.Add(new Account(
+                    Account account = new Account(
                         id,
                         parentId == emptyParentId ? Guid.Empty : parentId,
                         reader.GetDecimal(2),
@@ -87,10 +89,29 @@ public static class GnuCashSqliteSerializer
                         Placeholder = reader.GetBoolean(5),
                         Description = await SqliteUtilities.GetStringAsync(reader, 6),
                         Memo = await SqliteUtilities.GetStringAsync(reader, 7),
-                        Color = await SqliteUtilities.GetColorAsync(reader, 8),
                         TaxType = !await reader.IsDBNullAsync(9) && reader.GetBoolean(9),
                         Inactive = reader.GetBoolean(10)
-                    });
+                    };
+
+                    const int colorIndex = 8;
+
+                    if (!await reader.IsDBNullAsync(colorIndex))
+                    {
+                        string? colorString = reader.GetString(colorIndex);
+
+                        Match match = Regexes.Rgb().Match(colorString);
+
+                        if (match.Success)
+                        {
+                            int r = int.Parse(match.Groups[1].Value);
+                            int g = int.Parse(match.Groups[2].Value);
+                            int b = int.Parse(match.Groups[3].Value);
+
+                            account.Color = Color.FromArgb(r, g, b);
+                        }
+                    }
+
+                    accounts.Add(account);
 
                     DateTime? reconciled = await SqliteUtilities.GetDateTimeAsync(reader, 12);
                 }
