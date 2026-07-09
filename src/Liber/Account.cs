@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Text.Json.Serialization;
-using System.Text.RegularExpressions;
 using CsvHelper.Configuration.Attributes;
 using CsvHelper.TypeConversion;
 using Liber.Filters;

@@ -307,6 +307,8 @@ internal partial class AccountsForm : Form
 
         if (account.Type.IsTemporary())
         {
+            QuickReport(account);
+
             return;
         }
 

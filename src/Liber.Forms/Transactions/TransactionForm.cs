@@ -37,7 +37,7 @@ internal partial class TransactionForm : Form
         InitializeComponent();
         SystemFeatures.Initialize(this);
 
-        accountColumn.DataSource = new AccountViewBindingList(company, x => !x.ReadOnly);
+        accountColumn.DataSource = new AccountViewBindingList(company, x => !x.Placeholder);
         accountColumn.ValueMember = nameof(AccountView.Id);
         accountColumn.DisplayMember = nameof(AccountView.DisplayName);
         _dataGridView.SetCompanyColor(company.Color);
