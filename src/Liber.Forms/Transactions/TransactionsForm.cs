@@ -40,7 +40,7 @@ internal partial class TransactionsForm : Form
         SystemFeatures.Initialize(this);
         Design.ApplyStyles(_contextMenu);
 
-        AccountViewBindingList bindingList = new AccountViewBindingList(company, x => !x.ReadOnly);
+        AccountViewBindingList bindingList = new AccountViewBindingList(company, x => !x.Placeholder);
 
         bindingList.AddNullAccount();
 
