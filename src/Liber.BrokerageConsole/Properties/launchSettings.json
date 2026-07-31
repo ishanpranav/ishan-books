@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Liber.BrokerageConsole": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\publish\\trades.json"
+    }
+  }
+}
