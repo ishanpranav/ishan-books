@@ -76,6 +76,9 @@ public static class GnuCashSqliteSerializer
             {
                 while (await reader.ReadAsync())
                 {
+                    const int colorIndex = 8;
+                    const int taxTypeIndex = 9;
+
                     Guid id = reader.GetGuid(0);
                     Guid parentId = reader.GetGuid(1);
 
@@ -89,11 +92,9 @@ public static class GnuCashSqliteSerializer
                         Placeholder = reader.GetBoolean(5),
                         Description = await SqliteUtilities.GetStringAsync(reader, 6),
                         Memo = await SqliteUtilities.GetStringAsync(reader, 7),
-                        TaxType = !await reader.IsDBNullAsync(9) && reader.GetBoolean(9),
+                        TaxType = !await reader.IsDBNullAsync(taxTypeIndex) && reader.GetBoolean(taxTypeIndex),
                         Inactive = reader.GetBoolean(10)
                     };
-
-                    const int colorIndex = 8;
 
                     if (!await reader.IsDBNullAsync(colorIndex))
                     {
