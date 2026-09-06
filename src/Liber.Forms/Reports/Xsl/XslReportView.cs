@@ -46,11 +46,11 @@ internal sealed class XslReportView : ICloneable, IReportView
         }
     }
 
-    public object Properties
+    public string ImageKey
     {
         get
         {
-            return _report;
+            return "Report";
         }
     }
 
@@ -59,6 +59,14 @@ internal sealed class XslReportView : ICloneable, IReportView
         get
         {
             return 1;
+        }
+    }
+
+    public object Properties
+    {
+        get
+        {
+            return _report;
         }
     }
 

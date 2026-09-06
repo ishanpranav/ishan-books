@@ -26,7 +26,7 @@ namespace Liber.Forms.Reports
             _propertyGrid = new System.Windows.Forms.PropertyGrid();
             _webView = new Microsoft.Web.WebView2.WinForms.WebView2();
             _backgroundWorker = new System.ComponentModel.BackgroundWorker();
-            _recentPathManager = new Liber.Forms.RecentPaths.RecentPathManager(components);
+            _recentPathManager = new RecentPathManager(components);
             _timer = new System.Windows.Forms.Timer(components);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
@@ -69,6 +69,7 @@ namespace Liber.Forms.Reports
             // 
             _listView.AllowColumnReorder = true;
             resources.ApplyResources(_listView, "_listView");
+            _listView.GridLines = true;
             _listView.LargeImageList = _imageList;
             _listView.MultiSelect = false;
             _listView.Name = "_listView";
@@ -78,7 +79,7 @@ namespace Liber.Forms.Reports
             // 
             // _imageList
             // 
-            _imageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            _imageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
             resources.ApplyResources(_imageList, "_imageList");
             _imageList.TransparentColor = System.Drawing.Color.Transparent;
             // 
@@ -137,11 +138,11 @@ namespace Liber.Forms.Reports
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ListViewEx _listView;
         private Microsoft.Web.WebView2.WinForms.WebView2 _webView;
-        private System.Windows.Forms.ImageList _imageList;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.PropertyGrid _propertyGrid;
         private System.ComponentModel.BackgroundWorker _backgroundWorker;
         private RecentPathManager _recentPathManager;
         private System.Windows.Forms.Timer _timer;
+        private System.Windows.Forms.ImageList _imageList;
     }
 }
