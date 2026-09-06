@@ -168,7 +168,7 @@ internal partial class MainForm : Form
 
     private void InitializeReportEngine()
     {
-        if (_engine.Views.Count == 0)
+        if (_engine.Prototypes.Count == 0)
         {
             reportsToolStripMenuItem1.Visible = false;
         }
@@ -176,7 +176,7 @@ internal partial class MainForm : Form
         Dictionary<string, ToolStripMenuItem> groups = new Dictionary<string, ToolStripMenuItem>();
         Dictionary<(int SortOrder, string Key), List<(string Name, string GenericTitle)>> pending = new Dictionary<(int, string), List<(string, string)>>();
 
-        foreach (KeyValuePair<string, IReportView> view in _engine.Views)
+        foreach (KeyValuePair<string, IReportView> view in _engine.Prototypes)
         {
             string genericTitle = view.Value.GenericTitle;
             string baseTitle;
@@ -259,14 +259,16 @@ internal partial class MainForm : Form
     {
         string name = ((ToolStripMenuItem)sender!).Tag!.ToString()!;
         Guid key = Guid.NewGuid();
+        IReportView view = _engine.Prototypes[name].Clone();
+
         ReportsForm form = new ReportsForm(_engine)
         {
-            Text = _engine.Views[name].GenericTitle
+            Text = view.GenericTitle
         };
 
         form.Load += (sender, e) =>
         {
-            form.InitializeReport(name);
+            form.InitializeReport(view);
         };
 
         _factory.Kill(key);
@@ -805,7 +807,7 @@ internal partial class MainForm : Form
 
     private void OnCheckToolStripMenuItemClick(object sender, EventArgs e)
     {
-        if (!_engine.TryGetReport(ReportEngine.CheckReport, out GdiCheckReport? report))
+        if (!_engine.Find(ReportEngine.CheckReport, out IReportView? view, out GdiCheckReport? report))
         {
             return;
         }
@@ -825,7 +827,7 @@ internal partial class MainForm : Form
             Text = checkToolStripMenuItem.Text
         };
 
-        form.Load += (sender, e) => form.InitializeReport(ReportEngine.CheckReport);
+        form.Load += (sender, e) => form.InitializeReport(view);
 
         _factory.Kill(key);
         _factory.Register(key, form);

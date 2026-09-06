@@ -13,6 +13,7 @@ internal interface IReportView
     object Properties { get; }
     int SortOrder { get; }
 
-    void InitializeReport();
+    void Generate();
     void Navigate(CoreWebView2 coreWebView2);
+    IReportView Clone();
 }
