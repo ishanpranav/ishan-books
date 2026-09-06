@@ -360,6 +360,7 @@ partial class MainForm
         // 
         // checkToolStripMenuItem
         // 
+        checkToolStripMenuItem.Image = VisualStudioImageLibrary.MoneyEditor;
         checkToolStripMenuItem.Name = "checkToolStripMenuItem";
         resources.ApplyResources(checkToolStripMenuItem, "checkToolStripMenuItem");
         checkToolStripMenuItem.Click += OnCheckToolStripMenuItemClick;

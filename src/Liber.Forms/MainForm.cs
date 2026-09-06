@@ -18,7 +18,6 @@ using Liber.Forms.Filters;
 using Liber.Forms.Forms;
 using Liber.Forms.Help;
 using Liber.Forms.Lines;
-using Liber.Forms.LineSources;
 using Liber.Forms.Properties;
 using Liber.Forms.Reports;
 using Liber.Forms.Reports.Gdi;

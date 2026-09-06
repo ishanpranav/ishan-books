@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -45,14 +46,24 @@ internal partial class ReportsForm : Form
     {
         InitializeComponent();
         SystemFeatures.Initialize(this);
+        Dictionary<string, int> imageIndices = new Dictionary<string, int>();
 
         foreach (KeyValuePair<string, IReportView> prototype in engine.Prototypes
             .OrderBy(x => x.Value.SortOrder)
             .ThenBy(x => x.Value.GenericTitle))
-    {
+        {
             ListViewItem item = _listView.Items.Add(prototype.Key, prototype.Value.GenericTitle, imageIndex: 0);
+            string imageKey = prototype.Value.ImageKey;
 
-            item.ImageIndex = _imageList.Images.Count - 1;
+            if (!imageIndices.TryGetValue(imageKey, out int index))
+            {
+                index = _imageList.Images.Count;
+                imageIndices[imageKey] = index;
+
+                _imageList.Images.Add((Bitmap)VisualStudioImageLibrary.ResourceManager.GetObject(imageKey)!);
+            }
+
+            item.ImageIndex = index;
 
             IReportView view = prototype.Value.Clone();
 

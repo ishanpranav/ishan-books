@@ -17,6 +17,9 @@ internal abstract class GdiReport
     [LocalizedDisplayName(nameof(Title))]
     public abstract string Title { get; set; }
 
+    [Browsable(false)]
+    public abstract string ImageKey { get; }
+
     [Editor(typeof(PageSettingsEditor), typeof(UITypeEditor))]
     [LocalizedCategory(nameof(PageSettings))]
     [LocalizedDescription(nameof(PageSettings))]

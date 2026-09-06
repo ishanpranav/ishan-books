@@ -38,7 +38,6 @@ partial class TaskItemsForm
         _listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] { descriptionColumn, priorityColumn });
         _listView.FullRowSelect = true;
         _listView.GridLines = true;
-        _listView.HoverSelection = true;
         _listView.MultiSelect = false;
         _listView.Name = "_listView";
         _listView.SortColumn = 1;

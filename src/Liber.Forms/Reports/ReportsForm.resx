@@ -148,7 +148,7 @@
     <value>212, 17</value>
   </metadata>
   <data name="_imageList.ImageSize" type="System.Drawing.Size, System.Drawing">
-    <value>48, 48</value>
+    <value>24, 24</value>
   </data>
   <data name="_listView.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -362,7 +362,7 @@
     <value>_recentPathManager</value>
   </data>
   <data name="&gt;&gt;_recentPathManager.Type" xml:space="preserve">
-    <value>Liber.Forms.Components.RecentPathManager, Liber.Forms, Culture=neutral, PublicKeyToken=null</value>
+    <value>Liber.Forms.RecentPaths.RecentPathManager, Liber.Forms, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;_timer.Name" xml:space="preserve">
     <value>_timer</value>

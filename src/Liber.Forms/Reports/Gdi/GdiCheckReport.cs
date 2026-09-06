@@ -22,6 +22,14 @@ internal sealed class GdiCheckReport : GdiReport, IDisposable
 
     public override string Title { get; set; } = string.Empty;
 
+    public override string ImageKey
+    {
+        get
+        {
+            return "MoneyEditor";
+        }
+    }
+
     [LocalizedCategory(nameof(Font))]
     [LocalizedDescription(nameof(Font))]
     [LocalizedDisplayName(nameof(Font))]

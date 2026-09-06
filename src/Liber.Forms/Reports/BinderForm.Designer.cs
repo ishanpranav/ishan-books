@@ -32,11 +32,31 @@ partial class BinderForm
     /// </summary>
     private void InitializeComponent()
     {
-        this.components = new System.ComponentModel.Container();
-        this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        this.ClientSize = new System.Drawing.Size(800, 450);
-        this.Text = "BinderForm";
+        listViewEx1 = new System.Windows.Forms.ListViewEx();
+        SuspendLayout();
+        // 
+        // listViewEx1
+        // 
+        listViewEx1.AllowColumnReorder = true;
+        listViewEx1.GridLines = true;
+        listViewEx1.Location = new System.Drawing.Point(12, 12);
+        listViewEx1.Name = "listViewEx1";
+        listViewEx1.Size = new System.Drawing.Size(211, 353);
+        listViewEx1.TabIndex = 0;
+        listViewEx1.UseCompatibleStateImageBehavior = false;
+        // 
+        // BinderForm
+        // 
+        AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+        AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+        ClientSize = new System.Drawing.Size(577, 377);
+        Controls.Add(listViewEx1);
+        Name = "BinderForm";
+        Text = "BinderForm";
+        ResumeLayout(false);
     }
 
     #endregion
+
+    private System.Windows.Forms.ListViewEx listViewEx1;
 }

@@ -10,8 +10,9 @@ internal interface IReportView
 {
     string GenericTitle { get; }
     string Title { get; }
-    object Properties { get; }
+    string ImageKey { get; }
     int SortOrder { get; }
+    object Properties { get; }
 
     void Generate();
     void Navigate(CoreWebView2 coreWebView2);

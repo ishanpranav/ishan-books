@@ -11,7 +11,6 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Liber.Filters;
 
 namespace Liber.Forms.Reports.Html;
 
@@ -30,6 +29,21 @@ public class HtmlReport : IntervalView
     [LocalizedDescription(nameof(Periodicity))]
     [LocalizedDisplayName(nameof(Periodicity))]
     public Periodicity Periodicity { get; set; }
+
+    [Browsable(false)]
+    public string ImageKey
+    {
+        get
+        {
+            switch (Name)
+            {
+                case "pie-chart": return "DoughnutChart";
+                case "time-series": return "FastLineChart";
+            }
+
+            return "GenericChart";
+        }
+    }
 
     private DateTime Start(DateTime current)
     {

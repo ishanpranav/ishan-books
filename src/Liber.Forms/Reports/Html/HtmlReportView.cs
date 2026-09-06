@@ -38,11 +38,11 @@ internal sealed class HtmlReportView : ICloneable, IReportView
         }
     }
 
-    public object Properties
+    public string ImageKey
     {
         get
         {
-            return _report;
+            return _report.ImageKey;
         }
     }
 
@@ -51,6 +51,14 @@ internal sealed class HtmlReportView : ICloneable, IReportView
         get
         {
             return 2;
+        }
+    }
+
+    public object Properties
+    {
+        get
+        {
+            return _report;
         }
     }
 

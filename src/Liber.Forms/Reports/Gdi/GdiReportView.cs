@@ -40,11 +40,11 @@ internal sealed class GdiReportView : ICloneable, IReportView
         }
     }
 
-    public object Properties
+    public string ImageKey
     {
         get
         {
-            return _report;
+            return _report.ImageKey;
         }
     }
 
@@ -53,6 +53,14 @@ internal sealed class GdiReportView : ICloneable, IReportView
         get
         {
             return 3;
+        }
+    }
+
+    public object Properties
+    {
+        get
+        {
+            return _report;
         }
     }
 
