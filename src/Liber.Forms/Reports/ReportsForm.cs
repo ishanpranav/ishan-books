@@ -46,16 +46,19 @@ internal partial class ReportsForm : Form
         InitializeComponent();
         SystemFeatures.Initialize(this);
 
-        foreach (KeyValuePair<string, IReportView> view in engine.Views
+        foreach (KeyValuePair<string, IReportView> prototype in engine.Prototypes
             .OrderBy(x => x.Value.SortOrder)
             .ThenBy(x => x.Value.GenericTitle))
-        {
-            ListViewItem item = _listView.Items.Add(view.Key, view.Value.GenericTitle, imageIndex: 0);
+    {
+            ListViewItem item = _listView.Items.Add(prototype.Key, prototype.Value.GenericTitle, imageIndex: 0);
 
             item.ImageIndex = _imageList.Images.Count - 1;
-            item.Tag = view.Value;
 
-            if (view.Value.Properties is IntervalView report)
+            IReportView view = prototype.Value.Clone();
+
+            item.Tag = view;
+
+            if (view.Properties is IntervalView report)
             {
                 report.Accounts = new AccountsView(engine.Company);
             }
@@ -63,8 +66,7 @@ internal partial class ReportsForm : Form
 
         _engine = engine;
 
-        if (engine.Views.TryGetValue(ReportEngine.AccountMapReport, out IReportView? favoriteView) &&
-            favoriteView.Properties is IntervalView favoriteReport)
+        if (engine.Find(ReportEngine.AccountMapReport, out IReportView? favoriteView, out IntervalView? favoriteReport))
         {
             View = favoriteView;
 
@@ -104,9 +106,9 @@ internal partial class ReportsForm : Form
         }
     }
 
-    public void InitializeReport(string key)
+    public void InitializeReport(IReportView view)
     {
-        View = (IReportView)_listView.Items[key]!.Tag!;
+        View = view;
 
         InitializeReport();
     }
@@ -150,7 +152,7 @@ internal partial class ReportsForm : Form
             return;
         }
 
-        _view.InitializeReport();
+        _view.Generate();
     }
 
     private void OnBackgroundWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
