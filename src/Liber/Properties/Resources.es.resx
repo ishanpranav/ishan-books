@@ -165,4 +165,7 @@
   <data name="Memo" xml:space="preserve">
     <value>Concepto</value>
   </data>
+  <data name="Posted" xml:space="preserve">
+    <value>Fecha</value>
+  </data>
 </root>
