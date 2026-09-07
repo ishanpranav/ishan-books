@@ -60,7 +60,7 @@ internal sealed class GdiReportView : ICloneable, IReportView
         }
     }
 
-    public object Properties
+    public IReport Properties
     {
         get
         {

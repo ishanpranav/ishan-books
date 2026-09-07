@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Text.Json.Serialization;
 using Liber.Forms.Lines;
 
 namespace Liber.Forms.Reports.Gdi;
@@ -15,13 +16,17 @@ internal sealed class GdiCheckReport : GdiReport, IDisposable
     private Font? _font = new Font("Courier New", 10, FontStyle.Regular, GraphicsUnit.Point);
     private SolidBrush? _brush = new SolidBrush(Color.Black);
 
-    public GdiCheckReport(Company company)
+    public GdiCheckReport(string path, Company company)
     {
         Check = new CheckView(company);
+        Path = path;
     }
+
+    public string Path { get; set; }
 
     public override string Title { get; set; } = string.Empty;
 
+    [JsonIgnore]
     public override string ImageKey
     {
         get
@@ -74,6 +79,7 @@ internal sealed class GdiCheckReport : GdiReport, IDisposable
         }
     }
 
+    [JsonIgnore]
     [LocalizedCategory(nameof(Check))]
     [LocalizedDescription(nameof(Check))]
     [LocalizedDisplayName(nameof(Check))]
@@ -203,5 +209,10 @@ internal sealed class GdiCheckReport : GdiReport, IDisposable
     {
         Dispose(disposing: true);
         GC.SuppressFinalize(this);
+    }
+
+    public override IReportView CreateView(Company company)
+    {
+        return new GdiReportView(company, Path);
     }
 }

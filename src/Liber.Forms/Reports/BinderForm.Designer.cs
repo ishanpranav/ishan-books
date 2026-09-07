@@ -58,6 +58,8 @@ partial class BinderForm
         toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
         saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+        printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
         addToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
         toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
@@ -72,7 +74,11 @@ partial class BinderForm
         newToolStripButton = new System.Windows.Forms.ToolStripButton();
         openToolStripButton = new System.Windows.Forms.ToolStripButton();
         saveToolStripButton = new System.Windows.Forms.ToolStripButton();
+        saveAsToolStripButton = new System.Windows.Forms.ToolStripButton();
         toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+        printToolStripButton = new System.Windows.Forms.ToolStripButton();
+        addToolStripButton = new System.Windows.Forms.ToolStripButton();
+        toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
         toolStripButton2 = new System.Windows.Forms.ToolStripButton();
         toolStripButton3 = new System.Windows.Forms.ToolStripButton();
         toolStripButton4 = new System.Windows.Forms.ToolStripButton();
@@ -80,8 +86,8 @@ partial class BinderForm
         toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
         toolStripButton6 = new System.Windows.Forms.ToolStripButton();
         toolStripButton7 = new System.Windows.Forms.ToolStripButton();
-        addToolStripButton = new System.Windows.Forms.ToolStripButton();
-        toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+        _openFileDialog = new System.Windows.Forms.OpenFileDialog();
+        _saveFileDialog = new System.Windows.Forms.SaveFileDialog();
         _customReportContextMenu.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
         splitContainer1.Panel1.SuspendLayout();
@@ -228,7 +234,7 @@ partial class BinderForm
         // toolStripDropDownButton2
         // 
         toolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-        toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripMenuItem, openToolStripMenuItem, toolStripSeparator, saveToolStripMenuItem, saveAsToolStripMenuItem });
+        toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripMenuItem, openToolStripMenuItem, toolStripSeparator, saveToolStripMenuItem, saveAsToolStripMenuItem, toolStripSeparator9, printToolStripMenuItem });
         resources.ApplyResources(toolStripDropDownButton2, "toolStripDropDownButton2");
         toolStripDropDownButton2.Name = "toolStripDropDownButton2";
         // 
@@ -237,12 +243,14 @@ partial class BinderForm
         newToolStripMenuItem.Image = VisualStudioImageLibrary.AddDocument;
         resources.ApplyResources(newToolStripMenuItem, "newToolStripMenuItem");
         newToolStripMenuItem.Name = "newToolStripMenuItem";
+        newToolStripMenuItem.Click += OnNewToolStripMenuItemClick;
         // 
         // openToolStripMenuItem
         // 
         openToolStripMenuItem.Image = VisualStudioImageLibrary.OpenFile;
         resources.ApplyResources(openToolStripMenuItem, "openToolStripMenuItem");
         openToolStripMenuItem.Name = "openToolStripMenuItem";
+        openToolStripMenuItem.Click += OnOpenToolStripMenuItemClick;
         // 
         // toolStripSeparator
         // 
@@ -254,12 +262,26 @@ partial class BinderForm
         saveToolStripMenuItem.Image = VisualStudioImageLibrary.Save;
         resources.ApplyResources(saveToolStripMenuItem, "saveToolStripMenuItem");
         saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+        saveToolStripMenuItem.Click += OnSaveToolStripMenuItemClick;
         // 
         // saveAsToolStripMenuItem
         // 
         saveAsToolStripMenuItem.Image = VisualStudioImageLibrary.SaveAs;
         saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
         resources.ApplyResources(saveAsToolStripMenuItem, "saveAsToolStripMenuItem");
+        saveAsToolStripMenuItem.Click += OnSaveAsToolStripMenuItemClick;
+        // 
+        // toolStripSeparator9
+        // 
+        toolStripSeparator9.Name = "toolStripSeparator9";
+        resources.ApplyResources(toolStripSeparator9, "toolStripSeparator9");
+        // 
+        // printToolStripMenuItem
+        // 
+        printToolStripMenuItem.Image = VisualStudioImageLibrary.Print;
+        printToolStripMenuItem.Name = "printToolStripMenuItem";
+        resources.ApplyResources(printToolStripMenuItem, "printToolStripMenuItem");
+        printToolStripMenuItem.Click += OnPrintToolStripMenuItemClick;
         // 
         // toolStripDropDownButton1
         // 
@@ -329,7 +351,7 @@ partial class BinderForm
         // 
         // toolStrip1
         // 
-        toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripButton, openToolStripButton, saveToolStripButton, toolStripSeparator6, addToolStripButton, toolStripSeparator7, toolStripButton2, toolStripButton3, toolStripButton4, toolStripButton5, toolStripSeparator8, toolStripButton6, toolStripButton7 });
+        toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripButton, openToolStripButton, saveToolStripButton, saveAsToolStripButton, toolStripSeparator6, printToolStripButton, addToolStripButton, toolStripSeparator7, toolStripButton2, toolStripButton3, toolStripButton4, toolStripButton5, toolStripSeparator8, toolStripButton6, toolStripButton7 });
         resources.ApplyResources(toolStrip1, "toolStrip1");
         toolStrip1.Name = "toolStrip1";
         // 
@@ -339,6 +361,7 @@ partial class BinderForm
         newToolStripButton.Image = VisualStudioImageLibrary.AddDocument;
         resources.ApplyResources(newToolStripButton, "newToolStripButton");
         newToolStripButton.Name = "newToolStripButton";
+        newToolStripButton.Click += OnNewToolStripMenuItemClick;
         // 
         // openToolStripButton
         // 
@@ -346,6 +369,7 @@ partial class BinderForm
         openToolStripButton.Image = VisualStudioImageLibrary.OpenFile;
         resources.ApplyResources(openToolStripButton, "openToolStripButton");
         openToolStripButton.Name = "openToolStripButton";
+        openToolStripButton.Click += OnOpenToolStripMenuItemClick;
         // 
         // saveToolStripButton
         // 
@@ -353,11 +377,41 @@ partial class BinderForm
         saveToolStripButton.Image = VisualStudioImageLibrary.Save;
         resources.ApplyResources(saveToolStripButton, "saveToolStripButton");
         saveToolStripButton.Name = "saveToolStripButton";
+        saveToolStripButton.Click += OnSaveToolStripMenuItemClick;
+        // 
+        // saveAsToolStripButton
+        // 
+        saveAsToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+        saveAsToolStripButton.Image = VisualStudioImageLibrary.SaveAs;
+        resources.ApplyResources(saveAsToolStripButton, "saveAsToolStripButton");
+        saveAsToolStripButton.Name = "saveAsToolStripButton";
+        saveAsToolStripButton.Click += OnSaveAsToolStripMenuItemClick;
         // 
         // toolStripSeparator6
         // 
         toolStripSeparator6.Name = "toolStripSeparator6";
         resources.ApplyResources(toolStripSeparator6, "toolStripSeparator6");
+        // 
+        // printToolStripButton
+        // 
+        printToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+        printToolStripButton.Image = VisualStudioImageLibrary.Print;
+        resources.ApplyResources(printToolStripButton, "printToolStripButton");
+        printToolStripButton.Name = "printToolStripButton";
+        printToolStripButton.Click += OnPrintToolStripMenuItemClick;
+        // 
+        // addToolStripButton
+        // 
+        addToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+        addToolStripButton.Image = VisualStudioImageLibrary.New;
+        resources.ApplyResources(addToolStripButton, "addToolStripButton");
+        addToolStripButton.Name = "addToolStripButton";
+        addToolStripButton.Click += OnAddToolStripMenuItemClick;
+        // 
+        // toolStripSeparator7
+        // 
+        toolStripSeparator7.Name = "toolStripSeparator7";
+        resources.ApplyResources(toolStripSeparator7, "toolStripSeparator7");
         // 
         // toolStripButton2
         // 
@@ -389,7 +443,7 @@ partial class BinderForm
         toolStripButton5.Image = VisualStudioImageLibrary.Remove;
         toolStripButton5.Name = "toolStripButton5";
         resources.ApplyResources(toolStripButton5, "toolStripButton5");
-        toolStripButton5.CommandCanExecuteChanged += OnRemoveToolStripMenuItemClick;
+        toolStripButton5.Click += OnRemoveToolStripMenuItemClick;
         // 
         // toolStripSeparator8
         // 
@@ -412,18 +466,18 @@ partial class BinderForm
         resources.ApplyResources(toolStripButton7, "toolStripButton7");
         toolStripButton7.Click += OnMoveDownButtonClick;
         // 
-        // addToolStripButton
+        // _openFileDialog
         // 
-        addToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-        addToolStripButton.Image = VisualStudioImageLibrary.New;
-        resources.ApplyResources(addToolStripButton, "addToolStripButton");
-        addToolStripButton.Name = "addToolStripButton";
-        addToolStripButton.Click += OnAddToolStripMenuItemClick;
+        _openFileDialog.DefaultExt = "shbk";
+        resources.ApplyResources(_openFileDialog, "_openFileDialog");
+        _openFileDialog.RestoreDirectory = true;
+        _openFileDialog.Tag = "";
         // 
-        // toolStripSeparator7
+        // _saveFileDialog
         // 
-        toolStripSeparator7.Name = "toolStripSeparator7";
-        resources.ApplyResources(toolStripSeparator7, "toolStripSeparator7");
+        _saveFileDialog.DefaultExt = "shbk";
+        resources.ApplyResources(_saveFileDialog, "_saveFileDialog");
+        _saveFileDialog.RestoreDirectory = true;
         // 
         // BinderForm
         // 
@@ -497,4 +551,10 @@ partial class BinderForm
     private System.Windows.Forms.ToolStripButton toolStripButton3;
     private System.Windows.Forms.ToolStripButton addToolStripButton;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+    private System.Windows.Forms.OpenFileDialog _openFileDialog;
+    private System.Windows.Forms.SaveFileDialog _saveFileDialog;
+    private System.Windows.Forms.ToolStripButton printToolStripButton;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+    private System.Windows.Forms.ToolStripMenuItem printToolStripMenuItem;
+    private System.Windows.Forms.ToolStripButton saveAsToolStripButton;
 }
