@@ -25,7 +25,7 @@ internal sealed class XslReportView : ICloneable, IReportView
 
     public XslReportView(Company company, string path)
     {
-        _report = new XslReport(Path.GetFileNameWithoutExtension(path), company);
+        _report = new XslReport(path, company);
         _company = company;
         _path = path;
     }
@@ -66,7 +66,7 @@ internal sealed class XslReportView : ICloneable, IReportView
         }
     }
 
-    public object Properties
+    public IReport Properties
     {
         get
         {

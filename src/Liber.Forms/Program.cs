@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Liber.Forms.Accounts;
 using Liber.Forms.Help;
@@ -57,5 +58,25 @@ internal static class Program
         {
             AccountImageListManager.ImageList.Dispose();
         }
+    }
+
+    public static async Task AbortRetryIgnoreAsync(Func<Task> action)
+    {
+        DialogResult result;
+
+        do
+        {
+            try
+            {
+                await action();
+
+                result = DialogResult.OK;
+            }
+            catch (Exception exception)
+            {
+                result = MessageBox.Show(exception.Message, Resources.ExceptionCaption, MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error);
+            }
+        }
+        while (result == DialogResult.Retry);
     }
 }

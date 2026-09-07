@@ -513,7 +513,7 @@ internal partial class MainForm : Form
 
     private async Task ImportAsync(string path)
     {
-        await AbortRetryIgnoreAsync(async () =>
+        await Program.AbortRetryIgnoreAsync(async () =>
         {
             bool canSave = true;
 
@@ -561,27 +561,6 @@ internal partial class MainForm : Form
         _path = path;
     }
 
-    private static async Task AbortRetryIgnoreAsync(Func<Task> action)
-    {
-        DialogResult result;
-
-        do
-        {
-            try
-            {
-                await action();
-
-                result = DialogResult.OK;
-            }
-            catch (Exception exception)
-            {
-                result = MessageBox.Show(exception.Message, Resources.ExceptionCaption, MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error);
-            }
-        }
-        while (result == DialogResult.Retry);
-
-    }
-
     private async Task ExportAsync(string path, Company company)
     {
         SavingForm form = new SavingForm();
@@ -589,7 +568,7 @@ internal partial class MainForm : Form
 
         form.Show();
 
-        await AbortRetryIgnoreAsync(async () =>
+        await Program.AbortRetryIgnoreAsync(async () =>
         {
             string extension = Path.GetExtension(path);
 
@@ -726,7 +705,7 @@ internal partial class MainForm : Form
 
         form.Show();
 
-        await AbortRetryIgnoreAsync(async () =>
+        await Program.AbortRetryIgnoreAsync(async () =>
         {
             using PdfDocument document = new PdfDocument();
 
@@ -780,7 +759,7 @@ internal partial class MainForm : Form
             return;
         }
 
-        await AbortRetryIgnoreAsync(async () =>
+        await Program.AbortRetryIgnoreAsync(async () =>
         {
             await using FileStream input = File.OpenRead(path);
 
@@ -797,7 +776,7 @@ internal partial class MainForm : Form
             return;
         }
 
-        await AbortRetryIgnoreAsync(async () =>
+        await Program.AbortRetryIgnoreAsync(async () =>
         {
             await using FileStream input = File.OpenRead(path);
 
@@ -816,7 +795,7 @@ internal partial class MainForm : Form
             return;
         }
 
-        await AbortRetryIgnoreAsync(async () =>
+        await Program.AbortRetryIgnoreAsync(async () =>
         {
             await using FileStream output = File.Create(path);
 

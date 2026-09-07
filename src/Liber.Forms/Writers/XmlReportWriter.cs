@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using System.Xml;
 using Liber.Forms.Reports.Xsl;
 using Liber.Writers;
-using Microsoft.VisualBasic;
 
 namespace Liber.Forms.Writers;
 
@@ -18,7 +17,7 @@ internal sealed class XmlReportWriter : IWriter
     {
         XmlWriter writer = XmlWriter.Create(output, XmlReportSerializer.Settings);
 
-        XmlReportSerializer.Serializer.Serialize(writer, new XslReport(company.DisplayName, company)
+        XmlReportSerializer.Serializer.Serialize(writer, new XslReport($"{company.DisplayName}.xml", company)
         {
             Started = DateTime.UnixEpoch,
             Posted = DateTime.Today

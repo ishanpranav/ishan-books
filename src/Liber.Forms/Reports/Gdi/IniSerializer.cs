@@ -21,7 +21,7 @@ internal sealed class IniSerializer
             StringSplitOptions.TrimEntries |
             StringSplitOptions.RemoveEmptyEntries;
 
-        GdiCheckReport result = new GdiCheckReport(company);
+        GdiCheckReport result = new GdiCheckReport(path, company);
         IniDataParser baseParser = new IniDataParser(new IniParserConfiguration()
         {
             AllowDuplicateKeys = true,

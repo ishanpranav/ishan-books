@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing.Design;
+using System.Text.Json.Serialization;
 using Liber.Filters;
 using Liber.Forms.Accounts;
 using Liber.Forms.Filters;
@@ -17,14 +18,42 @@ public abstract class IntervalView : IStandardValuesProvider
     private DateTime _started;
     private DateTime _posted;
 
+    protected IntervalView(string path, Company company)
+    {
+        Path = path;
+        Company = company;
+        Accounts = new AccountsView(Company);
+        Title = FormattedStrings.GetTitle(Name, Company.Type);
+        Started = Company.Started;
+        Posted = Company.Posted;
+        company.NameChanged += OnCompanyChanged;
+        company.TypeChanged += OnCompanyChanged;
+        company.ReportingChanged += (sender, e) =>
+        {
+            Started = Company.Started;
+            Posted = Company.Posted;
+        };
+    }
+
     [Browsable(false)]
-    public string Name { get; set; }
+    public string Path { get; set; }
+
+    [Browsable(false)]
+    [JsonIgnore]
+    public string Name
+    {
+        get
+        {
+            return System.IO.Path.GetFileNameWithoutExtension(Path);
+        }
+    }
 
     /// <summary>
     /// Gets or sets the <see cref="Company"/> associated with the report.
     /// </summary>
     /// <value>The company associated with the report.</value>
     [Browsable(false)]
+    [JsonIgnore]
     public Company Company { get; set; }
 
     [LocalizedCategory(nameof(Title))]
@@ -40,12 +69,14 @@ public abstract class IntervalView : IStandardValuesProvider
     [TypeConverter(typeof(LocalizedEnumConverter<ReportLevel>))]
     public ReportLevel Level { get; set; } = ReportLevel.ByAccount;
 
+    [JsonIgnore]
     [LocalizedCategory(nameof(Accounts))]
     [LocalizedDescription(nameof(Accounts))]
     [LocalizedDisplayName(nameof(Accounts))]
     public AccountsView Accounts { get; set; }
 
     [Editor(typeof(FilterEditor), typeof(UITypeEditor))]
+    [JsonIgnore]
     [LocalizedCategory(nameof(Filter))]
     [LocalizedDescription(nameof(Filter))]
     [LocalizedDisplayName(nameof(Filter))]
@@ -89,23 +120,6 @@ public abstract class IntervalView : IStandardValuesProvider
 
             _posted = value.Date;
         }
-    }
-
-    protected IntervalView(string name, Company company)
-    {
-        Name = name;
-        Company = company;
-        Accounts = new AccountsView(Company);
-        Title = FormattedStrings.GetTitle(Name, Company.Type);
-        Started = Company.Started;
-        Posted = Company.Posted;
-        company.NameChanged += OnCompanyChanged;
-        company.TypeChanged += OnCompanyChanged;
-        company.ReportingChanged += (sender, e) =>
-        {
-            Started = Company.Started;
-            Posted = Company.Posted;
-        };
     }
 
     private void OnCompanyChanged(object? sender, EventArgs e)

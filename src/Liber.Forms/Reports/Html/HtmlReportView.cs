@@ -17,7 +17,7 @@ internal sealed class HtmlReportView : ICloneable, IReportView
 
     public HtmlReportView(Company company, string path)
     {
-        _report = new HtmlReport(Path.GetFileNameWithoutExtension(path), company);
+        _report = new HtmlReport(path, company);
         _company = company;
         _path = path;
     }
@@ -58,7 +58,7 @@ internal sealed class HtmlReportView : ICloneable, IReportView
         }
     }
 
-    public object Properties
+    public IReport Properties
     {
         get
         {

@@ -12,7 +12,7 @@ internal interface IReportView
     string Title { get; set; }
     string ImageKey { get; }
     int SortOrder { get; }
-    object Properties { get; }
+    IReport Properties { get; }
 
     void Generate();
     void Navigate(CoreWebView2 coreWebView2);

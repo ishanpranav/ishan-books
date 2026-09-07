@@ -15,6 +15,7 @@ public static class SerializationOptions
         DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
         PropertyNameCaseInsensitive = true,
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        ReferenceHandler = ReferenceHandler.IgnoreCycles,
         WriteIndented = true
     };
 
