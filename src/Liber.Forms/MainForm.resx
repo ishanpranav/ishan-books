@@ -421,10 +421,16 @@
     <value>&amp;View</value>
   </data>
   <data name="otherReportsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 22</value>
+    <value>154, 22</value>
   </data>
   <data name="otherReportsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Other Reports</value>
+  </data>
+  <data name="binderToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>154, 22</value>
+  </data>
+  <data name="binderToolStripMenuItem.Text" xml:space="preserve">
+    <value>Custom Report</value>
   </data>
   <data name="reportsToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 20</value>
@@ -433,25 +439,25 @@
     <value>&amp;Reports</value>
   </data>
   <data name="closeAllToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="closeAllToolStripMenuItem.Text" xml:space="preserve">
     <value>Close All</value>
   </data>
   <data name="formsToolStripSeparator.Size" type="System.Drawing.Size, System.Drawing">
-    <value>164, 6</value>
+    <value>177, 6</value>
   </data>
   <data name="formsToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="formsToolStripMenuItem1.Text" xml:space="preserve">
     <value>Windows</value>
   </data>
   <data name="formsToolStripMenUtem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="formsToolStripMenUtem.Text" xml:space="preserve">
-    <value>Manage windows</value>
+    <value>Manage Windows</value>
   </data>
   <data name="formToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>63, 20</value>
@@ -3723,6 +3729,12 @@
     <value>otherReportsToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;otherReportsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;binderToolStripMenuItem.Name" xml:space="preserve">
+    <value>binderToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;binderToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;formToolStripMenuItem.Name" xml:space="preserve">

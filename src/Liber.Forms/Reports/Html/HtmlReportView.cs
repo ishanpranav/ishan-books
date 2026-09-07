@@ -36,6 +36,10 @@ internal sealed class HtmlReportView : ICloneable, IReportView
         {
             return _report.Title;
         }
+        set
+        {
+            _report.Title = value;
+        }
     }
 
     public string ImageKey

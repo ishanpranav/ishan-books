@@ -173,9 +173,11 @@ internal partial class MainForm : Form
         }
 
         Dictionary<string, ToolStripMenuItem> groups = new Dictionary<string, ToolStripMenuItem>();
-        Dictionary<(int SortOrder, string Key), List<(string Name, string GenericTitle)>> pending = new Dictionary<(int, string), List<(string, string)>>();
+        Dictionary<(int SortOrder, string Key), List<string>> pending = new Dictionary<(int, string), List<string>>();
 
-        foreach (KeyValuePair<string, IReportView> view in _engine.Prototypes)
+        foreach (KeyValuePair<string, IReportView> view in _engine.Prototypes
+            .OrderBy(x => x.Value.SortOrder)
+            .ThenBy(x => x.Value.GenericTitle))
         {
             string genericTitle = view.Value.GenericTitle;
             string baseTitle;
@@ -193,16 +195,16 @@ internal partial class MainForm : Form
 
             int type = view.Value.SortOrder;
 
-            if (!pending.TryGetValue((type, baseTitle), out List<(string, string)>? items))
+            if (!pending.TryGetValue((type, baseTitle), out List<string>? items))
             {
-                items = new List<(string, string)>();
+                items = new List<string>();
                 pending[(type, baseTitle)] = items;
             }
 
-            items.Add((view.Key, genericTitle));
+            items.Add(view.Key);
         }
 
-        List<IGrouping<int, KeyValuePair<(int, string), List<(string, string)>>>> typeGroups = pending
+        List<IGrouping<int, KeyValuePair<(int, string), List<string>>>> typeGroups = pending
             .GroupBy(x => x.Key.SortOrder)
             .OrderBy(x => x.Key)
             .ToList();
@@ -213,30 +215,42 @@ internal partial class MainForm : Form
                 ? reportsToolStripMenuItem1
                 : otherReportsToolStripMenuItem;
 
-            foreach (KeyValuePair<(int, string Key), List<(string Name, string GenericTitle)>> group in typeGroups[i])
+            int j = 0;
+
+            foreach (KeyValuePair<(int, string Key), List<string>> group in typeGroups[i])
             {
                 if (group.Value.Count == 1)
                 {
-                    ToolStripMenuItem item = new ToolStripMenuItem(group.Value[0].GenericTitle)
+                    string name = group.Value[0];
+                    IReportView prototype = _engine.Prototypes[name];
+                    ToolStripMenuItem item = new ToolStripMenuItem(prototype.GenericTitle)
                     {
-                        Tag = group.Value[0].Name
+                        Tag = name,
+                        Image = ReportImageListManager.ImageList.Images[ReportImageListManager.GetImageIndex(prototype)]
                     };
 
                     item.Click += OnReportToolStripMenuItemClick;
-                    grandparent.DropDownItems.Add(item);
+
+                    grandparent.DropDownItems.Insert(j, item);
+
+                    j++;
 
                     continue;
                 }
 
                 ToolStripMenuItem parent = new ToolStripMenuItem(group.Key.Key);
 
-                grandparent.DropDownItems.Add(parent);
+                grandparent.DropDownItems.Insert(j, parent);
 
-                foreach ((string key, string fullTitle) in group.Value.OrderBy(x => x.GenericTitle))
+                j++;
+
+                foreach (string name in group.Value.OrderBy(x => _engine.Prototypes[x].GenericTitle))
                 {
-                    ToolStripMenuItem child = new ToolStripMenuItem(fullTitle)
+                    IReportView prototype = _engine.Prototypes[name];
+                    ToolStripMenuItem child = new ToolStripMenuItem(prototype.Title)
                     {
-                        Tag = key
+                        Tag = name,
+                        Image = ReportImageListManager.ImageList.Images[ReportImageListManager.GetImageIndex(prototype)]
                     };
 
                     child.Click += OnReportToolStripMenuItemClick;
@@ -244,14 +258,13 @@ internal partial class MainForm : Form
                 }
             }
 
-            if (i < typeGroups.Count - 1)
+            if (i == 0)
             {
-                grandparent.DropDownItems.Add(new ToolStripSeparator());
+                grandparent.DropDownItems.Insert(j, new ToolStripSeparator());
+
+                j++;
             }
         }
-
-        reportsToolStripMenuItem1.DropDownItems.Add(otherReportsToolStripMenuItem);
-        reportsToolStripMenuItem1.DropDownItems.RemoveAt(0);
     }
 
     private void OnReportToolStripMenuItemClick(object? sender, EventArgs e)
@@ -272,6 +285,13 @@ internal partial class MainForm : Form
 
         _factory.Kill(key);
         _factory.Register(key, form);
+    }
+
+    private void OnBinderToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        BinderForm form = new BinderForm(_engine);
+
+        _factory.Register(Guid.NewGuid(), form);
     }
 
     private async void OnFormClosing(object sender, FormClosingEventArgs e)

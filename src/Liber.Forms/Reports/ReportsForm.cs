@@ -3,9 +3,7 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -46,34 +44,7 @@ internal partial class ReportsForm : Form
     {
         InitializeComponent();
         SystemFeatures.Initialize(this);
-        Dictionary<string, int> imageIndices = new Dictionary<string, int>();
-
-        foreach (KeyValuePair<string, IReportView> prototype in engine.Prototypes
-            .OrderBy(x => x.Value.SortOrder)
-            .ThenBy(x => x.Value.GenericTitle))
-        {
-            ListViewItem item = _listView.Items.Add(prototype.Key, prototype.Value.GenericTitle, imageIndex: 0);
-            string imageKey = prototype.Value.ImageKey;
-
-            if (!imageIndices.TryGetValue(imageKey, out int index))
-            {
-                index = _imageList.Images.Count;
-                imageIndices[imageKey] = index;
-
-                _imageList.Images.Add((Bitmap)VisualStudioImageLibrary.ResourceManager.GetObject(imageKey)!);
-            }
-
-            item.ImageIndex = index;
-
-            IReportView view = prototype.Value.Clone();
-
-            item.Tag = view;
-
-            if (view.Properties is IntervalView report)
-            {
-                report.Accounts = new AccountsView(engine.Company);
-            }
-        }
+        _listView.Initialize(engine);
 
         _engine = engine;
 
@@ -105,11 +76,11 @@ internal partial class ReportsForm : Form
         }
         catch (COMException) { }
 
-        InitializeReport();
+        GenerateReport();
         _timer.Start();
     }
 
-    private void InitializeReport()
+    private void GenerateReport()
     {
         if (View != null && !_backgroundWorker.IsBusy)
         {
@@ -121,21 +92,21 @@ internal partial class ReportsForm : Form
     {
         View = view;
 
-        InitializeReport();
+        GenerateReport();
     }
 
     private void OnListViewItemActivate(object sender, EventArgs e)
     {
-        if (_listView.SelectedItems.Count == 0)
+        if (!_listView.TryGetSelection(out IReportView? view))
         {
             return;
         }
 
         _timer.Stop();
 
-        View = (IReportView)_listView.SelectedItems[0].Tag!;
+        View = view;
 
-        if (View.Properties is GdiCheckReport checkReport && checkReport.Check.Value == null)
+        if (view.Properties is GdiCheckReport checkReport && checkReport.Check.Value == null)
         {
             using CheckDialog checkForm = new CheckDialog(checkReport.Check);
 
@@ -145,13 +116,13 @@ internal partial class ReportsForm : Form
             }
         }
 
-        InitializeReport();
+        GenerateReport();
     }
 
     private void OnPropertyGridPropertyValueChanged(object sender, PropertyValueChangedEventArgs e)
     {
         _timer.Stop();
-        InitializeReport();
+        GenerateReport();
     }
 
     private void OnBackgroundWorkerDoWork(object sender, DoWorkEventArgs e)
@@ -202,7 +173,7 @@ internal partial class ReportsForm : Form
         }
 
         RefreshFavorite(report);
-        InitializeReport();
+        GenerateReport();
     }
 
     protected override void Dispose(bool disposing)

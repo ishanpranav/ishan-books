@@ -38,6 +38,10 @@ internal sealed class GdiReportView : ICloneable, IReportView
         {
             return _report.Title;
         }
+        set
+        {
+            _report.Title = value;
+        }
     }
 
     public string ImageKey
