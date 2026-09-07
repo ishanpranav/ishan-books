@@ -65,4 +65,12 @@ internal class ListViewEx : ListView
         AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
         AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
     }
+
+    public void SelectAll()
+    {
+        foreach (ListViewItem item in Items)
+        {
+            item.Selected = true;
+        }
+    }
 }

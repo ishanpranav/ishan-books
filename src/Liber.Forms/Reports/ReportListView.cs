@@ -2,12 +2,11 @@
 // Copyright (c) 2023-2026 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Windows.Forms;
-using Humanizer;
 using Liber.Forms.Accounts;
 
 namespace Liber.Forms.Reports;
@@ -25,50 +24,24 @@ internal class ReportListView : ListViewEx
 
     public ReportListView()
     {
-        View = View.Details;
         FullRowSelect = true;
-        SmallImageList = AccountImageListManager.ImageList;
+        LargeImageList = ReportImageListManager.ImageList;
+        SmallImageList = ReportImageListManager.ImageList;
 
-        ColumnHeader nameColumn = Columns.Add(Liber.Properties.Resources.Name);
-        ColumnHeader numberColumn = Columns.Add(Liber.Properties.Resources.Number);
-
-        numberColumn.DisplayIndex = 0;
-        nameColumn.DisplayIndex = 1;
-
-        foreach (AccountType type in AccountTypeExtensions.GetSortedValues())
-        {
-            Groups.Add(type.ToString(), type.Humanize());
-        }
+        Columns.Add(Liber.Properties.Resources.Name);
     }
 
-    public void Initialize(Company company, IReadOnlySet<Account> checkedAccounts, Func<Account, bool>? validator)
+    public void Initialize(ReportEngine engine)
     {
         BeginUpdate();
 
         try
         {
-            foreach (Account account in company.Accounts)
+            foreach (KeyValuePair<string, IReportView> prototype in engine.Prototypes
+                .OrderBy(x => x.Value.SortOrder)
+                .ThenBy(x => x.Value.GenericTitle))
             {
-                if (validator != null && !validator(account))
-                {
-                    continue;
-                }
-
-                ListViewItem item = Items.Add(
-                    account.Id.ToString(),
-                    account.Name,
-                    AccountImageListManager.GetImageIndex(company.GetColorOrDefault(account)));
-                AccountType type = account.Type;
-                string key = type.ToString();
-
-                item.Tag = account;
-                item.Group = Groups[key];
-                item.SubItems.Add(account.Number.ToStringOrEmpty());
-
-                if (checkedAccounts.Contains(account))
-                {
-                    item.Checked = true;
-                }
+                InsertReport(Items.Count, engine, prototype.Key, prototype.Value);
             }
 
             AutoResizeColumns();
@@ -80,43 +53,31 @@ internal class ReportListView : ListViewEx
         }
     }
 
-    public Guid GetSelectedAccountId()
+    public void InsertReport(int index, ReportEngine engine, string key, IReportView prototype)
     {
-        if (SelectedItems.Count < 1)
+        IReportView view = prototype.Clone();
+
+        ListViewItem item = Items.Insert(index, key, view.GenericTitle, ReportImageListManager.GetImageIndex(view));
+
+        item.Tag = view;
+
+        if (view.Properties is IntervalView report)
         {
-            return Guid.Empty;
+            report.Accounts = new AccountsView(engine.Company);
         }
-
-        object? tag = SelectedItems[0].Tag;
-
-        if (tag == null)
-        {
-            return Guid.Empty;
-        }
-
-        return ((Account)tag).Id;
     }
 
-    public IReadOnlySet<Account> GetCheckedAccounts()
+    public bool TryGetSelection([NotNullWhen(true)] out IReportView? value)
     {
-        HashSet<Account> accounts = new HashSet<Account>();
-
-        foreach (ListViewItem item in CheckedItems)
+        if (SelectedItems.Count == 0)
         {
-            if (item.Tag != null)
-            {
-                accounts.Add(((Account)item.Tag));
-            }
+            value = null;
+
+            return false;
         }
 
-        return accounts;
-    }
+        value = (IReportView)SelectedItems[0].Tag!;
 
-    public void AddNullAccount()
-    {
-        ListViewItem nullAccount = Items.Add(Properties.Resources.NoAccount);
-
-        nullAccount.Tag = null;
-        nullAccount.Selected = true;
+        return true;
     }
 }

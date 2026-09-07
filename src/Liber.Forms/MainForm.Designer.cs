@@ -87,6 +87,7 @@ partial class MainForm
         splashScreenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         reportsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
         otherReportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        binderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         formToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         closeAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         formsToolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
@@ -440,7 +441,7 @@ partial class MainForm
         // 
         // reportsToolStripMenuItem1
         // 
-        reportsToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { otherReportsToolStripMenuItem });
+        reportsToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { otherReportsToolStripMenuItem, binderToolStripMenuItem });
         reportsToolStripMenuItem1.Name = "reportsToolStripMenuItem1";
         resources.ApplyResources(reportsToolStripMenuItem1, "reportsToolStripMenuItem1");
         // 
@@ -448,6 +449,12 @@ partial class MainForm
         // 
         otherReportsToolStripMenuItem.Name = "otherReportsToolStripMenuItem";
         resources.ApplyResources(otherReportsToolStripMenuItem, "otherReportsToolStripMenuItem");
+        // 
+        // binderToolStripMenuItem
+        // 
+        binderToolStripMenuItem.Name = "binderToolStripMenuItem";
+        resources.ApplyResources(binderToolStripMenuItem, "binderToolStripMenuItem");
+        binderToolStripMenuItem.Click += OnBinderToolStripMenuItemClick;
         // 
         // formToolStripMenuItem
         // 
@@ -735,4 +742,5 @@ partial class MainForm
     private System.Windows.Forms.ToolStripMenuItem splashScreenToolStripMenuItem;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator19;
     private System.Windows.Forms.ToolStripMenuItem findToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem binderToolStripMenuItem;
 }

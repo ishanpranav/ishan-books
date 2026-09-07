@@ -9,7 +9,7 @@ namespace Liber.Forms.Reports;
 internal interface IReportView
 {
     string GenericTitle { get; }
-    string Title { get; }
+    string Title { get; set; }
     string ImageKey { get; }
     int SortOrder { get; }
     object Properties { get; }

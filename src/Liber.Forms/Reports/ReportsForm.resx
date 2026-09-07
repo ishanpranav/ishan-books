@@ -144,12 +144,6 @@
   <data name="_listView.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <metadata name="_imageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>212, 17</value>
-  </metadata>
-  <data name="_imageList.ImageSize" type="System.Drawing.Size, System.Drawing">
-    <value>24, 24</value>
-  </data>
   <data name="_listView.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -167,7 +161,7 @@
     <value>_listView</value>
   </data>
   <data name="&gt;&gt;_listView.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListViewEx, Liber.Forms, Culture=neutral, PublicKeyToken=null</value>
+    <value>Liber.Forms.Reports.ReportListView, Liber.Forms, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;_listView.Parent" xml:space="preserve">
     <value>splitContainer2.Panel1</value>
@@ -345,12 +339,6 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Report Center</value>
-  </data>
-  <data name="&gt;&gt;_imageList.Name" xml:space="preserve">
-    <value>_imageList</value>
-  </data>
-  <data name="&gt;&gt;_imageList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;_backgroundWorker.Name" xml:space="preserve">
     <value>_backgroundWorker</value>
