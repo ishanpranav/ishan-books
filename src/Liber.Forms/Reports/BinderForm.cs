@@ -35,7 +35,16 @@ internal partial class BinderForm : Form
 
     private void OnEditToolStripMenuItemClick(object sender, EventArgs e)
     {
+        if (_customReportListView.TryGetSelection(out IReportView? view))
+        {
+            ReportsForm form = new ReportsForm(_engine, ReportsFormStyle.ConfigurationOnly)
+            {
+                WindowState = FormWindowState.Normal
+            };
 
+            form.InitializeReport(view);
+            form.ShowDialog();
+        }
     }
 
     private void OnRenameToolStripMenuItemClick(object sender, EventArgs e)
@@ -86,7 +95,7 @@ internal partial class BinderForm : Form
         }
     }
 
-    private void OnMoveDownToolStripMenuItemClick(object sender, EventArgs e)
+    private void OnMoveDownButtonClick(object sender, EventArgs e)
     {
         ListViewItem[] selectedItems = new ListViewItem[_customReportListView.SelectedItems.Count];
 

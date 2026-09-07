@@ -356,9 +356,9 @@ internal partial class AccountsForm : Form
         report.Posted = _company.Posted;
         report.Level = ReportLevel.ByAccount;
 
-        ReportsForm form = new ReportsForm(_engine)
+        ReportsForm form = new ReportsForm(_engine, ReportsFormStyle.ConfigurationOnly)
         {
-            Text = title
+            Text = title,
         };
 
         form.Load += (sender, e) =>
