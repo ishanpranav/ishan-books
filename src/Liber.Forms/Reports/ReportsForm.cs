@@ -23,6 +23,36 @@ internal partial class ReportsForm : Form
 
     private IReportView? _view;
 
+    public ReportsForm(ReportEngine engine, ReportsFormStyle style)
+    {
+        InitializeComponent();
+        SystemFeatures.Initialize(this);
+
+        switch (style)
+        {
+            case ReportsFormStyle.Extended:
+                _listView.Initialize(engine);
+                break;
+
+            case ReportsFormStyle.None:
+                splitContainer1.Panel1Collapsed = true;
+                break;
+
+            case ReportsFormStyle.ConfigurationOnly:
+                splitContainer2.Panel1Collapsed = true;
+                break;
+        }
+
+        _engine = engine;
+
+        if (engine.Find(ReportEngine.AccountMapReport, out IReportView? favoriteView, out IntervalView? favoriteReport))
+        {
+            View = favoriteView;
+
+            RefreshFavorite(favoriteReport);
+        }
+    }
+
     private IReportView? View
     {
         get
@@ -37,22 +67,6 @@ internal partial class ReportsForm : Form
             {
                 _propertyGrid.SelectedObject = value.Properties;
             }
-        }
-    }
-
-    public ReportsForm(ReportEngine engine)
-    {
-        InitializeComponent();
-        SystemFeatures.Initialize(this);
-        _listView.Initialize(engine);
-
-        _engine = engine;
-
-        if (engine.Find(ReportEngine.AccountMapReport, out IReportView? favoriteView, out IntervalView? favoriteReport))
-        {
-            View = favoriteView;
-
-            RefreshFavorite(favoriteReport);
         }
     }
 

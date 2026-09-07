@@ -116,6 +116,7 @@ partial class MainForm
         _saveFileDialog = new System.Windows.Forms.SaveFileDialog();
         _recentPathManager = new RecentPathManager(components);
         _factory = new FormFactory(components);
+        saveAsToolStripButton = new System.Windows.Forms.ToolStripButton();
         _menuStrip.SuspendLayout();
         _toolStrip.SuspendLayout();
         SuspendLayout();
@@ -525,7 +526,7 @@ partial class MainForm
         // 
         // _toolStrip
         // 
-        _toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripButton, openToolStripButton, saveToolStripButton, toolStripSeparator6, accountsToolStripButton, transactionToolStripButton, toolStripSeparator10, transactionsToolStripButton, toolStripSeparator11, reportsToolStripButton, toolStripSeparator15, taskItemsToolStripButton });
+        _toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripButton, openToolStripButton, saveToolStripButton, saveAsToolStripButton, toolStripSeparator6, accountsToolStripButton, transactionToolStripButton, toolStripSeparator10, transactionsToolStripButton, toolStripSeparator11, reportsToolStripButton, toolStripSeparator15, taskItemsToolStripButton });
         resources.ApplyResources(_toolStrip, "_toolStrip");
         _toolStrip.Name = "_toolStrip";
         // 
@@ -635,6 +636,14 @@ partial class MainForm
         // 
         _factory.Invalidated += OnFactoryInvalidated;
         // 
+        // saveAsToolStripButton
+        // 
+        saveAsToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+        saveAsToolStripButton.Image = VisualStudioImageLibrary.SaveAs;
+        resources.ApplyResources(saveAsToolStripButton, "saveAsToolStripButton");
+        saveAsToolStripButton.Name = "saveAsToolStripButton";
+        saveAsToolStripButton.Click += OnSaveAsToolStripMenuItemClick;
+        // 
         // MainForm
         // 
         AllowDrop = true;
@@ -743,4 +752,5 @@ partial class MainForm
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator19;
     private System.Windows.Forms.ToolStripMenuItem findToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem binderToolStripMenuItem;
+    private System.Windows.Forms.ToolStripButton saveAsToolStripButton;
 }

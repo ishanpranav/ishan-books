@@ -52,27 +52,36 @@ partial class BinderForm
         toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
         selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         statusStrip1 = new System.Windows.Forms.StatusStrip();
+        toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
+        newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+        saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
         addToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
         toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
         editToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
         renameToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-        duplicateToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
         removeToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+        duplicateToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
         toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-        moveUpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
         moveDownToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+        moveUpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
         toolStrip1 = new System.Windows.Forms.ToolStrip();
         newToolStripButton = new System.Windows.Forms.ToolStripButton();
         openToolStripButton = new System.Windows.Forms.ToolStripButton();
         saveToolStripButton = new System.Windows.Forms.ToolStripButton();
-        printToolStripButton = new System.Windows.Forms.ToolStripButton();
-        toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-        cutToolStripButton = new System.Windows.Forms.ToolStripButton();
-        copyToolStripButton = new System.Windows.Forms.ToolStripButton();
-        pasteToolStripButton = new System.Windows.Forms.ToolStripButton();
         toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-        helpToolStripButton = new System.Windows.Forms.ToolStripButton();
+        toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+        toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+        toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+        toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+        toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+        toolStripButton6 = new System.Windows.Forms.ToolStripButton();
+        toolStripButton7 = new System.Windows.Forms.ToolStripButton();
+        addToolStripButton = new System.Windows.Forms.ToolStripButton();
+        toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
         _customReportContextMenu.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
         splitContainer1.Panel1.SuspendLayout();
@@ -148,7 +157,7 @@ partial class BinderForm
         moveDownToolStripMenuItem.Image = VisualStudioImageLibrary.MoveDown;
         moveDownToolStripMenuItem.Name = "moveDownToolStripMenuItem";
         resources.ApplyResources(moveDownToolStripMenuItem, "moveDownToolStripMenuItem");
-        moveDownToolStripMenuItem.Click += OnMoveDownToolStripMenuItemClick;
+        moveDownToolStripMenuItem.Click += OnMoveDownButtonClick;
         // 
         // toolStripSeparator1
         // 
@@ -212,9 +221,45 @@ partial class BinderForm
         // 
         // statusStrip1
         // 
-        statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripDropDownButton1 });
+        statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripDropDownButton2, toolStripDropDownButton1 });
         resources.ApplyResources(statusStrip1, "statusStrip1");
         statusStrip1.Name = "statusStrip1";
+        // 
+        // toolStripDropDownButton2
+        // 
+        toolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+        toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripMenuItem, openToolStripMenuItem, toolStripSeparator, saveToolStripMenuItem, saveAsToolStripMenuItem });
+        resources.ApplyResources(toolStripDropDownButton2, "toolStripDropDownButton2");
+        toolStripDropDownButton2.Name = "toolStripDropDownButton2";
+        // 
+        // newToolStripMenuItem
+        // 
+        newToolStripMenuItem.Image = VisualStudioImageLibrary.AddDocument;
+        resources.ApplyResources(newToolStripMenuItem, "newToolStripMenuItem");
+        newToolStripMenuItem.Name = "newToolStripMenuItem";
+        // 
+        // openToolStripMenuItem
+        // 
+        openToolStripMenuItem.Image = VisualStudioImageLibrary.OpenFile;
+        resources.ApplyResources(openToolStripMenuItem, "openToolStripMenuItem");
+        openToolStripMenuItem.Name = "openToolStripMenuItem";
+        // 
+        // toolStripSeparator
+        // 
+        toolStripSeparator.Name = "toolStripSeparator";
+        resources.ApplyResources(toolStripSeparator, "toolStripSeparator");
+        // 
+        // saveToolStripMenuItem
+        // 
+        saveToolStripMenuItem.Image = VisualStudioImageLibrary.Save;
+        resources.ApplyResources(saveToolStripMenuItem, "saveToolStripMenuItem");
+        saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+        // 
+        // saveAsToolStripMenuItem
+        // 
+        saveAsToolStripMenuItem.Image = VisualStudioImageLibrary.SaveAs;
+        saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+        resources.ApplyResources(saveAsToolStripMenuItem, "saveAsToolStripMenuItem");
         // 
         // toolStripDropDownButton1
         // 
@@ -249,13 +294,6 @@ partial class BinderForm
         resources.ApplyResources(renameToolStripMenuItem1, "renameToolStripMenuItem1");
         renameToolStripMenuItem1.Click += OnRenameToolStripMenuItemClick;
         // 
-        // duplicateToolStripMenuItem1
-        // 
-        duplicateToolStripMenuItem1.Image = VisualStudioImageLibrary.Duplicate;
-        duplicateToolStripMenuItem1.Name = "duplicateToolStripMenuItem1";
-        resources.ApplyResources(duplicateToolStripMenuItem1, "duplicateToolStripMenuItem1");
-        duplicateToolStripMenuItem1.Click += OnDuplicateToolStripMenuItemClick;
-        // 
         // removeToolStripMenuItem1
         // 
         removeToolStripMenuItem1.Image = VisualStudioImageLibrary.Remove;
@@ -263,17 +301,17 @@ partial class BinderForm
         resources.ApplyResources(removeToolStripMenuItem1, "removeToolStripMenuItem1");
         removeToolStripMenuItem1.Click += OnRemoveToolStripMenuItemClick;
         // 
+        // duplicateToolStripMenuItem1
+        // 
+        duplicateToolStripMenuItem1.Image = VisualStudioImageLibrary.Duplicate;
+        duplicateToolStripMenuItem1.Name = "duplicateToolStripMenuItem1";
+        resources.ApplyResources(duplicateToolStripMenuItem1, "duplicateToolStripMenuItem1");
+        duplicateToolStripMenuItem1.Click += OnDuplicateToolStripMenuItemClick;
+        // 
         // toolStripSeparator5
         // 
         toolStripSeparator5.Name = "toolStripSeparator5";
         resources.ApplyResources(toolStripSeparator5, "toolStripSeparator5");
-        // 
-        // moveUpToolStripMenuItem1
-        // 
-        moveUpToolStripMenuItem1.Image = VisualStudioImageLibrary.MoveUp;
-        moveUpToolStripMenuItem1.Name = "moveUpToolStripMenuItem1";
-        resources.ApplyResources(moveUpToolStripMenuItem1, "moveUpToolStripMenuItem1");
-        moveUpToolStripMenuItem1.Click += OnMoveDownToolStripMenuItemClick;
         // 
         // moveDownToolStripMenuItem1
         // 
@@ -282,69 +320,110 @@ partial class BinderForm
         resources.ApplyResources(moveDownToolStripMenuItem1, "moveDownToolStripMenuItem1");
         moveDownToolStripMenuItem1.Click += OnMoveUpToolStripMenuItemClick;
         // 
+        // moveUpToolStripMenuItem1
+        // 
+        moveUpToolStripMenuItem1.Image = VisualStudioImageLibrary.MoveUp;
+        moveUpToolStripMenuItem1.Name = "moveUpToolStripMenuItem1";
+        resources.ApplyResources(moveUpToolStripMenuItem1, "moveUpToolStripMenuItem1");
+        moveUpToolStripMenuItem1.Click += OnMoveDownButtonClick;
+        // 
         // toolStrip1
         // 
-        toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripButton, openToolStripButton, saveToolStripButton, printToolStripButton, toolStripSeparator, cutToolStripButton, copyToolStripButton, pasteToolStripButton, toolStripSeparator6, helpToolStripButton });
+        toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripButton, openToolStripButton, saveToolStripButton, toolStripSeparator6, addToolStripButton, toolStripSeparator7, toolStripButton2, toolStripButton3, toolStripButton4, toolStripButton5, toolStripSeparator8, toolStripButton6, toolStripButton7 });
         resources.ApplyResources(toolStrip1, "toolStrip1");
         toolStrip1.Name = "toolStrip1";
         // 
         // newToolStripButton
         // 
         newToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+        newToolStripButton.Image = VisualStudioImageLibrary.AddDocument;
         resources.ApplyResources(newToolStripButton, "newToolStripButton");
         newToolStripButton.Name = "newToolStripButton";
         // 
         // openToolStripButton
         // 
         openToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+        openToolStripButton.Image = VisualStudioImageLibrary.OpenFile;
         resources.ApplyResources(openToolStripButton, "openToolStripButton");
         openToolStripButton.Name = "openToolStripButton";
         // 
         // saveToolStripButton
         // 
         saveToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+        saveToolStripButton.Image = VisualStudioImageLibrary.Save;
         resources.ApplyResources(saveToolStripButton, "saveToolStripButton");
         saveToolStripButton.Name = "saveToolStripButton";
-        // 
-        // printToolStripButton
-        // 
-        printToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-        resources.ApplyResources(printToolStripButton, "printToolStripButton");
-        printToolStripButton.Name = "printToolStripButton";
-        // 
-        // toolStripSeparator
-        // 
-        toolStripSeparator.Name = "toolStripSeparator";
-        resources.ApplyResources(toolStripSeparator, "toolStripSeparator");
-        // 
-        // cutToolStripButton
-        // 
-        cutToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-        resources.ApplyResources(cutToolStripButton, "cutToolStripButton");
-        cutToolStripButton.Name = "cutToolStripButton";
-        // 
-        // copyToolStripButton
-        // 
-        copyToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-        resources.ApplyResources(copyToolStripButton, "copyToolStripButton");
-        copyToolStripButton.Name = "copyToolStripButton";
-        // 
-        // pasteToolStripButton
-        // 
-        pasteToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-        resources.ApplyResources(pasteToolStripButton, "pasteToolStripButton");
-        pasteToolStripButton.Name = "pasteToolStripButton";
         // 
         // toolStripSeparator6
         // 
         toolStripSeparator6.Name = "toolStripSeparator6";
         resources.ApplyResources(toolStripSeparator6, "toolStripSeparator6");
         // 
-        // helpToolStripButton
+        // toolStripButton2
         // 
-        helpToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-        resources.ApplyResources(helpToolStripButton, "helpToolStripButton");
-        helpToolStripButton.Name = "helpToolStripButton";
+        toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+        toolStripButton2.Image = VisualStudioImageLibrary.Edit;
+        toolStripButton2.Name = "toolStripButton2";
+        resources.ApplyResources(toolStripButton2, "toolStripButton2");
+        toolStripButton2.Click += OnEditToolStripMenuItemClick;
+        // 
+        // toolStripButton3
+        // 
+        toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+        toolStripButton3.Image = VisualStudioImageLibrary.Rename;
+        toolStripButton3.Name = "toolStripButton3";
+        resources.ApplyResources(toolStripButton3, "toolStripButton3");
+        toolStripButton3.Click += OnRenameToolStripMenuItemClick;
+        // 
+        // toolStripButton4
+        // 
+        toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+        toolStripButton4.Image = VisualStudioImageLibrary.Duplicate;
+        toolStripButton4.Name = "toolStripButton4";
+        resources.ApplyResources(toolStripButton4, "toolStripButton4");
+        toolStripButton4.Click += OnDuplicateToolStripMenuItemClick;
+        // 
+        // toolStripButton5
+        // 
+        toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+        toolStripButton5.Image = VisualStudioImageLibrary.Remove;
+        toolStripButton5.Name = "toolStripButton5";
+        resources.ApplyResources(toolStripButton5, "toolStripButton5");
+        toolStripButton5.CommandCanExecuteChanged += OnRemoveToolStripMenuItemClick;
+        // 
+        // toolStripSeparator8
+        // 
+        toolStripSeparator8.Name = "toolStripSeparator8";
+        resources.ApplyResources(toolStripSeparator8, "toolStripSeparator8");
+        // 
+        // toolStripButton6
+        // 
+        toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+        toolStripButton6.Image = VisualStudioImageLibrary.MoveUp;
+        toolStripButton6.Name = "toolStripButton6";
+        resources.ApplyResources(toolStripButton6, "toolStripButton6");
+        toolStripButton6.Click += OnMoveUpToolStripMenuItemClick;
+        // 
+        // toolStripButton7
+        // 
+        toolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+        toolStripButton7.Image = VisualStudioImageLibrary.MoveDown;
+        toolStripButton7.Name = "toolStripButton7";
+        resources.ApplyResources(toolStripButton7, "toolStripButton7");
+        toolStripButton7.Click += OnMoveDownButtonClick;
+        // 
+        // addToolStripButton
+        // 
+        addToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+        addToolStripButton.Image = VisualStudioImageLibrary.New;
+        resources.ApplyResources(addToolStripButton, "addToolStripButton");
+        addToolStripButton.Name = "addToolStripButton";
+        addToolStripButton.Click += OnAddToolStripMenuItemClick;
+        // 
+        // toolStripSeparator7
+        // 
+        toolStripSeparator7.Name = "toolStripSeparator7";
+        resources.ApplyResources(toolStripSeparator7, "toolStripSeparator7");
         // 
         // BinderForm
         // 
@@ -399,14 +478,23 @@ partial class BinderForm
     private System.Windows.Forms.ToolStripMenuItem moveDownToolStripMenuItem1;
     private System.Windows.Forms.ToolStripMenuItem moveUpToolStripMenuItem1;
     private System.Windows.Forms.ToolStrip toolStrip1;
+    private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton2;
     private System.Windows.Forms.ToolStripButton newToolStripButton;
     private System.Windows.Forms.ToolStripButton openToolStripButton;
     private System.Windows.Forms.ToolStripButton saveToolStripButton;
-    private System.Windows.Forms.ToolStripButton printToolStripButton;
-    private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
-    private System.Windows.Forms.ToolStripButton cutToolStripButton;
-    private System.Windows.Forms.ToolStripButton copyToolStripButton;
-    private System.Windows.Forms.ToolStripButton pasteToolStripButton;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
-    private System.Windows.Forms.ToolStripButton helpToolStripButton;
+    private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
+    private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
+    private System.Windows.Forms.ToolStripButton toolStripButton4;
+    private System.Windows.Forms.ToolStripButton toolStripButton5;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+    private System.Windows.Forms.ToolStripButton toolStripButton6;
+    private System.Windows.Forms.ToolStripButton toolStripButton7;
+    private System.Windows.Forms.ToolStripButton toolStripButton2;
+    private System.Windows.Forms.ToolStripButton toolStripButton3;
+    private System.Windows.Forms.ToolStripButton addToolStripButton;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
 }

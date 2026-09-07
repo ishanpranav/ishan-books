@@ -94,7 +94,7 @@ internal partial class MainForm : Form
         {
             await ImportAsync(_recentPathManager.Paths.First());
 
-            _factory.RegisterEmbedded(Guid.NewGuid(), new ReportsForm(_engine));
+            _factory.RegisterEmbedded(Guid.NewGuid(), new ReportsForm(_engine, ReportsFormStyle.None));
         }
     }
 
@@ -273,7 +273,7 @@ internal partial class MainForm : Form
         Guid key = Guid.NewGuid();
         IReportView view = _engine.Prototypes[name].Clone();
 
-        ReportsForm form = new ReportsForm(_engine)
+        ReportsForm form = new ReportsForm(_engine, ReportsFormStyle.Extended)
         {
             Text = view.GenericTitle
         };
@@ -841,7 +841,7 @@ internal partial class MainForm : Form
         report.Check = checkForm.Value;
 
         Guid key = Guid.NewGuid();
-        ReportsForm form = new ReportsForm(_engine)
+        ReportsForm form = new ReportsForm(_engine, ReportsFormStyle.Extended)
         {
             Text = checkToolStripMenuItem.Text
         };
@@ -854,7 +854,7 @@ internal partial class MainForm : Form
 
     private void OnReportsToolStripMenuItemClick(object sender, EventArgs e)
     {
-        _factory.Register(Guid.NewGuid(), new ReportsForm(_engine));
+        _factory.Register(Guid.NewGuid(), new ReportsForm(_engine, ReportsFormStyle.Extended));
     }
 
     private void OnTransactionToolStripMenuItemClick(object sender, EventArgs e)
