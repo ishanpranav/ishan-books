@@ -4,6 +4,7 @@
 
 using System;
 using System.ComponentModel;
+using System.Text.Json.Serialization;
 using Liber.Properties;
 
 namespace Liber.Filters;
@@ -14,6 +15,7 @@ public class TransactionPostedFilter : Filter
     private DateTime _to;
 
     [Browsable(false)]
+    [JsonIgnore]
     public override string Name
     {
         get

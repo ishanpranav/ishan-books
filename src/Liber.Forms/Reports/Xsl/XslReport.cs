@@ -374,6 +374,7 @@ public class XslReport :
         report.Started = Started;
         report.Posted = Posted;
         report.Level = Level;
+        report.Filter = Filter;
         report.Multiple = Multiple;
         report.Redaction = Redaction;
         report.Type = Type;

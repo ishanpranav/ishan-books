@@ -780,6 +780,7 @@ public class HtmlReport : IntervalView, IReport
         report.Started = Started;
         report.Posted = Posted;
         report.Level = Level;
+        report.Filter = Filter;
 
         return result;
     }

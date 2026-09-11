@@ -5,6 +5,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Text.Json.Serialization;
 using Liber.Properties;
 
 namespace Liber.Filters;
@@ -12,6 +13,7 @@ namespace Liber.Filters;
 public class ConjunctionFilter : Filter
 {
     [Browsable(false)]
+    [JsonIgnore]
     public override string Name
     {
         get

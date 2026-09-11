@@ -7,7 +7,7 @@ using System.Globalization;
 
 namespace System.ComponentModel;
 
-internal class FilterConverter : TypeConverter
+public class FilterConverter : TypeConverter
 {
     public override bool CanConvertTo(ITypeDescriptorContext? context, [NotNullWhen(true)] Type? destinationType)
     {

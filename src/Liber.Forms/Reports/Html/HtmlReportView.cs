@@ -91,6 +91,7 @@ internal sealed class HtmlReportView : ICloneable, IReportView
         result._report.Started = _report.Started;
         result._report.Posted = _report.Posted;
         result._report.Level = _report.Level;
+        result._report.Filter = _report.Filter;
 
         return result;
     }
