@@ -113,7 +113,19 @@ internal sealed class XslReportView : ICloneable, IReportView
 
     public XslReportView Clone()
     {
-        return new XslReportView(_company, _path);
+        XslReportView result = new XslReportView(_company, _path)
+        {
+            Title = Title
+        };
+
+        result._report.Started = _report.Started;
+        result._report.Posted = _report.Posted;
+        result._report.Level = _report.Level;
+        result._report.Multiple = _report.Multiple;
+        result._report.Redaction = _report.Redaction;
+        result._report.Type = _report.Type; 
+
+        return result;
     }
 
     IReportView IReportView.Clone()

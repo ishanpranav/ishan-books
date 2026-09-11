@@ -41,7 +41,11 @@ internal class ReportListView : ListViewEx
                 .OrderBy(x => x.Value.SortOrder)
                 .ThenBy(x => x.Value.GenericTitle))
             {
-                InsertReport(Items.Count, engine, prototype.Key, prototype.Value);
+                IReportView view = prototype.Value.Clone();
+
+                view.Title = view.GenericTitle;
+
+                InsertReport(Items.Count, engine, prototype.Key, view);
             }
 
             AutoResizeColumns();
@@ -53,11 +57,9 @@ internal class ReportListView : ListViewEx
         }
     }
 
-    public void InsertReport(int index, ReportEngine engine, string key, IReportView prototype)
+    public void InsertReport(int index, ReportEngine engine, string key, IReportView view)
     {
-        IReportView view = prototype.Clone();
-
-        ListViewItem item = Items.Insert(index, key, view.GenericTitle, ReportImageListManager.GetImageIndex(view));
+        ListViewItem item = Items.Insert(index, key, view.Title, ReportImageListManager.GetImageIndex(view));
 
         item.Tag = view;
 

@@ -3,27 +3,24 @@
 // Licensed under the MIT License.
 
 using System;
-using System.ComponentModel;
-using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Liber.Forms.Accounts;
 using Liber.Forms.Lines;
+using Liber.Forms.RecentPaths;
 using Liber.Forms.Reports.Gdi;
-using Microsoft.Web.WebView2.Core;
 
 namespace Liber.Forms.Reports;
 
 internal partial class ReportsForm : Form
 {
     private readonly ReportEngine _engine;
-    private int _favoriteIndex = 0;
+    private readonly RecentPathManager _recentPathManager;
 
+    private int _favoriteIndex = 0;
     private IReportView? _view;
 
-    public ReportsForm(ReportEngine engine, ReportsFormStyle style)
+    public ReportsForm(ReportEngine engine, ReportsFormStyle style, RecentPathManager recentPathManager)
     {
         InitializeComponent();
         SystemFeatures.Initialize(this);
@@ -44,6 +41,7 @@ internal partial class ReportsForm : Form
         }
 
         _engine = engine;
+        _recentPathManager = recentPathManager;
 
         if (engine.Find(ReportEngine.AccountMapReport, out IReportView? favoriteView, out IntervalView? favoriteReport))
         {
@@ -72,41 +70,21 @@ internal partial class ReportsForm : Form
 
     private async void OnLoad(object sender, EventArgs e)
     {
-        try
+        await _webView.InitializeWebViewAsync(_recentPathManager);
+
+        if (View != null)
         {
-            await _webView.EnsureCoreWebView2Async();
-
-            _webView.CoreWebView2.SetVirtualHostNameToFolderMapping(
-                "liber.example",
-                Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)!,
-                CoreWebView2HostResourceAccessKind.DenyCors);
-
-            if (!_recentPathManager.Empty)
-            {
-                _webView.CoreWebView2.Profile.DefaultDownloadFolderPath = Path.GetDirectoryName(_recentPathManager.Paths.First());
-            }
-
-            _webView.CoreWebView2.Profile.PreferredColorScheme = CoreWebView2PreferredColorScheme.Light;
+            _webView.GenerateReport(View);
         }
-        catch (COMException) { }
 
-        GenerateReport();
         _timer.Start();
-    }
-
-    private void GenerateReport()
-    {
-        if (View != null && !_backgroundWorker.IsBusy)
-        {
-            _backgroundWorker.RunWorkerAsync();
-        }
     }
 
     public void InitializeReport(IReportView view)
     {
         View = view;
 
-        GenerateReport();
+        _webView.GenerateReport(view);
     }
 
     private void OnListViewItemActivate(object sender, EventArgs e)
@@ -130,37 +108,16 @@ internal partial class ReportsForm : Form
             }
         }
 
-        GenerateReport();
+        _webView.GenerateReport(view);
     }
 
     private void OnPropertyGridPropertyValueChanged(object sender, PropertyValueChangedEventArgs e)
     {
         _timer.Stop();
-        GenerateReport();
-    }
 
-    private void OnBackgroundWorkerDoWork(object sender, DoWorkEventArgs e)
-    {
-        if (_view == null)
+        if (View != null)
         {
-            e.Cancel = true;
-
-            return;
-        }
-
-        _view.Generate();
-    }
-
-    private void OnBackgroundWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-    {
-        if (e.Cancelled || View == null)
-        {
-            return;
-        }
-
-        if (_webView.CoreWebView2 != null)
-        {
-            View.Navigate(_webView.CoreWebView2);
+            _webView.GenerateReport(View);
         }
     }
 
@@ -187,7 +144,7 @@ internal partial class ReportsForm : Form
         }
 
         RefreshFavorite(report);
-        GenerateReport();
+        _webView.GenerateReport(View);
     }
 
     protected override void Dispose(bool disposing)

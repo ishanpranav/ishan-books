@@ -275,7 +275,7 @@
     <value>_webView</value>
   </data>
   <data name="&gt;&gt;_webView.Type" xml:space="preserve">
-    <value>Microsoft.Web.WebView2.WinForms.WebView2, Microsoft.Web.WebView2.WinForms, Culture=neutral, PublicKeyToken=2a8ab48044d2601e</value>
+    <value>Liber.Forms.Reports.ReportWebView, Liber.Forms, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;_webView.Parent" xml:space="preserve">
     <value>splitContainer1.Panel2</value>
@@ -316,12 +316,6 @@
   <data name="&gt;&gt;splitContainer1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="_backgroundWorker.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="_recentPathManager.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>361, 17</value>
-  </metadata>
   <metadata name="_timer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>579, 17</value>
   </metadata>
@@ -339,18 +333,6 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Report Center</value>
-  </data>
-  <data name="&gt;&gt;_backgroundWorker.Name" xml:space="preserve">
-    <value>_backgroundWorker</value>
-  </data>
-  <data name="&gt;&gt;_backgroundWorker.Type" xml:space="preserve">
-    <value>System.ComponentModel.BackgroundWorker, System.ComponentModel.EventBasedAsync, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="&gt;&gt;_recentPathManager.Name" xml:space="preserve">
-    <value>_recentPathManager</value>
-  </data>
-  <data name="&gt;&gt;_recentPathManager.Type" xml:space="preserve">
-    <value>Liber.Forms.RecentPaths.RecentPathManager, Liber.Forms, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;_timer.Name" xml:space="preserve">
     <value>_timer</value>

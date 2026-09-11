@@ -11,19 +11,6 @@ partial class BinderForm
     /// </summary>
     private System.ComponentModel.IContainer components = null;
 
-    /// <summary>
-    /// Clean up any resources being used.
-    /// </summary>
-    /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-    protected override void Dispose(bool disposing)
-    {
-        if (disposing && (components != null))
-        {
-            components.Dispose();
-        }
-        base.Dispose(disposing);
-    }
-
     #region Windows Form Designer generated code
 
     /// <summary>
@@ -487,6 +474,7 @@ partial class BinderForm
         Controls.Add(splitContainer1);
         Controls.Add(toolStrip1);
         Name = "BinderForm";
+        Load += OnLoad;
         _customReportContextMenu.ResumeLayout(false);
         splitContainer1.Panel1.ResumeLayout(false);
         splitContainer1.Panel2.ResumeLayout(false);

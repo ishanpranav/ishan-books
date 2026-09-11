@@ -5,7 +5,6 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.IO;
 using System.Linq;
 using System.Text.Json.Serialization;
 using System.Xml;
@@ -366,6 +365,19 @@ public class XslReport :
 
     IReportView IReport.CreateView(Company company)
     {
-        return new XslReportView(company, Path);
+        XslReportView result = new XslReportView(company, Path)
+        {
+            Title = Title
+        };
+        XslReport report = (XslReport)result.Properties;
+
+        report.Started = Started;
+        report.Posted = Posted;
+        report.Level = Level;
+        report.Multiple = Multiple;
+        report.Redaction = Redaction;
+        report.Type = Type;
+
+        return result;
     }
 }

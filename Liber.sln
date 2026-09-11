@@ -30,8 +30,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Liber.MathEngine", "src\Lib
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Liber.MathEngine.Console", "src\Liber.MathEngine.Console\Liber.MathEngine.Console.csproj", "{40C1D0B7-B4CA-59F0-AC40-3B15BBD03D5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Liber.BrokerageConsole", "src\Liber.BrokerageConsole\Liber.BrokerageConsole.csproj", "{9A2FAB90-6733-48F4-BA12-FD29A3CF52CC}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -146,34 +144,14 @@ Global
 		{40C1D0B7-B4CA-59F0-AC40-3B15BBD03D5B}.Release|x64.Build.0 = Release|Any CPU
 		{40C1D0B7-B4CA-59F0-AC40-3B15BBD03D5B}.Release|x86.ActiveCfg = Release|Any CPU
 		{40C1D0B7-B4CA-59F0-AC40-3B15BBD03D5B}.Release|x86.Build.0 = Release|Any CPU
-		{9A2FAB90-6733-48F4-BA12-FD29A3CF52CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9A2FAB90-6733-48F4-BA12-FD29A3CF52CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9A2FAB90-6733-48F4-BA12-FD29A3CF52CC}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{9A2FAB90-6733-48F4-BA12-FD29A3CF52CC}.Debug|ARM.Build.0 = Debug|Any CPU
-		{9A2FAB90-6733-48F4-BA12-FD29A3CF52CC}.Debug|ARM64.ActiveCfg = Debug|Any CPU
-		{9A2FAB90-6733-48F4-BA12-FD29A3CF52CC}.Debug|ARM64.Build.0 = Debug|Any CPU
-		{9A2FAB90-6733-48F4-BA12-FD29A3CF52CC}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{9A2FAB90-6733-48F4-BA12-FD29A3CF52CC}.Debug|x64.Build.0 = Debug|Any CPU
-		{9A2FAB90-6733-48F4-BA12-FD29A3CF52CC}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{9A2FAB90-6733-48F4-BA12-FD29A3CF52CC}.Debug|x86.Build.0 = Debug|Any CPU
-		{9A2FAB90-6733-48F4-BA12-FD29A3CF52CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9A2FAB90-6733-48F4-BA12-FD29A3CF52CC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9A2FAB90-6733-48F4-BA12-FD29A3CF52CC}.Release|ARM.ActiveCfg = Release|Any CPU
-		{9A2FAB90-6733-48F4-BA12-FD29A3CF52CC}.Release|ARM.Build.0 = Release|Any CPU
-		{9A2FAB90-6733-48F4-BA12-FD29A3CF52CC}.Release|ARM64.ActiveCfg = Release|Any CPU
-		{9A2FAB90-6733-48F4-BA12-FD29A3CF52CC}.Release|ARM64.Build.0 = Release|Any CPU
-		{9A2FAB90-6733-48F4-BA12-FD29A3CF52CC}.Release|x64.ActiveCfg = Release|Any CPU
-		{9A2FAB90-6733-48F4-BA12-FD29A3CF52CC}.Release|x64.Build.0 = Release|Any CPU
-		{9A2FAB90-6733-48F4-BA12-FD29A3CF52CC}.Release|x86.ActiveCfg = Release|Any CPU
-		{9A2FAB90-6733-48F4-BA12-FD29A3CF52CC}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		RESX_TaskErrorCategory = Message
-		RESX_ConfirmAddLanguageFile = True
-		RESX_SortFileContentOnSave = True
 		SolutionGuid = {9170A1F4-FAEF-448C-A8BC-A2D0D54864C8}
+		RESX_SortFileContentOnSave = True
+		RESX_ConfirmAddLanguageFile = True
+		RESX_TaskErrorCategory = Message
 	EndGlobalSection
 EndGlobal
