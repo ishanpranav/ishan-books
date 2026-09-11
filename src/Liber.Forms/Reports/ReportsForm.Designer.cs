@@ -23,9 +23,7 @@ namespace Liber.Forms.Reports
             splitContainer2 = new System.Windows.Forms.SplitContainer();
             _listView = new ReportListView();
             _propertyGrid = new System.Windows.Forms.PropertyGrid();
-            _webView = new Microsoft.Web.WebView2.WinForms.WebView2();
-            _backgroundWorker = new System.ComponentModel.BackgroundWorker();
-            _recentPathManager = new RecentPathManager(components);
+            _webView = new ReportWebView();
             _timer = new System.Windows.Forms.Timer(components);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
@@ -92,16 +90,6 @@ namespace Liber.Forms.Reports
             _webView.Name = "_webView";
             _webView.ZoomFactor = 1D;
             // 
-            // _backgroundWorker
-            // 
-            _backgroundWorker.WorkerSupportsCancellation = true;
-            _backgroundWorker.DoWork += OnBackgroundWorkerDoWork;
-            _backgroundWorker.RunWorkerCompleted += OnBackgroundWorkerRunWorkerCompleted;
-            // 
-            // _recentPathManager
-            // 
-            _recentPathManager.MaxPaths = 1;
-            // 
             // _timer
             // 
             _timer.Interval = 30000;
@@ -130,11 +118,9 @@ namespace Liber.Forms.Reports
         #endregion
         private System.Windows.Forms.SplitContainer splitContainer1;
         private ReportListView _listView;
-        private Microsoft.Web.WebView2.WinForms.WebView2 _webView;
+        private ReportWebView _webView;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.PropertyGrid _propertyGrid;
-        private System.ComponentModel.BackgroundWorker _backgroundWorker;
-        private RecentPathManager _recentPathManager;
         private System.Windows.Forms.Timer _timer;
     }
 }

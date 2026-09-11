@@ -3,29 +3,53 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Liber.Forms.Accounts;
+using Liber.Forms.RecentPaths;
 using Liber.Forms.Saving;
+using PdfSharp.Pdf;
+using PdfSharp.Pdf.IO;
 
 namespace Liber.Forms.Reports;
 
 internal partial class BinderForm : Form
 {
+    private const int FilterOffset = 1;
+    private const int JsonFilterIndex = 1;
+    private const int PdfFilterIndex = 2;
+
     private readonly ReportEngine _engine;
+    private readonly RecentPathManager _recentPathManager;
+    private readonly ReportWebView _webView = new ReportWebView();
+    private readonly Queue<IReportView> _printQueue = new Queue<IReportView>();
 
+    private int _pageIndex;
     private string? _path;
+    private string? _printPath;
+    private string? _title;
+    private SavingForm? _savingForm;
+    private PdfDocument? _document;
 
-    public BinderForm(ReportEngine engine)
+    public BinderForm(ReportEngine engine, RecentPathManager recentPathManager)
     {
         InitializeComponent();
         SystemFeatures.Initialize(this);
         _listView.Initialize(engine);
 
         _engine = engine;
+        _recentPathManager = recentPathManager;
+        _webView.Generated += OnWebViewGenerated;
+    }
+
+    private async void OnLoad(object sender, EventArgs e)
+    {
+        await _webView.InitializeWebViewAsync(_recentPathManager);
     }
 
     private void OnDragOver(object sender, DragEventArgs e)
@@ -59,35 +83,39 @@ internal partial class BinderForm : Form
     {
         foreach (ListViewItem selectedItem in _listView.SelectedItems)
         {
+            IReportView view = ((IReportView)selectedItem.Tag!).Clone();
+
             _customReportListView.InsertReport(
                 _customReportListView.Items.Count,
                 _engine,
                 Guid.NewGuid().ToString(),
-                (IReportView)selectedItem.Tag!);
+                view);
             _customReportListView.AutoResizeColumns();
         }
     }
 
     private void OnEditToolStripMenuItemClick(object sender, EventArgs e)
     {
-        if (_customReportListView.SelectedItems.Count == 1)
+        if (_customReportListView.SelectedItems.Count != 1)
         {
-            IReportView view = (IReportView)_customReportListView.SelectedItems[0].Tag!;
-            ReportsForm form = new ReportsForm(_engine, ReportsFormStyle.ConfigurationOnly)
-            {
-                WindowState = FormWindowState.Normal
-            };
-
-            if (view.Properties is IntervalView report)
-            {
-                report.Accounts = new AccountsView(_engine.Company);
-            }
-
-            form.InitializeReport(view);
-            form.ShowDialog();
-
-            _customReportListView.SelectedItems[0].Text = view.Title;
+            return;
         }
+
+        IReportView view = (IReportView)_customReportListView.SelectedItems[0].Tag!;
+        ReportsForm form = new ReportsForm(_engine, ReportsFormStyle.ConfigurationOnly, _recentPathManager)
+        {
+            WindowState = FormWindowState.Normal
+        };
+
+        if (view.Properties is IntervalView report)
+        {
+            report.Accounts = new AccountsView(_engine.Company);
+        }
+
+        form.InitializeReport(view);
+        form.ShowDialog();
+
+        _customReportListView.SelectedItems[0].Text = view.Title;
     }
 
     private void OnRenameToolStripMenuItemClick(object sender, EventArgs e)
@@ -102,10 +130,13 @@ internal partial class BinderForm : Form
     {
         foreach (ListViewItem item in _customReportListView.SelectedItems)
         {
+            IReportView view = ((IReportView)item.Tag!).Clone();
+
             _customReportListView.InsertReport(
                 item.Index + 1,
-                _engine, Guid.NewGuid().ToString(),
-                (IReportView)item.Tag!);
+                _engine,
+                Guid.NewGuid().ToString(),
+                view);
         }
     }
 
@@ -241,7 +272,6 @@ internal partial class BinderForm : Form
     private async Task ExportAsync(string path)
     {
         SavingForm form = new SavingForm();
-        //SavingProgress progress = new SavingProgress(form);
 
         form.Show();
 
@@ -267,6 +297,12 @@ internal partial class BinderForm : Form
                     }
                     break;
 
+                case FilterIndex.Pdf:
+                    {
+                        Print(path);
+                    }
+                    break;
+
                 default:
                     FormattedStrings.ShowNotSupportedMessage(extension);
                     break;
@@ -278,7 +314,7 @@ internal partial class BinderForm : Form
 
     private async Task<bool> SaveAsAsync()
     {
-        if (!TryGetSavePath(FilterIndex.Liber, out string? path))
+        if (!TryGetSavePath(JsonFilterIndex, out string? path))
         {
             return false;
         }
@@ -300,9 +336,9 @@ internal partial class BinderForm : Form
         return true;
     }
 
-    private bool TryGetSavePath(FilterIndex filterIndex, [MaybeNullWhen(false)] out string result)
+    private bool TryGetSavePath(int filterIndex, [MaybeNullWhen(false)] out string result)
     {
-        _saveFileDialog.FilterIndex = (int)filterIndex + (int)FilterIndex.Offset;
+        _saveFileDialog.FilterIndex = filterIndex;
 
         if (_saveFileDialog.ShowDialog() != DialogResult.OK)
         {
@@ -318,7 +354,7 @@ internal partial class BinderForm : Form
 
     private async void OnOpenToolStripMenuItemClick(object sender, EventArgs e)
     {
-        if (await TryCancelAsync() || !TryGetOpenPath(FilterIndex.AllSupportedFiles, out string? path))
+        if (await TryCancelAsync() || !TryGetOpenPath(JsonFilterIndex, out string? path))
         {
             return;
         }
@@ -326,9 +362,9 @@ internal partial class BinderForm : Form
         await ImportAsync(path);
     }
 
-    public bool TryGetOpenPath(FilterIndex filterIndex, [NotNullWhen(true)] out string? result)
+    public bool TryGetOpenPath(int filterIndex, [NotNullWhen(true)] out string? result)
     {
-        _openFileDialog.FilterIndex = (int)filterIndex;
+        _openFileDialog.FilterIndex = filterIndex + FilterOffset;
 
         if (_openFileDialog.ShowDialog() != DialogResult.OK)
         {
@@ -354,12 +390,143 @@ internal partial class BinderForm : Form
 
     private void OnPrintToolStripMenuItemClick(object sender, EventArgs e)
     {
-        foreach(ListViewItem item in _customReportListView.Items)
+        if (TryGetSavePath(PdfFilterIndex, out string? path))
         {
-            IReportView view = (IReportView) item.Tag!;
-
-            view.Generate();
-            view.Navigate();
+            Print(path);
         }
+    }
+
+    private void Print(string path)
+    {
+        if (_printQueue.Count > 0)
+        {
+            return;
+        }
+
+        _printPath = path;
+        _savingForm = new SavingForm();
+
+        _savingForm.Show();
+
+        _document = new PdfDocument();
+        _pageIndex = 0;
+
+        foreach (ListViewItem item in _customReportListView.Items)
+        {
+            _printQueue.Enqueue((IReportView)item.Tag!);
+        }
+
+        DequeuePrint();
+    }
+
+    private void DequeuePrint()
+    {
+        if (!_printQueue.TryDequeue(out IReportView? view))
+        {
+            if (_savingForm != null)
+            {
+                _savingForm.Close();
+            }
+
+            if (_document != null && _printPath != null)
+            {
+                _document.Save(_printPath);
+                Process.Start(new ProcessStartInfo()
+                {
+                    FileName = _printPath,
+                    UseShellExecute = true
+                });
+            }
+
+            return;
+        }
+
+        _title = view.Title;
+
+        _webView.GenerateReport(view);
+    }
+
+    private async void OnWebViewGenerated(object? sender, EventArgs e)
+    {
+        if (_savingForm == null || _document == null)
+        {
+            return;
+        }
+
+        using Stream stream = await _webView.CoreWebView2.PrintToPdfStreamAsync(_webView.PrintSettings);
+        using MemoryStream memoryStream = new MemoryStream();
+
+        stream.CopyTo(memoryStream);
+
+        using PdfDocument inputPdfDocument = PdfReader.Open(memoryStream, PdfDocumentOpenMode.Import);
+
+        _savingForm.MaxProgress += inputPdfDocument.PageCount;
+
+        int j = _pageIndex;
+
+        foreach (PdfPage page in inputPdfDocument.Pages)
+        {
+            _document.AddPage(page);
+
+            _pageIndex++;
+            _savingForm.Progress++;
+        }
+
+        if (_title != null)
+        {
+            _document.Outlines.Add(_title, _document.Pages[j], opened: true);
+        }
+
+        DequeuePrint();
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            foreach (ListViewItem item in _listView.Items)
+            {
+                if (item.Tag is IDisposable disposable)
+                {
+                    disposable.Dispose();
+
+                    item.Tag = null;
+                }
+            }
+
+            foreach (ListViewItem item in _customReportListView.Items)
+            {
+                if (item.Tag is IDisposable disposable)
+                {
+                    disposable.Dispose();
+
+                    item.Tag = null;
+                }
+            }
+
+            if (_savingForm != null)
+            {
+                _savingForm.Close();
+                _savingForm.Dispose();
+
+                _savingForm = null;
+            }
+
+            if (_document != null)
+            {
+                _document.Dispose();
+
+                _document = null;
+            }
+
+            if (components != null)
+            {
+                components.Dispose();
+
+                components = null;
+            }
+        }
+
+        base.Dispose(disposing);
     }
 }

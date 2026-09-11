@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text.Json;
 using Liber.Forms.Forms;
 using Liber.Forms.Properties;
+using Liber.Forms.RecentPaths;
 using Liber.Forms.Reports;
 
 namespace Liber.Forms.Accounts;
@@ -17,17 +18,21 @@ internal sealed class ImportAccountsForm : ImportForm
     private readonly FormFactory _factory;
     private readonly ReportEngine _engine;
     private readonly IReadOnlyCollection<GnuCashAccount> _accounts;
+    private readonly RecentPathManager _recentPathManager;
     private readonly ImportContext _context;
 
     public ImportAccountsForm(
         Company company,
         FormFactory factory,
         ReportEngine engine,
-        IReadOnlyCollection<GnuCashAccount> accounts) : base(company)
+        IReadOnlyCollection<GnuCashAccount> accounts,
+        RecentPathManager recentPathManager) : base(company)
     {
         _factory = factory;
         _accounts = accounts;
+        _recentPathManager = recentPathManager;
         _engine = engine;
+        _recentPathManager = recentPathManager; 
 
         List<Account> values = accounts
             .Select(x => x.Value)
@@ -101,6 +106,6 @@ internal sealed class ImportAccountsForm : ImportForm
             Company.UpdateAccount(account.Value.Id, parentId, account.Value.Number, account.Value.Name, account.Value.Type);
         }
 
-        _factory.Register(typeof(AccountsForm).GUID, new AccountsForm(Company, _factory, _engine));
+        _factory.Register(typeof(AccountsForm).GUID, new AccountsForm(Company, _factory, _engine, _recentPathManager));
     }
 }

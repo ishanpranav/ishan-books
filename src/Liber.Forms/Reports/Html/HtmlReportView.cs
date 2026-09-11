@@ -6,6 +6,7 @@ using System;
 using System.IO;
 using System.Runtime.InteropServices;
 using Microsoft.Web.WebView2.Core;
+using static System.Windows.Forms.AxHost;
 
 namespace Liber.Forms.Reports.Html;
 
@@ -82,7 +83,16 @@ internal sealed class HtmlReportView : ICloneable, IReportView
 
     public HtmlReportView Clone()
     {
-        return new HtmlReportView(_company, _path);
+        HtmlReportView result = new HtmlReportView(_company, _path)
+        {
+            Title = Title
+        };
+
+        result._report.Started = _report.Started;
+        result._report.Posted = _report.Posted;
+        result._report.Level = _report.Level;
+
+        return result;
     }
 
     IReportView IReportView.Clone()

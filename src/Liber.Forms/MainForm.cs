@@ -94,7 +94,7 @@ internal partial class MainForm : Form
         {
             await ImportAsync(_recentPathManager.Paths.First());
 
-            _factory.RegisterEmbedded(Guid.NewGuid(), new ReportsForm(_engine, ReportsFormStyle.None));
+            _factory.RegisterEmbedded(Guid.NewGuid(), new ReportsForm(_engine, ReportsFormStyle.None, _recentPathManager));
         }
     }
 
@@ -273,7 +273,7 @@ internal partial class MainForm : Form
         Guid key = Guid.NewGuid();
         IReportView view = _engine.Prototypes[name].Clone();
 
-        ReportsForm form = new ReportsForm(_engine, ReportsFormStyle.Extended)
+        ReportsForm form = new ReportsForm(_engine, ReportsFormStyle.Extended, _recentPathManager)
         {
             Text = view.GenericTitle
         };
@@ -289,7 +289,7 @@ internal partial class MainForm : Form
 
     private void OnBinderToolStripMenuItemClick(object sender, EventArgs e)
     {
-        BinderForm form = new BinderForm(_engine);
+        BinderForm form = new BinderForm(_engine, _recentPathManager);
 
         _factory.Register(Guid.NewGuid(), form);
     }
@@ -622,7 +622,7 @@ internal partial class MainForm : Form
 
     private void OnAccountsToolStripMenuItemClick(object sender, EventArgs e)
     {
-        _factory.AutoRegister(() => new AccountsForm(_company, _factory, _engine));
+        _factory.AutoRegister(() => new AccountsForm(_company, _factory, _engine, _recentPathManager));
     }
 
     private void OnNewAccountToolStripMenuItemClick(object sender, EventArgs e)
@@ -765,7 +765,7 @@ internal partial class MainForm : Form
 
             IReadOnlyCollection<GnuCashAccount> accounts = await GnuCashSerializer.DeserializeAsync<GnuCashAccount>(input);
 
-            _factory.Register(Guid.NewGuid(), new ImportAccountsForm(_company, _factory, _engine, accounts));
+            _factory.Register(Guid.NewGuid(), new ImportAccountsForm(_company, _factory, _engine, accounts, _recentPathManager));
         });
     }
 
@@ -820,7 +820,7 @@ internal partial class MainForm : Form
         report.Check = checkForm.Value;
 
         Guid key = Guid.NewGuid();
-        ReportsForm form = new ReportsForm(_engine, ReportsFormStyle.Extended)
+        ReportsForm form = new ReportsForm(_engine, ReportsFormStyle.Extended, _recentPathManager)
         {
             Text = checkToolStripMenuItem.Text
         };
@@ -833,7 +833,7 @@ internal partial class MainForm : Form
 
     private void OnReportsToolStripMenuItemClick(object sender, EventArgs e)
     {
-        _factory.Register(Guid.NewGuid(), new ReportsForm(_engine, ReportsFormStyle.Extended));
+        _factory.Register(Guid.NewGuid(), new ReportsForm(_engine, ReportsFormStyle.Extended, _recentPathManager));
     }
 
     private void OnTransactionToolStripMenuItemClick(object sender, EventArgs e)
