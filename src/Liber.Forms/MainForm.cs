@@ -18,7 +18,6 @@ using Liber.Forms.Filters;
 using Liber.Forms.Forms;
 using Liber.Forms.Help;
 using Liber.Forms.Lines;
-using Liber.Forms.LineSources;
 using Liber.Forms.Properties;
 using Liber.Forms.Reports;
 using Liber.Forms.Reports.Gdi;
@@ -95,7 +94,7 @@ internal partial class MainForm : Form
         {
             await ImportAsync(_recentPathManager.Paths.First());
 
-            _factory.RegisterEmbedded(Guid.NewGuid(), new ReportsForm(_engine));
+            _factory.RegisterEmbedded(Guid.NewGuid(), new ReportsForm(_engine, ReportsFormStyle.None));
         }
     }
 
@@ -168,15 +167,17 @@ internal partial class MainForm : Form
 
     private void InitializeReportEngine()
     {
-        if (_engine.Views.Count == 0)
+        if (_engine.Prototypes.Count == 0)
         {
             reportsToolStripMenuItem1.Visible = false;
         }
 
         Dictionary<string, ToolStripMenuItem> groups = new Dictionary<string, ToolStripMenuItem>();
-        Dictionary<(int SortOrder, string Key), List<(string Name, string GenericTitle)>> pending = new Dictionary<(int, string), List<(string, string)>>();
+        Dictionary<(int SortOrder, string Key), List<string>> pending = new Dictionary<(int, string), List<string>>();
 
-        foreach (KeyValuePair<string, IReportView> view in _engine.Views)
+        foreach (KeyValuePair<string, IReportView> view in _engine.Prototypes
+            .OrderBy(x => x.Value.SortOrder)
+            .ThenBy(x => x.Value.GenericTitle))
         {
             string genericTitle = view.Value.GenericTitle;
             string baseTitle;
@@ -194,16 +195,16 @@ internal partial class MainForm : Form
 
             int type = view.Value.SortOrder;
 
-            if (!pending.TryGetValue((type, baseTitle), out List<(string, string)>? items))
+            if (!pending.TryGetValue((type, baseTitle), out List<string>? items))
             {
-                items = new List<(string, string)>();
+                items = new List<string>();
                 pending[(type, baseTitle)] = items;
             }
 
-            items.Add((view.Key, genericTitle));
+            items.Add(view.Key);
         }
 
-        List<IGrouping<int, KeyValuePair<(int, string), List<(string, string)>>>> typeGroups = pending
+        List<IGrouping<int, KeyValuePair<(int, string), List<string>>>> typeGroups = pending
             .GroupBy(x => x.Key.SortOrder)
             .OrderBy(x => x.Key)
             .ToList();
@@ -214,30 +215,42 @@ internal partial class MainForm : Form
                 ? reportsToolStripMenuItem1
                 : otherReportsToolStripMenuItem;
 
-            foreach (KeyValuePair<(int, string Key), List<(string Name, string GenericTitle)>> group in typeGroups[i])
+            int j = 0;
+
+            foreach (KeyValuePair<(int, string Key), List<string>> group in typeGroups[i])
             {
                 if (group.Value.Count == 1)
                 {
-                    ToolStripMenuItem item = new ToolStripMenuItem(group.Value[0].GenericTitle)
+                    string name = group.Value[0];
+                    IReportView prototype = _engine.Prototypes[name];
+                    ToolStripMenuItem item = new ToolStripMenuItem(prototype.GenericTitle)
                     {
-                        Tag = group.Value[0].Name
+                        Tag = name,
+                        Image = ReportImageListManager.ImageList.Images[ReportImageListManager.GetImageIndex(prototype)]
                     };
 
                     item.Click += OnReportToolStripMenuItemClick;
-                    grandparent.DropDownItems.Add(item);
+
+                    grandparent.DropDownItems.Insert(j, item);
+
+                    j++;
 
                     continue;
                 }
 
                 ToolStripMenuItem parent = new ToolStripMenuItem(group.Key.Key);
 
-                grandparent.DropDownItems.Add(parent);
+                grandparent.DropDownItems.Insert(j, parent);
 
-                foreach ((string key, string fullTitle) in group.Value.OrderBy(x => x.GenericTitle))
+                j++;
+
+                foreach (string name in group.Value.OrderBy(x => _engine.Prototypes[x].GenericTitle))
                 {
-                    ToolStripMenuItem child = new ToolStripMenuItem(fullTitle)
+                    IReportView prototype = _engine.Prototypes[name];
+                    ToolStripMenuItem child = new ToolStripMenuItem(prototype.Title)
                     {
-                        Tag = key
+                        Tag = name,
+                        Image = ReportImageListManager.ImageList.Images[ReportImageListManager.GetImageIndex(prototype)]
                     };
 
                     child.Click += OnReportToolStripMenuItemClick;
@@ -245,32 +258,40 @@ internal partial class MainForm : Form
                 }
             }
 
-            if (i < typeGroups.Count - 1)
+            if (i == 0)
             {
-                grandparent.DropDownItems.Add(new ToolStripSeparator());
+                grandparent.DropDownItems.Insert(j, new ToolStripSeparator());
+
+                j++;
             }
         }
-
-        reportsToolStripMenuItem1.DropDownItems.Add(otherReportsToolStripMenuItem);
-        reportsToolStripMenuItem1.DropDownItems.RemoveAt(0);
     }
 
     private void OnReportToolStripMenuItemClick(object? sender, EventArgs e)
     {
         string name = ((ToolStripMenuItem)sender!).Tag!.ToString()!;
         Guid key = Guid.NewGuid();
-        ReportsForm form = new ReportsForm(_engine)
+        IReportView view = _engine.Prototypes[name].Clone();
+
+        ReportsForm form = new ReportsForm(_engine, ReportsFormStyle.Extended)
         {
-            Text = _engine.Views[name].GenericTitle
+            Text = view.GenericTitle
         };
 
         form.Load += (sender, e) =>
         {
-            form.InitializeReport(name);
+            form.InitializeReport(view);
         };
 
         _factory.Kill(key);
         _factory.Register(key, form);
+    }
+
+    private void OnBinderToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        BinderForm form = new BinderForm(_engine);
+
+        _factory.Register(Guid.NewGuid(), form);
     }
 
     private async void OnFormClosing(object sender, FormClosingEventArgs e)
@@ -492,7 +513,7 @@ internal partial class MainForm : Form
 
     private async Task ImportAsync(string path)
     {
-        await AbortRetryIgnoreAsync(async () =>
+        await Program.AbortRetryIgnoreAsync(async () =>
         {
             bool canSave = true;
 
@@ -540,27 +561,6 @@ internal partial class MainForm : Form
         _path = path;
     }
 
-    private static async Task AbortRetryIgnoreAsync(Func<Task> action)
-    {
-        DialogResult result;
-
-        do
-        {
-            try
-            {
-                await action();
-
-                result = DialogResult.OK;
-            }
-            catch (Exception exception)
-            {
-                result = MessageBox.Show(exception.Message, Resources.ExceptionCaption, MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error);
-            }
-        }
-        while (result == DialogResult.Retry);
-
-    }
-
     private async Task ExportAsync(string path, Company company)
     {
         SavingForm form = new SavingForm();
@@ -568,7 +568,7 @@ internal partial class MainForm : Form
 
         form.Show();
 
-        await AbortRetryIgnoreAsync(async () =>
+        await Program.AbortRetryIgnoreAsync(async () =>
         {
             string extension = Path.GetExtension(path);
 
@@ -705,7 +705,7 @@ internal partial class MainForm : Form
 
         form.Show();
 
-        await AbortRetryIgnoreAsync(async () =>
+        await Program.AbortRetryIgnoreAsync(async () =>
         {
             using PdfDocument document = new PdfDocument();
 
@@ -759,7 +759,7 @@ internal partial class MainForm : Form
             return;
         }
 
-        await AbortRetryIgnoreAsync(async () =>
+        await Program.AbortRetryIgnoreAsync(async () =>
         {
             await using FileStream input = File.OpenRead(path);
 
@@ -776,7 +776,7 @@ internal partial class MainForm : Form
             return;
         }
 
-        await AbortRetryIgnoreAsync(async () =>
+        await Program.AbortRetryIgnoreAsync(async () =>
         {
             await using FileStream input = File.OpenRead(path);
 
@@ -795,7 +795,7 @@ internal partial class MainForm : Form
             return;
         }
 
-        await AbortRetryIgnoreAsync(async () =>
+        await Program.AbortRetryIgnoreAsync(async () =>
         {
             await using FileStream output = File.Create(path);
 
@@ -805,7 +805,7 @@ internal partial class MainForm : Form
 
     private void OnCheckToolStripMenuItemClick(object sender, EventArgs e)
     {
-        if (!_engine.TryGetReport(ReportEngine.CheckReport, out GdiCheckReport? report))
+        if (!_engine.Find(ReportEngine.CheckReport, out IReportView? view, out GdiCheckReport? report))
         {
             return;
         }
@@ -820,12 +820,12 @@ internal partial class MainForm : Form
         report.Check = checkForm.Value;
 
         Guid key = Guid.NewGuid();
-        ReportsForm form = new ReportsForm(_engine)
+        ReportsForm form = new ReportsForm(_engine, ReportsFormStyle.Extended)
         {
             Text = checkToolStripMenuItem.Text
         };
 
-        form.Load += (sender, e) => form.InitializeReport(ReportEngine.CheckReport);
+        form.Load += (sender, e) => form.InitializeReport(view);
 
         _factory.Kill(key);
         _factory.Register(key, form);
@@ -833,7 +833,7 @@ internal partial class MainForm : Form
 
     private void OnReportsToolStripMenuItemClick(object sender, EventArgs e)
     {
-        _factory.Register(Guid.NewGuid(), new ReportsForm(_engine));
+        _factory.Register(Guid.NewGuid(), new ReportsForm(_engine, ReportsFormStyle.Extended));
     }
 
     private void OnTransactionToolStripMenuItemClick(object sender, EventArgs e)

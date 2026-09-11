@@ -10,7 +10,7 @@ namespace Liber.Forms.Accounts;
 
 internal static class AccountImageListManager
 {
-    private static readonly Dictionary<Color, int> _imageIndices = new Dictionary<Color, int>();
+    private static readonly Dictionary<Color, int> s_imageIndices = new Dictionary<Color, int>();
 
     public static ImageList ImageList { get; } = new ImageList()
     {
@@ -20,12 +20,14 @@ internal static class AccountImageListManager
 
     public static int GetImageIndex(Color color)
     {
-        if (!_imageIndices.TryGetValue(color, out int imageIndex))
+        if (!s_imageIndices.TryGetValue(color, out int imageIndex))
         {
             imageIndex = ImageList.Images.Count;
-            _imageIndices[color] = imageIndex;
+            s_imageIndices[color] = imageIndex;
 
-            ImageList.Images.Add(CreateColorImage(color));
+            Bitmap image = CreateColorImage(color);
+
+            ImageList.Images.Add(image);
         }
 
         return imageIndex;

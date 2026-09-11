@@ -2,17 +2,27 @@
 // Copyright (c) 2023-2026 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Drawing.Printing;
 using System.IO;
 using Microsoft.Web.WebView2.Core;
 
 namespace Liber.Forms.Reports.Gdi;
 
-internal sealed class GdiReportView : IReportView
+internal sealed class GdiReportView : ICloneable, IReportView
 {
     private static readonly string s_path = Path.GetFullPath(Path.ChangeExtension("document", "pdf"));
 
+    private readonly Company _company;
+    private readonly string _path;
     private readonly GdiReport _report;
+
+    public GdiReportView(Company company, string path)
+    {
+        _report = IniSerializer.DeserializeGdiCheckReport(company, path);
+        _company = company;
+        _path = path;
+    }
 
     public string GenericTitle
     {
@@ -28,13 +38,17 @@ internal sealed class GdiReportView : IReportView
         {
             return _report.Title;
         }
+        set
+        {
+            _report.Title = value;
+        }
     }
 
-    public object Properties
+    public string ImageKey
     {
         get
         {
-            return _report;
+            return _report.ImageKey;
         }
     }
 
@@ -46,12 +60,15 @@ internal sealed class GdiReportView : IReportView
         }
     }
 
-    public GdiReportView(GdiReport report)
+    public IReport Properties
     {
-        _report = report;
+        get
+        {
+            return _report;
+        }
     }
 
-    public void InitializeReport()
+    public void Generate()
     {
         PrintDocument document = new PrintDocument()
         {
@@ -85,5 +102,20 @@ internal sealed class GdiReportView : IReportView
     public void Navigate(CoreWebView2 coreWebView2)
     {
         coreWebView2.Navigate(s_path);
+    }
+
+    public GdiReportView Clone()
+    {
+        return new GdiReportView(_company, _path);
+    }
+
+    IReportView IReportView.Clone()
+    {
+        return Clone();
+    }
+
+    object ICloneable.Clone()
+    {
+        return Clone();
     }
 }

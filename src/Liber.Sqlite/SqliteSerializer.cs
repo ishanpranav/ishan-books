@@ -157,7 +157,7 @@ public static class SqliteSerializer
                         command.Parameters.AddWithValue("@accountId", line.AccountId);
                         command.Parameters.AddWithValue("@balance", line.Balance);
                         command.Parameters.AddWithValue("@description", ValueOf(line.Description));
-                        command.Parameters.AddWithValue("@reconciled", line.Reconciled);
+                        command.Parameters.AddWithValue("@reconciled", ValueOf(line.Reconciled));
 
                         await command.ExecuteNonQueryAsync();
                     }

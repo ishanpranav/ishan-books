@@ -75,7 +75,7 @@ public class TransactionNumberFilter : Filter
     {
         decimal number = value.Transaction.Number;
 
-        return number >= From && number <= To;
+        return number >= _from && number <= _to;
     }
 
     public override Filter Clone()

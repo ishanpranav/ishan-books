@@ -48,7 +48,7 @@ internal class AccountLineSource : ILineSource
 
     public bool CanGetNewLines(Guid siblingId)
     {
-        return siblingId != _value.Id;
+        return siblingId != Guid.Empty && siblingId != _value.Id;
     }
 
     public IReadOnlyCollection<Line> GetNewLines(Guid siblingId, decimal balance)

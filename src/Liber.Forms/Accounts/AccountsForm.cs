@@ -193,7 +193,7 @@ internal partial class AccountsForm : Form
     {
         if (_listView.SelectedItems.Count == 0)
         {
-            value = default;
+            value = null;
 
             return false;
         }
@@ -344,21 +344,21 @@ internal partial class AccountsForm : Form
 
     private void QuickReport(Account account)
     {
-        if (!_engine.TryGetReport(ReportEngine.GeneralJournalReport, out IntervalView? report))
+        if (!_engine.Find(ReportEngine.GeneralJournalReport, out IReportView? view, out IntervalView? report))
         {
             return;
         }
 
-        string title = $"{_engine.Views[ReportEngine.GeneralJournalReport].GenericTitle} - {account.Name}";
+        string title = $"{view.GenericTitle} - {account.Name}";
 
         report.Title = title;
         report.Started = _company.Started;
         report.Posted = _company.Posted;
         report.Level = ReportLevel.ByAccount;
 
-        ReportsForm form = new ReportsForm(_engine)
+        ReportsForm form = new ReportsForm(_engine, ReportsFormStyle.ConfigurationOnly)
         {
-            Text = title
+            Text = title,
         };
 
         form.Load += (sender, e) =>
@@ -367,7 +367,7 @@ internal partial class AccountsForm : Form
 
             report.Accounts = new AccountsView(_company, accounts);
 
-            form.InitializeReport(ReportEngine.GeneralJournalReport);
+            form.InitializeReport(view);
         };
 
         _factory.Kill(account.Id);

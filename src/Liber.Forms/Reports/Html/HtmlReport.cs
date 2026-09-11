@@ -7,29 +7,45 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Liber.Filters;
 
 namespace Liber.Forms.Reports.Html;
 
 [ClassInterface(ClassInterfaceType.AutoDual)]
 [ComVisible(true)]
-public class HtmlReport : IntervalView
+public class HtmlReport : IntervalView, IReport
 {
     private static readonly JsonSerializerOptions s_options = new JsonSerializerOptions(SerializationOptions.Json)
     {
         DefaultIgnoreCondition = JsonIgnoreCondition.Never
     };
 
-    public HtmlReport(string name, Company company) : base(name, company) { }
+    public HtmlReport(string path, Company company) : base(path, company) { }
 
     [LocalizedCategory(nameof(Periodicity))]
     [LocalizedDescription(nameof(Periodicity))]
     [LocalizedDisplayName(nameof(Periodicity))]
     public Periodicity Periodicity { get; set; }
+
+    [Browsable(false)]
+    [JsonIgnore]
+    public string ImageKey
+    {
+        get
+        {
+            switch (Name)
+            {
+                case "pie-chart": return "DoughnutChart";
+                case "time-series": return "FastLineChart";
+            }
+
+            return "GenericChart";
+        }
+    }
 
     private DateTime Start(DateTime current)
     {
@@ -750,5 +766,10 @@ public class HtmlReport : IntervalView
         AddSankeyLink(data, FormattedStrings.NetFinancing, FormattedStrings.NetCashFlow, netFinancing, Colors.JungleTeal, Colors.JungleTeal);
 
         return JsonSerializer.Serialize(data, s_options);
+    }
+
+    IReportView IReport.CreateView(Company company)
+    {
+        return new HtmlReportView(company, Path);
     }
 }
