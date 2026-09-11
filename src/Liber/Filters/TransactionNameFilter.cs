@@ -3,6 +3,7 @@
 // Licensed under the MIT License.
 
 using System.ComponentModel;
+using System.Text.Json.Serialization;
 using Liber.Properties;
 
 namespace Liber.Filters;
@@ -10,6 +11,7 @@ namespace Liber.Filters;
 public class TransactionNameFilter : Filter
 {
     [Browsable(false)]
+    [JsonIgnore]
     public override string Name
     {
         get

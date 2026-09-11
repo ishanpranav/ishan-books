@@ -266,6 +266,8 @@ internal partial class BinderForm : Form
             {
                 _customReportListView.EndUpdate();
             }
+
+            _path = path;
         });
     }
 

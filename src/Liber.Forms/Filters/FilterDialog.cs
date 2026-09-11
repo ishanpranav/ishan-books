@@ -3,6 +3,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 using Liber.Filters;
 
@@ -10,6 +11,7 @@ namespace Liber.Forms.Filters;
 
 internal partial class FilterDialog : Form
 {
+    [TypeConverter(typeof(FilterConverter))]
     public Filter Value
     {
         get

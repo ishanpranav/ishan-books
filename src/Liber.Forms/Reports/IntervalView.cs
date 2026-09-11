@@ -76,10 +76,10 @@ public abstract class IntervalView : IStandardValuesProvider
     public AccountsView Accounts { get; set; }
 
     [Editor(typeof(FilterEditor), typeof(UITypeEditor))]
-    [JsonIgnore]
     [LocalizedCategory(nameof(Filter))]
     [LocalizedDescription(nameof(Filter))]
     [LocalizedDisplayName(nameof(Filter))]
+    [TypeConverter(typeof(FilterConverter))]
     public Filter Filter { get; set; } = new ConjunctionFilter();
 
     [LocalizedCategory(nameof(Started))]

@@ -15,6 +15,7 @@ internal partial class FilterControl : UserControl
     private Filter _value = new ConjunctionFilter();
 
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    [TypeConverter(typeof(FilterConverter))]
     public Filter Value
     {
         get

@@ -3,6 +3,7 @@
 // Licensed under the MIT License.
 
 using System.ComponentModel;
+using System.Text.Json.Serialization;
 using Liber.Properties;
 
 namespace Liber.Filters;
@@ -13,6 +14,7 @@ public class TransactionNumberFilter : Filter
     private decimal _to;
 
     [Browsable(false)]
+    [JsonIgnore]
     public override string Name
     {
         get

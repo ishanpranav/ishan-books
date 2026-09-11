@@ -3,11 +3,18 @@
 // Licensed under the MIT License.
 
 using System;
-using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace Liber.Filters;
 
-[TypeConverter(typeof(FilterConverter))]
+[JsonDerivedType(typeof(BalanceFilter), "balance")]
+[JsonDerivedType(typeof(ConjunctionFilter), "conjunction")]
+[JsonDerivedType(typeof(DescriptionFilter), "description")]
+[JsonDerivedType(typeof(ReconciledFilter), "reconciled")]
+[JsonDerivedType(typeof(TransactionMemoFilter), "transaction-memo")]
+[JsonDerivedType(typeof(TransactionNameFilter), "transaction-name")]
+[JsonDerivedType(typeof(TransactionNumberFilter), "transaction-number")]
+[JsonDerivedType(typeof(TransactionPostedFilter), "transaction-posted")]
 public abstract class Filter : ICloneable
 {
     public abstract string Name { get; }
