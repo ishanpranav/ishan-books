@@ -3,7 +3,6 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -24,6 +23,36 @@ internal partial class ReportsForm : Form
 
     private IReportView? _view;
 
+    public ReportsForm(ReportEngine engine, ReportsFormStyle style)
+    {
+        InitializeComponent();
+        SystemFeatures.Initialize(this);
+
+        switch (style)
+        {
+            case ReportsFormStyle.Extended:
+                _listView.Initialize(engine);
+                break;
+
+            case ReportsFormStyle.None:
+                splitContainer1.Panel1Collapsed = true;
+                break;
+
+            case ReportsFormStyle.ConfigurationOnly:
+                splitContainer2.Panel1Collapsed = true;
+                break;
+        }
+
+        _engine = engine;
+
+        if (engine.Find(ReportEngine.AccountMapReport, out IReportView? favoriteView, out IntervalView? favoriteReport))
+        {
+            View = favoriteView;
+
+            RefreshFavorite(favoriteReport);
+        }
+    }
+
     private IReportView? View
     {
         get
@@ -38,37 +67,6 @@ internal partial class ReportsForm : Form
             {
                 _propertyGrid.SelectedObject = value.Properties;
             }
-        }
-    }
-
-    public ReportsForm(ReportEngine engine)
-    {
-        InitializeComponent();
-        SystemFeatures.Initialize(this);
-
-        foreach (KeyValuePair<string, IReportView> view in engine.Views
-            .OrderBy(x => x.Value.SortOrder)
-            .ThenBy(x => x.Value.GenericTitle))
-        {
-            ListViewItem item = _listView.Items.Add(view.Key, view.Value.GenericTitle, imageIndex: 0);
-
-            item.ImageIndex = _imageList.Images.Count - 1;
-            item.Tag = view.Value;
-
-            if (view.Value.Properties is IntervalView report)
-            {
-                report.Accounts = new AccountsView(engine.Company);
-            }
-        }
-
-        _engine = engine;
-
-        if (engine.Views.TryGetValue(ReportEngine.AccountMapReport, out IReportView? favoriteView) &&
-            favoriteView.Properties is IntervalView favoriteReport)
-        {
-            View = favoriteView;
-
-            RefreshFavorite(favoriteReport);
         }
     }
 
@@ -92,11 +90,11 @@ internal partial class ReportsForm : Form
         }
         catch (COMException) { }
 
-        InitializeReport();
+        GenerateReport();
         _timer.Start();
     }
 
-    private void InitializeReport()
+    private void GenerateReport()
     {
         if (View != null && !_backgroundWorker.IsBusy)
         {
@@ -104,25 +102,25 @@ internal partial class ReportsForm : Form
         }
     }
 
-    public void InitializeReport(string key)
+    public void InitializeReport(IReportView view)
     {
-        View = (IReportView)_listView.Items[key]!.Tag!;
+        View = view;
 
-        InitializeReport();
+        GenerateReport();
     }
 
     private void OnListViewItemActivate(object sender, EventArgs e)
     {
-        if (_listView.SelectedItems.Count == 0)
+        if (!_listView.TryGetSelection(out IReportView? view))
         {
             return;
         }
 
         _timer.Stop();
 
-        View = (IReportView)_listView.SelectedItems[0].Tag!;
+        View = view;
 
-        if (View.Properties is GdiCheckReport checkReport && checkReport.Check.Value == null)
+        if (view.Properties is GdiCheckReport checkReport && checkReport.Check.Value == null)
         {
             using CheckDialog checkForm = new CheckDialog(checkReport.Check);
 
@@ -132,13 +130,13 @@ internal partial class ReportsForm : Form
             }
         }
 
-        InitializeReport();
+        GenerateReport();
     }
 
     private void OnPropertyGridPropertyValueChanged(object sender, PropertyValueChangedEventArgs e)
     {
         _timer.Stop();
-        InitializeReport();
+        GenerateReport();
     }
 
     private void OnBackgroundWorkerDoWork(object sender, DoWorkEventArgs e)
@@ -150,7 +148,7 @@ internal partial class ReportsForm : Form
             return;
         }
 
-        _view.InitializeReport();
+        _view.Generate();
     }
 
     private void OnBackgroundWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -189,7 +187,7 @@ internal partial class ReportsForm : Form
         }
 
         RefreshFavorite(report);
-        InitializeReport();
+        GenerateReport();
     }
 
     protected override void Dispose(bool disposing)

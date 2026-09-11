@@ -11,12 +11,13 @@ using Microsoft.Web.WebView2.Core;
 
 namespace Liber.Forms.Reports.Xsl;
 
-internal sealed class XslReportView : IReportView
+internal sealed class XslReportView : ICloneable, IReportView
 {
     private static readonly Dictionary<string, XslCompiledTransform> s_styles = new Dictionary<string, XslCompiledTransform>();
 
     private static Dictionary<string, ReportTypes>? s_reports;
 
+    private readonly Company _company;
     private readonly string _path;
     private readonly XslReport _report;
 
@@ -24,7 +25,8 @@ internal sealed class XslReportView : IReportView
 
     public XslReportView(Company company, string path)
     {
-        _report = new XslReport(Path.GetFileNameWithoutExtension(path), company);
+        _report = new XslReport(path, company);
+        _company = company;
         _path = path;
     }
 
@@ -42,13 +44,17 @@ internal sealed class XslReportView : IReportView
         {
             return _report.Title;
         }
+        set
+        {
+            _report.Title = value;
+        }
     }
 
-    public object Properties
+    public string ImageKey
     {
         get
         {
-            return _report;
+            return "Report";
         }
     }
 
@@ -60,7 +66,15 @@ internal sealed class XslReportView : IReportView
         }
     }
 
-    public void InitializeReport()
+    public IReport Properties
+    {
+        get
+        {
+            return _report;
+        }
+    }
+
+    public void Generate()
     {
         if (s_reports != null && s_reports.TryGetValue(Path.GetFileNameWithoutExtension(_path), out ReportTypes value))
         {
@@ -95,5 +109,20 @@ internal sealed class XslReportView : IReportView
         using FileStream input = File.OpenRead(path);
 
         s_reports = JsonSerializer.Deserialize<Dictionary<string, ReportTypes>>(input, SerializationOptions.Json);
+    }
+
+    public XslReportView Clone()
+    {
+        return new XslReportView(_company, _path);
+    }
+
+    IReportView IReportView.Clone()
+    {
+        return Clone();
+    }
+
+    object ICloneable.Clone()
+    {
+        return Clone();
     }
 }

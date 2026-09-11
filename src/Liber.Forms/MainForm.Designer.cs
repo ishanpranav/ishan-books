@@ -87,6 +87,7 @@ partial class MainForm
         splashScreenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         reportsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
         otherReportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        binderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         formToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         closeAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         formsToolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
@@ -115,6 +116,7 @@ partial class MainForm
         _saveFileDialog = new System.Windows.Forms.SaveFileDialog();
         _recentPathManager = new RecentPathManager(components);
         _factory = new FormFactory(components);
+        saveAsToolStripButton = new System.Windows.Forms.ToolStripButton();
         _menuStrip.SuspendLayout();
         _toolStrip.SuspendLayout();
         SuspendLayout();
@@ -360,6 +362,7 @@ partial class MainForm
         // 
         // checkToolStripMenuItem
         // 
+        checkToolStripMenuItem.Image = VisualStudioImageLibrary.MoneyEditor;
         checkToolStripMenuItem.Name = "checkToolStripMenuItem";
         resources.ApplyResources(checkToolStripMenuItem, "checkToolStripMenuItem");
         checkToolStripMenuItem.Click += OnCheckToolStripMenuItemClick;
@@ -439,7 +442,7 @@ partial class MainForm
         // 
         // reportsToolStripMenuItem1
         // 
-        reportsToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { otherReportsToolStripMenuItem });
+        reportsToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { otherReportsToolStripMenuItem, binderToolStripMenuItem });
         reportsToolStripMenuItem1.Name = "reportsToolStripMenuItem1";
         resources.ApplyResources(reportsToolStripMenuItem1, "reportsToolStripMenuItem1");
         // 
@@ -447,6 +450,12 @@ partial class MainForm
         // 
         otherReportsToolStripMenuItem.Name = "otherReportsToolStripMenuItem";
         resources.ApplyResources(otherReportsToolStripMenuItem, "otherReportsToolStripMenuItem");
+        // 
+        // binderToolStripMenuItem
+        // 
+        binderToolStripMenuItem.Name = "binderToolStripMenuItem";
+        resources.ApplyResources(binderToolStripMenuItem, "binderToolStripMenuItem");
+        binderToolStripMenuItem.Click += OnBinderToolStripMenuItemClick;
         // 
         // formToolStripMenuItem
         // 
@@ -517,7 +526,7 @@ partial class MainForm
         // 
         // _toolStrip
         // 
-        _toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripButton, openToolStripButton, saveToolStripButton, toolStripSeparator6, accountsToolStripButton, transactionToolStripButton, toolStripSeparator10, transactionsToolStripButton, toolStripSeparator11, reportsToolStripButton, toolStripSeparator15, taskItemsToolStripButton });
+        _toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripButton, openToolStripButton, saveToolStripButton, saveAsToolStripButton, toolStripSeparator6, accountsToolStripButton, transactionToolStripButton, toolStripSeparator10, transactionsToolStripButton, toolStripSeparator11, reportsToolStripButton, toolStripSeparator15, taskItemsToolStripButton });
         resources.ApplyResources(_toolStrip, "_toolStrip");
         _toolStrip.Name = "_toolStrip";
         // 
@@ -627,6 +636,14 @@ partial class MainForm
         // 
         _factory.Invalidated += OnFactoryInvalidated;
         // 
+        // saveAsToolStripButton
+        // 
+        saveAsToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+        saveAsToolStripButton.Image = VisualStudioImageLibrary.SaveAs;
+        resources.ApplyResources(saveAsToolStripButton, "saveAsToolStripButton");
+        saveAsToolStripButton.Name = "saveAsToolStripButton";
+        saveAsToolStripButton.Click += OnSaveAsToolStripMenuItemClick;
+        // 
         // MainForm
         // 
         AllowDrop = true;
@@ -734,4 +751,6 @@ partial class MainForm
     private System.Windows.Forms.ToolStripMenuItem splashScreenToolStripMenuItem;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator19;
     private System.Windows.Forms.ToolStripMenuItem findToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem binderToolStripMenuItem;
+    private System.Windows.Forms.ToolStripButton saveAsToolStripButton;
 }
