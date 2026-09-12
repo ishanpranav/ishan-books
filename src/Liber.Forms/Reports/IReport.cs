@@ -14,5 +14,7 @@ namespace Liber.Forms.Reports;
 [JsonDerivedType(typeof(XslReport), "xsl")]
 internal interface IReport
 {
+    string Title { get; set; }
+
     IReportView CreateView(Company company);
 }

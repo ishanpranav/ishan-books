@@ -630,6 +630,9 @@
   <data name="_saveFileDialog.Filter" xml:space="preserve">
     <value>JavaScript Object Notation (*.json)|*.json|PDF Document (*.pdf)|*.pdf</value>
   </data>
+  <metadata name="_recentPathManager.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 34</value>
+  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -923,6 +926,12 @@
   </data>
   <data name="&gt;&gt;_saveFileDialog.Type" xml:space="preserve">
     <value>System.Windows.Forms.SaveFileDialog, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_recentPathManager.Name" xml:space="preserve">
+    <value>_recentPathManager</value>
+  </data>
+  <data name="&gt;&gt;_recentPathManager.Type" xml:space="preserve">
+    <value>Liber.Forms.RecentPaths.RecentPathManager, Liber.Forms, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>BinderForm</value>

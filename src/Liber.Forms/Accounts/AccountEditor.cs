@@ -11,7 +11,7 @@ using Liber.Forms.AccountViews;
 
 namespace Liber.Forms.Accounts;
 
-internal sealed class AccountEditor : UITypeEditor
+internal class AccountEditor : UITypeEditor
 {
     public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext? context)
     {

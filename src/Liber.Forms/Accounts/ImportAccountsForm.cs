@@ -106,6 +106,6 @@ internal sealed class ImportAccountsForm : ImportForm
             Company.UpdateAccount(account.Value.Id, parentId, account.Value.Number, account.Value.Name, account.Value.Type);
         }
 
-        _factory.Register(typeof(AccountsForm).GUID, new AccountsForm(Company, _factory, _engine, _recentPathManager));
+        _factory.Register(typeof(AccountsForm).GUID, new AccountsForm(Company, _factory, _engine));
     }
 }

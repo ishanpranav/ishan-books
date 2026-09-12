@@ -38,18 +38,6 @@ internal sealed class XslReportView : ICloneable, IReportView
         }
     }
 
-    public string Title
-    {
-        get
-        {
-            return _report.Title;
-        }
-        set
-        {
-            _report.Title = value;
-        }
-    }
-
     public string ImageKey
     {
         get
@@ -62,7 +50,7 @@ internal sealed class XslReportView : ICloneable, IReportView
     {
         get
         {
-            return 1;
+            return 2;
         }
     }
 
@@ -90,11 +78,11 @@ internal sealed class XslReportView : ICloneable, IReportView
         _xhtml = XmlReportSerializer.Serialize(style, _report);
     }
 
-    public void Navigate(CoreWebView2 coreWebView2)
+    public void Navigate(ReportWebView webView)
     {
         try
         {
-            coreWebView2.NavigateToString(_xhtml);
+            webView.CoreWebView2.NavigateToString(_xhtml);
         }
         catch (ArgumentException) { }
     }
@@ -113,11 +101,9 @@ internal sealed class XslReportView : ICloneable, IReportView
 
     public XslReportView Clone()
     {
-        XslReportView result = new XslReportView(_company, _path)
-        {
-            Title = Title
-        };
+        XslReportView result = new XslReportView(_company, _path);
 
+        result._report.Title = _report.Title;
         result._report.Started = _report.Started;
         result._report.Posted = _report.Posted;
         result._report.Level = _report.Level;

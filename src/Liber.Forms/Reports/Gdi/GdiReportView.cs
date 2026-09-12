@@ -4,15 +4,11 @@
 
 using System;
 using System.Drawing.Printing;
-using System.IO;
-using Microsoft.Web.WebView2.Core;
 
 namespace Liber.Forms.Reports.Gdi;
 
 internal sealed class GdiReportView : ICloneable, IReportView
 {
-    private static readonly string s_path = Path.GetFullPath(Path.ChangeExtension("document", "pdf"));
-
     private readonly Company _company;
     private readonly string _path;
     private readonly GdiReport _report;
@@ -32,18 +28,6 @@ internal sealed class GdiReportView : ICloneable, IReportView
         }
     }
 
-    public string Title
-    {
-        get
-        {
-            return _report.Title;
-        }
-        set
-        {
-            _report.Title = value;
-        }
-    }
-
     public string ImageKey
     {
         get
@@ -56,7 +40,7 @@ internal sealed class GdiReportView : ICloneable, IReportView
     {
         get
         {
-            return 3;
+            return 4;
         }
     }
 
@@ -76,9 +60,9 @@ internal sealed class GdiReportView : ICloneable, IReportView
             {
                 PrinterName = "Microsoft Print to PDF",
                 PrintToFile = true,
-                PrintFileName = s_path
+                PrintFileName = ReportEngine.DocumentPath
             },
-            DocumentName = Title
+            DocumentName = _report.Title
         };
 
         document.QueryPageSettings += (sender, e) =>
@@ -99,9 +83,9 @@ internal sealed class GdiReportView : ICloneable, IReportView
         document.Print();
     }
 
-    public void Navigate(CoreWebView2 coreWebView2)
+    public void Navigate(ReportWebView webView)
     {
-        coreWebView2.Navigate(s_path);
+        webView.CoreWebView2.Navigate(ReportEngine.DocumentPath);
     }
 
     public GdiReportView Clone()

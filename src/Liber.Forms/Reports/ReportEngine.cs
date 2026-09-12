@@ -6,7 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using System.Linq;
+using Liber.Forms.RecentPaths;
+using Liber.Forms.Reports.Binder;
 using Liber.Forms.Reports.Gdi;
 using Liber.Forms.Reports.Html;
 using Liber.Forms.Reports.Xsl;
@@ -20,15 +21,14 @@ internal sealed class ReportEngine
     public const string CheckReport = "CPA 006 Middle ASAP";
     private readonly Dictionary<string, IReportView> _prototypes = new Dictionary<string, IReportView>();
 
+    public static readonly string DocumentPath = Path.GetFullPath(Path.ChangeExtension("document", "pdf"));
+
     public ReportEngine(Company company)
     {
         Company = company;
 
         XslReportView.InitializeReports(Path.Combine("data", Path.ChangeExtension("reports", "json")));
-        InitializeReports(
-            path: "styles",
-            searchPattern: "*.xslt",
-            x => new XslReportView(company, x));
+        _prototypes.Add("Binder", new BinderReportView(this, new List<IReportView>()));
         InitializeReports(
             path: "checks",
             searchPattern: "*.chk",
@@ -41,6 +41,11 @@ internal sealed class ReportEngine
             path: "pages",
             searchPattern: "*.html",
             x => new HtmlReportView(company, x));
+        //_prototypes.Add("Pdf", new PdfReportView());
+        InitializeReports(
+            path: "styles",
+            searchPattern: "*.xslt",
+            x => new XslReportView(company, x));
     }
 
     public Company Company { get; }

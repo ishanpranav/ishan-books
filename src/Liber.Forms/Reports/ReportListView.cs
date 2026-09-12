@@ -2,6 +2,7 @@
 // Copyright (c) 2023-2026 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
@@ -43,7 +44,7 @@ internal class ReportListView : ListViewEx
             {
                 IReportView view = prototype.Value.Clone();
 
-                view.Title = view.GenericTitle;
+                view.Properties.Title = view.GenericTitle;
 
                 InsertReport(Items.Count, engine, prototype.Key, view);
             }
@@ -57,9 +58,28 @@ internal class ReportListView : ListViewEx
         }
     }
 
+    public void Initialize(ReportEngine engine, IEnumerable<IReportView> views)
+    {
+        BeginUpdate();
+
+        try
+        {
+            foreach (IReportView view in views)
+            {
+                InsertReport(Items.Count, engine, Guid.NewGuid().ToString(), view);
+            }
+
+            AutoResizeColumns();
+        }
+        finally
+        {
+            EndUpdate();
+        }
+    }
+
     public void InsertReport(int index, ReportEngine engine, string key, IReportView view)
     {
-        ListViewItem item = Items.Insert(index, key, view.Title, ReportImageListManager.GetImageIndex(view));
+        ListViewItem item = Items.Insert(index, key, view.Properties.Title, ReportImageListManager.GetImageIndex(view));
 
         item.Tag = view;
 

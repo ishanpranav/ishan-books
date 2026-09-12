@@ -75,6 +75,7 @@ partial class BinderForm
         toolStripButton7 = new System.Windows.Forms.ToolStripButton();
         _openFileDialog = new System.Windows.Forms.OpenFileDialog();
         _saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+        _recentPathManager = new Liber.Forms.RecentPaths.RecentPathManager(components);
         _customReportContextMenu.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
         splitContainer1.Panel1.SuspendLayout();
@@ -466,6 +467,10 @@ partial class BinderForm
         resources.ApplyResources(_saveFileDialog, "_saveFileDialog");
         _saveFileDialog.RestoreDirectory = true;
         // 
+        // _recentPathManager
+        // 
+        _recentPathManager.MaxPaths = 1;
+        // 
         // BinderForm
         // 
         resources.ApplyResources(this, "$this");
@@ -545,4 +550,5 @@ partial class BinderForm
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
     private System.Windows.Forms.ToolStripMenuItem printToolStripMenuItem;
     private System.Windows.Forms.ToolStripButton saveAsToolStripButton;
+    private RecentPaths.RecentPathManager _recentPathManager;
 }
