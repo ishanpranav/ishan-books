@@ -471,4 +471,13 @@
   <data name="_d_Binder" xml:space="preserve">
     <value>Specifies the sections of the custom report.</value>
   </data>
+  <data name="Path" xml:space="preserve">
+    <value>File Path</value>
+  </data>
+  <data name="_d_Path" xml:space="preserve">
+    <value>Specifies the path to the linked document.</value>
+  </data>
+  <data name="_c_Path" xml:space="preserve">
+    <value>Data Source</value>
+  </data>
 </root>

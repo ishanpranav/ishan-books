@@ -382,37 +382,37 @@
     <value>222, 6</value>
   </data>
   <data name="newAccountToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>173, 22</value>
   </data>
   <data name="newAccountToolStripMenuItem.Text" xml:space="preserve">
     <value>New Account</value>
   </data>
   <data name="reconcileAccountToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>173, 22</value>
   </data>
   <data name="reconcileAccountToolStripMenuItem.Text" xml:space="preserve">
     <value>Reconcile Account</value>
   </data>
   <data name="removeAccountToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>173, 22</value>
   </data>
   <data name="removeAccountToolStripMenuItem.Text" xml:space="preserve">
     <value>Delete Account</value>
   </data>
   <data name="toolStripSeparator13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>170, 6</value>
   </data>
   <data name="binderToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>173, 22</value>
   </data>
   <data name="binderToolStripMenuItem1.Text" xml:space="preserve">
     <value>Custom Report</value>
   </data>
   <data name="toolStripSeparator18.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>170, 6</value>
   </data>
   <data name="splashScreenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>173, 22</value>
   </data>
   <data name="splashScreenToolStripMenuItem.Text" xml:space="preserve">
     <value>Splash Screen</value>
@@ -430,13 +430,13 @@
     <value>&amp;View</value>
   </data>
   <data name="otherReportsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>154, 22</value>
   </data>
   <data name="otherReportsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Other Reports</value>
   </data>
   <data name="binderToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>154, 22</value>
   </data>
   <data name="binderToolStripMenuItem.Text" xml:space="preserve">
     <value>Custom Report</value>

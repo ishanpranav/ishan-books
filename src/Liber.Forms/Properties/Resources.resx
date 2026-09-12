@@ -169,6 +169,9 @@
   <data name="NoAccount" xml:space="preserve">
     <value>(None)</value>
   </data>
+  <data name="PdfGenericTitle" xml:space="preserve">
+    <value>Linked Document</value>
+  </data>
   <data name="Posted" xml:space="preserve">
     <value>Date</value>
   </data>

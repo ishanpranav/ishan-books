@@ -639,7 +639,7 @@ partial class MainForm
         // 
         // _openFileDialog
         // 
-        _openFileDialog.DefaultExt = "shbk";
+        _openFileDialog.DefaultExt = "izbk";
         resources.ApplyResources(_openFileDialog, "_openFileDialog");
         _openFileDialog.RestoreDirectory = true;
         _openFileDialog.Tag = "";

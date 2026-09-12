@@ -3,55 +3,114 @@
 // Licensed under the MIT License.
 
 using System;
+using System.ComponentModel;
+using System.Drawing.Design;
+using System.IO;
+using System.Text.Json.Serialization;
+using Liber.Forms.Editors;
+using Liber.Forms.Properties;
 
 namespace Liber.Forms.Reports.Pdf;
 
-internal class PdfReportView : IReportView
+internal class PdfReportView :
+    ICloneable,
+    IReport,
+    IReportView
 {
+    private string? _title;
+
+    [Browsable(false)]
+    [JsonIgnore]
     public string GenericTitle
     {
         get
         {
-            throw new NotImplementedException();
+            return System.IO.Path.GetFileNameWithoutExtension(Path) ?? Resources.PdfGenericTitle;
         }
     }
 
+    [Browsable(false)]
+    [JsonIgnore]
     public string ImageKey
     {
         get
         {
-            throw new NotImplementedException();
+            return "ImageMapFile";
         }
     }
 
+    [Browsable(false)]
+    [JsonIgnore]
     public int SortOrder
     {
         get
         {
-            throw new NotImplementedException();
+            return 4;
         }
     }
 
-    public IReport Properties
+    IReport IReportView.Properties
     {
         get
         {
-            throw new NotImplementedException();
+            return this;
         }
     }
 
-    public IReportView Clone()
+    [LocalizedCategory(nameof(Title))]
+    [LocalizedDescription(nameof(Title))]
+    [LocalizedDisplayName(nameof(Title))]
+    public string Title
     {
-        throw new NotImplementedException();
+        get
+        {
+            return _title ?? GenericTitle;
+        }
+        set
+        { 
+            _title = value;
+        }
     }
 
-    public void Generate()
-    {
-        throw new NotImplementedException();
-    }
+    [LocalizedCategory(nameof(Path))]
+    [LocalizedDescription(nameof(Path))]
+    [LocalizedDisplayName(nameof(Path))]
+    [Editor(typeof(OpenFileDialogEditor), typeof(UITypeEditor))]
+    public string? Path { get; set; } 
+
+    void IReportView.Generate() { }
 
     public void Navigate(ReportWebView webView)
     {
-        throw new NotImplementedException();
+        if (File.Exists(Path))
+        {
+            webView.CoreWebView2.Navigate(Path);
+        }
+    }
+
+    public PdfReportView Clone()
+    {
+        PdfReportView result = new PdfReportView()
+        {
+            Path = Path,
+            Title = Title
+        };
+
+        return result;
+    }
+
+    IReportView IReportView.Clone()
+    {
+        return Clone();
+    }
+
+    object ICloneable.Clone()
+    {
+        return Clone();
+    }
+
+    IReportView IReport.CreateView(Company company)
+    {
+        return Clone();
     }
 }

@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Text.Json.Serialization;
 using Liber.Forms.Properties;
 
 namespace Liber.Forms.Reports.Binder;
@@ -21,6 +22,7 @@ internal sealed class BinderReportView :
     }
 
     [Browsable(false)]
+    [JsonIgnore]
     public string GenericTitle
     {
         get
@@ -30,6 +32,7 @@ internal sealed class BinderReportView :
     }
 
     [Browsable(false)]
+    [JsonIgnore]
     public string ImageKey
     {
         get
@@ -39,6 +42,7 @@ internal sealed class BinderReportView :
     }
 
     [Browsable(false)]
+    [JsonIgnore]
     public int SortOrder
     {
         get
@@ -99,6 +103,6 @@ internal sealed class BinderReportView :
 
     IReportView IReport.CreateView(Company company)
     {
-        return new BinderReportView(Binder.Engine, Binder.Views);
+        return Clone();
     }
 }
