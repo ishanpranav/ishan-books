@@ -25,6 +25,7 @@ namespace Liber.Forms.Reports
             _propertyGrid = new System.Windows.Forms.PropertyGrid();
             _webView = new ReportWebView();
             _timer = new System.Windows.Forms.Timer(components);
+            _recentPathManager = new RecentPathManager(components);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -95,6 +96,10 @@ namespace Liber.Forms.Reports
             _timer.Interval = 30000;
             _timer.Tick += OnTimerTick;
             // 
+            // _recentPathManager
+            // 
+            _recentPathManager.MaxPaths = 1;
+            // 
             // ReportsForm
             // 
             resources.ApplyResources(this, "$this");
@@ -122,5 +127,6 @@ namespace Liber.Forms.Reports
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.PropertyGrid _propertyGrid;
         private System.Windows.Forms.Timer _timer;
+        private RecentPathManager _recentPathManager;
     }
 }

@@ -94,7 +94,7 @@ internal partial class MainForm : Form
         {
             await ImportAsync(_recentPathManager.Paths.First());
 
-            _factory.RegisterEmbedded(Guid.NewGuid(), new ReportsForm(_engine, ReportsFormStyle.None, _recentPathManager));
+            _factory.RegisterEmbedded(Guid.NewGuid(), new ReportsForm(_engine, ReportsFormStyle.None));
         }
     }
 
@@ -211,7 +211,7 @@ internal partial class MainForm : Form
 
         for (int i = 0; i < typeGroups.Count; i++)
         {
-            ToolStripMenuItem grandparent = i == 0
+            ToolStripMenuItem grandparent = i == 1
                 ? reportsToolStripMenuItem1
                 : otherReportsToolStripMenuItem;
 
@@ -247,7 +247,7 @@ internal partial class MainForm : Form
                 foreach (string name in group.Value.OrderBy(x => _engine.Prototypes[x].GenericTitle))
                 {
                     IReportView prototype = _engine.Prototypes[name];
-                    ToolStripMenuItem child = new ToolStripMenuItem(prototype.Title)
+                    ToolStripMenuItem child = new ToolStripMenuItem(prototype.Properties.Title)
                     {
                         Tag = name,
                         Image = ReportImageListManager.ImageList.Images[ReportImageListManager.GetImageIndex(prototype)]
@@ -258,7 +258,7 @@ internal partial class MainForm : Form
                 }
             }
 
-            if (i == 0)
+            if (i == 1)
             {
                 grandparent.DropDownItems.Insert(j, new ToolStripSeparator());
 
@@ -273,7 +273,7 @@ internal partial class MainForm : Form
         Guid key = Guid.NewGuid();
         IReportView view = _engine.Prototypes[name].Clone();
 
-        ReportsForm form = new ReportsForm(_engine, ReportsFormStyle.Extended, _recentPathManager)
+        ReportsForm form = new ReportsForm(_engine, ReportsFormStyle.Extended)
         {
             Text = view.GenericTitle
         };
@@ -289,7 +289,7 @@ internal partial class MainForm : Form
 
     private void OnBinderToolStripMenuItemClick(object sender, EventArgs e)
     {
-        BinderForm form = new BinderForm(_engine, _recentPathManager);
+        BinderForm form = new BinderForm(_engine, Array.Empty<IReportView>());
 
         _factory.Register(Guid.NewGuid(), form);
     }
@@ -622,7 +622,7 @@ internal partial class MainForm : Form
 
     private void OnAccountsToolStripMenuItemClick(object sender, EventArgs e)
     {
-        _factory.AutoRegister(() => new AccountsForm(_company, _factory, _engine, _recentPathManager));
+        _factory.AutoRegister(() => new AccountsForm(_company, _factory, _engine));
     }
 
     private void OnNewAccountToolStripMenuItemClick(object sender, EventArgs e)
@@ -820,7 +820,7 @@ internal partial class MainForm : Form
         report.Check = checkForm.Value;
 
         Guid key = Guid.NewGuid();
-        ReportsForm form = new ReportsForm(_engine, ReportsFormStyle.Extended, _recentPathManager)
+        ReportsForm form = new ReportsForm(_engine, ReportsFormStyle.Extended)
         {
             Text = checkToolStripMenuItem.Text
         };
@@ -833,7 +833,7 @@ internal partial class MainForm : Form
 
     private void OnReportsToolStripMenuItemClick(object sender, EventArgs e)
     {
-        _factory.Register(Guid.NewGuid(), new ReportsForm(_engine, ReportsFormStyle.Extended, _recentPathManager));
+        _factory.Register(Guid.NewGuid(), new ReportsForm(_engine, ReportsFormStyle.Extended));
     }
 
     private void OnTransactionToolStripMenuItemClick(object sender, EventArgs e)

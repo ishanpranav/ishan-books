@@ -10,7 +10,7 @@ using System.Windows.Forms.Design;
 
 namespace Liber.Forms.Accounts;
 
-internal sealed class AccountsEditor : UITypeEditor
+internal class AccountsEditor : UITypeEditor
 {
     public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext? context)
     {

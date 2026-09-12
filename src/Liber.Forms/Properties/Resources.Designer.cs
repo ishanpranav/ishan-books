@@ -70,6 +70,15 @@ namespace Liber.Forms.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Custom Report.
+        /// </summary>
+        internal static string BinderGenericTitle {
+            get {
+                return ResourceManager.GetString("BinderGenericTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save Changes.
         /// </summary>
         internal static string CancelCaption {

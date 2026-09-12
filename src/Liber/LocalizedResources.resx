@@ -462,4 +462,13 @@
   <data name="_d_Value" xml:space="preserve">
     <value>Specifies the value to search for or filter by.</value>
   </data>
+  <data name="Binder" xml:space="preserve">
+    <value>Sections</value>
+  </data>
+  <data name="_c_Binder" xml:space="preserve">
+    <value>Sections</value>
+  </data>
+  <data name="_d_Binder" xml:space="preserve">
+    <value>Specifies the sections of the custom report.</value>
+  </data>
 </root>

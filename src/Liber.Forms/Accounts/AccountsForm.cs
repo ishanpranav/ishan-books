@@ -24,11 +24,10 @@ internal partial class AccountsForm : Form
     private readonly FormFactory _factory;
     private readonly Dictionary<Guid, ListViewItem> _items = new Dictionary<Guid, ListViewItem>();
     private readonly ReportEngine _engine;
-    private readonly RecentPathManager _recentPathManager;
 
     private Font? _strikeoutFont;
 
-    public AccountsForm(Company company, FormFactory factory, ReportEngine engine, RecentPathManager recentPathManager)
+    public AccountsForm(Company company, FormFactory factory, ReportEngine engine)
     {
         InitializeComponent();
         SystemFeatures.Initialize(this);
@@ -43,7 +42,6 @@ internal partial class AccountsForm : Form
         _company = company;
         _factory = factory;
         _engine = engine;
-        _recentPathManager = recentPathManager;
         inactiveToolStripMenuItem.Checked = Settings.Default.Inactive;
         _listView.SmallImageList = AccountImageListManager.ImageList;
 
@@ -359,7 +357,7 @@ internal partial class AccountsForm : Form
         report.Posted = _company.Posted;
         report.Level = ReportLevel.ByAccount;
 
-        ReportsForm form = new ReportsForm(_engine, ReportsFormStyle.ConfigurationOnly, _recentPathManager)
+        ReportsForm form = new ReportsForm(_engine, ReportsFormStyle.ConfigurationOnly)
         {
             Text = title,
         };

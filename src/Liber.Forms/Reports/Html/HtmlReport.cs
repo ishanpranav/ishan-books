@@ -7,12 +7,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Liber.Forms.Reports.Xsl;
 
 namespace Liber.Forms.Reports.Html;
 
@@ -771,12 +769,10 @@ public class HtmlReport : IntervalView, IReport
 
     IReportView IReport.CreateView(Company company)
     {
-        HtmlReportView result = new HtmlReportView(company, Path)
-        {
-            Title = Title
-        };
+        HtmlReportView result = new HtmlReportView(company, Path);
         HtmlReport report = (HtmlReport)result.Properties;
 
+        report.Title = Title;
         report.Started = Started;
         report.Posted = Posted;
         report.Level = Level;

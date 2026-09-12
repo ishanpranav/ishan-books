@@ -15,12 +15,11 @@ namespace Liber.Forms.Reports;
 internal partial class ReportsForm : Form
 {
     private readonly ReportEngine _engine;
-    private readonly RecentPathManager _recentPathManager;
 
     private int _favoriteIndex = 0;
     private IReportView? _view;
 
-    public ReportsForm(ReportEngine engine, ReportsFormStyle style, RecentPathManager recentPathManager)
+    public ReportsForm(ReportEngine engine, ReportsFormStyle style)
     {
         InitializeComponent();
         SystemFeatures.Initialize(this);
@@ -41,7 +40,6 @@ internal partial class ReportsForm : Form
         }
 
         _engine = engine;
-        _recentPathManager = recentPathManager;
 
         if (engine.Find(ReportEngine.AccountMapReport, out IReportView? favoriteView, out IntervalView? favoriteReport))
         {

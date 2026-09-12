@@ -365,12 +365,10 @@ public class XslReport :
 
     IReportView IReport.CreateView(Company company)
     {
-        XslReportView result = new XslReportView(company, Path)
-        {
-            Title = Title
-        };
+        XslReportView result = new XslReportView(company, Path);
         XslReport report = (XslReport)result.Properties;
 
+        report.Title = Title;
         report.Started = Started;
         report.Posted = Posted;
         report.Level = Level;

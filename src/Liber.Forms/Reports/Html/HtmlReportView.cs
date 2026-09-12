@@ -5,8 +5,6 @@
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
-using Microsoft.Web.WebView2.Core;
-using static System.Windows.Forms.AxHost;
 
 namespace Liber.Forms.Reports.Html;
 
@@ -31,18 +29,6 @@ internal sealed class HtmlReportView : ICloneable, IReportView
         }
     }
 
-    public string Title
-    {
-        get
-        {
-            return _report.Title;
-        }
-        set
-        {
-            _report.Title = value;
-        }
-    }
-
     public string ImageKey
     {
         get
@@ -55,7 +41,7 @@ internal sealed class HtmlReportView : ICloneable, IReportView
     {
         get
         {
-            return 2;
+            return 3;
         }
     }
 
@@ -67,27 +53,25 @@ internal sealed class HtmlReportView : ICloneable, IReportView
         }
     }
 
-    public void Generate() { }
+    void IReportView.Generate() { }
 
-    public void Navigate(CoreWebView2 coreWebView2)
+    public void Navigate(ReportWebView webView)
     {
         try
         {
-            coreWebView2.RemoveHostObjectFromScript("report");
+            webView.CoreWebView2.RemoveHostObjectFromScript("report");
         }
         catch (COMException) { }
 
-        coreWebView2.AddHostObjectToScript("report", _report);
-        coreWebView2.Navigate(Path.GetFullPath(_path));
+        webView.CoreWebView2.AddHostObjectToScript("report", _report);
+        webView.CoreWebView2.Navigate(Path.GetFullPath(_path));
     }
 
     public HtmlReportView Clone()
     {
-        HtmlReportView result = new HtmlReportView(_company, _path)
-        {
-            Title = Title
-        };
+        HtmlReportView result = new HtmlReportView(_company, _path);
 
+        result._report.Title = _report.Title;
         result._report.Started = _report.Started;
         result._report.Posted = _report.Posted;
         result._report.Level = _report.Level;
