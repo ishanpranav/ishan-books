@@ -6,10 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using Liber.Forms.RecentPaths;
 using Liber.Forms.Reports.Binder;
 using Liber.Forms.Reports.Gdi;
 using Liber.Forms.Reports.Html;
+using Liber.Forms.Reports.Pdf;
 using Liber.Forms.Reports.Xsl;
 
 namespace Liber.Forms.Reports;
@@ -41,7 +41,7 @@ internal sealed class ReportEngine
             path: "pages",
             searchPattern: "*.html",
             x => new HtmlReportView(company, x));
-        //_prototypes.Add("Pdf", new PdfReportView());
+        _prototypes.Add("Pdf", new PdfReportView());
         InitializeReports(
             path: "styles",
             searchPattern: "*.xslt",

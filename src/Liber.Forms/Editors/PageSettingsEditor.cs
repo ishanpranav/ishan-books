@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace System.Drawing.Printing.Design;
 
-internal sealed class PageSettingsEditor : UITypeEditor
+internal class PageSettingsEditor : UITypeEditor
 {
     public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext? context)
     {

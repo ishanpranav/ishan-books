@@ -215,6 +215,15 @@ namespace Liber.Forms.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Linked Document.
+        /// </summary>
+        internal static string PdfGenericTitle {
+            get {
+                return ResourceManager.GetString("PdfGenericTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date.
         /// </summary>
         internal static string Posted {

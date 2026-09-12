@@ -7,7 +7,6 @@ using System.Linq;
 using System.Windows.Forms;
 using Liber.Forms.Accounts;
 using Liber.Forms.Lines;
-using Liber.Forms.RecentPaths;
 using Liber.Forms.Reports.Gdi;
 
 namespace Liber.Forms.Reports;

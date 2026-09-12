@@ -40,7 +40,7 @@ internal sealed class GdiReportView : ICloneable, IReportView
     {
         get
         {
-            return 4;
+            return 5;
         }
     }
 
