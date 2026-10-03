@@ -2,12 +2,15 @@
 // Copyright (c) 2023-2026 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace System.Windows.Forms;
 
 internal class ListViewEx : ListView
 {
+    private readonly HashSet<int> _hiddenColumnIndices = new HashSet<int>();
+
     public ListViewEx()
     {
         AllowColumnReorder = true;
@@ -17,6 +20,8 @@ internal class ListViewEx : ListView
 
     [DefaultValue(-1)]
     public int SortColumn { get; set; } = -1;
+
+    public IReadOnlySet<int> HiddenColumnIndices { get { return _hiddenColumnIndices; } }
 
     protected override void OnColumnClick(ColumnClickEventArgs e)
     {
@@ -60,10 +65,41 @@ internal class ListViewEx : ListView
         base.OnLostFocus(e);
     }
 
+    public void ShowColumn(int index)
+    {
+        if (_hiddenColumnIndices.Remove(index))
+        {
+            AutoResizeColumn(index, ColumnHeaderAutoResizeStyle.ColumnContent);
+            AutoResizeColumn(index, ColumnHeaderAutoResizeStyle.HeaderSize);
+        }
+    }
+
+    public void HideColumn(int index)
+    {
+        if (_hiddenColumnIndices.Add(index))
+        {
+            Columns[index].Width = 0;
+        }
+    }
+
     public void AutoResizeColumns()
     {
-        AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-        AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+        if (_hiddenColumnIndices.Count == 0)
+        {
+            AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+
+            return;
+        }
+
+        for (int i = 0; i < Columns.Count; i++)
+        {
+            if (!_hiddenColumnIndices.Contains(i))
+            {
+                AutoResizeColumn(i, ColumnHeaderAutoResizeStyle.ColumnContent);
+                AutoResizeColumn(i, ColumnHeaderAutoResizeStyle.HeaderSize);
+            }
+        }
     }
 
     public void SelectAll()
