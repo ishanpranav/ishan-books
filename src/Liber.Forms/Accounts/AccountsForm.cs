@@ -7,12 +7,12 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Linq;
+using System.Text.Json;
 using System.Windows.Forms;
 using Humanizer;
 using Liber.Filters;
 using Liber.Forms.Forms;
 using Liber.Forms.Properties;
-using Liber.Forms.RecentPaths;
 using Liber.Forms.Reports;
 using Liber.Forms.Transactions;
 
@@ -45,7 +45,48 @@ internal partial class AccountsForm : Form
         inactiveToolStripMenuItem.Checked = Settings.Default.Inactive;
         _listView.SmallImageList = AccountImageListManager.ImageList;
 
+        HashSet<int>? hiddenColumnIndices = JsonSerializer.Deserialize<HashSet<int>>(Settings.Default.HiddenAccountColumnIndices, SerializationOptions.Json);
+        
+        if (hiddenColumnIndices != null)
+        {
+            foreach (int index in hiddenColumnIndices)
+            {
+                _listView.HideColumn(index);
+            }
+        }
+
+        foreach (ColumnHeader column in _listView.Columns)
+        {
+            ToolStripMenuItem item = new ToolStripMenuItem(FormattedStrings.GetVisibleMessage(column.Text))
+            {
+                Checked = hiddenColumnIndices == null || !hiddenColumnIndices.Contains(column.Index),
+                CheckOnClick = true
+            };
+
+            item.CheckedChanged += (sender, e) =>
+            {
+                ToggleColumnVisible(column.Index, item.Checked);
+
+                Settings.Default.HiddenAccountColumnIndices = JsonSerializer.Serialize(_listView.HiddenColumnIndices, SerializationOptions.Json);
+                Settings.Default.Save();
+            };
+
+            viewToolStripDropDownButton.DropDownItems.Add(item);
+        }
+
         InitializeAccounts();
+    }
+
+    private void ToggleColumnVisible(int index, bool value)
+    {
+        if (value)
+        {
+            _listView.ShowColumn(index);
+        }
+        else
+        {
+            _listView.HideColumn(index);
+        }
     }
 
     private void InitializeAccounts()
@@ -129,8 +170,12 @@ internal partial class AccountsForm : Form
         item.SubItems.Add(FormattedStrings.GetTaxTypeText(value.TaxType)).Tag = value.TaxType;
 
         decimal balance = value.Type.Toggle(_company.GetBalance(value, new ConjunctionFilter()));
+        decimal reconciledBalance = value.Type.Toggle(value.GetReconciledBalance());
+        decimal difference = balance - reconciledBalance;
 
         item.SubItems.Add(balance.ToLocalizedString()).Tag = balance;
+        item.SubItems.Add(reconciledBalance.ToLocalizedString()).Tag = reconciledBalance;
+        item.SubItems.Add(difference.ToLocalizedString()).Tag = difference;
 
         if (value.ReadOnly)
         {

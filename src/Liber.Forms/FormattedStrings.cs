@@ -382,4 +382,9 @@ internal static class FormattedStrings
             account.Name,
             overdue.Humanize(precision: 2, minUnit: TimeUnit.Day, maxUnit: TimeUnit.Year));
     }
+
+    internal static string? GetVisibleMessage(string text)
+    {
+        return string.Format(GetString("VisibleMessage{0}"), text);
+    }
 }

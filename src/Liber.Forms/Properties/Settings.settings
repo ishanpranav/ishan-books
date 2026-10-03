@@ -129,5 +129,8 @@
     <Setting Name="OverduePosted" Type="System.TimeSpan" Scope="User">
       <Value Profile="(Default)">90.00:00:00</Value>
     </Setting>
+    <Setting Name="HiddenAccountColumnIndices" Type="System.String" Scope="User">
+      <Value Profile="(Default)">[ 6, 7 ]</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -26,6 +26,8 @@ namespace Liber.Forms.Accounts
             cashFlowColumn = new ColumnHeader();
             taxType = new ColumnHeader();
             balanceColumn = new ColumnHeader();
+            reconciledBalanceColumn = new ColumnHeader();
+            differenceColumn = new ColumnHeader();
             _contextMenu = new ContextMenuStrip(components);
             openToolStripMenuItem1 = new ToolStripMenuItem();
             toolStripSeparator3 = new ToolStripSeparator();
@@ -53,10 +55,11 @@ namespace Liber.Forms.Accounts
             transactionsToolStripMenuItem = new ToolStripMenuItem();
             quickReportToolStripSeparator = new ToolStripSeparator();
             quickReportToolStripMenuItem1 = new ToolStripMenuItem();
-            toolStripDropDownButton3 = new ToolStripDropDownButton();
+            viewToolStripDropDownButton = new ToolStripDropDownButton();
             refreshToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator4 = new ToolStripSeparator();
             inactiveToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator6 = new ToolStripSeparator();
             _contextMenu.SuspendLayout();
             _statusStrip.SuspendLayout();
             SuspendLayout();
@@ -64,7 +67,7 @@ namespace Liber.Forms.Accounts
             // _listView
             // 
             _listView.AllowColumnReorder = true;
-            _listView.Columns.AddRange(new ColumnHeader[] { nameColumn, numberColumn, typeColumn, cashFlowColumn, taxType, balanceColumn });
+            _listView.Columns.AddRange(new ColumnHeader[] { nameColumn, numberColumn, typeColumn, cashFlowColumn, taxType, balanceColumn, reconciledBalanceColumn, differenceColumn });
             _listView.ContextMenuStrip = _contextMenu;
             resources.ApplyResources(_listView, "_listView");
             _listView.FullRowSelect = true;
@@ -103,6 +106,14 @@ namespace Liber.Forms.Accounts
             // balanceColumn
             // 
             resources.ApplyResources(balanceColumn, "balanceColumn");
+            // 
+            // reconciledBalanceColumn
+            // 
+            resources.ApplyResources(reconciledBalanceColumn, "reconciledBalanceColumn");
+            // 
+            // differenceColumn
+            // 
+            resources.ApplyResources(differenceColumn, "differenceColumn");
             // 
             // _contextMenu
             // 
@@ -189,7 +200,7 @@ namespace Liber.Forms.Accounts
             // 
             // _statusStrip
             // 
-            _statusStrip.Items.AddRange(new ToolStripItem[] { toolStripDropDownButton1, toolStripDropDownButton2, toolStripDropDownButton3 });
+            _statusStrip.Items.AddRange(new ToolStripItem[] { toolStripDropDownButton1, toolStripDropDownButton2, viewToolStripDropDownButton });
             resources.ApplyResources(_statusStrip, "_statusStrip");
             _statusStrip.Name = "_statusStrip";
             // 
@@ -279,12 +290,12 @@ namespace Liber.Forms.Accounts
             resources.ApplyResources(quickReportToolStripMenuItem1, "quickReportToolStripMenuItem1");
             quickReportToolStripMenuItem1.Click += OnQuickReportToolStripMenuItemClick;
             // 
-            // toolStripDropDownButton3
+            // viewToolStripDropDownButton
             // 
-            toolStripDropDownButton3.DisplayStyle = ToolStripItemDisplayStyle.Text;
-            toolStripDropDownButton3.DropDownItems.AddRange(new ToolStripItem[] { refreshToolStripMenuItem, toolStripSeparator4, inactiveToolStripMenuItem });
-            resources.ApplyResources(toolStripDropDownButton3, "toolStripDropDownButton3");
-            toolStripDropDownButton3.Name = "toolStripDropDownButton3";
+            viewToolStripDropDownButton.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            viewToolStripDropDownButton.DropDownItems.AddRange(new ToolStripItem[] { refreshToolStripMenuItem, toolStripSeparator4, inactiveToolStripMenuItem, toolStripSeparator6 });
+            resources.ApplyResources(viewToolStripDropDownButton, "viewToolStripDropDownButton");
+            viewToolStripDropDownButton.Name = "viewToolStripDropDownButton";
             // 
             // refreshToolStripMenuItem
             // 
@@ -304,6 +315,11 @@ namespace Liber.Forms.Accounts
             inactiveToolStripMenuItem.Name = "inactiveToolStripMenuItem";
             resources.ApplyResources(inactiveToolStripMenuItem, "inactiveToolStripMenuItem");
             inactiveToolStripMenuItem.CheckedChanged += OnInactiveToolStripMenuItemCheckedChanged;
+            // 
+            // toolStripSeparator6
+            // 
+            toolStripSeparator6.Name = "toolStripSeparator6";
+            resources.ApplyResources(toolStripSeparator6, "toolStripSeparator6");
             // 
             // AccountsForm
             // 
@@ -346,7 +362,7 @@ namespace Liber.Forms.Accounts
         private ToolStripMenuItem transactionToolStripMenuItem1;
         private ToolStripMenuItem reconcileToolStripMenuItem1;
         private ToolStripMenuItem transactionsToolStripMenuItem1;
-        private ToolStripDropDownButton toolStripDropDownButton3;
+        private ToolStripDropDownButton viewToolStripDropDownButton;
         private ToolStripMenuItem refreshToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripSeparator toolStripSeparator3;
@@ -360,5 +376,8 @@ namespace Liber.Forms.Accounts
         private ToolStripSeparator toolStripSeparator5;
         private ToolStripMenuItem quickReportToolStripMenuItem;
         private ToolStripMenuItem openToolStripMenuItem;
+        private ColumnHeader reconciledBalanceColumn;
+        private ColumnHeader differenceColumn;
+        private ToolStripSeparator toolStripSeparator6;
     }
 }

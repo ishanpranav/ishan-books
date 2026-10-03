@@ -660,4 +660,7 @@
   <data name="ThirdPartyNoticesUri" xml:space="preserve">
     <value>https://github.com/ishanpranav/ishan-books/blob/master/THIRD-PARTY-NOTICES.md</value>
   </data>
+  <data name="VisibleMessage{0}" xml:space="preserve">
+    <value>Show {0}</value>
+  </data>
 </root>
