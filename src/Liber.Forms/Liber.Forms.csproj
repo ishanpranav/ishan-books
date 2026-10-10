@@ -125,6 +125,9 @@
 	  <Content Include="scripts\time-series.js">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
+	  <Content Include="styles\reconciliation-report.xslt">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
 	  <Content Include="styles\chart.css">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>

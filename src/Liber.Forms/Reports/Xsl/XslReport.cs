@@ -260,6 +260,7 @@ public class XslReport :
         }
 
         writer.WriteElementString("balance", XmlConvert.ToString(balances.Balance));
+        writer.WriteElementString("reconciled-balance", XmlConvert.ToString(balances.ReconciledBalance));
         writer.WriteElementString("average-daily-balance", XmlConvert.ToString(balances.AverageDailyBalance));
         writer.WriteElementString("previous", XmlConvert.ToString(balances.Previous));
         writer.WriteElementString("debit", XmlConvert.ToString(debit));

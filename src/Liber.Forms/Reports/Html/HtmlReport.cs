@@ -139,9 +139,7 @@ public class HtmlReport : IntervalView, IReport
 
                         foreach ((Account _, ParentKey _, BalanceInfo otherBalances) in x)
                         {
-                            balances.Balance += otherBalances.Balance;
-                            balances.Previous += otherBalances.Previous;
-                            balances.AverageDailyBalance += otherBalances.AverageDailyBalance;
+                            balances += otherBalances;
                         }
 
                         return (x.Key.Name, x.Key.Type, x.Key.CashFlow, Company.GetColorOrDefault(x.First().Account), balances);
@@ -156,9 +154,7 @@ public class HtmlReport : IntervalView, IReport
 
                         foreach ((Account _, ParentKey _, BalanceInfo otherBalances) in x)
                         {
-                            balances.Balance += otherBalances.Balance;
-                            balances.Previous += otherBalances.Previous;
-                            balances.AverageDailyBalance += otherBalances.AverageDailyBalance;
+                            balances += otherBalances;
                         }
 
                         return (FormattedStrings.GetString(x.Key.Type.ToString()), x.Key.Type, x.Key.CashFlow, Company.Color, balances);
