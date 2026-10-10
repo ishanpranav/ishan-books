@@ -663,4 +663,13 @@
   <data name="VisibleMessage{0}" xml:space="preserve">
     <value>Show {0}</value>
   </data>
+  <data name="reconciled-balance" xml:space="preserve">
+    <value>Reconciled Balance</value>
+  </data>
+  <data name="difference" xml:space="preserve">
+    <value>Difference</value>
+  </data>
+  <data name="_r_reconciliation-report" xml:space="preserve">
+    <value>Reconciliation Report</value>
+  </data>
 </root>

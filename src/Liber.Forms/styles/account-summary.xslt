@@ -13,6 +13,7 @@ Licensed under the MIT License.
     exclude-result-prefixes="msxsl">
     <xsl:include href="base/financial-statement.xslt"/>
     <xsl:output method="html" indent="yes"/>
+    <xsl:key name="accounts-by-name" match="account" use="concat(generate-id(..), '|', name)"/>
     <xsl:template match="/report">
         <xsl:call-template name="financial-statement">
             <xsl:with-param name="title" select="title"/>
@@ -48,13 +49,16 @@ Licensed under the MIT License.
                     </tr>
                 </thead>
                 <tbody>
-                    <xsl:for-each select="company/account">
+                    <xsl:for-each select="company/account[
+                        generate-id() = generate-id(key('accounts-by-name', concat(generate-id(..), '|', name))[1])
+                    ]">
+                        <xsl:variable name="group" select="key('accounts-by-name', concat(generate-id(..), '|', name))"/>
                         <tr>
                             <td class="left account">
                                 <xsl:value-of select="name"/>
                             </td>
                             <td class="right">
-                                <xsl:value-of select="liber:fm(type, balance)"/>
+                                <xsl:value-of select="liber:fm(type, sum($group/balance))"/>
                             </td>
                         </tr>
                     </xsl:for-each>

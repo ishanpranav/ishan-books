@@ -837,48 +837,45 @@ public class Company : ICloneable
     {
         if (account.Id == EquityAccountId)
         {
-            BalanceInfo result = new BalanceInfo()
-            {
-                Previous = GetEquity(started.AddDays(-1), filter)
-            };
+            decimal previous = GetEquity(started.AddDays(-1), filter);
+            decimal balance = 0;
 
             if (type == ReportTypes.None || type.HasFlag(ReportTypes.CurrentPosted))
             {
-                result.Balance = GetEquity(posted, filter);
+                balance = GetEquity(posted, filter);
             }
 
             if (type.HasFlag(ReportTypes.CurrentStarted))
             {
-                result.Balance = GetEquity(started.AddDays(-1), filter);
+                balance = GetEquity(started.AddDays(-1), filter);
             }
 
-            return result;
+            return new BalanceInfo(balance, previous, averageDailyBalance: 0, reconciledBalance: 0);
         }
 
         if (account.Id == OtherEquityAccountId)
         {
-            return new BalanceInfo()
-            {
-                Balance = account.GetBalance(posted, filter),
-                Previous = account.GetBalance(started, filter)
-            };
+            return new BalanceInfo(
+                balance: account.GetBalance(posted, filter),
+                previous: account.GetBalance(started, filter),
+                averageDailyBalance: 0,
+                reconciledBalance: 0);
         }
 
         if (account.Type.IsTemporary())
         {
-            return new BalanceInfo()
-            {
-                Balance = account.GetBalance(started, posted, filter),
-                Previous = account.GetBalance(started - (posted - started), started, filter)
-            };
+            return new BalanceInfo(
+                balance: account.GetBalance(started, posted, filter),
+                previous: account.GetBalance(started - (posted - started), started, filter),
+                averageDailyBalance: 0,
+                reconciledBalance: 0);
         }
 
-        return new BalanceInfo()
-        {
-            Balance = account.GetBalance(posted, filter),
-            Previous = account.GetBalance(started.AddDays(-1), filter),
-            AverageDailyBalance = account.GetAverageDailyBalance(started, posted, filter)
-        };
+        return new BalanceInfo(
+            balance: account.GetBalance(posted, filter),
+            previous: account.GetBalance(started.AddDays(-1), filter),
+            averageDailyBalance: account.GetAverageDailyBalance(started, posted, filter),
+            reconciledBalance: account.GetReconciledBalance());
     }
 
     public LineType GetLineType(Line value, AccountType representativeType)
@@ -947,11 +944,9 @@ public class Company : ICloneable
         {
             ParentKey key = new ParentKey(account);
 
-            if (results.TryGetValue(key, out BalanceInfo? existing))
+            if (results.ContainsKey(key))
             {
-                existing.Balance += balances.Balance;
-                existing.Previous += balances.Previous;
-                existing.AverageDailyBalance += balances.AverageDailyBalance;
+                results[key] += balances;
             }
             else
             {
@@ -1022,9 +1017,7 @@ public class Company : ICloneable
 
             foreach ((Account _, ParentKey _, BalanceInfo balance) in group)
             {
-                result.Balance += balance.Balance;
-                result.Previous = balance.Previous;
-                result.AverageDailyBalance += balance.AverageDailyBalance;
+                result += balance;
             }
 
             yield return (group.Key, result);
@@ -1050,9 +1043,7 @@ public class Company : ICloneable
 
             foreach ((Account _, ParentKey _, BalanceInfo balance) in group)
             {
-                result.Balance += balance.Balance;
-                result.Previous = balance.Previous;
-                result.AverageDailyBalance += balance.AverageDailyBalance;
+                result += balance;
             }
 
             yield return (group.Key, result);
@@ -1078,9 +1069,7 @@ public class Company : ICloneable
 
             foreach ((Account _, ParentKey _, BalanceInfo balance) in group)
             {
-                result.Balance += balance.Balance;
-                result.Previous = balance.Previous;
-                result.AverageDailyBalance += balance.AverageDailyBalance;
+                result += balance;
             }
 
             yield return (group.Key.Type, group.Key.Parent, result);
