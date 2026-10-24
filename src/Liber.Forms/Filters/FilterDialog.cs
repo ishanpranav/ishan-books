@@ -11,6 +11,15 @@ namespace Liber.Forms.Filters;
 
 internal partial class FilterDialog : Form
 {
+    public FilterDialog()
+    {
+        InitializeComponent();
+        SystemFeatures.Initialize(this);
+
+        DialogResult = DialogResult.Cancel;
+    }
+
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     [TypeConverter(typeof(FilterConverter))]
     public Filter Value
     {
@@ -18,19 +27,10 @@ internal partial class FilterDialog : Form
         {
             return _filterControl.Value;
         }
-        private set
+        set
         {
             _filterControl.Value = value;
         }
-    }
-
-    public FilterDialog(Filter value)
-    {
-        InitializeComponent();
-        SystemFeatures.Initialize(this);
-
-        DialogResult = DialogResult.Cancel;
-        Value = value;
     }
 
     private void OnAcceptButtonClick(object sender, EventArgs e)

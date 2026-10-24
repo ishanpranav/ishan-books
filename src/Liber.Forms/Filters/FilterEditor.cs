@@ -22,7 +22,10 @@ internal sealed class FilterEditor : UITypeEditor
     {
         if (provider.GetService(typeof(IWindowsFormsEditorService)) is IWindowsFormsEditorService service && value is Filter filter)
         {
-            using FilterDialog form = new FilterDialog(filter);
+            using FilterDialog form = new FilterDialog()
+            {
+                Value = filter.Clone()
+            };
 
             if (service.ShowDialog(form) == DialogResult.OK)
             {
