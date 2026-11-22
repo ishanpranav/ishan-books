@@ -6,5 +6,6 @@ SELECT
     "SecurityId",
     "Timestamp",
     "Close",
-    "AdjustedClose"
+    "AdjustedClose",
+    "Dividend"
 FROM "main"."Price";

@@ -78,23 +78,21 @@ internal static class Program
 
     public static async Task AbortRetryIgnoreAsync(Func<Task> action)
     {
-        //DialogResult result;
+        DialogResult result;
 
-        //do
-        //{
-        //    try
-        //    {
-        //        await action();
+        do
+        {
+            try
+            {
+                await action();
 
-        //        result = DialogResult.OK;
-        //    }
-        //    catch (Exception exception)
-        //    {
-        //        result = MessageBox.Show(exception.Message, Resources.ExceptionCaption, MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error);
-        //    }
-        //}
-        //while (result == DialogResult.Retry);
-
-        await action();
+                result = DialogResult.OK;
+            }
+            catch (Exception exception)
+            {
+                result = MessageBox.Show(exception.Message, Resources.ExceptionCaption, MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error);
+            }
+        }
+        while (result == DialogResult.Retry);
     }
 }

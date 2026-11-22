@@ -273,7 +273,7 @@
         },
         {
             "title": "Bootstrap",
-            "formats": [ "js", "scss", "css" ],
+            "formats": [ "javascript", "scss", "css" ],
             "source": "https://github.com/twbs/bootstrap",
             "author": "The Bootstrap Authors",
             "copyright": "Copyright (c) 2011-2026 The Bootstrap Authors",

@@ -19,7 +19,7 @@ the application.
 - Author: Alpha Vantage Inc.
 - Source: [alphavantage.co](https://www.alphavantage.co)
 
-### Bootstrap&emsp;<sub><sup>*js*&ensp;*scss*&ensp;*css*&ensp;</sup></sub>
+### Bootstrap&emsp;<sub><sup>*javascript*&ensp;*scss*&ensp;*css*&ensp;</sup></sub>
 - Author: The Bootstrap Authors
 - Source: [twbs/bootstrap](https://github.com/twbs/bootstrap)
 - License: [MIT](#mit_bootstrap)

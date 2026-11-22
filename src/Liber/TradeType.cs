@@ -11,13 +11,13 @@ public enum TradeType
 {
     [LocalizedDescription(nameof(None))]
     [Name("")]
-    None,
+    None = 0,
 
     [LocalizedDescription(nameof(Purchase))]
     [Name("BUY")]
-    Purchase,
+    Purchase = 1,
 
     [LocalizedDescription(nameof(Sale))]
     [Name("SELL")]
-    Sale
+    Sale = -1
 }

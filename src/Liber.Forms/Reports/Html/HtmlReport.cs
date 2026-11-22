@@ -763,6 +763,40 @@ public class HtmlReport : IntervalView, IReport
         return JsonSerializer.Serialize(data, s_options);
     }
 
+    public string GetPositions()
+    {
+        List<Position> positions = new List<Position>();
+
+        foreach (Trade position in Company.GetPositions())
+        {
+            Security security = Company.GetSecurity(position.SecurityId);
+            Position item = new Position()
+            {
+                Type = position.Type,
+                Posted = position.Posted,
+                Cost = position.Cost,
+                Quantity = position.Quantity,
+                Commission = position.Commission,
+                Symbol = security.Symbol
+            };
+            Price? price = Company.GetPrice(position.SecurityId);
+
+            if (price != null)
+            {
+                item.Price = price.AdjustedClose;
+                price = Company.GetPriceBefore(price);
+
+                if (price != null)
+                {
+                    item.PreviousPrice = price.AdjustedClose;
+                }
+            }
+
+            positions.Add(item);
+        }
+        return JsonSerializer.Serialize(positions, s_options);
+    }
+
     IReportView IReport.CreateView(Company company)
     {
         HtmlReportView result = new HtmlReportView(company, Path);

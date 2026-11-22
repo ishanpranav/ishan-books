@@ -6,10 +6,12 @@ INSERT INTO "main"."Price" (
     "SecurityId",
     "Timestamp",
     "Close",
-    "AdjustedClose"
+    "AdjustedClose",
+    "Dividend"
 ) VALUES (
     @securityId,
     @timestamp,
     @close,
-    @adjustedClose
+    @adjustedClose,
+    @dividend
 );

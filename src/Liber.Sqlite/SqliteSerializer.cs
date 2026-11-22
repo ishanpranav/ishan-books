@@ -231,7 +231,8 @@ public static class SqliteSerializer
                     command.Parameters.AddWithValue("@securityId", price.SecurityId);
                     command.Parameters.AddWithValue("@timestamp", price.Timestamp);
                     command.Parameters.AddWithValue("@close", price.Close);
-                    command.Parameters.AddWithValue("@adjustedClose", price.AdjustedClose);
+                    command.Parameters.AddWithValue("@dividend", ValueOf(price.Dividend));
+                    command.Parameters.AddWithValue("@adjustedClose", ValueOf(price.AdjustedClose));
 
                     await command.ExecuteNonQueryAsync();
                 }
@@ -437,7 +438,8 @@ public static class SqliteSerializer
                     prices.Add(new Price(securityId, reader.GetDateTime(1))
                     {
                         Close = reader.GetDecimal(2),
-                        AdjustedClose = await SqliteUtilities.GetDecimalAsync(reader, 3)
+                        AdjustedClose = await SqliteUtilities.GetDecimalAsync(reader, 3),
+                        Dividend = await SqliteUtilities.GetDecimalAsync(reader, 4)
                     });
                 }
             }

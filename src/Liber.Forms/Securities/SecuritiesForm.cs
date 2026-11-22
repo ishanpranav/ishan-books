@@ -200,7 +200,8 @@ internal partial class SecuritiesForm : Form
                     _company.UpdatePrices(timeSeries.Select(x => new Price(_items[i].Id, x.Timestamp)
                     {
                         Close = x.Close,
-                        AdjustedClose = x.AdjustedClose
+                        AdjustedClose = x.AdjustedClose,
+                        Dividend = x.Dividend
                     }));
 
                     Price? price = _company.GetPrice(_items[i].Id);

@@ -109,6 +109,9 @@
 	  <Content Include="pages\time-series.html">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
+	  <Content Include="scripts\portfolio-dashboard.js">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
 	  <Content Include="scripts\account-map.js">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>

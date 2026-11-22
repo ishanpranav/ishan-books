@@ -653,11 +653,6 @@ public class Company : ICloneable
         }
     }
 
-    public Security GetSecurity(Guid id)
-    {
-        return _securities[id];
-    }
-
     private static void TrialBalance(IReadOnlyCollection<Line> lines)
     {
         decimal trialBalance = 0;
@@ -807,6 +802,11 @@ public class Company : ICloneable
         }
     }
 
+    public Security GetSecurity(Guid id)
+    {
+        return _securities[id];
+    }
+
     public void UpdateSecurity(Security value, string symbol)
     {
         if (value.Id == Guid.Empty)
@@ -834,6 +834,19 @@ public class Company : ICloneable
         }
 
         return set.Max;
+    }
+
+    public Price? GetPriceBefore(Price price)
+    {
+        if (!_prices.TryGetValue(price.SecurityId, out SortedSet<Price>? set))
+        {
+            return null;
+        }
+
+        return set.GetViewBetween(set.Min, price)
+              .Reverse()
+              .Skip(1)
+              .FirstOrDefault();
     }
 
     private void InitializePrices(IEnumerable<Price> prices)
@@ -1334,6 +1347,42 @@ public class Company : ICloneable
         }
 
         return result;
+    }
+
+    public IEnumerable<Trade> GetPositions()
+    {
+        foreach (IGrouping<Guid, Trade> grouping in _trades.Values.GroupBy(x => x.SecurityId))
+        {
+            decimal totalCost = 0;
+            decimal totalQuantity = 0;
+            decimal totalCommission = 0;
+            DateTime lastPosted = default;
+
+            foreach (Trade trade in grouping)
+            {
+                int sign = Math.Sign((int)trade.Type);
+
+                totalCost += sign * trade.Cost * trade.Quantity;
+                totalQuantity += sign * trade.Quantity;
+                totalCommission += trade.Commission;
+
+                if (trade.Posted > lastPosted)
+                {
+                    lastPosted = trade.Posted;
+                }
+            }
+
+            if (totalQuantity != 0)
+            {
+                yield return new Trade(Guid.Empty, lastPosted, (TradeType)Math.Sign(totalQuantity))
+                {
+                    SecurityId = grouping.Key,
+                    Cost = totalCost / totalQuantity,
+                    Quantity = totalQuantity,
+                    Commission = totalCommission
+                };
+            }
+        }
     }
 
     public override string ToString()

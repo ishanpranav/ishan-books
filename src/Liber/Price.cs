@@ -44,6 +44,8 @@ public class Price :
         }
     }
 
+    public decimal? Dividend { get; set; }
+
     public override string ToString()
     {
         return $"{Timestamp} {SecurityId} {AdjustedClose}";
