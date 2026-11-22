@@ -8,8 +8,6 @@ namespace Liber;
 
 public class Security
 {
-    internal int references;
-
     public Security(Guid id)
     {
         Id = id;

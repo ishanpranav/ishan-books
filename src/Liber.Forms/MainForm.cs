@@ -804,7 +804,7 @@ internal partial class MainForm : Form
 
             IReadOnlyCollection<YahooFinanceTrade> trades = await CsvSerializer.DeserializeAsync<YahooFinanceTrade>(input);
 
-            _factory.Register(Guid.NewGuid(), new ImportTradesForm(_company, trades));
+            _factory.Register(Guid.NewGuid(), new ImportTradesForm(_company, _factory, trades));
         });
     }
 
@@ -909,6 +909,11 @@ internal partial class MainForm : Form
 
             _path = path;
         }
+    }
+
+    private void OnTradesToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        _factory.AutoRegister(() => new TradesForm(_company));
     }
 
     private void OnFactoryInvalidated(object sender, EventArgs e)

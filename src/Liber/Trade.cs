@@ -13,16 +13,15 @@ public class Trade :
     IEquatable<Trade>
 {
     public Trade() { }
-    public Trade(Guid id, Guid securityId, DateTime posted, TradeType type)
+    public Trade(Guid id, DateTime posted, TradeType type)
     {
         Id = id;
-        SecurityId = securityId;
         Posted = posted;
         Type = type;
     }
 
     public Guid Id { get; internal set; }
-    public Guid SecurityId { get; }
+    public Guid SecurityId { get; set; }
     public DateTime Posted { get; internal set; }
     public TradeType Type { get; internal set; }
     public decimal Cost { get; set; }

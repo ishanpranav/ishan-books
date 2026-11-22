@@ -24,7 +24,10 @@ public class Company : ICloneable
     private readonly SortedSet<Account> _sortedAccounts;
     private readonly SortedSet<Transaction> _sortedTransactions;
     private readonly SortedSet<Trade> _sortedTrades;
-    private readonly SortedDictionary<string, int> _names = new SortedDictionary<string, int>();
+    private readonly SortedDictionary<string, int> _names =
+        new SortedDictionary<string, int>();
+    private readonly SortedDictionary<string, Guid> _securitiesBySymbol =
+        new SortedDictionary<string, Guid>(StringComparer.InvariantCultureIgnoreCase);
 
     private string? _name;
     private CompanyType _type;
@@ -70,8 +73,8 @@ public class Company : ICloneable
         _sortedAccounts = new SortedSet<Account>(accounts);
         _transactions = transactions.ToDictionary(x => x.Id);
         _sortedTransactions = new SortedSet<Transaction>(transactions);
-        _trades = trades.ToDictionary(x => x.Id);
-        _sortedTrades = new SortedSet<Trade>(trades);
+        _trades = new Dictionary<Guid, Trade>(trades.Count);
+        _sortedTrades = new SortedSet<Trade>();
         _securities = securities.ToDictionary(x => x.Id);
         NextAccountNumber = nextAccountNumber;
         NextTransactionNumber = nextTransactionNumber;
@@ -79,20 +82,22 @@ public class Company : ICloneable
         foreach (Account account in accounts)
         {
             InitializeAccount(account);
-            AddChild(account, account.ParentId);
+            AddChildReference(account, account.ParentId);
         }
 
         foreach (Transaction transaction in transactions)
         {
             InitializeTransaction(transaction);
-            AddName(transaction, transaction.Name);
-            AddLines(transaction, transaction.Lines);
+            AddNameReference(transaction, transaction.Name);
+            AddLineReferences(transaction, transaction.Lines);
         }
 
-        foreach (Trade trade in trades)
+        foreach (Security security in securities)
         {
-            AddSecurity(trade.SecurityId);
+            _securitiesBySymbol[security.Symbol] = security.Id;
         }
+
+        InitializeTrades(trades);
     }
 
     public IReadOnlyCollection<Account> Accounts
@@ -124,6 +129,14 @@ public class Company : ICloneable
         get
         {
             return _securities.Values;
+        }
+    }
+
+    public IReadOnlyDictionary<string, Guid> SecuritiesBySymbol
+    {
+        get
+        {
+            return _securitiesBySymbol;
         }
     }
 
@@ -346,9 +359,7 @@ public class Company : ICloneable
     public event EventHandler<GuidEventArgs>? TransactionUpdated;
     public event EventHandler<GuidEventArgs>? TransactionReconciled;
     public event EventHandler<GuidEventArgs>? TransactionRemoved;
-    public event EventHandler<GuidEventArgs>? TradeAdded;
-    public event EventHandler<GuidEventArgs>? TradeUpdated;
-    public event EventHandler<GuidEventArgs>? TradeRemoved;
+    public event EventHandler<GuidEventArgs>? TradesChanged;
 
     public void ResetEquityAccount()
     {
@@ -386,7 +397,7 @@ public class Company : ICloneable
         return result;
     }
 
-    private void AddChild(Account value, Guid parentId)
+    private void AddChildReference(Account value, Guid parentId)
     {
         value.ParentId = parentId;
 
@@ -398,7 +409,7 @@ public class Company : ICloneable
         }
     }
 
-    private void RemoveChild(Account value)
+    private void RemoveChildReference(Account value)
     {
         if (value.ParentId != Guid.Empty)
         {
@@ -446,7 +457,7 @@ public class Company : ICloneable
 
         value.Id = id;
 
-        AddChild(value, parentId);
+        AddChildReference(value, parentId);
         _accounts.Add(value.Id, value);
         _sortedAccounts.Add(value);
 
@@ -466,8 +477,8 @@ public class Company : ICloneable
 
         if (parentId != value.ParentId)
         {
-            RemoveChild(value);
-            AddChild(value, parentId);
+            RemoveChildReference(value);
+            AddChildReference(value, parentId);
         }
 
         NextAccountNumber = Math.Max(value.Number, NextAccountNumber);
@@ -499,7 +510,7 @@ public class Company : ICloneable
             return false;
         }
 
-        RemoveChild(value);
+        RemoveChildReference(value);
         _accounts.Remove(id);
         _sortedAccounts.Remove(value);
         AccountRemoved?.Invoke(sender: this, new GuidEventArgs(id));
@@ -560,7 +571,7 @@ public class Company : ICloneable
         }
     }
 
-    private void AddName(Transaction value, string? name)
+    private void AddNameReference(Transaction value, string? name)
     {
         if (string.IsNullOrWhiteSpace(name))
         {
@@ -573,7 +584,7 @@ public class Company : ICloneable
         _names[value.Name] = _names.GetValueOrDefault(value.Name) + 1;
     }
 
-    private void RemoveName(Transaction value)
+    private void RemoveNameReference(Transaction value)
     {
         if (string.IsNullOrWhiteSpace(value.Name))
         {
@@ -592,7 +603,7 @@ public class Company : ICloneable
         _names[value.Name] = count;
     }
 
-    private void AddLines(Transaction value, IReadOnlyCollection<Line> lines)
+    private void AddLineReferences(Transaction value, IReadOnlyCollection<Line> lines)
     {
         foreach (Line line in lines)
         {
@@ -614,7 +625,7 @@ public class Company : ICloneable
         }
     }
 
-    private void RemoveLines(Transaction value)
+    private void RemoveLineReferences(Transaction value)
     {
         foreach (Line line in value.lines)
         {
@@ -629,31 +640,6 @@ public class Company : ICloneable
     public Security GetSecurity(Guid id)
     {
         return _securities[id];
-    }
-
-    private void AddSecurity(Guid securityId)
-    {
-        if (!_securities.TryGetValue(securityId, out Security? security))
-        {
-            security = new Security(securityId);
-            _securities[securityId] = security;
-        }
-
-        security.references++;
-    }
-
-    private void RemoveSecurity(Trade value)
-    {
-        int count = _securities[value.SecurityId].references - 1;
-
-        if (count < 1)
-        {
-            _securities.Remove(value.SecurityId);
-
-            return;
-        }
-
-        _securities[value.SecurityId].references = count;
     }
 
     private static void TrialBalance(IReadOnlyCollection<Line> lines)
@@ -686,8 +672,8 @@ public class Company : ICloneable
 
         value.Id = id;
 
-        AddName(value, name);
-        AddLines(value, lines);
+        AddNameReference(value, name);
+        AddLineReferences(value, lines);
 
         if (value.lines.Count == 0)
         {
@@ -722,12 +708,12 @@ public class Company : ICloneable
 
         if (name != value.Name)
         {
-            RemoveName(value);
-            AddName(value, name);
+            RemoveNameReference(value);
+            AddNameReference(value, name);
         }
 
-        RemoveLines(value);
-        AddLines(value, lines);
+        RemoveLineReferences(value);
+        AddLineReferences(value, lines);
 
         if (lines != value.lines)
         {
@@ -762,61 +748,46 @@ public class Company : ICloneable
             throw new InvalidOperationException();
         }
 
-        RemoveLines(value);
+        RemoveLineReferences(value);
         _transactions.Remove(id);
         _sortedTransactions.Remove(value);
         TransactionRemoved?.Invoke(sender: this, new GuidEventArgs(id));
     }
 
-    public void AddTrade(Trade value, Guid securityId)
+    public void SetTrades(IEnumerable<Trade> trades)
     {
-        if (value.Id != Guid.Empty)
+        foreach (Trade trade in trades)
         {
-            throw new InvalidOperationException();
+            if (trade.Id != Guid.Empty)
+            {
+                throw new InvalidOperationException();
+            }
         }
 
-        Guid id = Guid.NewGuid();
+        List<Trade> clone = trades.ToList();
 
-        value.Id = id;
-
-        AddSecurity(securityId);
-        _trades.Add(value.Id, value);
-        _sortedTrades.Add(value);
-
-        TradeAdded?.Invoke(sender: this, new GuidEventArgs(value.Id));
+        _trades.Clear();
+        _sortedTrades.Clear();
+        InitializeTrades(clone);
     }
 
-    public void UpdateTrade(Guid id, Guid securityId, DateTime posted, TradeType type)
+    private void InitializeTrades(IEnumerable<Trade> trades)
     {
-        if (!_trades.TryGetValue(id, out Trade? value))
+        foreach (Trade trade in trades)
         {
-            throw new InvalidOperationException();
+            if (!_securities.ContainsKey(trade.SecurityId))
+            {
+                Security? security = new Security(trade.SecurityId);
+
+                _securities[trade.SecurityId] = security;
+                _securitiesBySymbol[security.Symbol] = trade.SecurityId;
+            }
+
+            trade.Id = Guid.NewGuid();
+
+            _trades.Add(trade.Id, trade);
+            _sortedTrades.Add(trade);
         }
-
-        RemoveSecurity(value);
-
-        _sortedTrades.Remove(value);
-
-        value.Posted = posted;
-        value.Type = type;
-
-        _sortedTrades.Add(value);
-        TradeUpdated?.Invoke(sender: this, new GuidEventArgs(id));
-    }
-
-    public bool RemoveTrade(Guid id)
-    {
-        if (!_trades.TryGetValue(id, out Trade? value))
-        {
-            throw new InvalidOperationException();
-        }
-
-        RemoveSecurity(value);
-        _trades.Remove(id);
-        _sortedTrades.Remove(value);
-        TradeRemoved?.Invoke(sender: this, new GuidEventArgs(id));
-
-        return true;
     }
 
     public IEnumerable<Transaction> GetTransfers()

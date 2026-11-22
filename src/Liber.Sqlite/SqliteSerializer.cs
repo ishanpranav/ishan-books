@@ -384,10 +384,10 @@ public static class SqliteSerializer
 
                     trades.Add(new Trade(
                         id,
-                        reader.GetGuid(1),
                         reader.GetDateTime(2),
                         await reader.GetFieldValueAsync<TradeType>(3))
                     {
+                        SecurityId = reader.GetGuid(1),
                         Cost = reader.GetDecimal(4),
                         Quantity = reader.GetDecimal(5),
                         Commission = reader.GetDecimal(6)

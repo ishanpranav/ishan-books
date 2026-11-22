@@ -6,18 +6,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Liber.Forms.Accounts;
+using Liber.Forms.Forms;
 
 namespace Liber.Forms.Trades;
 
 internal partial class ImportTradesForm : ImportForm
 {
+    private readonly FormFactory _factory;
     private readonly List<Trade> _trades = new List<Trade>();
-    private readonly List<Guid> _securityIds = new List<Guid>();
     private readonly Dictionary<string, Guid> _securities;
 
-    public ImportTradesForm(Company company, IReadOnlyCollection<YahooFinanceTrade> trades) : base(company)
+    public ImportTradesForm(
+        Company company,
+        FormFactory factory,
+        IReadOnlyCollection<YahooFinanceTrade> trades) : base(company)
     {
-        _securities = Company.Securities.ToDictionary(x => x.Symbol, x => x.Id);
+        _securities = new Dictionary<string, Guid>(Company.SecuritiesBySymbol);
 
         foreach (YahooFinanceTrade trade in trades)
         {
@@ -32,19 +36,19 @@ internal partial class ImportTradesForm : ImportForm
                 _securities[trade.Symbol] = securityId;
             }
 
+            trade.Value.SecurityId = securityId;
+
             _trades.Add(trade.Value);
-            _securityIds.Add(securityId);
         }
 
         SetDataSource(trades.ToList());
+        _factory = factory;
     }
 
     protected override void CommitChanges()
     {
-        for (int i = 0; i < _trades.Count; i++)
-        {
-            Company.AddTrade(_trades[i], _securityIds[i]);
-        }
+        _factory.Kill(typeof(TradesForm).GUID);
+        Company.SetTrades(_trades);
 
         foreach (KeyValuePair<string, Guid> entry in _securities)
         {
@@ -52,5 +56,7 @@ internal partial class ImportTradesForm : ImportForm
 
             security.Symbol = entry.Key;
         }
+
+        _factory.Register(typeof(TradesForm).GUID, new TradesForm(Company));
     }
 }
