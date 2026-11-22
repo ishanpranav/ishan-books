@@ -47,6 +47,7 @@
 	  <None Remove="styles\base\general-ledger.xslt" />
 	  <None Remove="styles\base\income-statement.xslt" />
 	  <None Remove="styles\base\tax-reconciliation.xslt" />
+	  <None Remove="styles\bootstrap.css" />
 	  <None Remove="styles\cash-flow-statement.xslt" />
 	  <None Remove="styles\chart.css" />
 	  <None Remove="styles\comparative-balance-sheet.xslt" />
@@ -56,6 +57,7 @@
 	  <None Remove="styles\financial-statement.xslt" />
 	  <None Remove="styles\general-ledger.xslt" />
 	  <None Remove="styles\income-statement.xslt" />
+	  <None Remove="styles\ishan.css" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -87,6 +89,9 @@
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="favicon.ico">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="pages\portfolio-dashboard.html">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="pages\heat-account-map.html">
@@ -123,6 +128,12 @@
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="scripts\time-series.js">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="styles\bootstrap.css">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="styles\ishan.css">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="styles\reconciliation-report.xslt">

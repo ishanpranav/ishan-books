@@ -1,0 +1,201 @@
+﻿<!DOCTYPE html>
+<!-- portfolio-dashboard.html -->
+<!-- Copyright (c) 2023-2026 Ishan Pranav. All rights reserved. -->
+<!-- Licensed under the MIT License. -->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="../styles/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../styles/ishan.css" type="text/css" />
+</head>
+<body>
+    <div class="container py-4">
+        <header
+                class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
+            <div>
+                <h1 class="h3 fw-bold mb-0">My portfolio</h1>
+                <div class="small text-body-secondary">Sample data for
+                    illustration. Prices are not live.</div>
+            </div>
+            <div class="btn-group btn-group-sm" id="range" role="group"
+                 aria-label="Chart range">
+                <button type="button" class="btn btn-outline-primary" data-r="7"
+                        aria-pressed="false">1W</button>
+                <button type="button" class="btn btn-outline-primary active"
+                        data-r="30" aria-pressed="true">1M</button>
+                <button type="button" class="btn btn-outline-primary"
+                        data-r="90" aria-pressed="false">3M</button>
+            </div>
+        </header>
+        <section class="row g-3 mb-3">
+            <div class="col-lg-7">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="small text-body-secondary">Total market
+                            value</div>
+                        <div class="display-6 fw-bold" id="mv"></div>
+                        <div id="dayline"></div>
+                        <div class="row row-cols-3 g-3 mt-0">
+                            <div class="col"><span
+                                      class="small text-body-secondary">Total
+                                    gain</span>
+                                <div class="fw-semibold" id="tg"></div>
+                            </div>
+                            <div class="col"><span
+                                      class="small text-body-secondary">Cost
+                                    basis</span>
+                                <div class="fw-semibold" id="cb"></div>
+                            </div>
+                            <div class="col"><span
+                                      class="small text-body-secondary">Holdings</span>
+                                <div class="fw-semibold" id="cnt"></div>
+                            </div>
+                        </div>
+                        <div class="mt-3" style="height:130px"><canvas id="main"
+                                    role="img"
+                                    aria-label="Portfolio value trend"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="small text-body-secondary mb-3">Allocation
+                            by sector</div>
+                        <div class="d-flex align-items-center gap-3">
+                            <div style="width:130px;height:130px;flex:none">
+                                <canvas id="donut" role="img"
+                                        aria-label="Sector allocation"></canvas>
+                            </div>
+                            <div class="legend flex-fill small d-grid gap-1"
+                                 id="legend"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="card">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0"
+                       style="min-width:860px">
+                    <thead>
+                        <tr id="head"></tr>
+                    </thead>
+                    <tbody id="body"></tbody>
+                    <tfoot class="fw-bold" id="foot"></tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <script>
+        const H = [
+            { s: "AAPL", n: "Apple Inc.", sec: "Technology", p: 228.40, pc: 226.10, q: 40, c: 171.20 },
+            { s: "MSFT", n: "Microsoft Corporation", sec: "Technology", p: 431.75, pc: 434.20, q: 25, c: 310.00 },
+            { s: "NVDA", n: "NVIDIA Corporation", sec: "Technology", p: 142.30, pc: 138.55, q: 120, c: 61.40 },
+            { s: "AMZN", n: "Amazon.com, Inc.", sec: "Consumer", p: 198.60, pc: 199.05, q: 35, c: 142.80 },
+            { s: "JPM", n: "JPMorgan Chase & Co.", sec: "Financials", p: 236.90, pc: 233.40, q: 30, c: 168.50 },
+            { s: "JNJ", n: "Johnson & Johnson", sec: "Healthcare", p: 157.20, pc: 158.30, q: 28, c: 164.10 },
+            { s: "XOM", n: "Exxon Mobil Corporation", sec: "Energy", p: 114.80, pc: 116.20, q: 45, c: 98.60 },
+            { s: "VTI", n: "Vanguard Total Stock Market ETF", sec: "Funds", p: 287.10, pc: 285.90, q: 50, c: 219.30 }
+        ];
+        const COLORS = ["#6001d2", "#1c9ad6", "#e8a31a", "#188a4a", "#d6283a", "#7a8794", "#c24ba5"];
+        const $ = id => document.getElementById(id);
+        const usd = (v, d = 2) => v.toLocaleString("en-US", { style: "currency", currency: "USD", minimumFractionDigits: d, maximumFractionDigits: d });
+        const num = (v, d = 2) => v.toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d });
+        const sg = v => (v >= 0 ? "+" : "") + num(v);
+        const cls = v => v >= 0 ? "text-success" : "text-danger", bgc = v => v >= 0 ? "text-bg-success" : "text-bg-danger";
+        let range = 30, sortKey = "mv", dir = -1;
+        const SP = {}, CH = {}; let SPC = [];
+        const cv = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+        function mk(id, cfg) { if (CH[id]) CH[id].destroy(); CH[id] = new Chart(document.getElementById(id), cfg) }
+        function drawSparks() {
+            SPC.forEach(c => c.destroy()); SPC = [];
+            document.querySelectorAll("canvas[data-s]").forEach(el => {
+                const { d, up } = SP[el.dataset.s];
+                SPC.push(new Chart(el, { type: "line", data: { labels: d.map((_, i) => i), datasets: [{ data: d, borderColor: cv(up ? "--bs-success" : "--bs-danger"), borderWidth: 1.6, pointRadius: 0, tension: .3 }] }, options: { responsive: true, maintainAspectRatio: false, animation: false, events: [], plugins: { legend: { display: false }, tooltip: { enabled: false } }, scales: { x: { display: false }, y: { display: false } } } }))
+            })
+        }
+
+        // deterministic pseudo-random series ending at current price
+        function series(h, n) {
+            let seed = 0; for (const ch of h.s) seed = seed * 31 + ch.charCodeAt(0);
+            const r = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+            const drift = (h.p / h.c - 1) * 0.35, a = [1];
+            for (let i = 1; i < n; i++)a.push(a[i - 1] * (1 + (r() - .5) * .03 + drift / n));
+            const k = h.p / a[n - 1]; return a.map(v => v * k)
+        }
+        function path(a, w, hh, pad = 2) {
+            const mn = Math.min(...a), mx = Math.max(...a);
+            return a.map((v, i) => (i ? "L" : "M") + (i / (a.length - 1) * w).toFixed(1) + " " + (hh - pad - (v - mn) / (mx - mn || 1) * (hh - pad * 2)).toFixed(1)).join("")
+        }
+
+        const COLS = [
+            ["s", "Symbol"], ["p", "Last price"], ["chg", "Change"], ["pct", "% change"], ["q", "Shares"], ["c", "Avg cost"],
+            ["mv", "Market value"], ["dg", "Day gain"], ["tg", "Total gain"], ["tgp", "Total %"], ["tr", "Trend"]];
+        $("head").innerHTML = COLS.map(([k, l]) => `<th data-k="${k}" ${k === sortKey ? 'aria-sort="descending"' : ""} tabindex="0" scope="col">${l}</th>`).join("");
+
+        function rows() { return H.map(h => ({ ...h, chg: h.p - h.pc, pct: (h.p / h.pc - 1) * 100, mv: h.p * h.q, dg: (h.p - h.pc) * h.q, tg: (h.p - h.c) * h.q, tgp: (h.p / h.c - 1) * 100, cost: h.c * h.q })) }
+
+        function render() {
+            const R = rows();
+            R.sort((a, b) => (typeof a[sortKey] === "string" ? a[sortKey].localeCompare(b[sortKey]) : a[sortKey] - b[sortKey]) * dir);
+            document.querySelectorAll("th").forEach(t => { t.removeAttribute("aria-sort"); if (t.dataset.k === sortKey) t.setAttribute("aria-sort", dir > 0 ? "ascending" : "descending") });
+            $("body").innerHTML = R.map(r => {
+                const d = series(r, range), up = d[d.length - 1] >= d[0]; SP[r.s] = { d, up };
+                return `<tr><td><span class="fw-bold text-primary">${r.s}</span><span class="d-block small text-body-secondary text-truncate" style="max-width:190px">${r.n}</span></td>
+  <td>${num(r.p)}</td>
+  <td class="${cls(r.chg)}">${sg(r.chg)}</td>
+  <td><span class="badge ${bgc(r.pct)}">${sg(r.pct)}%</span></td>
+  <td>${num(r.q, 0)}</td><td>${num(r.c)}</td>
+  <td><b>${usd(r.mv)}</b></td>
+  <td class="${cls(r.dg)}">${sg(r.dg)}</td>
+  <td class="${cls(r.tg)}">${sg(r.tg)}</td>
+  <td class="${cls(r.tgp)}">${sg(r.tgp)}%</td>
+  <td><div style="width:90px;height:28px;margin-left:auto"><canvas data-s="${r.s}" aria-hidden="true"></canvas></div></td></tr>`
+            }).join("");
+            drawSparks();
+
+            const T = R.reduce((o, r) => ({ mv: o.mv + r.mv, dg: o.dg + r.dg, tg: o.tg + r.tg, cost: o.cost + r.cost }), { mv: 0, dg: 0, tg: 0, cost: 0 });
+            const dgp = T.dg / (T.mv - T.dg) * 100, tgp = T.tg / T.cost * 100;
+            $("mv").textContent = usd(T.mv);
+            $("dayline").innerHTML = `<span class="${cls(T.dg)}"><b>${sg(T.dg)}</b> (${sg(dgp)}%)</span> <span class="small text-body-secondary">today</span>`;
+            $("tg").innerHTML = `<span class="${cls(T.tg)}">${sg(T.tg)} (${sg(tgp)}%)</span>`;
+            $("cb").textContent = usd(T.cost); $("cnt").textContent = R.length + " positions";
+            $("foot").innerHTML = `<tr><td>Total</td><td></td><td></td><td></td><td></td><td></td><td>${usd(T.mv)}</td><td class="${cls(T.dg)}">${sg(T.dg)}</td><td class="${cls(T.tg)}">${sg(T.tg)}</td><td class="${cls(T.tg)}">${sg(tgp)}%</td><td></td></tr>`;
+
+            // portfolio trend = sum of holdings series
+            const sum = Array.from({ length: range }, (_, i) => R.reduce((s, r) => s + series(r, range)[i] * r.q, 0));
+            const upT = sum[sum.length - 1] >= sum[0], col = cv(upT ? "--bs-success" : "--bs-danger"), mute = cv("--bs-secondary-color");
+            const labels = sum.map((_, i) => new Date(Date.now() - (range - 1 - i) * 864e5).toLocaleDateString("en-US", { month: "short", day: "numeric" }));
+            mk("main", { type: "line", data: { labels, datasets: [{ data: sum, borderColor: col, backgroundColor: col + "1f", fill: true, borderWidth: 2, pointRadius: 0, pointHoverRadius: 4, tension: .25 }] }, options: { responsive: true, maintainAspectRatio: false, interaction: { mode: "index", intersect: false }, plugins: { legend: { display: false }, tooltip: { displayColors: false, callbacks: { label: c => usd(c.parsed.y) } } }, scales: { x: { grid: { display: false }, ticks: { color: mute, maxTicksLimit: 6, maxRotation: 0 } }, y: { grid: { color: cv("--bs-border-color") }, ticks: { color: mute, maxTicksLimit: 4, callback: v => "$" + (v / 1000).toFixed(1) + "k" } } } } });
+
+            // sector donut
+            const by = {}; R.forEach(r => by[r.sec] = (by[r.sec] || 0) + r.mv);
+            const secs = Object.entries(by).sort((a, b) => b[1] - a[1]);
+            mk("donut", { type: "doughnut", data: { labels: secs.map(s => s[0]), datasets: [{ data: secs.map(s => s[1]), backgroundColor: secs.map((_, i) => COLORS[i % COLORS.length]), borderColor: cv("--bs-body-bg"), borderWidth: 2 }] }, options: { cutout: "62%", responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => ` ${c.label}: ${usd(c.parsed, 0)}` } } } } });
+            $("legend").innerHTML = secs.map(([k, v], i) => `<div><span><span class="dot" style="background:${COLORS[i % COLORS.length]}"></span>${k}</span><b>${num(v / T.mv * 100, 1)}%</b></div>`).join("");
+        }
+
+        $("head").addEventListener("click", e => {
+            const t = e.target.closest("th"); if (!t || t.dataset.k === "tr") return;
+            const k = t.dataset.k; dir = (k === sortKey) ? -dir : (k === "s" ? 1 : -1); sortKey = k; render()
+        });
+        $("head").addEventListener("keydown", e => { if (e.key === "Enter") e.target.click() });
+        $("range").addEventListener("click", e => {
+            const b = e.target.closest("button"); if (!b) return;
+            range = +b.dataset.r; document.querySelectorAll("#range button").forEach(x => { x.setAttribute("aria-pressed", x === b); x.classList.toggle("active", x === b) }); render()
+        });
+        matchMedia("(prefers-color-scheme: dark)").addEventListener("change", e => { document.documentElement.setAttribute("data-bs-theme", e.matches ? "dark" : "light"); render() });
+        render();
+    </script>
+    <script type="text/javascript"
+            src="https://liber.example/scripts/chart.js"></script>
+    <script type="text/javascript"
+            src="https://liber.example/scripts/portfolio-dashboard.js"></script>
+</body>
+</html>
