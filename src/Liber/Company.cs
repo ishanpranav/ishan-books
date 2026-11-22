@@ -68,7 +68,7 @@ public class Company : ICloneable
         IReadOnlyCollection<Transaction> transactions,
         IReadOnlyCollection<Trade> trades,
         IReadOnlyCollection<Security> securities,
-        IReadOnlyCollection<Price> prices,
+        IEnumerable<Price> prices,
         decimal nextAccountNumber,
         decimal nextTransactionNumber)
     {

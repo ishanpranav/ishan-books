@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS "Price" (
     "SecurityId"    TEXT NOT NULL,
     "Timestamp"     TEXT NOT NULL,
     "Close"         INTEGER NOT NULL,
-    "AdjustedClose" INTEGER NOT NULL,
+    "AdjustedClose" INTEGER,
     PRIMARY KEY("SecurityId", "Timestamp"),
     FOREIGN KEY("SecurityId") REFERENCES "Security"("Id")
 );

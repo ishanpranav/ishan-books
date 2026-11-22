@@ -12,6 +12,7 @@ DROP TABLE IF EXISTS "Trade";
 DROP TABLE IF EXISTS "Security";
 DROP TABLE IF EXISTS "Trade";
 DROP TABLE IF EXISTS "Security";
+DROP TABLE IF EXISTS "Price";
 
 PRAGMA foreign_keys = ON;
 

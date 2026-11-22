@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Threading.Tasks;
-using System.Transactions;
 using Microsoft.Data.Sqlite;
 using SQLitePCL;
 
@@ -233,6 +232,8 @@ public static class SqliteSerializer
                     command.Parameters.AddWithValue("@timestamp", price.Timestamp);
                     command.Parameters.AddWithValue("@close", price.Close);
                     command.Parameters.AddWithValue("@adjustedClose", price.AdjustedClose);
+
+                    await command.ExecuteNonQueryAsync();
                 }
 
                 progress.WritePrice();
