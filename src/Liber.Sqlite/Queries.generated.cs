@@ -24,19 +24,23 @@ internal static class Queries
 
     public const string InsertLine = " INSERT INTO \"main\".\"Line\" ( \"TransactionId\", \"AccountId\", \"Balance\", \"Description\", \"Reconciled\" ) VALUES ( @transactionId, @accountId, @balance, @description, @reconciled ); ";
 
+    public const string InsertPrice = " INSERT INTO \"main\".\"Price\" ( \"SecurityId\", \"Timestamp\", \"Close\", \"AdjustedClose\" ) VALUES ( @securityId, @timestamp, @close, @adjustedClose ); ";
+
     public const string InsertSecurity = " INSERT INTO \"main\".\"Security\" ( \"Id\", \"Symbol\", \"Name\" ) VALUES ( @id, @symbol, @name ); ";
 
     public const string InsertTrade = " INSERT INTO \"main\".\"Trade\" ( \"Id\", \"SecurityId\", \"Posted\", \"Type\", \"Cost\", \"Quantity\", \"Commission\" ) VALUES ( @id, @securityId, @posted, @type, @cost, @quantity, @commission ); ";
 
     public const string InsertTransaction = " INSERT INTO \"main\".\"Transaction\" ( \"Id\", \"Posted\", \"Number\", \"Name\", \"Memo\" ) VALUES ( @id, @posted, @number, @name, @memo ); ";
 
-    public const string Migrate = " PRAGMA foreign_keys = OFF; PRAGMA foreign_keys = ON; CREATE TABLE IF NOT EXISTS \"Trade\" ( \"Id\" TEXT NOT NULL UNIQUE, \"SecurityId\" TEXT NOT NULL, \"Posted\" TEXT NOT NULL, \"Type\" INTEGER NOT NULL, \"Cost\" INTEGER NOT NULL, \"Quantity\" INTEGER NOT NULL, \"Commission\" INTEGER NOT NULL, PRIMARY KEY(\"Id\"), FOREIGN KEY(\"SecurityId\") REFERENCES \"Security\"(\"Id\") ); CREATE TABLE IF NOT EXISTS \"Security\" ( \"Id\" TEXT NOT NULL UNIQUE, \"Symbol\" TEXT NOT NULL UNIQUE, \"Name\" TEXT, PRIMARY KEY(\"Id\") ); ";
+    public const string Migrate = " CREATE TABLE IF NOT EXISTS \"Trade\" ( \"Id\" TEXT NOT NULL UNIQUE, \"SecurityId\" TEXT NOT NULL, \"Posted\" TEXT NOT NULL, \"Type\" INTEGER NOT NULL, \"Cost\" INTEGER NOT NULL, \"Quantity\" INTEGER NOT NULL, \"Commission\" INTEGER NOT NULL, PRIMARY KEY(\"Id\"), FOREIGN KEY(\"SecurityId\") REFERENCES \"Security\"(\"Id\") ); CREATE TABLE IF NOT EXISTS \"Security\" ( \"Id\" TEXT NOT NULL UNIQUE, \"Symbol\" TEXT NOT NULL UNIQUE, \"Name\" TEXT, PRIMARY KEY(\"Id\") ); CREATE TABLE IF NOT EXISTS \"Price\" ( \"SecurityId\" TEXT NOT NULL, \"Timestamp\" TEXT NOT NULL, \"Close\" INTEGER NOT NULL, \"AdjustedClose\" INTEGER NOT NULL, PRIMARY KEY(\"SecurityId\", \"Timestamp\"), FOREIGN KEY(\"SecurityId\") REFERENCES \"Security\"(\"Id\") ); ";
 
     public const string SelectAccounts = " SELECT \"Id\", COALESCE(\"ParentId\", '00000000-0000-0000-0000-000000000000'), COALESCE(\"Number\", 0), \"Name\", \"Type\", \"Placeholder\", \"Description\", \"Memo\", \"Color\", \"TaxType\", \"Inactive\", \"CashFlow\" FROM \"main\".\"Account\"; ";
 
     public const string SelectCompany = " SELECT \"Name\", \"NextAccountNumber\", \"NextTransactionNumber\", \"Type\", \"Color\", \"EquityAccount\", \"OtherEquityAccount\", \"FiscalYearStarted\", \"FiscalYearPosted\", \"ReportingPeriod\", \"CustomStarted\", \"CustomPosted\" FROM \"main\".\"Company\" LIMIT 1; ";
 
     public const string SelectLines = " SELECT \"TransactionId\", \"AccountId\", \"Balance\", \"Description\", \"Reconciled\" FROM \"main\".\"Line\"; ";
+
+    public const string SelectPrices = " SELECT \"SecurityId\", \"Timestamp\", \"Close\", \"AdjustedClose\" FROM \"main\".\"Price\"; ";
 
     public const string SelectSecurities = " SELECT \"Id\", \"Symbol\", \"Name\" FROM \"main\".\"Security\"; ";
 

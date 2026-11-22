@@ -50,6 +50,16 @@ public static class SqliteSerializer
         return value;
     }
 
+    private static object ValueOf(decimal? value)
+    {
+        if (value == null)
+        {
+            return DBNull.Value;
+        }
+
+        return value;
+    }
+
     private static object ValueOf(Guid value)
     {
         if (value == Guid.Empty)
@@ -201,13 +211,31 @@ public static class SqliteSerializer
                 {
                     command.Transaction = dbTransaction;
                     command.CommandText = Queries.InsertSecurity;
+
                     command.Parameters.AddWithValue("@id", security.Id);
                     command.Parameters.AddWithValue("@symbol", security.Symbol);
                     command.Parameters.AddWithValue("@name", ValueOf(security.Name));
+
                     await command.ExecuteNonQueryAsync();
                 }
 
                 progress.WriteSecurity();
+            }
+
+            foreach (Price price in value.Prices)
+            {
+                await using (SqliteCommand command = connection.CreateCommand())
+                {
+                    command.Transaction = dbTransaction;
+                    command.CommandText = Queries.InsertPrice;
+
+                    command.Parameters.AddWithValue("@securityId", price.SecurityId);
+                    command.Parameters.AddWithValue("@timestamp", price.Timestamp);
+                    command.Parameters.AddWithValue("@close", price.Close);
+                    command.Parameters.AddWithValue("@adjustedClose", price.AdjustedClose);
+                }
+
+                progress.WritePrice();
             }
 
             await dbTransaction.CommitAsync();
@@ -347,7 +375,6 @@ public static class SqliteSerializer
             }
         }
 
-        List<Trade> trades = new List<Trade>();
         Dictionary<Guid, Security> securities = new Dictionary<Guid, Security>();
 
         await using (SqliteCommand command = connection.CreateCommand())
@@ -360,17 +387,15 @@ public static class SqliteSerializer
                 {
                     Guid id = reader.GetGuid(0);
 
-                    if (!securities.TryGetValue(id, out Security? value))
+                    securities.Add(id, new Security(id, reader.GetString(1))
                     {
-                        value = new Security(id);
-                        securities[id] = value;
-                    }
-
-                    value.Symbol = reader.GetString(1);
-                    value.Name = await SqliteUtilities.GetStringAsync(reader, 2);
+                        Name = await SqliteUtilities.GetStringAsync(reader, 2)
+                    });
                 }
             }
         }
+
+        List<Trade> trades = new List<Trade>();
 
         await using (SqliteCommand command = connection.CreateCommand())
         {
@@ -396,6 +421,27 @@ public static class SqliteSerializer
             }
         }
 
+        List<Price> prices = new List<Price>();
+
+        await using (SqliteCommand command = connection.CreateCommand())
+        {
+            command.CommandText = Queries.SelectPrices;
+
+            await using (SqliteDataReader reader = await command.ExecuteReaderAsync())
+            {
+                while (await reader.ReadAsync())
+                {
+                    Guid securityId = reader.GetGuid(0);
+
+                    prices.Add(new Price(securityId, reader.GetDateTime(1))
+                    {
+                        Close = reader.GetDecimal(2),
+                        AdjustedClose = await SqliteUtilities.GetDecimalAsync(reader, 3)
+                    });
+                }
+            }
+        }
+
         await using (SqliteCommand command = connection.CreateCommand())
         {
             command.CommandText = Queries.SelectCompany;
@@ -409,6 +455,7 @@ public static class SqliteSerializer
                     transactions,
                     trades,
                     securities.Values,
+                    prices,
                     reader.GetDecimal(1),
                     reader.GetDecimal(2))
                 {

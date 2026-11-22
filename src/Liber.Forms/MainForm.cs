@@ -23,6 +23,7 @@ using Liber.Forms.Properties;
 using Liber.Forms.Reports;
 using Liber.Forms.Reports.Gdi;
 using Liber.Forms.Saving;
+using Liber.Forms.Securities;
 using Liber.Forms.TaskItems;
 using Liber.Forms.Trades;
 using Liber.Forms.Transactions;
@@ -723,6 +724,7 @@ internal partial class MainForm : Form
         await Program.AbortRetryIgnoreAsync(async () =>
         {
             form.Progress = 0;
+            form.MaxProgress = 0;
 
             using PdfDocument document = new PdfDocument();
 
@@ -926,6 +928,11 @@ internal partial class MainForm : Form
     private void OnTradesToolStripMenuItemClick(object sender, EventArgs e)
     {
         _factory.AutoRegister(() => new TradesForm(_company));
+    }
+
+    private void OnSecuritiesToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        _factory.AutoRegister(() => new SecuritiesForm(_company, GetAlphaVantageClient()));
     }
 
     private void OnAlphaVantageToolStripMenuItemClick(object sender, EventArgs e)

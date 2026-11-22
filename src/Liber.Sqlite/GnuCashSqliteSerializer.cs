@@ -176,7 +176,8 @@ public static class GnuCashSqliteSerializer
             accounts,
             transactions,
             Array.Empty<Trade>(),
-            Array.Empty<Security>(), 
+            Array.Empty<Security>(),
+            Array.Empty<Price>(),
             nextAccountNumber: 1,
             nextTransactionNumber: 1)
         {

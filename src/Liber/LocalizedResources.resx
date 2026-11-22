@@ -519,4 +519,7 @@
   <data name="AccountPath" xml:space="preserve">
     <value>Account Path</value>
   </data>
+  <data name="TradeView.Posted" xml:space="preserve">
+    <value>Date</value>
+  </data>
 </root>

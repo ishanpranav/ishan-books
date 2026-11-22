@@ -56,4 +56,14 @@ internal static class SqliteUtilities
 
         return reader.GetDateTime(ordinal).Date;
     }
+
+    internal static async Task<decimal?> GetDecimalAsync(SqliteDataReader reader, int ordinal)
+    {
+        if (await reader.IsDBNullAsync(ordinal))
+        {
+            return null;
+        }
+
+        return reader.GetDecimal(ordinal);
+    }
 }

@@ -37,6 +37,7 @@ partial class TradesForm
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
         _dataGridView = new System.Windows.Forms.DataGridViewEx();
         saveButton = new System.Windows.Forms.Button();
+        closeButton = new System.Windows.Forms.Button();
         ((System.ComponentModel.ISupportInitialize)_dataGridView).BeginInit();
         SuspendLayout();
         // 
@@ -76,8 +77,8 @@ partial class TradesForm
         // 
         // saveButton
         // 
-        saveButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
-        saveButton.Location = new System.Drawing.Point(12, 340);
+        saveButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+        saveButton.Location = new System.Drawing.Point(437, 340);
         saveButton.Name = "saveButton";
         saveButton.Size = new System.Drawing.Size(75, 23);
         saveButton.TabIndex = 1;
@@ -85,11 +86,23 @@ partial class TradesForm
         saveButton.UseVisualStyleBackColor = true;
         saveButton.Click += OnSaveButtonClick;
         // 
+        // closeButton
+        // 
+        closeButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+        closeButton.Location = new System.Drawing.Point(518, 340);
+        closeButton.Name = "closeButton";
+        closeButton.Size = new System.Drawing.Size(75, 23);
+        closeButton.TabIndex = 2;
+        closeButton.Text = "&Close";
+        closeButton.UseVisualStyleBackColor = true;
+        closeButton.Click += OnCloseButtonClick;
+        // 
         // TradesForm
         // 
         AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         ClientSize = new System.Drawing.Size(605, 375);
+        Controls.Add(closeButton);
         Controls.Add(saveButton);
         Controls.Add(_dataGridView);
         Name = "TradesForm";
@@ -102,4 +115,5 @@ partial class TradesForm
 
     private System.Windows.Forms.DataGridViewEx _dataGridView;
     private System.Windows.Forms.Button saveButton;
+    private System.Windows.Forms.Button closeButton;
 }

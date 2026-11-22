@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text.Json.Serialization;
-using System.Transactions;
 using Liber.Filters;
 using Liber.Properties;
 
@@ -20,8 +19,9 @@ public class Company : ICloneable
 {
     private readonly Dictionary<Guid, Account> _accounts;
     private readonly Dictionary<Guid, Transaction> _transactions;
-    private readonly Dictionary<Guid, Security> _securities;
     private readonly Dictionary<Guid, Trade> _trades;
+    private readonly Dictionary<Guid, Security> _securities;
+    private readonly Dictionary<Guid, SortedSet<Price>> _prices;
     private readonly SortedSet<Account> _sortedAccounts;
     private readonly SortedSet<Transaction> _sortedTransactions;
     private readonly SortedSet<Trade> _sortedTrades;
@@ -50,6 +50,7 @@ public class Company : ICloneable
         _trades = new Dictionary<Guid, Trade>();
         _sortedTrades = new SortedSet<Trade>();
         _securities = new Dictionary<Guid, Security>();
+        _prices = new Dictionary<Guid, SortedSet<Price>>();
 
         ResetEquityAccount();
         ResetOtherEquityAccount();
@@ -67,6 +68,7 @@ public class Company : ICloneable
         IReadOnlyCollection<Transaction> transactions,
         IReadOnlyCollection<Trade> trades,
         IReadOnlyCollection<Security> securities,
+        IReadOnlyCollection<Price> prices,
         decimal nextAccountNumber,
         decimal nextTransactionNumber)
     {
@@ -77,6 +79,8 @@ public class Company : ICloneable
         _trades = new Dictionary<Guid, Trade>(trades.Count);
         _sortedTrades = new SortedSet<Trade>();
         _securities = securities.ToDictionary(x => x.Id);
+        _prices = new Dictionary<Guid, SortedSet<Price>>(securities.Count);
+
         NextAccountNumber = nextAccountNumber;
         NextTransactionNumber = nextTransactionNumber;
 
@@ -99,6 +103,7 @@ public class Company : ICloneable
         }
 
         InitializeTrades(trades);
+        InitializePrices(prices);
     }
 
     public IReadOnlyCollection<Account> Accounts
@@ -130,6 +135,14 @@ public class Company : ICloneable
         get
         {
             return _securities.Values;
+        }
+    }
+
+    public IEnumerable<Price> Prices
+    {
+        get
+        {
+            return _prices.Values.SelectMany(x => x);
         }
     }
 
@@ -361,6 +374,8 @@ public class Company : ICloneable
     public event EventHandler<GuidEventArgs>? TransactionReconciled;
     public event EventHandler<GuidEventArgs>? TransactionRemoved;
     public event EventHandler? TradesChanged;
+    public event EventHandler<GuidEventArgs>? SecurityUpdated;
+    public event EventHandler? PricesUpdated;
 
     public void ResetEquityAccount()
     {
@@ -779,7 +794,7 @@ public class Company : ICloneable
         {
             if (!_securities.ContainsKey(trade.SecurityId))
             {
-                Security? security = new Security(trade.SecurityId);
+                Security? security = new Security(trade.SecurityId, string.Empty);
 
                 _securities[trade.SecurityId] = security;
                 _securitiesBySymbol[security.Symbol] = trade.SecurityId;
@@ -790,6 +805,55 @@ public class Company : ICloneable
             _trades.Add(trade.Id, trade);
             _sortedTrades.Add(trade);
         }
+    }
+
+    public void UpdateSecurity(Security value, string symbol)
+    {
+        if (value.Id == Guid.Empty)
+        {
+            throw new InvalidOperationException();
+        }
+
+        if (symbol != value.Symbol)
+        {
+            _securitiesBySymbol.Remove(value.Symbol);
+
+            value.Symbol = symbol;
+
+            _securitiesBySymbol.Add(symbol, value.Id);
+        }
+
+        SecurityUpdated?.Invoke(sender: this, new GuidEventArgs(value.Id));
+    }
+
+    public Price? GetPrice(Guid securityId)
+    {
+        if (!_prices.TryGetValue(securityId, out SortedSet<Price>? set))
+        {
+            return null;
+        }
+
+        return set.Max;
+    }
+
+    private void InitializePrices(IEnumerable<Price> prices)
+    {
+        foreach (Price price in prices)
+        {
+            if (!_prices.TryGetValue(price.SecurityId, out SortedSet<Price>? set))
+            {
+                set = new SortedSet<Price>();
+                _prices[price.SecurityId] = set;
+            }
+
+            set.Add(price);
+        }
+    }
+
+    public void UpdatePrices(IEnumerable<Price> prices)
+    {
+        InitializePrices(prices);
+        PricesUpdated?.Invoke(sender: this, EventArgs.Empty);
     }
 
     public IEnumerable<Transaction> GetTransfers()
@@ -1284,6 +1348,7 @@ public class Company : ICloneable
             _transactions.Values,
             _trades.Values,
             _securities.Values,
+            Prices.ToList(),
             NextAccountNumber,
             NextTransactionNumber);
     }

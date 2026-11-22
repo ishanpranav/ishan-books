@@ -54,7 +54,7 @@ internal partial class ImportTradesForm : ImportForm
         {
             Security security = Company.GetSecurity(entry.Value);
 
-            security.Symbol = entry.Key;
+            Company.UpdateSecurity(security, entry.Key);
         }
 
         _factory.Register(typeof(TradesForm).GUID, new TradesForm(Company));

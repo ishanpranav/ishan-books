@@ -1,4 +1,8 @@
-﻿using System.Windows.Forms;
+﻿// SavingForm.cs
+// Copyright (c) 2023-2026 Ishan Pranav. All rights reserved.
+// Licensed under the MIT License.
+
+using System.Windows.Forms;
 using Liber.Forms.Properties;
 using System.ComponentModel;
 

@@ -265,6 +265,9 @@
 	  <Compile Update="CultureForm.cs">
 	    <SubType>Form</SubType>
 	  </Compile>
+	  <Compile Update="Securities\SecuritiesForm.cs">
+	    <SubType>Form</SubType>
+	  </Compile>
 	  <Compile Update="Transactions\TransactionForm.cs">
 	    <SubType>Form</SubType>
 	  </Compile>

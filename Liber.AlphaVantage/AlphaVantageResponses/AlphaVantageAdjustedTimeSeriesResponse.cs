@@ -8,9 +8,9 @@ namespace Liber.AlphaVantage.AlphaVantageResponses;
 
 public sealed class AlphaVantageAdjustedTimeSeriesResponse : AlphaVantageTimeSeriesResponse
 {
-    [Name("adjusted_close")]
+    [Name("adjusted close")]
     public decimal AdjustedClose { get; set; }
 
-    [Name("dividend_amount")]
+    [Name("dividend amount")]
     public decimal Dividend { get; set; }
 }

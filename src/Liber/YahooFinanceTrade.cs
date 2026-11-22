@@ -10,6 +10,16 @@ namespace Liber;
 
 public class YahooFinanceTrade
 {
+    public YahooFinanceTrade()
+    {
+        Value = new Trade();
+    }
+
+    public YahooFinanceTrade(Trade value)
+    {
+        Value = value;
+    }
+
     [Format("yyyyMMdd")]
     [LocalizedDisplayName("YahooFinanceTrade.Posted")]
     [Name("Trade Date")]
@@ -95,5 +105,5 @@ public class YahooFinanceTrade
 
     [Browsable(false)]
     [Ignore]
-    public Trade Value { get; set; } = new Trade();
+    public Trade Value { get; set; }
 }

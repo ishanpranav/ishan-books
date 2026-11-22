@@ -2,10 +2,6 @@
 -- Copyright (c) 2023-2026 Ishan Pranav. All rights reserved.
 -- Licensed under the MIT License.
 
-PRAGMA foreign_keys = OFF;
-
-PRAGMA foreign_keys = ON;
-
 CREATE TABLE IF NOT EXISTS "Trade" (
     "Id"         TEXT NOT NULL UNIQUE,
     "SecurityId" TEXT NOT NULL,
@@ -23,4 +19,13 @@ CREATE TABLE IF NOT EXISTS "Security" (
     "Symbol"    TEXT NOT NULL UNIQUE,
     "Name"      TEXT,
     PRIMARY KEY("Id")
+);
+
+CREATE TABLE IF NOT EXISTS "Price" (
+    "SecurityId"    TEXT NOT NULL,
+    "Timestamp"     TEXT NOT NULL,
+    "Close"         INTEGER NOT NULL,
+    "AdjustedClose" INTEGER NOT NULL,
+    PRIMARY KEY("SecurityId", "Timestamp"),
+    FOREIGN KEY("SecurityId") REFERENCES "Security"("Id")
 );

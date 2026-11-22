@@ -10,7 +10,7 @@ using Liber.AlphaVantage;
 using Liber.AlphaVantage.AlphaVantageResponses;
 using Liber.Forms.Properties;
 
-namespace Liber.Forms.Trades;
+namespace Liber.Forms.Securities;
 
 internal partial class AlphaVantageForm : Form
 {

@@ -14,7 +14,7 @@ namespace Liber.Forms.Trades;
 internal partial class TradesForm : Form
 {
     private readonly Company _company;
-    private readonly BindingList<YahooFinanceTrade> _items;
+    private readonly BindingList<TradeView> _items;
 
     public TradesForm(Company company)
     {
@@ -22,12 +22,15 @@ internal partial class TradesForm : Form
         SystemFeatures.Initialize(this);
 
         _company = company;
-        _items = new BindingList<YahooFinanceTrade>(
+        _items = new BindingList<TradeView>(
             _company.Trades
-                .Select(trade => new YahooFinanceTrade()
+                .Select(x => new TradeView(x.Id, _company.GetSecurity(x.SecurityId).Symbol)
                 {
-                    Value = trade,
-                    Symbol = _company.GetSecurity(trade.SecurityId).Symbol
+                    Posted = x.Posted,
+                    Type = x.Type,
+                    Cost = x.Cost,
+                    Quantity = x.Quantity,
+                    Commission = x.Commission
                 })
                 .ToList())
         {
@@ -41,13 +44,7 @@ internal partial class TradesForm : Form
 
     private void OnItemsAddingNew(object? sender, AddingNewEventArgs e)
     {
-        e.NewObject = new YahooFinanceTrade()
-        {
-            Value = new Trade(
-                Guid.Empty,
-                DateTime.Today,
-                TradeType.Purchase)
-        };
+        e.NewObject = new TradeView(Guid.Empty, string.Empty);
     }
 
     private void OnDataGridViewDataError(object sender, DataGridViewDataErrorEventArgs e)
@@ -72,11 +69,24 @@ internal partial class TradesForm : Form
             BindingContext[_items].EndCurrentEdit();
         }
 
-        foreach (YahooFinanceTrade item in _items)
+        List<Trade> trades = new List<Trade>();
+
+        foreach (TradeView item in _items)
         {
-            item.Value.SecurityId = _company.SecuritiesBySymbol[item.Symbol];
+            trades.Add(new Trade(Guid.Empty, item.Posted, item.Type)
+            {
+                SecurityId = _company.SecuritiesBySymbol[item.Symbol],
+                Cost = item.Cost,
+                Quantity = item.Quantity,
+                Commission = item.Commission
+            });
         }
 
-        _company.SetTrades(_items.Select(x => x.Value));
+        _company.SetTrades(trades);
+    }
+
+    private void OnCloseButtonClick(object sender, EventArgs e)
+    {
+        Close();
     }
 }

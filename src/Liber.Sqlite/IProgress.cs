@@ -10,4 +10,5 @@ public interface IProgress
     void WriteTransaction();
     void WriteTrade();
     void WriteSecurity();
+    void WritePrice();
 }

@@ -85,14 +85,14 @@ public class AlphaVantageClient : IDisposable
 
         RestResponse restResponse = await _restClient.GetAsync(request);
 
+        if (restResponse.ErrorMessage != null)
+        {
+            throw new Exception(restResponse.ErrorMessage + ": " + restResponse.Content);
+        }
+
         if (restResponse.ErrorException != null)
         {
             throw restResponse.ErrorException;
-        }
-
-        if (restResponse.ErrorMessage != null)
-        {
-            throw new Exception(restResponse.ErrorMessage);
         }
 
         if (restResponse.ContentType == "application/json")

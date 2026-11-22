@@ -96,7 +96,7 @@ partial class MainForm
         binderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         portfolioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         tradesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-        securityUniverseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        securitiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         toolStripSeparator21 = new System.Windows.Forms.ToolStripSeparator();
         alphaVantageSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         formToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -507,7 +507,7 @@ partial class MainForm
         // 
         // portfolioToolStripMenuItem
         // 
-        portfolioToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tradesToolStripMenuItem, securityUniverseToolStripMenuItem, toolStripSeparator21, alphaVantageSettingsToolStripMenuItem });
+        portfolioToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tradesToolStripMenuItem, securitiesToolStripMenuItem, toolStripSeparator21, alphaVantageSettingsToolStripMenuItem });
         portfolioToolStripMenuItem.Name = "portfolioToolStripMenuItem";
         resources.ApplyResources(portfolioToolStripMenuItem, "portfolioToolStripMenuItem");
         // 
@@ -517,10 +517,11 @@ partial class MainForm
         resources.ApplyResources(tradesToolStripMenuItem, "tradesToolStripMenuItem");
         tradesToolStripMenuItem.Click += OnTradesToolStripMenuItemClick;
         // 
-        // securityUniverseToolStripMenuItem
+        // securitiesToolStripMenuItem
         // 
-        securityUniverseToolStripMenuItem.Name = "securityUniverseToolStripMenuItem";
-        resources.ApplyResources(securityUniverseToolStripMenuItem, "securityUniverseToolStripMenuItem");
+        securitiesToolStripMenuItem.Name = "securitiesToolStripMenuItem";
+        resources.ApplyResources(securitiesToolStripMenuItem, "securitiesToolStripMenuItem");
+        securitiesToolStripMenuItem.Click += OnSecuritiesToolStripMenuItem_Click;
         // 
         // toolStripSeparator21
         // 
@@ -835,7 +836,7 @@ partial class MainForm
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator18;
     private System.Windows.Forms.ToolStripMenuItem portfolioToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem tradesToolStripMenuItem;
-    private System.Windows.Forms.ToolStripMenuItem securityUniverseToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem securitiesToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem aPISettingsToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem alphaVantageToolStripMenuItem;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator21;
