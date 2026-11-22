@@ -10,6 +10,8 @@ internal sealed class SavingProgress : IProgress
 {
     private const int AccountFactor = 15;
     private const int TransactionFactor = 2;
+    private const int TradeFactor = 2;
+    private const int SecurityFactor = 1;
 
     private readonly SavingForm _form;
 
@@ -17,7 +19,11 @@ internal sealed class SavingProgress : IProgress
     {
         _form = form;
 
-        form.MaxProgress = company.Accounts.Count * AccountFactor + company.Transactions.Count * TransactionFactor;
+        form.MaxProgress =
+            company.Accounts.Count * AccountFactor +
+            company.Transactions.Count * TransactionFactor +
+            company.Trades.Count * TradeFactor +
+            company.Securities.Count * SecurityFactor;
     }
 
     public void WriteAccount()
@@ -28,5 +34,15 @@ internal sealed class SavingProgress : IProgress
     public void WriteTransaction()
     {
         _form.Progress += TransactionFactor;
+    }
+
+    public void WriteTrade()
+    {
+        _form.Progress += TradeFactor;
+    }
+
+    public void WriteSecurity()
+    {
+        _form.Progress += SecurityFactor;
     }
 }

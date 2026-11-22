@@ -3,10 +3,7 @@
 // Licensed under the MIT License.
 
 using System;
-using System.ComponentModel;
-using System.Globalization;
 using System.Text.Json.Serialization;
-using CsvHelper.Configuration.Attributes;
 
 namespace Liber;
 
@@ -18,25 +15,11 @@ public class Line :
 {
     internal Transaction? transaction;
 
-    [Browsable(false)]
-    [Ignore]
     public Guid AccountId { get; private set; }
-
-    [Browsable(false)]
-    [Index(14)]
-    [Name("Value Num.")]
-    [NumberStyles(NumberStyles.Currency)]
-    public decimal Balance { get; private set; }
-
-    [Index(16)]
-    [LocalizedDisplayName(nameof(Reconciled))]
-    [Name("Reconcile Date")]
-    [NullValues("")]
-    [Optional]
+    public decimal Balance { get; internal set; }
     public DateTime? Reconciled { get; internal set; }
 
     [JsonIgnore]
-    [LocalizedDisplayName(nameof(Debit))]
     public decimal Debit
     {
         get
@@ -51,7 +34,6 @@ public class Line :
     }
 
     [JsonIgnore]
-    [LocalizedDisplayName(nameof(Credit))]
     public decimal Credit
     {
         get
@@ -65,15 +47,8 @@ public class Line :
         }
     }
 
-    [Index(8)]
-    [LocalizedDisplayName(nameof(Description))]
-    [Name("Memo")]
-    [NullValues("")]
-    [Optional]
     public string? Description { get; internal set; }
 
-    [Browsable(false)]
-    [Ignore]
     [JsonIgnore]
     public Transaction Transaction
     {
@@ -83,8 +58,6 @@ public class Line :
         }
     }
 
-    [Browsable(false)]
-    [Ignore]
     [JsonIgnore]
     public Line? Sibling
     {

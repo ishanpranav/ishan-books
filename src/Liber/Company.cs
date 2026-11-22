@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text.Json.Serialization;
-using System.Text.RegularExpressions;
 using Liber.Filters;
 using Liber.Properties;
 
@@ -20,8 +19,11 @@ public class Company : ICloneable
 {
     private readonly Dictionary<Guid, Account> _accounts;
     private readonly Dictionary<Guid, Transaction> _transactions;
+    private readonly Dictionary<Guid, Security> _securities;
+    private readonly Dictionary<Guid, Trade> _trades;
     private readonly SortedSet<Account> _sortedAccounts;
     private readonly SortedSet<Transaction> _sortedTransactions;
+    private readonly SortedSet<Trade> _sortedTrades;
     private readonly SortedDictionary<string, int> _names = new SortedDictionary<string, int>();
 
     private string? _name;
@@ -31,6 +33,67 @@ public class Company : ICloneable
     private ReportingPeriod _reportingPeriod;
     private DateTime? _customStarted;
     private DateTime? _customPosted;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Company"/> class.
+    /// </summary>
+    public Company()
+    {
+        _accounts = new Dictionary<Guid, Account>();
+        _sortedAccounts = new SortedSet<Account>();
+        _transactions = new Dictionary<Guid, Transaction>();
+        _sortedTransactions = new SortedSet<Transaction>();
+        _trades = new Dictionary<Guid, Trade>();
+        _sortedTrades = new SortedSet<Trade>();
+        _securities = new Dictionary<Guid, Security>();
+
+        ResetEquityAccount();
+        ResetOtherEquityAccount();
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Company"/> class with the specified accounts, journal entries, account number sequence, and journal entry number sequence.
+    /// </summary>
+    /// <param name="accounts">The account dictionary.</param>
+    /// <param name="transactions">The transaction collection.</param>
+    /// <param name="nextAccountNumber">The next account number to be assigned.</param>
+    [JsonConstructor]
+    public Company(
+        IReadOnlyCollection<Account> accounts,
+        IReadOnlyCollection<Transaction> transactions,
+        IReadOnlyCollection<Trade> trades,
+        IReadOnlyCollection<Security> securities,
+        decimal nextAccountNumber,
+        decimal nextTransactionNumber)
+    {
+        _accounts = accounts.ToDictionary(x => x.Id);
+        _sortedAccounts = new SortedSet<Account>(accounts);
+        _transactions = transactions.ToDictionary(x => x.Id);
+        _sortedTransactions = new SortedSet<Transaction>(transactions);
+        _trades = trades.ToDictionary(x => x.Id);
+        _sortedTrades = new SortedSet<Trade>(trades);
+        _securities = securities.ToDictionary(x => x.Id);
+        NextAccountNumber = nextAccountNumber;
+        NextTransactionNumber = nextTransactionNumber;
+
+        foreach (Account account in accounts)
+        {
+            InitializeAccount(account);
+            AddChild(account, account.ParentId);
+        }
+
+        foreach (Transaction transaction in transactions)
+        {
+            InitializeTransaction(transaction);
+            AddName(transaction, transaction.Name);
+            AddLines(transaction, transaction.Lines);
+        }
+
+        foreach (Trade trade in trades)
+        {
+            AddSecurity(trade.SecurityId);
+        }
+    }
 
     public IReadOnlyCollection<Account> Accounts
     {
@@ -45,6 +108,22 @@ public class Company : ICloneable
         get
         {
             return _sortedTransactions;
+        }
+    }
+
+    public IReadOnlyCollection<Trade> Trades
+    {
+        get
+        {
+            return _sortedTrades;
+        }
+    }
+
+    public IReadOnlyCollection<Security> Securities
+    {
+        get
+        {
+            return _securities.Values;
         }
     }
 
@@ -267,54 +346,9 @@ public class Company : ICloneable
     public event EventHandler<GuidEventArgs>? TransactionUpdated;
     public event EventHandler<GuidEventArgs>? TransactionReconciled;
     public event EventHandler<GuidEventArgs>? TransactionRemoved;
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Company"/> class.
-    /// </summary>
-    public Company()
-    {
-        _accounts = new Dictionary<Guid, Account>();
-        _sortedAccounts = new SortedSet<Account>();
-        _transactions = new Dictionary<Guid, Transaction>();
-        _sortedTransactions = new SortedSet<Transaction>();
-
-        ResetEquityAccount();
-        ResetOtherEquityAccount();
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="Company"/> class with the specified accounts, journal entries, account number sequence, and journal entry number sequence.
-    /// </summary>
-    /// <param name="accounts">The account dictionary.</param>
-    /// <param name="transactions">The transaction collection.</param>
-    /// <param name="nextAccountNumber">The next account number to be assigned.</param>
-    [JsonConstructor]
-    public Company(
-        IReadOnlyCollection<Account> accounts,
-        IReadOnlyCollection<Transaction> transactions,
-        decimal nextAccountNumber,
-        decimal nextTransactionNumber)
-    {
-        _accounts = accounts.ToDictionary(x => x.Id);
-        _sortedAccounts = new SortedSet<Account>(accounts);
-        _transactions = transactions.ToDictionary(x => x.Id);
-        _sortedTransactions = new SortedSet<Transaction>(transactions);
-        NextAccountNumber = nextAccountNumber;
-        NextTransactionNumber = nextTransactionNumber;
-
-        foreach (Account account in accounts)
-        {
-            InitializeAccount(account);
-            AddChild(account, account.ParentId);
-        }
-
-        foreach (Transaction transaction in transactions)
-        {
-            InitializeTransaction(transaction);
-            AddName(transaction, transaction.Name);
-            AddLines(transaction, transaction.Lines);
-        }
-    }
+    public event EventHandler<GuidEventArgs>? TradeAdded;
+    public event EventHandler<GuidEventArgs>? TradeUpdated;
+    public event EventHandler<GuidEventArgs>? TradeRemoved;
 
     public void ResetEquityAccount()
     {
@@ -592,6 +626,31 @@ public class Company : ICloneable
         }
     }
 
+    private void AddSecurity(Guid securityId)
+    {
+        if (!_securities.TryGetValue(securityId, out Security? security))
+        {
+            security = new Security(securityId);
+            _securities[securityId] = security;
+        }
+
+        security.references++;
+    }
+
+    private void RemoveSecurity(Trade value)
+    {
+        int count = _securities[value.SecurityId].references - 1;
+
+        if (count < 1)
+        {
+            _securities.Remove(value.SecurityId);
+
+            return;
+        }
+
+        _securities[value.SecurityId].references = count;
+    }
+
     private static void TrialBalance(IReadOnlyCollection<Line> lines)
     {
         decimal trialBalance = 0;
@@ -702,6 +761,57 @@ public class Company : ICloneable
         _transactions.Remove(id);
         _sortedTransactions.Remove(value);
         TransactionRemoved?.Invoke(sender: this, new GuidEventArgs(id));
+    }
+
+    public void AddTrade(Trade value, Guid securityId)
+    {
+        if (value.Id != Guid.Empty)
+        {
+            throw new InvalidOperationException();
+        }
+
+        Guid id = Guid.NewGuid();
+
+        value.Id = id;
+
+        AddSecurity(securityId);
+        _trades.Add(value.Id, value);
+        _sortedTrades.Add(value);
+
+        TradeAdded?.Invoke(sender: this, new GuidEventArgs(value.Id));
+    }
+
+    public void UpdateTrade(Guid id, Guid securityId, DateTime posted, TradeType type)
+    {
+        if (!_trades.TryGetValue(id, out Trade? value))
+        {
+            throw new InvalidOperationException();
+        }
+
+        RemoveSecurity(value);
+
+        _sortedTrades.Remove(value);
+
+        value.Posted = posted;
+        value.Type = type;
+
+        _sortedTrades.Add(value);
+        TradeUpdated?.Invoke(sender: this, new GuidEventArgs(id));
+    }
+
+    public bool RemoveTrade(Guid id)
+    {
+        if (!_trades.TryGetValue(id, out Trade? value))
+        {
+            throw new InvalidOperationException();
+        }
+
+        RemoveSecurity(value);
+        _trades.Remove(id);
+        _sortedTrades.Remove(value);
+        TradeRemoved?.Invoke(sender: this, new GuidEventArgs(id));
+
+        return true;
     }
 
     public IEnumerable<Transaction> GetTransfers()
@@ -1191,7 +1301,13 @@ public class Company : ICloneable
 
     public Company Clone()
     {
-        return new Company(_accounts.Values, _transactions.Values, NextAccountNumber, NextTransactionNumber);
+        return new Company(
+            _accounts.Values,
+            _transactions.Values,
+            _trades.Values,
+            _securities.Values,
+            NextAccountNumber,
+            NextTransactionNumber);
     }
 
     object ICloneable.Clone()

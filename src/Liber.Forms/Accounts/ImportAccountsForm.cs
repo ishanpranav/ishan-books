@@ -47,7 +47,7 @@ internal sealed class ImportAccountsForm : ImportForm
         };
 
         _context.Apply(rules ?? Enumerable.Empty<ImportRule>());
-        SetDataSource(values);
+        SetDataSource(accounts.ToList());
     }
 
     private Guid GetParentId(Guid id, string value)

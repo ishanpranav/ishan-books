@@ -2,15 +2,20 @@
 // Copyright (c) 2023-2026 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
+
 namespace Liber;
 
 public class Security
 {
-    public Security(string symbol)
+    internal int references;
+
+    public Security(Guid id)
     {
-        Symbol = symbol;
+        Id = id;
     }
 
-    public string Symbol { get; set; }
-    public string? Description { get; set; }
+    public Guid Id { get; }
+    public string Symbol { get; set; } = string.Empty;
+    public string? Name { get; set; }
 }

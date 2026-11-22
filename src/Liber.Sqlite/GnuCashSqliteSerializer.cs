@@ -170,7 +170,15 @@ public static class GnuCashSqliteSerializer
             }
         }
 
-        Company result = new Company(accounts, transactions, nextAccountNumber: 1, nextTransactionNumber: 1)
+        // TODO: import security universe
+
+        Company result = new Company(
+            accounts,
+            transactions,
+            Array.Empty<Trade>(),
+            Array.Empty<Security>(), 
+            nextAccountNumber: 1,
+            nextTransactionNumber: 1)
         {
             Name = name,
             Type = type

@@ -4,11 +4,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Text.Json.Serialization;
-using CsvHelper.Configuration.Attributes;
-using CsvHelper.TypeConversion;
 using Liber.Filters;
 
 namespace Liber;
@@ -39,124 +36,70 @@ public class Account :
         Type = type;
     }
 
-    [Browsable(false)]
-    [Ignore]
     public Guid Id { get; internal set; }
 
     /// <summary>
     /// Gets the identifier of the parent account.
     /// </summary>
     /// <value>The parent identifier.</value>
-    [Browsable(false)]
-    [Ignore]
     public Guid ParentId { get; internal set; }
 
     /// <summary>
     /// Gets or sets the account number.
     /// </summary>
     /// <value>The account number.</value>
-    [Default(0)]
-    [Index(3)]
-    [LocalizedDisplayName(nameof(Number))]
-    [Name("Account Code")]
-    [Optional]
     public decimal Number { get; internal set; }
 
     /// <summary>
     /// Gets or sets the account name.
     /// </summary>
     /// <value>The account name.</value>
-    [Index(2)]
-    [LocalizedDisplayName(nameof(Name))]
-    [Name("Account Name")]
-    [Optional]
     public string Name { get; internal set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the account type.
     /// </summary>
     /// <value>The account type.</value>
-    [Index(0)]
-    [LocalizedDisplayName(nameof(Type))]
-    [Name("Type")]
-    [Optional]
-    [CsvHelper.Configuration.Attributes.TypeConverter(typeof(GnuCashAccountTypeConverter))]
-    [System.ComponentModel.TypeConverter(typeof(LocalizedEnumConverter<AccountType>))]
     public AccountType Type { get; internal set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether the account is a placeholder.
     /// </summary>
     /// <value><see langword="true"/> if the account is a placeholder; otherwise, <see langword="false"/>.</value>
-    [BooleanFalseValues("F")]
-    [BooleanTrueValues("T")]
-    [Index(11)]
-    [LocalizedDisplayName(nameof(Placeholder))]
-    [Name("Placeholder")]
-    [Optional]
     public bool Placeholder { get; set; }
 
     /// <summary>
     /// Gets or sets the description of the account.
     /// </summary>
     /// <value>The description of the account.</value>
-    [Index(4)]
-    [LocalizedDisplayName(nameof(Description))]
-    [Name("Description")]
-    [NullValues("")]
-    [Optional]
     public string? Description { get; set; }
 
     /// <summary>
     /// Gets or sets the memo associated with the account.
     /// </summary>
     /// <value>The memo associated with the account.</value>
-    [Index(6)]
-    [LocalizedDisplayName(nameof(Memo))]
-    [Name("Notes")]
-    [NullValues("")]
-    [Optional]
     public string? Memo { get; set; }
 
     /// <summary>
     /// Gets or sets the color associated with the account.
     /// </summary>
     /// <value>The color associated with the account.</value>
-    [Index(5)]
-    [LocalizedDisplayName(nameof(Color))]
-    [Name("Account Color")]
-    [Optional]
-    [CsvHelper.Configuration.Attributes.TypeConverter(typeof(CsvHelper.TypeConversion.ColorConverter))]
     public Color Color { get; set; }
 
     /// <summary>
     /// Gets or sets the tax category associated with the account.
     /// </summary>
     /// <value>The tax category associated with the account.</value>
-    [BooleanFalseValues("F")]
-    [BooleanTrueValues("T")]
-    [LocalizedDisplayName(nameof(TaxType))]
-    [Name("Tax Info")]
     public bool TaxType { get; set; }
 
-    [Ignore]
-    [LocalizedDisplayName(nameof(CashFlow))]
-    [System.ComponentModel.TypeConverter(typeof(LocalizedEnumConverter<CashFlow>))]
     public CashFlow CashFlow { get; set; }
 
-    [BooleanFalseValues("F")]
-    [BooleanTrueValues("T")]
-    [Index(9)]
-    [LocalizedDisplayName(nameof(Inactive))]
-    [Name("Hidden")]
-    [Optional]
     public bool Inactive { get; set; }
 
     /// <summary>
     /// Gets the subaccounts of the current account.
     /// </summary>
     /// <value>The account children.</value>
-    [Browsable(false)]
     [JsonIgnore]
     public IReadOnlyCollection<Account> Children
     {
@@ -170,7 +113,6 @@ public class Account :
     /// Gets the line items posted to the account.
     /// </summary>
     /// <value>The line items posted to the account.</value>
-    [Browsable(false)]
     [JsonIgnore]
     public IReadOnlyCollection<Line> Lines
     {
@@ -180,7 +122,6 @@ public class Account :
         }
     }
 
-    [Browsable(false)]
     [JsonIgnore]
     public bool ReadOnly
     {
@@ -190,7 +131,6 @@ public class Account :
         }
     }
 
-    [Browsable(false)]
     [JsonIgnore]
     public DateTime? Reconciled
     {
@@ -200,7 +140,6 @@ public class Account :
         }
     }
 
-    [Browsable(false)]
     [JsonIgnore]
     public IReadOnlyCollection<Line>? LastReconciledLines
     {

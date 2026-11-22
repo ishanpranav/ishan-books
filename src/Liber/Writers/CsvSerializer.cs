@@ -14,9 +14,9 @@ using CsvHelper.Configuration;
 namespace Liber.Writers;
 
 /// <summary>
-/// Provides methods for serializing and deserializing data using the CSV format for GnuCash integration.
+/// Provides methods for serializing and deserializing data using the CSV format for integration with GnuCash and Yahoo! Finance.
 /// </summary>
-public static class GnuCashSerializer
+public static class CsvSerializer
 {
     /// <summary>
     /// Asynchronously Serializes a collection of items to a stream using the CSV format.

@@ -28,11 +28,11 @@ public class GnuCashAccountWriter : IWriter
             accounts[i] = new GnuCashAccount()
             {
                 Value = account,
-                Path = GnuCashSerializer.GetPath(company, account)
+                Path = CsvSerializer.GetPath(company, account)
             };
             i++;
         }
 
-        await GnuCashSerializer.SerializeAsync(output, accounts);
+        await CsvSerializer.SerializeAsync(output, accounts);
     }
 }

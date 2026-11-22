@@ -11,23 +11,18 @@ namespace Liber.Forms.Transactions;
 
 internal sealed class ImportTransactionsForm : ImportForm
 {
-    private readonly Dictionary<Guid, (GnuCashLine, List<Line>)> lookup = new Dictionary<Guid, (GnuCashLine, List<Line>)>();
+    private readonly Dictionary<Guid, (GnuCashLine, List<Line>)> _lookup = new Dictionary<Guid, (GnuCashLine, List<Line>)>();
 
     public ImportTransactionsForm(Company company, IReadOnlyCollection<GnuCashLine> lines) : base(company)
     {
-        Dictionary<string, Guid> accounts = new Dictionary<string, Guid>(company.Accounts.Count);
-
-        foreach (Account account in company.Accounts)
-        {
-            accounts.Add(account.Name, account.Id);
-        }
+        Dictionary<string, Guid> accounts = company.Accounts.ToDictionary(x => x.Name, x => x.Id);
 
         foreach (GnuCashLine line in lines)
         {
-            if (!lookup.TryGetValue(line.TransactionId, out (GnuCashLine Line, List<Line> Values) result))
+            if (!_lookup.TryGetValue(line.TransactionId, out (GnuCashLine Line, List<Line> Values) result))
             {
                 result = (line, new List<Line>());
-                lookup[line.TransactionId] = result;
+                _lookup[line.TransactionId] = result;
             }
 
             result.Values.Add(new Line(
@@ -37,12 +32,12 @@ internal sealed class ImportTransactionsForm : ImportForm
                 line.Value.Reconciled));
         }
 
-        SetDataSource(lines.Select(x => x.Value).ToList());
+        SetDataSource(lines.ToList());
     }
 
     protected override void CommitChanges()
     {
-        foreach (KeyValuePair<Guid, (GnuCashLine Line, List<Line> Values)> entry in lookup)
+        foreach (KeyValuePair<Guid, (GnuCashLine Line, List<Line> Values)> entry in _lookup)
         {
             Company.AddTransaction(
                 new Transaction(

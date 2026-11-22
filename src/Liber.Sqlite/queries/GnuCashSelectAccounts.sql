@@ -5,7 +5,7 @@
 SELECT
 	account."guid" "Id",
 	COALESCE(account.parent_guid, '00000000-0000-0000-0000-000000000000') "ParentId",
-	COALESCE(account.code, 0) "Number",
+	COALESCE(NULLIF(account.code, ''), 0) "Number",
 	account."name" "Name",
 	account.account_type "Type",
 	account.placeholder "Placeholder",

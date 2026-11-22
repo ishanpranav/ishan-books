@@ -119,6 +119,8 @@ partial class MainForm
         _saveFileDialog = new System.Windows.Forms.SaveFileDialog();
         _recentPathManager = new RecentPathManager(components);
         _factory = new FormFactory(components);
+        importTradesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
         _menuStrip.SuspendLayout();
         _toolStrip.SuspendLayout();
         SuspendLayout();
@@ -151,7 +153,7 @@ partial class MainForm
         // 
         // importToolStripMenuItem
         // 
-        importToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { importAccountsToolStripMenuItem, importTransactionsToolStripMenuItem });
+        importToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { importAccountsToolStripMenuItem, importTransactionsToolStripMenuItem, toolStripSeparator20, importTradesToolStripMenuItem });
         importToolStripMenuItem.Name = "importToolStripMenuItem";
         resources.ApplyResources(importToolStripMenuItem, "importToolStripMenuItem");
         // 
@@ -659,6 +661,18 @@ partial class MainForm
         // 
         _factory.Invalidated += OnFactoryInvalidated;
         // 
+        // importTradesToolStripMenuItem
+        // 
+        importTradesToolStripMenuItem.Image = VisualStudioImageLibrary.Import;
+        importTradesToolStripMenuItem.Name = "importTradesToolStripMenuItem";
+        resources.ApplyResources(importTradesToolStripMenuItem, "importTradesToolStripMenuItem");
+        importTradesToolStripMenuItem.Click += OnImportTradesToolStripMenuItemClick;
+        // 
+        // toolStripSeparator20
+        // 
+        toolStripSeparator20.Name = "toolStripSeparator20";
+        resources.ApplyResources(toolStripSeparator20, "toolStripSeparator20");
+        // 
         // MainForm
         // 
         AllowDrop = true;
@@ -770,4 +784,6 @@ partial class MainForm
     private System.Windows.Forms.ToolStripButton saveAsToolStripButton;
     private System.Windows.Forms.ToolStripMenuItem binderToolStripMenuItem1;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator18;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator20;
+    private System.Windows.Forms.ToolStripMenuItem importTradesToolStripMenuItem;
 }

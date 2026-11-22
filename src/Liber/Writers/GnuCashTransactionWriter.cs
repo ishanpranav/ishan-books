@@ -33,11 +33,11 @@ public class GnuCashTransactionWriter : IWriter
                 {
                     Value = line,
                     AccountName = account.Name,
-                    AccountPath = GnuCashSerializer.GetPath(company, account)
+                    AccountPath = CsvSerializer.GetPath(company, account)
                 });
             }
         }
 
-        await GnuCashSerializer.SerializeAsync(output, lines);
+        await CsvSerializer.SerializeAsync(output, lines);
     }
 }

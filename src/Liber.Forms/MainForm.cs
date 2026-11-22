@@ -23,6 +23,7 @@ using Liber.Forms.Reports;
 using Liber.Forms.Reports.Gdi;
 using Liber.Forms.Saving;
 using Liber.Forms.TaskItems;
+using Liber.Forms.Trades;
 using Liber.Forms.Transactions;
 using Liber.Forms.Writers;
 using Liber.Sqlite;
@@ -763,7 +764,7 @@ internal partial class MainForm : Form
         {
             await using FileStream input = File.OpenRead(path);
 
-            IReadOnlyCollection<GnuCashAccount> accounts = await GnuCashSerializer.DeserializeAsync<GnuCashAccount>(input);
+            IReadOnlyCollection<GnuCashAccount> accounts = await CsvSerializer.DeserializeAsync<GnuCashAccount>(input);
 
             _factory.Register(Guid.NewGuid(), new ImportAccountsForm(_company, _factory, _engine, accounts, _recentPathManager));
         });
@@ -780,9 +781,26 @@ internal partial class MainForm : Form
         {
             await using FileStream input = File.OpenRead(path);
 
-            IReadOnlyCollection<GnuCashLine> lines = await GnuCashSerializer.DeserializeAsync<GnuCashLine>(input);
+            IReadOnlyCollection<GnuCashLine> lines = await CsvSerializer.DeserializeAsync<GnuCashLine>(input);
 
             _factory.Register(Guid.NewGuid(), new ImportTransactionsForm(_company, lines));
+        });
+    }
+
+    private async void OnImportTradesToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        if (!TryGetOpenPath(FilterIndex.Csv, out string? path))
+        {
+            return;
+        }
+
+        await Program.AbortRetryIgnoreAsync(async () =>
+        {
+            await using FileStream input = File.OpenRead(path);
+
+            IReadOnlyCollection<YahooFinanceTrade> trades = await CsvSerializer.DeserializeAsync<YahooFinanceTrade>(input);
+
+            _factory.Register(Guid.NewGuid(), new ImportTradesForm(_company, trades));
         });
     }
 

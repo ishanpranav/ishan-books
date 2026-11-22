@@ -62,6 +62,9 @@ internal static class Program
 
     public static async Task AbortRetryIgnoreAsync(Func<Task> action)
     {
+#if DEBUG
+        await action();
+#else
         DialogResult result;
 
         do
@@ -78,5 +81,6 @@ internal static class Program
             }
         }
         while (result == DialogResult.Retry);
+#endif
     }
 }

@@ -8,6 +8,10 @@ DROP TABLE IF EXISTS "Company";
 DROP TABLE IF EXISTS "Account";
 DROP TABLE IF EXISTS "Transaction";
 DROP TABLE IF EXISTS "Line";
+DROP TABLE IF EXISTS "Trade";
+DROP TABLE IF EXISTS "Security";
+DROP TABLE IF EXISTS "Trade";
+DROP TABLE IF EXISTS "Security";
 
 PRAGMA foreign_keys = ON;
 
@@ -57,7 +61,7 @@ CREATE TABLE "Transaction" (
 CREATE TABLE "Line" (
     "TransactionId" TEXT    NOT NULL,
     "AccountId"     TEXT    NOT NULL,
-    "Balance"       INTEGER,
+    "Balance"       INTEGER NOT NULL,
     "Description"   TEXT,
     "Reconciled"    TEXT,
     FOREIGN KEY("TransactionId") REFERENCES "Transaction"("Id"),
