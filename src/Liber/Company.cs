@@ -626,6 +626,11 @@ public class Company : ICloneable
         }
     }
 
+    public Security GetSecurity(Guid id)
+    {
+        return _securities[id];
+    }
+
     private void AddSecurity(Guid securityId)
     {
         if (!_securities.TryGetValue(securityId, out Security? security))

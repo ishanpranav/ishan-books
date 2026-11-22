@@ -279,6 +279,8 @@ internal partial class BinderForm : Form
 
         await Program.AbortRetryIgnoreAsync(async () =>
         {
+            form.Progress = 0;
+
             string extension = Path.GetExtension(path);
 
             switch (FilterIndexExtensions.FromExtension(extension))

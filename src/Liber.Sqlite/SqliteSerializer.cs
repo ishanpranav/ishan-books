@@ -182,6 +182,7 @@ public static class SqliteSerializer
                     command.CommandText = Queries.InsertTrade;
 
                     command.Parameters.AddWithValue("@id", trade.Id);
+                    command.Parameters.AddWithValue("@securityId", trade.SecurityId);
                     command.Parameters.AddWithValue("@posted", trade.Posted);
                     command.Parameters.AddWithValue("@type", trade.Type);
                     command.Parameters.AddWithValue("@cost", trade.Cost);

@@ -571,6 +571,8 @@ internal partial class MainForm : Form
 
         await Program.AbortRetryIgnoreAsync(async () =>
         {
+            form.Progress = 0;
+
             string extension = Path.GetExtension(path);
 
             switch (FilterIndexExtensions.FromExtension(extension))
@@ -708,6 +710,8 @@ internal partial class MainForm : Form
 
         await Program.AbortRetryIgnoreAsync(async () =>
         {
+            form.Progress = 0;
+
             using PdfDocument document = new PdfDocument();
 
             PdfOutlineCollection outline = document.Outlines;
