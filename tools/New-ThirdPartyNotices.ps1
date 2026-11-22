@@ -64,13 +64,21 @@ function Out-Dependencies {
     
         if ($null -ne $dependency.source) {
             $source = $dependency.source
-
-            if ($source.StartsWith("https://github.com/")) {
-                $source = $source.Substring(19)
+            
+            if ($source.StartsWith("https://")) {
+                $source = $source.Substring(8);
             }
 
-            if ($source.StartsWith("https://en.wikipedia.org/wiki/")) {
-                $source = $source.Substring(30).Replace('_', "%20") + "%20-%20Wikipedia"
+            if ($source.StartsWith("www.")) {
+                $source = $source.Substring(4);
+            }
+
+            if ($source.StartsWith("github.com/")) {
+                $source = $source.Substring(11)
+            }
+
+            if ($source.StartsWith("en.wikipedia.org/wiki/")) {
+                $source = $source.Substring(22).Replace('_', "%20") + "%20-%20Wikipedia"
             }
 
             Out-ThirdPartyNotices ("- Source: [" + [System.Web.HttpUtility]::UrlDecode($source) + "](" + $dependency.source + ")")

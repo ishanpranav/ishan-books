@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text.Json.Serialization;
+using System.Transactions;
 using Liber.Filters;
 using Liber.Properties;
 
@@ -359,7 +360,7 @@ public class Company : ICloneable
     public event EventHandler<GuidEventArgs>? TransactionUpdated;
     public event EventHandler<GuidEventArgs>? TransactionReconciled;
     public event EventHandler<GuidEventArgs>? TransactionRemoved;
-    public event EventHandler<GuidEventArgs>? TradesChanged;
+    public event EventHandler? TradesChanged;
 
     public void ResetEquityAccount()
     {
@@ -769,6 +770,7 @@ public class Company : ICloneable
         _trades.Clear();
         _sortedTrades.Clear();
         InitializeTrades(clone);
+        TradesChanged?.Invoke(sender: this, EventArgs.Empty);
     }
 
     private void InitializeTrades(IEnumerable<Trade> trades)

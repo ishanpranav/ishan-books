@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Liber.Forms.Accounts;
@@ -15,6 +16,21 @@ namespace Liber.Forms;
 
 internal static class Program
 {
+    private static HttpClient? s_httpClient;
+
+    public static HttpClient HttpClient
+    {
+        get
+        {
+            if (s_httpClient == null)
+            {
+                s_httpClient = new HttpClient();
+            }
+
+            return s_httpClient;
+        }
+    }
+
     [STAThread]
     private static void Main(string[] args)
     {

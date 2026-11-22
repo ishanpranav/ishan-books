@@ -68,6 +68,8 @@ partial class MainForm
         toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
         cultureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         importSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        aPISettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        alphaVantageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
         combinePdfDocumentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -87,10 +89,16 @@ partial class MainForm
         removeAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
         binderToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+        toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
         splashScreenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         reportsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
         otherReportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         binderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        portfolioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        tradesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        securityUniverseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        toolStripSeparator21 = new System.Windows.Forms.ToolStripSeparator();
+        alphaVantageSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         formToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         closeAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         formsToolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
@@ -120,9 +128,6 @@ partial class MainForm
         _saveFileDialog = new System.Windows.Forms.SaveFileDialog();
         _recentPathManager = new RecentPathManager(components);
         _factory = new FormFactory(components);
-        toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
-        portfolioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-        tradesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         _menuStrip.SuspendLayout();
         _toolStrip.SuspendLayout();
         SuspendLayout();
@@ -301,7 +306,7 @@ partial class MainForm
         // 
         // editToolStripMenuItem1
         // 
-        editToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { findToolStripMenuItem, toolStripSeparator19, unreconcileToolStripMenuItem, toolStripSeparator17, cultureToolStripMenuItem, importSettingsToolStripMenuItem, toolStripSeparator7, combinePdfDocumentsToolStripMenuItem });
+        editToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { findToolStripMenuItem, toolStripSeparator19, unreconcileToolStripMenuItem, toolStripSeparator17, cultureToolStripMenuItem, importSettingsToolStripMenuItem, aPISettingsToolStripMenuItem, toolStripSeparator7, combinePdfDocumentsToolStripMenuItem });
         editToolStripMenuItem1.Name = "editToolStripMenuItem1";
         resources.ApplyResources(editToolStripMenuItem1, "editToolStripMenuItem1");
         // 
@@ -341,6 +346,18 @@ partial class MainForm
         importSettingsToolStripMenuItem.Name = "importSettingsToolStripMenuItem";
         resources.ApplyResources(importSettingsToolStripMenuItem, "importSettingsToolStripMenuItem");
         importSettingsToolStripMenuItem.Click += OnImportSettingsToolStripMenuItemClick;
+        // 
+        // aPISettingsToolStripMenuItem
+        // 
+        aPISettingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { alphaVantageToolStripMenuItem });
+        aPISettingsToolStripMenuItem.Name = "aPISettingsToolStripMenuItem";
+        resources.ApplyResources(aPISettingsToolStripMenuItem, "aPISettingsToolStripMenuItem");
+        // 
+        // alphaVantageToolStripMenuItem
+        // 
+        alphaVantageToolStripMenuItem.Name = "alphaVantageToolStripMenuItem";
+        resources.ApplyResources(alphaVantageToolStripMenuItem, "alphaVantageToolStripMenuItem");
+        alphaVantageToolStripMenuItem.Click += OnAlphaVantageToolStripMenuItemClick;
         // 
         // toolStripSeparator7
         // 
@@ -459,6 +476,11 @@ partial class MainForm
         resources.ApplyResources(binderToolStripMenuItem1, "binderToolStripMenuItem1");
         binderToolStripMenuItem1.Click += OnBinderToolStripMenuItemClick;
         // 
+        // toolStripSeparator18
+        // 
+        toolStripSeparator18.Name = "toolStripSeparator18";
+        resources.ApplyResources(toolStripSeparator18, "toolStripSeparator18");
+        // 
         // splashScreenToolStripMenuItem
         // 
         splashScreenToolStripMenuItem.Name = "splashScreenToolStripMenuItem";
@@ -482,6 +504,34 @@ partial class MainForm
         binderToolStripMenuItem.Name = "binderToolStripMenuItem";
         resources.ApplyResources(binderToolStripMenuItem, "binderToolStripMenuItem");
         binderToolStripMenuItem.Click += OnBinderToolStripMenuItemClick;
+        // 
+        // portfolioToolStripMenuItem
+        // 
+        portfolioToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tradesToolStripMenuItem, securityUniverseToolStripMenuItem, toolStripSeparator21, alphaVantageSettingsToolStripMenuItem });
+        portfolioToolStripMenuItem.Name = "portfolioToolStripMenuItem";
+        resources.ApplyResources(portfolioToolStripMenuItem, "portfolioToolStripMenuItem");
+        // 
+        // tradesToolStripMenuItem
+        // 
+        tradesToolStripMenuItem.Name = "tradesToolStripMenuItem";
+        resources.ApplyResources(tradesToolStripMenuItem, "tradesToolStripMenuItem");
+        tradesToolStripMenuItem.Click += OnTradesToolStripMenuItemClick;
+        // 
+        // securityUniverseToolStripMenuItem
+        // 
+        securityUniverseToolStripMenuItem.Name = "securityUniverseToolStripMenuItem";
+        resources.ApplyResources(securityUniverseToolStripMenuItem, "securityUniverseToolStripMenuItem");
+        // 
+        // toolStripSeparator21
+        // 
+        toolStripSeparator21.Name = "toolStripSeparator21";
+        resources.ApplyResources(toolStripSeparator21, "toolStripSeparator21");
+        // 
+        // alphaVantageSettingsToolStripMenuItem
+        // 
+        alphaVantageSettingsToolStripMenuItem.Name = "alphaVantageSettingsToolStripMenuItem";
+        resources.ApplyResources(alphaVantageSettingsToolStripMenuItem, "alphaVantageSettingsToolStripMenuItem");
+        alphaVantageSettingsToolStripMenuItem.Click += OnAlphaVantageToolStripMenuItemClick;
         // 
         // formToolStripMenuItem
         // 
@@ -670,22 +720,6 @@ partial class MainForm
         // 
         _factory.Invalidated += OnFactoryInvalidated;
         // 
-        // toolStripSeparator18
-        // 
-        toolStripSeparator18.Name = "toolStripSeparator18";
-        resources.ApplyResources(toolStripSeparator18, "toolStripSeparator18");
-        // 
-        // portfolioToolStripMenuItem
-        // 
-        portfolioToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tradesToolStripMenuItem });
-        portfolioToolStripMenuItem.Name = "portfolioToolStripMenuItem";
-        resources.ApplyResources(portfolioToolStripMenuItem, "portfolioToolStripMenuItem");
-        // 
-        // tradesToolStripMenuItem
-        // 
-        tradesToolStripMenuItem.Name = "tradesToolStripMenuItem";
-        resources.ApplyResources(tradesToolStripMenuItem, "tradesToolStripMenuItem");
-        // 
         // MainForm
         // 
         AllowDrop = true;
@@ -801,4 +835,9 @@ partial class MainForm
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator18;
     private System.Windows.Forms.ToolStripMenuItem portfolioToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem tradesToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem securityUniverseToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem aPISettingsToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem alphaVantageToolStripMenuItem;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator21;
+    private System.Windows.Forms.ToolStripMenuItem alphaVantageSettingsToolStripMenuItem;
 }

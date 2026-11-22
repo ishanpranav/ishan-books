@@ -70,6 +70,15 @@ namespace Liber.Forms.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Offline..
+        /// </summary>
+        internal static string ApiError {
+            get {
+                return ResourceManager.GetString("ApiError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Custom Report.
         /// </summary>
         internal static string BinderGenericTitle {
@@ -211,6 +220,15 @@ namespace Liber.Forms.Properties {
         internal static string NoAccount {
             get {
                 return ResourceManager.GetString("NoAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OK..
+        /// </summary>
+        internal static string OK {
+            get {
+                return ResourceManager.GetString("OK", resourceCulture);
             }
         }
         

@@ -1,0 +1,7 @@
+﻿﻿# AlphaVantageAdjustedTimeSeries.txt
+# Copyright (c) 2023 Ishan Pranav. All rights reserved.
+# Licensed under the MIT License.
+
+Daily = TIME_SERIES_DAILY_ADJUSTED
+Weekly = TIME_SERIES_WEEKLY_ADJUSTED
+Monthly = TIME_SERIES_MONTHLY_ADJUSTED

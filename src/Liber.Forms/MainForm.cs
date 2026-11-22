@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Liber.AlphaVantage;
 using Liber.Forms.Accounts;
 using Liber.Forms.AccountViews;
 using Liber.Forms.Companies;
@@ -43,6 +44,7 @@ internal partial class MainForm : Form
     private string? _path;
     private ReportEngine _engine;
     private Company _company;
+    private AlphaVantageClient? _client;
 
     public event EventHandler? Loaded;
 
@@ -76,6 +78,16 @@ internal partial class MainForm : Form
         _factory.KillAll();
 
         _company = value;
+    }
+
+    private AlphaVantageClient GetAlphaVantageClient()
+    {
+        if (_client == null)
+        {
+            _client = new AlphaVantageClient(Program.HttpClient);
+        }
+
+        return _client;
     }
 
     private async void OnLoad(object sender, EventArgs e)
@@ -914,6 +926,13 @@ internal partial class MainForm : Form
     private void OnTradesToolStripMenuItemClick(object sender, EventArgs e)
     {
         _factory.AutoRegister(() => new TradesForm(_company));
+    }
+
+    private void OnAlphaVantageToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        AlphaVantageClient client = GetAlphaVantageClient();
+
+        _factory.AutoRegister(() => new AlphaVantageForm(client));
     }
 
     private void OnFactoryInvalidated(object sender, EventArgs e)

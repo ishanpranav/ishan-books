@@ -120,6 +120,9 @@
   <data name="Account" xml:space="preserve">
     <value>account</value>
   </data>
+  <data name="ApiError" xml:space="preserve">
+    <value>Offline.</value>
+  </data>
   <data name="BinderGenericTitle" xml:space="preserve">
     <value>Custom Report</value>
   </data>
@@ -168,6 +171,9 @@
   </data>
   <data name="NoAccount" xml:space="preserve">
     <value>(None)</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK.</value>
   </data>
   <data name="PdfGenericTitle" xml:space="preserve">
     <value>Linked Document</value>

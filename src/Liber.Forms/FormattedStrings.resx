@@ -672,4 +672,13 @@
   <data name="_r_reconciliation-report" xml:space="preserve">
     <value>Reconciliation Report</value>
   </data>
+  <data name="AlphaVantageStatus{0}{1}{2}{3}" xml:space="preserve">
+    <value>API status: {0}
+
+Basic access: {1}
+
+Premium access: {2}
+
+Real-time entitlement: {3}</value>
+  </data>
 </root>

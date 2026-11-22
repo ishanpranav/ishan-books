@@ -383,8 +383,21 @@ internal static class FormattedStrings
             overdue.Humanize(precision: 2, minUnit: TimeUnit.Day, maxUnit: TimeUnit.Year));
     }
 
-    internal static string? GetVisibleMessage(string text)
+    public static string? GetVisibleMessage(string text)
     {
         return string.Format(GetString("VisibleMessage{0}"), text);
+    }
+
+    public static string? GetAlphaVantageStatus(
+        string apiStatus,
+        string basicStatus,
+        string premiumStatus,
+        string realTimeStatus)
+    {
+        return string.Format(GetString("AlphaVantageStatus{0}{1}{2}{3}"),
+            apiStatus,
+            basicStatus,
+            premiumStatus,
+            realTimeStatus);
     }
 }

@@ -15,6 +15,10 @@ Dependencies
 This section contains notices for binary dependencies redistributed alongside
 the application.
 
+### Alpha Vantage&emsp;<sub><sup>*api*&ensp;</sup></sub>
+- Author: Alpha Vantage Inc.
+- Source: [alphavantage.co](https://www.alphavantage.co)
+
 ### Bootstrap&emsp;<sub><sup>*js*&ensp;*scss*&ensp;*css*&ensp;</sup></sub>
 - Author: The Bootstrap Authors
 - Source: [twbs/bootstrap](https://github.com/twbs/bootstrap)
@@ -109,23 +113,30 @@ See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/quicken.ch
 - Source: [kurkle/chartjs-chart-treemap](https://github.com/kurkle/chartjs-chart-treemap)
 - License: [MIT](#mit_charjscharttreemap)
 
+### Visual Studio 2026 Image Library&emsp;<sub><sup>*png*&ensp;</sup></sub>
+- Author: Microsoft Corporation
+- Source: [microsoft.com/en-us/download/details.aspx?id=35825](https://www.microsoft.com/en-us/download/details.aspx?id=35825)
+- License: [MICROSOFT VISUAL STUDIO IMAGE LIBRARY](#visual-studio-image-library-eula_microsoft)
+
+See [here](https://www.microsoft.com/en-us/download/details.aspx?id=35825) for the resource included from the repository.
+
 ### CalendarEditingControl&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
 - Author: .NET Foundation and contributors
-- Source: [https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells)
+- Source: [learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells)
 - License: [MIT](#mit_dotnet)
 
 See [here](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells) for the resource included from the repository.
 
 ### CalendarCell&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
 - Author: .NET Foundation and contributors
-- Source: [https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells)
+- Source: [learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells)
 - License: [MIT](#mit_dotnet)
 
 See [here](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells) for the resource included from the repository.
 
 ### CalendarColumn&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
 - Author: .NET Foundation and contributors
-- Source: [https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells)
+- Source: [learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells)
 - License: [MIT](#mit_dotnet)
 
 See [here](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells) for the resource included from the repository.
@@ -139,34 +150,27 @@ See [here](https://github.com/dotnet/runtime/issues/1761) for the resource inclu
 
 For more information about this software, please see its [third-party notices](https://github.com/dotnet/runtime/blob/main/THIRD-PARTY-NOTICES.TXT).
 
-### .NET Runtime&emsp;<sub><sup>*c\#*&ensp;*c++*&ensp;*c*&ensp;</sup></sub>
-- Author: .NET Foundation and contributors
-- Source: [dotnet/runtime](https://github.com/dotnet/runtime)
-- License: [MIT](#mit_dotnet)
-
-For more information about this software, please see its [third-party notices](https://github.com/dotnet/runtime/blob/main/THIRD-PARTY-NOTICES.TXT).
+### Microsoft Edge WebView2&emsp;<sub><sup>*c++*&ensp;</sup></sub>
+- Author: Microsoft Corporation
+- Source: [developer.microsoft.com/en-us/microsoft-edge/webview2](https://developer.microsoft.com/en-us/microsoft-edge/webview2)
+- License: [BSD 3-clause "New" or "Revised" license](#bsd-3-clause-microsoft)
 
 ### Microsoft.Data.Sqlite&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
 - Author: .NET Foundation and contributors
 - Source: [dotnet/efcore](https://github.com/dotnet/efcore)
 - License: [MIT](#mit_dotnet)
 
-### Visual Studio 2026 Image Library&emsp;<sub><sup>*png*&ensp;</sup></sub>
-- Author: Microsoft Corporation
-- Source: [https://www.microsoft.com/en-us/download/details.aspx?id=35825](https://www.microsoft.com/en-us/download/details.aspx?id=35825)
-- License: [MICROSOFT VISUAL STUDIO IMAGE LIBRARY](#visual-studio-image-library-eula_microsoft)
-
-See [here](https://www.microsoft.com/en-us/download/details.aspx?id=35825) for the resource included from the repository.
-
 ### Humanizer&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
 - Author: .NET Foundation and contributors
 - Source: [Humanizr/Humanizer](https://github.com/Humanizr/Humanizer)
 - License: [MIT](#mit_dotnet)
 
-### Microsoft Edge WebView2&emsp;<sub><sup>*c++*&ensp;</sup></sub>
-- Author: Microsoft Corporation
-- Source: [https://developer.microsoft.com/en-us/microsoft-edge/webview2](https://developer.microsoft.com/en-us/microsoft-edge/webview2)
-- License: [BSD 3-clause "New" or "Revised" license](#bsd-3-clause-microsoft)
+### .NET Runtime&emsp;<sub><sup>*c\#*&ensp;*c++*&ensp;*c*&ensp;</sup></sub>
+- Author: .NET Foundation and contributors
+- Source: [dotnet/runtime](https://github.com/dotnet/runtime)
+- License: [MIT](#mit_dotnet)
+
+For more information about this software, please see its [third-party notices](https://github.com/dotnet/runtime/blob/main/THIRD-PARTY-NOTICES.TXT).
 
 ### CPA 006 Cheque in Middle ASAP Cheques&emsp;<sub><sup>*ini*&ensp;</sup></sub>
 - Author: Doug Ransom
@@ -184,7 +188,7 @@ For more information about this software, please see its [third-party notices](h
 
 ### SQLite&emsp;<sub><sup>*c*&ensp;</sup></sub>
 - Author: SQLite contributors
-- Source: [https://sqlite.org](https://sqlite.org)
+- Source: [sqlite.org](https://sqlite.org)
 
 ### SQLCipher&emsp;<sub><sup>*c*&ensp;*tcl*&ensp;</sup></sub>
 - Author: Zetetic, LLC
@@ -200,7 +204,7 @@ inspired by third-party open-source software.
 - Source: [Luma (video) - Wikipedia](https://en.wikipedia.org/wiki/Luma_(video))
 
 ### How to: Host Controls in Windows Forms DataGridView Cells&emsp;<sub><sup></sup></sub>
-- Source: [https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells)
+- Source: [learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells)
 
 Resources
 ---------

@@ -321,6 +321,18 @@
   <data name="importSettingsToolStripMenuItem.Text" xml:space="preserve">
     <value>Import Settings</value>
   </data>
+  <data name="alphaVantageToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="alphaVantageToolStripMenuItem.Text" xml:space="preserve">
+    <value>Alpha Vantage</value>
+  </data>
+  <data name="aPISettingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>211, 22</value>
+  </data>
+  <data name="aPISettingsToolStripMenuItem.Text" xml:space="preserve">
+    <value>API Settings</value>
+  </data>
   <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
     <value>208, 6</value>
   </data>
@@ -391,37 +403,37 @@
     <value>222, 6</value>
   </data>
   <data name="newAccountToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="newAccountToolStripMenuItem.Text" xml:space="preserve">
     <value>New Account</value>
   </data>
   <data name="reconcileAccountToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="reconcileAccountToolStripMenuItem.Text" xml:space="preserve">
     <value>Reconcile Account</value>
   </data>
   <data name="removeAccountToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="removeAccountToolStripMenuItem.Text" xml:space="preserve">
     <value>Delete Account</value>
   </data>
   <data name="toolStripSeparator13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 6</value>
+    <value>177, 6</value>
   </data>
   <data name="binderToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="binderToolStripMenuItem1.Text" xml:space="preserve">
     <value>Custom Report</value>
   </data>
   <data name="toolStripSeparator18.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 6</value>
+    <value>177, 6</value>
   </data>
   <data name="splashScreenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="splashScreenToolStripMenuItem.Text" xml:space="preserve">
     <value>Splash Screen</value>
@@ -457,10 +469,25 @@
     <value>&amp;Reports</value>
   </data>
   <data name="tradesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>216, 22</value>
   </data>
   <data name="tradesToolStripMenuItem.Text" xml:space="preserve">
     <value>Enter &amp;Trades</value>
+  </data>
+  <data name="securityUniverseToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 22</value>
+  </data>
+  <data name="securityUniverseToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Security Universe</value>
+  </data>
+  <data name="toolStripSeparator21.Size" type="System.Drawing.Size, System.Drawing">
+    <value>213, 6</value>
+  </data>
+  <data name="alphaVantageSettingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 22</value>
+  </data>
+  <data name="alphaVantageSettingsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Alpha Vantage API Settings</value>
   </data>
   <data name="portfolioToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 20</value>
@@ -469,22 +496,22 @@
     <value>&amp;Portfolio</value>
   </data>
   <data name="closeAllToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>169, 22</value>
   </data>
   <data name="closeAllToolStripMenuItem.Text" xml:space="preserve">
     <value>Close All</value>
   </data>
   <data name="formsToolStripSeparator.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>166, 6</value>
   </data>
   <data name="formsToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>169, 22</value>
   </data>
   <data name="formsToolStripMenuItem1.Text" xml:space="preserve">
     <value>Windows</value>
   </data>
   <data name="formsToolStripMenUtem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>169, 22</value>
   </data>
   <data name="formsToolStripMenUtem.Text" xml:space="preserve">
     <value>Manage Windows</value>
@@ -3656,6 +3683,18 @@
   <data name="&gt;&gt;importSettingsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;aPISettingsToolStripMenuItem.Name" xml:space="preserve">
+    <value>aPISettingsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;aPISettingsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;alphaVantageToolStripMenuItem.Name" xml:space="preserve">
+    <value>alphaVantageToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;alphaVantageToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;toolStripSeparator7.Name" xml:space="preserve">
     <value>toolStripSeparator7</value>
   </data>
@@ -3770,6 +3809,12 @@
   <data name="&gt;&gt;binderToolStripMenuItem1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;toolStripSeparator18.Name" xml:space="preserve">
+    <value>toolStripSeparator18</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator18.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;splashScreenToolStripMenuItem.Name" xml:space="preserve">
     <value>splashScreenToolStripMenuItem</value>
   </data>
@@ -3792,6 +3837,36 @@
     <value>binderToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;binderToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;portfolioToolStripMenuItem.Name" xml:space="preserve">
+    <value>portfolioToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;portfolioToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tradesToolStripMenuItem.Name" xml:space="preserve">
+    <value>tradesToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;tradesToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;securityUniverseToolStripMenuItem.Name" xml:space="preserve">
+    <value>securityUniverseToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;securityUniverseToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator21.Name" xml:space="preserve">
+    <value>toolStripSeparator21</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator21.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;alphaVantageSettingsToolStripMenuItem.Name" xml:space="preserve">
+    <value>alphaVantageSettingsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;alphaVantageSettingsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;formToolStripMenuItem.Name" xml:space="preserve">
@@ -3961,24 +4036,6 @@
   </data>
   <data name="&gt;&gt;_factory.Type" xml:space="preserve">
     <value>Liber.Forms.Forms.FormFactory, Liber.Forms, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator18.Name" xml:space="preserve">
-    <value>toolStripSeparator18</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator18.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;portfolioToolStripMenuItem.Name" xml:space="preserve">
-    <value>portfolioToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;portfolioToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tradesToolStripMenuItem.Name" xml:space="preserve">
-    <value>tradesToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;tradesToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainForm</value>

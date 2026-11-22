@@ -1,0 +1,7 @@
+﻿﻿# AlphaVantageTimeSeries.txt
+# Copyright (c) 2023 Ishan Pranav. All rights reserved.
+# Licensed under the MIT License.
+
+Daily = TIME_SERIES_DAILY
+Weekly = TIME_SERIES_WEEKLY
+Monthly = TIME_SERIES_MONTHLY
