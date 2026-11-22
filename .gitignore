@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+/src/Liber.Forms/AlphaVantage.txt
+/Liber.AlphaVantage/AlphaVantage.txt
