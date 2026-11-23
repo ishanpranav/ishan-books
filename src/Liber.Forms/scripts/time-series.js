@@ -23,10 +23,18 @@ const config = {
                     weight: 'bold'
                 }
             },
-            legend: { display: false }
+            legend: { display: false },
+            tooltip: {
+                callbacks: {
+                    title: (items) => {
+                        return new Date(items[0].parsed.x).toLocaleDateString(undefined, { dateStyle: 'medium' });
+                    }
+                }
+            }
         },
         scales: {
             x: {
+                type: 'time',
                 grid: { display: false },
                 ticks: { color: '#212529', maxTicksLimit: 6, maxRotation: 0 }
             },
@@ -41,9 +49,36 @@ const config = {
     }
 };
 
+function toTimestamp(date) {
+    if (typeof date === 'string' && date.length === 10) {
+        return new Date(date + 'T00:00:00').getTime();
+    }
+
+    return new Date(date).getTime();
+}
+
+function toTimePoints(data) {
+    const dates = data.labels || [];
+    const datasets = data.datasets || [];
+
+    for (let i = 0; i < datasets.length; i++) {
+        const points = [];
+
+        for (let j = 0; j < datasets[i].data.length; j++) {
+            points.push({ x: toTimestamp(dates[j]), y: datasets[i].data[j] });
+        }
+
+        datasets[i].data = points;
+    }
+
+    delete data.labels;
+
+    return data;
+}
+
 async function main() {
     config.options.plugins.title.text = await report.title;
-    config.data = JSON.parse(await report.getTimeSeries);
+    config.data = toTimePoints(JSON.parse(await report.getTimeSeries));
 }
 
 main().then(() => {

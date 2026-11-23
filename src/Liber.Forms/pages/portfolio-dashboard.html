@@ -17,15 +17,6 @@
             <div>
                 <h1 class="h3 fw-bold mb-0" id="title"></h1>
             </div>
-            <div class="btn-group btn-group-sm" id="range" role="group"
-                 aria-label="Chart range">
-                <button type="button" class="btn btn-outline-primary" data-r="7"
-                        aria-pressed="false">1W</button>
-                <button type="button" class="btn btn-outline-primary active"
-                        data-r="30" aria-pressed="true">1M</button>
-                <button type="button" class="btn btn-outline-primary"
-                        data-r="90" aria-pressed="false">3M</button>
-            </div>
         </header>
         <section class="row g-3 mb-3">
             <div class="col-lg-7">
@@ -34,7 +25,6 @@
                         <div class="small text-body-secondary">Total market
                             value</div>
                         <div class="display-6 fw-bold" id="market-value"></div>
-                        <div id="periodline"></div>
                         <div class="row row-cols-3 g-3 mt-0">
                             <div class="col"><span
                                       class="small text-body-secondary">Total
@@ -73,8 +63,7 @@
         </section>
         <div class="card">
             <div class="table-responsive">
-                <table class="table table-hover align-middle mb-0"
-                       style="min-width:860px">
+                <table class="table table-hover align-middle mb-0 small w-100">
                     <thead>
                         <tr id="head"></tr>
                     </thead>
@@ -84,9 +73,10 @@
             </div>
         </div>
     </div>
-
     <script type="text/javascript"
             src="https://liber.example/scripts/chart.js"></script>
+    <script type="text/javascript"
+            src="https://liber.example/scripts/chartjs-adapter-date-fns.js"></script>
     <script type="text/javascript"
             src="https://liber.example/scripts/pie-chart-normalize.js"></script>
     <script type="text/javascript"

@@ -20,7 +20,6 @@ const columns = [
     { key: 'trend', label: 'Trend' }
 ];
 
-let selectedPeriods = 30;
 let sortColumn = 'marketValue';
 let sortDirection = -1;
 let trendChart = null;
@@ -64,6 +63,16 @@ function percentOf(part, whole) {
     return part / whole * 100;
 }
 
+// 'YYYY-MM-DD' on its own is read as UTC midnight, which can display as the
+// previous day in US time zones. Adding a time makes JavaScript read it as local.
+function toTimestamp(date) {
+    if (typeof date === 'string' && date.length === 10) {
+        return new Date(date + 'T00:00:00').getTime();
+    }
+
+    return new Date(date).getTime();
+}
+
 function calculateRows() {
     const rows = [];
 
@@ -102,9 +111,8 @@ function calculateRows() {
             totalGain: totalGain,
             totalReturn: percentOf(totalGain, costBasis),
             costBasis: costBasis,
-            periodGain: (price - startPrice) * h.quantity,
-            periodStartValue: startPrice * h.quantity,
             timeSeries: timeSeries,
+            labels: h.labels || [],
             trendIsUp: price >= startPrice
         });
     }
@@ -113,7 +121,7 @@ function calculateRows() {
 }
 
 function sortRows(rows) {
-    rows.sort(function (a, b) {
+    rows.sort((a, b) => {
         let result;
 
         if (typeof a[sortColumn] === 'string') {
@@ -133,9 +141,7 @@ function calculateTotals(rows) {
         unrealizedGain: 0,
         commission: 0,
         realizedGain: 0,
-        totalGain: 0,
-        periodGain: 0,
-        periodStartValue: 0
+        totalGain: 0
     };
 
     for (let i = 0; i < rows.length; i++) {
@@ -145,12 +151,9 @@ function calculateTotals(rows) {
         totals.commission += rows[i].commission;
         totals.realizedGain += rows[i].realizedGain;
         totals.totalGain += rows[i].totalGain;
-        totals.periodGain += rows[i].periodGain;
-        totals.periodStartValue += rows[i].periodStartValue;
     }
 
     totals.totalReturn = percentOf(totals.totalGain, totals.costBasis);
-    totals.periodGainPercent = percentOf(totals.periodGain, totals.periodStartValue);
 
     return totals;
 }
@@ -170,7 +173,7 @@ function drawTableHeader() {
             }
         }
 
-        html += `<th data-key='${column.key}' ${sortAttribute} tabindex='0' scope='col' class="text-center">${column.label}</th>`;
+        html += `<th data-key='${column.key}' ${sortAttribute} tabindex='0' scope='col' class="text-center align-middle fw-semibold small text-body-secondary">${column.label}</th>`;
     }
 
     document.getElementById('head').innerHTML = html;
@@ -226,12 +229,6 @@ function drawTableFooter(totals) {
 function drawSummary(rows, totals) {
     document.getElementById('market-value').textContent = formatNumber(totals.marketValue);
 
-    document.getElementById('periodline').innerHTML = `
-        <span class='${textColorClass(totals.periodGain)}'>
-            <b>${formatSigned(totals.periodGain)}</b> (${formatSigned(totals.periodGainPercent)}%)
-        </span>
-        <span class='small text-body-secondary'>this period</span>`;
-
     document.getElementById('tg').innerHTML = `
         <span class='${textColorClass(totals.totalGain)}'>
             ${formatSigned(totals.totalGain)} (${formatSigned(totals.totalReturn)}%)
@@ -242,34 +239,52 @@ function drawSummary(rows, totals) {
 }
 
 function drawTrendChart(rows) {
-    let length = 0;
+    // 1. Collect every distinct date across all holdings, oldest first.
+    const dateSet = new Set();
+
     for (let i = 0; i < rows.length; i++) {
-        length = Math.max(length, rows[i].timeSeries.length);
+        for (let j = 0; j < rows[i].labels.length; j++) {
+            dateSet.add(toTimestamp(rows[i].labels[j]));
+        }
     }
 
-    const portfolioValues = [];
+    const dates = Array.from(dateSet).sort((a, b) => a - b);
 
-    for (let period = 0; period < length; period++) {
-        let valueThatPeriod = 0;
+    // 2. For each holding, make a lookup: date -> price.
+    const priceMaps = [];
+
+    for (let i = 0; i < rows.length; i++) {
+        const priceByDate = new Map();
+
+        for (let j = 0; j < rows[i].labels.length; j++) {
+            priceByDate.set(toTimestamp(rows[i].labels[j]), rows[i].timeSeries[j]);
+        }
+
+        priceMaps.push(priceByDate);
+    }
+
+    // 3. For each date, add up price x quantity across holdings.
+    // If a holding has no price on a date, reuse its last known price.
+    const lastPrices = new Array(rows.length).fill(undefined);
+    const points = []; // each point is { x: date, y: portfolio value }
+
+    for (let d = 0; d < dates.length; d++) {
+        let total = 0;
+
         for (let i = 0; i < rows.length; i++) {
-            const price = rows[i].timeSeries[period];
-            if (price !== undefined) {
-                valueThatPeriod += price * rows[i].quantity;
+            if (priceMaps[i].has(dates[d])) {
+                lastPrices[i] = priceMaps[i].get(dates[d]);
+            }
+
+            if (lastPrices[i] !== undefined) {
+                total += lastPrices[i] * rows[i].quantity;
             }
         }
-        portfolioValues.push(valueThatPeriod);
+
+        points.push({ x: dates[d], y: total });
     }
 
-    const labels = [];
-    const onePeriodInMilliseconds = 24 * 60 * 60 * 1000;
-
-    for (let period = 0; period < length; period++) {
-        const periodsAgo = length - 1 - period;
-        const date = new Date(Date.now() - periodsAgo * onePeriodInMilliseconds);
-        labels.push(date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }));
-    }
-
-    const endedHigher = portfolioValues[portfolioValues.length - 1] >= portfolioValues[0];
+    const endedHigher = points.length > 0 && points[points.length - 1].y >= points[0].y;
     const lineColor = getThemeColor(endedHigher ? '--bs-success' : '--bs-danger');
     const textColor = getThemeColor('--bs-secondary-color');
     const gridColor = getThemeColor('--bs-border-color');
@@ -281,9 +296,8 @@ function drawTrendChart(rows) {
     trendChart = new Chart(document.getElementById('main'), {
         type: 'line',
         data: {
-            labels: labels,
             datasets: [{
-                data: portfolioValues,
+                data: points, // no labels array: x comes from each point
                 borderColor: lineColor,
                 backgroundColor: lineColor + '1f',
                 fill: true,
@@ -302,7 +316,10 @@ function drawTrendChart(rows) {
                 tooltip: {
                     displayColors: false,
                     callbacks: {
-                        label: function (context) {
+                        title: (items) => {
+                            return new Date(items[0].parsed.x).toLocaleDateString(undefined, { dateStyle: 'medium' });
+                        },
+                        label: (context) => {
                             return formatNumber(context.parsed.y);
                         }
                     }
@@ -310,6 +327,7 @@ function drawTrendChart(rows) {
             },
             scales: {
                 x: {
+                    type: 'time', // Chart.js chooses the tick dates and format
                     grid: { display: false },
                     ticks: { color: textColor, maxTicksLimit: 6, maxRotation: 0 }
                 },
@@ -326,7 +344,6 @@ function drawTrendChart(rows) {
 }
 
 function drawDonutChart(rows, totals) {
-    let total = 0;
     const valueBySector = {};
 
     for (let i = 0; i < rows.length; i++) {
@@ -335,7 +352,6 @@ function drawDonutChart(rows, totals) {
             valueBySector[sector] = 0;
         }
         valueBySector[sector] += rows[i].marketValue;
-        total += rows[i].marketValue;
     }
 
     const sectors = [];
@@ -354,7 +370,7 @@ function drawDonutChart(rows, totals) {
 
     for (let i = 0; i < sectors.length; i++) {
         names.push(sectors[i].name);
-        values.push(percentOf(sectors[i].value, total));
+        values.push(percentOf(sectors[i].value, totals.marketValue));
         // colors.push(sectorColors[i % sectorColors.length]);
     }
 
@@ -380,7 +396,7 @@ function drawDonutChart(rows, totals) {
             plugins: {
                 tooltip: {
                     callbacks: {
-                        label: function (context) {
+                        label: (context) => {
                             return ' ' + context.label + ': ' + formatNumber(context.parsed, 2) + '%';
                         }
                     }
@@ -397,13 +413,27 @@ function drawSparklines(rows) {
 
     sparklineCharts = [];
 
+    let earliest = Infinity;
+    let latest = -Infinity;
+
+    for (let i = 0; i < rows.length; i++) {
+        for (let j = 0; j < rows[i].labels.length; j++) {
+            const time = toTimestamp(rows[i].labels[j]);
+
+            earliest = Math.min(earliest, time);
+            latest = Math.max(latest, time);
+        }
+    }
+
+    const hasRange = earliest <= latest;
+
     for (let i = 0; i < rows.length; i++) {
         const row = rows[i];
         const canvas = document.getElementById('spark-' + row.symbol);
+        const points = [];
 
-        const periodNumbers = [];
-        for (let period = 0; period < row.timeSeries.length; period++) {
-            periodNumbers.push(period);
+        for (let j = 0; j < row.timeSeries.length; j++) {
+            points.push({ x: toTimestamp(row.labels[j]), y: row.timeSeries[j] });
         }
 
         const color = getThemeColor(row.trendIsUp ? '--bs-success' : '--bs-danger');
@@ -411,9 +441,8 @@ function drawSparklines(rows) {
         const chart = new Chart(canvas, {
             type: 'line',
             data: {
-                labels: periodNumbers,
                 datasets: [{
-                    data: row.timeSeries,
+                    data: points,
                     borderColor: color,
                     borderWidth: 1.6,
                     pointRadius: 0,
@@ -426,7 +455,15 @@ function drawSparklines(rows) {
                 animation: false,
                 events: [],
                 plugins: { legend: { display: false }, tooltip: { enabled: false } },
-                scales: { x: { display: false }, y: { display: false } }
+                scales: {
+                    x: {
+                        type: 'time',
+                        display: false,
+                        min: hasRange ? earliest : undefined,
+                        max: hasRange ? latest : undefined
+                    },
+                    y: { display: false }
+                }
             }
         });
 
@@ -455,8 +492,8 @@ async function main() {
 
     holdings = JSON.parse(await report.getPositions);
 
-    document.getElementById('head').addEventListener('click', function (event) {
-        const th = event.target.closest('th');
+    document.getElementById('head').addEventListener('click', (e) => {
+        const th = e.target.closest('th');
 
         if (!th) {
             return;
@@ -482,29 +519,10 @@ async function main() {
         drawAll();
     });
 
-    document.getElementById('head').addEventListener('keydown', function (event) {
-        if (event.key === 'Enter') {
-            event.target.click();
+    document.getElementById('head').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.target.click();
         }
-    });
-
-    document.getElementById('range').addEventListener('click', function (event) {
-        const clickedButton = event.target.closest('button');
-        if (!clickedButton) {
-            return;
-        }
-
-        selectedPeriods = Number(clickedButton.dataset.r);
-
-        const buttons = document.querySelectorAll('#range button');
-
-        for (let i = 0; i < buttons.length; i++) {
-            const isClicked = buttons[i] === clickedButton;
-            buttons[i].setAttribute('aria-pressed', isClicked);
-            buttons[i].classList.toggle('active', isClicked);
-        }
-
-        drawAll();
     });
 
     drawAll();

@@ -108,6 +108,9 @@
 	  <Content Include="pages\time-series.html">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
+	  <Content Include="scripts\chartjs-adapter-date-fns.js">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
 	  <Content Include="scripts\pie-chart-normalize.js">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>

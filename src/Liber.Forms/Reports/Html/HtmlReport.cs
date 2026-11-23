@@ -195,7 +195,7 @@ public class HtmlReport : IntervalView, IReport
 
         foreach ((DateTime started, DateTime posted) in EnumerateRanges())
         {
-            labels.Add(started.ToShortDateString() + " \u2013 " + posted.ToShortDateString());
+            labels.Add(posted.ToString("yyyy-MM-dd"));
         }
 
         foreach (Account account in Accounts.Values)
