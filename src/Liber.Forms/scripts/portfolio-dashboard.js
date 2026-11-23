@@ -5,250 +5,163 @@
 const report = window.chrome.webview.hostObjects.report;
 
 let holdings = [];
-// const holdings = [
-//     { symbol: "AAPL", name: "Apple Inc.", sector: "Technology", price: 228.40, previousPrice: 226.10, quantity: 40, cost: 171.20 },
-//     { symbol: "MSFT", name: "Microsoft Corporation", sector: "Technology", price: 431.75, previousPrice: 434.20, quantity: 25, cost: 310.00 },
-//     { symbol: "NVDA", name: "NVIDIA Corporation", sector: "Technology", price: 142.30, previousPrice: 138.55, quantity: 120, cost: 61.40 },
-//     { symbol: "AMZN", name: "Amazon.com, Inc.", sector: "Consumer", price: 198.60, previousPrice: 199.05, quantity: 35, cost: 142.80 },
-//     { symbol: "JPM", name: "JPMorgan Chase & Co.", sector: "Financials", price: 236.90, previousPrice: 233.40, quantity: 30, cost: 168.50 },
-//     { symbol: "JNJ", name: "Johnson & Johnson", sector: "Healthcare", price: 157.20, previousPrice: 158.30, quantity: 28, cost: 164.10 },
-//     { symbol: "XOM", name: "Exxon Mobil Corporation", sector: "Energy", price: 114.80, previousPrice: 116.20, quantity: 45, cost: 98.60 },
-//     { symbol: "VTI", name: "Vanguard Total Stock Market ETF", sector: "Funds", price: 287.10, previousPrice: 285.90, quantity: 50, cost: 219.30 }
-// ];
 
-// The table columns. "key" matches a property of each row (see Section 5).
 const columns = [
-    { key: "symbol", label: "Symbol" },
-    { key: "price", label: "Last price" },
-    { key: "change", label: "Change" },
-    { key: "changePercent", label: "% change" },
-    { key: "quantity", label: "quantity" },
-    { key: "cost", label: "Avg cost" },
-    { key: "marketValue", label: "Market value" },
-    { key: "dayGain", label: "Day gain" },
-    { key: "totalGain", label: "Total gain" },
-    { key: "totalGainPercent", label: "Total %" },
-    { key: "trend", label: "Trend" }
+    { key: 'symbol', label: 'Symbol' },
+    { key: 'price', label: 'Price' },
+    { key: 'quantity', label: 'Quantity' },
+    { key: 'cost', label: 'Average cost' },
+    { key: 'marketValue', label: 'Market value' },
+    { key: 'unrealizedGain', label: 'Unrealized gain' },
+    { key: 'commission', label: 'Commission' },
+    { key: 'realizedGain', label: 'Realized gain' },
+    { key: 'totalGain', label: 'Total return' },
+    { key: 'totalReturn', label: 'Total %' },
+    { key: 'trend', label: 'Trend' }
 ];
 
-// Colors for the donut chart slices (one per sector).
-const sectorColors = ["#6001d2", "#1c9ad6", "#e8a31a", "#188a4a", "#d6283a", "#7a8794", "#c24ba5"];
-
-
-/* ==========================================================================
-   SECTION 2: THE PAGE'S CURRENT SETTINGS ("state")
-   These change when the user clicks things. After a change we redraw.
-   ========================================================================== */
-
-let selectedDays = 30;          // chart range: 7, 30 or 90 days
-let sortColumn = "marketValue"; // which column the table is sorted by
-let sortDirection = -1;         // 1 = ascending (small to large), -1 = descending
-
-// We remember the charts we create so we can delete the old ones before
-// drawing new ones (Chart.js complains if two charts share one canvas).
+let selectedPeriods = 30;
+let sortColumn = 'marketValue';
+let sortDirection = -1;
 let trendChart = null;
 let donutChart = null;
 let sparklineCharts = [];
 
-
-/* ==========================================================================
-   SECTION 3: SMALL HELPER FUNCTIONS
-   ========================================================================== */
-
-// 1234.5 becomes "$1,234.50". "digits" is how many decimal places to show.
-function formatDollars(value, digits = 2) {
-    return value.toLocaleString("en-US", {
-        style: "currency",
-        currency: "USD",
-        minimumFractionDigits: digits,
-        maximumFractionDigits: digits
-    });
-}
-
-// 1234.5 becomes "1,234.50" (no dollar sign).
 function formatNumber(value, digits = 2) {
-    return value.toLocaleString("en-US", {
+    return value.toLocaleString(undefined, {
         minimumFractionDigits: digits,
         maximumFractionDigits: digits
     });
 }
 
-// Like formatNumber, but adds a "+" in front of positive numbers.
 function formatSigned(value) {
     if (value >= 0) {
-        return "+" + formatNumber(value);
+        return '+' + formatNumber(value);
     }
+
     return formatNumber(value);
 }
 
-// Bootstrap text color class: green for gains, red for losses.
 function textColorClass(value) {
     if (value >= 0) {
-        return "text-success";
+        return 'text-success';
     }
-    return "text-danger";
+
+    return 'text-danger';
 }
 
-// Bootstrap badge class: green background for gains, red for losses.
-function badgeColorClass(value) {
-    if (value >= 0) {
-        return "text-bg-success";
-    }
-    return "text-bg-danger";
-}
-
-// Chart.js draws on a <canvas>, which can't use CSS variables directly.
-// So we ask the browser for the actual color of a Bootstrap variable,
-// e.g. getThemeColor("--bs-success") gives something like "#198754".
 function getThemeColor(variableName) {
     const styles = getComputedStyle(document.documentElement);
+
     return styles.getPropertyValue(variableName).trim();
 }
 
-// Switch Bootstrap between its light and dark themes.
-function applyTheme(isDark) {
-    if (isDark) {
-        document.documentElement.setAttribute("data-bs-theme", "dark");
-    } else {
-        document.documentElement.setAttribute("data-bs-theme", "light");
+function percentOf(part, whole) {
+    if (whole === 0) {
+        return 0;
     }
+
+    return part / whole * 100;
 }
-
-
-/* ==========================================================================
-   SECTION 4: FAKE PRICE HISTORY
-   We don't have real historical prices, so we invent a believable line.
-   It is "deterministic": the same stock always gets the same line, and
-   the last point always equals the current price.
-   ========================================================================== */
-
-function makePriceHistory(holding, days) {
-    // Turn the stock symbol into a starting number ("seed") for the random generator.
-    let seed = 0;
-    for (let i = 0; i < holding.symbol.length; i++) {
-        seed = seed * 31 + holding.symbol.charCodeAt(i);
-    }
-
-    // Returns a pseudo-random number between 0 and 1.
-    function nextRandom() {
-        seed = (seed * 16807) % 2147483647;
-        return seed / 2147483647;
-    }
-
-    // Stocks that are up overall drift upward over time, and vice versa.
-    const drift = (holding.price / holding.cost - 1) * 0.35;
-
-    // Start at 1, then wobble a little each day.
-    const prices = [1];
-    for (let day = 1; day < days; day++) {
-        const yesterday = prices[day - 1];
-        const randomWobble = (nextRandom() - 0.5) * 0.03;
-        const dailyMove = randomWobble + drift / days;
-        prices.push(yesterday * (1 + dailyMove));
-    }
-
-    // Scale every point so the final one matches the real current price.
-    const scale = holding.price / prices[days - 1];
-    for (let i = 0; i < prices.length; i++) {
-        prices[i] = prices[i] * scale;
-    }
-
-    return prices;
-}
-
-
-/* ==========================================================================
-   SECTION 5: CALCULATIONS
-   Turn each holding into a "row" with all the numbers the table needs.
-   ========================================================================== */
 
 function calculateRows() {
     const rows = [];
 
     for (let i = 0; i < holdings.length; i++) {
         const h = holdings[i];
+        const timeSeries = h.timeSeries || [];
+        let price = h.price || 0;
 
-        const row = {
+        if (timeSeries.length > 0) {
+            price = timeSeries[timeSeries.length - 1];
+        }
+
+        let startPrice = price;
+
+        if (timeSeries.length > 0) {
+            startPrice = timeSeries[0];
+        }
+
+        const commission = h.commission || 0;
+        const realizedGain = h.realizedGain || 0;
+        const costBasis = h.cost * h.quantity;
+        const unrealizedGain = (price - h.cost) * h.quantity;
+        const totalGain = unrealizedGain + realizedGain - commission;
+
+        rows.push({
             symbol: h.symbol,
-            name: h.name,
-            sector: h.sector,
-            price: h.price,
+            name: h.name || h.symbol,
+            sector: h.sector || h.name || h.symbol,
+            price: price,
             quantity: h.quantity,
             cost: h.cost,
-
-            // Today's change per share, and as a percent.
-            change: h.price - h.previousPrice,
-            changePercent: (h.price / h.previousPrice - 1) * 100,
-
-            // What the whole position is worth, and what it cost.
-            marketValue: h.price * h.quantity,
-            costBasis: h.cost * h.quantity,
-
-            // Gain today, and gain since you bought.
-            dayGain: (h.price - h.previousPrice) * h.quantity,
-            totalGain: (h.price - h.cost) * h.quantity,
-            totalGainPercent: (h.price / h.cost - 1) * 100
-        };
-
-        // Fake price line for the sparkline and the portfolio trend.
-        row.history = makePriceHistory(row, selectedDays);
-        row.trendIsUp = row.history[row.history.length - 1] >= row.history[0];
-
-        rows.push(row);
+            marketValue: price * h.quantity,
+            unrealizedGain: unrealizedGain,
+            commission: commission,
+            realizedGain: realizedGain,
+            totalGain: totalGain,
+            totalReturn: percentOf(totalGain, costBasis),
+            costBasis: costBasis,
+            periodGain: (price - startPrice) * h.quantity,
+            periodStartValue: startPrice * h.quantity,
+            timeSeries: timeSeries,
+            trendIsUp: price >= startPrice
+        });
     }
 
     return rows;
 }
 
-// Sort the rows by the current column and direction.
 function sortRows(rows) {
     rows.sort(function (a, b) {
         let result;
 
-        if (typeof a[sortColumn] === "string") {
-            result = a[sortColumn].localeCompare(b[sortColumn]); // text: A to Z
+        if (typeof a[sortColumn] === 'string') {
+            result = a[sortColumn].localeCompare(b[sortColumn]);
         } else {
-            result = a[sortColumn] - b[sortColumn];              // numbers: small to large
+            result = a[sortColumn] - b[sortColumn];
         }
 
-        return result * sortDirection; // multiplying by -1 flips the order
+        return result * sortDirection;
     });
 }
 
-// Add up the numbers for the whole portfolio.
 function calculateTotals(rows) {
-    const totals = { marketValue: 0, dayGain: 0, totalGain: 0, costBasis: 0 };
+    const totals = {
+        marketValue: 0,
+        costBasis: 0,
+        unrealizedGain: 0,
+        commission: 0,
+        realizedGain: 0,
+        totalGain: 0,
+        periodGain: 0,
+        periodStartValue: 0
+    };
 
     for (let i = 0; i < rows.length; i++) {
         totals.marketValue += rows[i].marketValue;
-        totals.dayGain += rows[i].dayGain;
-        totals.totalGain += rows[i].totalGain;
         totals.costBasis += rows[i].costBasis;
+        totals.unrealizedGain += rows[i].unrealizedGain;
+        totals.commission += rows[i].commission;
+        totals.realizedGain += rows[i].realizedGain;
+        totals.totalGain += rows[i].totalGain;
+        totals.periodGain += rows[i].periodGain;
+        totals.periodStartValue += rows[i].periodStartValue;
     }
 
-    // Percentages are measured against what the portfolio was worth before.
-    const valueYesterday = totals.marketValue - totals.dayGain;
-    totals.dayGainPercent = totals.dayGain / valueYesterday * 100;
-    totals.totalGainPercent = totals.totalGain / totals.costBasis * 100;
+    totals.totalReturn = percentOf(totals.totalGain, totals.costBasis);
+    totals.periodGainPercent = percentOf(totals.periodGain, totals.periodStartValue);
 
     return totals;
 }
 
-
-/* ==========================================================================
-   SECTION 6: DRAWING
-   Each function below draws one part of the page.
-   ========================================================================== */
-
-// The clickable column titles. The sorted column gets an aria-sort
-// attribute (used by screen readers and by CSS for the little arrow).
 function drawTableHeader() {
-    let html = "";
+    let html = '';
 
     for (let i = 0; i < columns.length; i++) {
         const column = columns[i];
 
-        let sortAttribute = "";
+        let sortAttribute = '';
         if (column.key === sortColumn) {
             if (sortDirection === 1) {
                 sortAttribute = 'aria-sort="ascending"';
@@ -257,15 +170,14 @@ function drawTableHeader() {
             }
         }
 
-        html += `<th data-key="${column.key}" ${sortAttribute} tabindex="0" scope="col">${column.label}</th>`;
+        html += `<th data-key='${column.key}' ${sortAttribute} tabindex='0' scope='col' class="text-center">${column.label}</th>`;
     }
 
-    document.getElementById("head").innerHTML = html;
+    document.getElementById('head').innerHTML = html;
 }
 
-// One <tr> per holding, with a small canvas in the last cell for the sparkline.
 function drawTableBody(rows) {
-    let html = "";
+    let html = '';
 
     for (let i = 0; i < rows.length; i++) {
         const row = rows[i];
@@ -273,120 +185,125 @@ function drawTableBody(rows) {
         html += `
             <tr>
                 <td>
-                    <span class="fw-bold text-primary">${row.symbol}</span>
-                    <span class="d-block small text-body-secondary text-truncate" style="max-width:190px">${row.name}</span>
+                    <span class='fw-bold text-primary'>${row.symbol}</span>
+                    <span class='d-block small text-body-secondary text-truncate' style='max-width:190px'>${row.name}</span>
                 </td>
-                <td>${formatNumber(row.price)}</td>
-                <td class="${textColorClass(row.change)}">${formatSigned(row.change)}</td>
-                <td><span class="badge ${badgeColorClass(row.changePercent)}">${formatSigned(row.changePercent)}%</span></td>
-                <td>${formatNumber(row.quantity, 0)}</td>
-                <td>${formatNumber(row.cost)}</td>
-                <td><b>${formatDollars(row.marketValue)}</b></td>
-                <td class="${textColorClass(row.dayGain)}">${formatSigned(row.dayGain)}</td>
-                <td class="${textColorClass(row.totalGain)}">${formatSigned(row.totalGain)}</td>
-                <td class="${textColorClass(row.totalGainPercent)}">${formatSigned(row.totalGainPercent)}%</td>
+                <td class="text-end">${formatNumber(row.price)}</td>
+                <td class="text-end">${formatNumber(row.quantity, 4)}</td>
+                <td class="text-end">${formatNumber(row.cost)}</td>
+                <td class="text-end"><b>${formatNumber(row.marketValue)}</b></td>
+                <td class='text-end ${textColorClass(row.unrealizedGain)}'>${formatSigned(row.unrealizedGain)}</td>
+                <td class="text-end">${formatNumber(row.commission)}</td>
+                <td class='text-end ${textColorClass(row.realizedGain)}'>${formatSigned(row.realizedGain)}</td>
+                <td class='text-end ${textColorClass(row.totalGain)}'>${formatSigned(row.totalGain)}</td>
+                <td class='text-end ${textColorClass(row.totalReturn)}'>${formatSigned(row.totalReturn)}%</td>
                 <td>
-                    <div style="width:90px;height:28px;margin-left:auto">
-                        <canvas id="spark-${row.symbol}" aria-hidden="true"></canvas>
+                    <div class="portfolio-dashboard-spark">
+                        <canvas id='spark-${row.symbol}' aria-hidden='true'></canvas>
                     </div>
                 </td>
             </tr>`;
     }
 
-    document.getElementById("body").innerHTML = html;
+    document.getElementById('body').innerHTML = html;
 }
 
-// The "Total" row at the bottom of the table.
 function drawTableFooter(totals) {
-    document.getElementById("foot").innerHTML = `
+    document.getElementById('foot').innerHTML = `
         <tr>
             <td>Total</td>
-            <td></td><td></td><td></td><td></td><td></td>
-            <td>${formatDollars(totals.marketValue)}</td>
-            <td class="${textColorClass(totals.dayGain)}">${formatSigned(totals.dayGain)}</td>
-            <td class="${textColorClass(totals.totalGain)}">${formatSigned(totals.totalGain)}</td>
-            <td class="${textColorClass(totals.totalGain)}">${formatSigned(totals.totalGainPercent)}%</td>
+            <td></td><td></td><td></td>
+            <td class="text-end">${formatNumber(totals.marketValue)}</td>
+            <td class='text-end ${textColorClass(totals.unrealizedGain)}'>${formatSigned(totals.unrealizedGain)}</td>
+            <td class="text-end">${formatNumber(totals.commission)}</td>
+            <td class='text-end ${textColorClass(totals.realizedGain)}'>${formatSigned(totals.realizedGain)}</td>
+            <td class='text-end ${textColorClass(totals.totalGain)}'>${formatSigned(totals.totalGain)}</td>
+            <td class='text-end ${textColorClass(totals.totalGain)}'>${formatSigned(totals.totalReturn)}%</td>
             <td></td>
         </tr>`;
 }
 
-// The big numbers at the top of the summary card.
 function drawSummary(rows, totals) {
-    document.getElementById("mv").textContent = formatDollars(totals.marketValue);
+    document.getElementById('market-value').textContent = formatNumber(totals.marketValue);
 
-    document.getElementById("dayline").innerHTML = `
-        <span class="${textColorClass(totals.dayGain)}">
-            <b>${formatSigned(totals.dayGain)}</b> (${formatSigned(totals.dayGainPercent)}%)
+    document.getElementById('periodline').innerHTML = `
+        <span class='${textColorClass(totals.periodGain)}'>
+            <b>${formatSigned(totals.periodGain)}</b> (${formatSigned(totals.periodGainPercent)}%)
         </span>
-        <span class="small text-body-secondary">today</span>`;
+        <span class='small text-body-secondary'>this period</span>`;
 
-    document.getElementById("tg").innerHTML = `
-        <span class="${textColorClass(totals.totalGain)}">
-            ${formatSigned(totals.totalGain)} (${formatSigned(totals.totalGainPercent)}%)
+    document.getElementById('tg').innerHTML = `
+        <span class='${textColorClass(totals.totalGain)}'>
+            ${formatSigned(totals.totalGain)} (${formatSigned(totals.totalReturn)}%)
         </span>`;
 
-    document.getElementById("cb").textContent = formatDollars(totals.costBasis);
-    document.getElementById("cnt").textContent = rows.length + " positions";
+    document.getElementById('cb').textContent = formatNumber(totals.costBasis);
+    document.getElementById('cnt').textContent = rows.length + ' positions';
 }
 
-// The line chart of total portfolio value over the selected range.
 function drawTrendChart(rows) {
-    // For each day, add up (price that day x quantity) across all holdings.
+    let length = 0;
+    for (let i = 0; i < rows.length; i++) {
+        length = Math.max(length, rows[i].timeSeries.length);
+    }
+
     const portfolioValues = [];
-    for (let day = 0; day < selectedDays; day++) {
-        let valueThatDay = 0;
+
+    for (let period = 0; period < length; period++) {
+        let valueThatPeriod = 0;
         for (let i = 0; i < rows.length; i++) {
-            valueThatDay += rows[i].history[day] * rows[i].quantity;
+            const price = rows[i].timeSeries[period];
+            if (price !== undefined) {
+                valueThatPeriod += price * rows[i].quantity;
+            }
         }
-        portfolioValues.push(valueThatDay);
+        portfolioValues.push(valueThatPeriod);
     }
 
-    // Label each day with a date, counting back from today.
     const labels = [];
-    const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
-    for (let day = 0; day < selectedDays; day++) {
-        const daysAgo = selectedDays - 1 - day;
-        const date = new Date(Date.now() - daysAgo * oneDayInMilliseconds);
-        labels.push(date.toLocaleDateString("en-US", { month: "short", day: "numeric" }));
+    const onePeriodInMilliseconds = 24 * 60 * 60 * 1000;
+
+    for (let period = 0; period < length; period++) {
+        const periodsAgo = length - 1 - period;
+        const date = new Date(Date.now() - periodsAgo * onePeriodInMilliseconds);
+        labels.push(date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }));
     }
 
-    // Green if the portfolio ended higher than it started, otherwise red.
     const endedHigher = portfolioValues[portfolioValues.length - 1] >= portfolioValues[0];
-    const lineColor = getThemeColor(endedHigher ? "--bs-success" : "--bs-danger");
-    const textColor = getThemeColor("--bs-secondary-color");
-    const gridColor = getThemeColor("--bs-border-color");
+    const lineColor = getThemeColor(endedHigher ? '--bs-success' : '--bs-danger');
+    const textColor = getThemeColor('--bs-secondary-color');
+    const gridColor = getThemeColor('--bs-border-color');
 
-    // Remove the previous chart before drawing a new one.
     if (trendChart) {
         trendChart.destroy();
     }
 
-    trendChart = new Chart(document.getElementById("main"), {
-        type: "line",
+    trendChart = new Chart(document.getElementById('main'), {
+        type: 'line',
         data: {
             labels: labels,
             datasets: [{
                 data: portfolioValues,
                 borderColor: lineColor,
-                backgroundColor: lineColor + "1f", // "1f" makes the fill see-through
+                backgroundColor: lineColor + '1f',
                 fill: true,
                 borderWidth: 2,
-                pointRadius: 0,        // hide dots...
-                pointHoverRadius: 4,   // ...until you hover
-                tension: 0.25          // slightly curved line
+                pointRadius: 0,
+                pointHoverRadius: 4,
+                tension: 0.25
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            interaction: { mode: "index", intersect: false },
+            interaction: { mode: 'index', intersect: false },
             plugins: {
                 legend: { display: false },
                 tooltip: {
                     displayColors: false,
                     callbacks: {
                         label: function (context) {
-                            return formatDollars(context.parsed.y);
+                            return formatNumber(context.parsed.y);
                         }
                     }
                 }
@@ -400,10 +317,7 @@ function drawTrendChart(rows) {
                     grid: { color: gridColor },
                     ticks: {
                         color: textColor,
-                        maxTicksLimit: 4,
-                        callback: function (value) {
-                            return "$" + (value / 1000).toFixed(1) + "k";
-                        }
+                        maxTicksLimit: 4
                     }
                 }
             }
@@ -411,111 +325,95 @@ function drawTrendChart(rows) {
     });
 }
 
-// The doughnut chart and its legend: how much of the portfolio is in each sector.
 function drawDonutChart(rows, totals) {
-    // Add up the market value of each sector, e.g. { Technology: 30000, Energy: 5000 }
+    let total = 0;
     const valueBySector = {};
+
     for (let i = 0; i < rows.length; i++) {
         const sector = rows[i].sector;
         if (valueBySector[sector] === undefined) {
             valueBySector[sector] = 0;
         }
         valueBySector[sector] += rows[i].marketValue;
+        total += rows[i].marketValue;
     }
 
-    // Turn that object into a list and put the biggest sector first.
     const sectors = [];
+
     for (const sectorName in valueBySector) {
         sectors.push({ name: sectorName, value: valueBySector[sectorName] });
     }
+
     sectors.sort(function (a, b) {
         return b.value - a.value;
     });
 
-    // Separate lists for the chart's labels, values, and colors.
     const names = [];
     const values = [];
-    const colors = [];
+    // const colors = [];
+
     for (let i = 0; i < sectors.length; i++) {
         names.push(sectors[i].name);
-        values.push(sectors[i].value);
-        colors.push(sectorColors[i % sectorColors.length]); // % wraps around if we run out
+        values.push(percentOf(sectors[i].value, total));
+        // colors.push(sectorColors[i % sectorColors.length]);
     }
 
     if (donutChart) {
         donutChart.destroy();
     }
 
-    donutChart = new Chart(document.getElementById("donut"), {
-        type: "doughnut",
-        data: {
+    donutChart = new Chart(document.getElementById('donut'), {
+        type: 'doughnut',
+        data: normalizeChartData({
             labels: names,
             datasets: [{
                 data: values,
-                backgroundColor: colors,
-                borderColor: getThemeColor("--bs-body-bg"),
+                // backgroundColor: colors,
+                borderColor: getThemeColor('--bs-body-bg'),
                 borderWidth: 2
             }]
-        },
+        }),
         options: {
-            cutout: "62%", // size of the hole
+            cutout: '60%',
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
-                legend: { display: false }, // we draw our own legend below
                 tooltip: {
                     callbacks: {
                         label: function (context) {
-                            return " " + context.label + ": " + formatDollars(context.parsed, 0);
+                            return ' ' + context.label + ': ' + formatNumber(context.parsed, 2) + '%';
                         }
                     }
                 }
             }
         }
     });
-
-    // Our own legend: a colored dot, the sector name, and its percentage.
-    let legendHtml = "";
-    for (let i = 0; i < sectors.length; i++) {
-        const percent = sectors[i].value / totals.marketValue * 100;
-        legendHtml += `
-            <div>
-                <span>
-                    <span class="dot" style="background:${colors[i]}"></span>${sectors[i].name}
-                </span>
-                <b>${formatNumber(percent, 1)}%</b>
-            </div>`;
-    }
-    document.getElementById("legend").innerHTML = legendHtml;
 }
 
-// The tiny line chart in the last cell of each table row.
-// This must run AFTER drawTableBody, because it needs those canvases to exist.
 function drawSparklines(rows) {
-    // Delete the old sparkline charts first.
     for (let i = 0; i < sparklineCharts.length; i++) {
         sparklineCharts[i].destroy();
     }
+
     sparklineCharts = [];
 
     for (let i = 0; i < rows.length; i++) {
         const row = rows[i];
-        const canvas = document.getElementById("spark-" + row.symbol);
+        const canvas = document.getElementById('spark-' + row.symbol);
 
-        // Number the days 0, 1, 2... (labels are required, but we hide them).
-        const dayNumbers = [];
-        for (let day = 0; day < row.history.length; day++) {
-            dayNumbers.push(day);
+        const periodNumbers = [];
+        for (let period = 0; period < row.timeSeries.length; period++) {
+            periodNumbers.push(period);
         }
 
-        const color = getThemeColor(row.trendIsUp ? "--bs-success" : "--bs-danger");
+        const color = getThemeColor(row.trendIsUp ? '--bs-success' : '--bs-danger');
 
         const chart = new Chart(canvas, {
-            type: "line",
+            type: 'line',
             data: {
-                labels: dayNumbers,
+                labels: periodNumbers,
                 datasets: [{
-                    data: row.history,
+                    data: row.timeSeries,
                     borderColor: color,
                     borderWidth: 1.6,
                     pointRadius: 0,
@@ -526,7 +424,7 @@ function drawSparklines(rows) {
                 responsive: true,
                 maintainAspectRatio: false,
                 animation: false,
-                events: [], // no hover effects on these tiny charts
+                events: [],
                 plugins: { legend: { display: false }, tooltip: { enabled: false } },
                 scales: { x: { display: false }, y: { display: false } }
             }
@@ -536,10 +434,11 @@ function drawSparklines(rows) {
     }
 }
 
-// Redraw everything. We call this on page load and after every click.
 function drawAll() {
     const rows = calculateRows();
+
     sortRows(rows);
+
     const totals = calculateTotals(rows);
 
     drawTableHeader();
@@ -553,57 +452,56 @@ function drawAll() {
 
 async function main() {
     document.getElementById('title').innerText = await report.title;
-        
+
     holdings = JSON.parse(await report.getPositions);
 
-    document.getElementById("head").addEventListener("click", function (event) {
-        const th = event.target.closest("th");
+    document.getElementById('head').addEventListener('click', function (event) {
+        const th = event.target.closest('th');
 
         if (!th) {
             return;
         }
 
-        const clickedColumn = th.dataset.key; // reads the data-key attribute
-        if (clickedColumn === "trend") {
-            return; // the Trend column can't be sorted
+        const clickedColumn = th.dataset.key;
+
+        if (clickedColumn === 'trend') {
+            return;
         }
 
         if (clickedColumn === sortColumn) {
-            sortDirection = -sortDirection;  // same column again: flip the order
+            sortDirection = -sortDirection;
         } else {
-            sortColumn = clickedColumn;      // new column: start fresh...
-            if (clickedColumn === "symbol") {
-                sortDirection = 1;           // ...A to Z for the symbol
+            sortColumn = clickedColumn;
+            if (clickedColumn === 'symbol') {
+                sortDirection = 1;
             } else {
-                sortDirection = -1;          // ...biggest first for numbers
+                sortDirection = -1;
             }
         }
 
         drawAll();
     });
 
-    // Pressing Enter on a focused column title acts like a click (keyboard users).
-    document.getElementById("head").addEventListener("keydown", function (event) {
-        if (event.key === "Enter") {
+    document.getElementById('head').addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
             event.target.click();
         }
     });
 
-    // Clicking 1W / 1M / 3M changes the chart range.
-    document.getElementById("range").addEventListener("click", function (event) {
-        const clickedButton = event.target.closest("button");
+    document.getElementById('range').addEventListener('click', function (event) {
+        const clickedButton = event.target.closest('button');
         if (!clickedButton) {
             return;
         }
 
-        selectedDays = Number(clickedButton.dataset.r); // the button's data-r attribute
+        selectedPeriods = Number(clickedButton.dataset.r);
 
-        // Highlight only the button that was clicked.
-        const buttons = document.querySelectorAll("#range button");
+        const buttons = document.querySelectorAll('#range button');
+
         for (let i = 0; i < buttons.length; i++) {
             const isClicked = buttons[i] === clickedButton;
-            buttons[i].setAttribute("aria-pressed", isClicked);
-            buttons[i].classList.toggle("active", isClicked);
+            buttons[i].setAttribute('aria-pressed', isClicked);
+            buttons[i].classList.toggle('active', isClicked);
         }
 
         drawAll();

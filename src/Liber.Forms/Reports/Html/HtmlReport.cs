@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime.Intrinsics.X86;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -226,10 +227,11 @@ public class HtmlReport : IntervalView, IReport
                 datasets.Add(new ChartJSChartDataset(data)
                 {
                     Label = account.Name,
-                    BorderWidth = 1,
-                    LineTension = 0.25,
-                    BackgroundColors = colors,
-                    BorderColors = colors
+                    BorderWidth = 2,
+                    Tension = 0.25,
+                    BorderColors = colors,
+                    PointRadius = 0,
+                    PointHoverRadius = 4
                 });
             }
         }
@@ -765,12 +767,44 @@ public class HtmlReport : IntervalView, IReport
 
     public string GetPositions()
     {
-        List<Position> positions = new List<Position>();
+        List<Position> items = new List<Position>();
+        List<Trade> positions = Company
+            .GetPositions()
+            .ToList();
+        DateTime min;
 
-        foreach (Trade position in Company.GetPositions())
+        if (positions.Count > 0)
+        {
+            min = positions.Min(x => x.Posted).AddDays(-1);
+        }
+        else
+        {
+            min = DateTime.Today;
+        }
+
+        foreach (Trade position in positions)
         {
             Security security = Company.GetSecurity(position.SecurityId);
-            Position item = new Position()
+            IEnumerable<Price>? prices = Company.GetPricesAfter(position.SecurityId, min);
+            IReadOnlyCollection<decimal> timeSeries;
+            IReadOnlyCollection<DateTime> labels;
+
+            if (prices == null)
+            {
+                timeSeries = Array.Empty<decimal>();
+                labels = Array.Empty<DateTime>();
+            }
+            else
+            {
+                timeSeries = prices
+                    .Select(x => x.AdjustedClose ?? x.Close)
+                    .ToList();
+                labels = prices
+                     .Select(x => x.Timestamp)
+                     .ToList();
+            }
+
+            Position item = new Position(timeSeries, labels)
             {
                 Type = position.Type,
                 Posted = position.Posted,
@@ -779,22 +813,10 @@ public class HtmlReport : IntervalView, IReport
                 Commission = position.Commission,
                 Symbol = security.Symbol
             };
-            Price? price = Company.GetPrice(position.SecurityId);
 
-            if (price != null)
-            {
-                item.Price = price.AdjustedClose;
-                price = Company.GetPriceBefore(price);
-
-                if (price != null)
-                {
-                    item.PreviousPrice = price.AdjustedClose;
-                }
-            }
-
-            positions.Add(item);
+            items.Add(item);
         }
-        return JsonSerializer.Serialize(positions, s_options);
+        return JsonSerializer.Serialize(items, s_options);
     }
 
     IReportView IReport.CreateView(Company company)

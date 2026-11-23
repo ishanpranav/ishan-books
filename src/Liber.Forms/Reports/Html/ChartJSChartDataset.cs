@@ -12,7 +12,7 @@ internal sealed class ChartJSChartDataset
 {
     public string? Label { get; set; }
     public int BorderWidth { get; set; }
-    public double LineTension { get; set; }
+    public double Tension { get; set; }
     public IReadOnlyList<double> Data { get; }
 
     [JsonConverter(typeof(ChartJSColorCollectionConverter))]
@@ -22,6 +22,9 @@ internal sealed class ChartJSChartDataset
     [JsonConverter(typeof(ChartJSColorCollectionConverter))]
     [JsonPropertyName("borderColor")]
     public IEnumerable<Color>? BorderColors { get; set; }
+
+    public int PointRadius { get; set; }
+    public int PointHoverRadius { get; set; }
 
     public ChartJSChartDataset(IReadOnlyList<double> data)
     {

@@ -3,7 +3,7 @@
 // Licensed under the MIT License.
 
 const report = window.chrome.webview.hostObjects.report;
-const chart = document.getElementdocument.getElementById('chart');
+const chart = document.getElementById('chart');
 
 Chart.defaults.font.family = 'Segoe UI';
 Chart.defaults.font.size = 11;

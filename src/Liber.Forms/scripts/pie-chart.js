@@ -3,7 +3,7 @@
 // Licensed under the MIT License.
 
 const report = window.chrome.webview.hostObjects.report;
-const chart = document.getElementdocument.getElementById('chart');
+const chart = document.getElementById('chart');
 
 Chart.defaults.font.family = 'Segoe UI';
 Chart.defaults.font.size = 11;
@@ -12,10 +12,10 @@ Chart.defaults.font.weight = 'normal';
 const config = {
     type: 'doughnut',
     options: {
+        cutout: '60%',
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-            cutout: '60%',
             title: {
                 display: true,
                 font: {
@@ -29,7 +29,7 @@ const config = {
 
 async function main() {
     config.options.plugins.title.text = await report.title;
-    config.data = JSON.parse(await report.getPieChart);
+    config.data = normalizeChartData(JSON.parse(await report.getPieChart));
 }
 
 main().then(() => {

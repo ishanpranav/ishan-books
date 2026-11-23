@@ -3,11 +3,18 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Generic;
 
 namespace Liber.Forms.Reports.Html;
 
 internal class Position
 {
+    public Position(IReadOnlyCollection<decimal> timeSeries, IReadOnlyCollection<DateTime> labels)
+    {
+        TimeSeries = timeSeries;
+        Labels = labels;
+    }
+
     public string? Symbol { get; set; }
     public DateTime Posted { get; set; }
     public TradeType Type { get; set; }
@@ -16,4 +23,6 @@ internal class Position
     public decimal Cost { get; set; }
     public decimal Quantity { get; set; }
     public decimal Commission { get; set; }
+    public IReadOnlyCollection<decimal> TimeSeries { get; }
+    public IReadOnlyCollection<DateTime> Labels { get; }
 }

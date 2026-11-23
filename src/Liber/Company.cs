@@ -826,6 +826,26 @@ public class Company : ICloneable
         SecurityUpdated?.Invoke(sender: this, new GuidEventArgs(value.Id));
     }
 
+    public IEnumerable<Price>? GetPrices(Guid securityId)
+    {
+        if (!_prices.TryGetValue(securityId, out SortedSet<Price>? set))
+        {
+            return null;
+        }
+
+        return set;
+    }
+
+    public IEnumerable<Price>? GetPricesAfter(Guid securityId, DateTime timestamp)
+    {
+        if (!_prices.TryGetValue(securityId, out SortedSet<Price>? set))
+        {
+            return null;
+        }
+
+        return set.GetViewBetween(new Price(securityId, timestamp), set.Max);
+    }
+
     public Price? GetPrice(Guid securityId)
     {
         if (!_prices.TryGetValue(securityId, out SortedSet<Price>? set))
@@ -834,19 +854,6 @@ public class Company : ICloneable
         }
 
         return set.Max;
-    }
-
-    public Price? GetPriceBefore(Price price)
-    {
-        if (!_prices.TryGetValue(price.SecurityId, out SortedSet<Price>? set))
-        {
-            return null;
-        }
-
-        return set.GetViewBetween(set.Min, price)
-              .Reverse()
-              .Skip(1)
-              .FirstOrDefault();
     }
 
     private void InitializePrices(IEnumerable<Price> prices)
@@ -1356,7 +1363,7 @@ public class Company : ICloneable
             decimal totalCost = 0;
             decimal totalQuantity = 0;
             decimal totalCommission = 0;
-            DateTime lastPosted = default;
+            DateTime firstPosted = DateTime.Today;
 
             foreach (Trade trade in grouping)
             {
@@ -1366,15 +1373,15 @@ public class Company : ICloneable
                 totalQuantity += sign * trade.Quantity;
                 totalCommission += trade.Commission;
 
-                if (trade.Posted > lastPosted)
+                if (trade.Posted < firstPosted)
                 {
-                    lastPosted = trade.Posted;
+                    firstPosted = trade.Posted;
                 }
             }
 
             if (totalQuantity != 0)
             {
-                yield return new Trade(Guid.Empty, lastPosted, (TradeType)Math.Sign(totalQuantity))
+                yield return new Trade(Guid.Empty, firstPosted, (TradeType)Math.Sign(totalQuantity))
                 {
                     SecurityId = grouping.Key,
                     Cost = totalCost / totalQuantity,
