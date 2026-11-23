@@ -62,7 +62,7 @@ public class Trade :
             return result;
         }
 
-        result = Type.CompareTo(other.Type);
+        result = other.Type.CompareTo(Type);
 
         if (result != 0)
         {

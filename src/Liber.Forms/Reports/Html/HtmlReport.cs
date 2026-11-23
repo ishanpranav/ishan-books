@@ -770,27 +770,27 @@ public class HtmlReport : IntervalView, IReport
 
     public string GetPositions()
     {
-        List<Position> items = new List<Position>();
-        List<Trade> positions = Company
-            .GetPositions()
+        List<PositionView> items = new List<PositionView>();
+        List<Position> positions = Company
+            .GetPositions(DateTime.Today)
             .ToList();
         DateTime min;
 
         if (positions.Count > 0)
         {
-            min = positions.Min(x => x.Posted).AddDays(-1);
+            min = positions.Min(x => x.Opened).AddDays(-1);
         }
         else
         {
             min = DateTime.Today;
         }
 
-        foreach (Trade position in positions)
+        foreach (Position position in positions)
         {
             Security security = Company.GetSecurity(position.SecurityId);
             IEnumerable<Price>? prices = Company.GetPricesAfter(position.SecurityId, min);
-            IReadOnlyCollection<decimal> timeSeries;
-            IReadOnlyCollection<DateTime> labels;
+            decimal[] timeSeries;
+            DateTime[] labels;
 
             if (prices == null)
             {
@@ -799,21 +799,20 @@ public class HtmlReport : IntervalView, IReport
             }
             else
             {
-                timeSeries = prices
-                    .Select(x => x.AdjustedClose ?? x.Close)
-                    .ToList();
-                labels = prices
-                     .Select(x => x.Timestamp)
-                     .ToList();
+                List<Price> priceTable = prices.ToList();
+
+                timeSeries = new decimal[priceTable.Count];
+                labels = new DateTime[priceTable.Count];
+
+                for (int i = 0; i < priceTable.Count; i++)
+                {
+                    timeSeries[i] = priceTable[i].AdjustedClose ?? priceTable[i].Close;
+                    labels[i] = priceTable[i].Timestamp;
+                }
             }
 
-            Position item = new Position(timeSeries, labels)
+            PositionView item = new PositionView(position, timeSeries, labels)
             {
-                Type = position.Type,
-                Posted = position.Posted,
-                Cost = position.Cost,
-                Quantity = position.Quantity,
-                Commission = position.Commission,
                 Symbol = security.Symbol,
                 Name = security.Name,
                 Color = security.Color

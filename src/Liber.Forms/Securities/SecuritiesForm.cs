@@ -40,7 +40,6 @@ internal partial class SecuritiesForm : Form
                 Name = security.Name,
                 Color = security.Color
             };
-
             Price? price = company.GetPrice(security.Id);
 
             if (price != null)

@@ -12,11 +12,12 @@ const columns = [
     { key: 'quantity', label: 'Quantity' },
     { key: 'cost', label: 'Average cost' },
     { key: 'marketValue', label: 'Market value' },
-    { key: 'unrealizedGain', label: 'Unrealized gain' },
-    { key: 'commission', label: 'Commission' },
+    { key: 'commission', label: 'Commissions' },
+    { key: 'dividend', label: 'Dividends' },
     { key: 'realizedGain', label: 'Realized gain' },
-    { key: 'totalGain', label: 'Total return' },
-    { key: 'totalReturn', label: 'Total %' },
+    { key: 'unrealizedGain', label: 'Unrealized gain' },
+    { key: 'totalGain', label: 'Total gain' },
+    { key: 'totalReturn', label: 'Total return %' },
     { key: 'trend', label: 'Trend' }
 ];
 
@@ -34,7 +35,7 @@ function formatNumber(value, digits = 2) {
 }
 
 function formatSigned(value) {
-    if (value >= 0) {
+    if (value > 0) {
         return '+' + formatNumber(value);
     }
 
@@ -42,11 +43,15 @@ function formatSigned(value) {
 }
 
 function textColorClass(value) {
-    if (value >= 0) {
-        return 'text-success';
+    if (value == 0) {
+        return 'text-secondary';
     }
 
-    return 'text-danger';
+    if (value < 0) {
+        return 'text-danger';
+    }
+
+    return 'text-success';
 }
 
 function getThemeColor(variableName) {
@@ -76,42 +81,25 @@ function calculateRows() {
 
     for (let i = 0; i < holdings.length; i++) {
         const h = holdings[i];
-        const timeSeries = h.timeSeries || [];
-        let price = h.price || 0;
-
-        if (timeSeries.length > 0) {
-            price = timeSeries[timeSeries.length - 1];
-        }
-
-        let startPrice = price;
-
-        if (timeSeries.length > 0) {
-            startPrice = timeSeries[0];
-        }
-
-        const commission = h.commission || 0;
-        const realizedGain = h.realizedGain || 0;
-        const costBasis = h.cost * h.quantity;
-        const unrealizedGain = (price - h.cost) * h.quantity;
-        const totalGain = unrealizedGain + realizedGain - commission;
+        const timeSeries = h.timeSeries || []; 
 
         rows.push({
             symbol: h.symbol,
             name: h.name || h.symbol,
-            sector: h.sector || h.name || h.symbol,
-            price: price,
-            quantity: h.quantity,
-            cost: h.cost,
-            marketValue: price * h.quantity,
-            unrealizedGain: unrealizedGain,
-            commission: commission,
-            realizedGain: realizedGain,
-            totalGain: totalGain,
-            totalReturn: percentOf(totalGain, costBasis),
-            costBasis: costBasis,
+            price: h.position.price || 0,
+            quantity: h.position.quantity,
+            cost: h.position.cost,
+            marketValue: h.position.marketValue,
+            unrealizedGain: h.position.unrealizedGain || 0,
+            commission: h.position.commission || 0,
+            dividend: h.position.dividend || 0,
+            realizedGain: h.position.realizedGain || 0,
+            totalGain: h.position.totalGain || 0,
+            totalReturn: percentOf(h.position.totalGain || 0, h.position.costBasis || 0),
+            costBasis: h.position.costBasis || 0,
             timeSeries: timeSeries,
             labels: h.labels || [],
-            trendIsUp: price >= startPrice,
+            trendIsUp: timeSeries.length > 1 && timeSeries[timeSeries.length - 1] - timeSeries[0] > 0,
             color: h.color
         });
     }
@@ -139,6 +127,7 @@ function calculateTotals(rows) {
         costBasis: 0,
         unrealizedGain: 0,
         commission: 0,
+        dividend: 0,
         realizedGain: 0,
         totalGain: 0
     };
@@ -148,6 +137,7 @@ function calculateTotals(rows) {
         totals.costBasis += rows[i].costBasis;
         totals.unrealizedGain += rows[i].unrealizedGain;
         totals.commission += rows[i].commission;
+        totals.dividend += rows[i].dividend;
         totals.realizedGain += rows[i].realizedGain;
         totals.totalGain += rows[i].totalGain;
     }
@@ -194,9 +184,10 @@ function drawTableBody(rows) {
                 <td class="text-end">${formatNumber(row.quantity, 4)}</td>
                 <td class="text-end">${formatNumber(row.cost)}</td>
                 <td class="text-end"><b>${formatNumber(row.marketValue)}</b></td>
-                <td class='text-end ${textColorClass(row.unrealizedGain)}'>${formatSigned(row.unrealizedGain)}</td>
-                <td class="text-end">${formatNumber(row.commission)}</td>
+                <td class='text-end ${textColorClass(-row.commission)}'>${formatNumber(row.commission)}</td>
+                <td class='text-end ${textColorClass(row.dividend)}'>${formatSigned(row.dividend)}</td>
                 <td class='text-end ${textColorClass(row.realizedGain)}'>${formatSigned(row.realizedGain)}</td>
+                <td class='text-end ${textColorClass(row.unrealizedGain)}'>${formatSigned(row.unrealizedGain)}</td>
                 <td class='text-end ${textColorClass(row.totalGain)}'>${formatSigned(row.totalGain)}</td>
                 <td class='text-end ${textColorClass(row.totalReturn)}'>${formatSigned(row.totalReturn)}%</td>
                 <td>
@@ -216,9 +207,10 @@ function drawTableFooter(totals) {
             <td>Total</td>
             <td></td><td></td><td></td>
             <td class="text-end">${formatNumber(totals.marketValue)}</td>
-            <td class='text-end ${textColorClass(totals.unrealizedGain)}'>${formatSigned(totals.unrealizedGain)}</td>
-            <td class="text-end">${formatNumber(totals.commission)}</td>
+            <td class='text-end ${textColorClass(-totals.commission)}'>${formatNumber(totals.commission)}</td>
+            <td class='text-end ${textColorClass(totals.dividend)}'>${formatSigned(totals.dividend)}</td>
             <td class='text-end ${textColorClass(totals.realizedGain)}'>${formatSigned(totals.realizedGain)}</td>
+            <td class='text-end ${textColorClass(totals.unrealizedGain)}'>${formatSigned(totals.unrealizedGain)}</td>
             <td class='text-end ${textColorClass(totals.totalGain)}'>${formatSigned(totals.totalGain)}</td>
             <td class='text-end ${textColorClass(totals.totalGain)}'>${formatSigned(totals.totalReturn)}%</td>
             <td></td>
@@ -238,7 +230,6 @@ function drawSummary(rows, totals) {
 }
 
 function drawTrendChart(rows) {
-    // 1. Collect every distinct date across all holdings, oldest first.
     const dateSet = new Set();
 
     for (let i = 0; i < rows.length; i++) {
@@ -248,8 +239,6 @@ function drawTrendChart(rows) {
     }
 
     const dates = Array.from(dateSet).sort((a, b) => a - b);
-
-    // 2. For each holding, make a lookup: date -> price.
     const priceMaps = [];
 
     for (let i = 0; i < rows.length; i++) {
@@ -263,7 +252,7 @@ function drawTrendChart(rows) {
     }
 
     const lastPrices = new Array(rows.length).fill(undefined);
-    const points = []; // each point is { x: date, y: portfolio value }
+    const points = []; 
 
     for (let d = 0; d < dates.length; d++) {
         let total = 0;
@@ -324,7 +313,7 @@ function drawTrendChart(rows) {
             },
             scales: {
                 x: {
-                    type: 'time', // Chart.js chooses the tick dates and format
+                    type: 'time',
                     grid: { display: false },
                     ticks: { color: textColor, maxTicksLimit: 6, maxRotation: 0 }
                 },

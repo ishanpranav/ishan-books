@@ -1,4 +1,4 @@
-﻿// Position.cs
+﻿// PositionView.cs
 // Copyright (c) 2023-2026 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
@@ -9,10 +9,11 @@ using System.Text.Json.Serialization;
 
 namespace Liber.Forms.Reports.Html;
 
-internal class Position
+internal class PositionView
 {
-    public Position(IReadOnlyCollection<decimal> timeSeries, IReadOnlyCollection<DateTime> labels)
+    public PositionView(Position position, IReadOnlyCollection<decimal> timeSeries, IReadOnlyCollection<DateTime> labels)
     {
+        Position = position;
         TimeSeries = timeSeries;
         Labels = labels;
     }
@@ -23,13 +24,7 @@ internal class Position
     [JsonConverter(typeof(ChartJSColorConverter))]
     public Color Color { get; set; }
 
-    public DateTime Posted { get; set; }
-    public TradeType Type { get; set; }
-    public decimal? Price { get; set; }
-    public decimal? PreviousPrice { get; set; }
-    public decimal Cost { get; set; }
-    public decimal Quantity { get; set; }
-    public decimal Commission { get; set; }
+    public Position Position { get; set; }
     public IReadOnlyCollection<decimal> TimeSeries { get; }
     public IReadOnlyCollection<DateTime> Labels { get; }
 }

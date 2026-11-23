@@ -4,9 +4,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text.Json.Serialization;
+using Liber.BasisMethods;
 using Liber.Filters;
 using Liber.Properties;
 
@@ -1356,40 +1358,131 @@ public class Company : ICloneable
         return result;
     }
 
-    public IEnumerable<Trade> GetPositions()
+    public IReadOnlyCollection<Position> GetPositions(DateTime posted)
     {
-        foreach (IGrouping<Guid, Trade> grouping in _trades.Values.GroupBy(x => x.SecurityId))
+        Dictionary<Guid, List<Trade>> tradesBySecurity = new Dictionary<Guid, List<Trade>>();
+
+        foreach (Trade trade in _sortedTrades)
         {
-            decimal totalCost = 0;
-            decimal totalQuantity = 0;
-            decimal totalCommission = 0;
-            DateTime firstPosted = DateTime.Today;
-
-            foreach (Trade trade in grouping)
+            if (trade.Posted > posted)
             {
-                int sign = Math.Sign((int)trade.Type);
-
-                totalCost += sign * trade.Cost * trade.Quantity;
-                totalQuantity += sign * trade.Quantity;
-                totalCommission += trade.Commission;
-
-                if (trade.Posted < firstPosted)
-                {
-                    firstPosted = trade.Posted;
-                }
+                break;
             }
 
-            if (totalQuantity != 0)
+            if (!tradesBySecurity.TryGetValue(trade.SecurityId, out List<Trade>? trades))
             {
-                yield return new Trade(Guid.Empty, firstPosted, (TradeType)Math.Sign(totalQuantity))
-                {
-                    SecurityId = grouping.Key,
-                    Cost = totalCost / totalQuantity,
-                    Quantity = totalQuantity,
-                    Commission = totalCommission
-                };
+                trades = new List<Trade>();
+                tradesBySecurity[trade.SecurityId] = trades;
+            }
+
+            trades.Add(trade);
+        }
+
+        List<Position> results = new List<Position>(tradesBySecurity.Count);
+
+        foreach (KeyValuePair<Guid, List<Trade>> entry in tradesBySecurity)
+        {
+            _prices.TryGetValue(entry.Key, out SortedSet<Price>? set);
+
+            Position? position = BuildPosition(entry.Key, entry.Value, set, posted);
+
+            if (position != null)
+            {
+                results.Add(position);
             }
         }
+
+        return results;
+    }
+
+    private decimal CalculateDividends(
+        IEnumerable<Trade> trades,
+        IEnumerable<Price> prices)
+    {
+        using IEnumerator<Trade> tradeEnumerator = trades.GetEnumerator();
+        using IEnumerator<Price> priceEnumerator = prices.GetEnumerator();
+        bool hasTrade = tradeEnumerator.MoveNext();
+        bool hasPrice = priceEnumerator.MoveNext();
+        decimal quantity = 0;
+        decimal dividend = 0;
+
+        for (;  hasPrice; hasPrice = priceEnumerator.MoveNext())
+        {
+            Price price = priceEnumerator.Current;
+
+            for (;  hasTrade && tradeEnumerator.Current.Posted <= price.Timestamp; hasTrade = tradeEnumerator.MoveNext())
+            {
+                Trade trade = tradeEnumerator.Current;
+
+                quantity += Math.Sign((int)trade.Type) * trade.Quantity;
+            }
+
+            if (price.Timestamp.Date == DateTime.Today || price.Dividend == null || price.Dividend == 0)
+            {
+                continue;
+            }
+
+            dividend += quantity * price.Dividend!.Value;
+        }
+
+        return dividend;
+    }
+
+    private Position? BuildPosition(
+        Guid securityId,
+        List<Trade> trades,
+        SortedSet<Price>? prices,
+        DateTime posted)
+    {
+        FifoBasisMethod builder = new FifoBasisMethod();
+        Price? latest = null;
+        decimal commission = 0;
+
+        if (prices != null && prices.Count > 0 && prices.Min!.Timestamp <= posted)
+        {
+            latest = prices.GetViewBetween(prices.Min, new Price(securityId, posted)).Max;
+        }
+
+        int i = 0;
+
+        while (i < trades.Count)
+        {
+            DateTime date = trades[i].Posted.Date;
+            int end = i;
+
+            while (end < trades.Count && trades[end].Posted.Date == date)
+            {
+                end++;
+            }
+
+            for (int k = i; k < end; k++)
+            {
+                commission += trades[k].Commission;
+
+                builder.Apply(trades[k]);
+            }
+
+            i = end;
+        }
+
+        decimal dividend = prices != null ? CalculateDividends(trades, prices) : 0;
+
+        if (builder.Quantity == 0 && commission == 0 && dividend == 0 && builder.RealizedGain == 0)
+        {
+            return null;
+        }
+
+        return new Position()
+        {
+            SecurityId = securityId,
+            Opened = trades[0].Posted,
+            Price = latest?.Close ?? 0,
+            Cost = builder.Quantity == 0 ? 0 : builder.CostBasis / builder.Quantity,
+            Quantity = builder.Quantity,
+            Commission = commission,
+            Dividend = dividend,
+            RealizedGain = builder.RealizedGain,
+        };
     }
 
     public override string ToString()

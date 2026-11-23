@@ -45,6 +45,7 @@ internal partial class ReportsForm : Form
             View = favoriteView;
 
             RefreshFavorite(favoriteReport);
+            _timer.Start();
         }
     }
 
@@ -62,6 +63,8 @@ internal partial class ReportsForm : Form
             {
                 _propertyGrid.SelectedObject = value.Properties;
             }
+
+            _timer.Stop();
         }
     }
 
@@ -73,8 +76,6 @@ internal partial class ReportsForm : Form
         {
             _webView.GenerateReport(View);
         }
-
-        _timer.Start();
     }
 
     public void InitializeReport(IReportView view)
