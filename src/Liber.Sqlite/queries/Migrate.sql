@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS "Security" (
     "Id"        TEXT NOT NULL UNIQUE,
     "Symbol"    TEXT NOT NULL UNIQUE,
     "Name"      TEXT,
+    "Color"     INT,
     PRIMARY KEY("Id")
 );
 

@@ -297,6 +297,10 @@
         {
             "title": "How to: Host Controls in Windows Forms DataGridView Cells",
             "source": "https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells"
+        },
+        {
+            "title": "Brand Color Guide",
+            "source": "https://www.brandcolorcode.com"
         }
     ],
     "tools": [

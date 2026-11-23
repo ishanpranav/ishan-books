@@ -5,5 +5,6 @@
 SELECT 
     "Id",
     "Symbol",
-    "Name"
+    "Name",
+    "Color"
 FROM "main"."Security";

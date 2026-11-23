@@ -63,8 +63,6 @@ function percentOf(part, whole) {
     return part / whole * 100;
 }
 
-// 'YYYY-MM-DD' on its own is read as UTC midnight, which can display as the
-// previous day in US time zones. Adding a time makes JavaScript read it as local.
 function toTimestamp(date) {
     if (typeof date === 'string' && date.length === 10) {
         return new Date(date + 'T00:00:00').getTime();
@@ -113,7 +111,8 @@ function calculateRows() {
             costBasis: costBasis,
             timeSeries: timeSeries,
             labels: h.labels || [],
-            trendIsUp: price >= startPrice
+            trendIsUp: price >= startPrice,
+            color: h.color
         });
     }
 
@@ -263,8 +262,6 @@ function drawTrendChart(rows) {
         priceMaps.push(priceByDate);
     }
 
-    // 3. For each date, add up price x quantity across holdings.
-    // If a holding has no price on a date, reuse its last known price.
     const lastPrices = new Array(rows.length).fill(undefined);
     const points = []; // each point is { x: date, y: portfolio value }
 
@@ -297,7 +294,7 @@ function drawTrendChart(rows) {
         type: 'line',
         data: {
             datasets: [{
-                data: points, // no labels array: x comes from each point
+                data: points,
                 borderColor: lineColor,
                 backgroundColor: lineColor + '1f',
                 fill: true,
@@ -344,34 +341,22 @@ function drawTrendChart(rows) {
 }
 
 function drawDonutChart(rows, totals) {
-    const valueBySector = {};
+    const slices = rows.filter((row) => {
+        return row.marketValue > 0;
+    });
 
-    for (let i = 0; i < rows.length; i++) {
-        const sector = rows[i].sector;
-        if (valueBySector[sector] === undefined) {
-            valueBySector[sector] = 0;
-        }
-        valueBySector[sector] += rows[i].marketValue;
-    }
-
-    const sectors = [];
-
-    for (const sectorName in valueBySector) {
-        sectors.push({ name: sectorName, value: valueBySector[sectorName] });
-    }
-
-    sectors.sort(function (a, b) {
-        return b.value - a.value;
+    slices.sort(function (a, b) {
+        return b.marketValue - a.marketValue;
     });
 
     const names = [];
     const values = [];
-    // const colors = [];
+    const colors = [];
 
-    for (let i = 0; i < sectors.length; i++) {
-        names.push(sectors[i].name);
-        values.push(percentOf(sectors[i].value, totals.marketValue));
-        // colors.push(sectorColors[i % sectorColors.length]);
+    for (let i = 0; i < slices.length; i++) {
+        names.push(slices[i].symbol);
+        values.push(percentOf(slices[i].marketValue, totals.marketValue));
+        colors.push(slices[i].color);
     }
 
     if (donutChart) {
@@ -384,7 +369,7 @@ function drawDonutChart(rows, totals) {
             labels: names,
             datasets: [{
                 data: values,
-                // backgroundColor: colors,
+                backgroundColor: colors,
                 borderColor: getThemeColor('--bs-body-bg'),
                 borderWidth: 2
             }]

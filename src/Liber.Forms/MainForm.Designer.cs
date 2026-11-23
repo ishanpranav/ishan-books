@@ -99,6 +99,7 @@ partial class MainForm
         securitiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         toolStripSeparator21 = new System.Windows.Forms.ToolStripSeparator();
         alphaVantageSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        toolStripSeparator22 = new System.Windows.Forms.ToolStripSeparator();
         formToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         closeAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         formsToolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
@@ -128,6 +129,7 @@ partial class MainForm
         _saveFileDialog = new System.Windows.Forms.SaveFileDialog();
         _recentPathManager = new RecentPathManager(components);
         _factory = new FormFactory(components);
+        portfolioDashboardReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         _menuStrip.SuspendLayout();
         _toolStrip.SuspendLayout();
         SuspendLayout();
@@ -507,7 +509,7 @@ partial class MainForm
         // 
         // portfolioToolStripMenuItem
         // 
-        portfolioToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tradesToolStripMenuItem, securitiesToolStripMenuItem, toolStripSeparator21, alphaVantageSettingsToolStripMenuItem });
+        portfolioToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { tradesToolStripMenuItem, securitiesToolStripMenuItem, toolStripSeparator21, alphaVantageSettingsToolStripMenuItem, toolStripSeparator22, portfolioDashboardReportToolStripMenuItem });
         portfolioToolStripMenuItem.Name = "portfolioToolStripMenuItem";
         resources.ApplyResources(portfolioToolStripMenuItem, "portfolioToolStripMenuItem");
         // 
@@ -533,6 +535,11 @@ partial class MainForm
         alphaVantageSettingsToolStripMenuItem.Name = "alphaVantageSettingsToolStripMenuItem";
         resources.ApplyResources(alphaVantageSettingsToolStripMenuItem, "alphaVantageSettingsToolStripMenuItem");
         alphaVantageSettingsToolStripMenuItem.Click += OnAlphaVantageToolStripMenuItemClick;
+        // 
+        // toolStripSeparator22
+        // 
+        toolStripSeparator22.Name = "toolStripSeparator22";
+        resources.ApplyResources(toolStripSeparator22, "toolStripSeparator22");
         // 
         // formToolStripMenuItem
         // 
@@ -721,6 +728,12 @@ partial class MainForm
         // 
         _factory.Invalidated += OnFactoryInvalidated;
         // 
+        // portfolioDashboardReportToolStripMenuItem
+        // 
+        portfolioDashboardReportToolStripMenuItem.Name = "portfolioDashboardReportToolStripMenuItem";
+        resources.ApplyResources(portfolioDashboardReportToolStripMenuItem, "portfolioDashboardReportToolStripMenuItem");
+        portfolioDashboardReportToolStripMenuItem.Click += OnPortfolioDashboardReportToolStripMenuItemClick;
+        // 
         // MainForm
         // 
         AllowDrop = true;
@@ -841,4 +854,6 @@ partial class MainForm
     private System.Windows.Forms.ToolStripMenuItem alphaVantageToolStripMenuItem;
     private System.Windows.Forms.ToolStripSeparator toolStripSeparator21;
     private System.Windows.Forms.ToolStripMenuItem alphaVantageSettingsToolStripMenuItem;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator22;
+    private System.Windows.Forms.ToolStripMenuItem portfolioDashboardReportToolStripMenuItem;
 }

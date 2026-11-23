@@ -4,6 +4,7 @@
 
 using System;
 using System.ComponentModel;
+using System.Drawing;
 
 namespace Liber.Forms.Securities;
 
@@ -26,4 +27,7 @@ internal sealed class SecurityView
     [LocalizedDisplayName(nameof(Price))]
     [ReadOnly(true)]
     public decimal? Price { get; set; }
+
+    [LocalizedDisplayName(nameof(Color))]
+    public Color Color { get; set; }
 }

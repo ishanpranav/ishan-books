@@ -5,9 +5,11 @@
 INSERT INTO "main"."Security" (
     "Id",
     "Symbol",
-    "Name"
+    "Name",
+    "Color"
 ) VALUES (
     @id,
     @symbol,
-    @name
+    @name,
+    @color
 );

@@ -3,6 +3,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Drawing;
 using System.Text.Json.Serialization;
 
 namespace Liber;
@@ -21,6 +22,7 @@ public class Security
     public Guid Id { get; }
     public string Symbol { get; internal set; } = string.Empty;
     public string? Name { get; set; }
+    public Color Color { get; set; }
 
     public override string ToString()
     {

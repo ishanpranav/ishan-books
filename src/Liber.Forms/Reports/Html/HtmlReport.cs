@@ -9,7 +9,6 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Runtime.Intrinsics.X86;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -204,6 +203,7 @@ public class HtmlReport : IntervalView, IReport
             bool nonZero = false;
             double[] data = new double[labels.Count];
             Color[] colors = new Color[labels.Count];
+            Color[] backgroundColors = new Color[labels.Count];
 
             foreach ((DateTime started, DateTime posted) in EnumerateRanges())
             {
@@ -213,6 +213,7 @@ public class HtmlReport : IntervalView, IReport
 
                 data[label] = (double)account.Type.Toggle(debit);
                 colors[label] = GetColorOrDefault(account.Name, account.Type, Company.GetColorOrDefault(account), debit);
+                backgroundColors[label] = Color.FromArgb(31, colors[label]);
 
                 if (data[label] != 0)
                 {
@@ -231,7 +232,9 @@ public class HtmlReport : IntervalView, IReport
                     Tension = 0.25,
                     BorderColors = colors,
                     PointRadius = 0,
-                    PointHoverRadius = 4
+                    PointHoverRadius = 4,
+                    BackgroundColors = backgroundColors,
+                    Fill = true
                 });
             }
         }
@@ -811,11 +814,14 @@ public class HtmlReport : IntervalView, IReport
                 Cost = position.Cost,
                 Quantity = position.Quantity,
                 Commission = position.Commission,
-                Symbol = security.Symbol
+                Symbol = security.Symbol,
+                Name = security.Name,
+                Color = security.Color
             };
 
             items.Add(item);
         }
+
         return JsonSerializer.Serialize(items, s_options);
     }
 

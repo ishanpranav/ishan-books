@@ -1,0 +1,7 @@
+﻿# AlphaVantage.txt
+
+# Provided by AlphaVantage Support on October 13, 2023
+# 150 requests per minute
+# no daily limit
+
+API_KEY = REDACTED

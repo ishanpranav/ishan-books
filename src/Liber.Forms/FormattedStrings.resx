@@ -681,4 +681,10 @@ Premium access: {2}
 
 Real-time entitlement: {3}</value>
   </data>
+  <data name="_r_portfolio-dashboard" xml:space="preserve">
+    <value>Portfolio Dashboard</value>
+  </data>
+  <data name="_r1_portfolio-dashboard" xml:space="preserve">
+    <value>Portfolio</value>
+  </data>
 </root>

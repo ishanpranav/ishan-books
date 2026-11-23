@@ -206,6 +206,9 @@ inspired by third-party open-source software.
 ### How to: Host Controls in Windows Forms DataGridView Cells&emsp;<sub><sup></sup></sub>
 - Source: [learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells)
 
+### Brand Color Guide&emsp;<sub><sup></sup></sub>
+- Source: [brandcolorcode.com](https://www.brandcolorcode.com)
+
 Resources
 ---------
 This section contains attributions for helpful resources that assisted in the

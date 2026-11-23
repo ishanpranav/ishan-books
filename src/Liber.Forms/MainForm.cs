@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using System.Security.Principal;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -22,6 +23,7 @@ using Liber.Forms.Lines;
 using Liber.Forms.Properties;
 using Liber.Forms.Reports;
 using Liber.Forms.Reports.Gdi;
+using Liber.Forms.Reports.Html;
 using Liber.Forms.Saving;
 using Liber.Forms.Securities;
 using Liber.Forms.TaskItems;
@@ -940,6 +942,26 @@ internal partial class MainForm : Form
         AlphaVantageClient client = GetAlphaVantageClient();
 
         _factory.AutoRegister(() => new AlphaVantageForm(client));
+    }
+
+    private void OnPortfolioDashboardReportToolStripMenuItemClick(object sender, EventArgs e)
+    {
+        if (!_engine.Find(ReportEngine.PortfolioDashboardReport, out IReportView? view, out HtmlReport? report))
+        {
+            return;
+        }
+
+        ReportsForm form = new ReportsForm(_engine, ReportsFormStyle.None)
+        {
+            Text = view.GenericTitle
+        };
+
+        form.Load += (sender, e) =>
+        {
+            form.InitializeReport(view);
+        };
+
+        _factory.Register(Guid.NewGuid(), form);
     }
 
     private void OnFactoryInvalidated(object sender, EventArgs e)

@@ -78,3 +78,5 @@ docs/styles/bootstrap.css linguist-vendored
 src/Liber.Forms/scripts/chart.js linguist-vendored
 src/Liber.Forms/scripts/chartjs-chart-treemap.js linguist-vendored
 src/Liber.Forms/scripts/chartjs-chart-sankey.js linguist-vendored
+src/Liber.Forms/scripts/chartjs-adapter-date-fns.js linguist-vendored
+src/Liber.Forms/styles/bootstrap.css linguist-vendored

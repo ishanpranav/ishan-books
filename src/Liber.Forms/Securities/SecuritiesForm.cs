@@ -37,7 +37,8 @@ internal partial class SecuritiesForm : Form
             SecurityView item = new SecurityView(security.Id)
             {
                 Symbol = security.Symbol,
-                Name = security.Name
+                Name = security.Name,
+                Color = security.Color
             };
 
             Price? price = company.GetPrice(security.Id);
@@ -94,6 +95,7 @@ internal partial class SecuritiesForm : Form
             Security security = _company.GetSecurity(item.Id);
 
             security.Name = item.Name;
+            security.Color = item.Color;
 
             _company.UpdateSecurity(security, item.Symbol);
         }

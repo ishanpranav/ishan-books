@@ -18,6 +18,7 @@ internal sealed class ReportEngine
 {
     public const string AccountMapReport = "account-map";
     public const string GeneralJournalReport = "general-journal";
+    public const string PortfolioDashboardReport = "portfolio-dashboard";
     public const string CheckReport = "CPA 006 Middle ASAP";
     private readonly Dictionary<string, IReportView> _prototypes = new Dictionary<string, IReportView>();
 

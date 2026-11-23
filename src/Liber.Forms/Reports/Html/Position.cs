@@ -4,6 +4,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Text.Json.Serialization;
 
 namespace Liber.Forms.Reports.Html;
 
@@ -16,6 +18,11 @@ internal class Position
     }
 
     public string? Symbol { get; set; }
+    public string? Name { get; set; }
+
+    [JsonConverter(typeof(ChartJSColorConverter))]
+    public Color Color { get; set; }
+
     public DateTime Posted { get; set; }
     public TradeType Type { get; set; }
     public decimal? Price { get; set; }

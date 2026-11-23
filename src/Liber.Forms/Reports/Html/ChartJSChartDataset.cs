@@ -25,6 +25,7 @@ internal sealed class ChartJSChartDataset
 
     public int PointRadius { get; set; }
     public int PointHoverRadius { get; set; }
+    public bool Fill { get; set; }
 
     public ChartJSChartDataset(IReadOnlyList<double> data)
     {

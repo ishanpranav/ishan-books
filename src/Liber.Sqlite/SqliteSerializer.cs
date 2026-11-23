@@ -214,6 +214,7 @@ public static class SqliteSerializer
                     command.Parameters.AddWithValue("@id", security.Id);
                     command.Parameters.AddWithValue("@symbol", security.Symbol);
                     command.Parameters.AddWithValue("@name", ValueOf(security.Name));
+                    command.Parameters.AddWithValue("@color", ValueOf(security.Color));
 
                     await command.ExecuteNonQueryAsync();
                 }
@@ -391,7 +392,8 @@ public static class SqliteSerializer
 
                     securities.Add(id, new Security(id, reader.GetString(1))
                     {
-                        Name = await SqliteUtilities.GetStringAsync(reader, 2)
+                        Name = await SqliteUtilities.GetStringAsync(reader, 2),
+                        Color = await SqliteUtilities.GetColorAsync(reader, 3)
                     });
                 }
             }
