@@ -224,6 +224,15 @@
             "index": "Kurkela"
         },
         {
+            "title": "chartjs-adapter-date-fns",
+            "formats": [ "javascript" ],
+            "source": "https://github.com/chartjs/chartjs-adapter-date-fns",
+            "author": "Chart.js Contributors",
+            "license": "mit_chartjsadapterdatefns",
+            "copyright": "Copyright (c) 2019 Chart.js Contributors",
+            "index": "Chart.js"
+        },
+        {
             "title": "PdfSharp",
             "formats": [ "c#" ],
             "source": "https://github.com/empira/PDFsharp",

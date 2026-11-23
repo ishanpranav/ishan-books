@@ -24,6 +24,11 @@ the application.
 - Source: [twbs/bootstrap](https://github.com/twbs/bootstrap)
 - License: [MIT](#mit_bootstrap)
 
+### chartjs-adapter-date-fns&emsp;<sub><sup>*javascript*&ensp;</sup></sub>
+- Author: Chart.js Contributors
+- Source: [chartjs/chartjs-adapter-date-fns](https://github.com/chartjs/chartjs-adapter-date-fns)
+- License: [MIT](#mit_chartjsadapterdatefns)
+
 ### Chart.js&emsp;<sub><sup>*javascript*&ensp;*typescript*&ensp;</sup></sub>
 - Author: Chart.js contributors
 - Source: [chartjs/Chart.js](https://github.com/chartjs/Chart.js)
@@ -60,12 +65,12 @@ See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/quicken_wa
 
 See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/quicken_check_21.chk) for the resource included from the repository.
 
-### Quicken&trade;/QuickBooks&trade; 3-Part US-Letter&emsp;<sub><sup>*ini*&ensp;</sup></sub>
+### Quicken&trade;/QuickBooks&trade; US-Letter&emsp;<sub><sup>*ini*&ensp;</sup></sub>
 - Author: GnuCash contributors
 - Source: [Gnucash/gnucash](https://github.com/Gnucash/gnucash)
 - License: [GNU General Public License family](#gpl-gnucash)
 
-See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/quicken_3part.chk) for the resource included from the repository.
+See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/quicken.chk) for the resource included from the repository.
 
 ### Liberty&trade; Personal Checks US-Letter&emsp;<sub><sup>*ini*&ensp;</sup></sub>
 - Author: GnuCash contributors
@@ -81,12 +86,12 @@ See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/liberty.ch
 
 See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/deluxe.chk) for the resource included from the repository.
 
-### Quicken&trade;/QuickBooks&trade; US-Letter&emsp;<sub><sup>*ini*&ensp;</sup></sub>
+### Quicken&trade;/QuickBooks&trade; 3-Part US-Letter&emsp;<sub><sup>*ini*&ensp;</sup></sub>
 - Author: GnuCash contributors
 - Source: [Gnucash/gnucash](https://github.com/Gnucash/gnucash)
 - License: [GNU General Public License family](#gpl-gnucash)
 
-See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/quicken.chk) for the resource included from the repository.
+See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/quicken_3part.chk) for the resource included from the repository.
 
 ### ini-parser&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
 - Author: Ricardo Amores Hernández
@@ -113,14 +118,31 @@ See [here](https://github.com/Gnucash/gnucash/blob/stable/data/checks/quicken.ch
 - Source: [kurkle/chartjs-chart-treemap](https://github.com/kurkle/chartjs-chart-treemap)
 - License: [MIT](#mit_charjscharttreemap)
 
-### Visual Studio 2026 Image Library&emsp;<sub><sup>*png*&ensp;</sup></sub>
+### Microsoft.Data.Sqlite&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
+- Author: .NET Foundation and contributors
+- Source: [dotnet/efcore](https://github.com/dotnet/efcore)
+- License: [MIT](#mit_dotnet)
+
+### Humanizer&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
+- Author: .NET Foundation and contributors
+- Source: [Humanizr/Humanizer](https://github.com/Humanizr/Humanizer)
+- License: [MIT](#mit_dotnet)
+
+### Microsoft Edge WebView2&emsp;<sub><sup>*c++*&ensp;</sup></sub>
 - Author: Microsoft Corporation
-- Source: [microsoft.com/en-us/download/details.aspx?id=35825](https://www.microsoft.com/en-us/download/details.aspx?id=35825)
-- License: [MICROSOFT VISUAL STUDIO IMAGE LIBRARY](#visual-studio-image-library-eula_microsoft)
+- Source: [developer.microsoft.com/en-us/microsoft-edge/webview2](https://developer.microsoft.com/en-us/microsoft-edge/webview2)
+- License: [BSD 3-clause "New" or "Revised" license](#bsd-3-clause-microsoft)
 
-See [here](https://www.microsoft.com/en-us/download/details.aspx?id=35825) for the resource included from the repository.
+### TypeConverter to JsonConverter Adapter&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
+- Author: .NET Foundation and contributors
+- Source: [dotnet/runtime/issues/1761](https://github.com/dotnet/runtime/issues/1761)
+- License: [MIT](#mit_dotnet)
 
-### CalendarEditingControl&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
+See [here](https://github.com/dotnet/runtime/issues/1761) for the resource included from the repository.
+
+For more information about this software, please see its [third-party notices](https://github.com/dotnet/runtime/blob/main/THIRD-PARTY-NOTICES.TXT).
+
+### CalendarColumn&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
 - Author: .NET Foundation and contributors
 - Source: [learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells)
 - License: [MIT](#mit_dotnet)
@@ -134,36 +156,19 @@ See [here](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/ho
 
 See [here](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells) for the resource included from the repository.
 
-### CalendarColumn&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
+### CalendarEditingControl&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
 - Author: .NET Foundation and contributors
 - Source: [learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells)
 - License: [MIT](#mit_dotnet)
 
 See [here](https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/how-to-host-controls-in-windows-forms-datagridview-cells) for the resource included from the repository.
 
-### TypeConverter to JsonConverter Adapter&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
-- Author: .NET Foundation and contributors
-- Source: [dotnet/runtime/issues/1761](https://github.com/dotnet/runtime/issues/1761)
-- License: [MIT](#mit_dotnet)
-
-See [here](https://github.com/dotnet/runtime/issues/1761) for the resource included from the repository.
-
-For more information about this software, please see its [third-party notices](https://github.com/dotnet/runtime/blob/main/THIRD-PARTY-NOTICES.TXT).
-
-### Microsoft Edge WebView2&emsp;<sub><sup>*c++*&ensp;</sup></sub>
+### Visual Studio 2026 Image Library&emsp;<sub><sup>*png*&ensp;</sup></sub>
 - Author: Microsoft Corporation
-- Source: [developer.microsoft.com/en-us/microsoft-edge/webview2](https://developer.microsoft.com/en-us/microsoft-edge/webview2)
-- License: [BSD 3-clause "New" or "Revised" license](#bsd-3-clause-microsoft)
+- Source: [microsoft.com/en-us/download/details.aspx?id=35825](https://www.microsoft.com/en-us/download/details.aspx?id=35825)
+- License: [MICROSOFT VISUAL STUDIO IMAGE LIBRARY](#visual-studio-image-library-eula_microsoft)
 
-### Microsoft.Data.Sqlite&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
-- Author: .NET Foundation and contributors
-- Source: [dotnet/efcore](https://github.com/dotnet/efcore)
-- License: [MIT](#mit_dotnet)
-
-### Humanizer&emsp;<sub><sup>*c\#*&ensp;</sup></sub>
-- Author: .NET Foundation and contributors
-- Source: [Humanizr/Humanizer](https://github.com/Humanizr/Humanizer)
-- License: [MIT](#mit_dotnet)
+See [here](https://www.microsoft.com/en-us/download/details.aspx?id=35825) for the resource included from the repository.
 
 ### .NET Runtime&emsp;<sub><sup>*c\#*&ensp;*c++*&ensp;*c*&ensp;</sup></sub>
 - Author: .NET Foundation and contributors
@@ -1189,6 +1194,33 @@ THE SOFTWARE.
 ```
 ________________________________________________________________________________
 
+### <a id='mit_chartjsadapterdatefns'>MIT</a>
+
+```
+The MIT License (MIT)
+
+Copyright Copyright (c) 2019 Chart.js Contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the “Software”), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+```
+________________________________________________________________________________
+
 ### <a id='mit_chartjschartsankey'>MIT</a>
 
 ```
@@ -1221,7 +1253,7 @@ ________________________________________________________________________________
 ```
 The MIT License (MIT)
 
-Copyright .NET Foundation and Contributors
+Copyright 
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the “Software”), to deal
