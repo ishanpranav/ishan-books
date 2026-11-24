@@ -183,6 +183,7 @@ public static class SqliteSerializer
 
                 progress.WriteTransaction();
             }
+            await dbTransaction.CommitAsync();
         }
 
         await using (SqliteTransaction dbTransaction = connection.BeginTransaction())
