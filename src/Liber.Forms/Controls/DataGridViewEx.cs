@@ -30,6 +30,8 @@ internal class DataGridViewEx : DataGridView
 
         DataGridViewColumn column = e.Column;
 
+        column.SortMode = DataGridViewColumnSortMode.Automatic;
+
         if (column is not DataGridViewTextBoxColumn)
         {
             return;
@@ -48,6 +50,11 @@ internal class DataGridViewEx : DataGridView
         }
         else
         {
+            if (valueType == typeof(decimal) || valueType == typeof(double))
+            {
+                column.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            }
+
             return;
         }
 
@@ -59,6 +66,8 @@ internal class DataGridViewEx : DataGridView
         newColumn.Visible = column.Visible;
         newColumn.ReadOnly = column.ReadOnly;
         newColumn.Width = column.Width;
+        newColumn.SortMode = column.SortMode;
+        newColumn.DefaultCellStyle.Alignment = column.DefaultCellStyle.Alignment;
 
         Columns.RemoveAt(index);
         Columns.Insert(index, newColumn);

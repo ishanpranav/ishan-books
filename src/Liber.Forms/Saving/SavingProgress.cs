@@ -9,11 +9,9 @@ namespace Liber.Forms.Saving;
 
 internal sealed class SavingProgress : IProgress
 {
-    private const int AccountFactor = 30;
-    private const int TransactionFactor = 3;
-    private const int TradeFactor = 2;
-    private const int SecurityFactor = 20;
-    private const int PriceFactor = 1;
+    private const int AccountFactor = 10;
+    private const int TransactionFactor = 1;
+    private const int SecurityFactor = 15;
 
     private readonly SavingForm _form;
 
@@ -24,9 +22,7 @@ internal sealed class SavingProgress : IProgress
         form.MaxProgress =
             company.Accounts.Count * AccountFactor +
             company.Transactions.Count * TransactionFactor +
-            company.Trades.Count * TradeFactor +
-            company.Securities.Count * SecurityFactor +
-            company.Prices.Count() * PriceFactor;
+            company.Securities.Count * SecurityFactor;
     }
 
     public void WriteAccount()
@@ -39,18 +35,8 @@ internal sealed class SavingProgress : IProgress
         _form.Progress += TransactionFactor;
     }
 
-    public void WriteTrade()
-    {
-        _form.Progress += TradeFactor;
-    }
-
     public void WriteSecurity()
     {
         _form.Progress += SecurityFactor;
-    }
-
-    public void WritePrice()
-    {
-        _form.Progress += PriceFactor;
     }
 }

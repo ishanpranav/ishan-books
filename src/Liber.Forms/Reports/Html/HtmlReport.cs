@@ -787,35 +787,26 @@ public class HtmlReport : IntervalView, IReport
 
         foreach (Position position in positions)
         {
-            Security security = Company.GetSecurity(position.SecurityId);
-            IEnumerable<Price>? prices = Company.GetPricesAfter(position.SecurityId, min);
+            SortedSet<Price> prices = position.Security.GetPricesAfter(min);
             decimal[] timeSeries;
             DateTime[] labels;
+            int i = 0;
 
-            if (prices == null)
+            timeSeries = new decimal[prices.Count];
+            labels = new DateTime[prices.Count];
+
+            foreach (Price price in prices)
             {
-                timeSeries = Array.Empty<decimal>();
-                labels = Array.Empty<DateTime>();
-            }
-            else
-            {
-                List<Price> priceTable = prices.ToList();
-
-                timeSeries = new decimal[priceTable.Count];
-                labels = new DateTime[priceTable.Count];
-
-                for (int i = 0; i < priceTable.Count; i++)
-                {
-                    timeSeries[i] = priceTable[i].AdjustedClose ?? priceTable[i].Close;
-                    labels[i] = priceTable[i].Timestamp;
-                }
+                timeSeries[i] = price.AdjustedClose ?? price.Close;
+                labels[i] = price.Timestamp;
+                i++;
             }
 
             PositionView item = new PositionView(position, timeSeries, labels)
             {
-                Symbol = security.Symbol,
-                Name = security.Name,
-                Color = security.Color
+                Symbol = position.Security.Symbol,
+                Name = position.Security.Name,
+                Color = position.Security.Color
             };
 
             items.Add(item);

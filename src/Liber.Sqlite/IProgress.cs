@@ -8,7 +8,5 @@ public interface IProgress
 {
     void WriteAccount();
     void WriteTransaction();
-    void WriteTrade();
     void WriteSecurity();
-    void WritePrice();
 }

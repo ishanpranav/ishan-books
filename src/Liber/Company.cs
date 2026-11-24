@@ -4,10 +4,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Linq;
 using System.Text.Json.Serialization;
+using System.Xml.Linq;
 using Liber.BasisMethods;
 using Liber.Filters;
 using Liber.Properties;
@@ -21,16 +22,13 @@ public class Company : ICloneable
 {
     private readonly Dictionary<Guid, Account> _accounts;
     private readonly Dictionary<Guid, Transaction> _transactions;
-    private readonly Dictionary<Guid, Trade> _trades;
     private readonly Dictionary<Guid, Security> _securities;
-    private readonly Dictionary<Guid, SortedSet<Price>> _prices;
     private readonly SortedSet<Account> _sortedAccounts;
     private readonly SortedSet<Transaction> _sortedTransactions;
-    private readonly SortedSet<Trade> _sortedTrades;
     private readonly SortedDictionary<string, int> _names =
         new SortedDictionary<string, int>();
-    private readonly SortedDictionary<string, Guid> _securitiesBySymbol =
-        new SortedDictionary<string, Guid>(StringComparer.InvariantCultureIgnoreCase);
+    private readonly SortedDictionary<string, Security> _securitiesBySymbol =
+        new SortedDictionary<string, Security>(StringComparer.InvariantCultureIgnoreCase);
 
     private string? _name;
     private CompanyType _type;
@@ -49,10 +47,7 @@ public class Company : ICloneable
         _sortedAccounts = new SortedSet<Account>();
         _transactions = new Dictionary<Guid, Transaction>();
         _sortedTransactions = new SortedSet<Transaction>();
-        _trades = new Dictionary<Guid, Trade>();
-        _sortedTrades = new SortedSet<Trade>();
         _securities = new Dictionary<Guid, Security>();
-        _prices = new Dictionary<Guid, SortedSet<Price>>();
 
         ResetEquityAccount();
         ResetOtherEquityAccount();
@@ -68,9 +63,7 @@ public class Company : ICloneable
     public Company(
         IReadOnlyCollection<Account> accounts,
         IReadOnlyCollection<Transaction> transactions,
-        IReadOnlyCollection<Trade> trades,
         IReadOnlyCollection<Security> securities,
-        IEnumerable<Price> prices,
         decimal nextAccountNumber,
         decimal nextTransactionNumber)
     {
@@ -78,10 +71,7 @@ public class Company : ICloneable
         _sortedAccounts = new SortedSet<Account>(accounts);
         _transactions = transactions.ToDictionary(x => x.Id);
         _sortedTransactions = new SortedSet<Transaction>(transactions);
-        _trades = new Dictionary<Guid, Trade>(trades.Count);
-        _sortedTrades = new SortedSet<Trade>();
         _securities = securities.ToDictionary(x => x.Id);
-        _prices = new Dictionary<Guid, SortedSet<Price>>(securities.Count);
 
         NextAccountNumber = nextAccountNumber;
         NextTransactionNumber = nextTransactionNumber;
@@ -101,11 +91,12 @@ public class Company : ICloneable
 
         foreach (Security security in securities)
         {
-            _securitiesBySymbol[security.Symbol] = security.Id;
-        }
+            _securitiesBySymbol[security.Symbol] = security;
 
-        InitializeTrades(trades);
-        InitializePrices(prices);
+            AddTradeReferences(security, security.Trades);
+            AddPriceReferences(security, security.Prices);
+            AddDividendReferences(security, security.Dividends);
+        }
     }
 
     public IReadOnlyCollection<Account> Accounts
@@ -124,35 +115,11 @@ public class Company : ICloneable
         }
     }
 
-    public IReadOnlyCollection<Trade> Trades
-    {
-        get
-        {
-            return _sortedTrades;
-        }
-    }
-
     public IReadOnlyCollection<Security> Securities
     {
         get
         {
-            return _securities.Values;
-        }
-    }
-
-    public IEnumerable<Price> Prices
-    {
-        get
-        {
-            return _prices.Values.SelectMany(x => x);
-        }
-    }
-
-    public IReadOnlyDictionary<string, Guid> SecuritiesBySymbol
-    {
-        get
-        {
-            return _securitiesBySymbol;
+            return _securitiesBySymbol.Values;
         }
     }
 
@@ -169,9 +136,14 @@ public class Company : ICloneable
         {
             if (_name != value)
             {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    value = null;
+                }
+
                 _name = value;
 
-                NameChanged?.Invoke(sender: this, System.EventArgs.Empty);
+                NameChanged?.Invoke(sender: this, EventArgs.Empty);
             }
         }
     }
@@ -375,9 +347,7 @@ public class Company : ICloneable
     public event EventHandler<GuidEventArgs>? TransactionUpdated;
     public event EventHandler<GuidEventArgs>? TransactionReconciled;
     public event EventHandler<GuidEventArgs>? TransactionRemoved;
-    public event EventHandler? TradesChanged;
-    public event EventHandler<GuidEventArgs>? SecurityUpdated;
-    public event EventHandler? PricesUpdated;
+    public event EventHandler<GuidEventArgs>? SecuritiesChanged;
 
     public void ResetEquityAccount()
     {
@@ -767,40 +737,66 @@ public class Company : ICloneable
         TransactionRemoved?.Invoke(sender: this, new GuidEventArgs(id));
     }
 
-    public void SetTrades(IEnumerable<Trade> trades)
+    private void AddTradeReferences(Security value, IReadOnlyCollection<Trade> trades)
     {
         foreach (Trade trade in trades)
         {
-            if (trade.Id != Guid.Empty)
+            if (trade.Quantity == 0)
             {
-                throw new InvalidOperationException();
+                continue;
             }
+
+            trade.security = value;
         }
-
-        List<Trade> clone = trades.ToList();
-
-        _trades.Clear();
-        _sortedTrades.Clear();
-        InitializeTrades(clone);
-        TradesChanged?.Invoke(sender: this, EventArgs.Empty);
     }
 
-    private void InitializeTrades(IEnumerable<Trade> trades)
+    private void RemoveTradeReferences(Security value)
     {
-        foreach (Trade trade in trades)
+        foreach (Trade trade in value.trades)
         {
-            if (!_securities.ContainsKey(trade.SecurityId))
-            {
-                Security? security = new Security(trade.SecurityId, string.Empty);
+            trade.security = null;
+        }
+    }
 
-                _securities[trade.SecurityId] = security;
-                _securitiesBySymbol[security.Symbol] = trade.SecurityId;
+    private void AddPriceReferences(Security value, IReadOnlyCollection<Price> prices)
+    {
+        foreach (Price price in prices)
+        {
+            if (price.Close == 0)
+            {
+                continue;
             }
 
-            trade.Id = Guid.NewGuid();
+            price.security = value;
+        }
+    }
 
-            _trades.Add(trade.Id, trade);
-            _sortedTrades.Add(trade);
+    private void RemovePriceReferences(Security value)
+    {
+        foreach (Price price in value.prices)
+        {
+            price.security = null;
+        }
+    }
+
+    private void AddDividendReferences(Security value, IReadOnlyCollection<Dividend> dividends)
+    {
+        foreach (Dividend dividend in dividends)
+        {
+            if (dividend.Value == 0)
+            {
+                continue;
+            }
+
+            dividend.security = value;
+        }
+    }
+
+    private void RemoveDividendReferences(Security value)
+    {
+        foreach (Dividend dividend in value.dividends)
+        {
+            dividend.security = null;
         }
     }
 
@@ -809,73 +805,159 @@ public class Company : ICloneable
         return _securities[id];
     }
 
-    public void UpdateSecurity(Security value, string symbol)
+    public bool TryGetSecurity(string symbol, [NotNullWhen(true)] out Security? value)
     {
-        if (value.Id == Guid.Empty)
+        return _securitiesBySymbol.TryGetValue(symbol, out value);
+    }
+
+    public void ClearSecurities()
+    {
+        if (_securities.Count > 0)
+        {
+            _securities.Clear();
+            _securitiesBySymbol.Clear();
+            SecuritiesChanged?.Invoke(sender: this, new GuidEventArgs(Guid.Empty));
+        }
+    }
+
+    public void AddSecurity(
+        Security value,
+        string symbol,
+        IReadOnlyCollection<Trade> trades,
+        IReadOnlyCollection<Price> prices,
+        IReadOnlyCollection<Dividend> dividends)
+    {
+        if (value.Id != Guid.Empty)
         {
             throw new InvalidOperationException();
         }
 
-        if (symbol != value.Symbol)
+        Guid id = Guid.NewGuid();
+
+        value.Id = id;
+
+        AddTradeReferences(value, trades);
+        AddPriceReferences(value, prices);
+        AddDividendReferences(value, dividends);
+
+        if (value.trades.Count == 0)
         {
-            _securitiesBySymbol.Remove(value.Symbol);
-
-            value.Symbol = symbol;
-
-            _securitiesBySymbol.Add(symbol, value.Id);
-        }
-
-        SecurityUpdated?.Invoke(sender: this, new GuidEventArgs(value.Id));
-    }
-
-    public IEnumerable<Price>? GetPrices(Guid securityId)
-    {
-        if (!_prices.TryGetValue(securityId, out SortedSet<Price>? set))
-        {
-            return null;
-        }
-
-        return set;
-    }
-
-    public IEnumerable<Price>? GetPricesAfter(Guid securityId, DateTime timestamp)
-    {
-        if (!_prices.TryGetValue(securityId, out SortedSet<Price>? set))
-        {
-            return null;
-        }
-
-        return set.GetViewBetween(new Price(securityId, timestamp), set.Max);
-    }
-
-    public Price? GetPrice(Guid securityId)
-    {
-        if (!_prices.TryGetValue(securityId, out SortedSet<Price>? set))
-        {
-            return null;
-        }
-
-        return set.Max;
-    }
-
-    private void InitializePrices(IEnumerable<Price> prices)
-    {
-        foreach (Price price in prices)
-        {
-            if (!_prices.TryGetValue(price.SecurityId, out SortedSet<Price>? set))
+            foreach (Trade trade in trades)
             {
-                set = new SortedSet<Price>();
-                _prices[price.SecurityId] = set;
-            }
+                if (trade.Quantity == 0)
+                {
+                    continue;
+                }
 
-            set.Add(price);
+                value.trades.Add(trade);
+            }
         }
+
+        if (value.prices.Count == 0)
+        {
+            foreach (Price price in prices)
+            {
+                if (price.Close == 0)
+                {
+                    continue;
+                }
+
+                value.prices.Add(price);
+            }
+        }
+
+        if (value.dividends.Count == 0)
+        {
+            foreach (Dividend dividend in dividends)
+            {
+                if (dividend.Value == 0)
+                {
+                    continue;
+                }
+
+                value.dividends.Add(dividend);
+            }
+        }
+
+        _securities.Add(value.Id, value);
+        _securitiesBySymbol.Remove(value.Symbol);
+
+        value.Symbol = symbol;
+
+        _securitiesBySymbol.Add(symbol, value);
+        SecuritiesChanged?.Invoke(sender: this, new GuidEventArgs(value.Id));
     }
 
-    public void UpdatePrices(IEnumerable<Price> prices)
+    public void UpdateSecurity(
+        Security value,
+        string symbol,
+        IReadOnlyCollection<Trade> trades,
+        IReadOnlyCollection<Price> prices,
+        IReadOnlyCollection<Dividend> dividends)
     {
-        InitializePrices(prices);
-        PricesUpdated?.Invoke(sender: this, EventArgs.Empty);
+        if (!_securities.TryGetValue(value.Id, out Security? other))
+        {
+            throw new InvalidOperationException();
+        }
+
+        RemoveTradeReferences(value);
+        AddTradeReferences(value, trades);
+        RemovePriceReferences(value);
+        AddPriceReferences(value, prices);
+        RemoveDividendReferences(value);
+        AddDividendReferences(value, dividends);
+
+        if (trades != value.trades)
+        {
+            value.trades.Clear();
+
+            foreach (Trade trade in trades)
+            {
+                if (trade.Quantity == 0)
+                {
+                    continue;
+                }
+
+                value.trades.Add(trade);
+            }
+        }
+
+        if (prices != value.prices)
+        {
+            value.prices.Clear();
+
+            foreach (Price price in prices)
+            {
+                if (price.Close == 0)
+                {
+                    continue;
+                }
+
+                value.prices.Add(price);
+            }
+        }
+
+        if (dividends != value.dividends)
+        {
+            value.dividends.Clear();
+
+            foreach (Dividend dividend in dividends)
+            {
+                if (dividend.Value == 0)
+                {
+                    continue;
+                }
+
+                value.dividends.Add(dividend);
+            }
+        }
+
+        _securitiesBySymbol.Remove(value.Symbol);
+
+        value.Symbol = symbol;
+
+        _securitiesBySymbol.Add(symbol, value);
+        SecuritiesChanged?.Invoke(sender: this, new GuidEventArgs(value.Id));
     }
 
     public IEnumerable<Transaction> GetTransfers()
@@ -1360,31 +1442,11 @@ public class Company : ICloneable
 
     public IReadOnlyCollection<Position> GetPositions(DateTime posted)
     {
-        Dictionary<Guid, List<Trade>> tradesBySecurity = new Dictionary<Guid, List<Trade>>();
+        List<Position> results = new List<Position>(_securities.Count);
 
-        foreach (Trade trade in _sortedTrades)
+        foreach (Security security in _securities.Values)
         {
-            if (trade.Posted > posted)
-            {
-                break;
-            }
-
-            if (!tradesBySecurity.TryGetValue(trade.SecurityId, out List<Trade>? trades))
-            {
-                trades = new List<Trade>();
-                tradesBySecurity[trade.SecurityId] = trades;
-            }
-
-            trades.Add(trade);
-        }
-
-        List<Position> results = new List<Position>(tradesBySecurity.Count);
-
-        foreach (KeyValuePair<Guid, List<Trade>> entry in tradesBySecurity)
-        {
-            _prices.TryGetValue(entry.Key, out SortedSet<Price>? set);
-
-            Position? position = BuildPosition(entry.Key, entry.Value, set, posted);
+            Position? position = BuildPosition(security, posted);
 
             if (position != null)
             {
@@ -1395,55 +1457,47 @@ public class Company : ICloneable
         return results;
     }
 
-    private decimal CalculateDividends(
-        IEnumerable<Trade> trades,
-        IEnumerable<Price> prices)
-    {
-        using IEnumerator<Trade> tradeEnumerator = trades.GetEnumerator();
-        using IEnumerator<Price> priceEnumerator = prices.GetEnumerator();
-        bool hasTrade = tradeEnumerator.MoveNext();
-        bool hasPrice = priceEnumerator.MoveNext();
-        decimal quantity = 0;
-        decimal dividend = 0;
+    //private decimal CalculateDividends(
+    //    IEnumerable<Trade> trades,
+    //    IEnumerable<Price> prices)
+    //{
+    //    using IEnumerator<Trade> tradeEnumerator = trades.GetEnumerator();
+    //    using IEnumerator<Price> priceEnumerator = prices.GetEnumerator();
+    //    bool hasTrade = tradeEnumerator.MoveNext();
+    //    bool hasPrice = priceEnumerator.MoveNext();
+    //    decimal quantity = 0;
+    //    decimal dividend = 0;
 
-        for (;  hasPrice; hasPrice = priceEnumerator.MoveNext())
-        {
-            Price price = priceEnumerator.Current;
+    //    for (; hasPrice; hasPrice = priceEnumerator.MoveNext())
+    //    {
+    //        Price price = priceEnumerator.Current;
 
-            for (;  hasTrade && tradeEnumerator.Current.Posted <= price.Timestamp; hasTrade = tradeEnumerator.MoveNext())
-            {
-                Trade trade = tradeEnumerator.Current;
+    //        for (; hasTrade && tradeEnumerator.Current.Posted <= price.Timestamp; hasTrade = tradeEnumerator.MoveNext())
+    //        {
+    //            Trade trade = tradeEnumerator.Current;
 
-                quantity += Math.Sign((int)trade.Type) * trade.Quantity;
-            }
+    //            quantity += Math.Sign((int)trade.Type) * trade.Quantity;
+    //        }
 
-            if (price.Timestamp.Date == DateTime.Today || price.Dividend == null || price.Dividend == 0)
-            {
-                continue;
-            }
+    //        if (price.Timestamp.Date == DateTime.Today || price.Dividend == null || price.Dividend == 0)
+    //        {
+    //            continue;
+    //        }
 
-            dividend += quantity * price.Dividend!.Value;
-        }
+    //        dividend += quantity * price.Dividend!.Value;
+    //    }
 
-        return dividend;
-    }
+    //    return dividend;
+    //}
 
-    private Position? BuildPosition(
-        Guid securityId,
-        List<Trade> trades,
-        SortedSet<Price>? prices,
-        DateTime posted)
+    private Position? BuildPosition(Security security, DateTime posted)
     {
         FifoBasisMethod builder = new FifoBasisMethod();
-        Price? latest = null;
+        Price? price = security.GetPrice(posted);
         decimal commission = 0;
 
-        if (prices != null && prices.Count > 0 && prices.Min!.Timestamp <= posted)
-        {
-            latest = prices.GetViewBetween(prices.Min, new Price(securityId, posted)).Max;
-        }
-
         int i = 0;
+        List<Trade> trades = new List<Trade>(security.Trades);
 
         while (i < trades.Count)
         {
@@ -1465,18 +1519,17 @@ public class Company : ICloneable
             i = end;
         }
 
-        decimal dividend = prices != null ? CalculateDividends(trades, prices) : 0;
+        decimal dividend = 0;
 
         if (builder.Quantity == 0 && commission == 0 && dividend == 0 && builder.RealizedGain == 0)
         {
             return null;
         }
 
-        return new Position()
+        return new Position(security)
         {
-            SecurityId = securityId,
             Opened = trades[0].Posted,
-            Price = latest?.Close ?? 0,
+            Price = price?.Close ?? 0,
             Cost = builder.Quantity == 0 ? 0 : builder.CostBasis / builder.Quantity,
             Quantity = builder.Quantity,
             Commission = commission,
@@ -1495,9 +1548,7 @@ public class Company : ICloneable
         return new Company(
             _accounts.Values,
             _transactions.Values,
-            _trades.Values,
             _securities.Values,
-            Prices.ToList(),
             NextAccountNumber,
             NextTransactionNumber);
     }

@@ -14,16 +14,16 @@ public class Price :
 {
     private decimal? _adjustedClose;
 
+    internal Security? security;
+
     public Price() { }
 
     [JsonConstructor]
-    public Price(Guid securityId, DateTime timestamp)
+    public Price(DateTime timestamp)
     {
-        SecurityId = securityId;
         Timestamp = timestamp;
     }
 
-    public Guid SecurityId { get; private set; }
     public DateTime Timestamp { get; private set; }
     public decimal Close { get; set; }
 
@@ -31,7 +31,7 @@ public class Price :
     {
         get
         {
-            if (_adjustedClose == null)
+            if (_adjustedClose == null || _adjustedClose == 0)
             {
                 return Close;
             }
@@ -40,15 +40,18 @@ public class Price :
         }
         set
         {
+            if (value == 0)
+            {
+                value = null;
+            }
+
             _adjustedClose = value;
         }
     }
 
-    public decimal? Dividend { get; set; }
-
     public override string ToString()
     {
-        return $"{Timestamp} {SecurityId} {AdjustedClose}";
+        return $"{Timestamp} {security} {AdjustedClose}";
     }
 
     public int CompareTo(object? obj)
@@ -58,12 +61,12 @@ public class Price :
             return 1;
         }
 
-        if (obj is not Price trade)
+        if (obj is not Price other)
         {
             throw new ArgumentException(message: null, nameof(obj));
         }
 
-        return CompareTo(trade);
+        return CompareTo(other);
     }
 
     public int CompareTo(Price? other)
@@ -80,7 +83,14 @@ public class Price :
             return result;
         }
 
-        return SecurityId.CompareTo(other.SecurityId);
+        if (security != null)
+        {
+            result = security.CompareTo(other.security);
+
+            return result;
+        }
+
+        return 0;
     }
 
     public override bool Equals(object? obj)
@@ -105,12 +115,12 @@ public class Price :
             return false;
         }
 
-        return SecurityId == other.SecurityId && Timestamp == other.Timestamp;
+        return security == other.security && Timestamp == other.Timestamp;
     }
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(SecurityId, Timestamp);
+        return HashCode.Combine(security, Timestamp);
     }
 
     public static bool operator ==(Price? left, Price? right)

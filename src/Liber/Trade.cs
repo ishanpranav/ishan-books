@@ -3,6 +3,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Text.Json.Serialization;
 using Humanizer;
 
 namespace Liber;
@@ -12,25 +13,34 @@ public class Trade :
     IComparable,
     IEquatable<Trade>
 {
+    internal Security? security;
+
     public Trade() { }
-    public Trade(Guid id, DateTime posted, TradeType type)
+
+    [JsonConstructor]
+    public Trade(
+        DateTime posted,
+        TradeType type,
+        decimal cost,
+        decimal quantity,
+        decimal commission)
     {
-        Id = id;
         Posted = posted;
         Type = type;
+        Cost = cost;
+        Quantity = quantity;
+        Commission = commission;
     }
 
-    public Guid Id { get; internal set; }
-    public Guid SecurityId { get; set; }
     public DateTime Posted { get; internal set; }
     public TradeType Type { get; internal set; }
-    public decimal Cost { get; set; }
-    public decimal Quantity { get; set; }
-    public decimal Commission { get; set; }
+    public decimal Cost { get; internal set; }
+    public decimal Quantity { get; internal set; }
+    public decimal Commission { get; internal set; }
 
     public override string ToString()
     {
-        return $"{Posted}: {Type.Humanize()} {Quantity} {SecurityId} @ {Cost:c2} ${-Commission:c2}";
+        return $"{Posted}: {Type.Humanize()} {Quantity} {security} @ {Cost:c2} ${-Commission:c2}";
     }
 
     public int CompareTo(object? obj)
@@ -40,12 +50,12 @@ public class Trade :
             return 1;
         }
 
-        if (obj is not Trade trade)
+        if (obj is not Trade other)
         {
             throw new ArgumentException(message: null, nameof(obj));
         }
 
-        return CompareTo(trade);
+        return CompareTo(other);
     }
 
     public int CompareTo(Trade? other)
@@ -55,7 +65,19 @@ public class Trade :
             return 1;
         }
 
-        int result = Posted.CompareTo(other.Posted);
+        int result;
+
+        if (security != null)
+        {
+            result = security.CompareTo(other.security);
+
+            if (result != 0)
+            {
+                return result;
+            }
+        }
+
+        result = Posted.CompareTo(other.Posted); ;
 
         if (result != 0)
         {
@@ -69,7 +91,21 @@ public class Trade :
             return result;
         }
 
-        return Id.CompareTo(other.Id);
+        result = Quantity.CompareTo(other.Quantity);
+
+        if (result != 0)
+        {
+            return result;
+        }
+
+        result = Cost.CompareTo(other.Cost);
+
+        if (result != 0)
+        {
+            return result;
+        }
+
+        return Commission.CompareTo(other.Commission);
     }
 
     public override bool Equals(object? obj)
@@ -94,12 +130,17 @@ public class Trade :
             return false;
         }
 
-        return Id == other.Id;
+        return security == other.security &&
+            Posted == other.Posted &&
+            Type == other.Type &&
+            Quantity == other.Quantity &&
+            Cost == other.Cost &&
+            Commission == other.Commission;
     }
 
     public override int GetHashCode()
     {
-        return Id.GetHashCode();
+        return HashCode.Combine(security, Posted, Type, Quantity, Cost, Commission);
     }
 
     public static bool operator ==(Trade? left, Trade? right)

@@ -105,12 +105,12 @@ public class Line :
             return 1;
         }
 
-        if (obj is not Line line)
+        if (obj is not Line other)
         {
             throw new ArgumentException(message: null, nameof(obj));
         }
 
-        return CompareTo(line);
+        return CompareTo(other);
     }
 
     public int CompareTo(Line? other)
@@ -120,16 +120,16 @@ public class Line :
             return 1;
         }
 
-        int result = 0;
+        int result;
 
         if (transaction != null)
         {
             result = transaction.CompareTo(other.transaction);
-        }
 
-        if (result != 0)
-        {
-            return result;
+            if (result != 0)
+            {
+                return result;
+            }
         }
 
         int debitOrder = Balance >= 0 ? -1 : 1;

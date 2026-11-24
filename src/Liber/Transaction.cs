@@ -123,12 +123,12 @@ public class Transaction :
             return 1;
         }
 
-        if (obj is not Transaction transaction)
+        if (obj is not Transaction other)
         {
             throw new ArgumentException(message: null, nameof(obj));
         }
 
-        return CompareTo(transaction);
+        return CompareTo(other);
     }
 
     public int CompareTo(Transaction? other)

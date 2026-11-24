@@ -63,6 +63,7 @@ internal class TransactionGridView : DataGridViewEx
 
                 debitColumn.ValueType = typeof(IExpression);
                 debitColumn.DefaultCellStyle.Format = DecimalExtensions.Format;
+                debitColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             }
 
             _debitColumnIndex = value;
@@ -90,6 +91,7 @@ internal class TransactionGridView : DataGridViewEx
 
                 creditColumn.ValueType = typeof(IExpression);
                 creditColumn.DefaultCellStyle.Format = DecimalExtensions.Format;
+                creditColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             }
 
             _creditColumnIndex = value;

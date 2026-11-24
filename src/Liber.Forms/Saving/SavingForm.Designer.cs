@@ -51,7 +51,7 @@ partial class SavingForm
         MinimizeBox = false;
         Name = "SavingForm";
         ShowIcon = false;
-        ShowInTaskbar = false;
+        TopMost = true;
         ResumeLayout(false);
     }
 

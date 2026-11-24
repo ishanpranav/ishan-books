@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Threading.Tasks;
+using System.Transactions;
 using Microsoft.Data.Sqlite;
 using SQLitePCL;
 
@@ -182,28 +183,10 @@ public static class SqliteSerializer
 
                 progress.WriteTransaction();
             }
+        }
 
-            foreach (Trade trade in value.Trades)
-            {
-                await using (SqliteCommand command = connection.CreateCommand())
-                {
-                    command.Transaction = dbTransaction;
-                    command.CommandText = Queries.InsertTrade;
-
-                    command.Parameters.AddWithValue("@id", trade.Id);
-                    command.Parameters.AddWithValue("@securityId", trade.SecurityId);
-                    command.Parameters.AddWithValue("@posted", trade.Posted);
-                    command.Parameters.AddWithValue("@type", trade.Type);
-                    command.Parameters.AddWithValue("@cost", trade.Cost);
-                    command.Parameters.AddWithValue("@quantity", trade.Quantity);
-                    command.Parameters.AddWithValue("@commission", trade.Commission);
-
-                    await command.ExecuteNonQueryAsync();
-                }
-
-                progress.WriteTrade();
-            }
-
+        await using (SqliteTransaction dbTransaction = connection.BeginTransaction())
+        {
             foreach (Security security in value.Securities)
             {
                 await using (SqliteCommand command = connection.CreateCommand())
@@ -220,25 +203,55 @@ public static class SqliteSerializer
                 }
 
                 progress.WriteSecurity();
-            }
 
-            foreach (Price price in value.Prices)
-            {
-                await using (SqliteCommand command = connection.CreateCommand())
+                foreach (Trade trade in security.Trades)
                 {
-                    command.Transaction = dbTransaction;
-                    command.CommandText = Queries.InsertPrice;
+                    await using (SqliteCommand command = connection.CreateCommand())
+                    {
+                        command.Transaction = dbTransaction;
+                        command.CommandText = Queries.InsertTrade;
 
-                    command.Parameters.AddWithValue("@securityId", price.SecurityId);
-                    command.Parameters.AddWithValue("@timestamp", price.Timestamp);
-                    command.Parameters.AddWithValue("@close", price.Close);
-                    command.Parameters.AddWithValue("@dividend", ValueOf(price.Dividend));
-                    command.Parameters.AddWithValue("@adjustedClose", ValueOf(price.AdjustedClose));
+                        command.Parameters.AddWithValue("@securityId", security.Id);
+                        command.Parameters.AddWithValue("@posted", trade.Posted);
+                        command.Parameters.AddWithValue("@type", trade.Type);
+                        command.Parameters.AddWithValue("@cost", trade.Cost);
+                        command.Parameters.AddWithValue("@quantity", trade.Quantity);
+                        command.Parameters.AddWithValue("@commission", trade.Commission);
 
-                    await command.ExecuteNonQueryAsync();
+                        await command.ExecuteNonQueryAsync();
+                    }
                 }
 
-                progress.WritePrice();
+                foreach (Price price in security.Prices)
+                {
+                    await using (SqliteCommand command = connection.CreateCommand())
+                    {
+                        command.Transaction = dbTransaction;
+                        command.CommandText = Queries.InsertPrice;
+
+                        command.Parameters.AddWithValue("@securityId", security.Id);
+                        command.Parameters.AddWithValue("@timestamp", price.Timestamp);
+                        command.Parameters.AddWithValue("@close", price.Close);
+                        command.Parameters.AddWithValue("@adjustedClose", ValueOf(price.AdjustedClose));
+
+                        await command.ExecuteNonQueryAsync();
+                    }
+                }
+
+                foreach (Dividend dividend in security.Dividends)
+                {
+                    await using (SqliteCommand command = connection.CreateCommand())
+                    {
+                        command.Transaction = dbTransaction;
+                        command.CommandText = Queries.InsertDividend;
+
+                        command.Parameters.AddWithValue("@securityId", security.Id);
+                        command.Parameters.AddWithValue("@timestamp", dividend.Timestamp);
+                        command.Parameters.AddWithValue("@value", dividend.Value);
+
+                        await command.ExecuteNonQueryAsync();
+                    }
+                }
             }
 
             await dbTransaction.CommitAsync();
@@ -327,7 +340,6 @@ public static class SqliteSerializer
             }
         }
 
-        List<Transaction> transactions = new List<Transaction>();
         Dictionary<Guid, List<Line>> lines = new Dictionary<Guid, List<Line>>();
 
         await using (SqliteCommand command = connection.CreateCommand())
@@ -338,12 +350,12 @@ public static class SqliteSerializer
             {
                 while (await reader.ReadAsync())
                 {
-                    Guid id = reader.GetGuid(0);
+                    Guid transactionId = reader.GetGuid(0);
 
-                    if (!lines.TryGetValue(id, out List<Line>? values))
+                    if (!lines.TryGetValue(transactionId, out List<Line>? values))
                     {
                         values = new List<Line>();
-                        lines[id] = values;
+                        lines[transactionId] = values;
                     }
 
                     values.Add(new Line(
@@ -354,6 +366,8 @@ public static class SqliteSerializer
                 }
             }
         }
+
+        List<Transaction> transactions = new List<Transaction>();
 
         await using (SqliteCommand command = connection.CreateCommand())
         {
@@ -378,6 +392,87 @@ public static class SqliteSerializer
             }
         }
 
+        Dictionary<Guid, List<Trade>> trades = new Dictionary<Guid, List<Trade>>();
+
+        await using (SqliteCommand command = connection.CreateCommand())
+        {
+            command.CommandText = Queries.SelectTrades;
+
+            await using (SqliteDataReader reader = await command.ExecuteReaderAsync())
+            {
+                while (await reader.ReadAsync())
+                {
+                    Guid securityId = reader.GetGuid(0);
+
+                    if (!trades.TryGetValue(securityId, out List<Trade>? values))
+                    {
+                        values = new List<Trade>();
+                        trades[securityId] = values;
+                    }
+
+                    values.Add(new Trade(
+                        reader.GetDateTime(1),
+                        await reader.GetFieldValueAsync<TradeType>(2),
+                        reader.GetDecimal(3),
+                        reader.GetDecimal(4),
+                        reader.GetDecimal(5)));
+                }
+            }
+        }
+
+        Dictionary<Guid, List<Price>> prices = new Dictionary<Guid, List<Price>>();
+
+        await using (SqliteCommand command = connection.CreateCommand())
+        {
+            command.CommandText = Queries.SelectPrices;
+
+            await using (SqliteDataReader reader = await command.ExecuteReaderAsync())
+            {
+                while (await reader.ReadAsync())
+                {
+                    Guid securityId = reader.GetGuid(0);
+
+                    if (!prices.TryGetValue(securityId, out List<Price>? values))
+                    {
+                        values = new List<Price>();
+                        prices[securityId] = values;
+                    }
+
+                    values.Add(new Price(reader.GetDateTime(1))
+                    {
+                        Close = reader.GetDecimal(2),
+                        AdjustedClose = await SqliteUtilities.GetDecimalAsync(reader, 3)
+                    });
+                }
+            }
+        }
+
+        Dictionary<Guid, List<Dividend>> dividends = new Dictionary<Guid, List<Dividend>>();
+
+        await using (SqliteCommand command = connection.CreateCommand())
+        {
+            command.CommandText = Queries.SelectDividends;
+
+            await using (SqliteDataReader reader = await command.ExecuteReaderAsync())
+            {
+                while (await reader.ReadAsync())
+                {
+                    Guid securityId = reader.GetGuid(0);
+
+                    if (!dividends.TryGetValue(securityId, out List<Dividend>? values))
+                    {
+                        values = new List<Dividend>();
+                        dividends[securityId] = values;
+                    }
+
+                    values.Add(new Dividend(reader.GetDateTime(1))
+                    {
+                        Value = reader.GetDecimal(2)
+                    });
+                }
+            }
+        }
+
         Dictionary<Guid, Security> securities = new Dictionary<Guid, Security>();
 
         await using (SqliteCommand command = connection.CreateCommand())
@@ -390,58 +485,25 @@ public static class SqliteSerializer
                 {
                     Guid id = reader.GetGuid(0);
 
-                    securities.Add(id, new Security(id, reader.GetString(1))
+                    if (!trades.TryGetValue(id, out List<Trade>? securityTrades))
+                    {
+                        securityTrades = new List<Trade>();
+                    }
+
+                    if (!prices.TryGetValue(id, out List<Price>? securityPrices))
+                    {
+                        securityPrices = new List<Price>();
+                    }
+
+                    if (!dividends.TryGetValue(id, out List<Dividend>? securityDividends))
+                    {
+                        securityDividends = new List<Dividend>();
+                    }
+
+                    securities.Add(id, new Security(id, reader.GetString(1), securityTrades, securityPrices, securityDividends)
                     {
                         Name = await SqliteUtilities.GetStringAsync(reader, 2),
                         Color = await SqliteUtilities.GetColorAsync(reader, 3)
-                    });
-                }
-            }
-        }
-
-        List<Trade> trades = new List<Trade>();
-
-        await using (SqliteCommand command = connection.CreateCommand())
-        {
-            command.CommandText = Queries.SelectTrades;
-
-            await using (SqliteDataReader reader = await command.ExecuteReaderAsync())
-            {
-                while (await reader.ReadAsync())
-                {
-                    Guid id = reader.GetGuid(0);
-
-                    trades.Add(new Trade(
-                        id,
-                        reader.GetDateTime(2),
-                        await reader.GetFieldValueAsync<TradeType>(3))
-                    {
-                        SecurityId = reader.GetGuid(1),
-                        Cost = reader.GetDecimal(4),
-                        Quantity = reader.GetDecimal(5),
-                        Commission = reader.GetDecimal(6)
-                    });
-                }
-            }
-        }
-
-        List<Price> prices = new List<Price>();
-
-        await using (SqliteCommand command = connection.CreateCommand())
-        {
-            command.CommandText = Queries.SelectPrices;
-
-            await using (SqliteDataReader reader = await command.ExecuteReaderAsync())
-            {
-                while (await reader.ReadAsync())
-                {
-                    Guid securityId = reader.GetGuid(0);
-
-                    prices.Add(new Price(securityId, reader.GetDateTime(1))
-                    {
-                        Close = reader.GetDecimal(2),
-                        AdjustedClose = await SqliteUtilities.GetDecimalAsync(reader, 3),
-                        Dividend = await SqliteUtilities.GetDecimalAsync(reader, 4)
                     });
                 }
             }
@@ -458,9 +520,7 @@ public static class SqliteSerializer
                 return new Company(
                     accounts,
                     transactions,
-                    trades,
                     securities.Values,
-                    prices,
                     reader.GetDecimal(1),
                     reader.GetDecimal(2))
                 {

@@ -3,7 +3,6 @@
 -- Licensed under the MIT License.
 
 SELECT 
-    "Id",
     "SecurityId",
     "Posted",
     "Type",

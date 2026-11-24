@@ -3,7 +3,6 @@
 -- Licensed under the MIT License.
 
 INSERT INTO "main"."Trade" (
-    "Id",
     "SecurityId",
     "Posted",
     "Type",
@@ -11,7 +10,6 @@ INSERT INTO "main"."Trade" (
     "Quantity",
     "Commission"
 ) VALUES (
-    @id,
     @securityId,    
     @posted,
     @type,

@@ -5,9 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Security.RightsManagement;
+using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Liber.AlphaVantage;
@@ -23,48 +21,85 @@ internal partial class SecuritiesForm : Form
 
     private readonly Company _company;
     private readonly AlphaVantageClient _client;
-    private readonly BindingList<SecurityView> _items;
 
     public SecuritiesForm(Company company, AlphaVantageClient client)
     {
         InitializeComponent();
         SystemFeatures.Initialize(this);
 
-        List<SecurityView> items = new List<SecurityView>();
-
-        foreach (Security security in company.Securities)
-        {
-            SecurityView item = new SecurityView(security.Id)
-            {
-                Symbol = security.Symbol,
-                Name = security.Name,
-                Color = security.Color
-            };
-            Price? price = company.GetPrice(security.Id);
-
-            if (price != null)
-            {
-                item.Price = price.AdjustedClose;
-            }
-
-            items.Add(item);
-        }
+        typeColumn.ValueType = typeof(TradeType);
+        typeColumn.DataSource = Enum.GetValues<TradeType>();
+        costColumn.ValueType = typeof(decimal);
+        quantityColumn.ValueType = typeof(decimal);
+        commissionColumn.ValueType = typeof(decimal);
+        closeColumn.ValueType = typeof(decimal);
+        adjustedCloseColumn.ValueType = typeof(decimal);
+        valueColumn.ValueType = typeof(decimal);
+        costColumn.DefaultCellStyle.Format = DecimalExtensions.Format;
+        quantityColumn.DefaultCellStyle.Format = DecimalExtensions.Format;
+        commissionColumn.DefaultCellStyle.Format = DecimalExtensions.Format;
+        closeColumn.DefaultCellStyle.Format = DecimalExtensions.Format;
+        adjustedCloseColumn.DefaultCellStyle.Format = DecimalExtensions.Format;
+        valueColumn.DefaultCellStyle.Format = DecimalExtensions.Format;
 
         _company = company;
         _client = client;
-        _items = new BindingList<SecurityView>(items)
-        {
-            AllowNew = true,
-            AllowEdit = true,
-            AllowRemove = true
-        };
-        _items.AddingNew += OnItemsAddingNew;
-        _dataGridView.DataSource = _items;
+
+        // TODO: custom data grid view columns for enums: replace enum columns with drop downs
     }
 
-    private void OnItemsAddingNew(object? sender, AddingNewEventArgs e)
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+    public SecuritiesFormTabPage TabPage
     {
-        e.NewObject = new SecurityView(Guid.Empty);
+        get
+        {
+            return (SecuritiesFormTabPage)_tabControl.SelectedIndex;
+        }
+        set
+        {
+            _tabControl.SelectedIndex = (int)value;
+        }
+    }
+
+    private void OnLoad(object sender, EventArgs e)
+    {
+        foreach (Security security in _company.Securities)
+        {
+            securityDataGridView.Rows.Add(
+                security.Symbol,
+                security.Name ?? string.Empty,
+                security.Color);
+
+            foreach (Trade trade in security.Trades)
+            {
+                tradeDataGridView.Rows.Add(
+                    security.Symbol,
+                    trade.Posted,
+                    trade.Type,
+                    trade.Cost,
+                    trade.Quantity,
+                    trade.Commission);
+            }
+
+            foreach (Price price in security.Prices)
+            {
+                priceDataGridView.Rows.Add(
+                    security.Symbol,
+                    price.Timestamp, price.Close, price.AdjustedClose ?? 0);
+            }
+
+            foreach (Dividend dividend in security.Dividends)
+            {
+                dividendDataGridView.Rows.Add(
+                    security.Symbol,
+                    dividend.Timestamp, dividend.Value);
+            }
+        }
+
+        securityDataGridView.AutoResizeColumns();
+        tradeDataGridView.AutoResizeColumns();
+        priceDataGridView.AutoResizeColumns();
+        dividendDataGridView.AutoResizeColumns();
     }
 
     private void OnDataGridViewDataError(object sender, DataGridViewDataErrorEventArgs e)
@@ -82,21 +117,110 @@ internal partial class SecuritiesForm : Form
 
     private void CommitChanges()
     {
-        _dataGridView.EndEdit();
+        StringComparer stringComparer = StringComparer.InvariantCultureIgnoreCase;
+        Dictionary<string, List<Trade>> trades = new Dictionary<string, List<Trade>>(stringComparer);
 
-        if (BindingContext != null)
+        foreach (DataGridViewRow row in tradeDataGridView.Rows)
         {
-            BindingContext[_items].EndCurrentEdit();
+            if (row.IsNewRow)
+            {
+                continue;
+            }
+
+            string symbol = (string)row.Cells[tradeSymbolColumn.Index].Value!;
+
+            if (!trades.TryGetValue(symbol, out List<Trade>? values))
+            {
+                values = new List<Trade>();
+                trades[symbol] = values;
+            }
+
+            values.Add(new Trade(
+                (DateTime)row.Cells[postedColumn.Index].Value!,
+                (TradeType)row.Cells[typeColumn.Index].Value!,
+                (decimal)row.Cells[costColumn.Index].Value!,
+                (decimal)row.Cells[quantityColumn.Index].Value!,
+                (decimal)row.Cells[commissionColumn.Index].Value!));
         }
 
-        foreach (SecurityView item in _items)
+        Dictionary<string, List<Price>> prices = new Dictionary<string, List<Price>>(stringComparer);
+
+        foreach (DataGridViewRow row in priceDataGridView.Rows)
         {
-            Security security = _company.GetSecurity(item.Id);
+            if (row.IsNewRow)
+            {
+                continue;
+            }
 
-            security.Name = item.Name;
-            security.Color = item.Color;
+            string symbol = (string)row.Cells[priceSymbolColumn.Index].Value!;
 
-            _company.UpdateSecurity(security, item.Symbol);
+            if (!prices.TryGetValue(symbol, out List<Price>? values))
+            {
+                values = new List<Price>();
+                prices[symbol] = values;
+            }
+
+            values.Add(new Price((DateTime)row.Cells[priceTimestampColumn.Index].Value!)
+            {
+                Close = (decimal)row.Cells[closeColumn.Index].Value!,
+                AdjustedClose = (decimal)row.Cells[adjustedCloseColumn.Index].Value!
+            });
+        }
+
+        Dictionary<string, List<Dividend>> dividends = new Dictionary<string, List<Dividend>>(stringComparer);
+
+        foreach (DataGridViewRow row in dividendDataGridView.Rows)
+        {
+            if (row.IsNewRow)
+            {
+                continue;
+            }
+
+            string symbol = (string)row.Cells[dividendSymbolColumn.Index].Value!;
+
+            if (!dividends.TryGetValue(symbol, out List<Dividend>? values))
+            {
+                values = new List<Dividend>();
+                dividends[symbol] = values;
+            }
+
+            values.Add(new Dividend((DateTime)row.Cells[dividendTimestampColumn.Index].Value!)
+            {
+                Value = (decimal)row.Cells[valueColumn.Index].Value!
+            });
+        }
+
+        _company.ClearSecurities();
+
+        foreach (DataGridViewRow row in securityDataGridView.Rows)
+        {
+            if (row.IsNewRow)
+            {
+                continue;
+            }
+
+            string symbol = (string)row.Cells[securitySymbolColumn.Index].Value!;
+
+            if (!trades.TryGetValue(symbol, out List<Trade>? securityTrades))
+            {
+                securityTrades = new List<Trade>();
+            }
+
+            if (!prices.TryGetValue(symbol, out List<Price>? securityPrices))
+            {
+                securityPrices = new List<Price>();
+            }
+
+            if (!dividends.TryGetValue(symbol, out List<Dividend>? securityDividends))
+            {
+                securityDividends = new List<Dividend>();
+            }
+
+            _company.AddSecurity(new Security
+            {
+                Name = (string)row.Cells[nameColumn.Index].Value!,
+                Color = (Color)row.Cells[colorColumn.Index].Value!
+            }, symbol, securityTrades, securityPrices, securityDividends);
         }
     }
 
@@ -107,66 +231,6 @@ internal partial class SecuritiesForm : Form
 
     private async void OnBasicRefreshButtonClick(object sender, EventArgs e)
     {
-        basicRefreshButton.Enabled = false;
-        premiumRefreshButton.Enabled = false;
-
-        SavingForm form = new SavingForm()
-        {
-            MaxProgress = AssumedSize * _items.Count
-        };
-
-        form.Show();
-
-        try
-        {
-            await Program.AbortRetryIgnoreAsync(async () =>
-            {
-                form.Progress = 0;
-
-                for (int i = 0; i < _items.Count; i++)
-                {
-                    IReadOnlyList<AlphaVantageTimeSeriesResponse> timeSeries = await _client.GetTimeSeriesAsync(
-                        Settings.Default.AlphaVantageApiKey,
-                        AlphaVantageTimeSeries.Monthly,
-                        new AlphaVantageTimeSeriesRequest()
-                        {
-                            OutputSize = AlphaVantageOutputSize.Compact,
-                            Symbol = _items[i].Symbol
-                        });
-
-                    _company.UpdatePrices(timeSeries.Select(x => new Price(_items[i].Id, x.Timestamp)
-                    {
-                        Close = x.Close,
-                    }));
-
-                    Price? price = _company.GetPrice(_items[i].Id);
-
-                    if (price != null)
-                    {
-                        _items[i].Price = price.AdjustedClose;
-                    }
-
-                    form.Progress += Math.Min(timeSeries.Count, AssumedSize);
-
-                    form.Refresh();
-                    _dataGridView.Refresh();
-
-                    await Task.Yield();
-
-                    if (i < _items.Count - 1)
-                    {
-                        await Task.Delay(millisecondsDelay: 15000);
-                    }
-                }
-            });
-        }
-        finally
-        {
-            form.Close();
-
-            basicRefreshButton.Enabled = true;
-            premiumRefreshButton.Enabled = true;
-        }
     }
 
     private async void OnPremiumRefreshButtonClick(object sender, EventArgs e)
@@ -176,7 +240,7 @@ internal partial class SecuritiesForm : Form
 
         SavingForm form = new SavingForm()
         {
-            MaxProgress = AssumedSize * _items.Count
+            MaxProgress = AssumedSize * securityDataGridView.Rows.Count
         };
 
         form.Show();
@@ -187,39 +251,38 @@ internal partial class SecuritiesForm : Form
             {
                 form.Progress = 0;
 
-                for (int i = 0; i < _items.Count; i++)
+                for (int i = 0; i < securityDataGridView.Rows.Count; i++)
                 {
+                    if (securityDataGridView.Rows[i].IsNewRow)
+                    {
+                        continue;
+                    }
+
+                    string symbol = (string)securityDataGridView[securitySymbolColumn.Index, i].Value!;
                     IReadOnlyList<AlphaVantageAdjustedTimeSeriesResponse> timeSeries = await _client.GetTimeSeriesAsync(
                         Settings.Default.AlphaVantageApiKey,
                         AlphaVantageAdjustedTimeSeries.Monthly,
                         new AlphaVantageTimeSeriesRequest()
                         {
                             OutputSize = AlphaVantageOutputSize.Compact,
-                            Symbol = _items[i].Symbol
+                            Symbol = symbol
                         });
 
-                    _company.UpdatePrices(timeSeries.Select(x => new Price(_items[i].Id, x.Timestamp)
+                    foreach (AlphaVantageAdjustedTimeSeriesResponse point in timeSeries)
                     {
-                        Close = x.Close,
-                        AdjustedClose = x.AdjustedClose,
-                        Dividend = x.Dividend
-                    }));
-
-                    Price? price = _company.GetPrice(_items[i].Id);
-
-                    if (price != null)
-                    {
-                        _items[i].Price = price.AdjustedClose;
+                        priceDataGridView.Rows.Add(
+                            symbol,
+                            point.Timestamp, point.Close, point.AdjustedClose);
                     }
 
                     form.Progress += Math.Min(timeSeries.Count, AssumedSize);
 
                     form.Refresh();
-                    _dataGridView.Refresh();
+                    priceDataGridView.Refresh();
 
                     await Task.Yield();
 
-                    if (i < _items.Count - 1)
+                    if (i < securityDataGridView.Rows.Count - 1)
                     {
                         await Task.Delay(millisecondsDelay: 1000);
                     }

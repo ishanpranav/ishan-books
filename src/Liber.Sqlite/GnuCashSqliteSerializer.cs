@@ -175,9 +175,7 @@ public static class GnuCashSqliteSerializer
         Company result = new Company(
             accounts,
             transactions,
-            Array.Empty<Trade>(),
             Array.Empty<Security>(),
-            Array.Empty<Price>(),
             nextAccountNumber: 1,
             nextTransactionNumber: 1)
         {

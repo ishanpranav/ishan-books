@@ -8,9 +8,9 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
-using System.Security.Principal;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Windows.Controls.Primitives;
 using System.Windows.Forms;
 using Liber.AlphaVantage;
 using Liber.Forms.Accounts;
@@ -27,7 +27,6 @@ using Liber.Forms.Reports.Html;
 using Liber.Forms.Saving;
 using Liber.Forms.Securities;
 using Liber.Forms.TaskItems;
-using Liber.Forms.Trades;
 using Liber.Forms.Transactions;
 using Liber.Forms.Writers;
 using Liber.Sqlite;
@@ -820,7 +819,7 @@ internal partial class MainForm : Form
 
             IReadOnlyCollection<YahooFinanceTrade> trades = await CsvSerializer.DeserializeAsync<YahooFinanceTrade>(input);
 
-            _factory.Register(Guid.NewGuid(), new ImportTradesForm(_company, _factory, trades));
+            _factory.Register(Guid.NewGuid(), new ImportTradesForm(_company, _factory, trades, GetAlphaVantageClient()));
         });
     }
 
@@ -927,14 +926,34 @@ internal partial class MainForm : Form
         }
     }
 
+    private void AutoRegisterSecuritiesForm(SecuritiesFormTabPage tabPage)
+    {
+        Guid key = typeof(SecuritiesForm).GUID;
+
+        if (_factory.TryActivate(key))
+        {
+            if (_factory.Forms[key] is SecuritiesForm form)
+            {
+                form.TabPage = tabPage;
+            }
+
+            return;
+        }
+
+        _factory.Register(key, new SecuritiesForm(_company, GetAlphaVantageClient())
+        {
+            TabPage = tabPage
+        });
+    }
+
     private void OnTradesToolStripMenuItemClick(object sender, EventArgs e)
     {
-        _factory.AutoRegister(() => new TradesForm(_company));
+        AutoRegisterSecuritiesForm(SecuritiesFormTabPage.Trades);
     }
 
     private void OnSecuritiesToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        _factory.AutoRegister(() => new SecuritiesForm(_company, GetAlphaVantageClient()));
+        AutoRegisterSecuritiesForm(SecuritiesFormTabPage.Securities);
     }
 
     private void OnAlphaVantageToolStripMenuItemClick(object sender, EventArgs e)

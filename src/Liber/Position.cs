@@ -8,7 +8,12 @@ namespace Liber;
 
 public class Position
 {
-    public Guid SecurityId { get; set; }
+    public Position(Security security)
+    {
+        Security = security;
+    }
+
+    public Security Security { get; }
     public DateTime Opened { get; set; }
     public decimal Quantity { get; set; }
     public decimal Cost { get; set; }

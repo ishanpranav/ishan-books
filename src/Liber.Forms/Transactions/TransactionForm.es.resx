@@ -117,12 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="postedDateTimePicker.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="postedDateTimePicker.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
   <data name="postedDateTimePicker.HelpString" xml:space="preserve">
     <value>Especifica la fecha de la transacción.</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="postedDateTimePicker.Location" type="System.Drawing.Point, System.Drawing">
     <value>84, 29</value>
+  </data>
+  <data name="label1.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="label1.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="label1.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 34</value>
@@ -133,17 +149,41 @@
   <data name="label1.Text" xml:space="preserve">
     <value>Fecha</value>
   </data>
+  <data name="label2.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="label2.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="label2.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
     <value>201, 32</value>
   </data>
   <data name="label2.Text" xml:space="preserve">
     <value>Nú&amp;mero</value>
   </data>
+  <data name="numberNumericUpDown.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="numberNumericUpDown.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
   <data name="numberNumericUpDown.HelpString" xml:space="preserve">
     <value>Especifica el número de transacción, número de asiento de ajuste o número de cheque.</value>
   </data>
   <data name="numberNumericUpDown.Location" type="System.Drawing.Point, System.Drawing">
     <value>261, 29</value>
+  </data>
+  <data name="toolStrip1.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="toolStrip1.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="toolStrip1.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
   <data name="closeToolStripButton.Text" xml:space="preserve">
     <value>Salir</value>
@@ -175,11 +215,23 @@
   <data name="lastToolStripButton.Text" xml:space="preserve">
     <value>Ir al último</value>
   </data>
+  <data name="cancelButton.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="cancelButton.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
   <data name="cancelButton.HelpString" xml:space="preserve">
     <value>Elimina todas las líneas del asiento contable.</value>
   </data>
   <data name="cancelButton.Text" xml:space="preserve">
     <value>Borrar</value>
+  </data>
+  <data name="applyButton.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="applyButton.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
   </data>
   <data name="applyButton.HelpString" xml:space="preserve">
     <value>Contabiliza el asiento y crea uno nuevo.</value>
@@ -192,6 +244,12 @@
   </data>
   <data name="applyButton.Text" xml:space="preserve">
     <value>Guardar y nuevo</value>
+  </data>
+  <data name="acceptButton.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="acceptButton.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
   </data>
   <data name="acceptButton.HelpString" xml:space="preserve">
     <value>Contabiliza el asiento y cierra la ventana.</value>
@@ -230,6 +288,21 @@
   <data name="descriptionColumn.Width" type="System.Int32, mscorlib">
     <value>97</value>
   </data>
+  <data name="_dataGridView.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="_dataGridView.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="_dataGridView.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="previousButton.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="previousButton.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
   <data name="previousButton.HelpString" xml:space="preserve">
     <value>Navega al asiento contable anterior.</value>
   </data>
@@ -238,6 +311,12 @@
   </data>
   <data name="previousButton.Text" xml:space="preserve">
     <value>Anterior</value>
+  </data>
+  <data name="nextButton.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="nextButton.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
   </data>
   <data name="nextButton.HelpString" xml:space="preserve">
     <value>Navega al siguiente asiento contable.</value>
@@ -248,11 +327,29 @@
   <data name="nextButton.Text" xml:space="preserve">
     <value>Siguiente</value>
   </data>
+  <data name="label3.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="label3.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="label3.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 15</value>
   </data>
   <data name="label3.Text" xml:space="preserve">
     <value>Nombr&amp;e</value>
+  </data>
+  <data name="label4.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="label4.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="label4.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
   <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 15</value>
@@ -260,11 +357,23 @@
   <data name="label4.Text" xml:space="preserve">
     <value>C&amp;oncepto</value>
   </data>
+  <data name="nameComboBox.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="nameComboBox.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
   <data name="nameComboBox.HelpString" xml:space="preserve">
     <value>Especifica el nombre del cliente o proveedor.</value>
   </data>
   <data name="nameComboBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>84, 58</value>
+  </data>
+  <data name="memoTextBox.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="memoTextBox.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
   </data>
   <data name="memoTextBox.HelpString" xml:space="preserve">
     <value>Especifica una nota para el cheque o depósito.</value>
@@ -274,6 +383,12 @@
   </data>
   <data name="memoTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>488, 23</value>
+  </data>
+  <data name="lastButton.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="lastButton.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
   </data>
   <data name="lastButton.HelpString" xml:space="preserve">
     <value>Navega al último asiento contable.</value>
@@ -291,6 +406,12 @@
   <data name="lastButton.Text" xml:space="preserve">
     <value>Último</value>
   </data>
+  <data name="firstButton.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="firstButton.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
   <data name="firstButton.HelpString" xml:space="preserve">
     <value>Navega al primer asiento contable.</value>
   </data>
@@ -305,6 +426,15 @@
   </data>
   <data name="firstButton.Text" xml:space="preserve">
     <value>Primer</value>
+  </data>
+  <data name="$this.HelpKeyword" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="$this.HelpNavigator" type="System.Windows.Forms.HelpNavigator, System.Windows.Forms">
+    <value>AssociateIndex</value>
+  </data>
+  <data name="$this.HelpString" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Diario general</value>

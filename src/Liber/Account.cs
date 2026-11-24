@@ -327,12 +327,12 @@ public class Account :
             return 1;
         }
 
-        if (obj is not Account account)
+        if (obj is not Account other)
         {
             throw new ArgumentException(message: null, nameof(obj));
         }
 
-        return CompareTo(account);
+        return CompareTo(other);
     }
 
     public int CompareTo(Account? other)
