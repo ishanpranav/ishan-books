@@ -6,7 +6,9 @@ Licensed under the MIT License.
 
 # IshanBooks
 
-This is a cross-platform library and application for double-entry bookkeeping.
+This is a cross-platform library and application for double-entry bookkeeping and
+portfolio management.
+
 The project includes a standalone class library and a Windows GUI application.
 
 You can download the software from the
@@ -23,6 +25,16 @@ You can download the software from the
 ![Screenshot of the IshanBooks application.](docs/images/story-4.png "IshanBooks")
 
 ![Screenshot of the IshanBooks application.](docs/images/story-5.png "IshanBooks")
+
+## License
+
+This repository is licensed with the [MIT](LICENSE.txt) license.
+
+## Attribution
+
+This software uses third-party libraries or other resources that may be
+distributed under licenses different than the software. Please see the
+third-party notices included [here](THIRD-PARTY-NOTICES.md).
 
 ## Features
 
@@ -55,6 +67,8 @@ __Accounts receivable and accounts payable__
 - [X] Generate invoice
 - [X] Generate credit note
 
+__Portfolio management__ (in progress)
+
 __First-class data formats__
 - [X] IshanBooks Company (\*.izbk)
 - [X] JavaScript Object Notation (\*.json)
@@ -74,14 +88,5 @@ __Export-friendly formats__
 
 __Miscellaneous__
 - [X] Password protection
-- [X] Globalization and localization
-
-## License
-
-This repository is licensed with the [MIT](LICENSE.txt) license.
-
-## Attribution
-
-This software uses third-party libraries or other resources that may be
-distributed under licenses different than the software. Please see the
-third-party notices included [here](THIRD-PARTY-NOTICES.md).
+- [X] Globalization and localization (needs updates)
+- [X] Anonymize data
