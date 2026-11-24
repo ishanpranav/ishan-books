@@ -8,7 +8,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Linq;
 using System.Text.Json.Serialization;
-using System.Xml.Linq;
 using Liber.BasisMethods;
 using Liber.Filters;
 using Liber.Properties;

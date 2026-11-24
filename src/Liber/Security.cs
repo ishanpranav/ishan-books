@@ -88,7 +88,7 @@ public class Security :
     {
         Price? min = prices.Min;
 
-        if (min == null | timestamp < min.Timestamp)
+        if (min == null || timestamp < min.Timestamp)
         {
             return new SortedSet<Price>();
         }
