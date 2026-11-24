@@ -532,8 +532,8 @@ public static class SqliteSerializer
                     FiscalYearStarted = reader.GetDateTime(7),
                     FiscalYearPosted = reader.GetDateTime(8),
                     ReportingPeriod = await reader.GetFieldValueAsync<ReportingPeriod>(9),
-                    CustomPosted = await SqliteUtilities.GetDateTimeAsync(reader, 10),
-                    CustomStarted = await SqliteUtilities.GetDateTimeAsync(reader, 11),
+                    CustomStarted = await SqliteUtilities.GetDateTimeAsync(reader, 10),
+                    CustomPosted = await SqliteUtilities.GetDateTimeAsync(reader, 11),
                     Password = password
                 };
             }
