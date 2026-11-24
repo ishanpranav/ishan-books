@@ -22,7 +22,7 @@ internal static class Queries
 
     public const string InsertAccount = " INSERT INTO \"main\".\"Account\" ( \"Id\", \"ParentId\", \"Number\", \"Name\", \"Type\", \"Placeholder\", \"Description\", \"Memo\", \"Color\", \"TaxType\", \"Inactive\", \"CashFlow\" ) VALUES ( @id, @parentId, @number, @name, @type, @placeholder, @description, @memo, @color, @taxType, @inactive, @cashFlow ); ";
 
-    public const string InsertDividend = " INSERT INTO \"main\".\"Dividend\" ( \"SecurityId\", \"Timestamp\", \"Value\" ) VALUES ( @securityId, @timestamp, @close ); ";
+    public const string InsertDividend = " INSERT INTO \"main\".\"Dividend\" ( \"SecurityId\", \"Timestamp\", \"Value\" ) VALUES ( @securityId, @timestamp, @value ); ";
 
     public const string InsertLine = " INSERT INTO \"main\".\"Line\" ( \"TransactionId\", \"AccountId\", \"Balance\", \"Description\", \"Reconciled\" ) VALUES ( @transactionId, @accountId, @balance, @description, @reconciled ); ";
 

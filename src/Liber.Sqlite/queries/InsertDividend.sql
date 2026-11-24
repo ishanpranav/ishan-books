@@ -9,5 +9,5 @@ INSERT INTO "main"."Dividend" (
 ) VALUES (
     @securityId,
     @timestamp,
-    @close
+    @value
 );
