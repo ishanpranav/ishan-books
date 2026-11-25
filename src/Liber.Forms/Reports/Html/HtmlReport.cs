@@ -317,7 +317,7 @@ public class HtmlReport : IntervalView, IReport
     {
         if (color == Company.Color)
         {
-            GetColorFromHash(GetBaseColor(type, debit), name);
+            return GetColorFromHash(GetBaseColor(type, debit), name);
         }
 
         return color;
