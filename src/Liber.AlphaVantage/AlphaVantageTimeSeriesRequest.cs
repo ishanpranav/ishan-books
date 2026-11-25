@@ -8,7 +8,7 @@ namespace Liber.AlphaVantage;
 
 public class AlphaVantageTimeSeriesRequest
 {
-    [RequestProperty(Name = "symbol")]
+    [RequestProperty(Name = AlphaVantageClient.SymbolParameter)]
     public string Symbol { get; set; } = string.Empty;
 
     [RequestProperty(Name = "outputsize")]

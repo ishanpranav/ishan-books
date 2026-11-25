@@ -105,6 +105,5 @@ internal partial class AlphaVantageForm : Form
             basicStatus,
             premiumStatus,
             realTimeStatus);
-
     }
 }

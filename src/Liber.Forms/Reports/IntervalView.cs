@@ -24,14 +24,12 @@ public abstract class IntervalView : IStandardValuesProvider
         Company = company;
         Accounts = new AccountsView(Company);
         Title = FormattedStrings.GetTitle(Name, Company.Type);
-        Started = Company.Started;
-        Posted = Company.Posted;
+        (Started, Posted) = Company.GetPeriod();
         company.NameChanged += OnCompanyChanged;
         company.TypeChanged += OnCompanyChanged;
-        company.ReportingChanged += (sender, e) =>
+        company.ReportingPeriodChanged += (sender, e) =>
         {
-            Started = Company.Started;
-            Posted = Company.Posted;
+            (Started, Posted) = Company.GetPeriod();
         };
     }
 

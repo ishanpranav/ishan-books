@@ -36,7 +36,7 @@ internal partial class SecuritiesForm : Form
         adjustedCloseColumn.ValueType = typeof(decimal);
         valueColumn.ValueType = typeof(decimal);
         costColumn.DefaultCellStyle.Format = DecimalExtensions.Format;
-        quantityColumn.DefaultCellStyle.Format = DecimalExtensions.Format;
+        quantityColumn.DefaultCellStyle.Format = "0.0000";
         commissionColumn.DefaultCellStyle.Format = DecimalExtensions.Format;
         closeColumn.DefaultCellStyle.Format = DecimalExtensions.Format;
         adjustedCloseColumn.DefaultCellStyle.Format = DecimalExtensions.Format;
@@ -229,14 +229,15 @@ internal partial class SecuritiesForm : Form
         Close();
     }
 
-    private async void OnBasicRefreshButtonClick(object sender, EventArgs e)
+    private void SetRefreshButtonsEnabled(bool value)
     {
+        priceRefreshButton.Enabled = value;
+        dividendRefreshButton.Enabled = value;
     }
 
-    private async void OnPremiumRefreshButtonClick(object sender, EventArgs e)
+    private async void OnPriceRefreshButtonClick(object sender, EventArgs e)
     {
-        basicRefreshButton.Enabled = false;
-        premiumRefreshButton.Enabled = false;
+        SetRefreshButtonsEnabled(false);
 
         SavingForm form = new SavingForm()
         {
@@ -244,7 +245,7 @@ internal partial class SecuritiesForm : Form
         };
 
         form.Show();
-
+        
         try
         {
             await Program.AbortRetryIgnoreAsync(async () =>
@@ -292,9 +293,66 @@ internal partial class SecuritiesForm : Form
         finally
         {
             form.Close();
+            SetRefreshButtonsEnabled(true);
+        }
+    }
 
-            basicRefreshButton.Enabled = true;
-            premiumRefreshButton.Enabled = true;
+    private async void OnDividendRefreshButtonClick(object sender, EventArgs e)
+    {
+        SetRefreshButtonsEnabled(false);
+
+        SavingForm form = new SavingForm()
+        {
+            MaxProgress = AssumedSize * securityDataGridView.Rows.Count
+        };
+
+        form.Show();
+
+        try
+        {
+            await Program.AbortRetryIgnoreAsync(async () =>
+            {
+                form.Progress = 0;
+
+                for (int i = 0; i < securityDataGridView.Rows.Count; i++)
+                {
+                    if (securityDataGridView.Rows[i].IsNewRow)
+                    {
+                        continue;
+                    }
+
+                    string symbol = (string)securityDataGridView[securitySymbolColumn.Index, i].Value!;
+                    IReadOnlyList<AlphaVantageDividendResponse> series = await _client.GetDividendsAsync(
+                        Settings.Default.AlphaVantageApiKey,
+                        symbol);
+
+                    foreach (AlphaVantageDividendResponse point in series)
+                    {
+                        DateOnly dividendDate = (point.PaymentDate ?? point.ExDividendDate);
+
+                        dividendDataGridView.Rows.Add(
+                            symbol,
+                            new DateTime(dividendDate.Year, dividendDate.Month, dividendDate.Day), point.Amount);
+                    }
+
+                    form.Progress += Math.Min(series.Count, AssumedSize);
+
+                    form.Refresh();
+                    priceDataGridView.Refresh();
+
+                    await Task.Yield();
+
+                    if (i < securityDataGridView.Rows.Count - 1)
+                    {
+                        await Task.Delay(millisecondsDelay: 1000);
+                    }
+                }
+            });
+        }
+        finally
+        {
+            form.Close();
+            SetRefreshButtonsEnabled(true);
         }
     }
 }

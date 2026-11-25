@@ -38,27 +38,32 @@ partial class SecuritiesForm
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
         securityDataGridView = new System.Windows.Forms.DataGridViewEx();
         securitySymbolColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
         nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
         colorColumn = new System.Windows.Forms.DataGridViewColorColumn();
         saveButton = new System.Windows.Forms.Button();
         closeButton = new System.Windows.Forms.Button();
-        basicRefreshButton = new System.Windows.Forms.Button();
-        premiumRefreshButton = new System.Windows.Forms.Button();
+        priceRefreshButton = new System.Windows.Forms.Button();
         _tabControl = new System.Windows.Forms.TabControl();
         securityTabPage = new System.Windows.Forms.TabPage();
         tradeTabPage = new System.Windows.Forms.TabPage();
         tradeDataGridView = new System.Windows.Forms.DataGridViewEx();
+        tradeSymbolColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        postedColumn = new System.Windows.Forms.CalendarColumn();
+        typeColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+        costColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        quantityColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        commissionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
         priceTabPage = new System.Windows.Forms.TabPage();
         priceDataGridView = new System.Windows.Forms.DataGridViewEx();
         priceSymbolColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,12 +75,7 @@ partial class SecuritiesForm
         dividendSymbolColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
         dividendTimestampColumn = new System.Windows.Forms.CalendarColumn();
         valueColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        tradeSymbolColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        postedColumn = new System.Windows.Forms.CalendarColumn();
-        typeColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-        costColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        quantityColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        commissionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        dividendRefreshButton = new System.Windows.Forms.Button();
         ((System.ComponentModel.ISupportInitialize)securityDataGridView).BeginInit();
         _tabControl.SuspendLayout();
         securityTabPage.SuspendLayout();
@@ -160,27 +160,16 @@ partial class SecuritiesForm
         closeButton.UseVisualStyleBackColor = true;
         closeButton.Click += OnCloseButtonClick;
         // 
-        // basicRefreshButton
+        // priceRefreshButton
         // 
-        basicRefreshButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
-        basicRefreshButton.Location = new System.Drawing.Point(12, 340);
-        basicRefreshButton.Name = "basicRefreshButton";
-        basicRefreshButton.Size = new System.Drawing.Size(115, 23);
-        basicRefreshButton.TabIndex = 3;
-        basicRefreshButton.Text = "&Refresh (Basic)";
-        basicRefreshButton.UseVisualStyleBackColor = true;
-        basicRefreshButton.Click += OnBasicRefreshButtonClick;
-        // 
-        // premiumRefreshButton
-        // 
-        premiumRefreshButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
-        premiumRefreshButton.Location = new System.Drawing.Point(133, 340);
-        premiumRefreshButton.Name = "premiumRefreshButton";
-        premiumRefreshButton.Size = new System.Drawing.Size(115, 23);
-        premiumRefreshButton.TabIndex = 4;
-        premiumRefreshButton.Text = "&Refresh (Premium)";
-        premiumRefreshButton.UseVisualStyleBackColor = true;
-        premiumRefreshButton.Click += OnPremiumRefreshButtonClick;
+        priceRefreshButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+        priceRefreshButton.Location = new System.Drawing.Point(16, 340);
+        priceRefreshButton.Name = "priceRefreshButton";
+        priceRefreshButton.Size = new System.Drawing.Size(122, 23);
+        priceRefreshButton.TabIndex = 4;
+        priceRefreshButton.Text = "&Refresh Prices";
+        priceRefreshButton.UseVisualStyleBackColor = true;
+        priceRefreshButton.Click += OnPriceRefreshButtonClick;
         // 
         // _tabControl
         // 
@@ -250,6 +239,45 @@ partial class SecuritiesForm
         tradeDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
         tradeDataGridView.Size = new System.Drawing.Size(567, 288);
         tradeDataGridView.TabIndex = 1;
+        // 
+        // tradeSymbolColumn
+        // 
+        tradeSymbolColumn.HeaderText = "Symbol";
+        tradeSymbolColumn.Name = "tradeSymbolColumn";
+        // 
+        // postedColumn
+        // 
+        postedColumn.HeaderText = "Date";
+        postedColumn.Name = "postedColumn";
+        postedColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+        // 
+        // typeColumn
+        // 
+        typeColumn.HeaderText = "Type";
+        typeColumn.Name = "typeColumn";
+        typeColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+        typeColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+        // 
+        // costColumn
+        // 
+        dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+        costColumn.DefaultCellStyle = dataGridViewCellStyle6;
+        costColumn.HeaderText = "Cost";
+        costColumn.Name = "costColumn";
+        // 
+        // quantityColumn
+        // 
+        dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+        quantityColumn.DefaultCellStyle = dataGridViewCellStyle7;
+        quantityColumn.HeaderText = "Quantity";
+        quantityColumn.Name = "quantityColumn";
+        // 
+        // commissionColumn
+        // 
+        dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+        commissionColumn.DefaultCellStyle = dataGridViewCellStyle8;
+        commissionColumn.HeaderText = "Commission";
+        commissionColumn.Name = "commissionColumn";
         // 
         // priceTabPage
         // 
@@ -379,53 +407,25 @@ partial class SecuritiesForm
         valueColumn.HeaderText = "Value";
         valueColumn.Name = "valueColumn";
         // 
-        // tradeSymbolColumn
+        // dividendRefreshButton
         // 
-        tradeSymbolColumn.HeaderText = "Symbol";
-        tradeSymbolColumn.Name = "tradeSymbolColumn";
-        // 
-        // postedColumn
-        // 
-        postedColumn.HeaderText = "Date";
-        postedColumn.Name = "postedColumn";
-        postedColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-        // 
-        // typeColumn
-        // 
-        typeColumn.HeaderText = "Type";
-        typeColumn.Name = "typeColumn";
-        typeColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-        typeColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-        // 
-        // costColumn
-        // 
-        dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-        costColumn.DefaultCellStyle = dataGridViewCellStyle6;
-        costColumn.HeaderText = "Cost";
-        costColumn.Name = "costColumn";
-        // 
-        // quantityColumn
-        // 
-        dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-        quantityColumn.DefaultCellStyle = dataGridViewCellStyle7;
-        quantityColumn.HeaderText = "Quantity";
-        quantityColumn.Name = "quantityColumn";
-        // 
-        // commissionColumn
-        // 
-        dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-        commissionColumn.DefaultCellStyle = dataGridViewCellStyle8;
-        commissionColumn.HeaderText = "Commission";
-        commissionColumn.Name = "commissionColumn";
+        dividendRefreshButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+        dividendRefreshButton.Location = new System.Drawing.Point(144, 340);
+        dividendRefreshButton.Name = "dividendRefreshButton";
+        dividendRefreshButton.Size = new System.Drawing.Size(122, 23);
+        dividendRefreshButton.TabIndex = 6;
+        dividendRefreshButton.Text = "&Refresh Dividends";
+        dividendRefreshButton.UseVisualStyleBackColor = true;
+        dividendRefreshButton.Click += OnDividendRefreshButtonClick;
         // 
         // SecuritiesForm
         // 
         AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         ClientSize = new System.Drawing.Size(605, 375);
+        Controls.Add(dividendRefreshButton);
         Controls.Add(_tabControl);
-        Controls.Add(premiumRefreshButton);
-        Controls.Add(basicRefreshButton);
+        Controls.Add(priceRefreshButton);
         Controls.Add(closeButton);
         Controls.Add(saveButton);
         Name = "SecuritiesForm";
@@ -448,8 +448,7 @@ partial class SecuritiesForm
     private System.Windows.Forms.DataGridViewEx securityDataGridView;
     private System.Windows.Forms.Button saveButton;
     private System.Windows.Forms.Button closeButton;
-    private System.Windows.Forms.Button basicRefreshButton;
-    private System.Windows.Forms.Button premiumRefreshButton;
+    private System.Windows.Forms.Button priceRefreshButton;
     private System.Windows.Forms.TabControl _tabControl;
     private System.Windows.Forms.TabPage securityTabPage;
     private System.Windows.Forms.TabPage tradeTabPage;
@@ -474,4 +473,5 @@ partial class SecuritiesForm
     private System.Windows.Forms.DataGridViewTextBoxColumn costColumn;
     private System.Windows.Forms.DataGridViewTextBoxColumn quantityColumn;
     private System.Windows.Forms.DataGridViewTextBoxColumn commissionColumn;
+    private System.Windows.Forms.Button dividendRefreshButton;
 }

@@ -60,12 +60,15 @@ public class Company : ICloneable
     /// <param name="nextAccountNumber">The next account number to be assigned.</param>
     [JsonConstructor]
     public Company(
-        IReadOnlyCollection<Account> accounts,
-        IReadOnlyCollection<Transaction> transactions,
-        IReadOnlyCollection<Security> securities,
+        IReadOnlyCollection<Account>? accounts,
+        IReadOnlyCollection<Transaction>? transactions,
+        IReadOnlyCollection<Security>? securities,
         decimal nextAccountNumber,
         decimal nextTransactionNumber)
     {
+        accounts ??= Array.Empty<Account>();
+        transactions ??= Array.Empty<Transaction>();
+        securities ??= Array.Empty<Security>();
         _accounts = accounts.ToDictionary(x => x.Id);
         _sortedAccounts = new SortedSet<Account>(accounts);
         _transactions = transactions.ToDictionary(x => x.Id);
@@ -190,7 +193,7 @@ public class Company : ICloneable
             {
                 _fiscalYearStarted = value;
 
-                ReportingChanged?.Invoke(sender: this, System.EventArgs.Empty);
+                ReportingPeriodChanged?.Invoke(sender: this, System.EventArgs.Empty);
             }
         }
     }
@@ -209,7 +212,7 @@ public class Company : ICloneable
             {
                 _fiscalYearPosted = value;
 
-                ReportingChanged?.Invoke(sender: this, System.EventArgs.Empty);
+                ReportingPeriodChanged?.Invoke(sender: this, System.EventArgs.Empty);
             }
         }
     }
@@ -226,7 +229,7 @@ public class Company : ICloneable
             {
                 _reportingPeriod = value;
 
-                ReportingChanged?.Invoke(sender: this, EventArgs.Empty);
+                ReportingPeriodChanged?.Invoke(sender: this, EventArgs.Empty);
             }
         }
     }
@@ -243,7 +246,7 @@ public class Company : ICloneable
             {
                 _customStarted = value;
 
-                ReportingChanged?.Invoke(sender: this, EventArgs.Empty);
+                ReportingPeriodChanged?.Invoke(sender: this, EventArgs.Empty);
             }
         }
     }
@@ -260,58 +263,46 @@ public class Company : ICloneable
             {
                 _customPosted = value;
 
-                ReportingChanged?.Invoke(sender: this, EventArgs.Empty);
+                ReportingPeriodChanged?.Invoke(sender: this, EventArgs.Empty);
             }
         }
     }
 
-    [JsonIgnore]
-    public DateTime Started
+    public (DateTime Started, DateTime Posted) GetPeriod()
     {
-        get
+        if (ReportingPeriod == ReportingPeriod.Custom &&
+            CustomStarted != null &&
+            CustomPosted != null)
         {
-            if (ReportingPeriod == ReportingPeriod.Custom && CustomStarted != null)
-            {
-                return CustomStarted.Value;
-            }
-
-            DateTime current = new DateTime(DateTime.Today.Year, FiscalYearStarted.Month, FiscalYearStarted.Day);
-            DateTime result = current > DateTime.Today ? current.AddYears(-1) : current;
-
-            if (ReportingPeriod == ReportingPeriod.PreviousFiscalYear)
-            {
-                return result.AddYears(-1);
-            }
-
-            return result;
+            return (CustomStarted.Value, CustomPosted.Value);
         }
+
+        DateTime today = DateTime.Today;
+        DateTime started = SafeDate(today.Year, FiscalYearStarted.Month, FiscalYearStarted.Day);
+
+        if (started > today)
+        {
+            started = started.AddYears(-1);
+        }
+
+        DateTime posted = started.AddYears(1).AddDays(-1);
+
+        if (ReportingPeriod == ReportingPeriod.PreviousFiscalYear)
+        {
+            started = started.AddYears(-1);
+            posted = posted.AddYears(-1);   // careful with leap years, see below
+        }
+        else if (ReportingPeriod == ReportingPeriod.FiscalYearToDate)
+        {
+            posted = today;
+        }
+
+        return (started, posted);
     }
 
-    [JsonIgnore]
-    public DateTime Posted
+    private static DateTime SafeDate(int year, int month, int day)
     {
-        get
-        {
-            if (ReportingPeriod == ReportingPeriod.Custom && CustomPosted != null)
-            {
-                return CustomPosted.Value;
-            }
-
-            if (ReportingPeriod == ReportingPeriod.FiscalYearToDate)
-            {
-                return DateTime.Today;
-            }
-
-            DateTime current = new DateTime(DateTime.Today.Year, FiscalYearPosted.Month, FiscalYearPosted.Day);
-            DateTime result = current < Started ? current.AddYears(1) : current;
-
-            if (ReportingPeriod == ReportingPeriod.PreviousFiscalYear)
-            {
-                return result.AddYears(-1);
-            }
-
-            return result;
-        }
+        return new DateTime(year, month, Math.Min(day, DateTime.DaysInMonth(year, month)));
     }
 
     [JsonIgnore]
@@ -337,7 +328,7 @@ public class Company : ICloneable
 
     public event EventHandler? NameChanged;
     public event EventHandler? TypeChanged;
-    public event EventHandler? ReportingChanged;
+    public event EventHandler? ReportingPeriodChanged;
     public event EventHandler<GuidEventArgs>? AccountAdded;
     public event EventHandler<GuidEventArgs>? AccountUpdated;
     public event EventHandler<GuidEventArgs>? AccountRemoved;
@@ -818,6 +809,9 @@ public class Company : ICloneable
         AddPriceReferences(value, value.Prices);
         AddDividendReferences(value, value.Dividends);
         _securities.Add(value.Id, value);
+
+        _securitiesBySymbol[value.Symbol] = value;
+
         SecuritiesChanged?.Invoke(sender: this, new GuidEventArgs(value.Id));
     }
 
@@ -940,12 +934,14 @@ public class Company : ICloneable
 
     public decimal GetBalance(Account account, Filter filter)
     {
+        (DateTime started, DateTime posted) = GetPeriod();
+
         if (account.Type.IsTemporary())
         {
-            return account.GetBalance(Started, Posted, filter);
+            return account.GetBalance(started, posted, filter);
         }
 
-        return account.GetBalance(Posted, filter);
+        return account.GetBalance(posted, filter);
     }
 
     public decimal Reconcile(Account account, DateTime reconciled, decimal endingBalance, IEnumerable<Line> lines)

@@ -121,6 +121,7 @@ internal partial class ReportsForm : Form
 
     private void RefreshFavorite(IntervalView report)
     {
+        report.Title = _engine.Company.DisplayName;
         report.Accounts = new AccountsView(
             _engine.Company,
             _engine.Company.Accounts

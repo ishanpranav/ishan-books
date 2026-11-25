@@ -398,8 +398,7 @@ internal partial class AccountsForm : Form
         string title = $"{view.GenericTitle} - {account.Name}";
 
         report.Title = title;
-        report.Started = _company.Started;
-        report.Posted = _company.Posted;
+        (report.Started, report.Posted) = _company.GetPeriod();
         report.Level = ReportLevel.ByAccount;
 
         ReportsForm form = new ReportsForm(_engine, ReportsFormStyle.ConfigurationOnly)

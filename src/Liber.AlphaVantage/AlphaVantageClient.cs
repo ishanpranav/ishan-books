@@ -10,7 +10,8 @@ namespace Liber.AlphaVantage;
 
 public class AlphaVantageClient : IDisposable
 {
-    private const string FunctionParameter = "function";
+    public const string FunctionParameter = "function";
+    public const string SymbolParameter = "symbol";
     public const string Hostname = "https://www.alphavantage.co";
     public const string DemoApiKey = "demo";
 
@@ -36,12 +37,22 @@ public class AlphaVantageClient : IDisposable
     {
         RestRequest restRequest = CreateRequest(apiKey);
 
-        restRequest.AddQueryParameter("symbol", symbol);
         restRequest.AddQueryParameter(FunctionParameter, "GLOBAL_QUOTE");
+        restRequest.AddQueryParameter(SymbolParameter, symbol);
 
         IReadOnlyList<AlphaVantageQuoteResponse> response = await ExecuteRequestAsync<AlphaVantageQuoteResponse>(restRequest);
 
         return response[0];
+    }
+
+    public Task<IReadOnlyList<AlphaVantageDividendResponse>> GetDividendsAsync(string apiKey, string symbol)
+    {
+        RestRequest restRequest = CreateRequest(apiKey);
+
+        restRequest.AddQueryParameter(FunctionParameter, "DIVIDENDS");
+        restRequest.AddQueryParameter(SymbolParameter, symbol);
+
+        return ExecuteRequestAsync<AlphaVantageDividendResponse>(restRequest);
     }
 
     public Task<IReadOnlyList<AlphaVantageTimeSeriesResponse>> GetTimeSeriesAsync(string apiKey, AlphaVantageTimeSeries timeSeries, AlphaVantageTimeSeriesRequest request)
