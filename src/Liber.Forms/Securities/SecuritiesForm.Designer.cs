@@ -72,10 +72,11 @@ partial class SecuritiesForm
         adjustedCloseColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
         dividendTabPage = new System.Windows.Forms.TabPage();
         dividendDataGridView = new System.Windows.Forms.DataGridViewEx();
+        dividendRefreshButton = new System.Windows.Forms.Button();
         dividendSymbolColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
         dividendTimestampColumn = new System.Windows.Forms.CalendarColumn();
+        dividendPaidColumn = new System.Windows.Forms.CalendarColumn();
         valueColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-        dividendRefreshButton = new System.Windows.Forms.Button();
         ((System.ComponentModel.ISupportInitialize)securityDataGridView).BeginInit();
         _tabControl.SuspendLayout();
         securityTabPage.SuspendLayout();
@@ -374,7 +375,7 @@ partial class SecuritiesForm
         dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
         dividendDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
         dividendDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        dividendDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { dividendSymbolColumn, dividendTimestampColumn, valueColumn });
+        dividendDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { dividendSymbolColumn, dividendTimestampColumn, dividendPaidColumn, valueColumn });
         dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
         dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Window;
         dataGridViewCellStyle15.Font = new System.Drawing.Font("Segoe UI", 9F);
@@ -391,22 +392,6 @@ partial class SecuritiesForm
         dividendDataGridView.Size = new System.Drawing.Size(567, 288);
         dividendDataGridView.TabIndex = 2;
         // 
-        // dividendSymbolColumn
-        // 
-        dividendSymbolColumn.HeaderText = "Symbol";
-        dividendSymbolColumn.Name = "dividendSymbolColumn";
-        // 
-        // dividendTimestampColumn
-        // 
-        dividendTimestampColumn.HeaderText = "Date";
-        dividendTimestampColumn.Name = "dividendTimestampColumn";
-        dividendTimestampColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-        // 
-        // valueColumn
-        // 
-        valueColumn.HeaderText = "Value";
-        valueColumn.Name = "valueColumn";
-        // 
         // dividendRefreshButton
         // 
         dividendRefreshButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
@@ -417,6 +402,28 @@ partial class SecuritiesForm
         dividendRefreshButton.Text = "&Refresh Dividends";
         dividendRefreshButton.UseVisualStyleBackColor = true;
         dividendRefreshButton.Click += OnDividendRefreshButtonClick;
+        // 
+        // dividendSymbolColumn
+        // 
+        dividendSymbolColumn.HeaderText = "Symbol";
+        dividendSymbolColumn.Name = "dividendSymbolColumn";
+        // 
+        // dividendTimestampColumn
+        // 
+        dividendTimestampColumn.HeaderText = "Ex-Date";
+        dividendTimestampColumn.Name = "dividendTimestampColumn";
+        dividendTimestampColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+        // 
+        // dividendPaidColumn
+        // 
+        dividendPaidColumn.HeaderText = "Payment Date";
+        dividendPaidColumn.Name = "dividendPaidColumn";
+        dividendPaidColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+        // 
+        // valueColumn
+        // 
+        valueColumn.HeaderText = "Value";
+        valueColumn.Name = "valueColumn";
         // 
         // SecuritiesForm
         // 
@@ -460,13 +467,10 @@ partial class SecuritiesForm
     private System.Windows.Forms.DataGridViewTextBoxColumn securitySymbolColumn;
     private System.Windows.Forms.DataGridViewTextBoxColumn nameColumn;
     private System.Windows.Forms.DataGridViewColorColumn colorColumn;
-    private System.Windows.Forms.DataGridViewTextBoxColumn dividendSymbolColumn;
     private System.Windows.Forms.DataGridViewTextBoxColumn priceSymbolColumn;
     private System.Windows.Forms.CalendarColumn priceTimestampColumn;
     private System.Windows.Forms.DataGridViewTextBoxColumn closeColumn;
     private System.Windows.Forms.DataGridViewTextBoxColumn adjustedCloseColumn;
-    private System.Windows.Forms.CalendarColumn dividendTimestampColumn;
-    private System.Windows.Forms.DataGridViewTextBoxColumn valueColumn;
     private System.Windows.Forms.DataGridViewTextBoxColumn tradeSymbolColumn;
     private System.Windows.Forms.CalendarColumn postedColumn;
     private System.Windows.Forms.DataGridViewComboBoxColumn typeColumn;
@@ -474,4 +478,8 @@ partial class SecuritiesForm
     private System.Windows.Forms.DataGridViewTextBoxColumn quantityColumn;
     private System.Windows.Forms.DataGridViewTextBoxColumn commissionColumn;
     private System.Windows.Forms.Button dividendRefreshButton;
+    private System.Windows.Forms.DataGridViewTextBoxColumn dividendSymbolColumn;
+    private System.Windows.Forms.CalendarColumn dividendTimestampColumn;
+    private System.Windows.Forms.CalendarColumn dividendPaidColumn;
+    private System.Windows.Forms.DataGridViewTextBoxColumn valueColumn;
 }

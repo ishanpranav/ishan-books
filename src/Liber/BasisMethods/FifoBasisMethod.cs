@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Liber.BasisMethods;
 
-internal sealed class FifoBasisMethod : IBasisMethod
+public class FifoBasisMethod : IBasisMethod
 {
     private readonly Queue<Lot> _lots = new Queue<Lot>();
 
@@ -28,7 +28,7 @@ internal sealed class FifoBasisMethod : IBasisMethod
         {
             decimal costPerShare = trade.Cost + trade.Commission / trade.Quantity;
 
-            _lots.Enqueue(new Lot { Quantity = trade.Quantity, CostPerShare = costPerShare });
+            _lots.Enqueue(new Lot { Quantity = trade.Quantity, Cost = costPerShare });
 
             Quantity += trade.Quantity;
             CostBasis += trade.Quantity * costPerShare;
@@ -51,8 +51,8 @@ internal sealed class FifoBasisMethod : IBasisMethod
             Lot lot = _lots.Peek();
             decimal used = Math.Min(lot.Quantity, remaining);
 
-            RealizedGain += used * (proceedsPerShare - lot.CostPerShare);
-            CostBasis -= used * lot.CostPerShare;
+            RealizedGain += used * (proceedsPerShare - lot.Cost);
+            CostBasis -= used * lot.Cost;
 
             lot.Quantity -= used;
             remaining -= used;

@@ -11,6 +11,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Liber.BasisMethods;
 
 namespace Liber.Forms.Reports.Html;
 
@@ -770,24 +771,31 @@ public class HtmlReport : IntervalView, IReport
 
     public string GetPositions()
     {
+        List<Position> positions = new List<Position>();
         List<PositionView> items = new List<PositionView>();
-        List<Position> positions = Company
-            .GetPositions(DateTime.Today)
-            .ToList();
-        DateTime min;
+        DateTime today = DateTime.Today;
+        DateTime opened = today;
 
-        if (positions.Count > 0)
+        foreach (Security security in Company.Securities)
         {
-            min = positions.Min(x => x.Opened).AddDays(-1);
-        }
-        else
-        {
-            min = DateTime.Today;
+            Position? position = security.GetPosition(today, new FifoBasisMethod());
+
+            if (position == null)
+            {
+                continue;
+            }
+
+            positions.Add(position);
+
+            if (position.Opened < opened)
+            {
+                opened = position.Opened;
+            }
         }
 
         foreach (Position position in positions)
         {
-            SortedSet<Price> prices = position.Security.GetPricesAfter(min);
+            IReadOnlyCollection<Price> prices = position.Security.GetPricesAfter(opened);
             decimal[] timeSeries;
             DateTime[] labels;
             int i = 0;

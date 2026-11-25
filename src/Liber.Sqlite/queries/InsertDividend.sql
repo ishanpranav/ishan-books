@@ -5,9 +5,11 @@
 INSERT INTO "main"."Dividend" (
     "SecurityId",
     "Timestamp",
+    "Paid",
     "Value"
 ) VALUES (
     @securityId,
     @timestamp,
+    @paid,
     @value
 );

@@ -5,7 +5,9 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Text.Json.Serialization;
+using Liber.BasisMethods;
 
 namespace Liber;
 
@@ -33,8 +35,6 @@ public class Security :
         prices = new SortedSet<Price>();
         dividends = new SortedSet<Dividend>();
     }
-
-    // new Security(entry.Key, entry.Value, security.Prices, security.Dividends);
 
     [JsonConstructor]
     public Security(
@@ -85,6 +85,18 @@ public class Security :
         }
     }
 
+    public SortedSet<Trade> GetTradesBefore(DateTime posted)
+    {
+        Trade? min = trades.Min;
+
+        if (min == null || posted < min.Posted)
+        {
+            return new SortedSet<Trade>();
+        }
+
+        return trades.GetViewBetween(min, new Trade(posted));
+    }
+
     public Price? GetPrice()
     {
         return prices.Max;
@@ -117,6 +129,54 @@ public class Security :
         }
 
         return prices.GetViewBetween(new Price(timestamp), max);
+    }
+
+    public Position? GetPosition(DateTime posted, IBasisMethod basisMethod)
+    {
+        Price? price = GetPrice(posted);
+        decimal commission = 0;
+        decimal dividend = 0;
+        SortedSet<Trade> subset = GetTradesBefore(posted);
+        List<Dividend> list = dividends
+            .Where(x => x.Paid.Date <= posted.Date)
+            .ToList();
+        int i = 0;
+
+        void CollectDividendsThrough(DateTime date)
+        {
+            while (i < list.Count && list[i].Timestamp.Date <= date.Date)
+            {
+                dividend += list[i].Value * basisMethod.Quantity;
+                i++;
+            }
+        }
+
+        foreach (Trade trade in subset)
+        {
+            CollectDividendsThrough(trade.Posted);
+
+            commission += trade.Commission;
+
+            basisMethod.Apply(trade);
+        }
+
+        CollectDividendsThrough(posted);
+
+        if (basisMethod.Quantity == 0 && commission == 0 && dividend == 0 && basisMethod.RealizedGain == 0)
+        {
+            return null;
+        }
+
+        return new Position(this)
+        {
+            Opened = subset.Min != null ? subset.Min.Posted : posted,
+            Price = price?.Close ?? 0,
+            Cost = basisMethod.Quantity == 0 ? 0 : basisMethod.CostBasis / basisMethod.Quantity,
+            Quantity = basisMethod.Quantity,
+            Commission = commission,
+            Dividend = dividend,
+            RealizedGain = basisMethod.RealizedGain,
+        };
     }
 
     public override string ToString()

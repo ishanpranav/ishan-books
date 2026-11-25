@@ -18,22 +18,24 @@ public class Dividend :
     public Dividend() { }
 
     [JsonConstructor]
-    public Dividend(DateTime timestamp)
+    public Dividend(DateTime timestamp, DateTime paid)
     {
         Timestamp = timestamp;
+        Paid = paid;
     }
 
     public DateTime Timestamp { get; private set; }
+    public DateTime Paid { get; private set; }
     public decimal Value { get; set; }
 
     public override string ToString()
     {
-        return $"{Timestamp} {security} {Value}";
+        return $"{Timestamp} - {Paid} {security} {Value}";
     }
 
     public Dividend Clone()
     {
-        return new Dividend(Timestamp)
+        return new Dividend(Timestamp, Paid)
         {
             Value = Value
         };
@@ -73,6 +75,13 @@ public class Dividend :
             return result;
         }
 
+        result = Paid.CompareTo(other.Paid);
+
+        if (result != 0)
+        {
+            return result;
+        }
+
         if (security != null)
         {
             return security.CompareTo(other.security);
@@ -103,7 +112,9 @@ public class Dividend :
             return false;
         }
 
-        return security == other.security && Timestamp == other.Timestamp;
+        return security == other.security &&
+            Timestamp == other.Timestamp &&
+            Paid == other.Paid;
     }
 
     public override int GetHashCode()

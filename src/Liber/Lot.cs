@@ -7,5 +7,5 @@ namespace Liber;
 internal sealed class Lot
 {
     public decimal Quantity { get; set; }
-    public decimal CostPerShare { get; set; }
+    public decimal Cost { get; set; }
 }

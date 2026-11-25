@@ -248,6 +248,7 @@ public static class SqliteSerializer
 
                         command.Parameters.AddWithValue("@securityId", security.Id);
                         command.Parameters.AddWithValue("@timestamp", dividend.Timestamp);
+                        command.Parameters.AddWithValue("@paid", dividend.Paid);
                         command.Parameters.AddWithValue("@value", dividend.Value);
 
                         await command.ExecuteNonQueryAsync();
@@ -466,9 +467,9 @@ public static class SqliteSerializer
                         dividends[securityId] = values;
                     }
 
-                    values.Add(new Dividend(reader.GetDateTime(1))
+                    values.Add(new Dividend(reader.GetDateTime(1), reader.GetDateTime(2))
                     {
-                        Value = reader.GetDecimal(2)
+                        Value = reader.GetDecimal(3)
                     });
                 }
             }

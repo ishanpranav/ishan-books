@@ -18,6 +18,11 @@ public class Trade :
 
     public Trade() { }
 
+    public Trade(DateTime posted)
+    {
+        Posted = posted;
+    }
+
     [JsonConstructor]
     public Trade(
         DateTime posted,
@@ -66,7 +71,12 @@ public class Trade :
             return 1;
         }
 
-        int result;
+        int result = Posted.CompareTo(other.Posted); 
+
+        if (result != 0)
+        {
+            return result;
+        }
 
         if (security != null)
         {
@@ -76,13 +86,6 @@ public class Trade :
             {
                 return result;
             }
-        }
-
-        result = Posted.CompareTo(other.Posted); ;
-
-        if (result != 0)
-        {
-            return result;
         }
 
         result = other.Type.CompareTo(Type);

@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS "Price" (
 CREATE TABLE IF NOT EXISTS "Dividend" (
     "SecurityId" TEXT NOT NULL,
     "Timestamp"  TEXT NOT NULL,
+    "Paid"       TEXT NOT NULL,
     "Value"      INTEGER NOT NULL,
     PRIMARY KEY("SecurityId", "Timestamp"),
     FOREIGN KEY("SecurityId") REFERENCES "Security"("Id")

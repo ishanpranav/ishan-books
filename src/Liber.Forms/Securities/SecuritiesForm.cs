@@ -92,7 +92,7 @@ internal partial class SecuritiesForm : Form
             {
                 dividendDataGridView.Rows.Add(
                     security.Symbol,
-                    dividend.Timestamp, dividend.Value);
+                    dividend.Timestamp, dividend.Paid, dividend.Value);
             }
         }
 
@@ -184,7 +184,9 @@ internal partial class SecuritiesForm : Form
                 dividends[symbol] = values;
             }
 
-            values.Add(new Dividend((DateTime)row.Cells[dividendTimestampColumn.Index].Value!)
+            values.Add(new Dividend(
+                (DateTime)row.Cells[dividendTimestampColumn.Index].Value!,
+                (DateTime)row.Cells[dividendPaidColumn.Index].Value!)
             {
                 Value = (decimal)row.Cells[valueColumn.Index].Value!
             });
@@ -328,11 +330,14 @@ internal partial class SecuritiesForm : Form
 
                     foreach (AlphaVantageDividendResponse point in series)
                     {
-                        DateOnly dividendDate = (point.PaymentDate ?? point.ExDividendDate);
+                        DateOnly exDividendDate = point.ExDividendDate;
+                        DateOnly paymentDate = point.PaymentDate ?? point.ExDividendDate;
 
                         dividendDataGridView.Rows.Add(
                             symbol,
-                            new DateTime(dividendDate.Year, dividendDate.Month, dividendDate.Day), point.Amount);
+                            new DateTime(exDividendDate.Year, exDividendDate.Month, exDividendDate.Day),
+                            new DateTime(paymentDate.Year, paymentDate.Month, paymentDate.Day),
+                            point.Amount);
                     }
 
                     form.Progress += Math.Min(series.Count, AssumedSize);

@@ -5,5 +5,6 @@
 SELECT 
     "SecurityId",
     "Timestamp",
+    "Paid",
     "Value"
 FROM "main"."Dividend";
