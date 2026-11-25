@@ -6,10 +6,12 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text.Json.Serialization;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Liber;
 
 public class Security :
+    ICloneable,
     IComparable<Security>,
     IComparable,
     IEquatable<Security>
@@ -24,6 +26,16 @@ public class Security :
         prices = new SortedSet<Price>();
         dividends = new SortedSet<Dividend>();
     }
+
+    public Security(string symbol, IReadOnlyCollection<Trade> trades)
+    {
+        Symbol = symbol;
+        this.trades = new SortedSet<Trade>(trades);
+        prices = new SortedSet<Price>();
+        dividends = new SortedSet<Dividend>();
+    }
+
+    // new Security(entry.Key, entry.Value, security.Prices, security.Dividends);
 
     [JsonConstructor]
     public Security(
@@ -116,6 +128,50 @@ public class Security :
         }
 
         return Symbol;
+    }
+
+    public Security Clone()
+    {
+        int tradeLength = prices.Count;
+        Trade[] clonedTrades = new Trade[tradeLength];
+        int i = 0;
+
+        foreach (Trade trade in trades)
+        {
+            clonedTrades[i] = trade.Clone();
+            i++;
+        }
+
+        int priceLength = prices.Count;
+        Price[] clonedPrices = new Price[priceLength];
+        int j = 0;
+
+        foreach (Price price in prices)
+        {
+            clonedPrices[j] = price.Clone();
+            j++;
+        }
+
+        int dividendLength = dividends.Count;
+        Dividend[] clonedDividend = new Dividend[dividendLength];
+        int k = 0;
+
+        foreach (Dividend dividend in dividends)
+        {
+            clonedDividend[k] = dividend.Clone();
+            k++;
+        }
+
+        return new Security(Guid.Empty, Symbol, clonedTrades, clonedPrices, clonedDividend)
+        {
+            Color = Color,
+            Name = Name
+        };
+    }
+
+    object ICloneable.Clone()
+    {
+        return Clone();
     }
 
     public int CompareTo(object? obj)

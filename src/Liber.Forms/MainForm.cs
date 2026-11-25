@@ -912,18 +912,17 @@ internal partial class MainForm : Form
 
     private async void OnAnonymizeToolStripMenuItemClick(object sender, EventArgs e)
     {
+        if (!TryGetSavePath(FilterIndex.Liber, out string? path))
+        {
+            return;
+        }
+
         Company clone = _company.Clone();
         Anonymizer anonymizer = new Anonymizer(clone);
 
         anonymizer.Anonymize();
 
-        if (TryGetSavePath(FilterIndex.Liber, out string? path))
-        {
-            await ExportAsync(path, clone);
-            SetCompany(clone);
-
-            _path = path;
-        }
+        await ExportAsync(path, clone);
     }
 
     private void AutoRegisterSecuritiesForm(SecuritiesFormTabPage tabPage)

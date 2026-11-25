@@ -56,9 +56,9 @@ internal partial class ImportTradesForm : ImportForm
             }
             else
             {
-                security = new Security();
+                security = new Security(entry.Key, entry.Value);
 
-                Company.AddSecurity(security, entry.Key, entry.Value, security.Prices, security.Dividends);
+                Company.AddSecurity(security);
             }
         }
 

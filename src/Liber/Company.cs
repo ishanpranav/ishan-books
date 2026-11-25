@@ -71,7 +71,6 @@ public class Company : ICloneable
         _transactions = transactions.ToDictionary(x => x.Id);
         _sortedTransactions = new SortedSet<Transaction>(transactions);
         _securities = securities.ToDictionary(x => x.Id);
-
         NextAccountNumber = nextAccountNumber;
         NextTransactionNumber = nextTransactionNumber;
 
@@ -356,7 +355,7 @@ public class Company : ICloneable
             Type = AccountType.Equity
         };
 
-        AddAccount(value, Guid.Empty);
+        AddAccount(value);
 
         EquityAccountId = value.Id;
     }
@@ -370,7 +369,7 @@ public class Company : ICloneable
             CashFlow = CashFlow.OtherEquity
         };
 
-        AddAccount(value, Guid.Empty);
+        AddAccount(value);
 
         OtherEquityAccountId = value.Id;
     }
@@ -431,7 +430,7 @@ public class Company : ICloneable
         return _accounts[id];
     }
 
-    public void AddAccount(Account value, Guid parentId)
+    public void AddAccount(Account value)
     {
         if (value.Id != Guid.Empty)
         {
@@ -444,7 +443,7 @@ public class Company : ICloneable
 
         value.Id = id;
 
-        AddChildReference(value, parentId);
+        AddChildReference(value, value.ParentId);
         _accounts.Add(value.Id, value);
         _sortedAccounts.Add(value);
 
@@ -639,14 +638,14 @@ public class Company : ICloneable
         }
     }
 
-    public void AddTransaction(Transaction value, string? name, IReadOnlyCollection<Line> lines)
+    public void AddTransaction(Transaction value)
     {
         if (value.Id != Guid.Empty)
         {
             throw new InvalidOperationException();
         }
 
-        TrialBalance(lines);
+        TrialBalance(value.Lines);
 
         Guid id = Guid.NewGuid();
 
@@ -654,26 +653,12 @@ public class Company : ICloneable
 
         value.Id = id;
 
-        AddNameReference(value, name);
-        AddLineReferences(value, lines);
-
-        if (value.lines.Count == 0)
-        {
-            foreach (Line line in lines)
-            {
-                if (line.Balance == 0)
-                {
-                    continue;
-                }
-
-                value.lines.Add(line);
-            }
-        }
-
+        AddNameReference(value, value.Name);
+        AddLineReferences(value, value.Lines);
         _transactions.Add(id, value);
         _sortedTransactions.Add(value);
 
-        NextTransactionNumber = Math.Max(value.Number, NextTransactionNumber) + 1;
+        NextTransactionNumber = Math.Max(value.Number + 1, NextTransactionNumber);
 
         TransactionAdded?.Invoke(sender: this, new GuidEventArgs(id));
     }
@@ -712,12 +697,11 @@ public class Company : ICloneable
             }
         }
 
-        NextTransactionNumber = Math.Max(value.Number, NextTransactionNumber);
-
         _sortedTransactions.Remove(value);
 
         value.Number = number;
         value.Posted = posted;
+        NextTransactionNumber = Math.Max(number, NextTransactionNumber);
 
         _sortedTransactions.Add(value);
         TransactionUpdated?.Invoke(sender: this, new GuidEventArgs(id));
@@ -819,12 +803,7 @@ public class Company : ICloneable
         }
     }
 
-    public void AddSecurity(
-        Security value,
-        string symbol,
-        IReadOnlyCollection<Trade> trades,
-        IReadOnlyCollection<Price> prices,
-        IReadOnlyCollection<Dividend> dividends)
+    public void AddSecurity(Security value)
     {
         if (value.Id != Guid.Empty)
         {
@@ -835,55 +814,10 @@ public class Company : ICloneable
 
         value.Id = id;
 
-        AddTradeReferences(value, trades);
-        AddPriceReferences(value, prices);
-        AddDividendReferences(value, dividends);
-
-        if (value.trades.Count == 0)
-        {
-            foreach (Trade trade in trades)
-            {
-                if (trade.Quantity == 0)
-                {
-                    continue;
-                }
-
-                value.trades.Add(trade);
-            }
-        }
-
-        if (value.prices.Count == 0)
-        {
-            foreach (Price price in prices)
-            {
-                if (price.Close == 0)
-                {
-                    continue;
-                }
-
-                value.prices.Add(price);
-            }
-        }
-
-        if (value.dividends.Count == 0)
-        {
-            foreach (Dividend dividend in dividends)
-            {
-                if (dividend.Value == 0)
-                {
-                    continue;
-                }
-
-                value.dividends.Add(dividend);
-            }
-        }
-
+        AddTradeReferences(value, value.Trades);
+        AddPriceReferences(value, value.Prices);
+        AddDividendReferences(value, value.Dividends);
         _securities.Add(value.Id, value);
-        _securitiesBySymbol.Remove(value.Symbol);
-
-        value.Symbol = symbol;
-
-        _securitiesBySymbol.Add(symbol, value);
         SecuritiesChanged?.Invoke(sender: this, new GuidEventArgs(value.Id));
     }
 
@@ -1545,9 +1479,9 @@ public class Company : ICloneable
     public Company Clone()
     {
         return new Company(
-            _accounts.Values,
-            _transactions.Values,
-            _securities.Values,
+            _accounts.Select(x => x.Value.Clone()).ToList(),
+            _transactions.Select(x => x.Value.Clone()).ToList(),
+            _securities.Select(x => x.Value.Clone()).ToList(),
             NextAccountNumber,
             NextTransactionNumber);
     }

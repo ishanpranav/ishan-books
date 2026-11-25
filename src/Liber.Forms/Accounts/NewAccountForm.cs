@@ -38,9 +38,9 @@ internal sealed class NewAccountForm : AccountForm
 
     protected override void CommitChanges()
     {
-        Account account = new Account();
+        Account account = new Account((Guid?)parentComboBox.SelectedValue ?? Guid.Empty);
 
         ApplyChanges(account);
-        Company.AddAccount(account, (Guid?)parentComboBox.SelectedValue ?? Guid.Empty);
+        Company.AddAccount(account);
     }
 }

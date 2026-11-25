@@ -8,6 +8,7 @@ using System.Text.Json.Serialization;
 namespace Liber;
 
 public class Price :
+    ICloneable,
     IComparable<Price>,
     IComparable,
     IEquatable<Price>
@@ -52,6 +53,20 @@ public class Price :
     public override string ToString()
     {
         return $"{Timestamp} {security} {AdjustedClose}";
+    }
+
+    public Price Clone()
+    {
+        return new Price(Timestamp)
+        {
+            Close = Close,
+            AdjustedClose = AdjustedClose,
+        };
+    }
+
+    object ICloneable.Clone()
+    {
+        return Clone();
     }
 
     public int CompareTo(object? obj)

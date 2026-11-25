@@ -74,7 +74,7 @@ internal sealed class ImportAccountsForm : ImportForm
 
         foreach (GnuCashAccount account in _accounts)
         {
-            Company.AddAccount(account.Value, parentId: Guid.Empty);
+            Company.AddAccount(account.Value);
 
             if (_context.EquityAccount == account.Value)
             {

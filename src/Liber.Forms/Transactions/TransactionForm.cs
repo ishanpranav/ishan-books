@@ -182,7 +182,7 @@ internal partial class TransactionForm : Form
 
         if (addingNew)
         {
-            _company.AddTransaction(transaction, name, lines);
+            _company.AddTransaction(transaction);
         }
 
         _company.UpdateTransaction(transaction.Id, numberNumericUpDown.Value, name, postedDateTimePicker.Value, lines);
@@ -236,7 +236,7 @@ internal partial class TransactionForm : Form
 
         Transaction? clone = Value.Clone();
 
-        _company.AddTransaction(clone, clone.Name, clone.Lines);
+        _company.AddTransaction(clone);
         _company.UpdateTransaction(clone.Id, _company.NextTransactionNumber, clone.Name, clone.Posted, clone.Lines);
         InitializeTransaction(clone);
         TransactionHelpers.Post(postedDateTimePicker.Value);

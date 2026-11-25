@@ -48,9 +48,7 @@ internal sealed class ImportTransactionsForm : ImportForm
                     entry.Value.Values)
                 {
                     Memo = entry.Value.Line.TransactionMemo,
-                },
-                entry.Value.Line.TransactionName,
-                entry.Value.Values);
+                });
         }
     }
 }

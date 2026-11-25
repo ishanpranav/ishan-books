@@ -9,6 +9,7 @@ using Humanizer;
 namespace Liber;
 
 public class Trade :
+    ICloneable,
     IComparable<Trade>,
     IComparable,
     IEquatable<Trade>
@@ -141,6 +142,16 @@ public class Trade :
     public override int GetHashCode()
     {
         return HashCode.Combine(security, Posted, Type, Quantity, Cost, Commission);
+    }
+
+    public Trade Clone()
+    {
+        return new Trade(Posted, Type, Cost, Quantity, Commission);
+    }
+
+    object ICloneable.Clone()
+    {
+        return Clone();
     }
 
     public static bool operator ==(Trade? left, Trade? right)

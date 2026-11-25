@@ -26,6 +26,11 @@ public class Account :
 
     public Account() { }
 
+    public Account(Guid parentId)
+    {
+        ParentId = parentId;
+    }
+
     [JsonConstructor]
     public Account(Guid id, Guid parentId, decimal number, string name, AccountType type)
     {

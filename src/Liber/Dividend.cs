@@ -8,6 +8,7 @@ using System.Text.Json.Serialization;
 namespace Liber;
 
 public class Dividend :
+    ICloneable,
     IComparable<Dividend>,
     IComparable,
     IEquatable<Dividend>
@@ -28,6 +29,19 @@ public class Dividend :
     public override string ToString()
     {
         return $"{Timestamp} {security} {Value}";
+    }
+
+    public Dividend Clone()
+    {
+        return new Dividend(Timestamp)
+        {
+            Value = Value
+        };
+    }
+
+    object ICloneable.Clone()
+    {
+        return Clone();
     }
 
     public int CompareTo(object? obj)

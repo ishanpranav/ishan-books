@@ -216,11 +216,11 @@ internal partial class SecuritiesForm : Form
                 securityDividends = new List<Dividend>();
             }
 
-            _company.AddSecurity(new Security
+            _company.AddSecurity(new Security(Guid.Empty, symbol, securityTrades, securityPrices, securityDividends)
             {
                 Name = (string)row.Cells[nameColumn.Index].Value!,
                 Color = (Color)row.Cells[colorColumn.Index].Value!
-            }, symbol, securityTrades, securityPrices, securityDividends);
+            });
         }
     }
 

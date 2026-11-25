@@ -361,7 +361,7 @@ internal partial class TransactionsForm : Form
 
         if (addingNew)
         {
-            _company.AddTransaction(transaction, name, lines);
+            _company.AddTransaction(transaction);
         }
 
         _company.UpdateTransaction(transaction.Id, number, name, posted, lines);
@@ -836,7 +836,7 @@ internal partial class TransactionsForm : Form
 
         Transaction? clone = line.Transaction.Clone();
 
-        _company.AddTransaction(clone, clone.Name, clone.Lines);
+        _company.AddTransaction(clone);
         _company.UpdateTransaction(clone.Id, _company.NextTransactionNumber, clone.Name, clone.Posted, clone.Lines);
         TransactionHelpers.Post(posted);
     }
