@@ -66,7 +66,7 @@ public class ImportRule
                 account.CashFlow = CashFlow;
             }
 
-            if (Color != Color.Empty && Color != context.Color &&
+            if (!Color.IsEmpty && Color != context.Color &&
                 (Strict || account.Color.IsEmpty || account.Color == context.Color))
             {
                 account.Color = Color;

@@ -288,32 +288,36 @@ public class HtmlReport : IntervalView, IReport
         return Colors.TigerFlame;
     }
 
+    private Color GetColorFromHash(Color baseColor, string key)
+    {
+        int offset = 0;
+        int length = key.Length;
+
+        while (offset < length && !char.IsLetter(key[offset]))
+        {
+            offset++;
+            length--;
+        }
+
+        ulong hash = Djb2(key, offset, length) >> 16;
+        bool tint = (hash & 0x1) == 0;
+
+        hash >>= 1;
+
+        double factor = 0.35 + (hash % 100) / 100d * 0.5;
+
+        Color backgroundColor = tint
+            ? baseColor.Tint(factor)
+            : baseColor.Shade(factor);
+
+        return backgroundColor;
+    }
+
     private Color GetColorOrDefault(string name, AccountType type, Color color, decimal debit)
     {
         if (color == Company.Color)
         {
-            int offset = 0;
-            int length = name.Length;
-
-            while (offset < length && !char.IsLetter(name[offset]))
-            {
-                offset++;
-                length--;
-            }
-
-            ulong hash = Djb2(name, offset, length) >> 16;
-            bool tint = (hash & 0x1) == 0;
-
-            hash >>= 1;
-
-            double factor = 0.35 + (hash % 100) / 100d * 0.5;
-
-            Color baseColor = GetBaseColor(type, debit);
-            Color backgroundColor = tint
-                ? baseColor.Tint(factor)
-                : baseColor.Shade(factor);
-
-            return backgroundColor;
+            GetColorFromHash(GetBaseColor(type, debit), name);
         }
 
         return color;
@@ -795,7 +799,7 @@ public class HtmlReport : IntervalView, IReport
 
         foreach (Position position in positions)
         {
-            IReadOnlyCollection<Price> prices = position.Security.GetPricesAfter(opened);
+            SortedSet<Price> prices = position.Security.GetPricesAfter(opened);
             decimal[] timeSeries;
             DateTime[] labels;
             int i = 0;
@@ -813,9 +817,17 @@ public class HtmlReport : IntervalView, IReport
             PositionView item = new PositionView(position, timeSeries, labels)
             {
                 Symbol = position.Security.Symbol,
-                Name = position.Security.Name,
-                Color = position.Security.Color
+                Name = position.Security.Name
             };
+
+            if (position.Security.Color.IsEmpty)
+            {
+                item.Color = GetColorFromHash(Colors.BlueBell, position.Security.Symbol);
+            }
+            else
+            {
+                item.Color = position.Security.Color;
+            }
 
             items.Add(item);
         }
