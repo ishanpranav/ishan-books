@@ -42,6 +42,15 @@ function formatSigned(value) {
     return formatNumber(value);
 }
 
+function escapeHtml(value) {
+    return String(value ?? '')
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;');
+}
+
 function textColorClass(value) {
     if (value == 0) {
         return 'text-secondary';
@@ -177,8 +186,8 @@ function drawTableBody(rows) {
         html += `
             <tr>
                 <td>
-                    <span class='fw-bold text-primary'>${row.symbol}</span>
-                    <span class='d-block small text-body-secondary text-truncate' style='max-width:190px'>${row.name}</span>
+                    <span class='fw-bold text-primary'>${escapeHtml(row.symbol)}</span>
+                    <span class='d-block small text-body-secondary text-truncate' style='max-width:190px'>${escapeHtml(row.name)}</span>
                 </td>
                 <td class="text-end">${formatNumber(row.price)}</td>
                 <td class="text-end">${formatNumber(row.quantity, 4)}</td>
@@ -192,7 +201,7 @@ function drawTableBody(rows) {
                 <td class='text-end ${textColorClass(row.totalReturn)}'>${formatSigned(row.totalReturn)}%</td>
                 <td>
                     <div class="portfolio-dashboard-spark">
-                        <canvas id='spark-${row.symbol}' aria-hidden='true'></canvas>
+                        <canvas id='spark-${escapeHtml(row.symbol)}' aria-hidden='true'></canvas>
                     </div>
                 </td>
             </tr>`;
