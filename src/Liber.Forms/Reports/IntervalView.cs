@@ -77,7 +77,7 @@ public abstract class IntervalView : IStandardValuesProvider
     [LocalizedCategory(nameof(Filter))]
     [LocalizedDescription(nameof(Filter))]
     [LocalizedDisplayName(nameof(Filter))]
-    [TypeConverter(typeof(FilterConverter))]
+    [TypeConverter(typeof(FormattableConverter))]
     public Filter Filter { get; set; } = new ConjunctionFilter();
 
     [LocalizedCategory(nameof(Started))]

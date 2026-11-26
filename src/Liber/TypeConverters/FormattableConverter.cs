@@ -1,4 +1,4 @@
-﻿// FilterConverter.cs
+﻿// FormattableConverter.cs
 // Copyright (c) 2023-2026 Ishan Pranav. All rights reserved.
 // Licensed under the MIT License.
 
@@ -7,7 +7,7 @@ using System.Globalization;
 
 namespace System.ComponentModel;
 
-public class FilterConverter : TypeConverter
+public class FormattableConverter : TypeConverter
 {
     public override bool CanConvertTo(ITypeDescriptorContext? context, [NotNullWhen(true)] Type? destinationType)
     {

@@ -9,7 +9,7 @@ using CsvHelper.Configuration;
 
 namespace CsvHelper.TypeConversion;
 
-internal sealed class ColorConverter : DefaultTypeConverter
+public class ColorConverter : DefaultTypeConverter
 {
     public override object? ConvertFromString(string? text, IReaderRow row, MemberMapData memberMapData)
     {

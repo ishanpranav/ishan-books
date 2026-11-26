@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Liber.Csv\Liber.Csv.csproj" />
     <ProjectReference Include="..\Liber\Liber.csproj" />
   </ItemGroup>
 

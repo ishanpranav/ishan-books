@@ -27,7 +27,7 @@ public static class CsvSerializer
     {
         await using StreamWriter streamWriter = new StreamWriter(output);
         await using CsvWriter csvWriter = new CsvWriter(streamWriter, CultureInfo.InvariantCulture);
-
+        
         await csvWriter.WriteRecordsAsync(items);
     }
 

@@ -13,7 +13,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="CsvHelper" Version="33.1.0" />
 	  <PackageReference Include="Humanizer.Core" Version="3.0.10" />
 	  <PackageReference Include="Humanizer.Core.es" Version="3.0.10" />
 	</ItemGroup>

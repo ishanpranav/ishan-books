@@ -20,7 +20,7 @@ internal partial class FilterDialog : Form
     }
 
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    [TypeConverter(typeof(FilterConverter))]
+    [TypeConverter(typeof(FormattableConverter))]
     public Filter Value
     {
         get
