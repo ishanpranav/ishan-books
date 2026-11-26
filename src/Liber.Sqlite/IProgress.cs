@@ -6,7 +6,5 @@ namespace Liber.Sqlite;
 
 public interface IProgress
 {
-    void WriteAccount();
-    void WriteTransaction();
-    void WriteSecurity();
+    void Tick();
 }

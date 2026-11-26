@@ -11,7 +11,6 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Liber.BasisMethods;
 
 namespace Liber.Forms.Reports.Html;
 
@@ -766,68 +765,6 @@ public class HtmlReport : IntervalView, IReport
         AddSankeyLink(data, FormattedStrings.NetFinancing, FormattedStrings.NetCashFlow, netFinancing, Colors.JungleTeal, Colors.JungleTeal);
 
         return JsonSerializer.Serialize(data, SerializationOptions.HtmlJson);
-    }
-
-    public string GetPositions()
-    {
-        List<Position> positions = new List<Position>();
-        List<PositionView> items = new List<PositionView>();
-        DateTime today = DateTime.Today;
-        DateTime opened = today;
-
-        foreach (Security security in Company.Securities)
-        {
-            Position? position = security.GetPosition(today, new FifoBasisMethod());
-
-            if (position == null)
-            {
-                continue;
-            }
-
-            positions.Add(position);
-
-            if (position.Opened < opened)
-            {
-                opened = position.Opened;
-            }
-        }
-
-        foreach (Position position in positions)
-        {
-            SortedSet<Price> prices = position.Security.GetPricesAfter(opened);
-            decimal[] timeSeries;
-            DateTime[] labels;
-            int i = 0;
-
-            timeSeries = new decimal[prices.Count];
-            labels = new DateTime[prices.Count];
-
-            foreach (Price price in prices)
-            {
-                timeSeries[i] = price.AdjustedClose ?? price.Close;
-                labels[i] = price.Timestamp;
-                i++;
-            }
-
-            PositionView item = new PositionView(position, timeSeries, labels)
-            {
-                Symbol = position.Security.Symbol,
-                Name = position.Security.Name
-            };
-
-            if (position.Security.Color.IsEmpty)
-            {
-                item.Color = GetColorFromHash(Colors.BlueBell, position.Security.Symbol);
-            }
-            else
-            {
-                item.Color = position.Security.Color;
-            }
-
-            items.Add(item);
-        }
-
-        return JsonSerializer.Serialize(items, SerializationOptions.HtmlJson);
     }
 
     IReportView IReport.CreateView(Company company)

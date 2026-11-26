@@ -11,9 +11,10 @@ namespace Liber.Forms.Transactions;
 
 internal sealed class ImportTransactionsForm : ImportForm
 {
+    private readonly Company _company;
     private readonly Dictionary<Guid, (GnuCashLine, List<Line>)> _lookup = new Dictionary<Guid, (GnuCashLine, List<Line>)>();
 
-    public ImportTransactionsForm(Company company, IReadOnlyCollection<GnuCashLine> lines) : base(company)
+    public ImportTransactionsForm(Company company, IReadOnlyCollection<GnuCashLine> lines)
     {
         Dictionary<string, Guid> accounts = company.Accounts.ToDictionary(x => x.Name, x => x.Id);
 
@@ -33,13 +34,15 @@ internal sealed class ImportTransactionsForm : ImportForm
         }
 
         SetDataSource(lines.ToList());
+
+        _company = company;
     }
 
     protected override void CommitChanges()
     {
         foreach (KeyValuePair<Guid, (GnuCashLine Line, List<Line> Values)> entry in _lookup)
         {
-            Company.AddTransaction(
+            _company.AddTransaction(
                 new Transaction(
                     Guid.Empty,
                     entry.Value.Line.TransactionNumber,

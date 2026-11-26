@@ -3,7 +3,7 @@
 // Licensed under the MIT License.
 
 using System.Drawing;
-using Liber.Forms;
+using Liber;
 using Liber.Forms.Controls;
 
 namespace System.Windows.Forms;

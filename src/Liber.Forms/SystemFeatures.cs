@@ -162,21 +162,22 @@ internal static class SystemFeatures
         }
     }
 
-
     public static IReadOnlyList<string> GetArguments()
     {
         List<string> results = new List<string>();
-        int index = 1;
+        int i = 1;
         string? result;
 
         do
         {
-            result = Environment.GetEnvironmentVariable($"CLICKONCE_ACTIVATIONDATA_{index}");
+            result = Environment.GetEnvironmentVariable($"CLICKONCE_ACTIVATIONDATA_{i}");
 
             if (result != null)
             {
                 results.Add(result);
             }
+
+            i++;
         }
         while (result != null);
 

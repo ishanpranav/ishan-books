@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Windows.Forms;
-using Liber.Properties;
 
 namespace Liber.Forms.Lines;
 
@@ -28,9 +27,9 @@ internal class LineListView : ListViewEx
         FullRowSelect = true;
 
         Columns.Add(Properties.Resources.Posted);
-        Columns.Add(Resources.Number);
-        Columns.Add(Resources.Name);
-        Columns.Add(Resources.DebitCredit);
+        Columns.Add(CompanyResources.Number);
+        Columns.Add(CompanyResources.Name);
+        Columns.Add(CompanyResources.DebitCredit);
     }
 
     public void Initialize(IEnumerable<Line> lines, AccountType representativeType, Func<Line, (string, string)>? grouping)

@@ -15,6 +15,7 @@ namespace Liber.Forms.Accounts;
 
 internal sealed class ImportAccountsForm : ImportForm
 {
+    private readonly Company _company;
     private readonly FormFactory _factory;
     private readonly ReportEngine _engine;
     private readonly IReadOnlyCollection<GnuCashAccount> _accounts;
@@ -26,8 +27,9 @@ internal sealed class ImportAccountsForm : ImportForm
         FormFactory factory,
         ReportEngine engine,
         IReadOnlyCollection<GnuCashAccount> accounts,
-        RecentPathManager recentPathManager) : base(company)
+        RecentPathManager recentPathManager)
     {
+        _company = company;
         _factory = factory;
         _accounts = accounts;
         _recentPathManager = recentPathManager;
@@ -52,7 +54,7 @@ internal sealed class ImportAccountsForm : ImportForm
 
     private Guid GetParentId(Guid id, string value)
     {
-        foreach (Account account in Company.Accounts)
+        foreach (Account account in _company.Accounts)
         {
             if (account.Id == id)
             {
@@ -74,16 +76,16 @@ internal sealed class ImportAccountsForm : ImportForm
 
         foreach (GnuCashAccount account in _accounts)
         {
-            Company.AddAccount(account.Value);
+            _company.AddAccount(account.Value);
 
             if (_context.EquityAccount == account.Value)
             {
-                Company.EquityAccountId = account.Value.Id;
+                _company.EquityAccountId = account.Value.Id;
             }
 
             if (_context.OtherEquityAccount == account.Value)
             {
-                Company.OtherEquityAccountId = account.Value.Id;
+                _company.OtherEquityAccountId = account.Value.Id;
             }
         }
 
@@ -103,9 +105,9 @@ internal sealed class ImportAccountsForm : ImportForm
                 continue;
             }
 
-            Company.UpdateAccount(account.Value.Id, parentId, account.Value.Number, account.Value.Name, account.Value.Type);
+            _company.UpdateAccount(account.Value.Id, parentId, account.Value.Number, account.Value.Name, account.Value.Type);
         }
 
-        _factory.Register(typeof(AccountsForm).GUID, new AccountsForm(Company, _factory, _engine));
+        _factory.Register(typeof(AccountsForm).GUID, new AccountsForm(_company, _factory, _engine));
     }
 }

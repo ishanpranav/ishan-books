@@ -10,12 +10,13 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
-using System.Windows.Controls.Primitives;
 using System.Windows.Forms;
 using Liber.AlphaVantage;
+using Liber.CompanyWriters;
 using Liber.Forms.Accounts;
 using Liber.Forms.AccountViews;
 using Liber.Forms.Companies;
+using Liber.Forms.CompanyWriters;
 using Liber.Forms.Filters;
 using Liber.Forms.Forms;
 using Liber.Forms.Help;
@@ -30,7 +31,6 @@ using Liber.Forms.TaskItems;
 using Liber.Forms.Transactions;
 using Liber.Forms.Writers;
 using Liber.Sqlite;
-using Liber.Writers;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 
@@ -46,6 +46,7 @@ internal partial class MainForm : Form
     private string? _path;
     private ReportEngine _engine;
     private Company _company;
+    private Portfolio _portfolio;
     private AlphaVantageClient? _client;
 
     public event EventHandler? Loaded;
@@ -56,6 +57,7 @@ internal partial class MainForm : Form
         SystemFeatures.Initialize(this);
         SetCompany(new Company());
 
+        _portfolio = new Portfolio();
         Text = SystemFeatures.ApplicationName;
         _factory.Parent = this;
     }
@@ -95,11 +97,11 @@ internal partial class MainForm : Form
     private async void OnLoad(object sender, EventArgs e)
     {
         aboutToolStripMenuItem.Text = string.Format(aboutToolStripMenuItem.Text ?? "{0}", SystemFeatures.ApplicationName);
-        exportCompanyJsonToolStripMenuItem.Tag = new Writer(FilterIndex.Json, _jsonWriter);
-        exportCompanyXmlToolStripMenuItem.Tag = new Writer(FilterIndex.Xml, _xmlWriter);
-        exportAccountsToolStripMenuItem.Tag = new Writer(FilterIndex.Csv, new GnuCashAccountWriter());
-        exportTransactionsToolStripMenuItem.Tag = new Writer(FilterIndex.Csv, new GnuCashTransactionWriter());
-        exportAccountsIifToolStripMenuItem.Tag = new Writer(FilterIndex.Iif, new IifAccountWriter());
+        exportCompanyJsonToolStripMenuItem.Tag = new CompanyWriter(FilterIndex.Json, _jsonWriter);
+        exportCompanyXmlToolStripMenuItem.Tag = new CompanyWriter(FilterIndex.Xml, _xmlWriter);
+        exportAccountsToolStripMenuItem.Tag = new CompanyWriter(FilterIndex.Csv, new GnuCashAccountWriter());
+        exportTransactionsToolStripMenuItem.Tag = new CompanyWriter(FilterIndex.Csv, new GnuCashTransactionWriter());
+        exportAccountsIifToolStripMenuItem.Tag = new CompanyWriter(FilterIndex.Iif, new IifAccountWriter());
 
         InitializeRecentPaths();
         InitializeReportEngine();
@@ -476,9 +478,9 @@ internal partial class MainForm : Form
 
     private async Task ImportSqliteCompanyAsync(string path)
     {
-        if (await SqliteSerializer.CheckPasswordAsync(path, string.Empty))
+        if (await SqliteUtilities.CheckPasswordAsync(path, string.Empty))
         {
-            SetCompany(await SqliteSerializer.DeserializeAsync(path, string.Empty));
+            SetCompany(await SqliteCompanySerializer.DeserializeAsync(path, string.Empty));
 
             return;
         }
@@ -497,7 +499,7 @@ internal partial class MainForm : Form
 
             password = form.Password;
 
-            if (await SqliteSerializer.CheckPasswordAsync(path, password))
+            if (await SqliteUtilities.CheckPasswordAsync(path, password))
             {
                 break;
             }
@@ -516,7 +518,7 @@ internal partial class MainForm : Form
         }
         while (result == DialogResult.Retry);
 
-        SetCompany(await SqliteSerializer.DeserializeAsync(path, password));
+        SetCompany(await SqliteCompanySerializer.DeserializeAsync(path, password));
     }
 
     private async Task ImportGnuCashSqliteCompanyAsync(string path)
@@ -560,7 +562,7 @@ internal partial class MainForm : Form
         await SaveAsAsync();
     }
 
-    private async Task ExportCompanyAsync(string path, Company company, IWriter writer)
+    private async Task ExportCompanyAsync(string path, Company company, ICompanyWriter writer)
     {
         await using FileStream output = File.Create(path);
 
@@ -571,7 +573,7 @@ internal partial class MainForm : Form
 
     private async Task ExportSqliteCompanyAsync(string path, Company company, IProgress progress)
     {
-        await SqliteSerializer.SerializeAsync(path, company, progress);
+        await SqliteCompanySerializer.SerializeAsync(path, company, progress);
 
         _path = path;
     }
@@ -819,13 +821,13 @@ internal partial class MainForm : Form
 
             IReadOnlyCollection<YahooFinanceTrade> trades = await CsvSerializer.DeserializeAsync<YahooFinanceTrade>(input);
 
-            _factory.Register(Guid.NewGuid(), new ImportTradesForm(_company, _factory, trades, GetAlphaVantageClient()));
+            _factory.Register(Guid.NewGuid(), new ImportTradesForm(_portfolio, _factory, trades, GetAlphaVantageClient()));
         });
     }
 
     private async void OnExportToolStripMenuItemClick(object sender, EventArgs e)
     {
-        Writer writer = (Writer)((ToolStripMenuItem)sender).Tag!;
+        CompanyWriter writer = (CompanyWriter)((ToolStripMenuItem)sender).Tag!;
 
         if (!TryGetSavePath(writer.Index, out string? path))
         {
@@ -939,7 +941,7 @@ internal partial class MainForm : Form
             return;
         }
 
-        _factory.Register(key, new SecuritiesForm(_company, GetAlphaVantageClient())
+        _factory.Register(key, new SecuritiesForm(_portfolio, GetAlphaVantageClient())
         {
             TabPage = tabPage
         });

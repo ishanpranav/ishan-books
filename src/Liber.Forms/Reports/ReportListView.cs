@@ -29,7 +29,7 @@ internal class ReportListView : ListViewEx
         LargeImageList = ReportImageListManager.ImageList;
         SmallImageList = ReportImageListManager.ImageList;
 
-        Columns.Add(Liber.Properties.Resources.Name);
+        Columns.Add(CompanyResources.Name);
     }
 
     public void Initialize(ReportEngine engine)

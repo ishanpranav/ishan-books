@@ -1,0 +1,90 @@
+﻿// TransactionNumberFilter.cs
+// Copyright (c) 2023-2026 Ishan Pranav. All rights reserved.
+// Licensed under the MIT License.
+
+using System.ComponentModel;
+using System.Text.Json.Serialization;
+
+namespace Liber.Filters;
+
+public class TransactionNumberFilter : Filter
+{
+    private decimal _from;
+    private decimal _to;
+
+    [Browsable(false)]
+    [JsonIgnore]
+    public override string Name
+    {
+        get
+        {
+            if (_from == 0 && _to == 0)
+            {
+                return CompanyResources.Number;
+            }
+
+            if (_from == _to)
+            {
+                return $"{CompanyResources.Number} = {_from}";
+            }
+
+            return $"{_from} ≤ {CompanyResources.Number} ≤ {_to}";
+        }
+    }
+
+    [LocalizedCategory(nameof(From))]
+    [LocalizedDescription(nameof(From))]
+    [LocalizedDisplayName(nameof(From))]
+    public decimal From
+    {
+        get
+        {
+            return _from;
+        }
+        set
+        {
+            if (value > _to)
+            {
+                _to = value;
+            }
+
+            _from = value;
+        }
+    }
+
+    [LocalizedCategory(nameof(To))]
+    [LocalizedDescription(nameof(To))]
+    [LocalizedDisplayName(nameof(To))]
+    public decimal To
+    {
+        get
+        {
+            return _to;
+        }
+        set
+        {
+            if (value < _from)
+            {
+                _from = value;
+            }
+
+            _to = value;
+        }
+    }
+
+    public override bool IsMatch(Line value)
+    {
+        decimal number = value.Transaction.Number;
+
+        return number >= _from && number <= _to;
+    }
+
+    public override Filter Clone()
+    {
+        return new TransactionNumberFilter()
+        {
+            From = _from,
+            To = _to
+        };
+    }
+}

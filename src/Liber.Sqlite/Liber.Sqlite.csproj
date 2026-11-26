@@ -11,7 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Liber\Liber.csproj" />
+    <ProjectReference Include="..\Liber.Company\Liber.Company.csproj" />
+    <ProjectReference Include="..\Liber.Portfolio\Liber.Portfolio.csproj" />
   </ItemGroup>
 
   <ItemGroup>

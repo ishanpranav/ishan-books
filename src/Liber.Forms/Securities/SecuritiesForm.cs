@@ -19,10 +19,10 @@ internal partial class SecuritiesForm : Form
 {
     private const int AssumedSize = 100;
 
-    private readonly Company _company;
+    private readonly Portfolio _portfolio;
     private readonly AlphaVantageClient _client;
 
-    public SecuritiesForm(Company company, AlphaVantageClient client)
+    public SecuritiesForm(Portfolio portfolio, AlphaVantageClient client)
     {
         InitializeComponent();
         SystemFeatures.Initialize(this);
@@ -42,7 +42,7 @@ internal partial class SecuritiesForm : Form
         adjustedCloseColumn.DefaultCellStyle.Format = DecimalExtensions.Format;
         valueColumn.DefaultCellStyle.Format = DecimalExtensions.Format;
 
-        _company = company;
+        _portfolio = portfolio;
         _client = client;
 
         // TODO: custom data grid view columns for enums: replace enum columns with drop downs
@@ -63,7 +63,7 @@ internal partial class SecuritiesForm : Form
 
     private void OnLoad(object sender, EventArgs e)
     {
-        foreach (Security security in _company.Securities)
+        foreach (Security security in _portfolio.Securities)
         {
             securityDataGridView.Rows.Add(
                 security.Symbol,
@@ -192,7 +192,7 @@ internal partial class SecuritiesForm : Form
             });
         }
 
-        _company.ClearSecurities();
+        _portfolio.ClearSecurities();
 
         foreach (DataGridViewRow row in securityDataGridView.Rows)
         {
@@ -218,7 +218,7 @@ internal partial class SecuritiesForm : Form
                 securityDividends = new List<Dividend>();
             }
 
-            _company.AddSecurity(new Security(Guid.Empty, symbol, securityTrades, securityPrices, securityDividends)
+            _portfolio.AddSecurity(new Security(Guid.Empty, symbol, securityTrades, securityPrices, securityDividends)
             {
                 Name = (string)row.Cells[nameColumn.Index].Value!,
                 Color = (Color)row.Cells[colorColumn.Index].Value!

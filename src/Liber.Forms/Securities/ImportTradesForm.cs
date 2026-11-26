@@ -13,15 +13,16 @@ namespace Liber.Forms.Securities;
 
 internal partial class ImportTradesForm : ImportForm
 {
+    private readonly Portfolio _portfolio;
     private readonly FormFactory _factory;
     private readonly Dictionary<string, List<Trade>> _trades = new Dictionary<string, List<Trade>>(StringComparer.InvariantCultureIgnoreCase);
     private readonly AlphaVantageClient _client;
-
+    
     public ImportTradesForm(
-        Company company,
+        Portfolio portfolio,
         FormFactory factory,
         IReadOnlyCollection<YahooFinanceTrade> trades,
-        AlphaVantageClient client) : base(company)
+        AlphaVantageClient client)
     {
         foreach (YahooFinanceTrade trade in trades)
         {
@@ -40,6 +41,7 @@ internal partial class ImportTradesForm : ImportForm
         }
 
         SetDataSource(trades.ToList());
+        _portfolio = portfolio;
         _factory = factory;
         _client = client;
     }
@@ -50,19 +52,19 @@ internal partial class ImportTradesForm : ImportForm
         
         foreach (KeyValuePair<string, List<Trade>> entry in _trades)
         {
-            if (Company.TryGetSecurity(entry.Key, out Security? security))
+            if (_portfolio.TryGetSecurity(entry.Key, out Security? security))
             {
-                Company.UpdateSecurity(security, entry.Key, entry.Value, security.Prices, security.Dividends);
+                _portfolio.UpdateSecurity(security, entry.Key, entry.Value, security.Prices, security.Dividends);
             }
             else
             {
                 security = new Security(entry.Key, entry.Value);
 
-                Company.AddSecurity(security);
+                _portfolio.AddSecurity(security);
             }
         }
 
-        _factory.Register(typeof(SecuritiesForm).GUID, new SecuritiesForm(Company, _client)
+        _factory.Register(typeof(SecuritiesForm).GUID, new SecuritiesForm(_portfolio, _client)
         {
             TabPage = SecuritiesFormTabPage.Trades
         });
