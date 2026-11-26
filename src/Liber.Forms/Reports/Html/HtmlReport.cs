@@ -19,11 +19,6 @@ namespace Liber.Forms.Reports.Html;
 [ComVisible(true)]
 public class HtmlReport : IntervalView, IReport
 {
-    private static readonly JsonSerializerOptions s_options = new JsonSerializerOptions(SerializationOptions.Json)
-    {
-        DefaultIgnoreCondition = JsonIgnoreCondition.Never
-    };
-
     public HtmlReport(string path, Company company) : base(path, company) { }
 
     [LocalizedCategory(nameof(Periodicity))]
@@ -240,7 +235,7 @@ public class HtmlReport : IntervalView, IReport
             }
         }
 
-        return JsonSerializer.Serialize(new ChartJSChartData(labels, datasets), s_options);
+        return JsonSerializer.Serialize(new ChartJSChartData(labels, datasets), SerializationOptions.HtmlJson);
     }
 
     // https://github.com/ishanpranav/codebook/blob/master/lib/hashes/djb2_hash.c
@@ -349,7 +344,7 @@ public class HtmlReport : IntervalView, IReport
         return JsonSerializer.Serialize(new ChartJSChartData(labels, new ChartJSChartDataset[]
         {
             dataset
-        }), s_options);
+        }), SerializationOptions.HtmlJson);
     }
 
     public string GetAccountMap()
@@ -380,7 +375,7 @@ public class HtmlReport : IntervalView, IReport
             });
         }
 
-        return JsonSerializer.Serialize(nodes, s_options);
+        return JsonSerializer.Serialize(nodes, SerializationOptions.HtmlJson);
     }
 
     private static Color GetHeatColor(double value, double min, double max, AccountType type)
@@ -480,7 +475,7 @@ public class HtmlReport : IntervalView, IReport
             nodes.Add(new ChartJSChartDatasetTree(FormattedStrings.GetString(type.ToString())));
         }
 
-        return JsonSerializer.Serialize(nodes, s_options);
+        return JsonSerializer.Serialize(nodes, SerializationOptions.HtmlJson);
     }
 
     private static void AddSankeyLink(
@@ -770,7 +765,7 @@ public class HtmlReport : IntervalView, IReport
         AddSankeyLink(data, FormattedStrings.Financing, FormattedStrings.NetFinancing, netFinancing, Colors.JungleTeal, Colors.JungleTeal);
         AddSankeyLink(data, FormattedStrings.NetFinancing, FormattedStrings.NetCashFlow, netFinancing, Colors.JungleTeal, Colors.JungleTeal);
 
-        return JsonSerializer.Serialize(data, s_options);
+        return JsonSerializer.Serialize(data, SerializationOptions.HtmlJson);
     }
 
     public string GetPositions()
@@ -832,7 +827,7 @@ public class HtmlReport : IntervalView, IReport
             items.Add(item);
         }
 
-        return JsonSerializer.Serialize(items, s_options);
+        return JsonSerializer.Serialize(items, SerializationOptions.HtmlJson);
     }
 
     IReportView IReport.CreateView(Company company)

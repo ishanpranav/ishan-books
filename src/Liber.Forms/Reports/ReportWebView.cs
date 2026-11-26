@@ -20,6 +20,8 @@ namespace Liber.Forms.Reports;
 
 internal class ReportWebView : WebView2
 {
+    private const string VirtualHost = "liber.example";
+
     private bool _printing;
     private BackgroundWorker? _backgroundWorker = new BackgroundWorker()
     {
@@ -44,7 +46,7 @@ internal class ReportWebView : WebView2
             await EnsureCoreWebView2Async();
 
             CoreWebView2.SetVirtualHostNameToFolderMapping(
-                "liber.example",
+                VirtualHost,
                 Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)!,
                 CoreWebView2HostResourceAccessKind.DenyCors);
 
@@ -54,6 +56,7 @@ internal class ReportWebView : WebView2
             }
 
             CoreWebView2.Profile.PreferredColorScheme = CoreWebView2PreferredColorScheme.Light;
+            CoreWebView2.NavigationStarting += OnCoreWebView2NavigationStarting;
             CoreWebView2.NavigationCompleted += OnCoreWebView2NavigationCompleted;
 
             PrintSettings = CoreWebView2.Environment.CreatePrintSettings();
@@ -97,6 +100,21 @@ internal class ReportWebView : WebView2
         if (CoreWebView2 != null)
         {
             _view.Navigate(this);
+        }
+    }
+
+    private void OnCoreWebView2NavigationStarting(object? sender, CoreWebView2NavigationStartingEventArgs e)
+    {
+        if (!Uri.TryCreate(e.Uri, UriKind.Absolute, out Uri? uri))
+        {
+            e.Cancel = true;
+
+            return;
+        }
+
+        if (uri.Host != "localhost" && uri.Host != VirtualHost && !uri.IsFile)
+        {
+            e.Cancel = true;
         }
     }
 
