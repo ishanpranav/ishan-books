@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -56,14 +57,21 @@ internal class ReportWebView : WebView2
             }
 
             CoreWebView2.Profile.PreferredColorScheme = CoreWebView2PreferredColorScheme.Light;
+            //CoreWebView2.Settings.AreBrowserAcceleratorKeysEnabled = false;
+
+#if !DEBUG
+            CoreWebView2.Settings.AreDevToolsEnabled = false;
+#endif
+
             CoreWebView2.NavigationStarting += OnCoreWebView2NavigationStarting;
             CoreWebView2.NavigationCompleted += OnCoreWebView2NavigationCompleted;
-
             PrintSettings = CoreWebView2.Environment.CreatePrintSettings();
-
             PrintSettings.ShouldPrintBackgrounds = true;
+           // PrintSettings.ShouldPrintHeaderAndFooter = false;
         }
-        catch (COMException) { }
+        catch (COMException exception) {
+            Debug.WriteLine(exception.Message);
+        }
     }
 
     public void GenerateReport(IReportView view, Action? callback = null)
@@ -112,8 +120,8 @@ internal class ReportWebView : WebView2
             return;
         }
 
-        if (uri.Host != "localhost" && uri.Host != VirtualHost && !uri.IsFile)
-        {
+        if (uri.Host != "localhost" && uri.Host != VirtualHost && !uri.IsFile && uri.Scheme != "data")
+        { 
             e.Cancel = true;
         }
     }

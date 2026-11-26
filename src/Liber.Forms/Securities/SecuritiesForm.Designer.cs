@@ -32,27 +32,26 @@ partial class SecuritiesForm
     /// </summary>
     private void InitializeComponent()
     {
-        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SecuritiesForm));
         securityDataGridView = new System.Windows.Forms.DataGridViewEx();
         securitySymbolColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
         nameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
         colorColumn = new System.Windows.Forms.DataGridViewColorColumn();
-        saveButton = new System.Windows.Forms.Button();
-        closeButton = new System.Windows.Forms.Button();
         priceRefreshButton = new System.Windows.Forms.Button();
         _tabControl = new System.Windows.Forms.TabControl();
         securityTabPage = new System.Windows.Forms.TabPage();
@@ -72,11 +71,46 @@ partial class SecuritiesForm
         adjustedCloseColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
         dividendTabPage = new System.Windows.Forms.TabPage();
         dividendDataGridView = new System.Windows.Forms.DataGridViewEx();
-        dividendRefreshButton = new System.Windows.Forms.Button();
         dividendSymbolColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
         dividendTimestampColumn = new System.Windows.Forms.CalendarColumn();
         dividendPaidColumn = new System.Windows.Forms.CalendarColumn();
         valueColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        dividendRefreshButton = new System.Windows.Forms.Button();
+        statusStrip1 = new System.Windows.Forms.StatusStrip();
+        toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
+        newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
+        saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+        printToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+        addToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+        toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+        editToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+        renameToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+        removeToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+        duplicateToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+        toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+        toolStrip1 = new System.Windows.Forms.ToolStrip();
+        newToolStripButton = new System.Windows.Forms.ToolStripButton();
+        openToolStripButton = new System.Windows.Forms.ToolStripButton();
+        saveToolStripButton = new System.Windows.Forms.ToolStripButton();
+        saveAsToolStripButton = new System.Windows.Forms.ToolStripButton();
+        toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+        printToolStripButton = new System.Windows.Forms.ToolStripButton();
+        addToolStripButton = new System.Windows.Forms.ToolStripButton();
+        toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+        toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+        toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+        toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+        toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+        toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+        toolStripButton6 = new System.Windows.Forms.ToolStripButton();
+        toolStripButton7 = new System.Windows.Forms.ToolStripButton();
+        refreshPricesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+        refreshDividendsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         ((System.ComponentModel.ISupportInitialize)securityDataGridView).BeginInit();
         _tabControl.SuspendLayout();
         securityTabPage.SuspendLayout();
@@ -86,40 +120,42 @@ partial class SecuritiesForm
         ((System.ComponentModel.ISupportInitialize)priceDataGridView).BeginInit();
         dividendTabPage.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)dividendDataGridView).BeginInit();
+        statusStrip1.SuspendLayout();
+        toolStrip1.SuspendLayout();
         SuspendLayout();
         // 
         // securityDataGridView
         // 
         securityDataGridView.AllowUserToOrderColumns = true;
-        dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(242, 242, 242);
-        dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
-        dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-        securityDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+        dataGridViewCellStyle16.BackColor = System.Drawing.Color.FromArgb(242, 242, 242);
+        dataGridViewCellStyle16.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
+        dataGridViewCellStyle16.SelectionForeColor = System.Drawing.Color.Black;
+        securityDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle16;
         securityDataGridView.BackgroundColor = System.Drawing.Color.FromArgb(248, 249, 250);
-        dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-        dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-        dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-        dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-        dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-        dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-        securityDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+        dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Control;
+        dataGridViewCellStyle17.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+        dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.WindowText;
+        dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+        dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+        dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+        securityDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
         securityDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
         securityDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { securitySymbolColumn, nameColumn, colorColumn });
-        dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-        dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F);
-        dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-        dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
-        dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-        dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-        securityDataGridView.DefaultCellStyle = dataGridViewCellStyle3;
+        dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window;
+        dataGridViewCellStyle18.Font = new System.Drawing.Font("Segoe UI", 9F);
+        dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.ControlText;
+        dataGridViewCellStyle18.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
+        dataGridViewCellStyle18.SelectionForeColor = System.Drawing.Color.Black;
+        dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+        securityDataGridView.DefaultCellStyle = dataGridViewCellStyle18;
         securityDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
         securityDataGridView.GridColor = System.Drawing.Color.FromArgb(33, 37, 41);
         securityDataGridView.Location = new System.Drawing.Point(3, 3);
         securityDataGridView.Name = "securityDataGridView";
         securityDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-        securityDataGridView.Size = new System.Drawing.Size(567, 288);
+        securityDataGridView.Size = new System.Drawing.Size(567, 259);
         securityDataGridView.TabIndex = 0;
         securityDataGridView.DataError += OnDataGridViewDataError;
         // 
@@ -139,32 +175,10 @@ partial class SecuritiesForm
         colorColumn.Name = "colorColumn";
         colorColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
         // 
-        // saveButton
-        // 
-        saveButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-        saveButton.Location = new System.Drawing.Point(437, 340);
-        saveButton.Name = "saveButton";
-        saveButton.Size = new System.Drawing.Size(75, 23);
-        saveButton.TabIndex = 1;
-        saveButton.Text = "&Save";
-        saveButton.UseVisualStyleBackColor = true;
-        saveButton.Click += OnSaveButtonClick;
-        // 
-        // closeButton
-        // 
-        closeButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-        closeButton.Location = new System.Drawing.Point(518, 340);
-        closeButton.Name = "closeButton";
-        closeButton.Size = new System.Drawing.Size(75, 23);
-        closeButton.TabIndex = 2;
-        closeButton.Text = "&Close";
-        closeButton.UseVisualStyleBackColor = true;
-        closeButton.Click += OnCloseButtonClick;
-        // 
         // priceRefreshButton
         // 
         priceRefreshButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
-        priceRefreshButton.Location = new System.Drawing.Point(16, 340);
+        priceRefreshButton.Location = new System.Drawing.Point(16, 323);
         priceRefreshButton.Name = "priceRefreshButton";
         priceRefreshButton.Size = new System.Drawing.Size(122, 23);
         priceRefreshButton.TabIndex = 4;
@@ -179,10 +193,10 @@ partial class SecuritiesForm
         _tabControl.Controls.Add(tradeTabPage);
         _tabControl.Controls.Add(priceTabPage);
         _tabControl.Controls.Add(dividendTabPage);
-        _tabControl.Location = new System.Drawing.Point(12, 12);
+        _tabControl.Location = new System.Drawing.Point(12, 28);
         _tabControl.Name = "_tabControl";
         _tabControl.SelectedIndex = 0;
-        _tabControl.Size = new System.Drawing.Size(581, 322);
+        _tabControl.Size = new System.Drawing.Size(581, 293);
         _tabControl.TabIndex = 5;
         // 
         // securityTabPage
@@ -191,7 +205,7 @@ partial class SecuritiesForm
         securityTabPage.Location = new System.Drawing.Point(4, 24);
         securityTabPage.Name = "securityTabPage";
         securityTabPage.Padding = new System.Windows.Forms.Padding(3);
-        securityTabPage.Size = new System.Drawing.Size(573, 294);
+        securityTabPage.Size = new System.Drawing.Size(573, 265);
         securityTabPage.TabIndex = 0;
         securityTabPage.Text = "Securities";
         securityTabPage.UseVisualStyleBackColor = true;
@@ -210,29 +224,29 @@ partial class SecuritiesForm
         // tradeDataGridView
         // 
         tradeDataGridView.AllowUserToOrderColumns = true;
-        dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(242, 242, 242);
-        dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
-        dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
-        tradeDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+        dataGridViewCellStyle19.BackColor = System.Drawing.Color.FromArgb(242, 242, 242);
+        dataGridViewCellStyle19.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
+        dataGridViewCellStyle19.SelectionForeColor = System.Drawing.Color.Black;
+        tradeDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle19;
         tradeDataGridView.BackgroundColor = System.Drawing.Color.FromArgb(248, 249, 250);
-        dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-        dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-        dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-        dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-        dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-        dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-        tradeDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+        dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Control;
+        dataGridViewCellStyle20.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+        dataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.WindowText;
+        dataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+        dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+        dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+        tradeDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle20;
         tradeDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
         tradeDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { tradeSymbolColumn, postedColumn, typeColumn, costColumn, quantityColumn, commissionColumn });
-        dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
-        dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI", 9F);
-        dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
-        dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
-        dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black;
-        dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-        tradeDataGridView.DefaultCellStyle = dataGridViewCellStyle9;
+        dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle24.BackColor = System.Drawing.SystemColors.Window;
+        dataGridViewCellStyle24.Font = new System.Drawing.Font("Segoe UI", 9F);
+        dataGridViewCellStyle24.ForeColor = System.Drawing.SystemColors.ControlText;
+        dataGridViewCellStyle24.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
+        dataGridViewCellStyle24.SelectionForeColor = System.Drawing.Color.Black;
+        dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+        tradeDataGridView.DefaultCellStyle = dataGridViewCellStyle24;
         tradeDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
         tradeDataGridView.GridColor = System.Drawing.Color.FromArgb(33, 37, 41);
         tradeDataGridView.Location = new System.Drawing.Point(3, 3);
@@ -261,22 +275,22 @@ partial class SecuritiesForm
         // 
         // costColumn
         // 
-        dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-        costColumn.DefaultCellStyle = dataGridViewCellStyle6;
+        dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+        costColumn.DefaultCellStyle = dataGridViewCellStyle21;
         costColumn.HeaderText = "Cost";
         costColumn.Name = "costColumn";
         // 
         // quantityColumn
         // 
-        dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-        quantityColumn.DefaultCellStyle = dataGridViewCellStyle7;
+        dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+        quantityColumn.DefaultCellStyle = dataGridViewCellStyle22;
         quantityColumn.HeaderText = "Quantity";
         quantityColumn.Name = "quantityColumn";
         // 
         // commissionColumn
         // 
-        dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-        commissionColumn.DefaultCellStyle = dataGridViewCellStyle8;
+        dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+        commissionColumn.DefaultCellStyle = dataGridViewCellStyle23;
         commissionColumn.HeaderText = "Commission";
         commissionColumn.Name = "commissionColumn";
         // 
@@ -294,29 +308,29 @@ partial class SecuritiesForm
         // priceDataGridView
         // 
         priceDataGridView.AllowUserToOrderColumns = true;
-        dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(242, 242, 242);
-        dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
-        dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.Black;
-        priceDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
+        dataGridViewCellStyle25.BackColor = System.Drawing.Color.FromArgb(242, 242, 242);
+        dataGridViewCellStyle25.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
+        dataGridViewCellStyle25.SelectionForeColor = System.Drawing.Color.Black;
+        priceDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle25;
         priceDataGridView.BackgroundColor = System.Drawing.Color.FromArgb(248, 249, 250);
-        dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
-        dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-        dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
-        dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-        dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-        dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-        priceDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
+        dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle26.BackColor = System.Drawing.SystemColors.Control;
+        dataGridViewCellStyle26.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+        dataGridViewCellStyle26.ForeColor = System.Drawing.SystemColors.WindowText;
+        dataGridViewCellStyle26.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+        dataGridViewCellStyle26.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+        dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+        priceDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle26;
         priceDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
         priceDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { priceSymbolColumn, priceTimestampColumn, closeColumn, adjustedCloseColumn });
-        dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-        dataGridViewCellStyle12.Font = new System.Drawing.Font("Segoe UI", 9F);
-        dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
-        dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
-        dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.Black;
-        dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-        priceDataGridView.DefaultCellStyle = dataGridViewCellStyle12;
+        dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle27.BackColor = System.Drawing.SystemColors.Window;
+        dataGridViewCellStyle27.Font = new System.Drawing.Font("Segoe UI", 9F);
+        dataGridViewCellStyle27.ForeColor = System.Drawing.SystemColors.ControlText;
+        dataGridViewCellStyle27.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
+        dataGridViewCellStyle27.SelectionForeColor = System.Drawing.Color.Black;
+        dataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+        priceDataGridView.DefaultCellStyle = dataGridViewCellStyle27;
         priceDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
         priceDataGridView.GridColor = System.Drawing.Color.FromArgb(33, 37, 41);
         priceDataGridView.Location = new System.Drawing.Point(3, 3);
@@ -361,29 +375,29 @@ partial class SecuritiesForm
         // dividendDataGridView
         // 
         dividendDataGridView.AllowUserToOrderColumns = true;
-        dataGridViewCellStyle13.BackColor = System.Drawing.Color.FromArgb(242, 242, 242);
-        dataGridViewCellStyle13.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
-        dataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.Black;
-        dividendDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
+        dataGridViewCellStyle28.BackColor = System.Drawing.Color.FromArgb(242, 242, 242);
+        dataGridViewCellStyle28.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
+        dataGridViewCellStyle28.SelectionForeColor = System.Drawing.Color.Black;
+        dividendDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle28;
         dividendDataGridView.BackgroundColor = System.Drawing.Color.FromArgb(248, 249, 250);
-        dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control;
-        dataGridViewCellStyle14.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-        dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText;
-        dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-        dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-        dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-        dividendDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
+        dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle29.BackColor = System.Drawing.SystemColors.Control;
+        dataGridViewCellStyle29.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+        dataGridViewCellStyle29.ForeColor = System.Drawing.SystemColors.WindowText;
+        dataGridViewCellStyle29.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+        dataGridViewCellStyle29.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+        dataGridViewCellStyle29.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+        dividendDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle29;
         dividendDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
         dividendDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { dividendSymbolColumn, dividendTimestampColumn, dividendPaidColumn, valueColumn });
-        dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-        dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Window;
-        dataGridViewCellStyle15.Font = new System.Drawing.Font("Segoe UI", 9F);
-        dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.ControlText;
-        dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
-        dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.Black;
-        dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-        dividendDataGridView.DefaultCellStyle = dataGridViewCellStyle15;
+        dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle30.BackColor = System.Drawing.SystemColors.Window;
+        dataGridViewCellStyle30.Font = new System.Drawing.Font("Segoe UI", 9F);
+        dataGridViewCellStyle30.ForeColor = System.Drawing.SystemColors.ControlText;
+        dataGridViewCellStyle30.SelectionBackColor = System.Drawing.Color.FromArgb(224, 220, 228);
+        dataGridViewCellStyle30.SelectionForeColor = System.Drawing.Color.Black;
+        dataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+        dividendDataGridView.DefaultCellStyle = dataGridViewCellStyle30;
         dividendDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
         dividendDataGridView.GridColor = System.Drawing.Color.FromArgb(33, 37, 41);
         dividendDataGridView.Location = new System.Drawing.Point(3, 3);
@@ -391,17 +405,6 @@ partial class SecuritiesForm
         dividendDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
         dividendDataGridView.Size = new System.Drawing.Size(567, 288);
         dividendDataGridView.TabIndex = 2;
-        // 
-        // dividendRefreshButton
-        // 
-        dividendRefreshButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
-        dividendRefreshButton.Location = new System.Drawing.Point(144, 340);
-        dividendRefreshButton.Name = "dividendRefreshButton";
-        dividendRefreshButton.Size = new System.Drawing.Size(122, 23);
-        dividendRefreshButton.TabIndex = 6;
-        dividendRefreshButton.Text = "&Refresh Dividends";
-        dividendRefreshButton.UseVisualStyleBackColor = true;
-        dividendRefreshButton.Click += OnDividendRefreshButtonClick;
         // 
         // dividendSymbolColumn
         // 
@@ -425,16 +428,295 @@ partial class SecuritiesForm
         valueColumn.HeaderText = "Value";
         valueColumn.Name = "valueColumn";
         // 
+        // dividendRefreshButton
+        // 
+        dividendRefreshButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+        dividendRefreshButton.Location = new System.Drawing.Point(144, 323);
+        dividendRefreshButton.Name = "dividendRefreshButton";
+        dividendRefreshButton.Size = new System.Drawing.Size(122, 23);
+        dividendRefreshButton.TabIndex = 6;
+        dividendRefreshButton.Text = "&Refresh Dividends";
+        dividendRefreshButton.UseVisualStyleBackColor = true;
+        dividendRefreshButton.Click += OnDividendRefreshButtonClick;
+        // 
+        // statusStrip1
+        // 
+        statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripDropDownButton2, toolStripDropDownButton1 });
+        statusStrip1.Location = new System.Drawing.Point(0, 353);
+        statusStrip1.Name = "statusStrip1";
+        statusStrip1.Size = new System.Drawing.Size(605, 22);
+        statusStrip1.TabIndex = 7;
+        statusStrip1.Text = "statusStrip1";
+        // 
+        // toolStripDropDownButton2
+        // 
+        toolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+        toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripMenuItem, openToolStripMenuItem, toolStripSeparator, saveToolStripMenuItem, saveAsToolStripMenuItem, toolStripSeparator9, printToolStripMenuItem });
+        toolStripDropDownButton2.Image = (System.Drawing.Image)resources.GetObject("toolStripDropDownButton2.Image");
+        toolStripDropDownButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+        toolStripDropDownButton2.Name = "toolStripDropDownButton2";
+        toolStripDropDownButton2.Size = new System.Drawing.Size(55, 20);
+        toolStripDropDownButton2.Text = "&Report";
+        // 
+        // newToolStripMenuItem
+        // 
+        newToolStripMenuItem.Image = VisualStudioImageLibrary.AddDocument;
+        newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+        newToolStripMenuItem.Name = "newToolStripMenuItem";
+        newToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N;
+        newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+        newToolStripMenuItem.Text = "&New";
+        // 
+        // openToolStripMenuItem
+        // 
+        openToolStripMenuItem.Image = VisualStudioImageLibrary.OpenFile;
+        openToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+        openToolStripMenuItem.Name = "openToolStripMenuItem";
+        openToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O;
+        openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+        openToolStripMenuItem.Text = "&Open";
+        // 
+        // toolStripSeparator
+        // 
+        toolStripSeparator.Name = "toolStripSeparator";
+        toolStripSeparator.Size = new System.Drawing.Size(177, 6);
+        // 
+        // saveToolStripMenuItem
+        // 
+        saveToolStripMenuItem.Image = VisualStudioImageLibrary.Save;
+        saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+        saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+        saveToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S;
+        saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+        saveToolStripMenuItem.Text = "&Save";
+        // 
+        // saveAsToolStripMenuItem
+        // 
+        saveAsToolStripMenuItem.Image = VisualStudioImageLibrary.SaveAs;
+        saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+        saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+        saveAsToolStripMenuItem.Text = "Save &As";
+        // 
+        // toolStripSeparator9
+        // 
+        toolStripSeparator9.Name = "toolStripSeparator9";
+        toolStripSeparator9.Size = new System.Drawing.Size(177, 6);
+        // 
+        // printToolStripMenuItem
+        // 
+        printToolStripMenuItem.Image = VisualStudioImageLibrary.Print;
+        printToolStripMenuItem.Name = "printToolStripMenuItem";
+        printToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P;
+        printToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+        printToolStripMenuItem.Text = "&Print";
+        // 
+        // toolStripDropDownButton1
+        // 
+        toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+        toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { addToolStripMenuItem1, toolStripSeparator4, editToolStripMenuItem1, renameToolStripMenuItem1, removeToolStripMenuItem1, duplicateToolStripMenuItem1, toolStripSeparator5, refreshPricesToolStripMenuItem, refreshDividendsToolStripMenuItem });
+        toolStripDropDownButton1.Image = (System.Drawing.Image)resources.GetObject("toolStripDropDownButton1.Image");
+        toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+        toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+        toolStripDropDownButton1.Size = new System.Drawing.Size(59, 20);
+        toolStripDropDownButton1.Text = "&Refresh";
+        // 
+        // addToolStripMenuItem1
+        // 
+        addToolStripMenuItem1.Image = VisualStudioImageLibrary.New;
+        addToolStripMenuItem1.Name = "addToolStripMenuItem1";
+        addToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+        addToolStripMenuItem1.Text = "&Add";
+        // 
+        // toolStripSeparator4
+        // 
+        toolStripSeparator4.Name = "toolStripSeparator4";
+        toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
+        // 
+        // editToolStripMenuItem1
+        // 
+        editToolStripMenuItem1.Image = VisualStudioImageLibrary.Edit;
+        editToolStripMenuItem1.Name = "editToolStripMenuItem1";
+        editToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+        editToolStripMenuItem1.Text = "&Edit";
+        // 
+        // renameToolStripMenuItem1
+        // 
+        renameToolStripMenuItem1.Image = VisualStudioImageLibrary.Rename;
+        renameToolStripMenuItem1.Name = "renameToolStripMenuItem1";
+        renameToolStripMenuItem1.ShortcutKeys = System.Windows.Forms.Keys.F2;
+        renameToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+        renameToolStripMenuItem1.Text = "Re&name";
+        // 
+        // removeToolStripMenuItem1
+        // 
+        removeToolStripMenuItem1.Image = VisualStudioImageLibrary.Remove;
+        removeToolStripMenuItem1.Name = "removeToolStripMenuItem1";
+        removeToolStripMenuItem1.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+        removeToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+        removeToolStripMenuItem1.Text = "&Remove";
+        // 
+        // duplicateToolStripMenuItem1
+        // 
+        duplicateToolStripMenuItem1.Image = VisualStudioImageLibrary.Duplicate;
+        duplicateToolStripMenuItem1.Name = "duplicateToolStripMenuItem1";
+        duplicateToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+        duplicateToolStripMenuItem1.Text = "&Duplicate";
+        // 
+        // toolStripSeparator5
+        // 
+        toolStripSeparator5.Name = "toolStripSeparator5";
+        toolStripSeparator5.Size = new System.Drawing.Size(177, 6);
+        // 
+        // toolStrip1
+        // 
+        toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { newToolStripButton, openToolStripButton, saveToolStripButton, saveAsToolStripButton, toolStripSeparator6, printToolStripButton, addToolStripButton, toolStripSeparator7, toolStripButton2, toolStripButton3, toolStripButton4, toolStripButton5, toolStripSeparator8, toolStripButton6, toolStripButton7 });
+        toolStrip1.Location = new System.Drawing.Point(0, 0);
+        toolStrip1.Name = "toolStrip1";
+        toolStrip1.Size = new System.Drawing.Size(605, 25);
+        toolStrip1.TabIndex = 8;
+        toolStrip1.Text = "toolStrip1";
+        // 
+        // newToolStripButton
+        // 
+        newToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+        newToolStripButton.Image = VisualStudioImageLibrary.AddDocument;
+        newToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+        newToolStripButton.Name = "newToolStripButton";
+        newToolStripButton.Size = new System.Drawing.Size(23, 22);
+        newToolStripButton.Text = "&New";
+        // 
+        // openToolStripButton
+        // 
+        openToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+        openToolStripButton.Image = VisualStudioImageLibrary.OpenFile;
+        openToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+        openToolStripButton.Name = "openToolStripButton";
+        openToolStripButton.Size = new System.Drawing.Size(23, 22);
+        openToolStripButton.Text = "&Open";
+        // 
+        // saveToolStripButton
+        // 
+        saveToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+        saveToolStripButton.Image = VisualStudioImageLibrary.Save;
+        saveToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+        saveToolStripButton.Name = "saveToolStripButton";
+        saveToolStripButton.Size = new System.Drawing.Size(23, 22);
+        saveToolStripButton.Text = "&Save";
+        // 
+        // saveAsToolStripButton
+        // 
+        saveAsToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+        saveAsToolStripButton.Image = VisualStudioImageLibrary.SaveAs;
+        saveAsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+        saveAsToolStripButton.Name = "saveAsToolStripButton";
+        saveAsToolStripButton.Size = new System.Drawing.Size(23, 22);
+        saveAsToolStripButton.Text = "Save As";
+        // 
+        // toolStripSeparator6
+        // 
+        toolStripSeparator6.Name = "toolStripSeparator6";
+        toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
+        // 
+        // printToolStripButton
+        // 
+        printToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+        printToolStripButton.Image = VisualStudioImageLibrary.Print;
+        printToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+        printToolStripButton.Name = "printToolStripButton";
+        printToolStripButton.Size = new System.Drawing.Size(23, 22);
+        printToolStripButton.Text = "Print";
+        // 
+        // addToolStripButton
+        // 
+        addToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+        addToolStripButton.Image = VisualStudioImageLibrary.New;
+        addToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+        addToolStripButton.Name = "addToolStripButton";
+        addToolStripButton.Size = new System.Drawing.Size(23, 22);
+        addToolStripButton.Text = "Add";
+        // 
+        // toolStripSeparator7
+        // 
+        toolStripSeparator7.Name = "toolStripSeparator7";
+        toolStripSeparator7.Size = new System.Drawing.Size(6, 25);
+        // 
+        // toolStripButton2
+        // 
+        toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+        toolStripButton2.Image = VisualStudioImageLibrary.Edit;
+        toolStripButton2.Name = "toolStripButton2";
+        toolStripButton2.Size = new System.Drawing.Size(23, 22);
+        toolStripButton2.Text = "Edit";
+        // 
+        // toolStripButton3
+        // 
+        toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+        toolStripButton3.Image = VisualStudioImageLibrary.Rename;
+        toolStripButton3.Name = "toolStripButton3";
+        toolStripButton3.Size = new System.Drawing.Size(23, 22);
+        toolStripButton3.Text = "Rename";
+        // 
+        // toolStripButton4
+        // 
+        toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+        toolStripButton4.Image = VisualStudioImageLibrary.Duplicate;
+        toolStripButton4.Name = "toolStripButton4";
+        toolStripButton4.Size = new System.Drawing.Size(23, 22);
+        toolStripButton4.Text = "Duplicate";
+        // 
+        // toolStripButton5
+        // 
+        toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+        toolStripButton5.Image = VisualStudioImageLibrary.Remove;
+        toolStripButton5.Name = "toolStripButton5";
+        toolStripButton5.Size = new System.Drawing.Size(23, 22);
+        toolStripButton5.Text = "Remove";
+        // 
+        // toolStripSeparator8
+        // 
+        toolStripSeparator8.Name = "toolStripSeparator8";
+        toolStripSeparator8.Size = new System.Drawing.Size(6, 25);
+        // 
+        // toolStripButton6
+        // 
+        toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+        toolStripButton6.Image = VisualStudioImageLibrary.MoveUp;
+        toolStripButton6.Name = "toolStripButton6";
+        toolStripButton6.Size = new System.Drawing.Size(23, 22);
+        toolStripButton6.Text = "Move Up";
+        // 
+        // toolStripButton7
+        // 
+        toolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+        toolStripButton7.Image = VisualStudioImageLibrary.MoveDown;
+        toolStripButton7.Name = "toolStripButton7";
+        toolStripButton7.Size = new System.Drawing.Size(23, 22);
+        toolStripButton7.Text = "Move Down";
+        // 
+        // refreshPricesToolStripMenuItem
+        // 
+        refreshPricesToolStripMenuItem.Name = "refreshPricesToolStripMenuItem";
+        refreshPricesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+        refreshPricesToolStripMenuItem.Text = "&Prices";
+        refreshPricesToolStripMenuItem.Click += OnPriceRefreshButtonClick;
+        // 
+        // refreshDividendsToolStripMenuItem
+        // 
+        refreshDividendsToolStripMenuItem.Name = "refreshDividendsToolStripMenuItem";
+        refreshDividendsToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+        refreshDividendsToolStripMenuItem.Text = "&Dividends";
+        refreshDividendsToolStripMenuItem.Click += OnDividendRefreshButtonClick;
+        // 
         // SecuritiesForm
         // 
         AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
         AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         ClientSize = new System.Drawing.Size(605, 375);
+        Controls.Add(statusStrip1);
+        Controls.Add(toolStrip1);
         Controls.Add(dividendRefreshButton);
         Controls.Add(_tabControl);
         Controls.Add(priceRefreshButton);
-        Controls.Add(closeButton);
-        Controls.Add(saveButton);
         Name = "SecuritiesForm";
         Text = "Portfolio";
         Load += OnLoad;
@@ -447,14 +729,17 @@ partial class SecuritiesForm
         ((System.ComponentModel.ISupportInitialize)priceDataGridView).EndInit();
         dividendTabPage.ResumeLayout(false);
         ((System.ComponentModel.ISupportInitialize)dividendDataGridView).EndInit();
+        statusStrip1.ResumeLayout(false);
+        statusStrip1.PerformLayout();
+        toolStrip1.ResumeLayout(false);
+        toolStrip1.PerformLayout();
         ResumeLayout(false);
+        PerformLayout();
     }
 
     #endregion
 
     private System.Windows.Forms.DataGridViewEx securityDataGridView;
-    private System.Windows.Forms.Button saveButton;
-    private System.Windows.Forms.Button closeButton;
     private System.Windows.Forms.Button priceRefreshButton;
     private System.Windows.Forms.TabControl _tabControl;
     private System.Windows.Forms.TabPage securityTabPage;
@@ -482,4 +767,39 @@ partial class SecuritiesForm
     private System.Windows.Forms.CalendarColumn dividendTimestampColumn;
     private System.Windows.Forms.CalendarColumn dividendPaidColumn;
     private System.Windows.Forms.DataGridViewTextBoxColumn valueColumn;
+    private System.Windows.Forms.StatusStrip statusStrip1;
+    private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton2;
+    private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
+    private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+    private System.Windows.Forms.ToolStripMenuItem printToolStripMenuItem;
+    private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
+    private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem1;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+    private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem1;
+    private System.Windows.Forms.ToolStripMenuItem renameToolStripMenuItem1;
+    private System.Windows.Forms.ToolStripMenuItem removeToolStripMenuItem1;
+    private System.Windows.Forms.ToolStripMenuItem duplicateToolStripMenuItem1;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+    private System.Windows.Forms.ToolStripMenuItem refreshPricesToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem refreshDividendsToolStripMenuItem;
+    private System.Windows.Forms.ToolStrip toolStrip1;
+    private System.Windows.Forms.ToolStripButton newToolStripButton;
+    private System.Windows.Forms.ToolStripButton openToolStripButton;
+    private System.Windows.Forms.ToolStripButton saveToolStripButton;
+    private System.Windows.Forms.ToolStripButton saveAsToolStripButton;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+    private System.Windows.Forms.ToolStripButton printToolStripButton;
+    private System.Windows.Forms.ToolStripButton addToolStripButton;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+    private System.Windows.Forms.ToolStripButton toolStripButton2;
+    private System.Windows.Forms.ToolStripButton toolStripButton3;
+    private System.Windows.Forms.ToolStripButton toolStripButton4;
+    private System.Windows.Forms.ToolStripButton toolStripButton5;
+    private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+    private System.Windows.Forms.ToolStripButton toolStripButton6;
+    private System.Windows.Forms.ToolStripButton toolStripButton7;
 }
